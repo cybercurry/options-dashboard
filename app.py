@@ -6,6 +6,7 @@ import plotly.graph_objects as go
 from plotly.subplots import make_subplots
 from datetime import datetime
 import math
+from scipy.stats import norm
 import warnings
 warnings.filterwarnings("ignore")
 
@@ -57,6 +58,8 @@ SCORE_RATINGS = [
     (0,  "🔴 Unsuitable"),
 ]
 
+RISK_FREE_RATE = 0.045  # used for BS fallback greeks
+
 # ── Session state ──────────────────────────────────────────────────────────────
 if "watchlist" not in st.session_state:
     st.session_state.watchlist = DEFAULT_WATCHLIST.copy()
@@ -84,24 +87,60 @@ def fetch_all_expiries(ticker):
     except Exception:
         return []
 
-def fetch_chain(ticker, expiry):
-    try:
-        tk = yf.Ticker(ticker)
-        chain = tk.option_chain(expiry)
-        dte = (datetime.strptime(expiry, "%Y-%m-%d") - datetime.utcnow()).days
-        return chain, dte
-    except Exception:
-        return None, None
-
+# ── CONSOLIDATED cached chain fetch (used everywhere) ─────────────────────────
 @st.cache_data(ttl=1800, show_spinner=False)
 def fetch_chain_cached(ticker, expiry):
+    """Returns (calls_df, puts_df, dte). Single source of truth for chain data."""
     try:
-        tk = yf.Ticker(ticker)
+        tk    = yf.Ticker(ticker)
         chain = tk.option_chain(expiry)
-        dte = (datetime.strptime(expiry, "%Y-%m-%d") - datetime.utcnow()).days
+        dte   = (datetime.strptime(expiry, "%Y-%m-%d") - datetime.utcnow()).days
         return chain.calls, chain.puts, dte
     except Exception:
         return None, None, None
+
+def fetch_chain(ticker, expiry):
+    """Thin wrapper returning (chain_obj, dte) for tabs that need a chain object."""
+    calls, puts, dte = fetch_chain_cached(ticker, expiry)
+    if calls is None:
+        return None, None
+    # Reconstruct a simple namespace so existing tab code still works
+    class _Chain:
+        pass
+    c = _Chain()
+    c.calls = calls
+    c.puts  = puts
+    return c, dte
+
+# ── Black-Scholes fallback greeks ──────────────────────────────────────────────
+def _bs_greeks(S, K, T, sigma, r=RISK_FREE_RATE, option_type="call"):
+    """
+    Returns (delta_abs_0_to_100, theta_per_day) using Black-Scholes.
+    Delta is returned as absolute value on 0-100 scale (matching Yahoo convention).
+    Theta is returned as positive dollars per day per contract.
+    Returns (None, None) if inputs are invalid.
+    """
+    try:
+        if T <= 0 or sigma <= 0 or S <= 0 or K <= 0:
+            return None, None
+        T_yr  = T / 365.0
+        d1    = (math.log(S / K) + (r + 0.5 * sigma ** 2) * T_yr) / (sigma * math.sqrt(T_yr))
+        d2    = d1 - sigma * math.sqrt(T_yr)
+        if option_type == "call":
+            delta = norm.cdf(d1)
+        else:
+            delta = norm.cdf(d1) - 1        # negative for put
+        # Theta (per calendar day, positive convention for seller)
+        pdf_d1 = norm.pdf(d1)
+        theta_call = (-(S * pdf_d1 * sigma) / (2 * math.sqrt(T_yr))
+                      - r * K * math.exp(-r * T_yr) * norm.cdf(d2))
+        if option_type == "call":
+            theta = theta_call / 365.0
+        else:
+            theta = (theta_call + r * K * math.exp(-r * T_yr)) / 365.0
+        return round(abs(delta) * 100.0, 1), round(abs(theta), 4)
+    except Exception:
+        return None, None
 
 # ── Technical indicators ───────────────────────────────────────────────────────
 def calc_hv(close, window=20):
@@ -124,11 +163,11 @@ def calc_iv_percentile(hv_series, lookback=252):
 
 def calc_rsi(close, window=14):
     delta = close.diff()
-    gain = delta.clip(lower=0)
-    loss = (-delta).clip(lower=0)
-    ag = gain.ewm(alpha=1/window, min_periods=window).mean()
-    al = loss.ewm(alpha=1/window, min_periods=window).mean()
-    rs = ag / al.replace(0, np.nan)
+    gain  = delta.clip(lower=0)
+    loss  = (-delta).clip(lower=0)
+    ag    = gain.ewm(alpha=1/window, min_periods=window).mean()
+    al    = loss.ewm(alpha=1/window, min_periods=window).mean()
+    rs    = ag / al.replace(0, np.nan)
     return 100 - 100 / (1 + rs)
 
 def calc_atr(df, window=14):
@@ -184,52 +223,73 @@ def calc_pcr(chain):
         return None
 
 # ── Screener helpers ───────────────────────────────────────────────────────────
-def find_target_strike(chain_df, target_delta_abs, option_type="put"):
+def find_target_strike(chain_df, target_delta_abs, option_type, price, dte, hv_pct=None):
     """
-    Finds the strike whose delta (absolute value, 0-100 scale) is closest
-    to target_delta_abs. Uses Yahoo's native delta and theta columns directly.
-    Skips strikes with OI < 50, zero/missing IV, or missing greeks.
+    Finds the strike closest to target_delta_abs.
+
+    Primary: uses Yahoo-supplied delta/theta columns.
+    Fallback: calculates delta/theta via Black-Scholes using IV from the chain
+              (or HV as last resort), so the screener works outside market hours.
+
+    Returns a dict or None.
     """
     best     = None
     min_diff = 999.0
 
     for _, row in chain_df.iterrows():
         try:
-            K     = float(row.get("strike",            0) or 0)
-            oi    = float(row.get("openInterest",       0) or 0)
-            iv    = float(row.get("impliedVolatility",  0) or 0)
-            bid   = float(row.get("bid",                0) or 0)
-            ask   = float(row.get("ask",                0) or 0)
-            delta_raw = row.get("delta", None)
-            theta_raw = row.get("theta", None)
-
-            if delta_raw is None or theta_raw is None:
-                continue
-            delta = float(delta_raw)
-            theta = float(theta_raw)
+            K   = float(row.get("strike",           0) or 0)
+            oi  = float(row.get("openInterest",      0) or 0)
+            iv  = float(row.get("impliedVolatility", 0) or 0)
+            bid = float(row.get("bid",               0) or 0)
+            ask = float(row.get("ask",               0) or 0)
         except (TypeError, ValueError):
             continue
 
-        if (K <= 0 or iv <= 0 or np.isnan(iv)
-                or np.isnan(oi) or oi < 50
-                or np.isnan(delta) or np.isnan(theta)):
+        if K <= 0 or np.isnan(oi) or oi < 10:
             continue
 
-        d_abs = abs(delta) * 100.0
-        diff  = abs(d_abs - target_delta_abs)
+        # ── Resolve delta & theta ──────────────────────────────────────────
+        delta_raw = row.get("delta", None)
+        theta_raw = row.get("theta", None)
 
+        yahoo_has_greeks = (
+            delta_raw is not None and theta_raw is not None
+            and not np.isnan(float(delta_raw))
+            and not np.isnan(float(theta_raw))
+        )
+
+        if yahoo_has_greeks:
+            d_abs = abs(float(delta_raw)) * 100.0
+            theta = abs(float(theta_raw))
+            greek_source = "yahoo"
+        else:
+            # Fallback: use Black-Scholes
+            sigma = iv if iv > 0 else (hv_pct or 0.30)
+            if iv <= 0 and (hv_pct is None or hv_pct <= 0):
+                continue            # can't price without any vol estimate
+            d_abs, theta = _bs_greeks(price, K, dte, sigma, option_type=option_type)
+            if d_abs is None:
+                continue
+            greek_source = "bs_fallback"
+
+        if np.isnan(d_abs) or np.isnan(theta):
+            continue
+
+        diff = abs(d_abs - target_delta_abs)
         if diff < min_diff:
             min_diff = diff
             mid = (bid + ask) / 2.0
             best = {
-                "strike":     K,
-                "delta":      round(d_abs, 1),
-                "theta":      round(abs(theta), 4),
-                "iv":         round(iv * 100.0, 1),
-                "oi":         int(oi),
-                "bid":        bid,
-                "ask":        ask,
-                "spread_pct": round((ask - bid) / mid * 100, 1) if mid > 0 else None,
+                "strike":       K,
+                "delta":        round(d_abs, 1),
+                "theta":        round(theta, 4),
+                "iv":           round(iv * 100.0, 1) if iv > 0 else None,
+                "oi":           int(oi),
+                "bid":          bid,
+                "ask":          ask,
+                "spread_pct":   round((ask - bid) / mid * 100, 1) if mid > 0 else None,
+                "greek_source": greek_source,
             }
     return best
 
@@ -248,7 +308,7 @@ def _tri_score(value, optimal, lo, hi):
 def calc_suitability(nis, dte, delta_abs, strategy):
     p = STRATEGY_PARAMS[strategy]
     a = nis if p["iv_dir"] == 1 else (100.0 - nis)
-    b = _tri_score(dte,       p["dte_opt"],  p["dte_lo"],  p["dte_hi"])
+    b = _tri_score(dte,       p["dte_opt"],   p["dte_lo"],   p["dte_hi"])
     c = _tri_score(delta_abs, p["delta_opt"], p["delta_lo"], p["delta_hi"])
     return round(p["w_iv"] * a + p["w_dte"] * b + p["w_delta"] * c, 1)
 
@@ -340,6 +400,9 @@ def calc_four_gates(r):
 def get_screener_row(ticker, result):
     price    = result.get("price")
     all_exps = result.get("all_exps", [])
+    hv20_s   = result.get("hv20_s")
+    hv_pct_raw = result.get("hv20")          # HV20 as a percentage (e.g. 35.2)
+
     if not all_exps or not price or price <= 0:
         return None
 
@@ -366,13 +429,16 @@ def get_screener_row(ticker, result):
     if puts_df is None or puts_df.empty:
         return None
 
-    csp = find_target_strike(puts_df, 18.0, "put")
+    # Pass HV as decimal sigma for BS fallback
+    hv_sigma = (hv_pct_raw / 100.0) if (hv_pct_raw and hv_pct_raw > 0) else None
+
+    csp = find_target_strike(puts_df,  18.0, "put",  price, dte_csp, hv_sigma)
     if csp is None:
         return None
 
     cc = None
     if calls_df is not None and not calls_df.empty:
-        cc = find_target_strike(calls_df, 35.0, "call")
+        cc = find_target_strike(calls_df, 35.0, "call", price, dte_csp, hv_sigma)
 
     nis        = calc_nis(csp["theta"], dte_csp, price)
     csp_score  = calc_suitability(nis, dte_csp, csp["delta"], "CSP")
@@ -381,26 +447,31 @@ def get_screener_row(ticker, result):
         cc_nis   = calc_nis(cc["theta"], dte_csp, price)
         cc_score = calc_suitability(cc_nis, dte_csp, cc["delta"], "CC")
     leap_score = calc_suitability(nis, dte_csp, csp["delta"], "LEAP")
+
     gate_result = calc_four_gates(result)
 
+    # Flag whether we used fallback greeks (for UI transparency)
+    greek_source = csp.get("greek_source", "unknown")
+
     return {
-        "ticker":      ticker,
-        "price":       price,
-        "expiry":      exp_csp,
-        "dte":         dte_csp,
-        "csp_strike":  csp["strike"],
-        "csp_delta":   csp["delta"],
-        "csp_theta":   csp["theta"],
-        "csp_iv":      csp["iv"],
-        "csp_oi":      csp["oi"],
-        "csp_spread":  csp["spread_pct"],
-        "cc_strike":   cc["strike"] if cc else None,
-        "cc_delta":    cc["delta"]  if cc else None,
-        "nis":         round(nis, 1),
-        "csp_score":   csp_score,
-        "cc_score":    cc_score,
-        "leap_score":  leap_score,
-        "gate_result": gate_result,
+        "ticker":       ticker,
+        "price":        price,
+        "expiry":       exp_csp,
+        "dte":          dte_csp,
+        "csp_strike":   csp["strike"],
+        "csp_delta":    csp["delta"],
+        "csp_theta":    csp["theta"],
+        "csp_iv":       csp["iv"],
+        "csp_oi":       csp["oi"],
+        "csp_spread":   csp["spread_pct"],
+        "cc_strike":    cc["strike"] if cc else None,
+        "cc_delta":     cc["delta"]  if cc else None,
+        "nis":          round(nis, 1),
+        "csp_score":    csp_score,
+        "cc_score":     cc_score,
+        "leap_score":   leap_score,
+        "gate_result":  gate_result,
+        "greek_source": greek_source,
     }
 
 # ── Signal engines ─────────────────────────────────────────────────────────────
@@ -531,8 +602,10 @@ def analyse(ticker, period, vix_current):
         valid = [e for e in all_exps if (datetime.strptime(e, "%Y-%m-%d") - today).days > 14]
         if valid:
             exp = valid[0]
-            chain, dte = fetch_chain(ticker, exp)
-            if chain:
+            # Use cached fetch — no redundant requests
+            calls_df, puts_df, dte = fetch_chain_cached(ticker, exp)
+            if calls_df is not None:
+                chain = type("_C", (), {"calls": calls_df, "puts": puts_df})()
                 c_iv, p_iv = calc_atm_iv(chain, curr)
                 pcr_val    = calc_pcr(chain)
     leap_lbl, leap_sc, leap_r = leap_signal(hvr, rsi_cur, ab50, ab200, vix_current)
@@ -778,8 +851,10 @@ with tab_chain:
         all_exps = r.get("all_exps", [])
         if all_exps:
             selected_exp = st.selectbox("Select Expiry", all_exps, index=0, key=f"exp_sel_{sel_c}")
-            chain, dte   = fetch_chain(sel_c, selected_exp)
-            if chain:
+            # Use cached fetch directly
+            calls_df, puts_df, dte = fetch_chain_cached(sel_c, selected_exp)
+            if calls_df is not None:
+                chain = type("_C", (), {"calls": calls_df, "puts": puts_df})()
                 st.caption(f"Expiry: {selected_exp} ({dte} DTE) | Current Price: ${price:.2f}")
                 def fmt_chain(df_raw, side):
                     df_raw = df_raw.copy()
@@ -876,7 +951,7 @@ with tab_screener:
     st.subheader("⚡ Options Suitability Screener")
     st.caption(
         "Ranks each watchlist stock for CSP / CC / LEAP suitability using the θ × √DTE / S formula. "
-        "Greeks sourced directly from Yahoo Finance. Requires live market hours for valid delta/theta data."
+        "Greeks sourced from Yahoo Finance when available; Black-Scholes fallback used outside market hours."
     )
 
     with st.expander("How the score is calculated", expanded=False):
@@ -907,14 +982,59 @@ Then calculates the **Normalised IV Score (NIS)**:
 
 **Ratings:** ≥80 Optimal · ≥60 Acceptable · ≥40 Marginal · <40 Unsuitable
 
-> ⚠️ Delta/theta only populate during US market hours — Dubai: 18:30 to 01:00
+**Greek sourcing:** Yahoo Finance live greeks used during US market hours (18:30–01:00 Dubai).
+Outside hours, delta and theta are computed via Black-Scholes using each strike's IV (or HV20 as fallback).
+Scores computed outside hours are directionally valid but less precise — use for triage, confirm at open.
+
+> ⚠️ Yahoo delta/theta only reliable during US market hours — Dubai: 18:30 to 01:00
         """)
+
+    # ── Chain Inspector (diagnostic) ──────────────────────────────────────────
+    with st.expander("🔬 Chain Inspector — see raw Yahoo data", expanded=False):
+        insp_ticker = st.selectbox("Ticker to inspect", list(results.keys()), key="insp_ticker")
+        if insp_ticker and insp_ticker in results:
+            insp_exps = results[insp_ticker].get("all_exps", [])
+            today_i   = datetime.utcnow()
+            valid_i   = [e for e in insp_exps
+                         if 21 <= (datetime.strptime(e, "%Y-%m-%d") - today_i).days <= 60]
+            if valid_i:
+                insp_exp = valid_i[0]
+                st.caption(f"Fetching puts chain for {insp_ticker} / {insp_exp}")
+                calls_i, puts_i, dte_i = fetch_chain_cached(insp_ticker, insp_exp)
+                if puts_i is not None and not puts_i.empty:
+                    st.write(f"**Columns present:** `{list(puts_i.columns)}`")
+                    st.write(f"**Rows:** {len(puts_i)}  |  **DTE:** {dte_i}")
+                    # Show delta/theta/IV/OI for middle 10 rows (near ATM)
+                    price_i = results[insp_ticker]["price"]
+                    puts_sorted = puts_i.iloc[(puts_i["strike"] - price_i).abs().argsort()].head(10)
+                    disp_cols = [c for c in ["strike","bid","ask","impliedVolatility",
+                                              "openInterest","delta","theta","gamma"] 
+                                 if c in puts_sorted.columns]
+                    st.dataframe(puts_sorted[disp_cols].reset_index(drop=True), use_container_width=True)
+                    # Summarise key fields
+                    oi_col  = puts_i.get("openInterest",      pd.Series(dtype=float)).fillna(0)
+                    iv_col  = puts_i.get("impliedVolatility",  pd.Series(dtype=float)).fillna(0)
+                    d_col   = puts_i.get("delta",              pd.Series(dtype=float))
+                    th_col  = puts_i.get("theta",              pd.Series(dtype=float))
+                    st.write(f"OI≥10 rows: **{(oi_col >= 10).sum()}** / {len(puts_i)}")
+                    st.write(f"IV>0  rows: **{(iv_col > 0).sum()}** / {len(puts_i)}")
+                    st.write(f"delta col present: **{d_col is not None}**  "
+                             f"non-NaN: **{d_col.notna().sum() if d_col is not None else 0}**")
+                    st.write(f"theta col present: **{th_col is not None}**  "
+                             f"non-NaN: **{th_col.notna().sum() if th_col is not None else 0}**")
+                else:
+                    st.warning("Chain fetch returned empty / None for this expiry.")
+            else:
+                st.warning(f"No expiry in 21–60 DTE range for {insp_ticker}. "
+                           f"Available: {insp_exps[:5]}")
 
     col_run, col_note = st.columns([1, 4])
     with col_run:
         run_btn = st.button("🔍 Run Screener", type="primary", use_container_width=True)
     with col_note:
         st.info("First run ~30–60 s (fetches live chains). Results cached 30 min.")
+
+    show_debug = st.checkbox("🔧 Show diagnostic output", value=False)
 
     if run_btn:
         if not results:
@@ -923,18 +1043,67 @@ Then calculates the **Normalised IV Score (NIS)**:
             screener_rows = []
             prog = st.progress(0, text="Initialising...")
             n    = len(results)
+            debug_log = []
             for i, (ticker, result) in enumerate(results.items()):
                 prog.progress((i + 1) / n, text=f"Analysing {ticker}  ({i+1}/{n})")
                 row = get_screener_row(ticker, result)
                 if row:
                     screener_rows.append(row)
+                    debug_log.append(f"✅ {ticker} — CSP score {row['csp_score']}  ({row['greek_source']})")
+                else:
+                    # Diagnose why
+                    price    = result.get("price")
+                    all_exps = result.get("all_exps", [])
+                    reason   = "unknown"
+                    if not price or price <= 0:
+                        reason = "no price"
+                    elif not all_exps:
+                        reason = "no expiries from Yahoo"
+                    else:
+                        today = datetime.utcnow()
+                        valid_exp = None
+                        for exp in all_exps:
+                            try:
+                                dte = (datetime.strptime(exp, "%Y-%m-%d") - today).days
+                                if 21 <= dte <= 60:
+                                    valid_exp = exp
+                                    break
+                            except Exception:
+                                pass
+                        if not valid_exp:
+                            reason = f"no expiry in 21–60 DTE range (available: {all_exps[:3]})"
+                        else:
+                            calls_df, puts_df, dte = fetch_chain_cached(ticker, valid_exp)
+                            if puts_df is None or puts_df.empty:
+                                reason = f"chain fetch failed for {valid_exp}"
+                            else:
+                                n_rows  = len(puts_df)
+                                n_oi    = (puts_df.get("openInterest", pd.Series(dtype=float)).fillna(0) >= 10).sum()
+                                n_iv    = (puts_df.get("impliedVolatility", pd.Series(dtype=float)).fillna(0) > 0).sum()
+                                reason  = f"puts chain fetched OK ({n_rows} rows, {n_oi} with OI≥10, {n_iv} with IV>0) — find_target_strike returned None"
+                    debug_log.append(f"❌ {ticker} — skipped: {reason}")
             prog.empty()
             st.session_state["screener_results"] = screener_rows
+            st.session_state["screener_debug"]   = debug_log
+
+    if show_debug and st.session_state.get("screener_debug"):
+        with st.expander("🔧 Diagnostic log", expanded=True):
+            for line in st.session_state["screener_debug"]:
+                st.text(line)
 
     screener_rows = st.session_state.get("screener_results", [])
 
     if screener_rows:
         screener_rows_sorted = sorted(screener_rows, key=lambda x: x["csp_score"], reverse=True)
+
+        # Check if any used BS fallback so we can show a banner
+        bs_tickers = [r["ticker"] for r in screener_rows_sorted if r.get("greek_source") == "bs_fallback"]
+        if bs_tickers:
+            st.warning(
+                f"⚠️ **Black-Scholes fallback greeks used for: {', '.join(bs_tickers)}** — "
+                "Yahoo didn't return delta/theta (markets likely closed). "
+                "Scores are directionally valid. Re-run after 18:30 Dubai for live greeks."
+            )
 
         table_rows = []
         for r in screener_rows_sorted:
@@ -942,15 +1111,17 @@ Then calculates the **Normalised IV Score (NIS)**:
             gates      = gr["gates"]
             gate_icons = "".join(["✅" if gates[f"G{i}"]["pass"] else "❌" for i in range(1, 5)])
             status     = "🟢 TRADE" if gr["all_pass"] else "🔴 WAIT"
+            greek_flag = "📐 BS" if r.get("greek_source") == "bs_fallback" else "📡 Live"
             table_rows.append({
                 "Ticker":      r["ticker"],
                 "Price":       f"${r['price']:.2f}",
                 "Expiry":      r["expiry"],
                 "DTE":         r["dte"],
+                "Greeks":      greek_flag,
                 "CSP Strike":  f"${r['csp_strike']:.1f}",
                 "CSP Δ":       r["csp_delta"],
                 "θ/day":       f"${r['csp_theta']:.3f}",
-                "Put IV %":    r["csp_iv"],
+                "Put IV %":    r["csp_iv"] if r["csp_iv"] else "—",
                 "OI":          r["csp_oi"],
                 "Spread %":    r["csp_spread"] if r["csp_spread"] else "—",
                 "NIS":         r["nis"],
@@ -962,7 +1133,7 @@ Then calculates the **Normalised IV Score (NIS)**:
             })
 
         st.dataframe(pd.DataFrame(table_rows), use_container_width=True, hide_index=True, height=480)
-        st.caption("\\* LEAP Score at short DTE — DTE component near zero. Use as relative IV indicator only.")
+        st.caption("\\* LEAP Score at short DTE — DTE component near zero. Use as relative IV indicator only. 📐 BS = Black-Scholes fallback  📡 Live = Yahoo greeks")
 
         st.subheader("CSP Suitability Ranking")
         tickers    = [r["ticker"]    for r in screener_rows_sorted]
@@ -1004,7 +1175,7 @@ Then calculates the **Normalised IV Score (NIS)**:
             with st.expander(
                 f"{icon} {r['ticker']}  —  CSP Score: {r['csp_score']}  |  "
                 f"Strike ${r['csp_strike']:.1f}  Δ{r['csp_delta']}  "
-                f"θ${r['csp_theta']:.3f}/day  IV {r['csp_iv']}%"
+                f"θ${r['csp_theta']:.3f}/day  IV {r['csp_iv'] or 'BS'}%"
             ):
                 gcols = st.columns(4)
                 for idx, (gk, gv) in enumerate(gates.items()):
@@ -1015,9 +1186,9 @@ Then calculates the **Normalised IV Score (NIS)**:
                 rc1.markdown(f"""
 **CSP Recommended Strike**
 - Strike: **${r['csp_strike']:.1f}**
-- Delta: **{r['csp_delta']}**
+- Delta: **{r['csp_delta']}** {'📡' if r.get('greek_source') != 'bs_fallback' else '📐 BS'}
 - Theta: **${r['csp_theta']:.3f}/day**
-- IV: **{r['csp_iv']}%**
+- IV: **{r['csp_iv'] or '— (HV used)'}%**
 - Open Interest: **{r['csp_oi']}**
 - Spread: **{r['csp_spread']}%** {'✅' if r['csp_spread'] and r['csp_spread'] < 20 else '⚠️ Wide' if r['csp_spread'] else '—'}
                 """)
@@ -1033,11 +1204,11 @@ Then calculates the **Normalised IV Score (NIS)**:
         st.markdown("""
         <div style='text-align:center; padding:60px; color:#94a3b8;'>
             <h3>Click <strong>Run Screener</strong> to analyse your watchlist</h3>
-            <p>Live delta and theta required — markets open 18:30 Dubai time.</p>
+            <p>Live greeks used during market hours (18:30 Dubai). Black-Scholes fallback active outside hours.</p>
         </div>
         """, unsafe_allow_html=True)
     else:
         st.warning(
-            "No screener data returned. Yahoo Finance may not have greeks available right now. "
-            "Try again after 18:30 Dubai time when US markets open."
+            "No screener data returned. This may indicate all chains had OI < 50 across all strikes, "
+            "or Yahoo returned empty data. Check the Options Chain tab for chain availability."
         )
