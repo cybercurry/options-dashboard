@@ -58,7 +58,7 @@ SCORE_RATINGS = [
     (0,  "🔴 Unsuitable"),
 ]
 
-RISK_FREE_RATE = 0.045  # used for BS fallback greeks
+RISK_FREE_RATE = 0.045  # used for BS greeks
 
 # ── Session state ──────────────────────────────────────────────────────────────
 if "watchlist" not in st.session_state:
@@ -87,7 +87,6 @@ def fetch_all_expiries(ticker):
     except Exception:
         return []
 
-# ── CONSOLIDATED cached chain fetch (used everywhere) ─────────────────────────
 @st.cache_data(ttl=1800, show_spinner=False)
 def fetch_chain_cached(ticker, expiry):
     """Returns (calls_df, puts_df, dte). Single source of truth for chain data."""
@@ -104,7 +103,6 @@ def fetch_chain(ticker, expiry):
     calls, puts, dte = fetch_chain_cached(ticker, expiry)
     if calls is None:
         return None, None
-    # Reconstruct a simple namespace so existing tab code still works
     class _Chain:
         pass
     c = _Chain()
@@ -112,33 +110,47 @@ def fetch_chain(ticker, expiry):
     c.puts  = puts
     return c, dte
 
-# ── Black-Scholes fallback greeks ──────────────────────────────────────────────
+# ══════════════════════════════════════════════════════════════════════════════
+# BLACK-SCHOLES GREEKS — hardened
+# ══════════════════════════════════════════════════════════════════════════════
 def _bs_greeks(S, K, T, sigma, r=RISK_FREE_RATE, option_type="call"):
     """
-    Returns (delta_abs_0_to_100, theta_per_day) using Black-Scholes.
-    Delta is returned as absolute value on 0-100 scale (matching Yahoo convention).
-    Theta is returned as positive dollars per day per contract.
-    Returns (None, None) if inputs are invalid.
+    Returns (delta_abs_0_to_100, theta_per_day) via Black-Scholes.
+    Delta is absolute, 0-100 scale (Yahoo convention).
+    Theta is positive dollars per day per share.
+    Returns (None, None) on ANY failure (NaN, invalid inputs, math errors).
     """
     try:
-        if T <= 0 or sigma <= 0 or S <= 0 or K <= 0:
+        # Reject None/NaN inputs before math
+        if any(x is None for x in (S, K, T, sigma)):
             return None, None
-        T_yr  = T / 365.0
-        d1    = (math.log(S / K) + (r + 0.5 * sigma ** 2) * T_yr) / (sigma * math.sqrt(T_yr))
-        d2    = d1 - sigma * math.sqrt(T_yr)
+        S, K, T, sigma = float(S), float(K), float(T), float(sigma)
+        if (pd.isna(S) or pd.isna(K) or pd.isna(T) or pd.isna(sigma)
+            or T <= 0 or sigma <= 0 or S <= 0 or K <= 0):
+            return None, None
+
+        # Clamp sigma — Yahoo sometimes returns absurd IV (e.g. 0.0001 or 12.0)
+        sigma = max(0.05, min(sigma, 3.0))
+
+        T_yr = T / 365.0
+        sqrtT = math.sqrt(T_yr)
+        d1   = (math.log(S / K) + (r + 0.5 * sigma ** 2) * T_yr) / (sigma * sqrtT)
+        d2   = d1 - sigma * sqrtT
+
         if option_type == "call":
             delta = norm.cdf(d1)
         else:
-            delta = norm.cdf(d1) - 1        # negative for put
-        # Theta (per calendar day, positive convention for seller)
+            delta = norm.cdf(d1) - 1.0
+
         pdf_d1 = norm.pdf(d1)
-        theta_call = (-(S * pdf_d1 * sigma) / (2 * math.sqrt(T_yr))
+        theta_call = (-(S * pdf_d1 * sigma) / (2 * sqrtT)
                       - r * K * math.exp(-r * T_yr) * norm.cdf(d2))
         if option_type == "call":
             theta = theta_call / 365.0
         else:
             theta = (theta_call + r * K * math.exp(-r * T_yr)) / 365.0
-        return round(abs(delta) * 100.0, 1), round(abs(theta), 4)
+
+        return round(abs(delta) * 100.0, 2), round(abs(theta), 4)
     except Exception:
         return None, None
 
@@ -222,75 +234,133 @@ def calc_pcr(chain):
     except Exception:
         return None
 
-# ── Screener helpers ───────────────────────────────────────────────────────────
+# ══════════════════════════════════════════════════════════════════════════════
+# SCREENER: STRIKE FINDER — hardened
+# ══════════════════════════════════════════════════════════════════════════════
 def find_target_strike(chain_df, target_delta_abs, option_type, price, dte, hv_pct=None):
     """
     Finds the strike closest to target_delta_abs.
 
-    Primary: uses Yahoo-supplied delta/theta columns.
-    Fallback: calculates delta/theta via Black-Scholes using IV from the chain
-              (or HV as last resort), so the screener works outside market hours.
+    Reality: yfinance does NOT return delta/theta columns. Ever. So greeks are
+    ALWAYS computed via Black-Scholes. This function keeps the yahoo-greeks check
+    for forward-compatibility but assumes BS is the normal path.
+
+    Robustness changes vs previous version:
+      - OI < 10 is no longer a hard filter (NaN OI is common in yfinance) —
+        low-OI strikes are penalized in ranking but not excluded.
+      - IV fallback chain: strike IV  →  chain median IV  →  HV20  →  0.30 default.
+      - NaN-safe input parsing using pd.isna.
+      - Sigma clamped to [0.05, 3.0] inside _bs_greeks.
 
     Returns a dict or None.
     """
-    best     = None
-    min_diff = 999.0
+    if chain_df is None or chain_df.empty:
+        return None
+    if price is None or price <= 0 or dte is None or dte <= 0:
+        return None
+
+    # ── Build chain-wide median IV as fallback ────────────────────────────────
+    iv_col_raw = chain_df.get("impliedVolatility", pd.Series(dtype=float))
+    iv_clean   = pd.to_numeric(iv_col_raw, errors="coerce").dropna() if iv_col_raw is not None else pd.Series(dtype=float)
+    valid_ivs  = iv_clean[(iv_clean > 0.01) & (iv_clean < 5.0)]
+    median_iv  = float(valid_ivs.median()) if len(valid_ivs) >= 3 else None
+
+    best       = None
+    min_score  = float("inf")
+    inspected  = 0
+    scored     = 0
 
     for _, row in chain_df.iterrows():
+        inspected += 1
         try:
-            K   = float(row.get("strike",           0) or 0)
-            oi  = float(row.get("openInterest",      0) or 0)
-            iv  = float(row.get("impliedVolatility", 0) or 0)
-            bid = float(row.get("bid",               0) or 0)
-            ask = float(row.get("ask",               0) or 0)
+            K      = float(row.get("strike", 0) or 0)
+
+            oi_raw = row.get("openInterest", 0)
+            oi     = 0.0 if pd.isna(oi_raw) else float(oi_raw or 0)
+
+            iv_raw = row.get("impliedVolatility", 0)
+            iv     = 0.0 if pd.isna(iv_raw) else float(iv_raw or 0)
+
+            bid    = float(row.get("bid", 0) or 0)
+            ask    = float(row.get("ask", 0) or 0)
         except (TypeError, ValueError):
             continue
 
-        if K <= 0 or np.isnan(oi) or oi < 10:
+        if K <= 0:
             continue
 
-        # ── Resolve delta & theta ──────────────────────────────────────────
+        # ── Check if yfinance ever actually provided greeks (it doesn't, but keep path) ──
         delta_raw = row.get("delta", None)
         theta_raw = row.get("theta", None)
-
-        yahoo_has_greeks = (
-            delta_raw is not None and theta_raw is not None
-            and not np.isnan(float(delta_raw))
-            and not np.isnan(float(theta_raw))
-        )
+        yahoo_has_greeks = False
+        if delta_raw is not None and theta_raw is not None:
+            try:
+                if not pd.isna(delta_raw) and not pd.isna(theta_raw):
+                    yahoo_has_greeks = True
+            except Exception:
+                yahoo_has_greeks = False
 
         if yahoo_has_greeks:
             d_abs = abs(float(delta_raw)) * 100.0
             theta = abs(float(theta_raw))
             greek_source = "yahoo"
         else:
-            # Fallback: use Black-Scholes
-            sigma = iv if iv > 0 else (hv_pct or 0.30)
-            if iv <= 0 and (hv_pct is None or hv_pct <= 0):
-                continue            # can't price without any vol estimate
-            d_abs, theta = _bs_greeks(price, K, dte, sigma, option_type=option_type)
-            if d_abs is None:
-                continue
-            greek_source = "bs_fallback"
+            # ── Resolve sigma for BS (priority: strike IV → median → HV → default) ──
+            if 0.01 < iv < 5.0:
+                sigma      = iv
+                iv_source  = "strike"
+            elif median_iv is not None:
+                sigma      = median_iv
+                iv_source  = "chain_median"
+            elif hv_pct is not None and hv_pct > 0:
+                sigma      = float(hv_pct)
+                iv_source  = "hv20"
+            else:
+                sigma      = 0.30
+                iv_source  = "default"
 
-        if np.isnan(d_abs) or np.isnan(theta):
+            d_abs, theta = _bs_greeks(price, K, dte, sigma, option_type=option_type)
+            if d_abs is None or theta is None:
+                continue
+            greek_source = f"bs_{iv_source}"
+
+        if pd.isna(d_abs) or pd.isna(theta):
             continue
 
-        diff = abs(d_abs - target_delta_abs)
-        if diff < min_diff:
-            min_diff = diff
+        scored += 1
+
+        # ── Scoring: proximity to target delta + soft OI penalty ──────────────
+        # OI penalty is additive in delta-points: keeps liquid strikes preferred
+        # without excluding strikes that have NaN/low OI (very common on yfinance).
+        delta_diff  = abs(d_abs - target_delta_abs)
+        if   oi >= 100: oi_penalty = 0
+        elif oi >= 10:  oi_penalty = 0.5
+        elif oi >= 1:   oi_penalty = 2
+        else:           oi_penalty = 4
+        score = delta_diff + oi_penalty
+
+        if score < min_score:
+            min_score = score
             mid = (bid + ask) / 2.0
+            # Report the IV we actually *used* (the effective sigma), not raw IV
+            effective_iv_pct = (
+                round(iv * 100.0, 1) if (greek_source == "yahoo" and iv > 0.01)
+                else round(sigma * 100.0, 1)
+            )
             best = {
                 "strike":       K,
                 "delta":        round(d_abs, 1),
                 "theta":        round(theta, 4),
-                "iv":           round(iv * 100.0, 1) if iv > 0 else None,
+                "iv":           effective_iv_pct,
                 "oi":           int(oi),
                 "bid":          bid,
                 "ask":          ask,
                 "spread_pct":   round((ask - bid) / mid * 100, 1) if mid > 0 else None,
                 "greek_source": greek_source,
+                "_inspected":   inspected,
+                "_scored":      scored,
             }
+
     return best
 
 def calc_nis(theta, dte, price):
@@ -398,9 +468,8 @@ def calc_four_gates(r):
 
 # ── Screener: per-stock assembly ───────────────────────────────────────────────
 def get_screener_row(ticker, result):
-    price    = result.get("price")
-    all_exps = result.get("all_exps", [])
-    hv20_s   = result.get("hv20_s")
+    price      = result.get("price")
+    all_exps   = result.get("all_exps", [])
     hv_pct_raw = result.get("hv20")          # HV20 as a percentage (e.g. 35.2)
 
     if not all_exps or not price or price <= 0:
@@ -429,7 +498,7 @@ def get_screener_row(ticker, result):
     if puts_df is None or puts_df.empty:
         return None
 
-    # Pass HV as decimal sigma for BS fallback
+    # HV passed as decimal sigma for BS fallback
     hv_sigma = (hv_pct_raw / 100.0) if (hv_pct_raw and hv_pct_raw > 0) else None
 
     csp = find_target_strike(puts_df,  18.0, "put",  price, dte_csp, hv_sigma)
@@ -448,9 +517,7 @@ def get_screener_row(ticker, result):
         cc_score = calc_suitability(cc_nis, dte_csp, cc["delta"], "CC")
     leap_score = calc_suitability(nis, dte_csp, csp["delta"], "LEAP")
 
-    gate_result = calc_four_gates(result)
-
-    # Flag whether we used fallback greeks (for UI transparency)
+    gate_result  = calc_four_gates(result)
     greek_source = csp.get("greek_source", "unknown")
 
     return {
@@ -472,6 +539,8 @@ def get_screener_row(ticker, result):
         "leap_score":   leap_score,
         "gate_result":  gate_result,
         "greek_source": greek_source,
+        "_inspected":   csp.get("_inspected"),
+        "_scored":      csp.get("_scored"),
     }
 
 # ── Signal engines ─────────────────────────────────────────────────────────────
@@ -602,7 +671,6 @@ def analyse(ticker, period, vix_current):
         valid = [e for e in all_exps if (datetime.strptime(e, "%Y-%m-%d") - today).days > 14]
         if valid:
             exp = valid[0]
-            # Use cached fetch — no redundant requests
             calls_df, puts_df, dte = fetch_chain_cached(ticker, exp)
             if calls_df is not None:
                 chain = type("_C", (), {"calls": calls_df, "puts": puts_df})()
@@ -635,6 +703,15 @@ def vix_zone(v):
 def fmt(v, fs=".1f", su=""):
     return f"{v:{fs}}{su}" if v is not None else "—"
 
+def greek_source_label(gs):
+    """Human-readable flag for the Greeks column."""
+    if gs == "yahoo":                return "📡 Yahoo"
+    if gs == "bs_strike":            return "📐 BS (strike IV)"
+    if gs == "bs_chain_median":      return "📐 BS (chain med IV)"
+    if gs == "bs_hv20":              return "📐 BS (HV20)"
+    if gs == "bs_default":           return "📐 BS (30% def)"
+    return gs or "—"
+
 # ══════════════════════════════════════════════════════════════════════════════
 # SIDEBAR
 # ══════════════════════════════════════════════════════════════════════════════
@@ -653,6 +730,10 @@ with st.sidebar:
             st.rerun()
     st.markdown(f"**Active watchlist:** {', '.join(st.session_state.watchlist)}")
     period = st.selectbox("Price History", ["6mo", "1y", "2y"], index=1)
+    if st.button("🧹 Clear data cache", use_container_width=True):
+        st.cache_data.clear()
+        st.success("Cache cleared — data will refetch on next run.")
+        st.rerun()
     st.divider()
     vix_df  = fetch_vix("1y")
     vix_now = None
@@ -851,7 +932,6 @@ with tab_chain:
         all_exps = r.get("all_exps", [])
         if all_exps:
             selected_exp = st.selectbox("Select Expiry", all_exps, index=0, key=f"exp_sel_{sel_c}")
-            # Use cached fetch directly
             calls_df, puts_df, dte = fetch_chain_cached(sel_c, selected_exp)
             if calls_df is not None:
                 chain = type("_C", (), {"calls": calls_df, "puts": puts_df})()
@@ -951,7 +1031,8 @@ with tab_screener:
     st.subheader("⚡ Options Suitability Screener")
     st.caption(
         "Ranks each watchlist stock for CSP / CC / LEAP suitability using the θ × √DTE / S formula. "
-        "Greeks sourced from Yahoo Finance when available; Black-Scholes fallback used outside market hours."
+        "yfinance does NOT return greeks — all delta/theta values are computed via Black-Scholes "
+        "using live strike IV (preferred), chain-median IV, or HV20 as progressive fallbacks."
     )
 
     with st.expander("How the score is calculated", expanded=False):
@@ -982,14 +1063,16 @@ Then calculates the **Normalised IV Score (NIS)**:
 
 **Ratings:** ≥80 Optimal · ≥60 Acceptable · ≥40 Marginal · <40 Unsuitable
 
-**Greek sourcing:** Yahoo Finance live greeks used during US market hours (18:30–01:00 Dubai).
-Outside hours, delta and theta are computed via Black-Scholes using each strike's IV (or HV20 as fallback).
-Scores computed outside hours are directionally valid but less precise — use for triage, confirm at open.
+**Greek sourcing hierarchy (per strike):**
+1. Strike's own IV (most accurate)
+2. Chain-wide median IV (if strike IV missing/extreme)
+3. HV20 of underlying (if whole chain has bad IV)
+4. 30% default (last resort)
 
-> ⚠️ Yahoo delta/theta only reliable during US market hours — Dubai: 18:30 to 01:00
+All greeks computed via Black-Scholes with r=4.5% and σ clamped to [5%, 300%].
         """)
 
-    # ── Chain Inspector (diagnostic) ──────────────────────────────────────────
+    # ── Chain Inspector ───────────────────────────────────────────────────────
     with st.expander("🔬 Chain Inspector — see raw Yahoo data", expanded=False):
         insp_ticker = st.selectbox("Ticker to inspect", list(results.keys()), key="insp_ticker")
         if insp_ticker and insp_ticker in results:
@@ -1004,24 +1087,24 @@ Scores computed outside hours are directionally valid but less precise — use f
                 if puts_i is not None and not puts_i.empty:
                     st.write(f"**Columns present:** `{list(puts_i.columns)}`")
                     st.write(f"**Rows:** {len(puts_i)}  |  **DTE:** {dte_i}")
-                    # Show delta/theta/IV/OI for middle 10 rows (near ATM)
                     price_i = results[insp_ticker]["price"]
-                    puts_sorted = puts_i.iloc[(puts_i["strike"] - price_i).abs().argsort()].head(10)
+                    puts_sorted = puts_i.iloc[(puts_i["strike"] - price_i).abs().argsort()].head(12)
                     disp_cols = [c for c in ["strike","bid","ask","impliedVolatility",
-                                              "openInterest","delta","theta","gamma"] 
+                                              "volume","openInterest","delta","theta","gamma"]
                                  if c in puts_sorted.columns]
                     st.dataframe(puts_sorted[disp_cols].reset_index(drop=True), use_container_width=True)
-                    # Summarise key fields
-                    oi_col  = puts_i.get("openInterest",      pd.Series(dtype=float)).fillna(0)
-                    iv_col  = puts_i.get("impliedVolatility",  pd.Series(dtype=float)).fillna(0)
-                    d_col   = puts_i.get("delta",              pd.Series(dtype=float))
-                    th_col  = puts_i.get("theta",              pd.Series(dtype=float))
-                    st.write(f"OI≥10 rows: **{(oi_col >= 10).sum()}** / {len(puts_i)}")
-                    st.write(f"IV>0  rows: **{(iv_col > 0).sum()}** / {len(puts_i)}")
-                    st.write(f"delta col present: **{d_col is not None}**  "
-                             f"non-NaN: **{d_col.notna().sum() if d_col is not None else 0}**")
-                    st.write(f"theta col present: **{th_col is not None}**  "
-                             f"non-NaN: **{th_col.notna().sum() if th_col is not None else 0}**")
+
+                    oi_col  = pd.to_numeric(puts_i.get("openInterest", pd.Series(dtype=float)), errors="coerce")
+                    iv_col  = pd.to_numeric(puts_i.get("impliedVolatility", pd.Series(dtype=float)), errors="coerce")
+                    st.write(f"OI≥10 rows: **{int((oi_col.fillna(0) >= 10).sum())}** / {len(puts_i)}")
+                    st.write(f"OI≥1  rows: **{int((oi_col.fillna(0) >= 1).sum())}** / {len(puts_i)}  (new filter threshold)")
+                    st.write(f"IV>0  rows: **{int((iv_col.fillna(0) > 0).sum())}** / {len(puts_i)}")
+                    st.write(f"IV NaN rows: **{int(iv_col.isna().sum())}** / {len(puts_i)}")
+
+                    if "delta" in puts_i.columns:
+                        st.success("✅ yfinance returned delta column (unusual — this build may have live greeks)")
+                    else:
+                        st.info("ℹ️ No delta column from yfinance (normal — using Black-Scholes fallback)")
                 else:
                     st.warning("Chain fetch returned empty / None for this expiry.")
             else:
@@ -1049,7 +1132,11 @@ Scores computed outside hours are directionally valid but less precise — use f
                 row = get_screener_row(ticker, result)
                 if row:
                     screener_rows.append(row)
-                    debug_log.append(f"✅ {ticker} — CSP score {row['csp_score']}  ({row['greek_source']})")
+                    debug_log.append(
+                        f"✅ {ticker} — CSP score {row['csp_score']} "
+                        f"({row['greek_source']}, "
+                        f"inspected {row.get('_inspected')}, scored {row.get('_scored')})"
+                    )
                 else:
                     # Diagnose why
                     price    = result.get("price")
@@ -1077,10 +1164,13 @@ Scores computed outside hours are directionally valid but less precise — use f
                             if puts_df is None or puts_df.empty:
                                 reason = f"chain fetch failed for {valid_exp}"
                             else:
-                                n_rows  = len(puts_df)
-                                n_oi    = (puts_df.get("openInterest", pd.Series(dtype=float)).fillna(0) >= 10).sum()
-                                n_iv    = (puts_df.get("impliedVolatility", pd.Series(dtype=float)).fillna(0) > 0).sum()
-                                reason  = f"puts chain fetched OK ({n_rows} rows, {n_oi} with OI≥10, {n_iv} with IV>0) — find_target_strike returned None"
+                                n_rows = len(puts_df)
+                                oi_c   = pd.to_numeric(puts_df.get("openInterest", pd.Series(dtype=float)), errors="coerce").fillna(0)
+                                iv_c   = pd.to_numeric(puts_df.get("impliedVolatility", pd.Series(dtype=float)), errors="coerce").fillna(0)
+                                reason = (f"puts chain {n_rows} rows "
+                                          f"(OI≥1: {int((oi_c>=1).sum())}, "
+                                          f"IV>0: {int((iv_c>0).sum())}) — "
+                                          f"find_target_strike returned None")
                     debug_log.append(f"❌ {ticker} — skipped: {reason}")
             prog.empty()
             st.session_state["screener_results"] = screener_rows
@@ -1096,13 +1186,22 @@ Scores computed outside hours are directionally valid but less precise — use f
     if screener_rows:
         screener_rows_sorted = sorted(screener_rows, key=lambda x: x["csp_score"], reverse=True)
 
-        # Check if any used BS fallback so we can show a banner
-        bs_tickers = [r["ticker"] for r in screener_rows_sorted if r.get("greek_source") == "bs_fallback"]
-        if bs_tickers:
+        # Summarise greek sources in use
+        src_counts = {}
+        for r in screener_rows_sorted:
+            k = r.get("greek_source", "unknown")
+            src_counts[k] = src_counts.get(k, 0) + 1
+        src_summary = "  ·  ".join(f"{greek_source_label(k)}: {v}" for k, v in src_counts.items())
+        st.info(f"**Greek sources in this run:** {src_summary}")
+
+        # Warn specifically if HV20 or default fallback was used (lowest precision)
+        low_precision = [r["ticker"] for r in screener_rows_sorted
+                         if r.get("greek_source") in ("bs_hv20", "bs_default")]
+        if low_precision:
             st.warning(
-                f"⚠️ **Black-Scholes fallback greeks used for: {', '.join(bs_tickers)}** — "
-                "Yahoo didn't return delta/theta (markets likely closed). "
-                "Scores are directionally valid. Re-run after 18:30 Dubai for live greeks."
+                f"⚠️ Low-precision greeks for: **{', '.join(low_precision)}** — "
+                "chain IV was missing/extreme, so HV20 or a 30% default was used. "
+                "Directionally useful but confirm at market open."
             )
 
         table_rows = []
@@ -1111,13 +1210,12 @@ Scores computed outside hours are directionally valid but less precise — use f
             gates      = gr["gates"]
             gate_icons = "".join(["✅" if gates[f"G{i}"]["pass"] else "❌" for i in range(1, 5)])
             status     = "🟢 TRADE" if gr["all_pass"] else "🔴 WAIT"
-            greek_flag = "📐 BS" if r.get("greek_source") == "bs_fallback" else "📡 Live"
             table_rows.append({
                 "Ticker":      r["ticker"],
                 "Price":       f"${r['price']:.2f}",
                 "Expiry":      r["expiry"],
                 "DTE":         r["dte"],
-                "Greeks":      greek_flag,
+                "Greeks":      greek_source_label(r.get("greek_source")),
                 "CSP Strike":  f"${r['csp_strike']:.1f}",
                 "CSP Δ":       r["csp_delta"],
                 "θ/day":       f"${r['csp_theta']:.3f}",
@@ -1133,7 +1231,7 @@ Scores computed outside hours are directionally valid but less precise — use f
             })
 
         st.dataframe(pd.DataFrame(table_rows), use_container_width=True, hide_index=True, height=480)
-        st.caption("\\* LEAP Score at short DTE — DTE component near zero. Use as relative IV indicator only. 📐 BS = Black-Scholes fallback  📡 Live = Yahoo greeks")
+        st.caption("\\* LEAP Score at short DTE — DTE component near zero. Use as relative IV indicator only.")
 
         st.subheader("CSP Suitability Ranking")
         tickers    = [r["ticker"]    for r in screener_rows_sorted]
@@ -1175,7 +1273,7 @@ Scores computed outside hours are directionally valid but less precise — use f
             with st.expander(
                 f"{icon} {r['ticker']}  —  CSP Score: {r['csp_score']}  |  "
                 f"Strike ${r['csp_strike']:.1f}  Δ{r['csp_delta']}  "
-                f"θ${r['csp_theta']:.3f}/day  IV {r['csp_iv'] or 'BS'}%"
+                f"θ${r['csp_theta']:.3f}/day  IV {r['csp_iv'] or '—'}%"
             ):
                 gcols = st.columns(4)
                 for idx, (gk, gv) in enumerate(gates.items()):
@@ -1186,9 +1284,9 @@ Scores computed outside hours are directionally valid but less precise — use f
                 rc1.markdown(f"""
 **CSP Recommended Strike**
 - Strike: **${r['csp_strike']:.1f}**
-- Delta: **{r['csp_delta']}** {'📡' if r.get('greek_source') != 'bs_fallback' else '📐 BS'}
+- Delta: **{r['csp_delta']}**  ({greek_source_label(r.get('greek_source'))})
 - Theta: **${r['csp_theta']:.3f}/day**
-- IV: **{r['csp_iv'] or '— (HV used)'}%**
+- Effective IV: **{r['csp_iv'] or '—'}%**
 - Open Interest: **{r['csp_oi']}**
 - Spread: **{r['csp_spread']}%** {'✅' if r['csp_spread'] and r['csp_spread'] < 20 else '⚠️ Wide' if r['csp_spread'] else '—'}
                 """)
@@ -1204,11 +1302,12 @@ Scores computed outside hours are directionally valid but less precise — use f
         st.markdown("""
         <div style='text-align:center; padding:60px; color:#94a3b8;'>
             <h3>Click <strong>Run Screener</strong> to analyse your watchlist</h3>
-            <p>Live greeks used during market hours (18:30 Dubai). Black-Scholes fallback active outside hours.</p>
+            <p>All greeks computed via Black-Scholes using live chain IV (with HV20 fallback).</p>
+            <p>Works during market hours <em>and</em> after-hours.</p>
         </div>
         """, unsafe_allow_html=True)
     else:
         st.warning(
-            "No screener data returned. This may indicate all chains had OI < 50 across all strikes, "
-            "or Yahoo returned empty data. Check the Options Chain tab for chain availability."
+            "No screener data returned. Check the Chain Inspector above to see raw chain data, "
+            "and toggle diagnostic output to see per-ticker skip reasons."
         )
