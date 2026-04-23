@@ -591,134 +591,139 @@ def fg_color(score):
     return "#15803d"
 
 # Sector zone config (shared by both stock and crypto gauges)
+# Zone definitions: (score_lo, score_hi, bright_color, dim_color, label)
 _FG_ZONES = [
-    (0,  25, "#ef4444", "EXTREME\nFEAR"),
-    (25, 45, "#f97316", "FEAR"),
-    (45, 55, "#eab308", "NEUTRAL"),
-    (55, 75, "#22c55e", "GREED"),
-    (75,100, "#15803d", "EXTREME\nGREED"),
+    (0,  25, "#ef4444", "rgba(239,68,68,0.18)",  "EXTREME\nFEAR"),
+    (25, 45, "#f97316", "rgba(249,115,22,0.18)", "FEAR"),
+    (45, 55, "#eab308", "rgba(234,179,8,0.18)",  "NEUTRAL"),
+    (55, 75, "#22c55e", "rgba(34,197,94,0.18)",  "GREED"),
+    (75,100, "#15803d", "rgba(21,128,61,0.18)",  "EXTREME\nGREED"),
 ]
+
+def fg_color(score):
+    if score is None: return "#6b7280"
+    for lo, hi, bright, *_ in _FG_ZONES:
+        if score < hi: return bright
+    return "#15803d"
 
 def semicircle_gauge(score, title, rating, source_label=""):
     """
-    CNN-style semicircle gauge with coloured zones and a needle pointer.
-    score: 0–100
+    True top-half-only semicircle gauge.
+    Built from filled scatter polygons (arc segments) so there is zero
+    bottom-half bleed.  Coordinate system: centre=(0,0), arc from 180°
+    (left=score 0) to 0° (right=score 100).  y-axis clipped at -0.5 so
+    the bottom half is simply never rendered.
     """
-    # Which zone is active?
-    def active_zone(s):
-        for i,(lo,hi,_,__) in enumerate(_FG_ZONES):
-            if s < hi: return i
-        return 4
+    R_OUT = 1.00   # outer ring radius
+    R_IN  = 0.58   # inner hole radius
+    N     = 80     # polygon resolution
 
-    active = active_zone(score if score is not None else 50)
+    def s2a(s):
+        """Score 0→180°, score 100→0°  (math angles, 0=right 90=top)"""
+        return 180.0 - s * 1.8
 
-    # Build pie slices — top semicircle only (bottom half is invisible)
-    # Each zone is proportional to its width out of 100
-    sizes  = [hi-lo for lo,hi,_,__ in _FG_ZONES]   # [25,20,10,20,25]
-    bright = [c  for _,__,c,___ in _FG_ZONES]
-    dim    = ["rgba(239,68,68,0.18)","rgba(249,115,22,0.18)",
-              "rgba(234,179,8,0.18)", "rgba(34,197,94,0.18)","rgba(21,128,61,0.18)"]
-    z_colors = [bright[i] if i==active else dim[i] for i in range(5)]
+    def arc_pts(a1_deg, a2_deg, r):
+        angs = np.linspace(np.radians(a1_deg), np.radians(a2_deg), N)
+        return r * np.cos(angs), r * np.sin(angs)
+
+    # Active zone index
+    active = 4
+    for i, (lo, hi, *_) in enumerate(_FG_ZONES):
+        if (score or 0) <= hi:
+            active = i
+            break
 
     fig = go.Figure()
 
-    # Semicircle via Pie: top half = gauge, bottom half = transparent spacer
-    fig.add_trace(go.Pie(
-        values=sizes + [sum(sizes)],          # spacer = 100
-        labels=[z[3] for z in _FG_ZONES] + [""],
-        marker=dict(
-            colors=z_colors + ["rgba(0,0,0,0)"],
-            line=dict(color="#0f172a", width=3),
-        ),
-        hole=0.44,
-        rotation=90,      # 0 → left, 100 → right
-        sort=False,
-        direction="clockwise",
-        textinfo="none",
-        hoverinfo="skip",
-        showlegend=False,
-    ))
+    # ── Coloured arc sectors ───────────────────────────────────────────────
+    for i, (slo, shi, bright, dim, lbl) in enumerate(_FG_ZONES):
+        a1 = s2a(slo); a2 = s2a(shi)          # a1 > a2 (left → right)
+        ox, oy = arc_pts(a1, a2, R_OUT)        # outer arc
+        ix, iy = arc_pts(a2, a1, R_IN)         # inner arc (reversed)
+        xs = np.concatenate([ox, ix, [ox[0]]]).tolist()
+        ys = np.concatenate([oy, iy, [oy[0]]]).tolist()
 
-    # Zone labels inside each slice
-    label_positions = [
-        (12,  0.62, 0.82),   # Extreme Fear
-        (35,  0.30, 0.82),   # Fear
-        (50,  0.50, 0.95),   # Neutral
-        (65,  0.70, 0.82),   # Greed
-        (88,  0.88, 0.82),   # Extreme Greed
-    ]
-    zone_names = ["EXTREME\nFEAR", "FEAR", "NEUTRAL", "GREED", "EXTREME\nGREED"]
-    for i, (mid_score, px, py) in enumerate(label_positions):
-        angle = math.pi * (1 - mid_score/100)
-        r_lbl = 0.36
-        lx = 0.5 + r_lbl * math.cos(angle)
-        ly = 0.47 + r_lbl * math.sin(angle)
+        fig.add_trace(go.Scatter(
+            x=xs, y=ys, fill="toself",
+            fillcolor=bright if i == active else dim,
+            line=dict(color="#0f172a", width=2),
+            mode="lines", hoverinfo="skip", showlegend=False,
+        ))
+
+        # Zone label at arc midpoint
+        ma  = math.radians(s2a((slo + shi) / 2))
+        lr  = (R_OUT + R_IN) / 2
         fig.add_annotation(
-            x=lx, y=ly, xref="paper", yref="paper",
-            text=zone_names[i].replace("\n","<br>"),
-            showarrow=False,
-            font=dict(size=7.5, color="white" if i==active else "rgba(255,255,255,0.45)"),
-            align="center", xanchor="center", yanchor="middle",
+            x=lr * math.cos(ma), y=lr * math.sin(ma),
+            text=lbl.replace("\n", "<br>"),
+            showarrow=False, align="center",
+            xanchor="center", yanchor="middle",
+            font=dict(size=8,
+                      color="white" if i == active else "rgba(255,255,255,0.35)"),
         )
 
-    # Needle
-    if score is not None:
-        angle = math.pi * (1 - score/100)
-        needle_r = 0.35
-        cx, cy = 0.5, 0.47
-        nx = cx + needle_r * math.cos(angle)
-        ny = cy + needle_r * math.sin(angle)
-
-        # Needle line
+    # ── Tick marks at 0, 25, 50, 75, 100 ──────────────────────────────────
+    for tv in [0, 25, 50, 75, 100]:
+        ta = math.radians(s2a(tv))
+        r0, r1, r2 = R_OUT + 0.02, R_OUT + 0.10, R_OUT + 0.21
         fig.add_shape(type="line",
-            x0=cx, y0=cy, x1=nx, y1=ny,
-            xref="paper", yref="paper",
-            line=dict(color="white", width=3))
+            x0=r0*math.cos(ta), y0=r0*math.sin(ta),
+            x1=r1*math.cos(ta), y1=r1*math.sin(ta),
+            line=dict(color="rgba(255,255,255,0.45)", width=1.5))
+        fig.add_annotation(
+            x=r2*math.cos(ta), y=r2*math.sin(ta),
+            text=str(tv), showarrow=False,
+            font=dict(size=9, color="rgba(255,255,255,0.5)"),
+            xanchor="center", yanchor="middle")
 
-        # Hub dot
+    # ── Needle ─────────────────────────────────────────────────────────────
+    if score is not None:
+        na  = math.radians(s2a(score))
+        nlx = 0.76 * math.cos(na)
+        nly = 0.76 * math.sin(na)
+        # Forward shaft
+        fig.add_shape(type="line",
+            x0=0, y0=0, x1=nlx, y1=nly,
+            line=dict(color="white", width=4))
+        # Short tail
+        fig.add_shape(type="line",
+            x0=0, y0=0,
+            x1=-0.10*math.cos(na), y1=-0.10*math.sin(na),
+            line=dict(color="white", width=4))
+        # Hub circle
+        hw = 0.07
         fig.add_shape(type="circle",
-            x0=cx-0.022, y0=cy-0.028, x1=cx+0.022, y1=cy+0.028,
-            xref="paper", yref="paper",
+            x0=-hw, y0=-hw, x1=hw, y1=hw,
             fillcolor="white", line_color="white")
 
-        # Scale ticks: 0, 25, 50, 75, 100
-        for tick_val in [0, 25, 50, 75, 100]:
-            ta = math.pi * (1 - tick_val/100)
-            r_in, r_out = 0.41, 0.44
-            fig.add_shape(type="line",
-                x0=cx + r_in * math.cos(ta), y0=cy + r_in * math.sin(ta),
-                x1=cx + r_out* math.cos(ta), y1=cy + r_out* math.sin(ta),
-                xref="paper", yref="paper",
-                line=dict(color="rgba(255,255,255,0.5)", width=1.5))
-            fig.add_annotation(
-                x=cx + 0.50*math.cos(ta), y=cy + 0.50*math.sin(ta),
-                xref="paper", yref="paper",
-                text=str(tick_val),
-                showarrow=False,
-                font=dict(size=8, color="rgba(255,255,255,0.5)"),
-                xanchor="center", yanchor="middle")
+    # ── Score + rating text ────────────────────────────────────────────────
+    score_txt    = f"{score:.0f}" if score is not None else "—"
+    rating_color = _FG_ZONES[active][2]
 
-    # Score + rating text
-    score_txt  = f"{score:.0f}" if score is not None else "—"
-    rating_color = bright[active] if score is not None else "#6b7280"
-    fig.add_annotation(x=0.5, y=0.18, xref="paper", yref="paper",
+    fig.add_annotation(x=0, y=-0.10,
         text=f"<b>{score_txt}</b>",
-        font=dict(size=38, color="white"), showarrow=False,
-        xanchor="center", yanchor="middle")
-    fig.add_annotation(x=0.5, y=0.06, xref="paper", yref="paper",
-        text=f"<b>{rating}</b>" if rating else "",
-        font=dict(size=13, color=rating_color), showarrow=False,
-        xanchor="center", yanchor="middle")
+        font=dict(size=46, color="white"),
+        showarrow=False, xanchor="center", yanchor="top")
+    if rating:
+        fig.add_annotation(x=0, y=-0.30,
+            text=f"<b>{rating}</b>",
+            font=dict(size=13, color=rating_color),
+            showarrow=False, xanchor="center", yanchor="top")
 
-    # Title + source
-    title_full = f"<b>{title}</b>"
+    # ── Title ──────────────────────────────────────────────────────────────
+    t_html = f"<b>{title}</b>"
     if source_label:
-        title_full += f"<br><span style='font-size:10px;color:rgba(255,255,255,0.45)'>{source_label}</span>"
+        t_html += (f"<br><span style='font-size:10px;"
+                   f"color:rgba(255,255,255,0.4)'>{source_label}</span>")
 
     fig.update_layout(
-        title=dict(text=title_full, font=dict(size=14, color="white"), x=0.5, xanchor="center", y=0.98),
-        height=300,
-        margin=dict(l=10, r=10, t=40, b=0),
+        title=dict(text=t_html, font=dict(size=13, color="white"),
+                   x=0.5, xanchor="center", y=0.99, yanchor="top"),
+        height=310,
+        # x range symmetrical; y clips at -0.52 so bottom half is invisible
+        xaxis=dict(visible=False, range=[-1.45, 1.45]),
+        yaxis=dict(visible=False, range=[-0.52, 1.28]),
+        margin=dict(l=5, r=5, t=48, b=5),
         paper_bgcolor="rgba(0,0,0,0)",
         plot_bgcolor="rgba(0,0,0,0)",
         showlegend=False,
