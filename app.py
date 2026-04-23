@@ -52,6 +52,23 @@ VIX_TERM_TICKERS = [
     ("^VIX6M", "6-Month"),
 ]
 
+# ── Sector heatmap — SPDR ETFs + BTC as 12th sector ──────────────────────────
+# (ticker, full name, short label for tile)
+SECTOR_TICKERS = [
+    ("XLK",     "Technology",       "XLK"),
+    ("XLF",     "Financials",       "XLF"),
+    ("XLV",     "Health Care",      "XLV"),
+    ("XLE",     "Energy",           "XLE"),
+    ("XLI",     "Industrials",      "XLI"),
+    ("XLC",     "Comm. Services",   "XLC"),
+    ("XLY",     "Consumer Disc.",   "XLY"),
+    ("XLP",     "Consumer Staples", "XLP"),
+    ("XLU",     "Utilities",        "XLU"),
+    ("XLRE",    "Real Estate",      "XLRE"),
+    ("XLB",     "Materials",        "XLB"),
+    ("BTC-USD", "Digital Assets",   "BTC"),
+]
+
 # ── Screener constants ─────────────────────────────────────────────────────────
 NIS_FLOOR = 0.00157
 NIS_CEIL  = 0.01253
@@ -668,6 +685,88 @@ def vix_term_chart(term_data):
         yaxis_range=[0,max(vals)*1.3],margin=dict(l=10,r=10,t=50,b=10),showlegend=False)
     return fig
 
+# ── Sector heatmap helpers ─────────────────────────────────────────────────────
+def sector_tile_color(pct):
+    """
+    Map % change → tile fill color.
+    Greens for positive, reds for negative.
+    Shade intensity increases with move magnitude.
+    """
+    if pct is None:  return "#334155"   # no data — slate
+    if pct >=  3.0:  return "#14532d"   # very deep green
+    if pct >=  2.0:  return "#166534"
+    if pct >=  1.0:  return "#15803d"
+    if pct >=  0.3:  return "#16a34a"
+    if pct >=  0.0:  return "#4ade80"   # light green (barely positive)
+    if pct >= -0.3:  return "#f87171"   # light red (barely negative)
+    if pct >= -1.0:  return "#dc2626"
+    if pct >= -2.0:  return "#b91c1c"
+    if pct >= -3.0:  return "#991b1b"
+    return "#7f1d1d"                    # very deep red
+
+def render_sector_heatmap(sector_data):
+    """
+    Draws a 4-column grid of equal-sized coloured tiles using Plotly
+    shapes + annotations. Each tile shows sector name, ETF, and % change.
+
+    sector_data: list of dicts — {label, ticker, pct}
+    """
+    N_COLS  = 4
+    TILE_W  = 1.0
+    TILE_H  = 0.9
+    PAD_X   = 0.06
+    PAD_Y   = 0.06
+    n_rows  = math.ceil(len(sector_data) / N_COLS)
+
+    fig = go.Figure()
+
+    for i, s in enumerate(sector_data):
+        row = i // N_COLS
+        col = i  % N_COLS
+        x0  = col * (TILE_W + PAD_X)
+        x1  = x0 + TILE_W
+        y0  = (n_rows - 1 - row) * (TILE_H + PAD_Y)
+        y1  = y0 + TILE_H
+        cx  = (x0 + x1) / 2
+        cy  = (y0 + y1) / 2
+
+        pct   = s.get("pct")
+        color = sector_tile_color(pct)
+        pct_txt = f"{pct:+.2f}%" if pct is not None else "—"
+
+        # Tile background
+        fig.add_shape(type="rect", x0=x0, y0=y0, x1=x1, y1=y1,
+                      fillcolor=color, line=dict(color="#0f172a", width=2),
+                      layer="below")
+
+        # Sector name (top)
+        fig.add_annotation(x=cx, y=cy+0.22, text=f"<b>{s['label']}</b>",
+                           showarrow=False, font=dict(size=12, color="white"),
+                           align="center", xanchor="center", yanchor="middle")
+
+        # ETF ticker (middle)
+        fig.add_annotation(x=cx, y=cy+0.02, text=s["ticker"],
+                           showarrow=False, font=dict(size=10, color="rgba(255,255,255,0.75)"),
+                           align="center", xanchor="center", yanchor="middle")
+
+        # % change (bottom, larger, bold)
+        fig.add_annotation(x=cx, y=cy-0.22, text=f"<b>{pct_txt}</b>",
+                           showarrow=False, font=dict(size=14, color="white"),
+                           align="center", xanchor="center", yanchor="middle")
+
+    total_w = N_COLS * (TILE_W + PAD_X) - PAD_X
+    total_h = n_rows  * (TILE_H + PAD_Y) - PAD_Y
+
+    fig.update_layout(
+        height=n_rows * 115,
+        xaxis=dict(visible=False, range=[-PAD_X, total_w + PAD_X]),
+        yaxis=dict(visible=False, range=[-PAD_Y, total_h + PAD_Y]),
+        margin=dict(l=0, r=0, t=0, b=0),
+        plot_bgcolor="rgba(0,0,0,0)",
+        paper_bgcolor="rgba(0,0,0,0)",
+    )
+    return fig
+
 # ══════════════════════════════════════════════════════════════════════════════
 # SIDEBAR
 # ══════════════════════════════════════════════════════════════════════════════
@@ -812,6 +911,39 @@ with tab_dash:
             st.markdown(f"**Market F&G:** <span style='color:{color}'>{fg_score:.0f} — {fg_rating}</span>",
                         unsafe_allow_html=True)
             st.caption("Built from VIX, SPY momentum, RSI, 125MA, HYG — no external API")
+
+    st.divider()
+
+    # ── SECTOR HEATMAP ─────────────────────────────────────────────────────────
+    st.subheader("🟩 Sector Heatmap")
+    st.caption("SPDR sector ETFs + Bitcoin as Digital Assets · colour intensity = move strength · data ~15 min delayed")
+
+    sector_quotes = []
+    for ticker, label, short in SECTOR_TICKERS:
+        q = fetch_quote(ticker)
+        sector_quotes.append({
+            "label":  label,
+            "ticker": short,
+            "pct":    q["pct"] if q else None,
+            "price":  q["price"] if q else None,
+        })
+
+    fig_sector = render_sector_heatmap(sector_quotes)
+    st.plotly_chart(fig_sector, use_container_width=True)
+
+    # Colour legend
+    legend_cols = st.columns(10)
+    legend_items = [
+        ("#14532d", ">+3%"), ("#15803d", "+1–3%"), ("#4ade80", "0–+1%"),
+        ("#334155", "n/a"),
+        ("#f87171", "0–-1%"), ("#dc2626", "-1–-3%"), ("#7f1d1d", "<-3%"),
+    ]
+    for i, (col, (clr, lbl)) in enumerate(zip(legend_cols[1:-1], legend_items)):
+        col.markdown(
+            f"<div style='background:{clr};border-radius:4px;padding:3px 6px;"
+            f"text-align:center;font-size:11px;color:white'>{lbl}</div>",
+            unsafe_allow_html=True,
+        )
 
     st.divider()
 
