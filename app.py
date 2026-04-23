@@ -700,14 +700,16 @@ def semicircle_gauge(score, title, rating, source_label=""):
     score_txt    = f"{score:.0f}" if score is not None else "—"
     rating_color = _FG_ZONES[active][2]
 
-    fig.add_annotation(x=0, y=-0.10,
+    # Score number just below the arc baseline
+    fig.add_annotation(x=0, y=-0.08,
         text=f"<b>{score_txt}</b>",
         font=dict(size=46, color="white"),
         showarrow=False, xanchor="center", yanchor="top")
+    # Rating label — pushed well below the number to avoid overlap
     if rating:
-        fig.add_annotation(x=0, y=-0.30,
+        fig.add_annotation(x=0, y=-0.46,
             text=f"<b>{rating}</b>",
-            font=dict(size=13, color=rating_color),
+            font=dict(size=14, color=rating_color),
             showarrow=False, xanchor="center", yanchor="top")
 
     # ── Title ──────────────────────────────────────────────────────────────
@@ -719,11 +721,11 @@ def semicircle_gauge(score, title, rating, source_label=""):
     fig.update_layout(
         title=dict(text=t_html, font=dict(size=13, color="white"),
                    x=0.5, xanchor="center", y=0.99, yanchor="top"),
-        height=310,
-        # x range symmetrical; y clips at -0.52 so bottom half is invisible
+        height=330,
+        # y range extended at bottom so score + rating both fit without clipping
         xaxis=dict(visible=False, range=[-1.45, 1.45]),
-        yaxis=dict(visible=False, range=[-0.52, 1.28]),
-        margin=dict(l=5, r=5, t=48, b=5),
+        yaxis=dict(visible=False, range=[-0.70, 1.28]),
+        margin=dict(l=5, r=5, t=48, b=10),
         paper_bgcolor="rgba(0,0,0,0)",
         plot_bgcolor="rgba(0,0,0,0)",
         showlegend=False,
