@@ -6,6 +6,7 @@ import plotly.graph_objects as go
 from plotly.subplots import make_subplots
 from datetime import datetime
 import math
+import requests
 from scipy.stats import norm
 import warnings
 warnings.filterwarnings("ignore")
@@ -141,98 +142,49 @@ def fetch_quote(ticker):
         return None
 
 @st.cache_data(ttl=300, show_spinner=False)
-def calc_market_fg():
+def fetch_cnn_fg():
     """
-    Compute a market Fear & Greed composite (0-100) entirely from yfinance.
-    No external API — always works.
-    Components: VIX level (inverted), SPY momentum, SPY RSI,
-                SPY vs 125-day MA, HYG junk-bond demand.
+    Fetch CNN Fear & Greed stock market index.
+    Tries the CNN dataviz endpoint with browser-like headers.
+    Falls back to None if unavailable.
     """
-    scores = {}; weights = {}; details = {}
-
-    # 1 — VIX (inverted): high VIX = fear = low score
     try:
-        vdf = yf.download("^VIX", period="1y", auto_adjust=True, progress=False)
-        if vdf is not None and not vdf.empty:
-            vcl = vdf["Close"].squeeze().dropna()
-            vmin, vmax, vcur = float(vcl.min()), float(vcl.max()), float(vcl.iloc[-1])
-            raw = 1.0 - (vcur - vmin)/(vmax - vmin) if vmax != vmin else 0.5
-            scores["VIX"]  = round(raw*100, 1)
-            weights["VIX"] = 0.25
-            details["VIX"] = f"VIX={vcur:.1f}  (1yr range {vmin:.1f}–{vmax:.1f})"
+        r = requests.get(
+            "https://production.dataviz.cnn.io/index/fearandgreed/graphdata",
+            headers={
+                "User-Agent":  "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) "
+                               "AppleWebKit/537.36 (KHTML, like Gecko) "
+                               "Chrome/124.0.0.0 Safari/537.36",
+                "Referer":     "https://www.cnn.com/markets/fear-and-greed",
+                "Origin":      "https://www.cnn.com",
+                "Accept":      "application/json, text/plain, */*",
+            },
+            timeout=10,
+        )
+        d   = r.json()
+        fg  = d.get("fear_and_greed", d)
+        score  = round(float(fg.get("score",  fg.get("value", 50))), 1)
+        rating = str(fg.get("rating", fg.get("value_classification", "neutral"))
+                     ).replace("_", " ").title()
+        return score, rating
     except Exception:
-        pass
+        return None, None
 
-    # 2 — SPY 30-day momentum
+@st.cache_data(ttl=300, show_spinner=False)
+def fetch_crypto_fg():
+    """
+    Fetch Crypto Fear & Greed from Alternative.me (free, no API key).
+    This is the same index shown on CoinMarketCap and CoinStats.
+    """
     try:
-        sdf = yf.download("SPY", period="3mo", auto_adjust=True, progress=False)
-        if sdf is not None and not sdf.empty:
-            scl = sdf["Close"].squeeze().dropna()
-            if len(scl) >= 30:
-                ret30 = (float(scl.iloc[-1])/float(scl.iloc[-30]) - 1)*100
-                raw   = (ret30 + 10)/20.0   # -10% → 0, +10% → 100
-                scores["Momentum"]  = round(max(0.0, min(100.0, raw*100)), 1)
-                weights["Momentum"] = 0.20
-                details["Momentum"] = f"SPY 30d return: {ret30:+.1f}%"
+        r   = requests.get("https://api.alternative.me/fng/?limit=1", timeout=8)
+        d   = r.json()
+        entry  = d["data"][0]
+        score  = int(entry["value"])
+        rating = entry["value_classification"].replace("_", " ").title()
+        return score, rating
     except Exception:
-        pass
-
-    # 3 — SPY RSI(14)
-    try:
-        sdf2 = yf.download("SPY", period="3mo", auto_adjust=True, progress=False)
-        if sdf2 is not None and not sdf2.empty:
-            scl2  = sdf2["Close"].squeeze().dropna()
-            delta = scl2.diff()
-            gain  = delta.clip(lower=0).ewm(alpha=1/14, min_periods=14).mean()
-            loss  = (-delta).clip(lower=0).ewm(alpha=1/14, min_periods=14).mean()
-            rsi_v = float((100 - 100/(1 + gain/loss.replace(0, np.nan))).dropna().iloc[-1])
-            raw   = (rsi_v - 30)/40.0   # RSI 30=fear, 70=greed
-            scores["RSI"]  = round(max(0.0, min(100.0, raw*100)), 1)
-            weights["RSI"] = 0.20
-            details["RSI"] = f"SPY RSI(14)={rsi_v:.1f}"
-    except Exception:
-        pass
-
-    # 4 — SPY vs 125-day MA
-    try:
-        sdf3 = yf.download("SPY", period="1y", auto_adjust=True, progress=False)
-        if sdf3 is not None and not sdf3.empty:
-            scl3 = sdf3["Close"].squeeze().dropna()
-            if len(scl3) >= 125:
-                ma125    = float(scl3.rolling(125).mean().dropna().iloc[-1])
-                pct_diff = (float(scl3.iloc[-1])/ma125 - 1)*100
-                raw      = (pct_diff + 5)/10.0   # -5% → 0, +5% → 100
-                scores["Trend"]  = round(max(0.0, min(100.0, raw*100)), 1)
-                weights["Trend"] = 0.20
-                details["Trend"] = f"SPY vs 125MA: {pct_diff:+.1f}%"
-    except Exception:
-        pass
-
-    # 5 — HYG junk bond demand
-    try:
-        hdf = yf.download("HYG", period="3mo", auto_adjust=True, progress=False)
-        if hdf is not None and not hdf.empty:
-            hcl = hdf["Close"].squeeze().dropna()
-            if len(hcl) >= 30:
-                ret30h = (float(hcl.iloc[-1])/float(hcl.iloc[-30]) - 1)*100
-                raw    = (ret30h + 5)/10.0   # -5% → 0, +5% → 100
-                scores["Junk Bond"]  = round(max(0.0, min(100.0, raw*100)), 1)
-                weights["Junk Bond"] = 0.15
-                details["Junk Bond"] = f"HYG 30d return: {ret30h:+.1f}%"
-    except Exception:
-        pass
-
-    if not scores:
-        return None, "Unavailable", {}
-
-    total_w   = sum(weights.get(k,0) for k in scores)
-    composite = sum(scores[k]*weights.get(k,0) for k in scores)/total_w if total_w > 0 else 50.0
-    composite = round(composite, 1)
-
-    rating = ("Extreme Fear" if composite < 25 else "Fear" if composite < 45
-              else "Neutral" if composite < 55 else "Greed" if composite < 75 else "Extreme Greed")
-
-    return composite, rating, details
+        return None, None
 
 @st.cache_data(ttl=60, show_spinner=False)
 def fetch_vix_term():
@@ -638,23 +590,139 @@ def fg_color(score):
     if score<75:  return "#16a34a"
     return "#15803d"
 
-def fg_gauge(score, rating):
-    color=fg_color(score)
-    fig=go.Figure(go.Indicator(
-        mode="gauge+number", value=score,
-        number={"font":{"size":34,"color":color}},
-        title={"text":f"<b>Market F&G</b><br><span style='color:{color};font-size:0.8em'>{rating}</span>",
-               "font":{"size":12}},
-        gauge={"axis":{"range":[0,100],"tickvals":[0,25,45,55,75,100],
-                       "ticktext":["0","Ex Fear","Fear","Greed","Ex Greed","100"]},
-               "bar":{"color":color,"thickness":0.25},
-               "steps":[{"range":[0,25],"color":"rgba(220,38,38,0.12)"},
-                         {"range":[25,45],"color":"rgba(234,88,12,0.12)"},
-                         {"range":[45,55],"color":"rgba(202,138,4,0.12)"},
-                         {"range":[55,75],"color":"rgba(22,163,74,0.12)"},
-                         {"range":[75,100],"color":"rgba(21,128,61,0.12)"}],
-               "threshold":{"line":{"color":color,"width":4},"thickness":0.75,"value":score}}))
-    fig.update_layout(height=210,template="plotly_dark",margin=dict(l=10,r=10,t=55,b=10))
+# Sector zone config (shared by both stock and crypto gauges)
+_FG_ZONES = [
+    (0,  25, "#ef4444", "EXTREME\nFEAR"),
+    (25, 45, "#f97316", "FEAR"),
+    (45, 55, "#eab308", "NEUTRAL"),
+    (55, 75, "#22c55e", "GREED"),
+    (75,100, "#15803d", "EXTREME\nGREED"),
+]
+
+def semicircle_gauge(score, title, rating, source_label=""):
+    """
+    CNN-style semicircle gauge with coloured zones and a needle pointer.
+    score: 0–100
+    """
+    # Which zone is active?
+    def active_zone(s):
+        for i,(lo,hi,_,__) in enumerate(_FG_ZONES):
+            if s < hi: return i
+        return 4
+
+    active = active_zone(score if score is not None else 50)
+
+    # Build pie slices — top semicircle only (bottom half is invisible)
+    # Each zone is proportional to its width out of 100
+    sizes  = [hi-lo for lo,hi,_,__ in _FG_ZONES]   # [25,20,10,20,25]
+    bright = [c  for _,__,c,___ in _FG_ZONES]
+    dim    = ["rgba(239,68,68,0.18)","rgba(249,115,22,0.18)",
+              "rgba(234,179,8,0.18)", "rgba(34,197,94,0.18)","rgba(21,128,61,0.18)"]
+    z_colors = [bright[i] if i==active else dim[i] for i in range(5)]
+
+    fig = go.Figure()
+
+    # Semicircle via Pie: top half = gauge, bottom half = transparent spacer
+    fig.add_trace(go.Pie(
+        values=sizes + [sum(sizes)],          # spacer = 100
+        labels=[z[3] for z in _FG_ZONES] + [""],
+        marker=dict(
+            colors=z_colors + ["rgba(0,0,0,0)"],
+            line=dict(color="#0f172a", width=3),
+        ),
+        hole=0.44,
+        rotation=90,      # 0 → left, 100 → right
+        sort=False,
+        direction="clockwise",
+        textinfo="none",
+        hoverinfo="skip",
+        showlegend=False,
+    ))
+
+    # Zone labels inside each slice
+    label_positions = [
+        (12,  0.62, 0.82),   # Extreme Fear
+        (35,  0.30, 0.82),   # Fear
+        (50,  0.50, 0.95),   # Neutral
+        (65,  0.70, 0.82),   # Greed
+        (88,  0.88, 0.82),   # Extreme Greed
+    ]
+    zone_names = ["EXTREME\nFEAR", "FEAR", "NEUTRAL", "GREED", "EXTREME\nGREED"]
+    for i, (mid_score, px, py) in enumerate(label_positions):
+        angle = math.pi * (1 - mid_score/100)
+        r_lbl = 0.36
+        lx = 0.5 + r_lbl * math.cos(angle)
+        ly = 0.47 + r_lbl * math.sin(angle)
+        fig.add_annotation(
+            x=lx, y=ly, xref="paper", yref="paper",
+            text=zone_names[i].replace("\n","<br>"),
+            showarrow=False,
+            font=dict(size=7.5, color="white" if i==active else "rgba(255,255,255,0.45)"),
+            align="center", xanchor="center", yanchor="middle",
+        )
+
+    # Needle
+    if score is not None:
+        angle = math.pi * (1 - score/100)
+        needle_r = 0.35
+        cx, cy = 0.5, 0.47
+        nx = cx + needle_r * math.cos(angle)
+        ny = cy + needle_r * math.sin(angle)
+
+        # Needle line
+        fig.add_shape(type="line",
+            x0=cx, y0=cy, x1=nx, y1=ny,
+            xref="paper", yref="paper",
+            line=dict(color="white", width=3))
+
+        # Hub dot
+        fig.add_shape(type="circle",
+            x0=cx-0.022, y0=cy-0.028, x1=cx+0.022, y1=cy+0.028,
+            xref="paper", yref="paper",
+            fillcolor="white", line_color="white")
+
+        # Scale ticks: 0, 25, 50, 75, 100
+        for tick_val in [0, 25, 50, 75, 100]:
+            ta = math.pi * (1 - tick_val/100)
+            r_in, r_out = 0.41, 0.44
+            fig.add_shape(type="line",
+                x0=cx + r_in * math.cos(ta), y0=cy + r_in * math.sin(ta),
+                x1=cx + r_out* math.cos(ta), y1=cy + r_out* math.sin(ta),
+                xref="paper", yref="paper",
+                line=dict(color="rgba(255,255,255,0.5)", width=1.5))
+            fig.add_annotation(
+                x=cx + 0.50*math.cos(ta), y=cy + 0.50*math.sin(ta),
+                xref="paper", yref="paper",
+                text=str(tick_val),
+                showarrow=False,
+                font=dict(size=8, color="rgba(255,255,255,0.5)"),
+                xanchor="center", yanchor="middle")
+
+    # Score + rating text
+    score_txt  = f"{score:.0f}" if score is not None else "—"
+    rating_color = bright[active] if score is not None else "#6b7280"
+    fig.add_annotation(x=0.5, y=0.18, xref="paper", yref="paper",
+        text=f"<b>{score_txt}</b>",
+        font=dict(size=38, color="white"), showarrow=False,
+        xanchor="center", yanchor="middle")
+    fig.add_annotation(x=0.5, y=0.06, xref="paper", yref="paper",
+        text=f"<b>{rating}</b>" if rating else "",
+        font=dict(size=13, color=rating_color), showarrow=False,
+        xanchor="center", yanchor="middle")
+
+    # Title + source
+    title_full = f"<b>{title}</b>"
+    if source_label:
+        title_full += f"<br><span style='font-size:10px;color:rgba(255,255,255,0.45)'>{source_label}</span>"
+
+    fig.update_layout(
+        title=dict(text=title_full, font=dict(size=14, color="white"), x=0.5, xanchor="center", y=0.98),
+        height=300,
+        margin=dict(l=10, r=10, t=40, b=0),
+        paper_bgcolor="rgba(0,0,0,0)",
+        plot_bgcolor="rgba(0,0,0,0)",
+        showlegend=False,
+    )
     return fig
 
 def vix_gauge(vix_val):
@@ -863,31 +931,38 @@ with tab_dash:
     st.divider()
 
     # Gauges
-    fg_score,fg_rating,fg_detail=calc_market_fg()
-    term_data=fetch_vix_term(); skew_val=fetch_skew()
+    stock_fg_score, stock_fg_rating   = fetch_cnn_fg()
+    crypto_fg_score, crypto_fg_rating = fetch_crypto_fg()
+    term_data = fetch_vix_term(); skew_val = fetch_skew()
 
-    gcol1,gcol2,gcol3,gcol4=st.columns([1.2,1.2,1.4,1.2])
+    gcol1, gcol2, gcol3, gcol4 = st.columns([1.3, 1.3, 1.3, 1.1])
 
     with gcol1:
-        if fg_score is not None:
-            st.plotly_chart(fg_gauge(fg_score,fg_rating),use_container_width=True)
-            with st.expander("F&G components"):
-                for k,v in fg_detail.items(): st.caption(f"**{k}:** {v}")
+        if stock_fg_score is not None:
+            st.plotly_chart(
+                semicircle_gauge(stock_fg_score, "Stocks Fear & Greed",
+                                 stock_fg_rating, "Source: CNN"),
+                use_container_width=True)
         else:
-            st.warning("F&G unavailable")
+            st.warning("CNN F&G unavailable")
 
     with gcol2:
-        if vix_now is not None:
-            st.plotly_chart(vix_gauge(vix_now),use_container_width=True)
+        if crypto_fg_score is not None:
+            st.plotly_chart(
+                semicircle_gauge(crypto_fg_score, "Crypto Fear & Greed",
+                                 crypto_fg_rating, "Source: Alternative.me"),
+                use_container_width=True)
         else:
-            st.metric("VIX","—")
+            st.warning("Crypto F&G unavailable")
 
     with gcol3:
-        if term_data:
-            tc=vix_term_chart(term_data)
-            if tc: st.plotly_chart(tc,use_container_width=True)
+        if vix_now is not None:
+            st.plotly_chart(vix_gauge(vix_now), use_container_width=True)
         else:
-            st.metric("VIX Term Structure","—")
+            st.metric("VIX","—")
+        if term_data:
+            tc = vix_term_chart(term_data)
+            if tc: st.plotly_chart(tc, use_container_width=True)
 
     with gcol4:
         st.markdown("**📊 Macro Signals**")
@@ -906,11 +981,16 @@ with tab_dash:
         if len(term_data)>=2:
             vals=list(term_data.values())
             st.markdown(f"**VIX Shape:** {'🟢 Contango' if vals[-1]>vals[0] else '🔴 Backwardation (stress)'}")
-        if fg_score is not None:
-            color=fg_color(fg_score)
-            st.markdown(f"**Market F&G:** <span style='color:{color}'>{fg_score:.0f} — {fg_rating}</span>",
+        if stock_fg_score is not None:
+            color = fg_color(stock_fg_score)
+            st.markdown(f"**Stocks F&G:** <span style='color:{color}'>{stock_fg_score:.0f} — {stock_fg_rating}</span>",
                         unsafe_allow_html=True)
-            st.caption("Built from VIX, SPY momentum, RSI, 125MA, HYG — no external API")
+            st.caption("Source: CNN")
+        if crypto_fg_score is not None:
+            color = fg_color(crypto_fg_score)
+            st.markdown(f"**Crypto F&G:** <span style='color:{color}'>{crypto_fg_score:.0f} — {crypto_fg_rating}</span>",
+                        unsafe_allow_html=True)
+            st.caption("Source: Alternative.me")
 
     st.divider()
 
