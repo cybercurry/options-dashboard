@@ -1130,8 +1130,9 @@ with tab_dive:
             line=dict(color="#fbbf24",width=1.5),showlegend=False),row=4,col=1)
         for lvl,col in [(70,"#ef4444"),(50,"#94a3b8"),(30,"#22c55e")]:
             fig.add_hline(y=lvl,line_dash="dash",line_color=col,row=4,col=1)
-        fig.update_layout(height=900,template="plotly_dark",xaxis_rangeslider_visible=False,
-                          legend=dict(orientation="h",y=1.04,x=0),margin=dict(l=0,r=0,t=40,b=0))
+        fig.update_layout(height=940,template="plotly_dark",xaxis_rangeslider_visible=False,
+                          legend=dict(orientation="h",y=1.08,yanchor="bottom",x=0,font=dict(size=11)),
+                          margin=dict(l=0,r=0,t=110,b=0))
         st.plotly_chart(fig,use_container_width=True)
         if r["price"]:
             st.subheader("Position Sizing Guide")
