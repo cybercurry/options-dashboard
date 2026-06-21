@@ -1196,11 +1196,14 @@ with tab_chain:
             if not selected_exp:
                 st.info("Pick an expiry above.")
             else:
-                st.markdown(f"**Loaded: {sel_c} — {selected_exp}**")
+                st.markdown(f"Loaded: {sel_c} — {selected_exp}")
                 calls_df,puts_df,dte=fetch_chain_cached(sel_c,selected_exp)
                 if calls_df is not None:
                     chain=type("_C",(),{"calls":calls_df,"puts":puts_df})()
-                    st.caption(f"Expiry: {selected_exp} ({dte} DTE) | Price: ${price:.2f}")
+                    st.markdown(f"<span style='font-size:1.9rem;font-weight:700;'>${price:.2f}</span>"
+                                f"&nbsp;&nbsp;·&nbsp;&nbsp;"
+                                f"<span style='font-size:1.9rem;font-weight:700;'>{dte} DTE</span>",
+                                unsafe_allow_html=True)
                     def fmt_chain(df_raw,side):
                         df_raw=df_raw.copy()
                         df_raw["IV %"]=(df_raw["impliedVolatility"]*100).round(1)
