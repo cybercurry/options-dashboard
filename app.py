@@ -1098,13 +1098,19 @@ with tab_dive:
                     for reason in reasons: st.write(reason)
         st.divider()
         bb_upper,bb_mid,bb_lower=calc_bb_bands(cl)
-        fig=make_subplots(rows=3,cols=1,shared_xaxes=True,row_heights=[0.52,0.22,0.26],
-            subplot_titles=[f"{sel} — Price, MAs & Bollinger Bands","HV20","RSI (14)"],vertical_spacing=0.05)
-        fig.add_trace(go.Scatter(x=df.index,y=bb_upper,name="BB Upper",
+        vol=df["Volume"].squeeze()
+        op=df["Open"].squeeze()
+        vol_colors=["#26a69a" if cl.iloc[i]>=op.iloc[i] else "#ef5350" for i in range(len(cl))]
+        fig=make_subplots(rows=4,cols=1,shared_xaxes=True,row_heights=[0.40,0.15,0.20,0.25],
+            subplot_titles=[f"{sel} — Price, MAs & Bollinger Bands","Volume",
+                            "HV20 / HV60 — Realized Vol","RSI (14)"],vertical_spacing=0.04)
+        fig.add_trace(go.Scatter(x=df.index,y=bb_upper,name="BB Bands (20,2)",
             line=dict(color="#64748b",width=1,dash="dot"),showlegend=False),row=1,col=1)
-        fig.add_trace(go.Scatter(x=df.index,y=bb_lower,name="BB Lower",fill="tonexty",
+        fig.add_trace(go.Scatter(x=df.index,y=bb_lower,name="BB Bands (20,2)",fill="tonexty",
             line=dict(color="#64748b",width=1,dash="dot"),fillcolor="rgba(100,116,139,0.08)"),row=1,col=1)
-        fig.add_trace(go.Candlestick(x=df.index,open=df["Open"].squeeze(),high=df["High"].squeeze(),
+        fig.add_trace(go.Scatter(x=df.index,y=bb_mid,name="BB Mid (20MA)",
+            line=dict(color="#cbd5e1",width=1,dash="dash")),row=1,col=1)
+        fig.add_trace(go.Candlestick(x=df.index,open=op,high=df["High"].squeeze(),
             low=df["Low"].squeeze(),close=cl,name="Price",
             increasing_line_color="#26a69a",decreasing_line_color="#ef5350",
             increasing_fillcolor="#26a69a",decreasing_fillcolor="#ef5350"),row=1,col=1)
@@ -1112,38 +1118,37 @@ with tab_dive:
             line=dict(color="#f97316",width=1.4)),row=1,col=1)
         fig.add_trace(go.Scatter(x=df.index,y=cl.rolling(200).mean(),name="200MA",
             line=dict(color="#60a5fa",width=1.6)),row=1,col=1)
+        fig.add_trace(go.Bar(x=df.index,y=vol,name="Volume",marker_color=vol_colors,
+            opacity=0.7,showlegend=False),row=2,col=1)
+        fig.add_trace(go.Scatter(x=df.index,y=vol.rolling(20).mean(),name="Vol 20MA",
+            line=dict(color="#e2e8f0",width=1.2)),row=2,col=1)
         fig.add_trace(go.Scatter(x=df.index,y=r["hv20_s"],name="HV20",fill="tozeroy",
-            line=dict(color="#a78bfa",width=1.5),fillcolor="rgba(167,139,250,0.12)"),row=2,col=1)
+            line=dict(color="#a78bfa",width=1.5),fillcolor="rgba(167,139,250,0.12)"),row=3,col=1)
         fig.add_trace(go.Scatter(x=df.index,y=r["hv60_s"],name="HV60",
-            line=dict(color="#7c3aed",width=1,dash="dot")),row=2,col=1)
+            line=dict(color="#7c3aed",width=1,dash="dot")),row=3,col=1)
         fig.add_trace(go.Scatter(x=df.index,y=r["rsi_s"],name="RSI",
-            line=dict(color="#fbbf24",width=1.5)),row=3,col=1)
+            line=dict(color="#fbbf24",width=1.5),showlegend=False),row=4,col=1)
         for lvl,col in [(70,"#ef4444"),(50,"#94a3b8"),(30,"#22c55e")]:
-            fig.add_hline(y=lvl,line_dash="dash",line_color=col,row=3,col=1)
-        fig.update_layout(height=760,template="plotly_dark",xaxis_rangeslider_visible=False,
-                          legend=dict(orientation="h",y=1.01,x=0),margin=dict(l=0,r=0,t=40,b=0))
+            fig.add_hline(y=lvl,line_dash="dash",line_color=col,row=4,col=1)
+        fig.update_layout(height=900,template="plotly_dark",xaxis_rangeslider_visible=False,
+                          legend=dict(orientation="h",y=1.04,x=0),margin=dict(l=0,r=0,t=40,b=0))
         st.plotly_chart(fig,use_container_width=True)
-        if r["atr"] and r["price"]:
-            atr_pct=r["atr"]/r["price"]*100
+        if r["price"]:
             st.subheader("Position Sizing Guide")
             dte_ref=r["dte"] if r.get("dte") else 30
             iv_ref=(r["c_iv"] or r["p_iv"]) if (r.get("c_iv") or r.get("p_iv")) else None
-            iv_block=""
             if iv_ref:
                 exp_move=r["price"]*(iv_ref/100.0)*math.sqrt(dte_ref/365.0)
-                iv_block=f"""
-| IV expected move (1 SD, ~{dte_ref}d, ATM IV {iv_ref:.0f}%) | ±${exp_move:.2f} ({exp_move/r['price']*100:.1f}% of price) |
-| Suggested CC strike (1 SD above, IV-based) | ~${r['price']+exp_move:.2f} |
-| Suggested CSP strike (1 SD below, IV-based) | ~${r['price']-exp_move:.2f} |"""
-            st.markdown(f"""
+                st.markdown(f"""
 | Metric | Value |
 |---|---|
-| ATR 14-day (realized, not time-scaled) | ${r['atr']:.2f} ({atr_pct:.1f}% of price) |
-| Suggested CC strike (1.5× ATR above) | ~${r['price']+r['atr']*1.5:.2f} |
-| Suggested CSP strike (1.5× ATR below) | ~${r['price']-r['atr']*1.5:.2f} |{iv_block}
-            """)
-            if iv_ref:
-                st.caption("IV expected move uses the option market's own forward-looking volatility, scaled to the actual days-to-expiry — generally more reliable for strike selection than a fixed ATR multiple, which is backward-looking and not time-scaled. Shown side by side; the IV-based row is the one to lean on.")
+| IV expected move (1 SD, ~{dte_ref}d, ATM IV {iv_ref:.0f}%) | ±${exp_move:.2f} ({exp_move/r['price']*100:.1f}% of price) |
+| Suggested CC strike (1 SD above) | ~${r['price']+exp_move:.2f} |
+| Suggested CSP strike (1 SD below) | ~${r['price']-exp_move:.2f} |
+                """)
+                st.caption("Uses the option market's own forward-looking volatility (ATM IV), scaled to this expiry's actual DTE via √(DTE/365) — a proper 1-standard-deviation expected move. The old ATR-based row is retired: ATR is backward-looking and not time-scaled, so it's fully superseded by this.")
+            else:
+                st.caption("No ATM IV available for this name (no live option chain) — can't compute an expected-move sizing guide.")
 
 # ══════════════════════════════════════════════════════════════════════════════
 # TAB 3 — OPTIONS CHAIN
