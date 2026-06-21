@@ -213,6 +213,14 @@ def fetch_vix(period="1y"):
     return fetch_prices("^VIX", period)
 
 @st.cache_data(ttl=1800, show_spinner=False)
+def fetch_ovx(period="1y"):
+    return fetch_prices("^OVX", period)
+
+@st.cache_data(ttl=1800, show_spinner=False)
+def fetch_gvz(period="1y"):
+    return fetch_prices("^GVZ", period)
+
+@st.cache_data(ttl=1800, show_spinner=False)
 def fetch_all_expiries(ticker):
     try:
         tk = yf.Ticker(ticker)
@@ -898,7 +906,7 @@ watchlist=st.session_state.watchlist
 st.title("Options Intelligence Dashboard")
 
 tab_dash,tab_dive,tab_chain,tab_vix,tab_screener=st.tabs(
-    ["Overview","Deep Dive","Options Chain","VIX","⚡ Screener"])
+    ["Overview","Deep Dive","Options Chain","🌪️ Market Volatility","⚡ Screener"])
 
 results={}
 with st.spinner("Loading market data..."):
@@ -1273,9 +1281,14 @@ interest.
                     st.warning("Could not load chain for this expiry.")
 
 # ══════════════════════════════════════════════════════════════════════════════
-# TAB 4 — VIX
+# TAB 4 — MARKET VOLATILITY
 # ══════════════════════════════════════════════════════════════════════════════
 with tab_vix:
+    st.caption("VIX is implied volatility, not historical — it's priced off S&P 500 options "
+               "and represents what the market expects annualized volatility to be over the "
+               "**next 30 days specifically**. That's why it jumps before an event (Fed, "
+               "earnings) even before anything's happened — the next 30 days' uncertainty is "
+               "already baked into the option prices it's built from.")
     if vix_df is not None and not vix_df.empty:
         vix_cl=vix_df["Close"].squeeze()
         c1,c2,c3,c4=st.columns(4)
@@ -1304,6 +1317,33 @@ with tab_vix:
         """)
     else:
         st.error("Could not load VIX data.")
+
+    st.divider()
+    st.subheader("Complementary Volatility Gauges")
+    st.caption("VIX measures equity fear. These extend the picture to oil and gold — useful "
+               "since stress can start outside equities and spread in, and gold vol directly "
+               "prices your GLD premium.")
+
+    def _vol_gauge(col,label,full_name,df_v,bands,note):
+        with col:
+            if df_v is not None and not df_v.empty:
+                cl_v=df_v["Close"].squeeze()
+                now_v=float(cl_v.iloc[-1]); prev_v=float(cl_v.iloc[-2]) if len(cl_v)>1 else now_v
+                st.metric(label,f"{now_v:.1f}",f"{now_v-prev_v:+.2f}")
+                band_lines="\n".join(f"| {b[0]} | {b[1]} |" for b in bands)
+                st.markdown(f"*{full_name}*\n\n| Level | Regime |\n|---|---|\n{band_lines}")
+                st.caption(note)
+            else:
+                st.warning(f"{label} data unavailable.")
+
+    gcol1,gcol2=st.columns(2)
+    ovx_df=fetch_ovx("1y"); gvz_df=fetch_gvz("1y")
+    _vol_gauge(gcol1,"OVX","CBOE Crude Oil ETF Volatility Index",ovx_df,
+        [("<25","Calm"),("25–40","Normal"),("40–60","Elevated"),(">60","Extreme — supply-shock territory")],
+        "Spikes hard on supply shocks (2020 negative oil prices, 2022 invasion) — watch if energy names are on the watchlist.")
+    _vol_gauge(gcol2,"GVZ","CBOE Gold ETF Volatility Index",gvz_df,
+        [("<14","Calm"),("14–18","Normal"),("18–24","Elevated"),(">24","Extreme — usually a flight-to-safety spike")],
+        "A GVZ spike means your GLD option premium just got richer — and usually signals something macro breaking.")
 
 # ══════════════════════════════════════════════════════════════════════════════
 # TAB 5 — SCREENER
