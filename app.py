@@ -1238,6 +1238,37 @@ with tab_chain:
                     fig_oi.update_layout(barmode="overlay",height=320,template="plotly_dark",
                                          xaxis_title="Strike",yaxis_title="OI",margin=dict(l=0,r=0,t=20,b=0))
                     st.plotly_chart(fig_oi,use_container_width=True)
+                    with st.expander("📖 How to read IV Smile & Open Interest"):
+                        st.markdown("""
+**IV Smile**
+
+What it shows: implied volatility (y-axis) by strike (x-axis) for this expiry — green line is
+calls, red is puts, the dashed white line marks the current price.
+
+What to look for: IV usually curves upward as strikes move away from the money in either
+direction (the "smile"). On most equities the put side curves up faster than the call side —
+the market pays more for downside protection than upside speculation. A steep put-side skew
+(puts well above calls at the same distance from price) means crash insurance is expensive
+right now — good news if you're selling CSPs (richer premium for the risk you're taking),
+worse news if you're buying puts for protection. A flat smile means both tails are priced
+similarly — calmer market, less skew to exploit. Where your target strike sits on the curve
+tells you if you're selling rich or cheap relative to ATM, not just relative to the stock's
+own history.
+
+**Open Interest by Strike**
+
+What it shows: total open contracts (y-axis) by strike (x-axis) — green bars are calls, red
+bars are puts, dashed white line marks current price.
+
+What to look for: large OI clusters mark strikes where a lot of positions are already
+parked — these often act as informal support/resistance into expiry, since market makers
+hedge those positions and that flow can pin price near a big strike as DTE shrinks ("gamma
+pin"). A heavy put-OI wall below price can act like a floor; a heavy call-OI wall above price
+can act like a lid on rallies. Separately, OI at your specific strike is a liquidity check —
+thin OI usually means wide bid/ask spreads and harder fills, so all else equal favor strikes
+with real OI behind them over a strike that's technically "perfect" on delta but empty on
+interest.
+                        """)
                 else:
                     st.warning("Could not load chain for this expiry.")
 
