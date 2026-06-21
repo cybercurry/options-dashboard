@@ -24,7 +24,7 @@ try:
 except ImportError:
     HAS_AUTOREFRESH = False
 
-DEFAULT_WATCHLIST = ["NVDA", "META", "TSLA", "IBIT", "GLD", "GDXJ", "BE", "VST", "CRWV"]
+DEFAULT_WATCHLIST = ["NVDA", "META", "TSLA", "IBIT", "GLD", "GDXJ", "BE", "VST", "CRWV", "AMZN", "SPCX", "NVTS", "VRT", "SLV", "PLTR", "ORCL", "AAPL", "GOOG", "MSFT", "IREN", "NBIS", "URNM", "COPP", "COPJ", "PURR", "MSTR", "BMNR", "NOW", "CQQQ", "QANT.AS", "WMT"]
 
 VIX_ZONES = [
     (0,  15, "#16a34a", "LOW — Ideal LEAP buying zone"),
@@ -285,6 +285,10 @@ def calc_bb_bands(close, window=20):
     mid=close.rolling(window).mean(); std=close.rolling(window).std()
     return mid+2*std, mid, mid-2*std
 
+def calc_bb_pctb(close, window=20):
+    upper,_,lower=calc_bb_bands(close,window)
+    return (close-lower)/(upper-lower+1e-10)
+
 def calc_stochastics(df, k_period=14, d_period=3):
     high=df["High"].squeeze(); low=df["Low"].squeeze(); close=df["Close"].squeeze()
     raw_k = 100.0*(close-low.rolling(k_period).min())/(high.rolling(k_period).max()-low.rolling(k_period).min()+1e-10)
@@ -495,7 +499,7 @@ def leap_signal(hvr,rsi_val,above_50ma,above_200ma,vix_lvl):
            else "🟠 MARGINAL" if score>=2 else "🔴 AVOID")
     return label, score, reasons
 
-def cc_signal(hvr,rsi_val,above_50ma,pcr_val):
+def cc_signal(hvr,rsi_val,above_50ma,pcr_val,pctb_val=None):
     score=0; reasons=[]
     if hvr is not None:
         if hvr>65:   score+=3; reasons.append("✅ HV Rank high — premium rich")
@@ -509,11 +513,14 @@ def cc_signal(hvr,rsi_val,above_50ma,pcr_val):
     else:          score-=1; reasons.append("⚠️ Below 50MA — trend weakening")
     if pcr_val is not None and pcr_val>1.2:
         score+=1; reasons.append("✅ Elevated PCR — fear = premium")
+    if pctb_val is not None:
+        if pctb_val>=0.8: score+=2; reasons.append("✅ Near upper BB — extended, good cap point")
+        elif pctb_val<=0.2: score-=1; reasons.append("⚠️ Near lower BB — don't cap into weakness")
     label=("🟢 WRITE NOW" if score>=5 else "🟡 DECENT" if score>=3
            else "🟠 MARGINAL" if score>=1 else "🔴 WAIT")
     return label, score, reasons
 
-def csp_signal(hvr,rsi_val,above_200ma):
+def csp_signal(hvr,rsi_val,above_200ma,pctb_val=None,walking=False):
     score=0; reasons=[]
     if hvr is not None:
         if hvr>55:   score+=2; reasons.append("✅ High HV Rank — CSP premium rich")
@@ -524,6 +531,9 @@ def csp_signal(hvr,rsi_val,above_200ma):
         elif rsi_val>70:    score-=1; reasons.append("❌ RSI overbought — don't sell puts here")
     if above_200ma: score+=2; reasons.append("✅ Above 200MA — reduces assignment risk")
     else:           score-=1; reasons.append("❌ Below 200MA — assignment risk elevated")
+    if pctb_val is not None and pctb_val<=0.2:
+        if walking: score-=2; reasons.append("❌ Walking the lower BB — breakdown, not a bounce")
+        else:       score+=2; reasons.append("✅ Near lower BB, holding — support bounce setup")
     label=("🟢 SELL PUT" if score>=4 else "🟡 DECENT" if score>=2
            else "🟠 MARGINAL" if score>=1 else "🔴 AVOID")
     return label, score, reasons
@@ -544,6 +554,9 @@ def analyse(ticker, period, vix_current):
     bbw_cur=float(bbw_s.dropna().iloc[-1]) if not bbw_s.dropna().empty else None
     ma50=float(cl.rolling(50).mean().iloc[-1]); ma200=float(cl.rolling(200).mean().iloc[-1])
     ab50=curr>ma50; ab200=curr>ma200
+    pctb_s=calc_bb_pctb(cl); pctb_c=pctb_s.dropna()
+    pctb_cur=float(pctb_c.iloc[-1]) if len(pctb_c)>=1 else None
+    walking_lower=bool(len(pctb_c)>=2 and pctb_c.iloc[-1]<=0.2 and pctb_c.iloc[-2]<=0.2)
     all_exps=fetch_all_expiries(ticker)
     c_iv=p_iv=pcr_val=chain=exp=dte=None
     if all_exps:
@@ -556,14 +569,15 @@ def analyse(ticker, period, vix_current):
                 chain=type("_C",(),{"calls":calls_df,"puts":puts_df})()
                 c_iv,p_iv=calc_atm_iv(chain,curr); pcr_val=calc_pcr(chain)
     leap_lbl,leap_sc,leap_r=leap_signal(hvr,rsi_cur,ab50,ab200,vix_current)
-    cc_lbl,cc_sc,cc_r=cc_signal(hvr,rsi_cur,ab50,pcr_val)
-    csp_lbl,csp_sc,csp_r=csp_signal(hvr,rsi_cur,ab200)
+    cc_lbl,cc_sc,cc_r=cc_signal(hvr,rsi_cur,ab50,pcr_val,pctb_cur)
+    csp_lbl,csp_sc,csp_r=csp_signal(hvr,rsi_cur,ab200,pctb_cur,walking_lower)
     return {"ticker":ticker,"price":curr,"pct":pct_chg,
             "hv20":hv_cur,"hvr":hvr,"hvpct":hvpct,"hv20_s":hv20_s,"hv60_s":hv60_s,
             "rsi":rsi_cur,"rsi_s":rsi_s,"atr":atr_cur,"bbw":bbw_cur,"bbw_s":bbw_s,
             "ma50":ma50,"ma200":ma200,"ab50":ab50,"ab200":ab200,
             "c_iv":c_iv,"p_iv":p_iv,"pcr":pcr_val,"exp":exp,"dte":dte,
             "all_exps":all_exps,"df":df,"cl":cl,
+            "pctb":pctb_cur,"walking_lower":walking_lower,
             "leap":(leap_lbl,leap_sc,leap_r),
             "cc":(cc_lbl,cc_sc,cc_r),
             "csp":(csp_lbl,csp_sc,csp_r)}
@@ -1049,8 +1063,7 @@ with tab_dash:
                      "ATM IV C/P":f"{r['c_iv']:.0f}/{r['p_iv']:.0f}%" if r["c_iv"] else "—",
                      "RSI":fmt(r["rsi"],".0f"),
                      "50MA":"✅" if r["ab50"] else "❌","200MA":"✅" if r["ab200"] else "❌",
-                     "PCR":fmt(r["pcr"],".2f"),"ATR":fmt(r["atr"],".2f"),
-                     "BB Width":fmt(r["bbw"],".1f","%"),
+                     "PCR":fmt(r["pcr"],".2f"),
                      "LEAP":r["leap"][0],"CC":r["cc"][0],"CSP":r["csp"][0]})
     if rows:
         tbl_height=38+len(rows)*35+4      # fits all rows exactly — no scrollbar
