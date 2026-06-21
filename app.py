@@ -1155,77 +1155,88 @@ with tab_dive:
 # TAB 3 — OPTIONS CHAIN
 # ══════════════════════════════════════════════════════════════════════════════
 with tab_chain:
-    st.caption("Click a row to load that ticker's chain for that expiry — no dropdowns.")
-    today_p=datetime.utcnow()
-    pick_rows=[]
-    for tkr,rr in results.items():
-        for exp in rr.get("all_exps",[]):
-            try:
-                dte_p=(datetime.strptime(exp,"%Y-%m-%d")-today_p).days
-            except Exception:
-                continue
-            pick_rows.append({"Ticker":tkr,"Price":rr.get("price"),"Expiry":exp,"DTE":dte_p})
-    if not pick_rows:
+    st.caption("Click a ticker tile, then an expiry tile — no dropdowns.")
+    tickers_avail=[t for t in results if results[t].get("all_exps")]
+    if not tickers_avail:
         st.warning("No options data loaded.")
     else:
-        pick_df=pd.DataFrame(pick_rows).sort_values(["Ticker","DTE"]).reset_index(drop=True)
-        event=st.dataframe(pick_df,use_container_width=True,hide_index=True,height=320,
-                            on_select="rerun",selection_mode="single-row",key="chain_picker")
-        sel_idx=[]
-        try: sel_idx=list(event["selection"]["rows"])
-        except Exception: pass
-        if sel_idx:
-            picked=pick_df.iloc[sel_idx[0]]
-            st.session_state["chain_pick"]={"ticker":picked["Ticker"],"expiry":picked["Expiry"]}
-        pick=st.session_state.get("chain_pick")
-        if not pick:
-            st.info("No expiry selected yet — click any row above.")
-        elif pick["ticker"] not in results:
-            st.warning(f"{pick['ticker']} not in current watchlist results.")
+        st.markdown("**Ticker**")
+        cur_tkr=st.session_state.get("chain_tkr")
+        n_cols=8
+        for i in range(0,len(tickers_avail),n_cols):
+            cols=st.columns(n_cols)
+            for c,tkr in zip(cols,tickers_avail[i:i+n_cols]):
+                with c:
+                    if st.button(tkr,key=f"tkrtile_{tkr}",use_container_width=True,
+                                 type="primary" if tkr==cur_tkr else "secondary"):
+                        st.session_state["chain_tkr"]=tkr
+                        st.session_state.pop("chain_exp",None)
+                        st.rerun()
+        cur_tkr=st.session_state.get("chain_tkr")
+        if not cur_tkr:
+            st.info("Pick a ticker above.")
         else:
-            sel_c=pick["ticker"]; selected_exp=pick["expiry"]
-            r=results[sel_c]; price=r["price"]
-            st.markdown(f"**Loaded: {sel_c} — {selected_exp}**")
-            calls_df,puts_df,dte=fetch_chain_cached(sel_c,selected_exp)
-            if calls_df is not None:
-                chain=type("_C",(),{"calls":calls_df,"puts":puts_df})()
-                st.caption(f"Expiry: {selected_exp} ({dte} DTE) | Price: ${price:.2f}")
-                def fmt_chain(df_raw,side):
-                    df_raw=df_raw.copy()
-                    df_raw["IV %"]=(df_raw["impliedVolatility"]*100).round(1)
-                    df_raw["Moneyness"]=df_raw["strike"].apply(
-                        lambda s:"ATM" if abs(s-price)/price<0.02
-                        else("ITM" if((s<price and side=="call")or(s>price and side=="put"))else "OTM"))
-                    cols=["strike","Moneyness","lastPrice","bid","ask","volume","openInterest","IV %","delta"]
-                    available=[c for c in cols if c in df_raw.columns]
-                    return(df_raw[available]
-                           .rename(columns={"lastPrice":"Last","openInterest":"OI","strike":"Strike","volume":"Volume"})
-                           .sort_values("Strike").reset_index(drop=True))
-                col_c,col_p=st.columns(2)
-                with col_c:
-                    st.subheader("Calls"); st.dataframe(fmt_chain(chain.calls,"call"),use_container_width=True,hide_index=True)
-                with col_p:
-                    st.subheader("Puts");  st.dataframe(fmt_chain(chain.puts,"put"),use_container_width=True,hide_index=True)
-                st.subheader("IV Smile")
-                fig_smile=go.Figure()
-                fig_smile.add_trace(go.Scatter(x=chain.calls["strike"],y=chain.calls["impliedVolatility"]*100,
-                    name="Calls IV",mode="lines+markers",line=dict(color="#26a69a",width=2),marker=dict(size=5)))
-                fig_smile.add_trace(go.Scatter(x=chain.puts["strike"], y=chain.puts["impliedVolatility"]*100,
-                    name="Puts IV", mode="lines+markers",line=dict(color="#ef5350",width=2),marker=dict(size=5)))
-                fig_smile.add_vline(x=price,line_dash="dash",line_color="white",annotation_text=f"${price:.2f}")
-                fig_smile.update_layout(height=350,template="plotly_dark",xaxis_title="Strike",
-                                        yaxis_title="IV (%)",margin=dict(l=0,r=0,t=20,b=0))
-                st.plotly_chart(fig_smile,use_container_width=True)
-                st.subheader("Open Interest by Strike")
-                fig_oi=go.Figure()
-                fig_oi.add_trace(go.Bar(x=chain.calls["strike"],y=chain.calls["openInterest"],name="Call OI",marker_color="#26a69a",opacity=0.75))
-                fig_oi.add_trace(go.Bar(x=chain.puts["strike"], y=chain.puts["openInterest"],name="Put OI", marker_color="#ef5350",opacity=0.75))
-                fig_oi.add_vline(x=price,line_dash="dash",line_color="white")
-                fig_oi.update_layout(barmode="overlay",height=320,template="plotly_dark",
-                                     xaxis_title="Strike",yaxis_title="OI",margin=dict(l=0,r=0,t=20,b=0))
-                st.plotly_chart(fig_oi,use_container_width=True)
+            r=results[cur_tkr]; price=r["price"]; all_exps=r.get("all_exps",[])
+            today_p=datetime.utcnow()
+            st.markdown(f"**Expiry — {cur_tkr} (${price:.2f})**")
+            cur_exp=st.session_state.get("chain_exp")
+            n_cols_e=6
+            for i in range(0,len(all_exps),n_cols_e):
+                cols=st.columns(n_cols_e)
+                for c,exp in zip(cols,all_exps[i:i+n_cols_e]):
+                    with c:
+                        try: dte_e=(datetime.strptime(exp,"%Y-%m-%d")-today_p).days
+                        except Exception: dte_e=None
+                        label=f"{exp} ({dte_e}d)" if dte_e is not None else exp
+                        if st.button(label,key=f"exptile_{cur_tkr}_{exp}",use_container_width=True,
+                                     type="primary" if exp==cur_exp else "secondary"):
+                            st.session_state["chain_exp"]=exp
+                            st.rerun()
+            sel_c=cur_tkr; selected_exp=st.session_state.get("chain_exp")
+            if not selected_exp:
+                st.info("Pick an expiry above.")
             else:
-                st.warning("Could not load chain for this expiry.")
+                st.markdown(f"**Loaded: {sel_c} — {selected_exp}**")
+                calls_df,puts_df,dte=fetch_chain_cached(sel_c,selected_exp)
+                if calls_df is not None:
+                    chain=type("_C",(),{"calls":calls_df,"puts":puts_df})()
+                    st.caption(f"Expiry: {selected_exp} ({dte} DTE) | Price: ${price:.2f}")
+                    def fmt_chain(df_raw,side):
+                        df_raw=df_raw.copy()
+                        df_raw["IV %"]=(df_raw["impliedVolatility"]*100).round(1)
+                        df_raw["Moneyness"]=df_raw["strike"].apply(
+                            lambda s:"ATM" if abs(s-price)/price<0.02
+                            else("ITM" if((s<price and side=="call")or(s>price and side=="put"))else "OTM"))
+                        cols=["strike","Moneyness","lastPrice","bid","ask","volume","openInterest","IV %","delta"]
+                        available=[c for c in cols if c in df_raw.columns]
+                        return(df_raw[available]
+                               .rename(columns={"lastPrice":"Last","openInterest":"OI","strike":"Strike","volume":"Volume"})
+                               .sort_values("Strike").reset_index(drop=True))
+                    col_c,col_p=st.columns(2)
+                    with col_c:
+                        st.subheader("Calls"); st.dataframe(fmt_chain(chain.calls,"call"),use_container_width=True,hide_index=True)
+                    with col_p:
+                        st.subheader("Puts");  st.dataframe(fmt_chain(chain.puts,"put"),use_container_width=True,hide_index=True)
+                    st.subheader("IV Smile")
+                    fig_smile=go.Figure()
+                    fig_smile.add_trace(go.Scatter(x=chain.calls["strike"],y=chain.calls["impliedVolatility"]*100,
+                        name="Calls IV",mode="lines+markers",line=dict(color="#26a69a",width=2),marker=dict(size=5)))
+                    fig_smile.add_trace(go.Scatter(x=chain.puts["strike"], y=chain.puts["impliedVolatility"]*100,
+                        name="Puts IV", mode="lines+markers",line=dict(color="#ef5350",width=2),marker=dict(size=5)))
+                    fig_smile.add_vline(x=price,line_dash="dash",line_color="white",annotation_text=f"${price:.2f}")
+                    fig_smile.update_layout(height=350,template="plotly_dark",xaxis_title="Strike",
+                                            yaxis_title="IV (%)",margin=dict(l=0,r=0,t=20,b=0))
+                    st.plotly_chart(fig_smile,use_container_width=True)
+                    st.subheader("Open Interest by Strike")
+                    fig_oi=go.Figure()
+                    fig_oi.add_trace(go.Bar(x=chain.calls["strike"],y=chain.calls["openInterest"],name="Call OI",marker_color="#26a69a",opacity=0.75))
+                    fig_oi.add_trace(go.Bar(x=chain.puts["strike"], y=chain.puts["openInterest"],name="Put OI", marker_color="#ef5350",opacity=0.75))
+                    fig_oi.add_vline(x=price,line_dash="dash",line_color="white")
+                    fig_oi.update_layout(barmode="overlay",height=320,template="plotly_dark",
+                                         xaxis_title="Strike",yaxis_title="OI",margin=dict(l=0,r=0,t=20,b=0))
+                    st.plotly_chart(fig_oi,use_container_width=True)
+                else:
+                    st.warning("Could not load chain for this expiry.")
 
 # ══════════════════════════════════════════════════════════════════════════════
 # TAB 4 — VIX
