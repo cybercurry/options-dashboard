@@ -1155,11 +1155,37 @@ with tab_dive:
 # TAB 3 — OPTIONS CHAIN
 # ══════════════════════════════════════════════════════════════════════════════
 with tab_chain:
-    sel_c=st.selectbox("Select Ticker",list(results.keys()),key="chain_sel")
-    if sel_c and sel_c in results:
-        r=results[sel_c]; price=r["price"]; all_exps=r.get("all_exps",[])
-        if all_exps:
-            selected_exp=st.selectbox("Select Expiry",all_exps,key=f"exp_sel_{sel_c}")
+    st.caption("Click a row to load that ticker's chain for that expiry — no dropdowns.")
+    today_p=datetime.utcnow()
+    pick_rows=[]
+    for tkr,rr in results.items():
+        for exp in rr.get("all_exps",[]):
+            try:
+                dte_p=(datetime.strptime(exp,"%Y-%m-%d")-today_p).days
+            except Exception:
+                continue
+            pick_rows.append({"Ticker":tkr,"Price":rr.get("price"),"Expiry":exp,"DTE":dte_p})
+    if not pick_rows:
+        st.warning("No options data loaded.")
+    else:
+        pick_df=pd.DataFrame(pick_rows).sort_values(["Ticker","DTE"]).reset_index(drop=True)
+        event=st.dataframe(pick_df,use_container_width=True,hide_index=True,height=320,
+                            on_select="rerun",selection_mode="single-row",key="chain_picker")
+        sel_idx=[]
+        try: sel_idx=list(event["selection"]["rows"])
+        except Exception: pass
+        if sel_idx:
+            picked=pick_df.iloc[sel_idx[0]]
+            st.session_state["chain_pick"]={"ticker":picked["Ticker"],"expiry":picked["Expiry"]}
+        pick=st.session_state.get("chain_pick")
+        if not pick:
+            st.info("No expiry selected yet — click any row above.")
+        elif pick["ticker"] not in results:
+            st.warning(f"{pick['ticker']} not in current watchlist results.")
+        else:
+            sel_c=pick["ticker"]; selected_exp=pick["expiry"]
+            r=results[sel_c]; price=r["price"]
+            st.markdown(f"**Loaded: {sel_c} — {selected_exp}**")
             calls_df,puts_df,dte=fetch_chain_cached(sel_c,selected_exp)
             if calls_df is not None:
                 chain=type("_C",(),{"calls":calls_df,"puts":puts_df})()
@@ -1200,8 +1226,6 @@ with tab_chain:
                 st.plotly_chart(fig_oi,use_container_width=True)
             else:
                 st.warning("Could not load chain for this expiry.")
-        else:
-            st.warning(f"No options data for {sel_c}.")
 
 # ══════════════════════════════════════════════════════════════════════════════
 # TAB 4 — VIX
