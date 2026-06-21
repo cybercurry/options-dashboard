@@ -289,12 +289,6 @@ def calc_bb_pctb(close, window=20):
     upper,_,lower=calc_bb_bands(close,window)
     return (close-lower)/(upper-lower+1e-10)
 
-def calc_stochastics(df, k_period=14, d_period=3):
-    high=df["High"].squeeze(); low=df["Low"].squeeze(); close=df["Close"].squeeze()
-    raw_k = 100.0*(close-low.rolling(k_period).min())/(high.rolling(k_period).max()-low.rolling(k_period).min()+1e-10)
-    k = raw_k.rolling(d_period).mean()
-    return k, k.rolling(d_period).mean()
-
 def calc_atm_iv(chain, price):
     try:
         c_atm = chain.calls.iloc[(chain.calls["strike"]-price).abs().argsort()[:1]]
@@ -406,33 +400,19 @@ def calc_four_gates(r):
     else:
         gates["G1"]={"pass":False,"label":"Trend (MA)","reason":"Insufficient history"}
 
-    if df is not None and len(df)>=25:
-        k_s,d_s=calc_stochastics(df); k_c=k_s.dropna(); d_c=d_s.dropna()
-        if len(k_c)>=6 and len(d_c)>=6:
-            touched=bool((k_c.iloc[-5:]<20).any())
-            k_cur,k_prev=float(k_c.iloc[-1]),float(k_c.iloc[-2])
-            d_cur,d_prev=float(d_c.iloc[-1]),float(d_c.iloc[-2])
-            crossed=(k_cur>d_cur) and (k_prev<=d_prev)
-            gates["G2"]={"pass":touched and crossed,"label":"Stoch (14,3,3)",
-                "reason":f"%K={k_cur:.1f} %D={d_cur:.1f}  Sub-20:{'✓' if touched else '✗'}  Cross↑:{'✓' if crossed else '✗'}"}
-        else:
-            gates["G2"]={"pass":False,"label":"Stoch (14,3,3)","reason":"Insufficient data"}
-    else:
-        gates["G2"]={"pass":False,"label":"Stoch (14,3,3)","reason":"No OHLCV data"}
-
     g3=pct>-2.5
-    gates["G3"]={"pass":g3,"label":"Session","reason":f"Today:{pct:+.2f}% ({'OK' if g3 else 'FAIL — down >2.5%'})"}
+    gates["G2"]={"pass":g3,"label":"Session","reason":f"Today:{pct:+.2f}% ({'OK' if g3 else 'FAIL — down >2.5%'})"}
 
     if cl is not None and len(cl.dropna())>=22:
         _,_,lower=calc_bb_bands(cl); lo_c=lower.dropna(); cl_a=cl.loc[lo_c.index]
         if len(lo_c)>=2:
             walking=(float(cl_a.iloc[-1])<float(lo_c.iloc[-1])) and (float(cl_a.iloc[-2])<float(lo_c.iloc[-2]))
-            gates["G4"]={"pass":not walking,"label":"BB Veto",
+            gates["G3"]={"pass":not walking,"label":"BB Veto",
                 "reason":f"Lower band:{float(lo_c.iloc[-1]):.2f}  |  {'Walking lower ❌' if walking else 'Inside bands ✓'}"}
         else:
-            gates["G4"]={"pass":True,"label":"BB Veto","reason":"Sparse — pass"}
+            gates["G3"]={"pass":True,"label":"BB Veto","reason":"Sparse — pass"}
     else:
-        gates["G4"]={"pass":True,"label":"BB Veto","reason":"Insufficient — pass"}
+        gates["G3"]={"pass":True,"label":"BB Veto","reason":"Insufficient — pass"}
 
     return {"gates":gates,"all_pass":all(g["pass"] for g in gates.values())}
 
@@ -1062,7 +1042,7 @@ with tab_dash:
                      "HV20":fmt(r["hv20"],".1f","%"),
                      "ATM IV C/P":f"{r['c_iv']:.0f}/{r['p_iv']:.0f}%" if r["c_iv"] else "—",
                      "RSI":fmt(r["rsi"],".0f"),
-                     "50MA":"✅" if r["ab50"] else "❌","200MA":"✅" if r["ab200"] else "❌",
+                     "200MA":"✅" if r["ab200"] else "❌",
                      "PCR":fmt(r["pcr"],".2f"),
                      "LEAP":r["leap"][0],"CC":r["cc"][0],"CSP":r["csp"][0]})
     if rows:
@@ -1117,8 +1097,13 @@ with tab_dive:
                 with st.expander("Breakdown"):
                     for reason in reasons: st.write(reason)
         st.divider()
-        fig=make_subplots(rows=4,cols=1,shared_xaxes=True,row_heights=[0.48,0.18,0.17,0.17],
-            subplot_titles=[f"{sel} — Price & MAs","HV20","RSI (14)","BB Width"],vertical_spacing=0.04)
+        bb_upper,bb_mid,bb_lower=calc_bb_bands(cl)
+        fig=make_subplots(rows=3,cols=1,shared_xaxes=True,row_heights=[0.52,0.22,0.26],
+            subplot_titles=[f"{sel} — Price, MAs & Bollinger Bands","HV20","RSI (14)"],vertical_spacing=0.05)
+        fig.add_trace(go.Scatter(x=df.index,y=bb_upper,name="BB Upper",
+            line=dict(color="#64748b",width=1,dash="dot"),showlegend=False),row=1,col=1)
+        fig.add_trace(go.Scatter(x=df.index,y=bb_lower,name="BB Lower",fill="tonexty",
+            line=dict(color="#64748b",width=1,dash="dot"),fillcolor="rgba(100,116,139,0.08)"),row=1,col=1)
         fig.add_trace(go.Candlestick(x=df.index,open=df["Open"].squeeze(),high=df["High"].squeeze(),
             low=df["Low"].squeeze(),close=cl,name="Price",
             increasing_line_color="#26a69a",decreasing_line_color="#ef5350",
@@ -1135,21 +1120,30 @@ with tab_dive:
             line=dict(color="#fbbf24",width=1.5)),row=3,col=1)
         for lvl,col in [(70,"#ef4444"),(50,"#94a3b8"),(30,"#22c55e")]:
             fig.add_hline(y=lvl,line_dash="dash",line_color=col,row=3,col=1)
-        fig.add_trace(go.Scatter(x=df.index,y=r["bbw_s"],name="BB Width",fill="tozeroy",
-            line=dict(color="#34d399",width=1.4),fillcolor="rgba(52,211,153,0.10)"),row=4,col=1)
-        fig.update_layout(height=820,template="plotly_dark",xaxis_rangeslider_visible=False,
+        fig.update_layout(height=760,template="plotly_dark",xaxis_rangeslider_visible=False,
                           legend=dict(orientation="h",y=1.01,x=0),margin=dict(l=0,r=0,t=40,b=0))
         st.plotly_chart(fig,use_container_width=True)
         if r["atr"] and r["price"]:
             atr_pct=r["atr"]/r["price"]*100
             st.subheader("Position Sizing Guide")
+            dte_ref=r["dte"] if r.get("dte") else 30
+            iv_ref=(r["c_iv"] or r["p_iv"]) if (r.get("c_iv") or r.get("p_iv")) else None
+            iv_block=""
+            if iv_ref:
+                exp_move=r["price"]*(iv_ref/100.0)*math.sqrt(dte_ref/365.0)
+                iv_block=f"""
+| IV expected move (1 SD, ~{dte_ref}d, ATM IV {iv_ref:.0f}%) | ±${exp_move:.2f} ({exp_move/r['price']*100:.1f}% of price) |
+| Suggested CC strike (1 SD above, IV-based) | ~${r['price']+exp_move:.2f} |
+| Suggested CSP strike (1 SD below, IV-based) | ~${r['price']-exp_move:.2f} |"""
             st.markdown(f"""
 | Metric | Value |
 |---|---|
-| ATR 14-day | ${r['atr']:.2f} ({atr_pct:.1f}% of price) |
+| ATR 14-day (realized, not time-scaled) | ${r['atr']:.2f} ({atr_pct:.1f}% of price) |
 | Suggested CC strike (1.5× ATR above) | ~${r['price']+r['atr']*1.5:.2f} |
-| Suggested CSP strike (1.5× ATR below) | ~${r['price']-r['atr']*1.5:.2f} |
+| Suggested CSP strike (1.5× ATR below) | ~${r['price']-r['atr']*1.5:.2f} |{iv_block}
             """)
+            if iv_ref:
+                st.caption("IV expected move uses the option market's own forward-looking volatility, scaled to the actual days-to-expiry — generally more reliable for strike selection than a fixed ATR multiple, which is backward-looking and not time-scaled. Shown side by side; the IV-based row is the one to lean on.")
 
 # ══════════════════════════════════════════════════════════════════════════════
 # TAB 3 — OPTIONS CHAIN
@@ -1287,11 +1281,10 @@ Scores ≥80 = Optimal · ≥60 = Acceptable · ≥40 = Marginal · <40 = Unsuit
 
 ---
 
-**Four-gate filter** — all four must pass before trading:
+**Three-gate filter** — all three must pass before trading:
 - **G1 Trend** — 20MA > 50MA, or price > 20MA
-- **G2 Stochastics** — %K touched sub-20 in last 5 sessions + %K crossed above %D
-- **G3 Session** — not down more than 2.5% today
-- **G4 BB Veto** — price not walking the lower Bollinger Band 2+ sessions in a row
+- **G2 Session** — not down more than 2.5% today
+- **G3 BB Veto** — price not walking the lower Bollinger Band 2+ sessions in a row
 
 **Greek sourcing (priority order):**
 Strike's own IV → Chain-wide median IV → HV20 of underlying → 30% default
@@ -1379,7 +1372,7 @@ Strike's own IV → Chain-wide median IV → HV20 of underlying → 30% default
         table_rows=[]
         for r in screener_rows_sorted:
             gr=r["gate_result"]; gates=gr["gates"]
-            gate_icons="".join(["✅" if gates[f"G{i}"]["pass"] else "❌" for i in range(1,5)])
+            gate_icons="".join(["✅" if gates[f"G{i}"]["pass"] else "❌" for i in range(1,4)])
             table_rows.append({"Ticker":r["ticker"],"Price":f"${r['price']:.2f}",
                 "Expiry":r["expiry"],"DTE":r["dte"],
                 "Greeks":greek_source_label(r.get("greek_source")),
@@ -1417,12 +1410,12 @@ Strike's own IV → Chain-wide median IV → HV20 of underlying → 30% default
                                legend=dict(orientation="h",y=1.05,x=0),margin=dict(l=0,r=0,t=20,b=0))
         st.plotly_chart(fig_cmp,use_container_width=True)
 
-        st.subheader("Four-Gate Filter Detail")
-        st.caption("G1=Trend  G2=Stochastics  G3=Session  G4=BB Veto")
+        st.subheader("Three-Gate Filter Detail")
+        st.caption("G1=Trend  G2=Session  G3=BB Veto")
         for r in screener_rows_sorted:
             gr=r["gate_result"]; gates=gr["gates"]; icon="🟢" if gr["all_pass"] else "🔴"
             with st.expander(f"{icon} {r['ticker']}  CSP:{r['csp_score']}  Strike${r['csp_strike']:.1f}  Δ{r['csp_delta']}  θ${r['csp_theta']:.3f}/d"):
-                gcols=st.columns(4)
+                gcols=st.columns(3)
                 for idx,(gk,gv) in enumerate(gates.items()):
                     gcols[idx].markdown(f"**{gv['label']}** {'✅' if gv['pass'] else '❌'}")
                     gcols[idx].caption(gv["reason"])
