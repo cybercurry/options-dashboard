@@ -1,4 +1,5 @@
-streamlit>=1.36.0
+# 1.37+ needed for st.container(key=...), used to scope CSS to one section (26 June)
+streamlit>=1.37.0
 yfinance>=1.3.0
 pandas>=2.0.0
 numpy>=1.24.0

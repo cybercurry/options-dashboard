@@ -1708,28 +1708,41 @@ ticker's detail expander below for the full reason breakdown.
             width: 100% !important;
         }
         button[kind*="FormSubmit"]:hover { background-color: #2ee60e !important; }
+        /* Scoped to this section's container (st-key-* class, Streamlit >=1.37) so it only
+           hits this one expander's header bar, not every expander in the app. */
+        .st-key-strike_targeting_section [data-testid="stExpander"] summary {
+            background-color: #04D9FF !important;
+            border-radius: 8px !important;
+        }
+        .st-key-strike_targeting_section [data-testid="stExpander"] summary p {
+            color: #000000 !important;
+            font-size: 1.6rem !important;
+            font-weight: 900 !important;
+            letter-spacing: 0.03em !important;
+        }
         </style>""", unsafe_allow_html=True)
 
-    with st.expander("🎯 Strike targeting (manual override)",expanded=False):
-        with st.form("target_form"):
-            tcol1,tcol2,tcol3=st.columns(3)
-            at=st.session_state["applied_targets"]
-            with tcol1:
-                in_delta_csp=st.number_input("CSP target Δ",min_value=5,max_value=50,value=at["csp_d"],step=1)
-                in_dte_csp=st.number_input("CSP target DTE",min_value=21,max_value=45,value=at["csp_dte"],step=1)
-            with tcol2:
-                in_delta_cc=st.number_input("CC target Δ",min_value=5,max_value=50,value=at["cc_d"],step=1)
-            with tcol3:
-                in_delta_leap=st.number_input("LEAP target Δ",min_value=50,max_value=95,value=at["leap_d"],step=1)
-                in_dte_leap=st.number_input("LEAP target DTE",min_value=180,max_value=900,value=at["leap_dte"],step=1)
-            st.caption("Defaults match the locked Δ30/30DTE CSP target (§ trade criteria doc). "
-                       "CSP/LEAP DTE targets are clamped to the 21–45 / 180–900 day windows that "
-                       "define what counts as a CSP-ish / LEAP-ish expiry at all. Nothing recalculates "
-                       "until you click Apply.")
-            if st.form_submit_button("CONFIRM CHOICES"):
-                st.session_state["applied_targets"]={"csp_d":in_delta_csp,"csp_dte":in_dte_csp,
-                    "cc_d":in_delta_cc,"leap_d":in_delta_leap,"leap_dte":in_dte_leap}
-                st.success("Targets applied — click Run Screener to use them.")
+    with st.container(key="strike_targeting_section"):
+        with st.expander("🎯 Manual Strike Selection",expanded=False):
+            with st.form("target_form"):
+                tcol1,tcol2,tcol3=st.columns(3)
+                at=st.session_state["applied_targets"]
+                with tcol1:
+                    in_delta_csp=st.number_input("CSP target Δ",min_value=5,max_value=50,value=at["csp_d"],step=1)
+                    in_dte_csp=st.number_input("CSP target DTE",min_value=21,max_value=45,value=at["csp_dte"],step=1)
+                with tcol2:
+                    in_delta_cc=st.number_input("CC target Δ",min_value=5,max_value=50,value=at["cc_d"],step=1)
+                with tcol3:
+                    in_delta_leap=st.number_input("LEAP target Δ",min_value=50,max_value=95,value=at["leap_d"],step=1)
+                    in_dte_leap=st.number_input("LEAP target DTE",min_value=180,max_value=900,value=at["leap_dte"],step=1)
+                st.caption("Defaults match the locked Δ30/30DTE CSP target (§ trade criteria doc). "
+                           "CSP/LEAP DTE targets are clamped to the 21–45 / 180–900 day windows that "
+                           "define what counts as a CSP-ish / LEAP-ish expiry at all. Nothing recalculates "
+                           "until you click Apply.")
+                if st.form_submit_button("CONFIRM CHOICES"):
+                    st.session_state["applied_targets"]={"csp_d":in_delta_csp,"csp_dte":in_dte_csp,
+                        "cc_d":in_delta_cc,"leap_d":in_delta_leap,"leap_dte":in_dte_leap}
+                    st.success("Targets applied — click Run Screener to use them.")
 
     _at=st.session_state["applied_targets"]
     target_delta_csp,target_dte_csp=_at["csp_d"],_at["csp_dte"]
