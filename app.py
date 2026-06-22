@@ -1713,12 +1713,13 @@ ticker's detail expander below for the full reason breakdown.
         .st-key-strike_targeting_section [data-testid="stExpander"] summary {
             background-color: #04D9FF !important;
             border-radius: 8px !important;
+            padding: 0.5rem 1rem !important;
         }
         .st-key-strike_targeting_section [data-testid="stExpander"] summary p {
             color: #000000 !important;
-            font-size: 1.6rem !important;
-            font-weight: 900 !important;
-            letter-spacing: 0.03em !important;
+            font-size: 1rem !important;
+            font-weight: 800 !important;
+            letter-spacing: 0.02em !important;
         }
         </style>""", unsafe_allow_html=True)
 
