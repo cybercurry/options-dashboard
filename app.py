@@ -443,12 +443,22 @@ def score_color(s):
     if s>=40: return "#f97316"
     return "#ef4444"
 
-def calc_four_gates(r, bb_veto_mode="Hard", soft_penalty=10):
+def calc_four_gates(r, bb_veto_mode="Hard", soft_penalty=10, leg="csp"):
     """bb_veto_mode (§9.3, 24 June): 'Hard' (default, original behavior — walking the lower
     band 2+ sessions fails G3 and blocks all_pass), 'Soft' (-soft_penalty points off each leg's
     score instead of blocking Status — see get_screener_row), or 'Off' (informational only,
     never gates or penalizes). Recommended over a one-off override rule since a hand-written
-    exception is just a second hard-coded rule with the same brittleness."""
+    exception is just a second hard-coded rule with the same brittleness.
+
+    leg (22 June, per Jay): 'csp', 'cc', or anything else (e.g. 'leap'). CSP and CC now get a
+    4th gate — G4 Median — with OPPOSITE pass conditions, because gates are no longer one
+    shared computation across all three tables (this was previously an open "next step, your
+    call" — Jay locked it in by asking for leg-specific median checks). CSP sells puts wanting
+    price at/above its own 20-day average (median Bollinger band); below that = price losing
+    its footing = G4 fails. CC writes calls against shares already held wanting price at/below
+    that same average — above it = price already extended/overbought = G4 fails (the mirror
+    image of CSP's check). Any other leg value (LEAP) gets no G4 — not requested, left as 3
+    gates exactly as before rather than guessed at."""
     df=r.get("df"); cl=r.get("cl"); price=r.get("price",0); pct=r.get("pct",0)
     gates={}
 
@@ -482,6 +492,23 @@ def calc_four_gates(r, bb_veto_mode="Hard", soft_penalty=10):
             gates["G3"]={"pass":True,"label":"BB Veto","reason":"Sparse — pass"}
     else:
         gates["G3"]={"pass":True,"label":"BB Veto","reason":"Insufficient — pass"}
+
+    # G4 Median (22 June, Jay's request) — CSP fails below the median band, CC fails above it.
+    # Only applies to leg in {"csp","cc"}; any other leg (LEAP) skips this gate entirely.
+    if leg in ("csp","cc") and cl is not None and len(cl.dropna())>=20:
+        median=float(cl.rolling(20).mean().dropna().iloc[-1])
+        if leg=="csp":
+            g4=price>=median
+            gates["G4"]={"pass":g4,"label":"Median (CSP)",
+                "reason":f"Price ${price:.2f} {'≥' if g4 else '<'} median ${median:.2f}"
+                          + ("" if g4 else "  — FAIL: below median")}
+        else:  # cc
+            g4=price<=median
+            gates["G4"]={"pass":g4,"label":"Median (CC)",
+                "reason":f"Price ${price:.2f} {'≤' if g4 else '>'} median ${median:.2f}"
+                          + ("" if g4 else "  — FAIL: above median")}
+    elif leg in ("csp","cc"):
+        gates["G4"]={"pass":True,"label":f"Median ({leg.upper()})","reason":"Insufficient — pass"}
 
     return {"gates":gates,"all_pass":all(g["pass"] for g in gates.values()),
             "bb_walking":walking,"bb_penalty":bb_penalty,"bb_veto_mode":bb_veto_mode}
@@ -568,15 +595,21 @@ def get_screener_row(ticker, result, bb_veto_mode="Hard", soft_penalty=10,
     # else: no expiry in the 180-900 DTE window (or no usable chain) for this ticker —
     # leap_score stays None rather than silently reusing CSP's numbers.
 
-    gate_result=calc_four_gates(result, bb_veto_mode=bb_veto_mode, soft_penalty=soft_penalty)
+    # 22 June — Gates are now per-leg, not one shared computation (see calc_four_gates'
+    # leg= param). CSP and CC each get their own G4 Median check with opposite pass
+    # conditions; LEAP keeps the original 3 gates (no median check — not requested).
+    gate_result_csp =calc_four_gates(result, bb_veto_mode=bb_veto_mode, soft_penalty=soft_penalty, leg="csp")
+    gate_result_cc  =calc_four_gates(result, bb_veto_mode=bb_veto_mode, soft_penalty=soft_penalty, leg="cc")
+    gate_result_leap=calc_four_gates(result, bb_veto_mode=bb_veto_mode, soft_penalty=soft_penalty, leg="leap")
 
     # §9.3 BB veto Soft mode (24 June) — apply the points penalty to each leg's score instead
     # of blocking Status. Hard/Off modes carry bb_penalty==0, so this is a no-op for them.
-    pen=gate_result.get("bb_penalty",0)
-    if pen:
-        csp_score=max(0.0,csp_score-pen)
-        cc_score =max(0.0,cc_score-pen) if cc else cc_score
-        if leap_score is not None: leap_score=max(0.0,leap_score-pen)
+    pen_csp=gate_result_csp.get("bb_penalty",0)
+    pen_cc =gate_result_cc.get("bb_penalty",0)
+    pen_leap=gate_result_leap.get("bb_penalty",0)
+    if pen_csp: csp_score=max(0.0,csp_score-pen_csp)
+    if pen_cc and cc: cc_score=max(0.0,cc_score-pen_cc)
+    if pen_leap and leap_score is not None: leap_score=max(0.0,leap_score-pen_leap)
 
     # §9.2 free-data-win metrics — Annualized Return %, Breakeven, POP, Liquidity.
     # Ann. return is yield-on-strike (collateral/notional), annualized off the actual DTE.
@@ -618,7 +651,9 @@ def get_screener_row(ticker, result, bb_veto_mode="Hard", soft_penalty=10,
             # 26 June — LEAP-buyer cost metrics (extrinsic premium, avg $/day to hold it).
             "leap_intrinsic":leap_intrinsic,"leap_extrinsic":leap_extrinsic,
             "leap_extrinsic_per_day":leap_extrinsic_per_day,
-            "leap_score":leap_score,"gate_result":gate_result,
+            "leap_score":leap_score,
+            "gate_result_csp":gate_result_csp,"gate_result_cc":gate_result_cc,
+            "gate_result_leap":gate_result_leap,
             "greek_source":csp.get("greek_source","unknown"),
             "_inspected":csp.get("_inspected"),"_scored":csp.get("_scored"),
             "cc_timing_label":cc_lbl,"cc_timing_score":cc_tsc,"cc_timing_reasons":cc_treasons,
@@ -1788,9 +1823,12 @@ with tab_screener:
         # option type as input) — splitting that into true per-leg gating was floated in §8 as
         # an open "next step, your call" and was never locked as a decision, so it's left as-is
         # here rather than guessed at.
-        def _gate_cols(r):
-            gr=r["gate_result"]; gates=gr["gates"]
-            icons="".join(["✅" if gates[f"G{i}"]["pass"] else "❌" for i in range(1,4)])
+        def _gate_cols(r, leg="leap"):
+            # 22 June — Gates are now per-leg: CSP and CC each carry their own gate_result
+            # (with a 4th Median gate, opposite pass conditions per leg); LEAP still uses the
+            # original 3-gate result. leg picks which one this table's row should read.
+            gr=r[f"gate_result_{leg}"]; gates=gr["gates"]
+            icons="".join("✅" if gates[k]["pass"] else "❌" for k in sorted(gates.keys()))
             return icons, ("🟢 TRADE" if gr["all_pass"] else "🔴 WAIT")
 
         # 22 June — column_config.Column(help=...) on st.dataframe (added below) gives a
@@ -1907,12 +1945,21 @@ with tab_screener:
             ("NIS","Normalised Income Score — premium per $ risk & time"),
             ("Score","Composite suitability score (NIS + DTE fit + Δ fit)"),
             ("Timing","Mean-reversion timing signal (flag, not a filter)"),
-            ("Gates","G1 Trend · G2 Session · G3 BB Veto — pass/fail"),
-            ("Status","Trade/Wait — all three gates must pass"),
+            ("Gates","G1 Trend · G2 Session · G3 BB Veto · G4 Median — pass/fail "
+                     "(G4 fails if price is below the median band)"),
+            ("Status","Trade/Wait — all four gates must pass"),
         ]
         _CC_LEGEND = [(l, t) if l!="Put IV %" else ("Call IV %","Implied volatility of this call") for l,t in _CSP_LEGEND]
+        _cc_gates_i = next(i for i,(l,_) in enumerate(_CC_LEGEND) if l=="Gates")
+        _CC_LEGEND[_cc_gates_i] = ("Gates","G1 Trend · G2 Session · G3 BB Veto · G4 Median — pass/fail "
+                                           "(G4 fails if price is above the median band — opposite of CSP)")
         _LEAP_LEGEND = [(l,t) for l,t in _CSP_LEGEND if l not in ("Put IV %","Timing")]
         _LEAP_LEGEND.insert(7, ("IV %","Implied volatility of this option"))
+        _leap_gates_i = next(i for i,(l,_) in enumerate(_LEAP_LEGEND) if l=="Gates")
+        _LEAP_LEGEND[_leap_gates_i] = ("Gates","G1 Trend · G2 Session · G3 BB Veto — pass/fail "
+                                                "(no median gate for LEAP)")
+        _leap_status_i = next(i for i,(l,_) in enumerate(_LEAP_LEGEND) if l=="Status")
+        _LEAP_LEGEND[_leap_status_i] = ("Status","Trade/Wait — all three gates must pass")
         _leap_nis_i = next(i for i,(l,_) in enumerate(_LEAP_LEGEND) if l=="NIS")
         _LEAP_LEGEND[_leap_nis_i] = ("NIS","Normalised Income Score, inverted — lower means cheaper to buy")
         _leap_theta_i = next(i for i,(l,_) in enumerate(_LEAP_LEGEND) if l=="θ/day")
@@ -1933,7 +1980,7 @@ with tab_screener:
         st.subheader("CSP Targets")
         csp_rows=[]
         for r in screener_rows_sorted:
-            icons,status=_gate_cols(r)
+            icons,status=_gate_cols(r,"csp")
             csp_rows.append({"Ticker":r["ticker"],"Price":f"${r['price']:.2f}",
                 "Expiry":r["expiry"],"DTE":r["dte"],
                 "Strike":f"${r['csp_strike']:.1f}","Δ":r["csp_delta"],"θ/day":f"${r['csp_theta']:.3f}",
@@ -1952,7 +1999,7 @@ with tab_screener:
         cc_sorted=sorted(screener_rows_sorted,key=lambda x:x["cc_score"],reverse=True)
         cc_rows=[]
         for r in cc_sorted:
-            icons,status=_gate_cols(r)
+            icons,status=_gate_cols(r,"cc")
             has_cc=r.get("cc_strike") is not None
             cc_rows.append({"Ticker":r["ticker"],"Price":f"${r['price']:.2f}",
                 "Expiry":r["expiry"],"DTE":r["dte"],
@@ -1973,7 +2020,7 @@ with tab_screener:
         leap_sorted=sorted(screener_rows_sorted,key=lambda x:(x["leap_score"] if x.get("leap_score") is not None else -1),reverse=True)
         leap_rows=[]
         for r in leap_sorted:
-            icons,status=_gate_cols(r)
+            icons,status=_gate_cols(r,"leap")
             has_leap=r.get("leap_strike") is not None
             leap_rows.append({"Ticker":r["ticker"],"Price":f"${r['price']:.2f}",
                 "Expiry":r.get("leap_expiry","—") if has_leap else "—",
@@ -2020,13 +2067,14 @@ with tab_screener:
                                legend=dict(orientation="h",y=1.05,x=0),margin=dict(l=0,r=0,t=20,b=0))
         st.plotly_chart(fig_cmp,use_container_width=True)
 
-        st.subheader("Three-Gate Filter Detail")
+        st.subheader("Four-Gate Filter Detail (CSP)")
         st.caption(f"G1=Trend  G2=Session  G3=BB Veto (mode: {bb_veto_mode}"
-                   + (f", −{soft_penalty} pts" if bb_veto_mode=="Soft" else "") + ")")
+                   + (f", −{soft_penalty} pts" if bb_veto_mode=="Soft" else "")
+                   + ")  G4=Median (CSP fails below median)")
         for r in screener_rows_sorted:
-            gr=r["gate_result"]; gates=gr["gates"]; icon="🟢" if gr["all_pass"] else "🔴"
+            gr=r["gate_result_csp"]; gates=gr["gates"]; icon="🟢" if gr["all_pass"] else "🔴"
             with st.expander(f"{icon} {r['ticker']}  CSP:{r['csp_score']}  Strike${r['csp_strike']:.1f}  Δ{r['csp_delta']}  θ${r['csp_theta']:.3f}/d"):
-                gcols=st.columns(3)
+                gcols=st.columns(len(gates))
                 for idx,(gk,gv) in enumerate(gates.items()):
                     gcols[idx].markdown(f"**{gv['label']}** {'✅' if gv['pass'] else '❌'}")
                     gcols[idx].caption(gv["reason"])
