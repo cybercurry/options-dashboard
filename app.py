@@ -221,22 +221,45 @@ def fetch_gvz(period="1y"):
     return fetch_prices("^GVZ", period)
 
 @st.cache_data(ttl=1800, show_spinner=False)
+def _fetch_all_expiries_raw(ticker):
+    # Raises on failure/empty so st.cache_data does NOT cache a bad result (25 June fix) —
+    # previously a transient Yahoo block/rate-limit got cached for 30 min via a swallowed
+    # exception returning [], which silently "stuck" the whole watchlist until TTL expired.
+    tk = yf.Ticker(ticker)
+    opts = list(tk.options)
+    if not opts:
+        raise RuntimeError("yfinance returned no option expiries (empty .options)")
+    return opts
+
 def fetch_all_expiries(ticker):
+    """Uncached wrapper — converts the raise back to the old ([], err) shape so callers
+    don't crash, while keeping the underlying cache un-poisoned by failures."""
     try:
-        tk = yf.Ticker(ticker)
-        return list(tk.options) or []
-    except Exception:
-        return []
+        return _fetch_all_expiries_raw(ticker), None
+    except Exception as e:
+        return [], f"{type(e).__name__}: {e}"
 
 @st.cache_data(ttl=1800, show_spinner=False)
+def _fetch_chain_cached_raw(ticker, expiry):
+    # Same fix as above (25 June) — raise instead of swallowing, so a transient failure
+    # isn't cached for 30 minutes.
+    tk    = yf.Ticker(ticker)
+    chain = tk.option_chain(expiry)
+    dte   = (datetime.strptime(expiry, "%Y-%m-%d") - datetime.utcnow()).days
+    calls_empty = chain.calls is None or chain.calls.empty
+    puts_empty  = chain.puts  is None or chain.puts.empty
+    if calls_empty and puts_empty:
+        raise RuntimeError(f"empty option chain for {ticker} {expiry} (calls and puts both empty)")
+    return chain.calls, chain.puts, dte
+
 def fetch_chain_cached(ticker, expiry):
+    """Uncached wrapper — converts the raise back to the old (None,None,None) shape so
+    callers don't crash, while keeping the underlying cache un-poisoned by failures."""
     try:
-        tk    = yf.Ticker(ticker)
-        chain = tk.option_chain(expiry)
-        dte   = (datetime.strptime(expiry, "%Y-%m-%d") - datetime.utcnow()).days
-        return chain.calls, chain.puts, dte
-    except Exception:
-        return None, None, None
+        calls, puts, dte = _fetch_chain_cached_raw(ticker, expiry)
+        return calls, puts, dte, None
+    except Exception as e:
+        return None, None, None, f"{type(e).__name__}: {e}"
 
 # ══════════════════════════════════════════════════════════════════════════════
 # BLACK-SCHOLES GREEKS
@@ -478,7 +501,7 @@ def get_screener_row(ticker, result, bb_veto_mode="Hard", soft_penalty=10):
             continue
     if exp_csp is None: return None
 
-    calls_df,puts_df,_=fetch_chain_cached(ticker,exp_csp)
+    calls_df,puts_df,_,_=fetch_chain_cached(ticker,exp_csp)
     if puts_df is None or puts_df.empty: return None
 
     hv_sigma=(hv_raw/100.0) if (hv_raw and hv_raw>0) else None
@@ -512,7 +535,7 @@ def get_screener_row(ticker, result, bb_veto_mode="Hard", soft_penalty=10):
 
     leap=None; leap_nis=None; leap_score=None
     if exp_leap is not None:
-        leap_calls_df,_,_=fetch_chain_cached(ticker,exp_leap)
+        leap_calls_df,_,_,_=fetch_chain_cached(ticker,exp_leap)
         if leap_calls_df is not None and not leap_calls_df.empty:
             leap=find_target_strike(leap_calls_df,80.0,"call",price,dte_leap,hv_sigma)
     if leap is not None:
@@ -709,14 +732,14 @@ def analyse(ticker, period, vix_current):
     pctb_s=calc_bb_pctb(cl); pctb_c=pctb_s.dropna()
     pctb_cur=float(pctb_c.iloc[-1]) if len(pctb_c)>=1 else None
     walking_lower=bool(len(pctb_c)>=2 and pctb_c.iloc[-1]<=0.2 and pctb_c.iloc[-2]<=0.2)
-    all_exps=fetch_all_expiries(ticker)
-    c_iv=p_iv=pcr_val=chain=exp=dte=None
+    all_exps,exp_err=fetch_all_expiries(ticker)
+    c_iv=p_iv=pcr_val=chain=exp=dte=None; chain_err=None
     if all_exps:
         today=datetime.utcnow()
         valid=[e for e in all_exps if (datetime.strptime(e,"%Y-%m-%d")-today).days>14]
         if valid:
             exp=valid[0]
-            calls_df,puts_df,dte=fetch_chain_cached(ticker,exp)
+            calls_df,puts_df,dte,chain_err=fetch_chain_cached(ticker,exp)
             if calls_df is not None:
                 chain=type("_C",(),{"calls":calls_df,"puts":puts_df})()
                 c_iv,p_iv=calc_atm_iv(chain,curr); pcr_val=calc_pcr(chain)
@@ -729,6 +752,10 @@ def analyse(ticker, period, vix_current):
             "ma50":ma50,"ma200":ma200,"ab50":ab50,"ab200":ab200,
             "c_iv":c_iv,"p_iv":p_iv,"pcr":pcr_val,"exp":exp,"dte":dte,
             "all_exps":all_exps,"df":df,"cl":cl,
+            # 25 June fix — real fetch-error text instead of a swallowed exception, so the
+            # Screener debug log can show *why* (rate limit, empty chain, etc.) instead of
+            # a generic "no expiries"/"chain failed".
+            "fetch_error":exp_err or chain_err,
             "pctb":pctb_cur,"walking_lower":walking_lower,
             "leap":(leap_lbl,leap_sc,leap_r),
             "cc":(cc_lbl,cc_sc,cc_r),
@@ -1369,7 +1396,7 @@ with tab_chain:
                 st.info("Pick an expiry above.")
             else:
                 st.markdown(f"Loaded: {sel_c} — {selected_exp}")
-                calls_df,puts_df,dte=fetch_chain_cached(sel_c,selected_exp)
+                calls_df,puts_df,dte,chain_err=fetch_chain_cached(sel_c,selected_exp)
                 if calls_df is not None:
                     chain=type("_C",(),{"calls":calls_df,"puts":puts_df})()
                     st.markdown(f"<span style='font-size:1.9rem;font-weight:700;'>${price:.2f}</span>"
@@ -1442,7 +1469,10 @@ with real OI behind them over a strike that's technically "perfect" on delta but
 interest.
                         """)
                 else:
-                    st.warning("Could not load chain for this expiry.")
+                    st.warning(f"Could not load chain for this expiry."
+                               + (f" ({chain_err})" if chain_err else "")
+                               + " Try again in a moment — this is usually a transient "
+                                 "Yahoo Finance fetch issue, not cached, so a retry can help.")
 
 # ══════════════════════════════════════════════════════════════════════════════
 # TAB 4 — MARKET VOLATILITY
@@ -1594,10 +1624,11 @@ ticker's detail expander below for the full reason breakdown.
         insp_ticker=st.selectbox("Ticker",list(results.keys()),key="insp_ticker")
         if insp_ticker and insp_ticker in results:
             insp_exps=results[insp_ticker].get("all_exps",[])
+            insp_fetch_err=results[insp_ticker].get("fetch_error")
             today_i=datetime.utcnow()
             valid_i=[e for e in insp_exps if 21<=(datetime.strptime(e,"%Y-%m-%d")-today_i).days<=45]
             if valid_i:
-                calls_i,puts_i,dte_i=fetch_chain_cached(insp_ticker,valid_i[0])
+                calls_i,puts_i,dte_i,chain_err_i=fetch_chain_cached(insp_ticker,valid_i[0])
                 if puts_i is not None and not puts_i.empty:
                     st.write(f"**Columns:** `{list(puts_i.columns)}`  |  **Rows:** {len(puts_i)}  |  **DTE:** {dte_i}")
                     price_i=results[insp_ticker]["price"]
@@ -1607,9 +1638,21 @@ ticker's detail expander below for the full reason breakdown.
                     iv_c=pd.to_numeric(puts_i.get("impliedVolatility",pd.Series(dtype=float)),errors="coerce").fillna(0)
                     st.write(f"OI≥1: **{int((oi_c>=1).sum())}** / {len(puts_i)}  ·  IV>0: **{int((iv_c>0).sum())}** / {len(puts_i)}")
                 else:
-                    st.warning("Chain returned empty.")
+                    st.warning(f"Chain returned empty for {insp_ticker} {valid_i[0]}."
+                               + (f" ({chain_err_i})" if chain_err_i else "")
+                               + " Not cached — retry should pick up a fresh fetch.")
+            elif not insp_exps:
+                # 25 June fix — this used to show the same "no 21–45 DTE expiry" text as the
+                # case below, which was misleading: the real problem here is the expiry-list
+                # fetch itself came back empty (rate limit/transient block), not a genuine gap
+                # in this ticker's calendar. Surface the actual fetch error now.
+                st.warning(f"No option expiries returned at all for {insp_ticker} — this is a "
+                           f"fetch failure, not a real gap in the calendar."
+                           + (f" Error: {insp_fetch_err}" if insp_fetch_err else "")
+                           + " Not cached — retry should pick up a fresh fetch.")
             else:
-                st.warning(f"No 21–45 DTE expiry for {insp_ticker}.")
+                st.warning(f"{insp_ticker} has expiries (e.g. {insp_exps[:3]}) but none fall in "
+                           f"the 21–45 DTE window right now — this can be a real calendar gap.")
 
     # §9.3 BB veto Hard/Soft/Off toggle (24 June) — Hard is the original behavior (G3 fail
     # blocks Status). Soft applies a points penalty to each leg's score instead of blocking.
@@ -1648,15 +1691,21 @@ ticker's detail expander below for the full reason breakdown.
                                      f"inspected {row.get('_inspected')}, scored {row.get('_scored')})")
                 else:
                     price=result.get("price"); all_exps=result.get("all_exps",[])
+                    fetch_err=result.get("fetch_error")
                     if not price or price<=0: reason="no price"
-                    elif not all_exps:        reason="no expiries"
+                    # 25 June fix — distinguish a real fetch failure (rate limit/transient
+                    # block, surfaced now instead of swallowed) from "no expiries" with no
+                    # further info.
+                    elif not all_exps:
+                        reason="no expiries"+(f" — {fetch_err}" if fetch_err else "")
                     else:
                         today=datetime.utcnow()
                         ve=next((e for e in all_exps if 21<=(datetime.strptime(e,"%Y-%m-%d")-today).days<=45),None)
                         if not ve: reason=f"no 21–45 DTE expiry (have:{all_exps[:3]})"
                         else:
-                            _,pdf,_=fetch_chain_cached(ticker,ve)
-                            if pdf is None or pdf.empty: reason=f"chain failed for {ve}"
+                            _,pdf,_,chain_err=fetch_chain_cached(ticker,ve)
+                            if pdf is None or pdf.empty:
+                                reason=f"chain failed for {ve}"+(f" — {chain_err}" if chain_err else "")
                             else:
                                 oi_c=pd.to_numeric(pdf.get("openInterest",pd.Series(dtype=float)),errors="coerce").fillna(0)
                                 iv_c=pd.to_numeric(pdf.get("impliedVolatility",pd.Series(dtype=float)),errors="coerce").fillna(0)
