@@ -582,6 +582,8 @@ def get_screener_row(ticker, result, bb_veto_mode="Hard", soft_penalty=10):
             "cc_spread":cc["spread_pct"] if cc else None,
             "cc_mid":cc_mid,"cc_pop":cc.get("pop") if cc else None,"cc_liquidity":cc.get("liquidity_score") if cc else None,
             "cc_oi":cc.get("oi") if cc else None,"cc_volume":cc.get("volume") if cc else None,"cc_ann_return":cc_ann_return,
+            # 26 June — added so the CC table can carry the same column set as CSP (NIS, Greeks).
+            "cc_nis":round(cc_nis,1) if cc else None,"cc_greek_source":cc.get("greek_source") if cc else None,
             "nis":round(nis,1),"csp_score":csp_score,"cc_score":cc_score,
             "leap_expiry":exp_leap,"leap_dte":dte_leap,
             "leap_strike":leap["strike"] if leap else None,"leap_delta":leap["delta"] if leap else None,
@@ -589,6 +591,9 @@ def get_screener_row(ticker, result, bb_veto_mode="Hard", soft_penalty=10):
             "leap_oi":leap.get("oi") if leap else None,"leap_mid":leap.get("mid") if leap else None,
             "leap_nis":round(leap_nis,1) if leap_nis is not None else None,
             "leap_greek_source":leap.get("greek_source") if leap else None,
+            # 26 June — added so the LEAP table can carry the same column set as CSP/CC.
+            "leap_volume":leap.get("volume") if leap else None,"leap_spread":leap.get("spread_pct") if leap else None,
+            "leap_pop":leap.get("pop") if leap else None,"leap_liquidity":leap.get("liquidity_score") if leap else None,
             "leap_score":leap_score,"gate_result":gate_result,
             "greek_source":csp.get("greek_source","unknown"),
             "_inspected":csp.get("_inspected"),"_scored":csp.get("_scored"),
@@ -1745,20 +1750,23 @@ ticker's detail expander below for the full reason breakdown.
             icons="".join(["✅" if gates[f"G{i}"]["pass"] else "❌" for i in range(1,4)])
             return icons, ("🟢 TRADE" if gr["all_pass"] else "🔴 WAIT")
 
+        # 26 June — unified column set/order across CSP/CC/LEAP (Jay's request): Greeks column
+        # dropped (superfluous — greek source is already surfaced via the "Greeks:" summary
+        # line above and the low-precision warning), Ann Return %/Breakeven/BE % dropped from
+        # CSP as clutter, and CC/LEAP now mirror CSP's column set/order as closely as possible.
+        # LEAP has no mean-reversion Timing signal (only computed for CSP/CC), so that column
+        # is the one unavoidable omission there.
         st.subheader("CSP Targets")
         csp_rows=[]
         for r in screener_rows_sorted:
             icons,status=_gate_cols(r)
             csp_rows.append({"Ticker":r["ticker"],"Price":f"${r['price']:.2f}",
-                "Expiry":r["expiry"],"DTE":r["dte"],"Greeks":greek_source_label(r.get("greek_source")),
+                "Expiry":r["expiry"],"DTE":r["dte"],
                 "Strike":f"${r['csp_strike']:.1f}","Δ":r["csp_delta"],"θ/day":f"${r['csp_theta']:.3f}",
                 "Put IV %":r["csp_iv"] if r["csp_iv"] else "—",
                 "OI":r["csp_oi"],"Vol":r.get("csp_volume","—"),
                 "Spread %":r["csp_spread"] if r["csp_spread"] else "—",
                 "Mid":r.get("csp_mid","—"),
-                "Ann Return %":r["csp_ann_return"] if r.get("csp_ann_return") is not None else "—",
-                "Breakeven":r.get("csp_breakeven","—"),
-                "BE %":r["csp_breakeven_pct"] if r.get("csp_breakeven_pct") is not None else "—",
                 "POP %":r["csp_pop"] if r.get("csp_pop") is not None else "—",
                 "Liquidity":r.get("csp_liquidity","—"),
                 "NIS":r["nis"],"Score":r["csp_score"],"Timing":r.get("csp_timing_label","—"),
@@ -1780,10 +1788,9 @@ ticker's detail expander below for the full reason breakdown.
                 "OI":r.get("cc_oi","—"),"Vol":r.get("cc_volume","—"),
                 "Spread %":r["cc_spread"] if r.get("cc_spread") else "—",
                 "Mid":r.get("cc_mid","—"),
-                "Ann Return %":r["cc_ann_return"] if r.get("cc_ann_return") is not None else "—",
                 "POP %":r["cc_pop"] if r.get("cc_pop") is not None else "—",
                 "Liquidity":r.get("cc_liquidity","—"),
-                "Score":r["cc_score"],"Timing":r.get("cc_timing_label","—"),
+                "NIS":r.get("cc_nis","—"),"Score":r["cc_score"],"Timing":r.get("cc_timing_label","—"),
                 "Gates":icons,"Status":status})
         cc_h=min(38+len(cc_rows)*35+4, 600)
         st.dataframe(pd.DataFrame(cc_rows),use_container_width=True,hide_index=True,height=cc_h)
@@ -1800,7 +1807,11 @@ ticker's detail expander below for the full reason breakdown.
                 "Strike":f"${r['leap_strike']:.1f}" if has_leap else "—","Δ":r.get("leap_delta","—"),
                 "θ/day":f"${r['leap_theta']:.3f}" if r.get("leap_theta") is not None else "—",
                 "IV %":r["leap_iv"] if r.get("leap_iv") else "—",
-                "OI":r.get("leap_oi","—"),"Mid":r.get("leap_mid","—"),
+                "OI":r.get("leap_oi","—"),"Vol":r.get("leap_volume","—"),
+                "Spread %":r["leap_spread"] if r.get("leap_spread") else "—",
+                "Mid":r.get("leap_mid","—"),
+                "POP %":r["leap_pop"] if r.get("leap_pop") is not None else "—",
+                "Liquidity":r.get("leap_liquidity","—"),
                 "NIS":r.get("leap_nis","—"),
                 "Score":r["leap_score"] if r.get("leap_score") is not None else "—",
                 "Gates":icons,"Status":status})
