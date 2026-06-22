@@ -803,6 +803,25 @@ def greek_source_label(gs):
             "bs_chain_median":"📐 BS (chain med IV)","bs_hv20":"📐 BS (HV20)",
             "bs_default":"📐 BS (30% def)"}.get(gs, gs or "—")
 
+# Reusable pure-CSS hover tooltip for plain labels/controls (buttons, section intros) —
+# same :hover technique as the screener column-header and nav-tab tooltips, just packaged
+# as a one-liner so call sites don't need a click-based help= icon.
+def _hover_tip(label, text):
+    st.markdown(f"""<style>
+    .jay-tip{{position:relative;display:inline-block;cursor:help;
+        font-size:0.82rem;color:#6b7280;border-bottom:1px dotted #6b7280;}}
+    .jay-tip .jay-tip-text{{
+        visibility:hidden;opacity:0;transition:opacity 0.15s ease;
+        position:absolute;top:135%;left:0;
+        background:#1f2937;color:#f9fafb;text-align:left;border-radius:6px;
+        padding:6px 10px;font-size:0.78rem;font-weight:400;line-height:1.35;
+        white-space:normal;width:max-content;max-width:260px;
+        box-shadow:0 4px 14px rgba(0,0,0,0.4);z-index:9999;pointer-events:none;
+    }}
+    .jay-tip:hover .jay-tip-text{{visibility:visible;opacity:1;}}
+    </style><span class="jay-tip">{label}<span class="jay-tip-text">{text}</span></span>""",
+        unsafe_allow_html=True)
+
 # ── Gauge helpers ──────────────────────────────────────────────────────────────
 def fg_color(score):
     if score is None: return "#6b7280"
@@ -1653,9 +1672,9 @@ with tab_screener:
         </style>""", unsafe_allow_html=True)
 
     with st.container(key="strike_targeting_section"):
-        st.caption("ℹ️ Manual Strike Selection info",
-                   help="Click to enter your option Strike price and DTE details. "
-                        "Then click CONFIRM to update the screener tables below.")
+        _hover_tip("ℹ️ Manual Strike Selection",
+                   "Enter your option Strike price and DTE details, then click CONFIRM "
+                   "to update the screener tables below.")
         with st.expander("🎯 Manual Strike Selection",expanded=False):
             with st.form("target_form"):
                 tcol1,tcol2,tcol3=st.columns(3)
@@ -1697,6 +1716,9 @@ with tab_screener:
             soft_penalty=st.number_input("Soft penalty (points off each leg's score)",
                 min_value=1,max_value=50,value=10,step=1)
 
+    _hover_tip("ℹ️ Run Screener",
+               "Scans your whole watchlist for CSP, covered-call, and LEAP candidates using "
+               "the target settings above.")
     col_run,col_note=st.columns([1,4])
     with col_run:
         run_btn=st.button("🔍 Run Screener",type="primary",use_container_width=True)
