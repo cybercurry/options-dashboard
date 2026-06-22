@@ -534,6 +534,7 @@ def get_screener_row(ticker, result, bb_veto_mode="Hard", soft_penalty=10):
             continue
 
     leap=None; leap_nis=None; leap_score=None
+    leap_intrinsic=None; leap_extrinsic=None; leap_extrinsic_per_day=None
     if exp_leap is not None:
         leap_calls_df,_,_,_=fetch_chain_cached(ticker,exp_leap)
         if leap_calls_df is not None and not leap_calls_df.empty:
@@ -544,6 +545,16 @@ def get_screener_row(ticker, result, bb_veto_mode="Hard", soft_penalty=10):
         # leap_nis/leap_score may need their own floor/ceil once tested on real LEAP chains.
         leap_nis=calc_nis(leap["theta"],dte_leap,leap["strike"])
         leap_score=calc_suitability(leap_nis,dte_leap,leap["delta"],"LEAP")
+        # 26 June — LEAP-buyer cost metrics (Jay's request): how much of the mid premium is
+        # pure time value (extrinsic) above intrinsic, and what that works out to per day on
+        # average over the life of the contract. This is a flat average (extrinsic ÷ DTE),
+        # not the instantaneous θ/day already shown — theta accelerates as expiry nears, so
+        # the average and the instantaneous rate will differ (average < current θ/day is
+        # normal early in a long-dated contract's life).
+        leap_mid_val=leap.get("mid") or 0.0
+        leap_intrinsic=round(max(0.0, price-leap["strike"]), 2)
+        leap_extrinsic=round(max(0.0, leap_mid_val-leap_intrinsic), 2)
+        leap_extrinsic_per_day=round(leap_extrinsic/dte_leap, 4) if dte_leap and dte_leap>0 else None
     # else: no expiry in the 180-900 DTE window (or no usable chain) for this ticker —
     # leap_score stays None rather than silently reusing CSP's numbers.
 
@@ -594,6 +605,9 @@ def get_screener_row(ticker, result, bb_veto_mode="Hard", soft_penalty=10):
             # 26 June — added so the LEAP table can carry the same column set as CSP/CC.
             "leap_volume":leap.get("volume") if leap else None,"leap_spread":leap.get("spread_pct") if leap else None,
             "leap_pop":leap.get("pop") if leap else None,"leap_liquidity":leap.get("liquidity_score") if leap else None,
+            # 26 June — LEAP-buyer cost metrics (extrinsic premium, avg $/day to hold it).
+            "leap_intrinsic":leap_intrinsic,"leap_extrinsic":leap_extrinsic,
+            "leap_extrinsic_per_day":leap_extrinsic_per_day,
             "leap_score":leap_score,"gate_result":gate_result,
             "greek_source":csp.get("greek_source","unknown"),
             "_inspected":csp.get("_inspected"),"_scored":csp.get("_scored"),
@@ -1810,6 +1824,9 @@ ticker's detail expander below for the full reason breakdown.
                 "OI":r.get("leap_oi","—"),"Vol":r.get("leap_volume","—"),
                 "Spread %":r["leap_spread"] if r.get("leap_spread") else "—",
                 "Mid":r.get("leap_mid","—"),
+                "Intrinsic":f"${r['leap_intrinsic']:.2f}" if r.get("leap_intrinsic") is not None else "—",
+                "Extrinsic $":f"${r['leap_extrinsic']:.2f}" if r.get("leap_extrinsic") is not None else "—",
+                "Extrinsic $/day":f"${r['leap_extrinsic_per_day']:.3f}" if r.get("leap_extrinsic_per_day") is not None else "—",
                 "POP %":r["leap_pop"] if r.get("leap_pop") is not None else "—",
                 "Liquidity":r.get("leap_liquidity","—"),
                 "NIS":r.get("leap_nis","—"),
@@ -1896,6 +1913,7 @@ ticker's detail expander below for the full reason breakdown.
 - Strike: **${r['leap_strike']:.1f}** · Delta: **{r['leap_delta']}** ({greek_source_label(r.get('leap_greek_source'))})
 - Theta: **${r['leap_theta']:.3f}/day** · IV: **{r['leap_iv'] or '—'}%** · OI: **{r.get('leap_oi','—')}**
 - Mid premium: **${r.get('leap_mid','—')}** · LEAP NIS: **{r.get('leap_nis','—')}**
+- Intrinsic: **${r.get('leap_intrinsic','—')}** · Extrinsic (time value): **${r.get('leap_extrinsic','—')}** · Avg cost to hold: **${r.get('leap_extrinsic_per_day','—')}/day**
 - **LEAP Score: {r.get('leap_score','—')}**
                     """)
                 else:
