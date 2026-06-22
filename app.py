@@ -513,6 +513,15 @@ def calc_four_gates(r, bb_veto_mode="Hard", soft_penalty=10, leg="csp"):
     return {"gates":gates,"all_pass":all(g["pass"] for g in gates.values()),
             "bb_walking":walking,"bb_penalty":bb_penalty,"bb_veto_mode":bb_veto_mode}
 
+# 22 June fix — schema-version stamp for the cached screener rows below. Streamlit's file-
+# watcher reruns an already-open session's script on a code push WITHOUT clearing
+# st.session_state, so a browser tab open before this edit still held rows built under the
+# old single-"gate_result" schema; reading them back under the new per-leg
+# "gate_result_csp"/"gate_result_cc"/"gate_result_leap" keys crashed with a KeyError. Bump
+# this whenever get_screener_row's returned dict shape changes, so a stale cache is detected
+# and discarded (forcing a re-click of "Run Screener") instead of crashing the page.
+_SCREENER_SCHEMA_VERSION = 2
+
 def get_screener_row(ticker, result, bb_veto_mode="Hard", soft_penalty=10,
                       target_delta_csp=30.0, target_dte_csp=30, target_delta_cc=30.0,
                       target_delta_leap=80.0, target_dte_leap=542):
@@ -1803,12 +1812,18 @@ with tab_screener:
             prog.empty()
             st.session_state["screener_results"]=screener_rows
             st.session_state["screener_debug"]=debug_log
+            st.session_state["screener_schema_version"]=_SCREENER_SCHEMA_VERSION
 
     if show_debug and st.session_state.get("screener_debug"):
         with st.expander("🔧 Log",expanded=True):
             for line in st.session_state["screener_debug"]: st.text(line)
 
-    screener_rows=st.session_state.get("screener_results",[])
+    # Discard a stale cache from before a row-schema change (see _SCREENER_SCHEMA_VERSION
+    # above) instead of crashing on a missing key — just falls back to "click Run Screener".
+    if st.session_state.get("screener_schema_version")==_SCREENER_SCHEMA_VERSION:
+        screener_rows=st.session_state.get("screener_results",[])
+    else:
+        screener_rows=[]
 
     if screener_rows:
         screener_rows_sorted=sorted(screener_rows,key=lambda x:x["csp_score"],reverse=True)
@@ -1818,11 +1833,9 @@ with tab_screener:
 
         # §9.4/§10.5 step 5 — split into three per-leg tables (24 June). Every ticker appears
         # in every table (revised §10.4.1 — the mean-reversion signal is a column, not a
-        # filter), so "qualifies for the CC table" is no longer a thing. Gates/Status are
-        # still one shared per-ticker computation (calc_four_gates doesn't take delta/strike/
-        # option type as input) — splitting that into true per-leg gating was floated in §8 as
-        # an open "next step, your call" and was never locked as a decision, so it's left as-is
-        # here rather than guessed at.
+        # filter), so "qualifies for the CC table" is no longer a thing. Gates/Status are now
+        # per-leg (22 June) — CSP and CC each get their own gate_result with an opposite-
+        # direction G4 Median check; LEAP still shares the original 3-gate logic.
         def _gate_cols(r, leg="leap"):
             # 22 June — Gates are now per-leg: CSP and CC each carry their own gate_result
             # (with a 4th Median gate, opposite pass conditions per leg); LEAP still uses the
