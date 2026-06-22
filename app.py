@@ -443,25 +443,32 @@ def score_color(s):
     if s>=40: return "#f97316"
     return "#ef4444"
 
-def calc_four_gates(r, bb_veto_mode="Hard", soft_penalty=10, leg="csp"):
+def calc_four_gates(r, bb_veto_mode="Hard", soft_penalty=10, leg="csp",
+                     leap_intrinsic=None, leap_extrinsic=None):
     """bb_veto_mode (§9.3, 24 June): 'Hard' (default, original behavior — walking the lower
     band 2+ sessions fails G3 and blocks all_pass), 'Soft' (-soft_penalty points off each leg's
     score instead of blocking Status — see get_screener_row), or 'Off' (informational only,
     never gates or penalizes). Recommended over a one-off override rule since a hand-written
     exception is just a second hard-coded rule with the same brittleness.
 
-    leg (22 June, per Jay; direction corrected same day): 'csp', 'cc', or anything else (e.g.
-    'leap'). CSP and CC each get a 4th gate — G4 Median — with OPPOSITE pass conditions,
-    because gates are no longer one shared computation across all three tables (this was
-    previously an open "next step, your call" — Jay locked it in by asking for leg-specific
-    median checks). Direction: CSP wants to catch a setup right after a reversal off the low,
-    with more upside runway left before the next reversal — that means price at/BELOW the
-    median; once price is already above the median, most of that runway is used up (this is
-    the BE case — riding the upper band, all gates green, no room left), so G4 FAILS when
-    price is above the median for CSP. CC is the mirror image: catch a setup near the top with
-    room to fall, so G4 FAILS when price is below the median for CC. Any other leg value
-    (LEAP) gets no G4 — not requested, left as 3 gates exactly as before rather than guessed
-    at."""
+    leg (22 June, per Jay; direction corrected same day): 'csp', 'cc', or 'leap'. CSP and CC
+    each get a 4th gate — G4 Median — with OPPOSITE pass conditions, because gates are no
+    longer one shared computation across all three tables (this was previously an open "next
+    step, your call" — Jay locked it in by asking for leg-specific median checks). Direction:
+    CSP wants to catch a setup right after a reversal off the low, with more upside runway left
+    before the next reversal — that means price at/BELOW the median; once price is already
+    above the median, most of that runway is used up (this is the BE case — riding the upper
+    band, all gates green, no room left), so G4 FAILS when price is above the median for CSP.
+    CC is the mirror image: catch a setup near the top with room to fall, so G4 FAILS when
+    price is below the median for CC.
+
+    leg='leap' (26 June, per Jay): a different 4th gate — G4 Premium Mix — since a LEAP buyer's
+    "runway" question isn't price-vs-median, it's "am I paying mostly for real (intrinsic)
+    value or mostly for rented time (extrinsic)?" Pass requires extrinsic to be at most 60% of
+    the contract's mid premium (the 50/50 split Jay proposed, plus a 10-point buffer so a
+    contract sitting a percent or two over the line doesn't flip needlessly). Needs
+    leap_intrinsic/leap_extrinsic passed in — these are computed in get_screener_row() from the
+    real ~80Δ/542-DTE contract, not derived from r."""
     df=r.get("df"); cl=r.get("cl"); price=r.get("price",0); pct=r.get("pct",0)
     gates={}
 
@@ -499,7 +506,7 @@ def calc_four_gates(r, bb_veto_mode="Hard", soft_penalty=10, leg="csp"):
     # G4 Median (22 June, Jay's request; direction corrected same day) — CSP fails ABOVE the
     # median band (catch the bounce early, before the up-move's runway is used up); CC fails
     # BELOW it (catch the topping setup early, before the down-move's runway is used up).
-    # Only applies to leg in {"csp","cc"}; any other leg (LEAP) skips this gate entirely.
+    # Only applies to leg in {"csp","cc"} — leap gets its own G4 below instead.
     if leg in ("csp","cc") and cl is not None and len(cl.dropna())>=20:
         median=float(cl.rolling(20).mean().dropna().iloc[-1])
         if leg=="csp":
@@ -514,6 +521,20 @@ def calc_four_gates(r, bb_veto_mode="Hard", soft_penalty=10, leg="csp"):
                           + ("" if g4 else "  — FAIL: below median, runway used up")}
     elif leg in ("csp","cc"):
         gates["G4"]={"pass":True,"label":f"Median ({leg.upper()})","reason":"Insufficient — pass"}
+    elif leg=="leap":
+        # G4 Premium Mix (26 June, Jay's request) — replaces the "no G4 for LEAP" gap. Fails
+        # when extrinsic (time value) is more than 60% of the contract's premium — paying
+        # mostly to rent time rather than for the moneyness already baked into the strike.
+        # 60% = the 50/50 split Jay proposed, plus a 10-point buffer.
+        total=(leap_intrinsic or 0.0)+(leap_extrinsic or 0.0)
+        if leap_intrinsic is not None and leap_extrinsic is not None and total>0:
+            ext_share=leap_extrinsic/total
+            g4=ext_share<=0.60
+            gates["G4"]={"pass":g4,"label":"Premium Mix (LEAP)",
+                "reason":f"Extrinsic ${leap_extrinsic:.2f} of ${total:.2f} premium ({ext_share*100:.0f}%)"
+                          + ("" if g4 else "  — FAIL: paying mostly for time value")}
+        else:
+            gates["G4"]={"pass":True,"label":"Premium Mix (LEAP)","reason":"No LEAP contract — pass"}
 
     return {"gates":gates,"all_pass":all(g["pass"] for g in gates.values()),
             "bb_walking":walking,"bb_penalty":bb_penalty,"bb_veto_mode":bb_veto_mode}
@@ -525,7 +546,10 @@ def calc_four_gates(r, bb_veto_mode="Hard", soft_penalty=10, leg="csp"):
 # "gate_result_csp"/"gate_result_cc"/"gate_result_leap" keys crashed with a KeyError. Bump
 # this whenever get_screener_row's returned dict shape changes, so a stale cache is detected
 # and discarded (forcing a re-click of "Run Screener") instead of crashing the page.
-_SCREENER_SCHEMA_VERSION = 2
+# v3 (26 June) — gate_result_leap now carries a G4 entry (Premium Mix); Deep Dive also reads
+# this gate straight out of screener_results, so a stale v2 cache (no G4) needs discarding
+# rather than silently showing a 3-gate LEAP result next to a 4-gate label.
+_SCREENER_SCHEMA_VERSION = 3
 
 def get_screener_row(ticker, result, bb_veto_mode="Hard", soft_penalty=10,
                       target_delta_csp=30.0, target_dte_csp=30, target_delta_cc=30.0,
@@ -611,10 +635,12 @@ def get_screener_row(ticker, result, bb_veto_mode="Hard", soft_penalty=10,
 
     # 22 June — Gates are now per-leg, not one shared computation (see calc_four_gates'
     # leg= param). CSP and CC each get their own G4 Median check with opposite pass
-    # conditions; LEAP keeps the original 3 gates (no median check — not requested).
+    # conditions. 26 June — LEAP now gets its own G4 too: Premium Mix (intrinsic vs
+    # extrinsic of the real LEAP contract computed just above).
     gate_result_csp =calc_four_gates(result, bb_veto_mode=bb_veto_mode, soft_penalty=soft_penalty, leg="csp")
     gate_result_cc  =calc_four_gates(result, bb_veto_mode=bb_veto_mode, soft_penalty=soft_penalty, leg="cc")
-    gate_result_leap=calc_four_gates(result, bb_veto_mode=bb_veto_mode, soft_penalty=soft_penalty, leg="leap")
+    gate_result_leap=calc_four_gates(result, bb_veto_mode=bb_veto_mode, soft_penalty=soft_penalty, leg="leap",
+                                      leap_intrinsic=leap_intrinsic, leap_extrinsic=leap_extrinsic)
 
     # §9.3 BB veto Soft mode (24 June) — apply the points penalty to each leg's score instead
     # of blocking Status. Hard/Off modes carry bb_penalty==0, so this is a no-op for them.
@@ -674,7 +700,11 @@ def get_screener_row(ticker, result, bb_veto_mode="Hard", soft_penalty=10,
             "csp_timing_label":csp_lbl,"csp_timing_score":csp_tsc,"csp_timing_reasons":csp_treasons}
 
 # ── Signal engines ─────────────────────────────────────────────────────────────
-def leap_signal(hvr,rsi_val,above_50ma,above_200ma,vix_lvl):
+def leap_signal(hvr,rsi_val,above_50ma,above_200ma):
+    # 26 June — dropped the VIX bullet (Jay: too generic, index-wide, not ticker-specific).
+    # Deep Dive now appends a Premium Mix tick (real ~80Δ/542-DTE contract, intrinsic vs
+    # extrinsic) sourced from the Screener tab's data instead — see tab_dive. vix_lvl is no
+    # longer a param here; analyse() still accepts vix_current but no longer threads it in.
     score=0; reasons=[]
     if hvr is not None:
         if hvr<25:   score+=3; reasons.append("✅ HV Rank low (<25) — cheap premium")
@@ -688,9 +718,6 @@ def leap_signal(hvr,rsi_val,above_50ma,above_200ma,vix_lvl):
     if above_200ma: score+=2; reasons.append("✅ Above 200MA — long term trend intact")
     else:           score-=1; reasons.append("❌ Below 200MA — trend broken")
     if above_50ma:  score+=1; reasons.append("✅ Above 50MA — medium term OK")
-    if vix_lvl is not None:
-        if vix_lvl<18:   score+=1; reasons.append("✅ VIX low — cheap index premium")
-        elif vix_lvl>28: score-=1; reasons.append("⚠️ VIX elevated — vol expansion risk")
     label=("🟢 STRONG ENTRY" if score>=7 else "🟡 DECENT ENTRY" if score>=4
            else "🟠 MARGINAL" if score>=2 else "🔴 AVOID")
     return label, score, reasons
@@ -821,7 +848,7 @@ def analyse(ticker, period, vix_current):
             if calls_df is not None:
                 chain=type("_C",(),{"calls":calls_df,"puts":puts_df})()
                 c_iv,p_iv=calc_atm_iv(chain,curr); pcr_val=calc_pcr(chain)
-    leap_lbl,leap_sc,leap_r=leap_signal(hvr,rsi_cur,ab50,ab200,vix_current)
+    leap_lbl,leap_sc,leap_r=leap_signal(hvr,rsi_cur,ab50,ab200)
     cc_lbl,cc_sc,cc_r=cc_signal(hvr,pctb_s,rsi_s,df)
     csp_lbl,csp_sc,csp_r=csp_signal(hvr,pctb_s,rsi_s,df,walking_lower)
     return {"ticker":ticker,"price":curr,"pct":pct_chg,
@@ -1488,6 +1515,22 @@ with tab_dive:
                 st.markdown(f"#### {lbl}: {lb2}")
                 with st.expander("Breakdown"):
                     for reason in reasons: st.write(reason)
+                    if key=="leap":
+                        # 26 June — Premium Mix tick (replaces the old VIX bullet here, which
+                        # was too generic/index-wide). Jay: "data is data... if we talk the
+                        # same data it should be same" — so this reads the real contract's
+                        # G4 straight out of the Screener tab's already-computed data instead
+                        # of recomputing a LEAP-contract fetch independently in analyse(). Only
+                        # available once "Run Screener" has been clicked this session; fails
+                        # silently (no extra line) rather than showing an error-y placeholder
+                        # when it hasn't, since HV Rank above already covers the gap.
+                        _scr=(st.session_state.get("screener_results",[])
+                              if st.session_state.get("screener_schema_version")==_SCREENER_SCHEMA_VERSION
+                              else [])
+                        _row=next((x for x in _scr if x.get("ticker")==sel), None)
+                        _g4=_row.get("gate_result_leap",{}).get("gates",{}).get("G4") if _row else None
+                        if _g4:
+                            st.write(("✅ " if _g4["pass"] else "❌ ") + _g4["reason"])
         st.divider()
         bb_upper,bb_mid,bb_lower=calc_bb_bands(cl)
         vol=df["Volume"].squeeze()
@@ -1912,11 +1955,12 @@ with tab_screener:
         # in every table (revised §10.4.1 — the mean-reversion signal is a column, not a
         # filter), so "qualifies for the CC table" is no longer a thing. Gates/Status are now
         # per-leg (22 June) — CSP and CC each get their own gate_result with an opposite-
-        # direction G4 Median check; LEAP still shares the original 3-gate logic.
+        # direction G4 Median check; LEAP now gets its own G4 (Premium Mix) too — 26 June.
         def _gate_cols(r, leg="leap"):
             # 22 June — Gates are now per-leg: CSP and CC each carry their own gate_result
-            # (with a 4th Median gate, opposite pass conditions per leg); LEAP still uses the
-            # original 3-gate result. leg picks which one this table's row should read.
+            # (with a 4th Median gate, opposite pass conditions per leg). 26 June — LEAP also
+            # gets a 4th gate now (Premium Mix: intrinsic vs extrinsic), so all three legs are
+            # 4-gate. leg picks which gate_result this table's row should read.
             gr=r[f"gate_result_{leg}"]; gates=gr["gates"]
             icons="".join("✅" if gates[k]["pass"] else "❌" for k in sorted(gates.keys()))
             return icons, ("🟢 TRADE" if gr["all_pass"] else "🔴 WAIT")
@@ -2010,10 +2054,11 @@ with tab_screener:
         _LEAP_LEGEND = [(l,t) for l,t in _CSP_LEGEND if l not in ("Put IV %","Timing")]
         _LEAP_LEGEND.insert(7, ("IV %","Implied volatility of this option"))
         _leap_gates_i = next(i for i,(l,_) in enumerate(_LEAP_LEGEND) if l=="Gates")
-        _LEAP_LEGEND[_leap_gates_i] = ("Gates","G1 Trend · G2 Session · G3 BB Veto — pass/fail "
-                                                "(no median gate for LEAP)")
+        _LEAP_LEGEND[_leap_gates_i] = ("Gates","G1 Trend · G2 Session · G3 BB Veto · G4 Premium Mix — "
+                                                "pass/fail (G4 fails if extrinsic is >60% of the "
+                                                "contract's premium — paying mostly for time value)")
         _leap_status_i = next(i for i,(l,_) in enumerate(_LEAP_LEGEND) if l=="Status")
-        _LEAP_LEGEND[_leap_status_i] = ("Status","Trade/Wait — all three gates must pass")
+        _LEAP_LEGEND[_leap_status_i] = ("Status","Trade/Wait — all four gates must pass")
         _leap_nis_i = next(i for i,(l,_) in enumerate(_LEAP_LEGEND) if l=="NIS")
         _LEAP_LEGEND[_leap_nis_i] = ("NIS","Normalised Income Score, inverted — lower means cheaper to buy")
         _leap_theta_i = next(i for i,(l,_) in enumerate(_LEAP_LEGEND) if l=="θ/day")
