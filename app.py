@@ -450,15 +450,18 @@ def calc_four_gates(r, bb_veto_mode="Hard", soft_penalty=10, leg="csp"):
     never gates or penalizes). Recommended over a one-off override rule since a hand-written
     exception is just a second hard-coded rule with the same brittleness.
 
-    leg (22 June, per Jay): 'csp', 'cc', or anything else (e.g. 'leap'). CSP and CC now get a
-    4th gate — G4 Median — with OPPOSITE pass conditions, because gates are no longer one
-    shared computation across all three tables (this was previously an open "next step, your
-    call" — Jay locked it in by asking for leg-specific median checks). CSP sells puts wanting
-    price at/above its own 20-day average (median Bollinger band); below that = price losing
-    its footing = G4 fails. CC writes calls against shares already held wanting price at/below
-    that same average — above it = price already extended/overbought = G4 fails (the mirror
-    image of CSP's check). Any other leg value (LEAP) gets no G4 — not requested, left as 3
-    gates exactly as before rather than guessed at."""
+    leg (22 June, per Jay; direction corrected same day): 'csp', 'cc', or anything else (e.g.
+    'leap'). CSP and CC each get a 4th gate — G4 Median — with OPPOSITE pass conditions,
+    because gates are no longer one shared computation across all three tables (this was
+    previously an open "next step, your call" — Jay locked it in by asking for leg-specific
+    median checks). Direction: CSP wants to catch a setup right after a reversal off the low,
+    with more upside runway left before the next reversal — that means price at/BELOW the
+    median; once price is already above the median, most of that runway is used up (this is
+    the BE case — riding the upper band, all gates green, no room left), so G4 FAILS when
+    price is above the median for CSP. CC is the mirror image: catch a setup near the top with
+    room to fall, so G4 FAILS when price is below the median for CC. Any other leg value
+    (LEAP) gets no G4 — not requested, left as 3 gates exactly as before rather than guessed
+    at."""
     df=r.get("df"); cl=r.get("cl"); price=r.get("price",0); pct=r.get("pct",0)
     gates={}
 
@@ -493,20 +496,22 @@ def calc_four_gates(r, bb_veto_mode="Hard", soft_penalty=10, leg="csp"):
     else:
         gates["G3"]={"pass":True,"label":"BB Veto","reason":"Insufficient — pass"}
 
-    # G4 Median (22 June, Jay's request) — CSP fails below the median band, CC fails above it.
+    # G4 Median (22 June, Jay's request; direction corrected same day) — CSP fails ABOVE the
+    # median band (catch the bounce early, before the up-move's runway is used up); CC fails
+    # BELOW it (catch the topping setup early, before the down-move's runway is used up).
     # Only applies to leg in {"csp","cc"}; any other leg (LEAP) skips this gate entirely.
     if leg in ("csp","cc") and cl is not None and len(cl.dropna())>=20:
         median=float(cl.rolling(20).mean().dropna().iloc[-1])
         if leg=="csp":
-            g4=price>=median
-            gates["G4"]={"pass":g4,"label":"Median (CSP)",
-                "reason":f"Price ${price:.2f} {'≥' if g4 else '<'} median ${median:.2f}"
-                          + ("" if g4 else "  — FAIL: below median")}
-        else:  # cc
             g4=price<=median
-            gates["G4"]={"pass":g4,"label":"Median (CC)",
+            gates["G4"]={"pass":g4,"label":"Median (CSP)",
                 "reason":f"Price ${price:.2f} {'≤' if g4 else '>'} median ${median:.2f}"
-                          + ("" if g4 else "  — FAIL: above median")}
+                          + ("" if g4 else "  — FAIL: above median, runway used up")}
+        else:  # cc
+            g4=price>=median
+            gates["G4"]={"pass":g4,"label":"Median (CC)",
+                "reason":f"Price ${price:.2f} {'≥' if g4 else '<'} median ${median:.2f}"
+                          + ("" if g4 else "  — FAIL: below median, runway used up")}
     elif leg in ("csp","cc"):
         gates["G4"]={"pass":True,"label":f"Median ({leg.upper()})","reason":"Insufficient — pass"}
 
@@ -1959,13 +1964,14 @@ with tab_screener:
             ("Score","Composite suitability score (NIS + DTE fit + Δ fit)"),
             ("Timing","Mean-reversion timing signal (flag, not a filter)"),
             ("Gates","G1 Trend · G2 Session · G3 BB Veto · G4 Median — pass/fail "
-                     "(G4 fails if price is below the median band)"),
+                     "(G4 fails if price is above the median band — catch the bounce early, "
+                     "before the up-move's runway is used up)"),
             ("Status","Trade/Wait — all four gates must pass"),
         ]
         _CC_LEGEND = [(l, t) if l!="Put IV %" else ("Call IV %","Implied volatility of this call") for l,t in _CSP_LEGEND]
         _cc_gates_i = next(i for i,(l,_) in enumerate(_CC_LEGEND) if l=="Gates")
         _CC_LEGEND[_cc_gates_i] = ("Gates","G1 Trend · G2 Session · G3 BB Veto · G4 Median — pass/fail "
-                                           "(G4 fails if price is above the median band — opposite of CSP)")
+                                           "(G4 fails if price is below the median band — opposite of CSP)")
         _LEAP_LEGEND = [(l,t) for l,t in _CSP_LEGEND if l not in ("Put IV %","Timing")]
         _LEAP_LEGEND.insert(7, ("IV %","Implied volatility of this option"))
         _leap_gates_i = next(i for i,(l,_) in enumerate(_LEAP_LEGEND) if l=="Gates")
@@ -2083,7 +2089,7 @@ with tab_screener:
         st.subheader("Four-Gate Filter Detail (CSP)")
         st.caption(f"G1=Trend  G2=Session  G3=BB Veto (mode: {bb_veto_mode}"
                    + (f", −{soft_penalty} pts" if bb_veto_mode=="Soft" else "")
-                   + ")  G4=Median (CSP fails below median)")
+                   + ")  G4=Median (CSP fails above median)")
         for r in screener_rows_sorted:
             gr=r["gate_result_csp"]; gates=gr["gates"]; icon="🟢" if gr["all_pass"] else "🔴"
             with st.expander(f"{icon} {r['ticker']}  CSP:{r['csp_score']}  Strike${r['csp_strike']:.1f}  Δ{r['csp_delta']}  θ${r['csp_theta']:.3f}/d"):
