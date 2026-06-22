@@ -1799,6 +1799,53 @@ with tab_screener:
             )
             st.markdown(style + f'<div class="jay-tt-row">{spans}</div>', unsafe_allow_html=True)
 
+        # 22 June (step 2) — Jay confirmed the hover-strip prototype above works and asked for
+        # the popup to live on the ACTUAL column header instead of a separate row. st.dataframe
+        # can't do that (its header is a canvas-rendered grid, not real HTML — see comment
+        # above), so this renders the table itself as a plain HTML <table>, with each <th>
+        # wrapping the same hover-tooltip span used above. Tradeoff vs st.dataframe: we lose
+        # the built-in click-to-sort columns, fullscreen/search icon, and copy-to-clipboard —
+        # gained true in-header hover. Scrollable via a max-height wrapper with a sticky thead
+        # so it still behaves like the old fixed-height table.
+        def _html_table(rows, legend, height):
+            cols = [l for l, _ in legend]
+            style = f"""<style>
+            .jay-tbl-wrap{{max-height:{height}px;overflow:auto;border:1px solid #30363d;
+                border-radius:6px;margin-bottom:0.6rem;}}
+            .jay-tbl{{border-collapse:collapse;width:100%;font-size:0.85rem;color:#e6edf3;}}
+            .jay-tbl th{{position:sticky;top:0;background:#161b22;text-align:left;
+                padding:8px 10px;border-bottom:1px solid #30363d;white-space:nowrap;z-index:2;}}
+            .jay-tbl td{{padding:6px 10px;border-bottom:1px solid #21262d;white-space:nowrap;}}
+            .jay-tbl tbody tr:nth-child(even) td{{background:#11151c;}}
+            .jay-th-tt{{position:relative;display:inline-block;cursor:help;
+                border-bottom:1px dotted #6b7280;}}
+            .jay-th-tt .jay-tt-text{{
+                visibility:hidden;opacity:0;transition:opacity 0.15s ease;
+                position:absolute;bottom:135%;left:50%;transform:translateX(-50%);
+                background:#1f2937;color:#f9fafb;text-align:center;border-radius:6px;
+                padding:6px 10px;font-size:0.78rem;font-weight:400;line-height:1.35;
+                white-space:normal;width:max-content;max-width:220px;
+                box-shadow:0 4px 14px rgba(0,0,0,0.4);z-index:9999;pointer-events:none;
+            }}
+            .jay-th-tt .jay-tt-text::after{{
+                content:"";position:absolute;top:100%;left:50%;margin-left:-5px;
+                border-width:5px;border-style:solid;
+                border-color:#1f2937 transparent transparent transparent;
+            }}
+            .jay-th-tt:hover .jay-tt-text{{visibility:visible;opacity:1;}}
+            </style>"""
+            head = "".join(
+                f'<th><span class="jay-th-tt">{label}<span class="jay-tt-text">{text}</span></span></th>'
+                for label, text in legend
+            )
+            body = "".join(
+                "<tr>" + "".join(f"<td>{r.get(c, '—')}</td>" for c in cols) + "</tr>"
+                for r in rows
+            )
+            html = (f'<div class="jay-tbl-wrap"><table class="jay-tbl"><thead><tr>{head}</tr>'
+                    f'</thead><tbody>{body}</tbody></table></div>')
+            st.markdown(style + html, unsafe_allow_html=True)
+
         _CSP_LEGEND = [
             ("Ticker","Stock symbol"),("Price","Current stock price"),
             ("Expiry","Option expiration date"),("DTE","Days to Expiry"),
@@ -1835,7 +1882,6 @@ with tab_screener:
         # LEAP has no mean-reversion Timing signal (only computed for CSP/CC), so that column
         # is the one unavoidable omission there.
         st.subheader("CSP Targets")
-        _col_legend_hover(_CSP_LEGEND)
         csp_rows=[]
         for r in screener_rows_sorted:
             icons,status=_gate_cols(r)
@@ -1851,28 +1897,7 @@ with tab_screener:
                 "NIS":r["nis"],"Score":r["csp_score"],"Timing":r.get("csp_timing_label","—"),
                 "Gates":icons,"Status":status})
         csp_h=min(38+len(csp_rows)*35+4, 600)
-        st.dataframe(pd.DataFrame(csp_rows),use_container_width=True,hide_index=True,height=csp_h,
-            column_config={
-                "Ticker":st.column_config.Column(help="Stock symbol"),
-                "Price":st.column_config.Column(help="Current stock price"),
-                "Expiry":st.column_config.Column(help="Option expiration date"),
-                "DTE":st.column_config.Column(help="Days to Expiry"),
-                "Strike":st.column_config.Column(help="Option strike price"),
-                "Δ":st.column_config.Column(help="Delta — sensitivity per $1 stock move"),
-                "θ/day":st.column_config.Column(help="Theta — premium decay per day"),
-                "Put IV %":st.column_config.Column(help="Implied volatility of this put"),
-                "OI":st.column_config.Column(help="Open interest — contracts outstanding"),
-                "Vol":st.column_config.Column(help="Volume — contracts traded today"),
-                "Spread %":st.column_config.Column(help="Bid-ask spread, % of mid"),
-                "Mid":st.column_config.Column(help="Midpoint of bid/ask"),
-                "POP %":st.column_config.Column(help="Probability of profit (Black-Scholes)"),
-                "Liquidity":st.column_config.Column(help="Liquidity score 0–100 (OI + volume)"),
-                "NIS":st.column_config.Column(help="Normalised Income Score — premium per $ risk & time"),
-                "Score":st.column_config.Column(help="Composite suitability score (NIS + DTE fit + Δ fit)"),
-                "Timing":st.column_config.Column(help="Mean-reversion timing signal (flag, not a filter)"),
-                "Gates":st.column_config.Column(help="G1 Trend · G2 Session · G3 BB Veto — pass/fail"),
-                "Status":st.column_config.Column(help="Trade/Wait — all three gates must pass"),
-            })
+        _html_table(csp_rows, _CSP_LEGEND, csp_h)
 
         st.subheader("CC Targets")
         _col_legend(_CC_LEGEND)
