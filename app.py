@@ -1684,19 +1684,38 @@ ticker's detail expander below for the full reason breakdown.
     # 26 June — manual target Δ/DTE overrides (Jay: keep Δ30/30DTE as the default, but let a
     # trader dial it manually off-default per chart/support-resistance read, rather than the
     # algorithm silently picking whatever's "closest" with no visibility into the target).
+    # Wrapped in st.form (26 June fix) — without a form, every +/- click on a number_input
+    # fires an immediate full-script rerun, which re-touches the cached per-ticker data for
+    # the whole watchlist and visibly "recalculates" before you've landed on the number you
+    # actually wanted. Inside a form, nothing reruns until "Apply targets" is clicked.
+    if "applied_targets" not in st.session_state:
+        st.session_state["applied_targets"]={"csp_d":30,"csp_dte":30,"cc_d":35,"leap_d":80,"leap_dte":547}
+
     with st.expander("🎯 Strike targeting (manual override)",expanded=False):
-        tcol1,tcol2,tcol3=st.columns(3)
-        with tcol1:
-            target_delta_csp=st.number_input("CSP target Δ",min_value=5,max_value=50,value=30,step=1)
-            target_dte_csp=st.number_input("CSP target DTE",min_value=21,max_value=45,value=30,step=1)
-        with tcol2:
-            target_delta_cc=st.number_input("CC target Δ",min_value=5,max_value=50,value=35,step=1)
-        with tcol3:
-            target_delta_leap=st.number_input("LEAP target Δ",min_value=50,max_value=95,value=80,step=1)
-            target_dte_leap=st.number_input("LEAP target DTE",min_value=180,max_value=900,value=547,step=1)
-        st.caption("Defaults match the locked Δ30/30DTE CSP target (§ trade criteria doc). "
-                   "CSP/LEAP DTE targets are clamped to the 21–45 / 180–900 day windows that "
-                   "define what counts as a CSP-ish / LEAP-ish expiry at all.")
+        with st.form("target_form"):
+            tcol1,tcol2,tcol3=st.columns(3)
+            at=st.session_state["applied_targets"]
+            with tcol1:
+                in_delta_csp=st.number_input("CSP target Δ",min_value=5,max_value=50,value=at["csp_d"],step=1)
+                in_dte_csp=st.number_input("CSP target DTE",min_value=21,max_value=45,value=at["csp_dte"],step=1)
+            with tcol2:
+                in_delta_cc=st.number_input("CC target Δ",min_value=5,max_value=50,value=at["cc_d"],step=1)
+            with tcol3:
+                in_delta_leap=st.number_input("LEAP target Δ",min_value=50,max_value=95,value=at["leap_d"],step=1)
+                in_dte_leap=st.number_input("LEAP target DTE",min_value=180,max_value=900,value=at["leap_dte"],step=1)
+            st.caption("Defaults match the locked Δ30/30DTE CSP target (§ trade criteria doc). "
+                       "CSP/LEAP DTE targets are clamped to the 21–45 / 180–900 day windows that "
+                       "define what counts as a CSP-ish / LEAP-ish expiry at all. Nothing recalculates "
+                       "until you click Apply.")
+            if st.form_submit_button("Apply targets"):
+                st.session_state["applied_targets"]={"csp_d":in_delta_csp,"csp_dte":in_dte_csp,
+                    "cc_d":in_delta_cc,"leap_d":in_delta_leap,"leap_dte":in_dte_leap}
+                st.success("Targets applied — click Run Screener to use them.")
+
+    _at=st.session_state["applied_targets"]
+    target_delta_csp,target_dte_csp=_at["csp_d"],_at["csp_dte"]
+    target_delta_cc=_at["cc_d"]
+    target_delta_leap,target_dte_leap=_at["leap_d"],_at["leap_dte"]
 
     # §9.3 BB veto Hard/Soft/Off toggle (24 June) — Hard is the original behavior (G3 fail
     # blocks Status). Soft applies a points penalty to each leg's score instead of blocking.
