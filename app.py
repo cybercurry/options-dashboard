@@ -1763,6 +1763,42 @@ with tab_screener:
                     with c:
                         st.caption(label, help=text)
 
+        # 22 June — prototype: pure-CSS hover tooltip, no click required (Jay: "cursor just
+        # touches the column header and automatically pops up... HTML-like"). This is plain
+        # HTML/CSS (:hover + a positioned span), not a Streamlit feature, so it doesn't depend
+        # on the deployed Streamlit Cloud version at all.
+        # Important constraint: this floats in a strip just above the table, not literally
+        # fused into st.dataframe's own header row — Streamlit renders dataframe headers via
+        # a canvas-based grid component (glide-data-grid), which doesn't accept arbitrary HTML
+        # in its cells, so true in-grid hover isn't reachable without a custom component.
+        # Trying this on CSP only first — once Jay confirms it actually pops on hover (no
+        # click) on the deployed app, roll the same helper out to CC_LEGEND/LEAP_LEGEND too.
+        def _col_legend_hover(items):
+            style = """<style>
+            .jay-tt-row{display:flex;flex-wrap:wrap;gap:0.7rem 1.5rem;margin:0.2rem 0 0.7rem 0;}
+            .jay-tt-wrap{position:relative;display:inline-block;cursor:help;
+                font-size:0.85rem;color:#9ca3af;border-bottom:1px dotted #6b7280;}
+            .jay-tt-wrap .jay-tt-text{
+                visibility:hidden;opacity:0;transition:opacity 0.15s ease;
+                position:absolute;bottom:135%;left:50%;transform:translateX(-50%);
+                background:#1f2937;color:#f9fafb;text-align:center;border-radius:6px;
+                padding:6px 10px;font-size:0.78rem;font-weight:400;line-height:1.35;
+                white-space:normal;width:max-content;max-width:220px;
+                box-shadow:0 4px 14px rgba(0,0,0,0.4);z-index:9999;pointer-events:none;
+            }
+            .jay-tt-wrap .jay-tt-text::after{
+                content:"";position:absolute;top:100%;left:50%;margin-left:-5px;
+                border-width:5px;border-style:solid;
+                border-color:#1f2937 transparent transparent transparent;
+            }
+            .jay-tt-wrap:hover .jay-tt-text{visibility:visible;opacity:1;}
+            </style>"""
+            spans = "".join(
+                f'<span class="jay-tt-wrap">{label}<span class="jay-tt-text">{text}</span></span>'
+                for label, text in items
+            )
+            st.markdown(style + f'<div class="jay-tt-row">{spans}</div>', unsafe_allow_html=True)
+
         _CSP_LEGEND = [
             ("Ticker","Stock symbol"),("Price","Current stock price"),
             ("Expiry","Option expiration date"),("DTE","Days to Expiry"),
@@ -1799,7 +1835,7 @@ with tab_screener:
         # LEAP has no mean-reversion Timing signal (only computed for CSP/CC), so that column
         # is the one unavoidable omission there.
         st.subheader("CSP Targets")
-        _col_legend(_CSP_LEGEND)
+        _col_legend_hover(_CSP_LEGEND)
         csp_rows=[]
         for r in screener_rows_sorted:
             icons,status=_gate_cols(r)
