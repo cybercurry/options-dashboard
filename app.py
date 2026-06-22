@@ -1525,6 +1525,11 @@ with tab_dive:
         fig.update_layout(height=940,template="plotly_dark",xaxis_rangeslider_visible=False,
                           legend=dict(orientation="h",y=1.08,yanchor="bottom",x=0,font=dict(size=11)),
                           margin=dict(l=0,r=0,t=110,b=0))
+        # 22 June — leave ~5 calendar days (≈3-4 trading days) of empty space after the last
+        # candle so it's visually obvious nothing is cut off at the right edge. update_xaxes
+        # with no row/col targets every xaxis (all 4 stacked rows share this range since
+        # shared_xaxes=True), so price/volume/HV/RSI stay aligned.
+        fig.update_xaxes(range=[df.index.min(), df.index.max()+pd.Timedelta(days=5)])
         st.plotly_chart(fig,use_container_width=True)
         if r["price"]:
             st.subheader("Position Sizing Guide")
