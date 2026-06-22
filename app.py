@@ -1128,6 +1128,36 @@ st.title("Options Intelligence Dashboard")
 tab_dash,tab_dive,tab_chain,tab_vix,tab_screener=st.tabs(
     ["Overview","Deep Dive","Options Chain","🌪️ Market Volatility","⚡ Screener"])
 
+# Hover explainers for first-time visitors — what each tab is for, in plain language.
+# st.tabs() won't take custom HTML in its own labels, so (same pure-CSS :hover technique as
+# the screener column tooltips, no click/no JS) this renders as a small legend strip directly
+# under the tab bar instead of literally inside each tab button.
+_TAB_LEGEND = [
+    ("Overview", "Quick health-check across your whole watchlist — price, trend, and risk signals at a glance"),
+    ("Deep Dive", "Zoom into one ticker — full technicals, fundamentals, and position-sizing guidance"),
+    ("Options Chain", "Browse the live option chain for any ticker — pick an expiry and strike to inspect"),
+    ("🌪️ Market Volatility", "Market-wide risk gauge — VIX level, term structure, and the current regime"),
+    ("⚡ Screener", "Scans your whole watchlist for the best CSP / covered-call / LEAP candidates right now"),
+]
+st.markdown("""<style>
+.jay-nav-tt-row{display:flex;flex-wrap:wrap;gap:0.5rem 1.3rem;margin:-0.7rem 0 0.9rem 0;}
+.jay-nav-tt{position:relative;display:inline-block;cursor:help;
+    font-size:0.78rem;color:#6b7280;border-bottom:1px dotted #6b7280;}
+.jay-nav-tt .jay-nav-tt-text{
+    visibility:hidden;opacity:0;transition:opacity 0.15s ease;
+    position:absolute;top:135%;left:0;
+    background:#1f2937;color:#f9fafb;text-align:left;border-radius:6px;
+    padding:6px 10px;font-size:0.78rem;font-weight:400;line-height:1.35;
+    white-space:normal;width:max-content;max-width:260px;
+    box-shadow:0 4px 14px rgba(0,0,0,0.4);z-index:9999;pointer-events:none;
+}
+.jay-nav-tt:hover .jay-nav-tt-text{visibility:visible;opacity:1;}
+</style>""", unsafe_allow_html=True)
+st.markdown('<div class="jay-nav-tt-row">'+"".join(
+    f'<span class="jay-nav-tt">ⓘ {label}<span class="jay-nav-tt-text">{text}</span></span>'
+    for label, text in _TAB_LEGEND
+)+'</div>', unsafe_allow_html=True)
+
 results={}
 with st.spinner("Loading market data..."):
     for t in watchlist:
@@ -1725,11 +1755,6 @@ with tab_screener:
 
     if screener_rows:
         screener_rows_sorted=sorted(screener_rows,key=lambda x:x["csp_score"],reverse=True)
-        src_counts={}
-        for r in screener_rows_sorted:
-            k=r.get("greek_source","?"); src_counts[k]=src_counts.get(k,0)+1
-        st.info("**Greeks:** "+"  ·  ".join(f"{greek_source_label(k)}: {v}" for k,v in src_counts.items()))
-
         low_prec=[r["ticker"] for r in screener_rows_sorted if r.get("greek_source") in ("bs_hv20","bs_default")]
         if low_prec:
             st.warning(f"⚠️ Low-precision greeks for: **{', '.join(low_prec)}**")
@@ -1821,16 +1846,16 @@ with tab_screener:
                 border-bottom:1px dotted #6b7280;}}
             .jay-th-tt .jay-tt-text{{
                 visibility:hidden;opacity:0;transition:opacity 0.15s ease;
-                position:absolute;bottom:135%;left:50%;transform:translateX(-50%);
+                position:absolute;top:135%;left:50%;transform:translateX(-50%);
                 background:#1f2937;color:#f9fafb;text-align:center;border-radius:6px;
                 padding:6px 10px;font-size:0.78rem;font-weight:400;line-height:1.35;
                 white-space:normal;width:max-content;max-width:220px;
                 box-shadow:0 4px 14px rgba(0,0,0,0.4);z-index:9999;pointer-events:none;
             }}
             .jay-th-tt .jay-tt-text::after{{
-                content:"";position:absolute;top:100%;left:50%;margin-left:-5px;
+                content:"";position:absolute;bottom:100%;left:50%;margin-left:-5px;
                 border-width:5px;border-style:solid;
-                border-color:#1f2937 transparent transparent transparent;
+                border-color:transparent transparent #1f2937 transparent;
             }}
             .jay-th-tt:hover .jay-tt-text{{visibility:visible;opacity:1;}}
             </style>"""
@@ -1850,7 +1875,7 @@ with tab_screener:
             ("Ticker","Stock symbol"),("Price","Current stock price"),
             ("Expiry","Option expiration date"),("DTE","Days to Expiry"),
             ("Strike","Option strike price"),("Δ","Delta — sensitivity per $1 stock move"),
-            ("θ/day","Theta — premium decay per day"),
+            ("θ/day","Theta — premium collected per day (you're the seller)"),
             ("Put IV %","Implied volatility of this put"),
             ("OI","Open interest — contracts outstanding"),
             ("Vol","Volume — contracts traded today"),
@@ -1868,6 +1893,8 @@ with tab_screener:
         _LEAP_LEGEND.insert(7, ("IV %","Implied volatility of this option"))
         _leap_nis_i = next(i for i,(l,_) in enumerate(_LEAP_LEGEND) if l=="NIS")
         _LEAP_LEGEND[_leap_nis_i] = ("NIS","Normalised Income Score, inverted — lower means cheaper to buy")
+        _leap_theta_i = next(i for i,(l,_) in enumerate(_LEAP_LEGEND) if l=="θ/day")
+        _LEAP_LEGEND[_leap_theta_i] = ("θ/day","Theta — premium you pay away per day (you're the buyer)")
         _leap_intr_i = next(i for i,(l,_) in enumerate(_LEAP_LEGEND) if l=="Mid") + 1
         _LEAP_LEGEND[_leap_intr_i:_leap_intr_i] = [
             ("Intrinsic","In-the-money value"),
@@ -1876,8 +1903,8 @@ with tab_screener:
         ]
 
         # 26 June — unified column set/order across CSP/CC/LEAP (Jay's request): Greeks column
-        # dropped (superfluous — greek source is already surfaced via the "Greeks:" summary
-        # line above and the low-precision warning), Ann Return %/Breakeven/BE % dropped from
+        # dropped (superfluous — greek source is already surfaced via the low-precision
+        # warning above and the per-row tooltip), Ann Return %/Breakeven/BE % dropped from
         # CSP as clutter, and CC/LEAP now mirror CSP's column set/order as closely as possible.
         # LEAP has no mean-reversion Timing signal (only computed for CSP/CC), so that column
         # is the one unavoidable omission there.
@@ -1900,7 +1927,6 @@ with tab_screener:
         _html_table(csp_rows, _CSP_LEGEND, csp_h)
 
         st.subheader("CC Targets")
-        _col_legend(_CC_LEGEND)
         cc_sorted=sorted(screener_rows_sorted,key=lambda x:x["cc_score"],reverse=True)
         cc_rows=[]
         for r in cc_sorted:
@@ -1919,31 +1945,9 @@ with tab_screener:
                 "NIS":r.get("cc_nis","—"),"Score":r["cc_score"],"Timing":r.get("cc_timing_label","—"),
                 "Gates":icons,"Status":status})
         cc_h=min(38+len(cc_rows)*35+4, 600)
-        st.dataframe(pd.DataFrame(cc_rows),use_container_width=True,hide_index=True,height=cc_h,
-            column_config={
-                "Ticker":st.column_config.Column(help="Stock symbol"),
-                "Price":st.column_config.Column(help="Current stock price"),
-                "Expiry":st.column_config.Column(help="Option expiration date"),
-                "DTE":st.column_config.Column(help="Days to Expiry"),
-                "Strike":st.column_config.Column(help="Option strike price"),
-                "Δ":st.column_config.Column(help="Delta — sensitivity per $1 stock move"),
-                "θ/day":st.column_config.Column(help="Theta — premium decay per day"),
-                "Call IV %":st.column_config.Column(help="Implied volatility of this call"),
-                "OI":st.column_config.Column(help="Open interest — contracts outstanding"),
-                "Vol":st.column_config.Column(help="Volume — contracts traded today"),
-                "Spread %":st.column_config.Column(help="Bid-ask spread, % of mid"),
-                "Mid":st.column_config.Column(help="Midpoint of bid/ask"),
-                "POP %":st.column_config.Column(help="Probability of profit (Black-Scholes)"),
-                "Liquidity":st.column_config.Column(help="Liquidity score 0–100 (OI + volume)"),
-                "NIS":st.column_config.Column(help="Normalised Income Score — premium per $ risk & time"),
-                "Score":st.column_config.Column(help="Composite suitability score (NIS + DTE fit + Δ fit)"),
-                "Timing":st.column_config.Column(help="Mean-reversion timing signal (flag, not a filter)"),
-                "Gates":st.column_config.Column(help="G1 Trend · G2 Session · G3 BB Veto — pass/fail"),
-                "Status":st.column_config.Column(help="Trade/Wait — all three gates must pass"),
-            })
+        _html_table(cc_rows, _CC_LEGEND, cc_h)
 
         st.subheader("LEAP Targets")
-        _col_legend(_LEAP_LEGEND)
         leap_sorted=sorted(screener_rows_sorted,key=lambda x:(x["leap_score"] if x.get("leap_score") is not None else -1),reverse=True)
         leap_rows=[]
         for r in leap_sorted:
@@ -1967,30 +1971,7 @@ with tab_screener:
                 "Score":r["leap_score"] if r.get("leap_score") is not None else "—",
                 "Gates":icons,"Status":status})
         leap_h=min(38+len(leap_rows)*35+4, 600)
-        st.dataframe(pd.DataFrame(leap_rows),use_container_width=True,hide_index=True,height=leap_h,
-            column_config={
-                "Ticker":st.column_config.Column(help="Stock symbol"),
-                "Price":st.column_config.Column(help="Current stock price"),
-                "Expiry":st.column_config.Column(help="Option expiration date"),
-                "DTE":st.column_config.Column(help="Days to Expiry"),
-                "Strike":st.column_config.Column(help="Option strike price"),
-                "Δ":st.column_config.Column(help="Delta — sensitivity per $1 stock move"),
-                "θ/day":st.column_config.Column(help="Theta — premium decay per day"),
-                "IV %":st.column_config.Column(help="Implied volatility of this option"),
-                "OI":st.column_config.Column(help="Open interest — contracts outstanding"),
-                "Vol":st.column_config.Column(help="Volume — contracts traded today"),
-                "Spread %":st.column_config.Column(help="Bid-ask spread, % of mid"),
-                "Mid":st.column_config.Column(help="Midpoint of bid/ask"),
-                "Intrinsic":st.column_config.Column(help="In-the-money value"),
-                "Extrinsic $":st.column_config.Column(help="Time value paid above intrinsic"),
-                "Extrinsic $/day":st.column_config.Column(help="Time value cost per day"),
-                "POP %":st.column_config.Column(help="Probability of profit (Black-Scholes)"),
-                "Liquidity":st.column_config.Column(help="Liquidity score 0–100 (OI + volume)"),
-                "NIS":st.column_config.Column(help="Normalised Income Score, inverted — lower means cheaper to buy"),
-                "Score":st.column_config.Column(help="Composite suitability score (NIS + DTE fit + Δ fit)"),
-                "Gates":st.column_config.Column(help="G1 Trend · G2 Session · G3 BB Veto — pass/fail"),
-                "Status":st.column_config.Column(help="Trade/Wait — all three gates must pass"),
-            })
+        _html_table(leap_rows, _LEAP_LEGEND, leap_h)
         st.caption("LEAP now scores a real ~80Δ contract in the 180–900 DTE window (closest to "
                    "542 DTE) — fixed 24 June, was previously reusing the CSP's ~30Δ/30DTE "
                    "numbers. Shows — if no expiry in that window exists for the ticker.")
