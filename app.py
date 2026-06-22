@@ -1137,6 +1137,49 @@ def render_sector_heatmap(sector_data):
     )
     return fig
 
+# 22 June — moved up from inside the Screener tab so the Watchlist Overview table
+# (Overview tab, rendered earlier in the script) can reuse the same in-header hover-
+# tooltip table instead of a separate copy. Was previously a nested function only
+# defined once tab_screener's block ran, which is too late for tab_dash to call it.
+def _html_table(rows, legend, height):
+    cols = [l for l, _ in legend]
+    style = f"""<style>
+    .jay-tbl-wrap{{max-height:{height}px;overflow:auto;border:1px solid #30363d;
+        border-radius:6px;margin-bottom:0.6rem;}}
+    .jay-tbl{{border-collapse:collapse;width:100%;font-size:0.85rem;color:#e6edf3;}}
+    .jay-tbl th{{position:sticky;top:0;background:#161b22;text-align:left;
+        padding:8px 10px;border-bottom:1px solid #30363d;white-space:nowrap;z-index:2;}}
+    .jay-tbl td{{padding:6px 10px;border-bottom:1px solid #21262d;white-space:nowrap;}}
+    .jay-tbl tbody tr:nth-child(even) td{{background:#11151c;}}
+    .jay-th-tt{{position:relative;display:inline-block;cursor:help;
+        border-bottom:1px dotted #6b7280;}}
+    .jay-th-tt .jay-tt-text{{
+        visibility:hidden;opacity:0;transition:opacity 0.15s ease;
+        position:absolute;top:135%;left:50%;transform:translateX(-50%);
+        background:#1f2937;color:#f9fafb;text-align:center;border-radius:6px;
+        padding:6px 10px;font-size:0.78rem;font-weight:400;line-height:1.35;
+        white-space:normal;width:max-content;max-width:220px;
+        box-shadow:0 4px 14px rgba(0,0,0,0.4);z-index:9999;pointer-events:none;
+    }}
+    .jay-th-tt .jay-tt-text::after{{
+        content:"";position:absolute;bottom:100%;left:50%;margin-left:-5px;
+        border-width:5px;border-style:solid;
+        border-color:transparent transparent #1f2937 transparent;
+    }}
+    .jay-th-tt:hover .jay-tt-text{{visibility:visible;opacity:1;}}
+    </style>"""
+    head = "".join(
+        f'<th><span class="jay-th-tt">{label}<span class="jay-tt-text">{text}</span></span></th>'
+        for label, text in legend
+    )
+    body = "".join(
+        "<tr>" + "".join(f"<td>{r.get(c, '—')}</td>" for c in cols) + "</tr>"
+        for r in rows
+    )
+    html = (f'<div class="jay-tbl-wrap"><table class="jay-tbl"><thead><tr>{head}</tr>'
+            f'</thead><tbody>{body}</tbody></table></div>')
+    st.markdown(style + html, unsafe_allow_html=True)
+
 # ══════════════════════════════════════════════════════════════════════════════
 # SIDEBAR
 # ══════════════════════════════════════════════════════════════════════════════
@@ -1378,7 +1421,25 @@ with tab_dash:
                      "LEAP":r["leap"][0],"CC":r["cc"][0],"CSP":r["csp"][0]})
     if rows:
         tbl_height=38+len(rows)*35+4      # fits all rows exactly — no scrollbar
-        st.dataframe(pd.DataFrame(rows),use_container_width=True,hide_index=True,height=tbl_height)
+        # 22 June — same in-header hover-tooltip table as the Screener tab (st.dataframe's
+        # header is a canvas-rendered grid and can't carry a real tooltip — see _html_table).
+        _WATCH_LEGEND = [
+            ("Ticker","Stock symbol"),
+            ("Price","Current stock price"),
+            ("Chg %","Today's percent change"),
+            ("HV Rank","Historical volatility rank 0–100 vs its own 1-year range "
+                       "(low = cheap premium, good for buying; high = rich premium, good for selling)"),
+            ("HV%ile","Historical volatility percentile vs its own 1-year range"),
+            ("HV20","20-day historical (realized) volatility, annualized"),
+            ("ATM IV C/P","At-the-money implied volatility — call / put"),
+            ("RSI","Relative Strength Index (14) — momentum; <30 oversold, >70 overbought"),
+            ("200MA","Price above (✅) or below (❌) its 200-day moving average — long-term trend"),
+            ("PCR","Put/call volume ratio — elevated readings skew bearish"),
+            ("LEAP","LEAP-buy timing signal (low-IV, oversold-leaning setup)"),
+            ("CC","Covered-call timing signal (overbought-leaning setup to write calls)"),
+            ("CSP","Cash-secured-put timing signal (oversold-bounce setup to sell puts)"),
+        ]
+        _html_table(rows, _WATCH_LEGEND, tbl_height)
 
     hvr_data={t:r["hvr"] for t,r in results.items() if r["hvr"] is not None}
     if hvr_data:
@@ -1914,46 +1975,9 @@ with tab_screener:
         # wrapping the same hover-tooltip span used above. Tradeoff vs st.dataframe: we lose
         # the built-in click-to-sort columns, fullscreen/search icon, and copy-to-clipboard —
         # gained true in-header hover. Scrollable via a max-height wrapper with a sticky thead
-        # so it still behaves like the old fixed-height table.
-        def _html_table(rows, legend, height):
-            cols = [l for l, _ in legend]
-            style = f"""<style>
-            .jay-tbl-wrap{{max-height:{height}px;overflow:auto;border:1px solid #30363d;
-                border-radius:6px;margin-bottom:0.6rem;}}
-            .jay-tbl{{border-collapse:collapse;width:100%;font-size:0.85rem;color:#e6edf3;}}
-            .jay-tbl th{{position:sticky;top:0;background:#161b22;text-align:left;
-                padding:8px 10px;border-bottom:1px solid #30363d;white-space:nowrap;z-index:2;}}
-            .jay-tbl td{{padding:6px 10px;border-bottom:1px solid #21262d;white-space:nowrap;}}
-            .jay-tbl tbody tr:nth-child(even) td{{background:#11151c;}}
-            .jay-th-tt{{position:relative;display:inline-block;cursor:help;
-                border-bottom:1px dotted #6b7280;}}
-            .jay-th-tt .jay-tt-text{{
-                visibility:hidden;opacity:0;transition:opacity 0.15s ease;
-                position:absolute;top:135%;left:50%;transform:translateX(-50%);
-                background:#1f2937;color:#f9fafb;text-align:center;border-radius:6px;
-                padding:6px 10px;font-size:0.78rem;font-weight:400;line-height:1.35;
-                white-space:normal;width:max-content;max-width:220px;
-                box-shadow:0 4px 14px rgba(0,0,0,0.4);z-index:9999;pointer-events:none;
-            }}
-            .jay-th-tt .jay-tt-text::after{{
-                content:"";position:absolute;bottom:100%;left:50%;margin-left:-5px;
-                border-width:5px;border-style:solid;
-                border-color:transparent transparent #1f2937 transparent;
-            }}
-            .jay-th-tt:hover .jay-tt-text{{visibility:visible;opacity:1;}}
-            </style>"""
-            head = "".join(
-                f'<th><span class="jay-th-tt">{label}<span class="jay-tt-text">{text}</span></span></th>'
-                for label, text in legend
-            )
-            body = "".join(
-                "<tr>" + "".join(f"<td>{r.get(c, '—')}</td>" for c in cols) + "</tr>"
-                for r in rows
-            )
-            html = (f'<div class="jay-tbl-wrap"><table class="jay-tbl"><thead><tr>{head}</tr>'
-                    f'</thead><tbody>{body}</tbody></table></div>')
-            st.markdown(style + html, unsafe_allow_html=True)
-
+        # so it still behaves like the old fixed-height table. _html_table itself now lives
+        # at module scope (above the Sidebar section) so the Watchlist Overview table in the
+        # Overview tab can reuse it too — see comment there.
         _CSP_LEGEND = [
             ("Ticker","Stock symbol"),("Price","Current stock price"),
             ("Expiry","Option expiration date"),("DTE","Days to Expiry"),
