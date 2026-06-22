@@ -83,14 +83,14 @@ STRATEGY_PARAMS = {
         "iv_dir": 1,     "option_type": "put",
     },
     "CC": {
-        "delta_opt": 35, "delta_lo": 20, "delta_hi": 50,
+        "delta_opt": 30, "delta_lo": 20, "delta_hi": 50,
         "dte_opt":   30, "dte_lo":   21, "dte_hi":   45,
         "w_iv": 0.50,    "w_dte": 0.30,  "w_delta": 0.20,
         "iv_dir": 1,     "option_type": "call",
     },
     "LEAP": {
         "delta_opt": 80, "delta_lo": 60, "delta_hi": 95,
-        "dte_opt":  547, "dte_lo":  180, "dte_hi":  900,
+        "dte_opt":  542, "dte_lo":  180, "dte_hi":  900,
         "w_iv": 0.30,    "w_dte": 0.40,  "w_delta": 0.30,
         "iv_dir": -1,    "option_type": "call",
     },
@@ -487,11 +487,13 @@ def calc_four_gates(r, bb_veto_mode="Hard", soft_penalty=10):
             "bb_walking":walking,"bb_penalty":bb_penalty,"bb_veto_mode":bb_veto_mode}
 
 def get_screener_row(ticker, result, bb_veto_mode="Hard", soft_penalty=10,
-                      target_delta_csp=30.0, target_dte_csp=30, target_delta_cc=35.0,
-                      target_delta_leap=80.0, target_dte_leap=547):
-    # 26 June — target delta/DTE are now caller-supplied (default Δ30/30DTE for CSP, Δ35 for
-    # CC, Δ80/547DTE for LEAP) instead of hard-coded, per Jay: keep Δ30/30DTE as the default,
-    # but let a trader manually dial it elsewhere on the chain (chart/support-resistance call)
+                      target_delta_csp=30.0, target_dte_csp=30, target_delta_cc=30.0,
+                      target_delta_leap=80.0, target_dte_leap=542):
+    # 22 June correction — CC default delta and LEAP default DTE realigned to Jay's stated
+    # defaults (CC Δ30, LEAP 542 DTE ≈ 18 months). Was previously Δ35 for CC, 547 for LEAP.
+    # 26 June — target delta/DTE are now caller-supplied (default Δ30/30DTE for CSP, Δ30/30DTE
+    # for CC, Δ80/542DTE for LEAP) instead of hard-coded, per Jay: keep Δ30/30DTE as the
+    # default, but let a trader manually dial it elsewhere on the chain (chart/support-resistance call)
     # rather than baking one fixed target into the code. The 21-45 / 180-900 DTE *windows*
     # stay fixed — they're sanity bounds on what counts as "CSP-ish" / "LEAP-ish" at all, not
     # the tunable target itself.
@@ -529,7 +531,7 @@ def get_screener_row(ticker, result, bb_veto_mode="Hard", soft_penalty=10,
     # CSP's ~30Δ/30DTE numbers. _tri_score() hard-zeroes DTE-fit/delta-fit outside LEAP's
     # 180-900 DTE / 60-95 delta window, so reusing CSP's ~30DTE/~30delta capped LEAP Score
     # at ~30/100 for every ticker regardless of actual LEAP suitability. Fetch the expiry
-    # closest to 547 DTE within the 180-900 window, find its ~80-delta call, score that
+    # closest to 542 DTE within the 180-900 window, find its ~80-delta call, score that
     # contract on its own theta/delta/DTE — same find_target_strike pattern as CC.
     exp_leap=None; dte_leap=None; min_diff_leap=999999
     for exp in all_exps:
@@ -549,7 +551,7 @@ def get_screener_row(ticker, result, bb_veto_mode="Hard", soft_penalty=10,
             leap=find_target_strike(leap_calls_df,target_delta_leap,"call",price,dte_leap,hv_sigma)
     if leap is not None:
         # NOTE: NIS_FLOOR/NIS_CEIL were hand-calibrated to the CSP's ~30delta/30DTE shape;
-        # theta-to-IV scaling differs at LEAP's ~80delta/547DTE shape (§8 side note), so
+        # theta-to-IV scaling differs at LEAP's ~80delta/542DTE shape (§8 side note), so
         # leap_nis/leap_score may need their own floor/ceil once tested on real LEAP chains.
         leap_nis=calc_nis(leap["theta"],dte_leap,leap["strike"])
         leap_score=calc_suitability(leap_nis,dte_leap,leap["delta"],"LEAP")
@@ -1571,7 +1573,12 @@ with tab_vix:
 # ══════════════════════════════════════════════════════════════════════════════
 with tab_screener:
     st.subheader("⚡ Options Suitability Screener")
-    st.caption("CSP target: **Δ30 · 30 DTE** · All greeks via Black-Scholes (strike IV → chain median → HV20 → 30% default)")
+    st.markdown("""<div style="font-size:1.3rem;font-weight:700;line-height:1.7;margin-bottom:0.3rem;">
+    CSP default settings: Δ30 | 30 DTE<br>
+    CC default settings: Δ30 | 30 DTE<br>
+    LEAP settings: Δ80 | 542 DTE (18 months)
+    </div>""", unsafe_allow_html=True)
+    st.caption("All greeks via Black-Scholes (strike IV → chain median → HV20 → 30% default)")
 
     # 26 June — manual target Δ/DTE overrides (Jay: keep Δ30/30DTE as the default, but let a
     # trader dial it manually off-default per chart/support-resistance read, rather than the
@@ -1581,7 +1588,7 @@ with tab_screener:
     # the whole watchlist and visibly "recalculates" before you've landed on the number you
     # actually wanted. Inside a form, nothing reruns until "Apply targets" is clicked.
     if "applied_targets" not in st.session_state:
-        st.session_state["applied_targets"]={"csp_d":30,"csp_dte":30,"cc_d":35,"leap_d":80,"leap_dte":547}
+        st.session_state["applied_targets"]={"csp_d":30,"csp_dte":30,"cc_d":30,"leap_d":80,"leap_dte":542}
 
     # 26 June — make the confirm button impossible to miss (neon green, big bold text).
     # button[kind*="FormSubmit"] matches both primaryFormSubmit/secondaryFormSubmit across
@@ -1738,6 +1745,52 @@ with tab_screener:
             icons="".join(["✅" if gates[f"G{i}"]["pass"] else "❌" for i in range(1,4)])
             return icons, ("🟢 TRADE" if gr["all_pass"] else "🔴 WAIT")
 
+        # 22 June — column_config.Column(help=...) on st.dataframe (added below) gives a
+        # native hover icon on the column header, but it silently doesn't render on the
+        # deployed Streamlit Cloud runtime — same root cause as the st.expander(help=...)
+        # crash fixed earlier this session (deployed version is older than what the column
+        # header tooltip feature needs). st.caption(help=...) IS confirmed working on this
+        # deployment (that's how the Manual Strike Selection info icon was fixed), so this
+        # glossary strip uses that as the reliable hover mechanism — keep column_config's
+        # help= too since it's free and will start working on its own once the Streamlit
+        # Cloud app is rebooted onto a current version.
+        def _col_legend(items, per_row=7):
+            for i in range(0, len(items), per_row):
+                chunk = items[i:i+per_row]
+                cols = st.columns(len(chunk))
+                for c, (label, text) in zip(cols, chunk):
+                    with c:
+                        st.caption(label, help=text)
+
+        _CSP_LEGEND = [
+            ("Ticker","Stock symbol"),("Price","Current stock price"),
+            ("Expiry","Option expiration date"),("DTE","Days to Expiry"),
+            ("Strike","Option strike price"),("Δ","Delta — sensitivity per $1 stock move"),
+            ("θ/day","Theta — premium decay per day"),
+            ("Put IV %","Implied volatility of this put"),
+            ("OI","Open interest — contracts outstanding"),
+            ("Vol","Volume — contracts traded today"),
+            ("Spread %","Bid-ask spread, % of mid"),("Mid","Midpoint of bid/ask"),
+            ("POP %","Probability of profit (Black-Scholes)"),
+            ("Liquidity","Liquidity score 0–100 (OI + volume)"),
+            ("NIS","Normalised Income Score — premium per $ risk & time"),
+            ("Score","Composite suitability score (NIS + DTE fit + Δ fit)"),
+            ("Timing","Mean-reversion timing signal (flag, not a filter)"),
+            ("Gates","G1 Trend · G2 Session · G3 BB Veto — pass/fail"),
+            ("Status","Trade/Wait — all three gates must pass"),
+        ]
+        _CC_LEGEND = [(l, t) if l!="Put IV %" else ("Call IV %","Implied volatility of this call") for l,t in _CSP_LEGEND]
+        _LEAP_LEGEND = [(l,t) for l,t in _CSP_LEGEND if l not in ("Put IV %","Timing")]
+        _LEAP_LEGEND.insert(7, ("IV %","Implied volatility of this option"))
+        _leap_nis_i = next(i for i,(l,_) in enumerate(_LEAP_LEGEND) if l=="NIS")
+        _LEAP_LEGEND[_leap_nis_i] = ("NIS","Normalised Income Score, inverted — lower means cheaper to buy")
+        _leap_intr_i = next(i for i,(l,_) in enumerate(_LEAP_LEGEND) if l=="Mid") + 1
+        _LEAP_LEGEND[_leap_intr_i:_leap_intr_i] = [
+            ("Intrinsic","In-the-money value"),
+            ("Extrinsic $","Time value paid above intrinsic"),
+            ("Extrinsic $/day","Time value cost per day"),
+        ]
+
         # 26 June — unified column set/order across CSP/CC/LEAP (Jay's request): Greeks column
         # dropped (superfluous — greek source is already surfaced via the "Greeks:" summary
         # line above and the low-precision warning), Ann Return %/Breakeven/BE % dropped from
@@ -1745,6 +1798,7 @@ with tab_screener:
         # LEAP has no mean-reversion Timing signal (only computed for CSP/CC), so that column
         # is the one unavoidable omission there.
         st.subheader("CSP Targets")
+        _col_legend(_CSP_LEGEND)
         csp_rows=[]
         for r in screener_rows_sorted:
             icons,status=_gate_cols(r)
@@ -1784,6 +1838,7 @@ with tab_screener:
             })
 
         st.subheader("CC Targets")
+        _col_legend(_CC_LEGEND)
         cc_sorted=sorted(screener_rows_sorted,key=lambda x:x["cc_score"],reverse=True)
         cc_rows=[]
         for r in cc_sorted:
@@ -1826,6 +1881,7 @@ with tab_screener:
             })
 
         st.subheader("LEAP Targets")
+        _col_legend(_LEAP_LEGEND)
         leap_sorted=sorted(screener_rows_sorted,key=lambda x:(x["leap_score"] if x.get("leap_score") is not None else -1),reverse=True)
         leap_rows=[]
         for r in leap_sorted:
@@ -1874,7 +1930,7 @@ with tab_screener:
                 "Status":st.column_config.Column(help="Trade/Wait — all three gates must pass"),
             })
         st.caption("LEAP now scores a real ~80Δ contract in the 180–900 DTE window (closest to "
-                   "547 DTE) — fixed 24 June, was previously reusing the CSP's ~30Δ/30DTE "
+                   "542 DTE) — fixed 24 June, was previously reusing the CSP's ~30Δ/30DTE "
                    "numbers. Shows — if no expiry in that window exists for the ticker.")
 
         tickers=[r["ticker"] for r in screener_rows_sorted]
