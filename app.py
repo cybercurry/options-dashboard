@@ -1945,7 +1945,7 @@ with tab_screener:
                 "Liquidity":r.get("csp_liquidity","—"),
                 "NIS":r["nis"],"Score":r["csp_score"],"Timing":r.get("csp_timing_label","—"),
                 "Gates":icons,"Status":status})
-        csp_h=min(38+len(csp_rows)*35+4, 600)
+        csp_h=38+len(csp_rows)*35+12  # no cap — full table height, no internal scrollbar
         _html_table(csp_rows, _CSP_LEGEND, csp_h)
 
         st.subheader("CC Targets")
@@ -1966,7 +1966,7 @@ with tab_screener:
                 "Liquidity":r.get("cc_liquidity","—"),
                 "NIS":r.get("cc_nis","—"),"Score":r["cc_score"],"Timing":r.get("cc_timing_label","—"),
                 "Gates":icons,"Status":status})
-        cc_h=min(38+len(cc_rows)*35+4, 600)
+        cc_h=38+len(cc_rows)*35+12  # no cap — full table height, no internal scrollbar
         _html_table(cc_rows, _CC_LEGEND, cc_h)
 
         st.subheader("LEAP Targets")
@@ -1992,7 +1992,7 @@ with tab_screener:
                 "NIS":r.get("leap_nis","—"),
                 "Score":r["leap_score"] if r.get("leap_score") is not None else "—",
                 "Gates":icons,"Status":status})
-        leap_h=min(38+len(leap_rows)*35+4, 600)
+        leap_h=38+len(leap_rows)*35+12  # no cap — full table height, no internal scrollbar
         _html_table(leap_rows, _LEAP_LEGEND, leap_h)
         st.caption("LEAP now scores a real ~80Δ contract in the 180–900 DTE window (closest to "
                    "542 DTE) — fixed 24 June, was previously reusing the CSP's ~30Δ/30DTE "
