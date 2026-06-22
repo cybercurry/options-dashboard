@@ -1710,16 +1710,15 @@ ticker's detail expander below for the full reason breakdown.
         button[kind*="FormSubmit"]:hover { background-color: #2ee60e !important; }
         /* Scoped to this section's container (st-key-* class, Streamlit >=1.37) so it only
            hits this one expander's header bar, not every expander in the app. */
-        .st-key-strike_targeting_section [data-testid="stExpander"] summary {
-            background-color: #04D9FF !important;
-            border-radius: 8px !important;
-            padding: 0.5rem 1rem !important;
-        }
         .st-key-strike_targeting_section [data-testid="stExpander"] summary p {
+            background-color: #04D9FF !important;
+            display: inline-block !important;
             color: #000000 !important;
             font-size: 1rem !important;
             font-weight: 800 !important;
             letter-spacing: 0.02em !important;
+            padding: 0.5rem 1rem !important;
+            border-radius: 8px !important;
         }
         </style>""", unsafe_allow_html=True)
 
