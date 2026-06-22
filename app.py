@@ -486,7 +486,15 @@ def calc_four_gates(r, bb_veto_mode="Hard", soft_penalty=10):
     return {"gates":gates,"all_pass":all(g["pass"] for g in gates.values()),
             "bb_walking":walking,"bb_penalty":bb_penalty,"bb_veto_mode":bb_veto_mode}
 
-def get_screener_row(ticker, result, bb_veto_mode="Hard", soft_penalty=10):
+def get_screener_row(ticker, result, bb_veto_mode="Hard", soft_penalty=10,
+                      target_delta_csp=30.0, target_dte_csp=30, target_delta_cc=35.0,
+                      target_delta_leap=80.0, target_dte_leap=547):
+    # 26 June — target delta/DTE are now caller-supplied (default Δ30/30DTE for CSP, Δ35 for
+    # CC, Δ80/547DTE for LEAP) instead of hard-coded, per Jay: keep Δ30/30DTE as the default,
+    # but let a trader manually dial it elsewhere on the chain (chart/support-resistance call)
+    # rather than baking one fixed target into the code. The 21-45 / 180-900 DTE *windows*
+    # stay fixed — they're sanity bounds on what counts as "CSP-ish" / "LEAP-ish" at all, not
+    # the tunable target itself.
     price=result.get("price"); all_exps=result.get("all_exps",[]); hv_raw=result.get("hv20")
     if not all_exps or not price or price<=0: return None
 
@@ -494,7 +502,7 @@ def get_screener_row(ticker, result, bb_veto_mode="Hard", soft_penalty=10):
     for exp in all_exps:
         try:
             dte=(datetime.strptime(exp,"%Y-%m-%d")-today).days
-            diff=abs(dte-30)
+            diff=abs(dte-target_dte_csp)
             if 21<=dte<=45 and diff<min_diff:
                 min_diff=diff; exp_csp=exp; dte_csp=dte
         except Exception:
@@ -505,12 +513,12 @@ def get_screener_row(ticker, result, bb_veto_mode="Hard", soft_penalty=10):
     if puts_df is None or puts_df.empty: return None
 
     hv_sigma=(hv_raw/100.0) if (hv_raw and hv_raw>0) else None
-    csp=find_target_strike(puts_df, 30.0,"put", price,dte_csp,hv_sigma)
+    csp=find_target_strike(puts_df, target_delta_csp,"put", price,dte_csp,hv_sigma)
     if csp is None: return None
 
     cc=None
     if calls_df is not None and not calls_df.empty:
-        cc=find_target_strike(calls_df,35.0,"call",price,dte_csp,hv_sigma)
+        cc=find_target_strike(calls_df,target_delta_cc,"call",price,dte_csp,hv_sigma)
 
     nis=calc_nis(csp["theta"],dte_csp,csp["strike"])
     csp_score=calc_suitability(nis,dte_csp,csp["delta"],"CSP")
@@ -527,7 +535,7 @@ def get_screener_row(ticker, result, bb_veto_mode="Hard", soft_penalty=10):
     for exp in all_exps:
         try:
             dte_l=(datetime.strptime(exp,"%Y-%m-%d")-today).days
-            diff_l=abs(dte_l-547)
+            diff_l=abs(dte_l-target_dte_leap)
             if 180<=dte_l<=900 and diff_l<min_diff_leap:
                 min_diff_leap=diff_l; exp_leap=exp; dte_leap=dte_l
         except Exception:
@@ -538,7 +546,7 @@ def get_screener_row(ticker, result, bb_veto_mode="Hard", soft_penalty=10):
     if exp_leap is not None:
         leap_calls_df,_,_,_=fetch_chain_cached(ticker,exp_leap)
         if leap_calls_df is not None and not leap_calls_df.empty:
-            leap=find_target_strike(leap_calls_df,80.0,"call",price,dte_leap,hv_sigma)
+            leap=find_target_strike(leap_calls_df,target_delta_leap,"call",price,dte_leap,hv_sigma)
     if leap is not None:
         # NOTE: NIS_FLOOR/NIS_CEIL were hand-calibrated to the CSP's ~30delta/30DTE shape;
         # theta-to-IV scaling differs at LEAP's ~80delta/547DTE shape (§8 side note), so
@@ -1673,6 +1681,23 @@ ticker's detail expander below for the full reason breakdown.
                 st.warning(f"{insp_ticker} has expiries (e.g. {insp_exps[:3]}) but none fall in "
                            f"the 21–45 DTE window right now — this can be a real calendar gap.")
 
+    # 26 June — manual target Δ/DTE overrides (Jay: keep Δ30/30DTE as the default, but let a
+    # trader dial it manually off-default per chart/support-resistance read, rather than the
+    # algorithm silently picking whatever's "closest" with no visibility into the target).
+    with st.expander("🎯 Strike targeting (manual override)",expanded=False):
+        tcol1,tcol2,tcol3=st.columns(3)
+        with tcol1:
+            target_delta_csp=st.number_input("CSP target Δ",min_value=5,max_value=50,value=30,step=1)
+            target_dte_csp=st.number_input("CSP target DTE",min_value=21,max_value=45,value=30,step=1)
+        with tcol2:
+            target_delta_cc=st.number_input("CC target Δ",min_value=5,max_value=50,value=35,step=1)
+        with tcol3:
+            target_delta_leap=st.number_input("LEAP target Δ",min_value=50,max_value=95,value=80,step=1)
+            target_dte_leap=st.number_input("LEAP target DTE",min_value=180,max_value=900,value=547,step=1)
+        st.caption("Defaults match the locked Δ30/30DTE CSP target (§ trade criteria doc). "
+                   "CSP/LEAP DTE targets are clamped to the 21–45 / 180–900 day windows that "
+                   "define what counts as a CSP-ish / LEAP-ish expiry at all.")
+
     # §9.3 BB veto Hard/Soft/Off toggle (24 June) — Hard is the original behavior (G3 fail
     # blocks Status). Soft applies a points penalty to each leg's score instead of blocking.
     # Off makes G3 purely informational (shown in the gate reason, never gates or penalizes).
@@ -1703,7 +1728,10 @@ ticker's detail expander below for the full reason breakdown.
             screener_rows=[]; prog=st.progress(0); debug_log=[]; n=len(results)
             for i,(ticker,result) in enumerate(results.items()):
                 prog.progress((i+1)/n,text=f"Analysing {ticker} ({i+1}/{n})")
-                row=get_screener_row(ticker,result,bb_veto_mode=bb_veto_mode,soft_penalty=soft_penalty)
+                row=get_screener_row(ticker,result,bb_veto_mode=bb_veto_mode,soft_penalty=soft_penalty,
+                                      target_delta_csp=float(target_delta_csp),target_dte_csp=target_dte_csp,
+                                      target_delta_cc=float(target_delta_cc),
+                                      target_delta_leap=float(target_delta_leap),target_dte_leap=target_dte_leap)
                 if row:
                     screener_rows.append(row)
                     debug_log.append(f"✅ {ticker} — CSP {row['csp_score']} ({row['greek_source']}, "
