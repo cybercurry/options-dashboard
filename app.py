@@ -243,10 +243,10 @@ def fetch_chain_cached(ticker, expiry):
 # ══════════════════════════════════════════════════════════════════════════════
 def _bs_greeks(S, K, T, sigma, r=RISK_FREE_RATE, option_type="call"):
     try:
-        if any(x is None for x in (S, K, T, sigma)): return None, None
+        if any(x is None for x in (S, K, T, sigma)): return None, None, None
         S, K, T, sigma = float(S), float(K), float(T), float(sigma)
-        if any(pd.isna(x) for x in (S,K,T,sigma)): return None, None
-        if T<=0 or sigma<=0 or S<=0 or K<=0:         return None, None
+        if any(pd.isna(x) for x in (S,K,T,sigma)): return None, None, None
+        if T<=0 or sigma<=0 or S<=0 or K<=0:         return None, None, None
         sigma  = max(0.05, min(sigma, 3.0))
         T_yr   = T/365.0; sqrtT = math.sqrt(T_yr)
         d1     = (math.log(S/K) + (r + 0.5*sigma**2)*T_yr)/(sigma*sqrtT)
@@ -255,9 +255,10 @@ def _bs_greeks(S, K, T, sigma, r=RISK_FREE_RATE, option_type="call"):
         pdf_d1 = norm.pdf(d1)
         tc     = -(S*pdf_d1*sigma)/(2*sqrtT) - r*K*math.exp(-r*T_yr)*norm.cdf(d2)
         theta  = (tc if option_type=="call" else tc + r*K*math.exp(-r*T_yr))/365.0
-        return round(abs(delta)*100.0, 2), round(abs(theta), 4)
+        # d2 is returned so callers can derive POP = N(d2) (put) / N(-d2) (call) — §9.2
+        return round(abs(delta)*100.0, 2), round(abs(theta), 4), round(d2, 4)
     except Exception:
-        return None, None
+        return None, None, None
 
 # ── Technical indicators ───────────────────────────────────────────────────────
 def calc_hv(close, window=20):
@@ -330,6 +331,8 @@ def find_target_strike(chain_df, target_delta_abs, option_type, price, dte, hv_p
             K      = float(row.get("strike",0) or 0)
             oi_raw = row.get("openInterest",0)
             oi     = 0.0 if pd.isna(oi_raw) else float(oi_raw or 0)
+            vol_raw= row.get("volume",0)
+            vol    = 0.0 if pd.isna(vol_raw) else float(vol_raw or 0)
             iv_raw = row.get("impliedVolatility",0)
             iv     = 0.0 if pd.isna(iv_raw) else float(iv_raw or 0)
             bid    = float(row.get("bid",0) or 0)
@@ -343,14 +346,16 @@ def find_target_strike(chain_df, target_delta_abs, option_type, price, dte, hv_p
             try: yahoo_ok = (not pd.isna(d_raw)) and (not pd.isna(t_raw))
             except Exception: pass
 
+        d2_val=None
         if yahoo_ok:
             d_abs=abs(float(d_raw))*100.0; theta=abs(float(t_raw)); gs="yahoo"
+            # no d1/d2 available from the raw chain field — POP falls back to None below
         else:
             if 0.01<iv<5.0:              sigma=iv;          src="strike"
             elif median_iv is not None:  sigma=median_iv;   src="chain_median"
             elif hv_pct and hv_pct>0:   sigma=float(hv_pct); src="hv20"
             else:                        sigma=0.30;         src="default"
-            d_abs, theta = _bs_greeks(price, K, dte, sigma, option_type=option_type)
+            d_abs, theta, d2_val = _bs_greeks(price, K, dte, sigma, option_type=option_type)
             if d_abs is None or theta is None: continue
             gs = f"bs_{src}"
 
@@ -367,15 +372,34 @@ def find_target_strike(chain_df, target_delta_abs, option_type, price, dte, hv_p
             min_score=score
             mid=(bid+ask)/2.0
             eff_iv=round(iv*100,1) if (gs=="yahoo" and iv>0.01) else round(sigma*100,1)
+            # POP (§9.2) — probability the short option expires OTM (favorable), via N(d2).
+            # Put: favorable if S_T>K -> N(d2). Call: favorable if S_T<K -> N(-d2)=1-N(d2).
+            if d2_val is not None:
+                pop = round(norm.cdf(d2_val)*100,1) if option_type=="put" else round((1-norm.cdf(d2_val))*100,1)
+            else:
+                pop = None
+            # Liquidity score (§9.2) — 60/40 blend of OI/volume, capped at 100.
+            # OI>=100 or volume>=50 contracts/day already scores "fully liquid" (0 score
+            # penalty above); these caps are a reasonable first pass, revisit if it misranks live names.
+            liq_oi  = min(100.0, (oi/100.0)*100.0)
+            liq_vol = min(100.0, (vol/50.0)*100.0)
+            liquidity_score = round(0.6*liq_oi + 0.4*liq_vol, 1)
             best={"strike":K,"delta":round(d_abs,1),"theta":round(theta,4),
-                  "iv":eff_iv,"oi":int(oi),"bid":bid,"ask":ask,
+                  "iv":eff_iv,"oi":int(oi),"volume":int(vol),"bid":bid,"ask":ask,"mid":round(mid,2),
                   "spread_pct":round((ask-bid)/mid*100,1) if mid>0 else None,
+                  "pop":pop,"liquidity_score":liquidity_score,
                   "greek_source":gs,"_inspected":inspected,"_scored":scored}
     return best
 
-def calc_nis(theta, dte, price):
-    if theta<=0 or dte<=0 or price<=0: return 0.0
-    raw = theta*math.sqrt(dte)/price
+def calc_nis(theta, dte, strike):
+    # Denominator fixed 24 June: strike, not spot price (§9.1) — theta is earned against
+    # the capital at risk on the contract, which is sized off strike, not the moving spot.
+    # NOTE: NIS_FLOOR/NIS_CEIL were originally calibrated with price as the denominator;
+    # since strike sits close to (but not exactly at) price for ~30Δ contracts, the raw
+    # NIS scale shifts slightly. Flagging in case the 0-100 spread looks off once tested
+    # against real chains — floor/ceil may need a re-calibration pass.
+    if theta<=0 or dte<=0 or strike<=0: return 0.0
+    raw = theta*math.sqrt(dte)/strike
     return min(100.0, max(0.0,(raw-NIS_FLOOR)/(NIS_CEIL-NIS_FLOOR)*100.0))
 
 def _tri_score(value, optimal, lo, hi):
@@ -396,7 +420,12 @@ def score_color(s):
     if s>=40: return "#f97316"
     return "#ef4444"
 
-def calc_four_gates(r):
+def calc_four_gates(r, bb_veto_mode="Hard", soft_penalty=10):
+    """bb_veto_mode (§9.3, 24 June): 'Hard' (default, original behavior — walking the lower
+    band 2+ sessions fails G3 and blocks all_pass), 'Soft' (-soft_penalty points off each leg's
+    score instead of blocking Status — see get_screener_row), or 'Off' (informational only,
+    never gates or penalizes). Recommended over a one-off override rule since a hand-written
+    exception is just a second hard-coded rule with the same brittleness."""
     df=r.get("df"); cl=r.get("cl"); price=r.get("price",0); pct=r.get("pct",0)
     gates={}
 
@@ -411,20 +440,30 @@ def calc_four_gates(r):
     g3=pct>-2.5
     gates["G2"]={"pass":g3,"label":"Session","reason":f"Today:{pct:+.2f}% ({'OK' if g3 else 'FAIL — down >2.5%'})"}
 
+    bb_penalty=0; walking=False
     if cl is not None and len(cl.dropna())>=22:
         _,_,lower=calc_bb_bands(cl); lo_c=lower.dropna(); cl_a=cl.loc[lo_c.index]
         if len(lo_c)>=2:
             walking=(float(cl_a.iloc[-1])<float(lo_c.iloc[-1])) and (float(cl_a.iloc[-2])<float(lo_c.iloc[-2]))
-            gates["G3"]={"pass":not walking,"label":"BB Veto",
-                "reason":f"Lower band:{float(lo_c.iloc[-1]):.2f}  |  {'Walking lower ❌' if walking else 'Inside bands ✓'}"}
+            band_txt=f"Lower band:{float(lo_c.iloc[-1]):.2f}  |  {'Walking lower ❌' if walking else 'Inside bands ✓'}"
+            if bb_veto_mode=="Hard":
+                gates["G3"]={"pass":not walking,"label":"BB Veto","reason":band_txt}
+            elif bb_veto_mode=="Soft":
+                bb_penalty = soft_penalty if walking else 0
+                gates["G3"]={"pass":True,"label":"BB Veto",
+                    "reason":band_txt+(f"  (soft: −{soft_penalty} pts)" if walking else "")}
+            else:  # "Off"
+                gates["G3"]={"pass":True,"label":"BB Veto",
+                    "reason":band_txt+("  (veto off — informational only)" if walking else "")}
         else:
             gates["G3"]={"pass":True,"label":"BB Veto","reason":"Sparse — pass"}
     else:
         gates["G3"]={"pass":True,"label":"BB Veto","reason":"Insufficient — pass"}
 
-    return {"gates":gates,"all_pass":all(g["pass"] for g in gates.values())}
+    return {"gates":gates,"all_pass":all(g["pass"] for g in gates.values()),
+            "bb_walking":walking,"bb_penalty":bb_penalty,"bb_veto_mode":bb_veto_mode}
 
-def get_screener_row(ticker, result):
+def get_screener_row(ticker, result, bb_veto_mode="Hard", soft_penalty=10):
     price=result.get("price"); all_exps=result.get("all_exps",[]); hv_raw=result.get("hv20")
     if not all_exps or not price or price<=0: return None
 
@@ -450,20 +489,88 @@ def get_screener_row(ticker, result):
     if calls_df is not None and not calls_df.empty:
         cc=find_target_strike(calls_df,35.0,"call",price,dte_csp,hv_sigma)
 
-    nis=calc_nis(csp["theta"],dte_csp,price)
+    nis=calc_nis(csp["theta"],dte_csp,csp["strike"])
     csp_score=calc_suitability(nis,dte_csp,csp["delta"],"CSP")
-    cc_score =(calc_suitability(calc_nis(cc["theta"],dte_csp,price),dte_csp,cc["delta"],"CC") if cc else 0.0)
-    leap_score=calc_suitability(nis,dte_csp,csp["delta"],"LEAP")
-    gate_result=calc_four_gates(result)
+    cc_nis = calc_nis(cc["theta"],dte_csp,cc["strike"]) if cc else 0.0
+    cc_score =(calc_suitability(cc_nis,dte_csp,cc["delta"],"CC") if cc else 0.0)
+
+    # §8/§9.4 LEAP fix (24 June) — fetch a real long-dated contract instead of reusing the
+    # CSP's ~30Δ/30DTE numbers. _tri_score() hard-zeroes DTE-fit/delta-fit outside LEAP's
+    # 180-900 DTE / 60-95 delta window, so reusing CSP's ~30DTE/~30delta capped LEAP Score
+    # at ~30/100 for every ticker regardless of actual LEAP suitability. Fetch the expiry
+    # closest to 547 DTE within the 180-900 window, find its ~80-delta call, score that
+    # contract on its own theta/delta/DTE — same find_target_strike pattern as CC.
+    exp_leap=None; dte_leap=None; min_diff_leap=999999
+    for exp in all_exps:
+        try:
+            dte_l=(datetime.strptime(exp,"%Y-%m-%d")-today).days
+            diff_l=abs(dte_l-547)
+            if 180<=dte_l<=900 and diff_l<min_diff_leap:
+                min_diff_leap=diff_l; exp_leap=exp; dte_leap=dte_l
+        except Exception:
+            continue
+
+    leap=None; leap_nis=None; leap_score=None
+    if exp_leap is not None:
+        leap_calls_df,_,_=fetch_chain_cached(ticker,exp_leap)
+        if leap_calls_df is not None and not leap_calls_df.empty:
+            leap=find_target_strike(leap_calls_df,80.0,"call",price,dte_leap,hv_sigma)
+    if leap is not None:
+        # NOTE: NIS_FLOOR/NIS_CEIL were hand-calibrated to the CSP's ~30delta/30DTE shape;
+        # theta-to-IV scaling differs at LEAP's ~80delta/547DTE shape (§8 side note), so
+        # leap_nis/leap_score may need their own floor/ceil once tested on real LEAP chains.
+        leap_nis=calc_nis(leap["theta"],dte_leap,leap["strike"])
+        leap_score=calc_suitability(leap_nis,dte_leap,leap["delta"],"LEAP")
+    # else: no expiry in the 180-900 DTE window (or no usable chain) for this ticker —
+    # leap_score stays None rather than silently reusing CSP's numbers.
+
+    gate_result=calc_four_gates(result, bb_veto_mode=bb_veto_mode, soft_penalty=soft_penalty)
+
+    # §9.3 BB veto Soft mode (24 June) — apply the points penalty to each leg's score instead
+    # of blocking Status. Hard/Off modes carry bb_penalty==0, so this is a no-op for them.
+    pen=gate_result.get("bb_penalty",0)
+    if pen:
+        csp_score=max(0.0,csp_score-pen)
+        cc_score =max(0.0,cc_score-pen) if cc else cc_score
+        if leap_score is not None: leap_score=max(0.0,leap_score-pen)
+
+    # §9.2 free-data-win metrics — Annualized Return %, Breakeven, POP, Liquidity.
+    # Ann. return is yield-on-strike (collateral/notional), annualized off the actual DTE.
+    csp_mid=csp.get("mid") or 0.0
+    csp_ann_return = round((csp_mid/csp["strike"])*(365.0/dte_csp)*100.0,2) if csp["strike"]>0 and dte_csp>0 else None
+    csp_breakeven  = round(csp["strike"]-csp_mid,2)
+    csp_breakeven_pct = round((price-csp_breakeven)/price*100.0,2) if price>0 else None
+    cc_mid = cc.get("mid") if cc else None
+    cc_ann_return = (round((cc_mid/cc["strike"])*(365.0/dte_csp)*100.0,2)
+                      if cc and cc_mid and cc["strike"]>0 and dte_csp>0 else None)
+
+    # §10 mean-reversion timing signal — already computed once per ticker in analyse(),
+    # reused here rather than recomputed. Flag/score, not a filter (revised §10.4.1).
+    cc_lbl,cc_tsc,cc_treasons = result.get("cc", ("—",0,[]))
+    csp_lbl,csp_tsc,csp_treasons = result.get("csp", ("—",0,[]))
 
     return {"ticker":ticker,"price":price,"expiry":exp_csp,"dte":dte_csp,
             "csp_strike":csp["strike"],"csp_delta":csp["delta"],"csp_theta":csp["theta"],
-            "csp_iv":csp["iv"],"csp_oi":csp["oi"],"csp_spread":csp["spread_pct"],
+            "csp_iv":csp["iv"],"csp_oi":csp["oi"],"csp_volume":csp.get("volume"),"csp_spread":csp["spread_pct"],
+            "csp_mid":csp_mid,"csp_pop":csp.get("pop"),"csp_liquidity":csp.get("liquidity_score"),
+            "csp_ann_return":csp_ann_return,"csp_breakeven":csp_breakeven,"csp_breakeven_pct":csp_breakeven_pct,
             "cc_strike":cc["strike"] if cc else None,"cc_delta":cc["delta"] if cc else None,
+            "cc_theta":cc["theta"] if cc else None,"cc_iv":cc["iv"] if cc else None,
+            "cc_spread":cc["spread_pct"] if cc else None,
+            "cc_mid":cc_mid,"cc_pop":cc.get("pop") if cc else None,"cc_liquidity":cc.get("liquidity_score") if cc else None,
+            "cc_oi":cc.get("oi") if cc else None,"cc_volume":cc.get("volume") if cc else None,"cc_ann_return":cc_ann_return,
             "nis":round(nis,1),"csp_score":csp_score,"cc_score":cc_score,
+            "leap_expiry":exp_leap,"leap_dte":dte_leap,
+            "leap_strike":leap["strike"] if leap else None,"leap_delta":leap["delta"] if leap else None,
+            "leap_theta":leap["theta"] if leap else None,"leap_iv":leap["iv"] if leap else None,
+            "leap_oi":leap.get("oi") if leap else None,"leap_mid":leap.get("mid") if leap else None,
+            "leap_nis":round(leap_nis,1) if leap_nis is not None else None,
+            "leap_greek_source":leap.get("greek_source") if leap else None,
             "leap_score":leap_score,"gate_result":gate_result,
             "greek_source":csp.get("greek_source","unknown"),
-            "_inspected":csp.get("_inspected"),"_scored":csp.get("_scored")}
+            "_inspected":csp.get("_inspected"),"_scored":csp.get("_scored"),
+            "cc_timing_label":cc_lbl,"cc_timing_score":cc_tsc,"cc_timing_reasons":cc_treasons,
+            "csp_timing_label":csp_lbl,"csp_timing_score":csp_tsc,"csp_timing_reasons":csp_treasons}
 
 # ── Signal engines ─────────────────────────────────────────────────────────────
 def leap_signal(hvr,rsi_val,above_50ma,above_200ma,vix_lvl):
@@ -487,43 +594,100 @@ def leap_signal(hvr,rsi_val,above_50ma,above_200ma,vix_lvl):
            else "🟠 MARGINAL" if score>=2 else "🔴 AVOID")
     return label, score, reasons
 
-def cc_signal(hvr,rsi_val,above_50ma,pcr_val,pctb_val=None):
+# ── Candle reversal patterns (§10.3a) — OR logic, any one pattern is enough ─────
+def _candle_reversal(df, direction, lookback=2):
+    """direction: 'bearish' (CC trigger) or 'bullish' (CSP mirror)."""
+    try:
+        o=df["Open"].squeeze(); h=df["High"].squeeze(); l=df["Low"].squeeze(); c=df["Close"].squeeze()
+    except Exception:
+        return False, None
+    n=len(c)
+    if n<4: return False, None
+    for off in range(lookback):
+        t=n-1-off; t1=t-1; t2=t-2
+        if t1<0: continue
+        o_t,h_t,l_t,c_t=float(o.iloc[t]),float(h.iloc[t]),float(l.iloc[t]),float(c.iloc[t])
+        o1,h1,l1,c1=float(o.iloc[t1]),float(h.iloc[t1]),float(l.iloc[t1]),float(c.iloc[t1])
+        body_t=abs(c_t-o_t); body1=abs(c1-o1); rng1=max(h1-l1,1e-9)
+        uw1=h1-max(o1,c1); lw1=min(o1,c1)-l1
+        if direction=="bearish":
+            if c1>o1 and c_t<o_t and o_t>=c1 and c_t<=o1 and body_t>body1*0.9:
+                return True,"Bearish engulfing"
+            mid1=(o1+c1)/2
+            if c1>o1 and o_t>c1 and c_t<o_t and o1<c_t<mid1:
+                return True,"Dark cloud cover"
+            if abs(h_t-h1)/rng1<0.015 and c_t<o_t:
+                return True,"Tweezer top"
+            if uw1>=2*body1 and lw1<=body1*0.3 and c_t<o_t and c_t<c1:
+                return True,"Shooting star + confirmation"
+            if t2>=0:
+                o2,h2,l2,c2=float(o.iloc[t2]),float(h.iloc[t2]),float(l.iloc[t2]),float(c.iloc[t2])
+                body2=abs(c2-o2); rngt=max(h_t-l_t,1e-9)
+                if c2>o2 and body2>rngt*0.5 and body1<rng1*0.3 and c_t<o_t and c_t<(o2+c2)/2:
+                    return True,"Evening star"
+        else:
+            if c1<o1 and c_t>o_t and o_t<=c1 and c_t>=o1 and body_t>body1*0.9:
+                return True,"Bullish engulfing"
+            mid1=(o1+c1)/2
+            if c1<o1 and o_t<c1 and c_t>o_t and mid1<c_t<o1:
+                return True,"Piercing line"
+            if abs(l_t-l1)/rng1<0.015 and c_t>o_t:
+                return True,"Tweezer bottom"
+            if lw1>=2*body1 and uw1<=body1*0.3 and c_t>o_t and c_t>c1:
+                return True,"Hammer + confirmation"
+            if t2>=0:
+                o2,h2,l2,c2=float(o.iloc[t2]),float(h.iloc[t2]),float(l.iloc[t2]),float(c.iloc[t2])
+                body2=abs(c2-o2); rngt=max(h_t-l_t,1e-9)
+                if c2<o2 and body2>rngt*0.5 and body1<rng1*0.3 and c_t>o_t and c_t>(o2+c2)/2:
+                    return True,"Morning star"
+    return False, None
+
+# ── Mean-reversion timing trigger (§10.1 CC / §10.2 CSP) — score, not a gate ────
+def _mean_reversion_score(pctb_s, rsi_s, df, direction):
+    """direction: 'cc' (fade overbought) or 'csp' (fade oversold). Returns (score, reasons, pattern)."""
+    pctb_c=pctb_s.dropna(); rsi_c=rsi_s.dropna()
+    if len(pctb_c)<3 or len(rsi_c)<5: return 0,["Insufficient history for mean-reversion read"],None
+    pctb_today=float(pctb_c.iloc[-1]); pctb_prev=float(pctb_c.iloc[-2]) if len(pctb_c)>=2 else pctb_today
+    pctb_3=pctb_c.iloc[-3:]
+    rsi_today=float(rsi_c.iloc[-1]); rsi_prev=float(rsi_c.iloc[-2]) if len(rsi_c)>=2 else rsi_today
+    rsi_5=rsi_c.iloc[-5:]
     score=0; reasons=[]
+
+    if direction=="cc":
+        fired,pattern=_candle_reversal(df,"bearish",2)
+        if pctb_today>=0.85: score+=2; reasons.append(f"✅ Near/touching upper BB ({pctb_today:.2f})")
+        if pctb_3.max()>=0.95 and pctb_today<pctb_prev: score+=3; reasons.append("✅ Spiked then rolled over")
+        if pctb_today>0.5:   score+=1; reasons.append("✅ Above midline")
+        if rsi_5.max()>70 and rsi_today<rsi_prev: score+=3; reasons.append(f"✅ RSI exceeded 70, turning down ({rsi_today:.0f})")
+        if fired: score+=3; reasons.append(f"✅ {pattern}")
+    else:
+        fired,pattern=_candle_reversal(df,"bullish",2)
+        if pctb_today<=0.15: score+=2; reasons.append(f"✅ Near/touching lower BB ({pctb_today:.2f})")
+        if pctb_3.min()<=0.05 and pctb_today>pctb_prev: score+=3; reasons.append("✅ Dropped then bounced")
+        if pctb_today<0.5:   score+=1; reasons.append("✅ Below midline")
+        if rsi_5.min()<30 and rsi_today>rsi_prev: score+=3; reasons.append(f"✅ RSI dropped below 30, turning up ({rsi_today:.0f})")
+        if fired: score+=3; reasons.append(f"✅ {pattern}")
+    return score, reasons, (pattern if fired else None)
+
+def cc_signal(hvr,pctb_s,rsi_s,df):
+    score,reasons,_=_mean_reversion_score(pctb_s,rsi_s,df,"cc")
     if hvr is not None:
-        if hvr>65:   score+=3; reasons.append("✅ HV Rank high — premium rich")
-        elif hvr>45: score+=2; reasons.append("🟡 HV Rank moderate")
-        else:        reasons.append("❌ HV Rank low — thin premium")
-    if rsi_val is not None:
-        if rsi_val>65:   score+=2; reasons.append("✅ RSI overbought — smart to cap")
-        elif rsi_val>50: score+=1; reasons.append("🟡 RSI bullish, not extreme")
-        elif rsi_val<35: score-=1; reasons.append("❌ RSI oversold — don't cap the bottom")
-    if above_50ma: score+=1; reasons.append("✅ Above 50MA — safe to sell calls")
-    else:          score-=1; reasons.append("⚠️ Below 50MA — trend weakening")
-    if pcr_val is not None and pcr_val>1.2:
-        score+=1; reasons.append("✅ Elevated PCR — fear = premium")
-    if pctb_val is not None:
-        if pctb_val>=0.8: score+=2; reasons.append("✅ Near upper BB — extended, good cap point")
-        elif pctb_val<=0.2: score-=1; reasons.append("⚠️ Near lower BB — don't cap into weakness")
-    label=("🟢 WRITE NOW" if score>=5 else "🟡 DECENT" if score>=3
-           else "🟠 MARGINAL" if score>=1 else "🔴 WAIT")
+        if hvr>55:   score+=2; reasons.append("✅ HV Rank high — premium rich")
+        elif hvr>35: score+=1; reasons.append("🟡 HV Rank moderate")
+        else:        reasons.append("❌ HV Rank low — thin premium even if setup fires")
+    label=("🟢 FULL SETUP — write now" if score>=10 else "🟡 PARTIAL SETUP" if score>=6
+           else "🟠 EARLY / WATCH" if score>=3 else "🔴 NO SETUP")
     return label, score, reasons
 
-def csp_signal(hvr,rsi_val,above_200ma,pctb_val=None,walking=False):
-    score=0; reasons=[]
+def csp_signal(hvr,pctb_s,rsi_s,df,walking=False):
+    score,reasons,_=_mean_reversion_score(pctb_s,rsi_s,df,"csp")
+    if walking:
+        score=max(0,score-4); reasons.append("❌ Still walking the lower band — breakdown, not a bounce (veto)")
     if hvr is not None:
         if hvr>55:   score+=2; reasons.append("✅ High HV Rank — CSP premium rich")
         elif hvr>35: score+=1; reasons.append("🟡 Moderate HV Rank")
-    if rsi_val is not None:
-        if 30<=rsi_val<=50: score+=2; reasons.append("✅ RSI in recovery — put support good")
-        elif rsi_val<30:    score+=1; reasons.append("⚠️ Deep oversold — wait to stabilise")
-        elif rsi_val>70:    score-=1; reasons.append("❌ RSI overbought — don't sell puts here")
-    if above_200ma: score+=2; reasons.append("✅ Above 200MA — reduces assignment risk")
-    else:           score-=1; reasons.append("❌ Below 200MA — assignment risk elevated")
-    if pctb_val is not None and pctb_val<=0.2:
-        if walking: score-=2; reasons.append("❌ Walking the lower BB — breakdown, not a bounce")
-        else:       score+=2; reasons.append("✅ Near lower BB, holding — support bounce setup")
-    label=("🟢 SELL PUT" if score>=4 else "🟡 DECENT" if score>=2
-           else "🟠 MARGINAL" if score>=1 else "🔴 AVOID")
+    label=("🟢 FULL SETUP — sell put" if score>=10 else "🟡 PARTIAL SETUP" if score>=6
+           else "🟠 EARLY / WATCH" if score>=3 else "🔴 NO SETUP")
     return label, score, reasons
 
 def analyse(ticker, period, vix_current):
@@ -557,8 +721,8 @@ def analyse(ticker, period, vix_current):
                 chain=type("_C",(),{"calls":calls_df,"puts":puts_df})()
                 c_iv,p_iv=calc_atm_iv(chain,curr); pcr_val=calc_pcr(chain)
     leap_lbl,leap_sc,leap_r=leap_signal(hvr,rsi_cur,ab50,ab200,vix_current)
-    cc_lbl,cc_sc,cc_r=cc_signal(hvr,rsi_cur,ab50,pcr_val,pctb_cur)
-    csp_lbl,csp_sc,csp_r=csp_signal(hvr,rsi_cur,ab200,pctb_cur,walking_lower)
+    cc_lbl,cc_sc,cc_r=cc_signal(hvr,pctb_s,rsi_s,df)
+    csp_lbl,csp_sc,csp_r=csp_signal(hvr,pctb_s,rsi_s,df,walking_lower)
     return {"ticker":ticker,"price":curr,"pct":pct_chg,
             "hv20":hv_cur,"hvr":hvr,"hvpct":hvpct,"hv20_s":hv20_s,"hv60_s":hv60_s,
             "rsi":rsi_cur,"rsi_s":rsi_s,"atr":atr_cur,"bbw":bbw_cur,"bbw_s":bbw_s,
@@ -1369,11 +1533,11 @@ with tab_screener:
 NIS measures how much income a strike generates relative to the stock price and time remaining,
 so you can compare premium quality across tickers of wildly different prices.
 
-> **Raw = θ × √DTE ÷ Price**
+> **Raw = θ × √DTE ÷ Strike**
 >
 > - **θ** = theta (dollars of decay per day per share)
 > - **√DTE** = square root of days to expiry — accounts for the fact that theta accelerates as expiry approaches; √DTE normalises it to a time-consistent basis
-> - **÷ Price** = scales by stock price so a $10 theta on a $1,000 stock is not the same as on a $100 stock
+> - **÷ Strike** = scales by the contract's strike (the actual capital at risk on the position), not spot price — fixed 24 June, previously divided by spot
 
 The raw number is then normalised to a 0–100 scale:
 - **0** ≈ IV around 15% (very cheap premium — thin income)
@@ -1403,6 +1567,27 @@ Scores ≥80 = Optimal · ≥60 = Acceptable · ≥40 = Marginal · <40 = Unsuit
 
 **Greek sourcing (priority order):**
 Strike's own IV → Chain-wide median IV → HV20 of underlying → 30% default
+
+---
+
+**CSP/CC Timing — mean-reversion signal (flag, not a filter)**
+
+Separate from the Suitability Score above — this reads whether *today* is a good moment to
+act, not whether the strike itself is well-shaped. CC fades a spike: price near/touching the
+upper Bollinger Band, spiked then rolled over, RSI exceeded 70 and turned down, plus a bearish
+candle reversal pattern (engulfing / dark cloud cover / tweezer top / shooting star+confirmation
+/ evening star). CSP is the exact mirror, fading a drop. Every ticker still shows up in the
+table regardless of this signal — it's a timing flag layered on top, not a screen. Hover the
+ticker's detail expander below for the full reason breakdown.
+
+---
+
+**Per-ticker metrics (in the detail expander below)**
+
+- **Annualized return** — mid premium ÷ strike, annualized off actual DTE. A yield-on-collateral figure for comparing strikes across different expiries.
+- **Breakeven** (CSP only) — strike minus mid premium; shown with % cushion below current spot.
+- **POP** — probability of profit via Black-Scholes N(d2): for a CSP, the odds spot finishes above strike at expiry; for a CC, the odds spot finishes below strike (call expires worthless, no assignment). Only available when greeks come from the Black-Scholes path — shows "—" if the raw chain supplied delta/theta directly.
+- **Liquidity score** — 0–100 blend (60% open interest, 40% volume), capped at 100 once OI ≥100 or volume ≥50/day.
         """)
 
     with st.expander("🔬 Chain Inspector",expanded=False):
@@ -1426,6 +1611,21 @@ Strike's own IV → Chain-wide median IV → HV20 of underlying → 30% default
             else:
                 st.warning(f"No 21–45 DTE expiry for {insp_ticker}.")
 
+    # §9.3 BB veto Hard/Soft/Off toggle (24 June) — Hard is the original behavior (G3 fail
+    # blocks Status). Soft applies a points penalty to each leg's score instead of blocking.
+    # Off makes G3 purely informational (shown in the gate reason, never gates or penalizes).
+    bbcol1,bbcol2=st.columns([2,2])
+    with bbcol1:
+        bb_veto_mode=st.radio("BB Veto mode",["Hard","Soft","Off"],index=0,horizontal=True,
+            help="Hard: walking the lower band 2+ sessions blocks Status (original behavior). "
+                 "Soft: same condition costs each leg's score points instead of blocking. "
+                 "Off: informational only — shown in Gates detail, never blocks or penalizes.")
+    soft_penalty=10
+    if bb_veto_mode=="Soft":
+        with bbcol2:
+            soft_penalty=st.number_input("Soft penalty (points off each leg's score)",
+                min_value=1,max_value=50,value=10,step=1)
+
     col_run,col_note=st.columns([1,4])
     with col_run:
         run_btn=st.button("🔍 Run Screener",type="primary",use_container_width=True)
@@ -1441,7 +1641,7 @@ Strike's own IV → Chain-wide median IV → HV20 of underlying → 30% default
             screener_rows=[]; prog=st.progress(0); debug_log=[]; n=len(results)
             for i,(ticker,result) in enumerate(results.items()):
                 prog.progress((i+1)/n,text=f"Analysing {ticker} ({i+1}/{n})")
-                row=get_screener_row(ticker,result)
+                row=get_screener_row(ticker,result,bb_veto_mode=bb_veto_mode,soft_penalty=soft_penalty)
                 if row:
                     screener_rows.append(row)
                     debug_log.append(f"✅ {ticker} — CSP {row['csp_score']} ({row['greek_source']}, "
@@ -1484,24 +1684,82 @@ Strike's own IV → Chain-wide median IV → HV20 of underlying → 30% default
         if low_prec:
             st.warning(f"⚠️ Low-precision greeks for: **{', '.join(low_prec)}**")
 
-        table_rows=[]
-        for r in screener_rows_sorted:
+        # §9.4/§10.5 step 5 — split into three per-leg tables (24 June). Every ticker appears
+        # in every table (revised §10.4.1 — the mean-reversion signal is a column, not a
+        # filter), so "qualifies for the CC table" is no longer a thing. Gates/Status are
+        # still one shared per-ticker computation (calc_four_gates doesn't take delta/strike/
+        # option type as input) — splitting that into true per-leg gating was floated in §8 as
+        # an open "next step, your call" and was never locked as a decision, so it's left as-is
+        # here rather than guessed at.
+        def _gate_cols(r):
             gr=r["gate_result"]; gates=gr["gates"]
-            gate_icons="".join(["✅" if gates[f"G{i}"]["pass"] else "❌" for i in range(1,4)])
-            table_rows.append({"Ticker":r["ticker"],"Price":f"${r['price']:.2f}",
-                "Expiry":r["expiry"],"DTE":r["dte"],
-                "Greeks":greek_source_label(r.get("greek_source")),
-                "CSP Strike":f"${r['csp_strike']:.1f}","CSP Δ":r["csp_delta"],
-                "θ/day":f"${r['csp_theta']:.3f}",
-                "Put IV %":r["csp_iv"] if r["csp_iv"] else "—",
-                "OI":r["csp_oi"],"Spread %":r["csp_spread"] if r["csp_spread"] else "—",
-                "NIS":r["nis"],"CSP Score":r["csp_score"],"CC Score":r["cc_score"],
-                "LEAP Score*":r["leap_score"],"Gates":gate_icons,
-                "Status":"🟢 TRADE" if gr["all_pass"] else "🔴 WAIT"})
+            icons="".join(["✅" if gates[f"G{i}"]["pass"] else "❌" for i in range(1,4)])
+            return icons, ("🟢 TRADE" if gr["all_pass"] else "🔴 WAIT")
 
-        scr_height=min(38+len(table_rows)*35+4, 600)
-        st.dataframe(pd.DataFrame(table_rows),use_container_width=True,hide_index=True,height=scr_height)
-        st.caption("\\* LEAP Score at short DTE — relative IV indicator only.")
+        st.subheader("CSP Targets")
+        csp_rows=[]
+        for r in screener_rows_sorted:
+            icons,status=_gate_cols(r)
+            csp_rows.append({"Ticker":r["ticker"],"Price":f"${r['price']:.2f}",
+                "Expiry":r["expiry"],"DTE":r["dte"],"Greeks":greek_source_label(r.get("greek_source")),
+                "Strike":f"${r['csp_strike']:.1f}","Δ":r["csp_delta"],"θ/day":f"${r['csp_theta']:.3f}",
+                "Put IV %":r["csp_iv"] if r["csp_iv"] else "—",
+                "OI":r["csp_oi"],"Vol":r.get("csp_volume","—"),
+                "Spread %":r["csp_spread"] if r["csp_spread"] else "—",
+                "Mid":r.get("csp_mid","—"),
+                "Ann Return %":r["csp_ann_return"] if r.get("csp_ann_return") is not None else "—",
+                "Breakeven":r.get("csp_breakeven","—"),
+                "BE %":r["csp_breakeven_pct"] if r.get("csp_breakeven_pct") is not None else "—",
+                "POP %":r["csp_pop"] if r.get("csp_pop") is not None else "—",
+                "Liquidity":r.get("csp_liquidity","—"),
+                "NIS":r["nis"],"Score":r["csp_score"],"Timing":r.get("csp_timing_label","—"),
+                "Gates":icons,"Status":status})
+        csp_h=min(38+len(csp_rows)*35+4, 600)
+        st.dataframe(pd.DataFrame(csp_rows),use_container_width=True,hide_index=True,height=csp_h)
+
+        st.subheader("CC Targets")
+        cc_sorted=sorted(screener_rows_sorted,key=lambda x:x["cc_score"],reverse=True)
+        cc_rows=[]
+        for r in cc_sorted:
+            icons,status=_gate_cols(r)
+            has_cc=r.get("cc_strike") is not None
+            cc_rows.append({"Ticker":r["ticker"],"Price":f"${r['price']:.2f}",
+                "Expiry":r["expiry"],"DTE":r["dte"],
+                "Strike":f"${r['cc_strike']:.1f}" if has_cc else "—","Δ":r.get("cc_delta","—"),
+                "θ/day":f"${r['cc_theta']:.3f}" if r.get("cc_theta") is not None else "—",
+                "Call IV %":r["cc_iv"] if r.get("cc_iv") else "—",
+                "OI":r.get("cc_oi","—"),"Vol":r.get("cc_volume","—"),
+                "Spread %":r["cc_spread"] if r.get("cc_spread") else "—",
+                "Mid":r.get("cc_mid","—"),
+                "Ann Return %":r["cc_ann_return"] if r.get("cc_ann_return") is not None else "—",
+                "POP %":r["cc_pop"] if r.get("cc_pop") is not None else "—",
+                "Liquidity":r.get("cc_liquidity","—"),
+                "Score":r["cc_score"],"Timing":r.get("cc_timing_label","—"),
+                "Gates":icons,"Status":status})
+        cc_h=min(38+len(cc_rows)*35+4, 600)
+        st.dataframe(pd.DataFrame(cc_rows),use_container_width=True,hide_index=True,height=cc_h)
+
+        st.subheader("LEAP Targets")
+        leap_sorted=sorted(screener_rows_sorted,key=lambda x:(x["leap_score"] if x.get("leap_score") is not None else -1),reverse=True)
+        leap_rows=[]
+        for r in leap_sorted:
+            icons,status=_gate_cols(r)
+            has_leap=r.get("leap_strike") is not None
+            leap_rows.append({"Ticker":r["ticker"],"Price":f"${r['price']:.2f}",
+                "Expiry":r.get("leap_expiry","—") if has_leap else "—",
+                "DTE":r.get("leap_dte","—") if has_leap else "—",
+                "Strike":f"${r['leap_strike']:.1f}" if has_leap else "—","Δ":r.get("leap_delta","—"),
+                "θ/day":f"${r['leap_theta']:.3f}" if r.get("leap_theta") is not None else "—",
+                "IV %":r["leap_iv"] if r.get("leap_iv") else "—",
+                "OI":r.get("leap_oi","—"),"Mid":r.get("leap_mid","—"),
+                "NIS":r.get("leap_nis","—"),
+                "Score":r["leap_score"] if r.get("leap_score") is not None else "—",
+                "Gates":icons,"Status":status})
+        leap_h=min(38+len(leap_rows)*35+4, 600)
+        st.dataframe(pd.DataFrame(leap_rows),use_container_width=True,hide_index=True,height=leap_h)
+        st.caption("LEAP now scores a real ~80Δ contract in the 180–900 DTE window (closest to "
+                   "547 DTE) — fixed 24 June, was previously reusing the CSP's ~30Δ/30DTE "
+                   "numbers. Shows — if no expiry in that window exists for the ticker.")
 
         tickers=[r["ticker"] for r in screener_rows_sorted]
         csp_scores=[r["csp_score"] for r in screener_rows_sorted]
@@ -1526,7 +1784,8 @@ Strike's own IV → Chain-wide median IV → HV20 of underlying → 30% default
         st.plotly_chart(fig_cmp,use_container_width=True)
 
         st.subheader("Three-Gate Filter Detail")
-        st.caption("G1=Trend  G2=Session  G3=BB Veto")
+        st.caption(f"G1=Trend  G2=Session  G3=BB Veto (mode: {bb_veto_mode}"
+                   + (f", −{soft_penalty} pts" if bb_veto_mode=="Soft" else "") + ")")
         for r in screener_rows_sorted:
             gr=r["gate_result"]; gates=gr["gates"]; icon="🟢" if gr["all_pass"] else "🔴"
             with st.expander(f"{icon} {r['ticker']}  CSP:{r['csp_score']}  Strike${r['csp_strike']:.1f}  Δ{r['csp_delta']}  θ${r['csp_theta']:.3f}/d"):
@@ -1536,22 +1795,51 @@ Strike's own IV → Chain-wide median IV → HV20 of underlying → 30% default
                     gcols[idx].caption(gv["reason"])
                 st.divider()
                 rc1,rc2=st.columns(2)
+                csp_ar = r.get('csp_ann_return'); csp_pop = r.get('csp_pop'); csp_liq = r.get('csp_liquidity')
                 rc1.markdown(f"""
 **CSP Strike**
 - Strike: **${r['csp_strike']:.1f}**
 - Delta: **{r['csp_delta']}** ({greek_source_label(r.get('greek_source'))})
 - Theta: **${r['csp_theta']:.3f}/day**
 - IV: **{r['csp_iv'] or '—'}%**
-- OI: **{r['csp_oi']}**
+- OI: **{r['csp_oi']}** · Volume: **{r.get('csp_volume','—')}** · Liquidity: **{csp_liq if csp_liq is not None else '—'}**
 - Spread: **{r['csp_spread']}%** {'✅' if r['csp_spread'] and r['csp_spread']<20 else '⚠️ Wide' if r['csp_spread'] else '—'}
+- Mid premium: **${r.get('csp_mid','—')}**
+- Annualized return: **{f'{csp_ar:.1f}%' if csp_ar is not None else '—'}**
+- Breakeven: **${r.get('csp_breakeven','—')}** ({f"{r.get('csp_breakeven_pct'):.1f}% below spot" if r.get('csp_breakeven_pct') is not None else '—'})
+- POP (N(d2)): **{f'{csp_pop:.1f}%' if csp_pop is not None else '—'}**
+
+**CSP Timing — {r.get('csp_timing_label','—')}** (score {r.get('csp_timing_score',0)})
                 """)
+                for reason in r.get("csp_timing_reasons",[]): rc1.caption(reason)
                 if r["cc_strike"]:
+                    cc_ar = r.get('cc_ann_return'); cc_pop = r.get('cc_pop'); cc_liq = r.get('cc_liquidity')
                     rc2.markdown(f"""
 **CC Strike**
 - Strike: **${r['cc_strike']:.1f}**
 - Delta: **{r['cc_delta']}**
 - CC Score: **{r['cc_score']}**
+- OI / Volume / Liquidity: **{r.get('cc_oi','—') if r.get('cc_oi') is not None else '—'} / {r.get('cc_volume','—')} / {cc_liq if cc_liq is not None else '—'}**
+- Mid premium: **${r.get('cc_mid','—')}**
+- Annualized return: **{f'{cc_ar:.1f}%' if cc_ar is not None else '—'}**
+- POP (N(-d2), call expires OTM): **{f'{cc_pop:.1f}%' if cc_pop is not None else '—'}**
+
+**CC Timing — {r.get('cc_timing_label','—')}** (score {r.get('cc_timing_score',0)})
                     """)
+                    for reason in r.get("cc_timing_reasons",[]): rc2.caption(reason)
+
+                st.divider()
+                if r.get("leap_strike"):
+                    st.markdown(f"""
+**LEAP Contract** — fixed 24 June, now a real ~80Δ long-dated call (was reusing CSP's numbers)
+- Expiry: **{r.get('leap_expiry','—')}** ({r.get('leap_dte','—')} DTE)
+- Strike: **${r['leap_strike']:.1f}** · Delta: **{r['leap_delta']}** ({greek_source_label(r.get('leap_greek_source'))})
+- Theta: **${r['leap_theta']:.3f}/day** · IV: **{r['leap_iv'] or '—'}%** · OI: **{r.get('leap_oi','—')}**
+- Mid premium: **${r.get('leap_mid','—')}** · LEAP NIS: **{r.get('leap_nis','—')}**
+- **LEAP Score: {r.get('leap_score','—')}**
+                    """)
+                else:
+                    st.caption("LEAP — no expiry in the 180–900 DTE window for this ticker.")
 
     elif "screener_results" not in st.session_state:
         st.markdown("""<div style='text-align:center;padding:60px;color:#94a3b8;'>
