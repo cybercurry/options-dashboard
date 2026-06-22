@@ -1723,9 +1723,16 @@ ticker's detail expander below for the full reason breakdown.
         </style>""", unsafe_allow_html=True)
 
     with st.container(key="strike_targeting_section"):
-        with st.expander("🎯 Manual Strike Selection",expanded=False,
-                          help="Click to enter your option Strike price and DTE details. "
-                               "Then click CONFIRM to update the screener tables below."):
+        _icol1,_icol2=st.columns([0.05,0.95])
+        with _icol1:
+            st.markdown(
+                '<span title="Click to enter your option Strike price and DTE details. '
+                'Then click CONFIRM to update the screener tables below." '
+                'style="cursor:help;font-size:1.3rem;">ℹ️</span>',
+                unsafe_allow_html=True)
+        with _icol2:
+            st.caption("Hover the ℹ️ for instructions")
+        with st.expander("🎯 Manual Strike Selection",expanded=False):
             with st.form("target_form"):
                 tcol1,tcol2,tcol3=st.columns(3)
                 at=st.session_state["applied_targets"]
