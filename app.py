@@ -1573,7 +1573,8 @@ with tab_vix:
 # ══════════════════════════════════════════════════════════════════════════════
 with tab_screener:
     st.subheader("⚡ Options Suitability Screener")
-    st.markdown("""<div style="font-size:1.3rem;font-weight:700;line-height:1.7;margin-bottom:0.3rem;">
+    st.markdown("<hr style='margin:0.2rem 0 0.6rem 0;'>", unsafe_allow_html=True)
+    st.markdown("""<div style="font-size:1.15rem;font-weight:700;font-style:italic;line-height:1.7;margin-bottom:0.3rem;">
     CSP default settings: Δ30 | 30 DTE<br>
     CC default settings: Δ30 | 30 DTE<br>
     LEAP settings: Δ80 | 542 DTE (18 months)
