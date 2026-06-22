@@ -812,7 +812,7 @@ def _hover_tip(label, text):
         font-size:0.82rem;color:#6b7280;border-bottom:1px dotted #6b7280;}}
     .jay-tip .jay-tip-text{{
         visibility:hidden;opacity:0;transition:opacity 0.15s ease;
-        position:absolute;top:135%;left:0;
+        position:absolute;bottom:135%;left:0;
         background:#1f2937;color:#f9fafb;text-align:left;border-radius:6px;
         padding:6px 10px;font-size:0.78rem;font-weight:400;line-height:1.35;
         white-space:normal;width:max-content;max-width:260px;
