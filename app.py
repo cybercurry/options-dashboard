@@ -1573,114 +1573,6 @@ with tab_screener:
     st.subheader("⚡ Options Suitability Screener")
     st.caption("CSP target: **Δ30 · 30 DTE** · All greeks via Black-Scholes (strike IV → chain median → HV20 → 30% default)")
 
-    with st.expander("How the score is calculated", expanded=False):
-        st.markdown("""
-**Screener targets**
-
-| Param | CSP | CC | LEAP |
-|---|---|---|---|
-| Delta target | **Δ30** | Δ35 | Δ80 |
-| DTE target | **30d** | 30d | 547d |
-| DTE window | 21–45d | 21–45d | 180–900d |
-
----
-
-**What is NIS? (Normalised Income Score)**
-
-NIS measures how much income a strike generates relative to the stock price and time remaining,
-so you can compare premium quality across tickers of wildly different prices.
-
-> **Raw = θ × √DTE ÷ Strike**
->
-> - **θ** = theta (dollars of decay per day per share)
-> - **√DTE** = square root of days to expiry — accounts for the fact that theta accelerates as expiry approaches; √DTE normalises it to a time-consistent basis
-> - **÷ Strike** = scales by the contract's strike (the actual capital at risk on the position), not spot price — fixed 24 June, previously divided by spot
-
-The raw number is then normalised to a 0–100 scale:
-- **0** ≈ IV around 15% (very cheap premium — thin income)
-- **100** ≈ IV around 120% (very expensive premium — rich income)
-
-For **CSP and CC**: higher NIS is better — more premium per dollar of risk.
-For **LEAP buying**: NIS is *inverted* — lower NIS means cheaper options to buy.
-
----
-
-**Composite score weights**
-
-| Component | CSP | CC | LEAP |
-|---|---|---|---|
-| A — NIS (inverted for LEAP) | 50% | 50% | 30% |
-| B — DTE fit (30d / 30d / 547d optimal) | 30% | 30% | 40% |
-| C — Delta fit (Δ30 / Δ35 / Δ80 optimal) | 20% | 20% | 30% |
-
-Scores ≥80 = Optimal · ≥60 = Acceptable · ≥40 = Marginal · <40 = Unsuitable
-
----
-
-**Three-gate filter** — all three must pass before trading:
-- **G1 Trend** — 20MA > 50MA, or price > 20MA
-- **G2 Session** — not down more than 2.5% today
-- **G3 BB Veto** — price not walking the lower Bollinger Band 2+ sessions in a row
-
-**Greek sourcing (priority order):**
-Strike's own IV → Chain-wide median IV → HV20 of underlying → 30% default
-
----
-
-**CSP/CC Timing — mean-reversion signal (flag, not a filter)**
-
-Separate from the Suitability Score above — this reads whether *today* is a good moment to
-act, not whether the strike itself is well-shaped. CC fades a spike: price near/touching the
-upper Bollinger Band, spiked then rolled over, RSI exceeded 70 and turned down, plus a bearish
-candle reversal pattern (engulfing / dark cloud cover / tweezer top / shooting star+confirmation
-/ evening star). CSP is the exact mirror, fading a drop. Every ticker still shows up in the
-table regardless of this signal — it's a timing flag layered on top, not a screen. Hover the
-ticker's detail expander below for the full reason breakdown.
-
----
-
-**Per-ticker metrics (in the detail expander below)**
-
-- **Annualized return** — mid premium ÷ strike, annualized off actual DTE. A yield-on-collateral figure for comparing strikes across different expiries.
-- **Breakeven** (CSP only) — strike minus mid premium; shown with % cushion below current spot.
-- **POP** — probability of profit via Black-Scholes N(d2): for a CSP, the odds spot finishes above strike at expiry; for a CC, the odds spot finishes below strike (call expires worthless, no assignment). Only available when greeks come from the Black-Scholes path — shows "—" if the raw chain supplied delta/theta directly.
-- **Liquidity score** — 0–100 blend (60% open interest, 40% volume), capped at 100 once OI ≥100 or volume ≥50/day.
-        """)
-
-    with st.expander("🔬 Chain Inspector",expanded=False):
-        insp_ticker=st.selectbox("Ticker",list(results.keys()),key="insp_ticker")
-        if insp_ticker and insp_ticker in results:
-            insp_exps=results[insp_ticker].get("all_exps",[])
-            insp_fetch_err=results[insp_ticker].get("fetch_error")
-            today_i=datetime.utcnow()
-            valid_i=[e for e in insp_exps if 21<=(datetime.strptime(e,"%Y-%m-%d")-today_i).days<=45]
-            if valid_i:
-                calls_i,puts_i,dte_i,chain_err_i=fetch_chain_cached(insp_ticker,valid_i[0])
-                if puts_i is not None and not puts_i.empty:
-                    st.write(f"**Columns:** `{list(puts_i.columns)}`  |  **Rows:** {len(puts_i)}  |  **DTE:** {dte_i}")
-                    price_i=results[insp_ticker]["price"]
-                    disp_cols=[c for c in ["strike","bid","ask","impliedVolatility","volume","openInterest"] if c in puts_i.columns]
-                    st.dataframe(puts_i.iloc[(puts_i["strike"]-price_i).abs().argsort()].head(12)[disp_cols].reset_index(drop=True),use_container_width=True)
-                    oi_c=pd.to_numeric(puts_i.get("openInterest",pd.Series(dtype=float)),errors="coerce").fillna(0)
-                    iv_c=pd.to_numeric(puts_i.get("impliedVolatility",pd.Series(dtype=float)),errors="coerce").fillna(0)
-                    st.write(f"OI≥1: **{int((oi_c>=1).sum())}** / {len(puts_i)}  ·  IV>0: **{int((iv_c>0).sum())}** / {len(puts_i)}")
-                else:
-                    st.warning(f"Chain returned empty for {insp_ticker} {valid_i[0]}."
-                               + (f" ({chain_err_i})" if chain_err_i else "")
-                               + " Not cached — retry should pick up a fresh fetch.")
-            elif not insp_exps:
-                # 25 June fix — this used to show the same "no 21–45 DTE expiry" text as the
-                # case below, which was misleading: the real problem here is the expiry-list
-                # fetch itself came back empty (rate limit/transient block), not a genuine gap
-                # in this ticker's calendar. Surface the actual fetch error now.
-                st.warning(f"No option expiries returned at all for {insp_ticker} — this is a "
-                           f"fetch failure, not a real gap in the calendar."
-                           + (f" Error: {insp_fetch_err}" if insp_fetch_err else "")
-                           + " Not cached — retry should pick up a fresh fetch.")
-            else:
-                st.warning(f"{insp_ticker} has expiries (e.g. {insp_exps[:3]}) but none fall in "
-                           f"the 21–45 DTE window right now — this can be a real calendar gap.")
-
     # 26 June — manual target Δ/DTE overrides (Jay: keep Δ30/30DTE as the default, but let a
     # trader dial it manually off-default per chart/support-resistance read, rather than the
     # algorithm silently picking whatever's "closest" with no visibility into the target).
@@ -1868,7 +1760,28 @@ ticker's detail expander below for the full reason breakdown.
                 "NIS":r["nis"],"Score":r["csp_score"],"Timing":r.get("csp_timing_label","—"),
                 "Gates":icons,"Status":status})
         csp_h=min(38+len(csp_rows)*35+4, 600)
-        st.dataframe(pd.DataFrame(csp_rows),use_container_width=True,hide_index=True,height=csp_h)
+        st.dataframe(pd.DataFrame(csp_rows),use_container_width=True,hide_index=True,height=csp_h,
+            column_config={
+                "Ticker":st.column_config.Column(help="Stock symbol"),
+                "Price":st.column_config.Column(help="Current stock price"),
+                "Expiry":st.column_config.Column(help="Option expiration date"),
+                "DTE":st.column_config.Column(help="Days to Expiry"),
+                "Strike":st.column_config.Column(help="Option strike price"),
+                "Δ":st.column_config.Column(help="Delta — sensitivity per $1 stock move"),
+                "θ/day":st.column_config.Column(help="Theta — premium decay per day"),
+                "Put IV %":st.column_config.Column(help="Implied volatility of this put"),
+                "OI":st.column_config.Column(help="Open interest — contracts outstanding"),
+                "Vol":st.column_config.Column(help="Volume — contracts traded today"),
+                "Spread %":st.column_config.Column(help="Bid-ask spread, % of mid"),
+                "Mid":st.column_config.Column(help="Midpoint of bid/ask"),
+                "POP %":st.column_config.Column(help="Probability of profit (Black-Scholes)"),
+                "Liquidity":st.column_config.Column(help="Liquidity score 0–100 (OI + volume)"),
+                "NIS":st.column_config.Column(help="Normalised Income Score — premium per $ risk & time"),
+                "Score":st.column_config.Column(help="Composite suitability score (NIS + DTE fit + Δ fit)"),
+                "Timing":st.column_config.Column(help="Mean-reversion timing signal (flag, not a filter)"),
+                "Gates":st.column_config.Column(help="G1 Trend · G2 Session · G3 BB Veto — pass/fail"),
+                "Status":st.column_config.Column(help="Trade/Wait — all three gates must pass"),
+            })
 
         st.subheader("CC Targets")
         cc_sorted=sorted(screener_rows_sorted,key=lambda x:x["cc_score"],reverse=True)
@@ -1889,7 +1802,28 @@ ticker's detail expander below for the full reason breakdown.
                 "NIS":r.get("cc_nis","—"),"Score":r["cc_score"],"Timing":r.get("cc_timing_label","—"),
                 "Gates":icons,"Status":status})
         cc_h=min(38+len(cc_rows)*35+4, 600)
-        st.dataframe(pd.DataFrame(cc_rows),use_container_width=True,hide_index=True,height=cc_h)
+        st.dataframe(pd.DataFrame(cc_rows),use_container_width=True,hide_index=True,height=cc_h,
+            column_config={
+                "Ticker":st.column_config.Column(help="Stock symbol"),
+                "Price":st.column_config.Column(help="Current stock price"),
+                "Expiry":st.column_config.Column(help="Option expiration date"),
+                "DTE":st.column_config.Column(help="Days to Expiry"),
+                "Strike":st.column_config.Column(help="Option strike price"),
+                "Δ":st.column_config.Column(help="Delta — sensitivity per $1 stock move"),
+                "θ/day":st.column_config.Column(help="Theta — premium decay per day"),
+                "Call IV %":st.column_config.Column(help="Implied volatility of this call"),
+                "OI":st.column_config.Column(help="Open interest — contracts outstanding"),
+                "Vol":st.column_config.Column(help="Volume — contracts traded today"),
+                "Spread %":st.column_config.Column(help="Bid-ask spread, % of mid"),
+                "Mid":st.column_config.Column(help="Midpoint of bid/ask"),
+                "POP %":st.column_config.Column(help="Probability of profit (Black-Scholes)"),
+                "Liquidity":st.column_config.Column(help="Liquidity score 0–100 (OI + volume)"),
+                "NIS":st.column_config.Column(help="Normalised Income Score — premium per $ risk & time"),
+                "Score":st.column_config.Column(help="Composite suitability score (NIS + DTE fit + Δ fit)"),
+                "Timing":st.column_config.Column(help="Mean-reversion timing signal (flag, not a filter)"),
+                "Gates":st.column_config.Column(help="G1 Trend · G2 Session · G3 BB Veto — pass/fail"),
+                "Status":st.column_config.Column(help="Trade/Wait — all three gates must pass"),
+            })
 
         st.subheader("LEAP Targets")
         leap_sorted=sorted(screener_rows_sorted,key=lambda x:(x["leap_score"] if x.get("leap_score") is not None else -1),reverse=True)
@@ -1915,7 +1849,30 @@ ticker's detail expander below for the full reason breakdown.
                 "Score":r["leap_score"] if r.get("leap_score") is not None else "—",
                 "Gates":icons,"Status":status})
         leap_h=min(38+len(leap_rows)*35+4, 600)
-        st.dataframe(pd.DataFrame(leap_rows),use_container_width=True,hide_index=True,height=leap_h)
+        st.dataframe(pd.DataFrame(leap_rows),use_container_width=True,hide_index=True,height=leap_h,
+            column_config={
+                "Ticker":st.column_config.Column(help="Stock symbol"),
+                "Price":st.column_config.Column(help="Current stock price"),
+                "Expiry":st.column_config.Column(help="Option expiration date"),
+                "DTE":st.column_config.Column(help="Days to Expiry"),
+                "Strike":st.column_config.Column(help="Option strike price"),
+                "Δ":st.column_config.Column(help="Delta — sensitivity per $1 stock move"),
+                "θ/day":st.column_config.Column(help="Theta — premium decay per day"),
+                "IV %":st.column_config.Column(help="Implied volatility of this option"),
+                "OI":st.column_config.Column(help="Open interest — contracts outstanding"),
+                "Vol":st.column_config.Column(help="Volume — contracts traded today"),
+                "Spread %":st.column_config.Column(help="Bid-ask spread, % of mid"),
+                "Mid":st.column_config.Column(help="Midpoint of bid/ask"),
+                "Intrinsic":st.column_config.Column(help="In-the-money value"),
+                "Extrinsic $":st.column_config.Column(help="Time value paid above intrinsic"),
+                "Extrinsic $/day":st.column_config.Column(help="Time value cost per day"),
+                "POP %":st.column_config.Column(help="Probability of profit (Black-Scholes)"),
+                "Liquidity":st.column_config.Column(help="Liquidity score 0–100 (OI + volume)"),
+                "NIS":st.column_config.Column(help="Normalised Income Score, inverted — lower means cheaper to buy"),
+                "Score":st.column_config.Column(help="Composite suitability score (NIS + DTE fit + Δ fit)"),
+                "Gates":st.column_config.Column(help="G1 Trend · G2 Session · G3 BB Veto — pass/fail"),
+                "Status":st.column_config.Column(help="Trade/Wait — all three gates must pass"),
+            })
         st.caption("LEAP now scores a real ~80Δ contract in the 180–900 DTE window (closest to "
                    "547 DTE) — fixed 24 June, was previously reusing the CSP's ~30Δ/30DTE "
                    "numbers. Shows — if no expiry in that window exists for the ticker.")
@@ -2007,4 +1964,4 @@ ticker's detail expander below for the full reason breakdown.
         <p>Δ30 · 30 DTE · Black-Scholes greeks · Works any time of day</p>
         </div>""",unsafe_allow_html=True)
     else:
-        st.warning("No screener data. Check Chain Inspector and enable diagnostic output.")
+        st.warning("No screener data. Enable diagnostic output and re-run the screener.")
