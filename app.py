@@ -1691,6 +1691,25 @@ ticker's detail expander below for the full reason breakdown.
     if "applied_targets" not in st.session_state:
         st.session_state["applied_targets"]={"csp_d":30,"csp_dte":30,"cc_d":35,"leap_d":80,"leap_dte":547}
 
+    # 26 June — make the confirm button impossible to miss (neon green, big bold text).
+    # button[kind*="FormSubmit"] matches both primaryFormSubmit/secondaryFormSubmit across
+    # Streamlit versions; this is the only st.form in the app so the selector is safe — it
+    # won't touch the separate "Run Screener" button (a plain st.button, different kind).
+    st.markdown("""<style>
+        button[kind*="FormSubmit"] {
+            background-color: #39FF14 !important;
+            color: #000000 !important;
+            font-size: 2rem !important;
+            font-weight: 900 !important;
+            letter-spacing: 0.05em !important;
+            padding: 0.9em 3em !important;
+            border: none !important;
+            border-radius: 8px !important;
+            width: 100% !important;
+        }
+        button[kind*="FormSubmit"]:hover { background-color: #2ee60e !important; }
+        </style>""", unsafe_allow_html=True)
+
     with st.expander("🎯 Strike targeting (manual override)",expanded=False):
         with st.form("target_form"):
             tcol1,tcol2,tcol3=st.columns(3)
@@ -1707,7 +1726,7 @@ ticker's detail expander below for the full reason breakdown.
                        "CSP/LEAP DTE targets are clamped to the 21–45 / 180–900 day windows that "
                        "define what counts as a CSP-ish / LEAP-ish expiry at all. Nothing recalculates "
                        "until you click Apply.")
-            if st.form_submit_button("Apply targets"):
+            if st.form_submit_button("CONFIRM CHOICES"):
                 st.session_state["applied_targets"]={"csp_d":in_delta_csp,"csp_dte":in_dte_csp,
                     "cc_d":in_delta_cc,"leap_d":in_delta_leap,"leap_dte":in_dte_leap}
                 st.success("Targets applied — click Run Screener to use them.")
