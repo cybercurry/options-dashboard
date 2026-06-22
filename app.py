@@ -1009,13 +1009,18 @@ def semicircle_gauge(score, title, rating, source_label=""):
                    f"color:rgba(255,255,255,0.4)'>{source_label}</span>")
 
     fig.update_layout(
+        # 22 June — title y nudged down from 0.99 to 0.90 (and top margin bumped 48→58).
+        # y=0.99/yanchor=top positions the title in *paper* space, which spans the whole
+        # figure including margins — so it sat almost flush against the absolute top edge
+        # of the chart, overlapping the st.divider() line rendered just above it in
+        # Streamlit. This pulls it down enough to clear that line.
         title=dict(text=t_html, font=dict(size=13, color="white"),
-                   x=0.5, xanchor="center", y=0.99, yanchor="top"),
+                   x=0.5, xanchor="center", y=0.90, yanchor="top"),
         height=330,
         # y range extended at bottom so score + rating both fit without clipping
         xaxis=dict(visible=False, range=[-1.45, 1.45]),
         yaxis=dict(visible=False, range=[-0.70, 1.28]),
-        margin=dict(l=5, r=5, t=48, b=10),
+        margin=dict(l=5, r=5, t=58, b=10),
         paper_bgcolor="rgba(0,0,0,0)",
         plot_bgcolor="rgba(0,0,0,0)",
         showlegend=False,
