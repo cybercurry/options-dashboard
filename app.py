@@ -1301,6 +1301,15 @@ st.markdown('<div class="jay-nav-tt-row">'+"".join(
     for label, text in _TAB_LEGEND
 )+'</div>', unsafe_allow_html=True)
 
+# 26 June — reusable inline hover-tooltip helper, module scope so every tab below can wrap a
+# bare jargon term (SKEW, DXY, Contango, etc.) in markdown text without re-injecting CSS — the
+# .jay-nav-tt/.jay-nav-tt-text classes are already on the page from the tab-legend strip above.
+# Use inside any st.markdown(..., unsafe_allow_html=True) call. For st.metric labels (which
+# can't render HTML), pass help= instead — that's a real Streamlit tooltip, confirmed working
+# on the deployed app since requirements.txt now pins streamlit>=1.37.
+def _tt(label, text):
+    return f'<span class="jay-nav-tt">{label}<span class="jay-nav-tt-text">{text}</span></span>'
+
 results={}
 with st.spinner("Loading market data..."):
     for t in watchlist:
@@ -1316,17 +1325,24 @@ with tab_dash:
 
     pulse_data={ticker:fetch_quote(ticker) for ticker,*_ in PULSE_TICKERS}
 
+    # 26 June — st.metric labels can't render HTML, so jargon-y ones get a real tooltip via
+    # help= instead of the inline _tt() span used in markdown text below.
+    _PULSE_HELP={"DXY":"US Dollar Index — dollar's value vs a basket of major currencies",
+                 "R2000":"Russell 2000 — small-cap stock index",
+                 "10Y Yield":"10-Year Treasury yield",
+                 "3M Yield":"3-Month Treasury yield"}
     def render_pulse_col(col,ticker,label,prefix,is_yield):
         q=pulse_data.get(ticker)
+        help_txt=_PULSE_HELP.get(label)
         if q:
             p=q["price"]; pct=q["pct"]
             if is_yield:    disp=f"{p:.2f}%"
             elif p>10000:   disp=f"${p:,.0f}"
             elif p>100:     disp=f"{prefix}{p:,.2f}"
             else:           disp=f"{prefix}{p:.2f}"
-            col.metric(label,disp,f"{pct:+.2f}%")
+            col.metric(label,disp,f"{pct:+.2f}%",help=help_txt)
         else:
-            col.metric(label,"—","—")
+            col.metric(label,"—","—",help=help_txt)
 
     cols1=st.columns(5)
     for col,(tk,lb,px,iy) in zip(cols1,PULSE_TICKERS[:5]):
@@ -1374,20 +1390,33 @@ with tab_dash:
     with gcol4:
         st.markdown("**📊 Macro Signals**")
         tnx_q=pulse_data.get("^TNX"); irx_q=pulse_data.get("^IRX")
+        _yc_tt=_tt("Yield Curve (10Y−3M)","10-year minus 3-month Treasury yield. Inverted "
+                   "(negative) has historically preceded recessions — short-term debt yielding "
+                   "more than long-term is the bond market pricing in future rate cuts.")
         if tnx_q and irx_q:
             spread=tnx_q["price"]-irx_q["price"]
             curve=("🟢 Normal" if spread>0.5 else "🟡 Flat" if spread>-0.3 else "🔴 Inverted")
-            st.markdown(f"**Yield Curve (10Y−3M):** {spread:+.2f}%  {curve}")
+            st.markdown(f"**{_yc_tt}:** {spread:+.2f}%  {curve}",unsafe_allow_html=True)
         else:
-            st.markdown("**Yield Curve:** —")
+            st.markdown(f"**{_yc_tt}:** —",unsafe_allow_html=True)
+        _skew_tt=_tt("SKEW","CBOE SKEW Index — prices the odds of a rare, sharp market drop "
+                     "(tail risk) beyond what a normal distribution implies. Higher = more "
+                     "tail-risk hedging demand priced into options.")
         if skew_val is not None:
             sk=("🔴 Elevated tail risk" if skew_val>145 else "🟡 Moderate" if skew_val>130 else "🟢 Low tail risk")
-            st.markdown(f"**SKEW:** {skew_val:.1f}  {sk}")
+            st.markdown(f"**{_skew_tt}:** {skew_val:.1f}  {sk}",unsafe_allow_html=True)
         else:
-            st.markdown("**SKEW:** —")
+            st.markdown(f"**{_skew_tt}:** —",unsafe_allow_html=True)
         if len(term_data)>=2:
             vals=list(term_data.values())
-            st.markdown(f"**VIX Shape:** {'🟢 Contango' if vals[-1]>vals[0] else '🔴 Backwardation (stress)'}")
+            if vals[-1]>vals[0]:
+                shape="🟢 "+_tt("Contango","Longer-dated VIX futures pricier than near-term — "
+                                "normal, calm-market shape")
+            else:
+                shape="🔴 "+_tt("Backwardation (stress)","Near-term VIX futures pricier than "
+                                "longer-dated — the market is pricing immediate stress higher "
+                                "than the future")
+            st.markdown(f"**VIX Shape:** {shape}",unsafe_allow_html=True)
         if stock_fg_score is not None:
             color = fg_color(stock_fg_score)
             st.markdown(f"**Stocks F&G:** <span style='color:{color}'>{stock_fg_score:.0f} — {stock_fg_rating}</span>",
@@ -1503,11 +1532,21 @@ with tab_dive:
         r=results[sel]; df=r["df"]; cl=r["cl"]
         c1,c2,c3,c4,c5,c6=st.columns(6)
         c1.metric("Price",f"${r['price']:.2f}",f"{r['pct']:+.1f}%")
-        c2.metric("HV Rank",fmt(r["hvr"],".0f"))
-        c3.metric("HV Pctile",fmt(r["hvpct"],".0f","%"))
-        c4.metric("RSI (14)",fmt(r["rsi"],".1f"))
-        c5.metric("ATM Call IV",fmt(r["c_iv"],".1f","%"))
-        c6.metric("PCR",fmt(r["pcr"],".2f"))
+        c2.metric("HV Rank",fmt(r["hvr"],".0f"),
+                   help="Historical (realized) volatility rank 0–100 vs its own 1-year range — "
+                        "low = cheap premium (good for buying LEAPs), high = rich premium (good "
+                        "for selling CSP/CC)")
+        c3.metric("HV Pctile",fmt(r["hvpct"],".0f","%"),
+                   help="Historical volatility percentile vs its own 1-year range")
+        c4.metric("RSI (14)",fmt(r["rsi"],".1f"),
+                   help="Relative Strength Index (14-day) — momentum gauge; <30 oversold, "
+                        ">70 overbought")
+        c5.metric("ATM Call IV",fmt(r["c_iv"],".1f","%"),
+                   help="At-the-money implied volatility on this call — what the market is "
+                        "pricing for forward-looking volatility")
+        c6.metric("PCR",fmt(r["pcr"],".2f"),
+                   help="Put/Call Ratio — volume of puts traded vs calls; elevated readings "
+                        "skew bearish")
         sc1,sc2,sc3=st.columns(3)
         for col,key,lbl in [(sc1,"leap","LEAP"),(sc2,"cc","CC"),(sc3,"csp","CSP")]:
             with col:
@@ -1656,6 +1695,21 @@ with tab_chain:
                         return(df_raw[available]
                                .rename(columns={"lastPrice":"Last","openInterest":"OI","strike":"Strike","volume":"Volume"})
                                .sort_values("Strike").reset_index(drop=True))
+                    # 26 June — st.dataframe's header is a canvas-rendered grid (glide-data-
+                    # grid), same constraint noted for the Screener tables, so a real in-header
+                    # hover isn't reachable here without rebuilding this as an HTML table too.
+                    # Cheaper fix: a small hover-legend strip above each table using the
+                    # confirmed-working st.caption(help=...) mechanism.
+                    _CHAIN_LEGEND=[("Moneyness","ATM = at-the-money (within 2% of spot) · "
+                                     "ITM = in-the-money · OTM = out-of-the-money"),
+                                    ("Last","Last traded price"),
+                                    ("OI","Open interest — contracts outstanding"),
+                                    ("Volume","Contracts traded today"),
+                                    ("IV %","Implied volatility for this strike"),
+                                    ("delta","Delta — sensitivity per $1 stock move")]
+                    _lcols=st.columns(len(_CHAIN_LEGEND))
+                    for _lc,(_ll,_lt) in zip(_lcols,_CHAIN_LEGEND):
+                        _lc.caption(_ll,help=_lt)
                     col_c,col_p=st.columns(2)
                     with col_c:
                         st.subheader("Calls"); st.dataframe(fmt_chain(chain.calls,"call"),use_container_width=True,hide_index=True)
@@ -1728,10 +1782,12 @@ with tab_vix:
     if vix_df is not None and not vix_df.empty:
         vix_cl=vix_df["Close"].squeeze()
         c1,c2,c3,c4=st.columns(4)
-        c1.metric("Current VIX",f"{vix_now:.1f}",f"{vix_chg:+.2f}")
-        c2.metric("52wk High",f"{vix_cl.max():.1f}")
-        c3.metric("52wk Low",f"{vix_cl.min():.1f}")
-        c4.metric("52wk Avg",f"{vix_cl.mean():.1f}")
+        c1.metric("Current VIX",f"{vix_now:.1f}",f"{vix_chg:+.2f}",
+                   help="CBOE Volatility Index — implied volatility priced off S&P 500 options "
+                        "for the next 30 days (see caption above)")
+        c2.metric("52wk High",f"{vix_cl.max():.1f}",help="Highest VIX close in the last year")
+        c3.metric("52wk Low",f"{vix_cl.min():.1f}",help="Lowest VIX close in the last year")
+        c4.metric("52wk Avg",f"{vix_cl.mean():.1f}",help="Average VIX close over the last year")
         fig_vix=make_subplots(rows=2,cols=1,shared_xaxes=True,row_heights=[0.7,0.3],
             subplot_titles=["VIX Level","30-day Rolling Avg"])
         fig_vix.add_trace(go.Scatter(x=vix_df.index,y=vix_cl,name="VIX",fill="tozeroy",
@@ -1765,7 +1821,7 @@ with tab_vix:
             if df_v is not None and not df_v.empty:
                 cl_v=df_v["Close"].squeeze()
                 now_v=float(cl_v.iloc[-1]); prev_v=float(cl_v.iloc[-2]) if len(cl_v)>1 else now_v
-                st.metric(label,f"{now_v:.1f}",f"{now_v-prev_v:+.2f}")
+                st.metric(label,f"{now_v:.1f}",f"{now_v-prev_v:+.2f}",help=full_name)
                 band_lines="\n".join(f"| {b[0]} | {b[1]} |" for b in bands)
                 st.markdown(f"*{full_name}*\n\n| Level | Regime |\n|---|---|\n{band_lines}")
                 st.caption(note)
