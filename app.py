@@ -1693,28 +1693,60 @@ with tab_chain:
                         cols=["strike","Moneyness","lastPrice","bid","ask","volume","openInterest","IV %","delta"]
                         available=[c for c in cols if c in df_raw.columns]
                         return(df_raw[available]
-                               .rename(columns={"lastPrice":"Last","openInterest":"OI","strike":"Strike","volume":"Volume"})
+                               .rename(columns={"lastPrice":"Last","openInterest":"OI","strike":"Strike",
+                                                 "volume":"Volume","bid":"Bid","ask":"Ask","delta":"Δ"})
                                .sort_values("Strike").reset_index(drop=True))
-                    # 26 June — st.dataframe's header is a canvas-rendered grid (glide-data-
-                    # grid), same constraint noted for the Screener tables, so a real in-header
-                    # hover isn't reachable here without rebuilding this as an HTML table too.
-                    # Cheaper fix: a small hover-legend strip above each table using the
-                    # confirmed-working st.caption(help=...) mechanism.
-                    _CHAIN_LEGEND=[("Moneyness","ATM = at-the-money (within 2% of spot) · "
+                    # 26 June (step 2) — converted from st.dataframe + a caption-strip legend
+                    # above it to the same in-header hover-tooltip _html_table used by Watchlist
+                    # Overview and the Screener's CSP/CC/LEAP tables (Jay: label every table the
+                    # same way). st.dataframe's header is a canvas-rendered grid and can't carry
+                    # a real tooltip (see _html_table's docstring comment above) — this renders
+                    # the chain as the shared HTML table instead, same sort/fullscreen-for-hover
+                    # tradeoff already made everywhere else.
+                    _CHAIN_LEGEND=[("Strike","Option strike price"),
+                                    ("Moneyness","ATM = at-the-money (within 2% of spot) · "
                                      "ITM = in-the-money · OTM = out-of-the-money"),
                                     ("Last","Last traded price"),
-                                    ("OI","Open interest — contracts outstanding"),
+                                    ("Bid","Current bid price"),
+                                    ("Ask","Current ask price"),
                                     ("Volume","Contracts traded today"),
+                                    ("OI","Open interest — contracts outstanding"),
                                     ("IV %","Implied volatility for this strike"),
-                                    ("delta","Delta — sensitivity per $1 stock move")]
-                    _lcols=st.columns(len(_CHAIN_LEGEND))
-                    for _lc,(_ll,_lt) in zip(_lcols,_CHAIN_LEGEND):
-                        _lc.caption(_ll,help=_lt)
+                                    ("Δ","Delta — sensitivity per $1 stock move")]
+                    def _chain_html_rows(df_fmt):
+                        cols=[l for l,_ in _CHAIN_LEGEND]
+                        rows=[]
+                        for _,row in df_fmt.iterrows():
+                            d={}
+                            for c in cols:
+                                if c not in df_fmt.columns:
+                                    d[c]="—"; continue
+                                v=row[c]
+                                if pd.isna(v):
+                                    d[c]="—"
+                                elif c in ("Strike","Last","Bid","Ask"):
+                                    d[c]=f"${v:.2f}"
+                                elif c=="IV %":
+                                    d[c]=f"{v:.1f}%"
+                                elif c=="Δ":
+                                    d[c]=f"{v:.3f}"
+                                elif c in ("Volume","OI"):
+                                    d[c]=f"{int(v):,}"
+                                else:
+                                    d[c]=v
+                            rows.append(d)
+                        return rows
                     col_c,col_p=st.columns(2)
                     with col_c:
-                        st.subheader("Calls"); st.dataframe(fmt_chain(chain.calls,"call"),use_container_width=True,hide_index=True)
+                        st.subheader("Calls")
+                        calls_fmt=fmt_chain(chain.calls,"call")
+                        calls_h=min(38+len(calls_fmt)*35+12,520)
+                        _html_table(_chain_html_rows(calls_fmt),_CHAIN_LEGEND,calls_h)
                     with col_p:
-                        st.subheader("Puts");  st.dataframe(fmt_chain(chain.puts,"put"),use_container_width=True,hide_index=True)
+                        st.subheader("Puts")
+                        puts_fmt=fmt_chain(chain.puts,"put")
+                        puts_h=min(38+len(puts_fmt)*35+12,520)
+                        _html_table(_chain_html_rows(puts_fmt),_CHAIN_LEGEND,puts_h)
                     st.subheader("IV Smile")
                     fig_smile=go.Figure()
                     fig_smile.add_trace(go.Scatter(x=chain.calls["strike"],y=chain.calls["impliedVolatility"]*100,
