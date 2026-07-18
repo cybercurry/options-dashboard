@@ -1181,8 +1181,9 @@ def _html_table(rows, legend, height):
     .jay-tbl{{border-collapse:collapse;width:100%;font-size:0.85rem;color:#e6edf3;}}
     .jay-tbl th{{position:sticky;top:0;background:#161b22;text-align:left;
         padding:8px 10px;border-bottom:1px solid #30363d;white-space:nowrap;z-index:2;}}
-    .jay-tbl td{{padding:6px 10px;border-bottom:1px solid #21262d;white-space:nowrap;}}
-    .jay-tbl tbody tr:nth-child(even) td{{background:#11151c;}}
+    .jay-tbl td{{padding:6px 10px;border-bottom:1px solid #21262d;white-space:nowrap;background:#0d1117;}}
+    .jay-tbl tbody tr:nth-child(odd) td{{background:#0d1117;}}
+    .jay-tbl tbody tr:nth-child(even) td{{background:#1b222c;}}
     .jay-th-tt{{position:relative;display:inline-block;cursor:help;
         border-bottom:1px dotted #6b7280;}}
     .jay-th-tt .jay-tt-text{{
