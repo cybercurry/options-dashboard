@@ -665,6 +665,9 @@ def get_screener_row(ticker, result, bb_veto_mode="Hard", soft_penalty=10,
     # reused here rather than recomputed. Flag/score, not a filter (revised §10.4.1).
     cc_lbl,cc_tsc,cc_treasons = result.get("cc", ("—",0,[]))
     csp_lbl,csp_tsc,csp_treasons = result.get("csp", ("—",0,[]))
+    # LEAP entry signal (leap_signal — HV-rank/RSI/MA) surfaced so the LEAP view stands on
+    # its own criteria like CSP/CC's mean-reversion timing does (added for CSP/CC/LEAP parity).
+    leap_lbl2,leap_tsc,leap_treasons = result.get("leap", ("—",0,[]))
 
     return {"ticker":ticker,"price":price,"expiry":exp_csp,"dte":dte_csp,
             "csp_strike":csp["strike"],"csp_delta":csp["delta"],"csp_theta":csp["theta"],
@@ -697,7 +700,8 @@ def get_screener_row(ticker, result, bb_veto_mode="Hard", soft_penalty=10,
             "greek_source":csp.get("greek_source","unknown"),
             "_inspected":csp.get("_inspected"),"_scored":csp.get("_scored"),
             "cc_timing_label":cc_lbl,"cc_timing_score":cc_tsc,"cc_timing_reasons":cc_treasons,
-            "csp_timing_label":csp_lbl,"csp_timing_score":csp_tsc,"csp_timing_reasons":csp_treasons}
+            "csp_timing_label":csp_lbl,"csp_timing_score":csp_tsc,"csp_timing_reasons":csp_treasons,
+            "leap_timing_label":leap_lbl2,"leap_timing_score":leap_tsc,"leap_timing_reasons":leap_treasons}
 
 # ── Signal engines ─────────────────────────────────────────────────────────────
 def leap_signal(hvr,rsi_val,above_50ma,above_200ma):
@@ -2157,6 +2161,10 @@ with tab_screener:
             ("Extrinsic $","Time value paid above intrinsic"),
             ("Extrinsic $/day","Time value cost per day"),
         ]
+        # Give LEAP its own entry-signal column (leap_signal) so it stands on its own
+        # criteria the way CSP/CC carry the mean-reversion Timing column.
+        _leap_gates_i2 = next(i for i,(l,_) in enumerate(_LEAP_LEGEND) if l=="Gates")
+        _LEAP_LEGEND.insert(_leap_gates_i2, ("Timing","LEAP entry signal — HV-rank / RSI / MA based"))
 
         # 26 June — unified column set/order across CSP/CC/LEAP (Jay's request): Greeks column
         # dropped (superfluous — greek source is already surfaced via the low-precision
@@ -2164,155 +2172,164 @@ with tab_screener:
         # CSP as clutter, and CC/LEAP now mirror CSP's column set/order as closely as possible.
         # LEAP has no mean-reversion Timing signal (only computed for CSP/CC), so that column
         # is the one unavoidable omission there.
-        st.subheader("CSP Targets")
-        csp_rows=[]
-        for r in screener_rows_sorted:
-            icons,status=_gate_cols(r,"csp")
-            csp_rows.append({"Ticker":r["ticker"],"Price":f"${r['price']:.2f}",
-                "Expiry":r["expiry"],"DTE":r["dte"],
-                "Strike":f"${r['csp_strike']:.1f}","Δ":r["csp_delta"],"θ/day":f"${r['csp_theta']:.3f}",
-                "Put IV %":r["csp_iv"] if r["csp_iv"] else "—",
-                "OI":r["csp_oi"],"Vol":r.get("csp_volume","—"),
-                "Spread %":r["csp_spread"] if r["csp_spread"] else "—",
-                "Mid":r.get("csp_mid","—"),
-                "POP %":r["csp_pop"] if r.get("csp_pop") is not None else "—",
-                "Liquidity":r.get("csp_liquidity","—"),
-                "NIS":r["nis"],"Score":r["csp_score"],"Timing":r.get("csp_timing_label","—"),
-                "Gates":icons,"Status":status})
-        csp_h=38+len(csp_rows)*35+12  # no cap — full table height, no internal scrollbar
-        _html_table(csp_rows, _CSP_LEGEND, csp_h)
-
-        st.subheader("CC Targets")
-        cc_sorted=sorted(screener_rows_sorted,key=lambda x:x["cc_score"],reverse=True)
-        cc_rows=[]
-        for r in cc_sorted:
-            icons,status=_gate_cols(r,"cc")
-            has_cc=r.get("cc_strike") is not None
-            cc_rows.append({"Ticker":r["ticker"],"Price":f"${r['price']:.2f}",
-                "Expiry":r["expiry"],"DTE":r["dte"],
-                "Strike":f"${r['cc_strike']:.1f}" if has_cc else "—","Δ":r.get("cc_delta","—"),
-                "θ/day":f"${r['cc_theta']:.3f}" if r.get("cc_theta") is not None else "—",
-                "Call IV %":r["cc_iv"] if r.get("cc_iv") else "—",
-                "OI":r.get("cc_oi","—"),"Vol":r.get("cc_volume","—"),
-                "Spread %":r["cc_spread"] if r.get("cc_spread") else "—",
-                "Mid":r.get("cc_mid","—"),
-                "POP %":r["cc_pop"] if r.get("cc_pop") is not None else "—",
-                "Liquidity":r.get("cc_liquidity","—"),
-                "NIS":r.get("cc_nis","—"),"Score":r["cc_score"],"Timing":r.get("cc_timing_label","—"),
-                "Gates":icons,"Status":status})
-        cc_h=38+len(cc_rows)*35+12  # no cap — full table height, no internal scrollbar
-        _html_table(cc_rows, _CC_LEGEND, cc_h)
-
-        st.subheader("LEAP Targets")
-        leap_sorted=sorted(screener_rows_sorted,key=lambda x:(x["leap_score"] if x.get("leap_score") is not None else -1),reverse=True)
-        leap_rows=[]
-        for r in leap_sorted:
-            icons,status=_gate_cols(r,"leap")
-            has_leap=r.get("leap_strike") is not None
-            leap_rows.append({"Ticker":r["ticker"],"Price":f"${r['price']:.2f}",
-                "Expiry":r.get("leap_expiry","—") if has_leap else "—",
-                "DTE":r.get("leap_dte","—") if has_leap else "—",
-                "Strike":f"${r['leap_strike']:.1f}" if has_leap else "—","Δ":r.get("leap_delta","—"),
-                "θ/day":f"${r['leap_theta']:.3f}" if r.get("leap_theta") is not None else "—",
-                "IV %":r["leap_iv"] if r.get("leap_iv") else "—",
-                "OI":r.get("leap_oi","—"),"Vol":r.get("leap_volume","—"),
-                "Spread %":r["leap_spread"] if r.get("leap_spread") else "—",
-                "Mid":r.get("leap_mid","—"),
-                "Intrinsic":f"${r['leap_intrinsic']:.2f}" if r.get("leap_intrinsic") is not None else "—",
-                "Extrinsic $":f"${r['leap_extrinsic']:.2f}" if r.get("leap_extrinsic") is not None else "—",
-                "Extrinsic $/day":f"${r['leap_extrinsic_per_day']:.3f}" if r.get("leap_extrinsic_per_day") is not None else "—",
-                "POP %":r["leap_pop"] if r.get("leap_pop") is not None else "—",
-                "Liquidity":r.get("leap_liquidity","—"),
-                "NIS":r.get("leap_nis","—"),
-                "Score":r["leap_score"] if r.get("leap_score") is not None else "—",
-                "Gates":icons,"Status":status})
-        leap_h=38+len(leap_rows)*35+12  # no cap — full table height, no internal scrollbar
-        _html_table(leap_rows, _LEAP_LEGEND, leap_h)
-        st.caption("LEAP now scores a real ~80Δ contract in the 180–900 DTE window (closest to "
-                   "542 DTE) — fixed 24 June, was previously reusing the CSP's ~30Δ/30DTE "
-                   "numbers. Shows — if no expiry in that window exists for the ticker.")
-
-        tickers=[r["ticker"] for r in screener_rows_sorted]
-        csp_scores=[r["csp_score"] for r in screener_rows_sorted]
-
-        st.subheader("CSP Suitability Ranking")
-        fig_sc=go.Figure(go.Bar(x=tickers,y=csp_scores,marker_color=[score_color(s) for s in csp_scores],
-            text=[f"{s:.0f}" for s in csp_scores],textposition="outside"))
-        for lvl,col,lbl in [(80,"#22c55e","80—Optimal"),(60,"#eab308","60—Acceptable"),(40,"#f97316","40—Marginal")]:
-            fig_sc.add_hline(y=lvl,line_dash="dash",line_color=col,annotation_text=lbl)
-        fig_sc.update_layout(height=340,template="plotly_dark",yaxis_title="CSP Score",
+        # ── Per-strategy helpers (ranking chart + gate drill-down), reused across the
+        #    CSP / CC / LEAP sub-tabs so each strategy gets the identical full treatment ──
+        def _ranking_chart(rows, score_key, ytitle, chart_key):
+            rr=sorted(rows,key=lambda x:(x.get(score_key) if x.get(score_key) is not None else -1),reverse=True)
+            tk=[r["ticker"] for r in rr]
+            sc=[(r.get(score_key) if r.get(score_key) is not None else 0) for r in rr]
+            fig=go.Figure(go.Bar(x=tk,y=sc,marker_color=[score_color(s) for s in sc],
+                text=[f"{s:.0f}" for s in sc],textposition="outside"))
+            for lvl,col,lbl in [(80,"#22c55e","80—Optimal"),(60,"#eab308","60—Acceptable"),(40,"#f97316","40—Marginal")]:
+                fig.add_hline(y=lvl,line_dash="dash",line_color=col,annotation_text=lbl)
+            fig.update_layout(height=320,template="plotly_dark",yaxis_title=ytitle,
                               yaxis_range=[0,115],margin=dict(l=0,r=0,t=20,b=0))
-        st.plotly_chart(fig_sc,use_container_width=True)
+            st.plotly_chart(fig,use_container_width=True,key=chart_key)
 
+        def _gate_detail_panel(rows, leg):
+            sk=f"{leg}_score"
+            rr=sorted(rows,key=lambda x:(x.get(sk) if isinstance(x.get(sk),(int,float)) else -1),reverse=True)
+            for r in rr:
+                gr=r[f"gate_result_{leg}"]; gates=gr["gates"]; icon="🟢" if gr["all_pass"] else "🔴"
+                strike=r.get(f"{leg}_strike"); score=r.get(sk); delta=r.get(f"{leg}_delta")
+                head=f"{icon} {r['ticker']}"
+                if isinstance(score,(int,float)): head+=f"   {leg.upper()}:{score}"
+                if strike is not None: head+=f"   Strike ${strike:.1f}"
+                if delta not in (None,"—"): head+=f"   Δ{delta}"
+                with st.expander(head):
+                    gcols=st.columns(len(gates))
+                    for idx,(gk,gv) in enumerate(gates.items()):
+                        gcols[idx].markdown(f"**{gv['label']}** {'✅' if gv['pass'] else '❌'}")
+                        gcols[idx].caption(gv["reason"])
+                    st.divider()
+                    theta=r.get(f"{leg}_theta"); iv=r.get(f"{leg}_iv"); mid=r.get(f"{leg}_mid")
+                    oi=r.get(f"{leg}_oi"); vol=r.get(f"{leg}_volume"); liq=r.get(f"{leg}_liquidity")
+                    pop=r.get(f"{leg}_pop"); ann=r.get(f"{leg}_ann_return")
+                    L=[]
+                    if strike is not None: L.append(f"- Strike: **${strike:.1f}**  ·  Δ **{delta}**")
+                    if theta is not None: L.append(f"- Theta: **${theta:.3f}/day**  ·  IV **{iv or '—'}%**")
+                    if mid is not None: L.append(f"- Mid premium: **${mid}**")
+                    L.append(f"- OI **{oi if oi is not None else '—'}** · Vol **{vol if vol is not None else '—'}** · Liquidity **{liq if liq is not None else '—'}**")
+                    if ann is not None: L.append(f"- Annualized return: **{ann:.1f}%**")
+                    if pop is not None: L.append(f"- POP: **{pop:.1f}%**")
+                    if leg=="csp":
+                        be=r.get("csp_breakeven"); bep=r.get("csp_breakeven_pct")
+                        if be is not None:
+                            L.append(f"- Breakeven: **${be}**"+(f"  ({bep:.1f}% below spot)" if bep is not None else ""))
+                    if leg=="leap":
+                        exp=r.get("leap_expiry"); dte=r.get("leap_dte")
+                        intr=r.get("leap_intrinsic"); ext=r.get("leap_extrinsic"); extd=r.get("leap_extrinsic_per_day")
+                        if exp: L.append(f"- Expiry: **{exp}** ({dte} DTE)")
+                        if intr is not None: L.append(f"- Intrinsic: **${intr}** · Extrinsic: **${ext}** · Avg hold: **${extd}/day**")
+                    st.markdown("\n".join(L) if L else "_No contract in the target window._")
+                    tl=r.get(f"{leg}_timing_label","—"); ts=r.get(f"{leg}_timing_score",0)
+                    st.markdown(f"**{leg.upper()} Signal — {tl}** (score {ts})")
+                    for reason in r.get(f"{leg}_timing_reasons",[]): st.caption(reason)
+
+        # Shared overview across all three strategies (above the sub-tabs)
+        _tickers=[r["ticker"] for r in screener_rows_sorted]
         st.subheader("Strategy Score Comparison")
         fig_cmp=go.Figure()
-        fig_cmp.add_trace(go.Bar(name="CSP",   x=tickers,y=[r["csp_score"]  for r in screener_rows_sorted],marker_color="#22c55e",opacity=0.85))
-        fig_cmp.add_trace(go.Bar(name="CC",    x=tickers,y=[r["cc_score"]   for r in screener_rows_sorted],marker_color="#60a5fa",opacity=0.85))
-        fig_cmp.add_trace(go.Bar(name="LEAP*", x=tickers,y=[r["leap_score"] for r in screener_rows_sorted],marker_color="#a78bfa",opacity=0.85))
-        fig_cmp.update_layout(barmode="group",height=340,template="plotly_dark",
+        fig_cmp.add_trace(go.Bar(name="CSP",   x=_tickers,y=[r["csp_score"]  for r in screener_rows_sorted],marker_color="#22c55e",opacity=0.85))
+        fig_cmp.add_trace(go.Bar(name="CC",    x=_tickers,y=[r["cc_score"]   for r in screener_rows_sorted],marker_color="#60a5fa",opacity=0.85))
+        fig_cmp.add_trace(go.Bar(name="LEAP*", x=_tickers,y=[(r["leap_score"] if r.get("leap_score") is not None else 0) for r in screener_rows_sorted],marker_color="#a78bfa",opacity=0.85))
+        fig_cmp.update_layout(barmode="group",height=300,template="plotly_dark",
                                yaxis_title="Score",yaxis_range=[0,115],
                                legend=dict(orientation="h",y=1.05,x=0),margin=dict(l=0,r=0,t=20,b=0))
-        st.plotly_chart(fig_cmp,use_container_width=True)
+        st.plotly_chart(fig_cmp,use_container_width=True,key="cmp_chart")
 
-        st.subheader("Four-Gate Filter Detail (CSP)")
-        st.caption(f"G1=Trend  G2=Session  G3=BB Veto (mode: {bb_veto_mode}"
-                   + (f", −{soft_penalty} pts" if bb_veto_mode=="Soft" else "")
-                   + ")  G4=Median (CSP fails above median)")
-        for r in screener_rows_sorted:
-            gr=r["gate_result_csp"]; gates=gr["gates"]; icon="🟢" if gr["all_pass"] else "🔴"
-            with st.expander(f"{icon} {r['ticker']}  CSP:{r['csp_score']}  Strike${r['csp_strike']:.1f}  Δ{r['csp_delta']}  θ${r['csp_theta']:.3f}/d"):
-                gcols=st.columns(len(gates))
-                for idx,(gk,gv) in enumerate(gates.items()):
-                    gcols[idx].markdown(f"**{gv['label']}** {'✅' if gv['pass'] else '❌'}")
-                    gcols[idx].caption(gv["reason"])
-                st.divider()
-                rc1,rc2=st.columns(2)
-                csp_ar = r.get('csp_ann_return'); csp_pop = r.get('csp_pop'); csp_liq = r.get('csp_liquidity')
-                rc1.markdown(f"""
-**CSP Strike**
-- Strike: **${r['csp_strike']:.1f}**
-- Delta: **{r['csp_delta']}** ({greek_source_label(r.get('greek_source'))})
-- Theta: **${r['csp_theta']:.3f}/day**
-- IV: **{r['csp_iv'] or '—'}%**
-- OI: **{r['csp_oi']}** · Volume: **{r.get('csp_volume','—')}** · Liquidity: **{csp_liq if csp_liq is not None else '—'}**
-- Spread: **{r['csp_spread']}%** {'✅' if r['csp_spread'] and r['csp_spread']<20 else '⚠️ Wide' if r['csp_spread'] else '—'}
-- Mid premium: **${r.get('csp_mid','—')}**
-- Annualized return: **{f'{csp_ar:.1f}%' if csp_ar is not None else '—'}**
-- Breakeven: **${r.get('csp_breakeven','—')}** ({f"{r.get('csp_breakeven_pct'):.1f}% below spot" if r.get('csp_breakeven_pct') is not None else '—'})
-- POP (N(d2)): **{f'{csp_pop:.1f}%' if csp_pop is not None else '—'}**
+        # ── Dedicated sub-tab per strategy — each self-contained: table + ranking + gate detail ──
+        t_csp,t_cc,t_leap=st.tabs(["📉 CSP","📈 CC","🚀 LEAP"])
 
-**CSP Timing — {r.get('csp_timing_label','—')}** (score {r.get('csp_timing_score',0)})
-                """)
-                for reason in r.get("csp_timing_reasons",[]): rc1.caption(reason)
-                if r["cc_strike"]:
-                    cc_ar = r.get('cc_ann_return'); cc_pop = r.get('cc_pop'); cc_liq = r.get('cc_liquidity')
-                    rc2.markdown(f"""
-**CC Strike**
-- Strike: **${r['cc_strike']:.1f}**
-- Delta: **{r['cc_delta']}**
-- CC Score: **{r['cc_score']}**
-- OI / Volume / Liquidity: **{r.get('cc_oi','—') if r.get('cc_oi') is not None else '—'} / {r.get('cc_volume','—')} / {cc_liq if cc_liq is not None else '—'}**
-- Mid premium: **${r.get('cc_mid','—')}**
-- Annualized return: **{f'{cc_ar:.1f}%' if cc_ar is not None else '—'}**
-- POP (N(-d2), call expires OTM): **{f'{cc_pop:.1f}%' if cc_pop is not None else '—'}**
+        with t_csp:
+            st.subheader("CSP Targets")
+            csp_rows=[]
+            for r in screener_rows_sorted:
+                icons,status=_gate_cols(r,"csp")
+                csp_rows.append({"Ticker":r["ticker"],"Price":f"${r['price']:.2f}",
+                    "Expiry":r["expiry"],"DTE":r["dte"],
+                    "Strike":f"${r['csp_strike']:.1f}","Δ":r["csp_delta"],"θ/day":f"${r['csp_theta']:.3f}",
+                    "Put IV %":r["csp_iv"] if r["csp_iv"] else "—",
+                    "OI":r["csp_oi"],"Vol":r.get("csp_volume","—"),
+                    "Spread %":r["csp_spread"] if r["csp_spread"] else "—",
+                    "Mid":r.get("csp_mid","—"),
+                    "POP %":r["csp_pop"] if r.get("csp_pop") is not None else "—",
+                    "Liquidity":r.get("csp_liquidity","—"),
+                    "NIS":r["nis"],"Score":r["csp_score"],"Timing":r.get("csp_timing_label","—"),
+                    "Gates":icons,"Status":status})
+            _html_table(csp_rows, _CSP_LEGEND, 38+len(csp_rows)*35+12)
+            st.subheader("CSP Suitability Ranking")
+            _ranking_chart(screener_rows_sorted,"csp_score","CSP Score","rank_csp")
+            st.subheader("Four-Gate Detail — CSP")
+            st.caption(f"G1 Trend · G2 Session · G3 BB Veto (mode: {bb_veto_mode}"
+                       + (f", −{soft_penalty} pts" if bb_veto_mode=="Soft" else "")
+                       + ") · G4 Median — CSP fails ABOVE median (catch the bounce early)")
+            _gate_detail_panel(screener_rows_sorted,"csp")
 
-**CC Timing — {r.get('cc_timing_label','—')}** (score {r.get('cc_timing_score',0)})
-                    """)
-                    for reason in r.get("cc_timing_reasons",[]): rc2.caption(reason)
+        with t_cc:
+            st.subheader("CC Targets")
+            cc_sorted=sorted(screener_rows_sorted,key=lambda x:x["cc_score"],reverse=True)
+            cc_rows=[]
+            for r in cc_sorted:
+                icons,status=_gate_cols(r,"cc")
+                has_cc=r.get("cc_strike") is not None
+                cc_rows.append({"Ticker":r["ticker"],"Price":f"${r['price']:.2f}",
+                    "Expiry":r["expiry"],"DTE":r["dte"],
+                    "Strike":f"${r['cc_strike']:.1f}" if has_cc else "—","Δ":r.get("cc_delta","—"),
+                    "θ/day":f"${r['cc_theta']:.3f}" if r.get("cc_theta") is not None else "—",
+                    "Call IV %":r["cc_iv"] if r.get("cc_iv") else "—",
+                    "OI":r.get("cc_oi","—"),"Vol":r.get("cc_volume","—"),
+                    "Spread %":r["cc_spread"] if r.get("cc_spread") else "—",
+                    "Mid":r.get("cc_mid","—"),
+                    "POP %":r["cc_pop"] if r.get("cc_pop") is not None else "—",
+                    "Liquidity":r.get("cc_liquidity","—"),
+                    "NIS":r.get("cc_nis","—"),"Score":r["cc_score"],"Timing":r.get("cc_timing_label","—"),
+                    "Gates":icons,"Status":status})
+            _html_table(cc_rows, _CC_LEGEND, 38+len(cc_rows)*35+12)
+            st.subheader("CC Suitability Ranking")
+            _ranking_chart(screener_rows_sorted,"cc_score","CC Score","rank_cc")
+            st.subheader("Four-Gate Detail — CC")
+            st.caption(f"G1 Trend · G2 Session · G3 BB Veto (mode: {bb_veto_mode}"
+                       + (f", −{soft_penalty} pts" if bb_veto_mode=="Soft" else "")
+                       + ") · G4 Median — CC fails BELOW median (catch the topping setup early)")
+            _gate_detail_panel(screener_rows_sorted,"cc")
 
-                st.divider()
-                if r.get("leap_strike"):
-                    st.markdown(f"""
-**LEAP Contract** — fixed 24 June, now a real ~80Δ long-dated call (was reusing CSP's numbers)
-- Expiry: **{r.get('leap_expiry','—')}** ({r.get('leap_dte','—')} DTE)
-- Strike: **${r['leap_strike']:.1f}** · Delta: **{r['leap_delta']}** ({greek_source_label(r.get('leap_greek_source'))})
-- Theta: **${r['leap_theta']:.3f}/day** · IV: **{r['leap_iv'] or '—'}%** · OI: **{r.get('leap_oi','—')}**
-- Mid premium: **${r.get('leap_mid','—')}** · LEAP NIS: **{r.get('leap_nis','—')}**
-- Intrinsic: **${r.get('leap_intrinsic','—')}** · Extrinsic (time value): **${r.get('leap_extrinsic','—')}** · Avg cost to hold: **${r.get('leap_extrinsic_per_day','—')}/day**
-- **LEAP Score: {r.get('leap_score','—')}**
-                    """)
-                else:
-                    st.caption("LEAP — no expiry in the 180–900 DTE window for this ticker.")
+        with t_leap:
+            st.subheader("LEAP Targets")
+            leap_sorted=sorted(screener_rows_sorted,key=lambda x:(x["leap_score"] if x.get("leap_score") is not None else -1),reverse=True)
+            leap_rows=[]
+            for r in leap_sorted:
+                icons,status=_gate_cols(r,"leap")
+                has_leap=r.get("leap_strike") is not None
+                leap_rows.append({"Ticker":r["ticker"],"Price":f"${r['price']:.2f}",
+                    "Expiry":r.get("leap_expiry","—") if has_leap else "—",
+                    "DTE":r.get("leap_dte","—") if has_leap else "—",
+                    "Strike":f"${r['leap_strike']:.1f}" if has_leap else "—","Δ":r.get("leap_delta","—"),
+                    "θ/day":f"${r['leap_theta']:.3f}" if r.get("leap_theta") is not None else "—",
+                    "IV %":r["leap_iv"] if r.get("leap_iv") else "—",
+                    "OI":r.get("leap_oi","—"),"Vol":r.get("leap_volume","—"),
+                    "Spread %":r["leap_spread"] if r.get("leap_spread") else "—",
+                    "Mid":r.get("leap_mid","—"),
+                    "Intrinsic":f"${r['leap_intrinsic']:.2f}" if r.get("leap_intrinsic") is not None else "—",
+                    "Extrinsic $":f"${r['leap_extrinsic']:.2f}" if r.get("leap_extrinsic") is not None else "—",
+                    "Extrinsic $/day":f"${r['leap_extrinsic_per_day']:.3f}" if r.get("leap_extrinsic_per_day") is not None else "—",
+                    "POP %":r["leap_pop"] if r.get("leap_pop") is not None else "—",
+                    "Liquidity":r.get("leap_liquidity","—"),
+                    "NIS":r.get("leap_nis","—"),
+                    "Score":r["leap_score"] if r.get("leap_score") is not None else "—",
+                    "Timing":r.get("leap_timing_label","—"),
+                    "Gates":icons,"Status":status})
+            _html_table(leap_rows, _LEAP_LEGEND, 38+len(leap_rows)*35+12)
+            st.caption("LEAP scores a real ~80Δ contract in the 180–900 DTE window (closest to "
+                       "542 DTE). Shows — if no expiry in that window exists for the ticker.")
+            st.subheader("LEAP Suitability Ranking")
+            _ranking_chart(screener_rows_sorted,"leap_score","LEAP Score","rank_leap")
+            st.subheader("Four-Gate Detail — LEAP")
+            st.caption("G1 Trend · G2 Session · G3 BB Veto · G4 Premium Mix — LEAP fails if extrinsic > 60% of premium")
+            _gate_detail_panel(screener_rows_sorted,"leap")
+
+        # (Old CSP-only "Four-Gate Filter Detail" block removed — gate drill-downs are now
+        #  per-strategy inside each sub-tab via _gate_detail_panel, so CSP/CC/LEAP are symmetric.)
 
     elif "screener_results" not in st.session_state:
         st.markdown("""<div style='text-align:center;padding:60px;color:#94a3b8;'>
