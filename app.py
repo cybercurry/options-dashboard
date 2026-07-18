@@ -2241,40 +2241,43 @@ with tab_screener:
         st.plotly_chart(fig_cmp,use_container_width=True,key="cmp_chart")
 
         # ── Dedicated sub-tab per strategy — each self-contained: table + ranking + gate detail.
-        #    Rendered as a colour-coded segmented control (CSP green / CC blue / LEAP purple) via
-        #    scoped CSS. Icons are inline-SVG masks (traced from Tabler) filled with currentColor,
-        #    so they turn white when a tab is active and need no runtime/CDN icon load. Scoped to
-        #    the st.container(key=...) class so only these sub-tabs are restyled, not the top tabs. ──
-        def _svgmask(paths):
+        #    Rendered as big colour-coded TILES (option b): icon over label, active tile tinted +
+        #    bordered in the strategy colour (CSP green / CC blue / LEAP purple). Icons are inline
+        #    SVGs drawn as background-image with the colour baked in — NOT a CSS mask (Safari won't
+        #    paint a stroked-SVG mask, so the mask version rendered blank there). background-image
+        #    of an SVG data-URI renders in every browser with no CDN load. Scoped to the
+        #    st.container(key=...) class so only these sub-tabs are restyled, not the top tabs. ──
+        def _svgicon(paths, color):
             svg = ("<svg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' "
-                   "fill='none' stroke='#000' stroke-width='2.2' stroke-linecap='round' "
+                   "fill='none' stroke='" + color + "' stroke-width='2' stroke-linecap='round' "
                    "stroke-linejoin='round'>" + paths + "</svg>")
             return "data:image/svg+xml," + quote(svg)
-        _ic_csp  = _svgmask("<path d='M3 7l6 6l4 -4l8 8'/><path d='M14 17l7 0l0 -7'/>")
-        _ic_cc   = _svgmask("<path d='M3 17l6 -6l4 4l8 -8'/><path d='M14 7l7 0l0 7'/>")
-        _ic_leap = _svgmask("<path d='M4 13a8 8 0 0 1 7 7a6 6 0 0 0 3 -5a9 9 0 0 0 6 -8a3 3 0 0 0 -3 -3a9 9 0 0 0 -8 6a6 6 0 0 0 -5 3'/>"
-                            "<path d='M7 14a6 6 0 0 0 -3 6a6 6 0 0 0 6 -3'/>"
-                            "<path d='M15 9m-1 0a1 1 0 1 0 2 0a1 1 0 1 0 -2 0'/>")
+        _P_CSP  = "<path d='M3 7l6 6l4 -4l8 8'/><path d='M14 17l7 0l0 -7'/>"
+        _P_CC   = "<path d='M3 17l6 -6l4 4l8 -8'/><path d='M14 7l7 0l0 7'/>"
+        _P_LEAP = ("<path d='M4 13a8 8 0 0 1 7 7a6 6 0 0 0 3 -5a9 9 0 0 0 6 -8a3 3 0 0 0 -3 -3a9 9 0 0 0 -8 6a6 6 0 0 0 -5 3'/>"
+                   "<path d='M7 14a6 6 0 0 0 -3 6a6 6 0 0 0 6 -3'/>"
+                   "<path d='M15 9m-1 0a1 1 0 1 0 2 0a1 1 0 1 0 -2 0'/>")
+        _ic_csp  = _svgicon(_P_CSP,  "#16a34a")
+        _ic_cc   = _svgicon(_P_CC,   "#2563eb")
+        _ic_leap = _svgicon(_P_LEAP, "#7c3aed")
         _K = ".st-key-strategy_subtabs"
         _B = _K + ' button[data-baseweb="tab"]'
         _subtab_css = (
-            _K + ' [data-baseweb="tab-list"]{display:inline-flex;gap:0;border:1px solid rgba(128,128,128,.35);border-radius:10px;overflow:hidden;margin:4px 0 12px;}'
+            _K + ' [data-baseweb="tab-list"]{display:flex;gap:14px;border:none!important;background:transparent!important;margin:6px 0 16px;}'
             + _K + ' [data-baseweb="tab-highlight"],' + _K + ' [data-baseweb="tab-border"]{display:none!important;}'
-            + _B + '{height:auto!important;padding:9px 22px!important;margin:0!important;border-radius:0!important;background:transparent;transition:background .12s;}'
-            + _B + ':hover{background:rgba(128,128,128,.09);}'
-            + _B + ' [data-testid="stMarkdownContainer"] p{font-size:15px!important;font-weight:600!important;color:inherit!important;margin:0;}'
-            + _B + ':nth-of-type(2),' + _B + ':nth-of-type(3){border-left:1px solid rgba(128,128,128,.35);}'
-            + _B + '::before{content:"";width:17px;height:17px;margin-right:8px;display:inline-block;background-color:currentColor;-webkit-mask-repeat:no-repeat;mask-repeat:no-repeat;-webkit-mask-position:center;mask-position:center;-webkit-mask-size:contain;mask-size:contain;}'
-            + _B + ':nth-of-type(1){color:#16a34a;}'
-            + _B + ':nth-of-type(1)::before{-webkit-mask-image:url("' + _ic_csp + '");mask-image:url("' + _ic_csp + '");}'
-            + _B + ':nth-of-type(2){color:#2563eb;}'
-            + _B + ':nth-of-type(2)::before{-webkit-mask-image:url("' + _ic_cc + '");mask-image:url("' + _ic_cc + '");}'
-            + _B + ':nth-of-type(3){color:#7c3aed;}'
-            + _B + ':nth-of-type(3)::before{-webkit-mask-image:url("' + _ic_leap + '");mask-image:url("' + _ic_leap + '");}'
-            + _B + '[aria-selected="true"]{color:#fff!important;}'
-            + _B + ':nth-of-type(1)[aria-selected="true"]{background:#16a34a!important;}'
-            + _B + ':nth-of-type(2)[aria-selected="true"]{background:#2563eb!important;}'
-            + _B + ':nth-of-type(3)[aria-selected="true"]{background:#7c3aed!important;}'
+            + _B + '{flex-direction:column!important;align-items:center!important;justify-content:center!important;gap:9px!important;min-width:134px;height:auto!important;padding:20px 30px!important;margin:0!important;border-radius:14px!important;border:2px solid rgba(128,128,128,.28)!important;background:transparent!important;transition:all .12s;}'
+            + _B + ':hover{border-color:rgba(128,128,128,.55)!important;}'
+            + _B + ' [data-testid="stMarkdownContainer"] p{font-size:17px!important;font-weight:600!important;margin:0;letter-spacing:.02em;}'
+            + _B + '::before{content:"";width:34px;height:34px;display:block;background-repeat:no-repeat;background-position:center;background-size:contain;}'
+            + _B + ':nth-of-type(1) p{color:#16a34a!important;}'
+            + _B + ':nth-of-type(1)::before{background-image:url("' + _ic_csp + '");}'
+            + _B + ':nth-of-type(2) p{color:#2563eb!important;}'
+            + _B + ':nth-of-type(2)::before{background-image:url("' + _ic_cc + '");}'
+            + _B + ':nth-of-type(3) p{color:#7c3aed!important;}'
+            + _B + ':nth-of-type(3)::before{background-image:url("' + _ic_leap + '");}'
+            + _B + ':nth-of-type(1)[aria-selected="true"]{background:#e7f7ee!important;border-color:#16a34a!important;}'
+            + _B + ':nth-of-type(2)[aria-selected="true"]{background:#e8f0fe!important;border-color:#2563eb!important;}'
+            + _B + ':nth-of-type(3)[aria-selected="true"]{background:#f1ebfd!important;border-color:#7c3aed!important;}'
         )
         st.markdown("<style>" + _subtab_css + "</style>", unsafe_allow_html=True)
         with st.container(key="strategy_subtabs"):
