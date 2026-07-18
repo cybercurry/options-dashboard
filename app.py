@@ -8,6 +8,7 @@ from datetime import datetime
 import math
 import requests
 from scipy.stats import norm
+from urllib.parse import quote
 import warnings
 warnings.filterwarnings("ignore")
 
@@ -2238,8 +2239,45 @@ with tab_screener:
                                legend=dict(orientation="h",y=1.05,x=0),margin=dict(l=0,r=0,t=20,b=0))
         st.plotly_chart(fig_cmp,use_container_width=True,key="cmp_chart")
 
-        # ── Dedicated sub-tab per strategy — each self-contained: table + ranking + gate detail ──
-        t_csp,t_cc,t_leap=st.tabs(["📉 CSP","📈 CC","🚀 LEAP"])
+        # ── Dedicated sub-tab per strategy — each self-contained: table + ranking + gate detail.
+        #    Rendered as a colour-coded segmented control (CSP green / CC blue / LEAP purple) via
+        #    scoped CSS. Icons are inline-SVG masks (traced from Tabler) filled with currentColor,
+        #    so they turn white when a tab is active and need no runtime/CDN icon load. Scoped to
+        #    the st.container(key=...) class so only these sub-tabs are restyled, not the top tabs. ──
+        def _svgmask(paths):
+            svg = ("<svg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' "
+                   "fill='none' stroke='#000' stroke-width='2.2' stroke-linecap='round' "
+                   "stroke-linejoin='round'>" + paths + "</svg>")
+            return "data:image/svg+xml," + quote(svg)
+        _ic_csp  = _svgmask("<path d='M3 7l6 6l4 -4l8 8'/><path d='M14 17l7 0l0 -7'/>")
+        _ic_cc   = _svgmask("<path d='M3 17l6 -6l4 4l8 -8'/><path d='M14 7l7 0l0 7'/>")
+        _ic_leap = _svgmask("<path d='M4 13a8 8 0 0 1 7 7a6 6 0 0 0 3 -5a9 9 0 0 0 6 -8a3 3 0 0 0 -3 -3a9 9 0 0 0 -8 6a6 6 0 0 0 -5 3'/>"
+                            "<path d='M7 14a6 6 0 0 0 -3 6a6 6 0 0 0 6 -3'/>"
+                            "<path d='M15 9m-1 0a1 1 0 1 0 2 0a1 1 0 1 0 -2 0'/>")
+        _K = ".st-key-strategy_subtabs"
+        _B = _K + ' button[data-baseweb="tab"]'
+        _subtab_css = (
+            _K + ' [data-baseweb="tab-list"]{display:inline-flex;gap:0;border:1px solid rgba(128,128,128,.35);border-radius:10px;overflow:hidden;margin:4px 0 12px;}'
+            + _K + ' [data-baseweb="tab-highlight"],' + _K + ' [data-baseweb="tab-border"]{display:none!important;}'
+            + _B + '{height:auto!important;padding:9px 22px!important;margin:0!important;border-radius:0!important;background:transparent;transition:background .12s;}'
+            + _B + ':hover{background:rgba(128,128,128,.09);}'
+            + _B + ' [data-testid="stMarkdownContainer"] p{font-size:15px!important;font-weight:600!important;color:inherit!important;margin:0;}'
+            + _B + ':nth-of-type(2),' + _B + ':nth-of-type(3){border-left:1px solid rgba(128,128,128,.35);}'
+            + _B + '::before{content:"";width:17px;height:17px;margin-right:8px;display:inline-block;background-color:currentColor;-webkit-mask-repeat:no-repeat;mask-repeat:no-repeat;-webkit-mask-position:center;mask-position:center;-webkit-mask-size:contain;mask-size:contain;}'
+            + _B + ':nth-of-type(1){color:#16a34a;}'
+            + _B + ':nth-of-type(1)::before{-webkit-mask-image:url("' + _ic_csp + '");mask-image:url("' + _ic_csp + '");}'
+            + _B + ':nth-of-type(2){color:#2563eb;}'
+            + _B + ':nth-of-type(2)::before{-webkit-mask-image:url("' + _ic_cc + '");mask-image:url("' + _ic_cc + '");}'
+            + _B + ':nth-of-type(3){color:#7c3aed;}'
+            + _B + ':nth-of-type(3)::before{-webkit-mask-image:url("' + _ic_leap + '");mask-image:url("' + _ic_leap + '");}'
+            + _B + '[aria-selected="true"]{color:#fff!important;}'
+            + _B + ':nth-of-type(1)[aria-selected="true"]{background:#16a34a!important;}'
+            + _B + ':nth-of-type(2)[aria-selected="true"]{background:#2563eb!important;}'
+            + _B + ':nth-of-type(3)[aria-selected="true"]{background:#7c3aed!important;}'
+        )
+        st.markdown("<style>" + _subtab_css + "</style>", unsafe_allow_html=True)
+        with st.container(key="strategy_subtabs"):
+            t_csp,t_cc,t_leap=st.tabs(["CSP","CC","LEAP"])
 
         with t_csp:
             st.subheader("CSP Targets")
