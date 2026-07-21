@@ -130,6 +130,26 @@ _save_watchlist_to_params(st.session_state.watchlist)
 # ══════════════════════════════════════════════════════════════════════════════
 @st.cache_data(ttl=60, show_spinner=False)
 def fetch_quote(ticker):
+    # 21 July — Market Pulse tiles were showing stale / day-behind numbers. Root cause:
+    # we read the *daily* 5d bars and compared last close vs prior close. Outside regular
+    # US hours (pre/post-market, weekends, holidays) that surfaces yesterday's price and
+    # yesterday's % move, and futures/yields/crypto (GC=F, CL=F, ^TNX, BTC-USD) roll on
+    # different clocks than SPY/QQQ, so the tiles disagreed on their "as of" time.
+    #
+    # Fix: prefer fast_info, which gives the latest intraday trade (updates through the
+    # session and in extended hours) plus the correct prior-session close as the day-change
+    # baseline. Fall back to the original daily-bar method if fast_info is unavailable, so
+    # a source hiccup never regresses below today's behaviour.
+    try:
+        fi    = yf.Ticker(ticker).fast_info
+        price = getattr(fi, "last_price", None)
+        prev  = getattr(fi, "previous_close", None)
+        if price is not None and prev not in (None, 0):
+            price = float(price); prev = float(prev)
+            if price > 0 and prev > 0:
+                return {"price": price, "pct": (price / prev - 1) * 100}
+    except Exception:
+        pass
     try:
         df = yf.download(ticker, period="5d", auto_adjust=True, progress=False)
         if df is None or df.empty:
@@ -1240,7 +1260,9 @@ with st.sidebar:
     period=st.selectbox("Price History",["6mo","1y","2y"],index=1)
 
     st.divider()
-    auto_refresh=st.toggle("🔄 Auto-refresh (60s)",value=False)
+    # 21 July — default ON so the Market Pulse / sector tiles refresh on their own
+    # (60s cadence matches fetch_quote's cache TTL). Toggle off to freeze the page.
+    auto_refresh=st.toggle("🔄 Auto-refresh (60s)",value=True)
     if auto_refresh and HAS_AUTOREFRESH:
         st_autorefresh(interval=60_000,key="pulse_refresh")
     elif auto_refresh and not HAS_AUTOREFRESH:
