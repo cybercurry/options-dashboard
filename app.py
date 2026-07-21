@@ -9,6 +9,7 @@ import math
 import requests
 from scipy.stats import norm
 from urllib.parse import quote
+from concurrent.futures import ThreadPoolExecutor
 import warnings
 warnings.filterwarnings("ignore")
 
@@ -128,8 +129,30 @@ _save_watchlist_to_params(st.session_state.watchlist)
 # ══════════════════════════════════════════════════════════════════════════════
 # DATA FETCHERS
 # ══════════════════════════════════════════════════════════════════════════════
-@st.cache_data(ttl=60, show_spinner=False)
-def fetch_quote(ticker):
+def _quote_single(ticker):
+    # 21 July — Market Pulse tiles were showing stale / day-behind numbers. Root cause:
+    # we read the *daily* 5d bars and compared last close vs prior close. Outside regular
+    # US hours (pre/post-market, weekends, holidays) that surfaces yesterday's price and
+    # yesterday's % move, and futures/yields/crypto (GC=F, CL=F, ^TNX, BTC-USD) roll on
+    # different clocks than SPY/QQQ, so the tiles disagreed on their "as of" time.
+    #
+    # Fix: prefer fast_info, which gives the latest intraday trade (updates through the
+    # session and in extended hours) plus the correct prior-session close as the day-change
+    # baseline. Fall back to the original daily-bar method if fast_info is unavailable, so
+    # a source hiccup never regresses below today's behaviour.
+    #
+    # Uncached on purpose — callers reach it via the cached fetch_quote (single) or
+    # fetch_quotes (batched, concurrent) wrappers below.
+    try:
+        fi    = yf.Ticker(ticker).fast_info
+        price = getattr(fi, "last_price", None)
+        prev  = getattr(fi, "previous_close", None)
+        if price is not None and prev not in (None, 0):
+            price = float(price); prev = float(prev)
+            if price > 0 and prev > 0:
+                return {"price": price, "pct": (price / prev - 1) * 100}
+    except Exception:
+        pass
     try:
         df = yf.download(ticker, period="5d", auto_adjust=True, progress=False)
         if df is None or df.empty:
@@ -141,6 +164,24 @@ def fetch_quote(ticker):
         return {"price": curr, "pct": (curr/prev - 1)*100}
     except Exception:
         return None
+
+@st.cache_data(ttl=60, show_spinner=False)
+def fetch_quote(ticker):
+    return _quote_single(ticker)
+
+@st.cache_data(ttl=60, show_spinner=False)
+def fetch_quotes(tickers):
+    # 21 July — the Overview fires a quote per pulse + sector tile. Run sequentially that's
+    # ~20 blocking round-trips every render, and painfully slow now that auto-refresh is on.
+    # Fetch them concurrently instead (I/O-bound, so threads help a lot) and cache the whole
+    # batch as one entry. `tickers` is a tuple so it stays hashable for st.cache_data.
+    tickers = tuple(tickers)
+    if not tickers:
+        return {}
+    workers = min(8, len(tickers))
+    with ThreadPoolExecutor(max_workers=workers) as ex:
+        results = ex.map(_quote_single, tickers)
+    return {t: q for t, q in zip(tickers, results)}
 
 @st.cache_data(ttl=300, show_spinner=False)
 def fetch_cnn_fg():
@@ -189,9 +230,10 @@ def fetch_crypto_fg():
 
 @st.cache_data(ttl=60, show_spinner=False)
 def fetch_vix_term():
+    quotes = fetch_quotes(tuple(ticker for ticker, _ in VIX_TERM_TICKERS))
     out = {}
     for ticker, label in VIX_TERM_TICKERS:
-        q = fetch_quote(ticker)
+        q = quotes.get(ticker)
         if q: out[label] = q["price"]
     return out
 
@@ -1240,7 +1282,9 @@ with st.sidebar:
     period=st.selectbox("Price History",["6mo","1y","2y"],index=1)
 
     st.divider()
-    auto_refresh=st.toggle("🔄 Auto-refresh (60s)",value=False)
+    # 21 July — default ON so the Market Pulse / sector tiles refresh on their own
+    # (60s cadence matches fetch_quote's cache TTL). Toggle off to freeze the page.
+    auto_refresh=st.toggle("🔄 Auto-refresh (60s)",value=True)
     if auto_refresh and HAS_AUTOREFRESH:
         st_autorefresh(interval=60_000,key="pulse_refresh")
     elif auto_refresh and not HAS_AUTOREFRESH:
@@ -1329,7 +1373,7 @@ with tab_dash:
     st.subheader("🌍 Market Pulse")
     st.caption(f"Updated: {datetime.utcnow().strftime('%H:%M:%S UTC')}  ·  ~15 min delayed  ·  Toggle 60s refresh in sidebar")
 
-    pulse_data={ticker:fetch_quote(ticker) for ticker,*_ in PULSE_TICKERS}
+    pulse_data=fetch_quotes(tuple(ticker for ticker,*_ in PULSE_TICKERS))
 
     # 26 June — st.metric labels can't render HTML, so jargon-y ones get a real tooltip via
     # help= instead of the inline _tt() span used in markdown text below.
@@ -1440,9 +1484,10 @@ with tab_dash:
     st.subheader("🟩 Sector Heatmap")
     st.caption("SPDR sector ETFs + Bitcoin as Digital Assets · colour intensity = move strength · data ~15 min delayed")
 
+    sector_data = fetch_quotes(tuple(ticker for ticker, *_ in SECTOR_TICKERS))
     sector_quotes = []
     for ticker, label, short in SECTOR_TICKERS:
-        q = fetch_quote(ticker)
+        q = sector_data.get(ticker)
         sector_quotes.append({
             "label":  label,
             "ticker": short,
