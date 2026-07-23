@@ -1488,19 +1488,31 @@ with tab_dash:
     st.caption(f"Updated: {datetime.utcnow().strftime('%H:%M:%S UTC')}  ·  ~15 min delayed  ·  Toggle 60s refresh in sidebar")
 
     # ── Data Health — proves, per source, whether it connected and how old its data is ──────
+    # Button-gated: the probe hits the network, so running it on every 60s auto-refresh would
+    # add latency to every render. It runs only when clicked, and the result is stashed in
+    # session_state so it survives the next auto-refresh rerun instead of vanishing.
     with st.expander("🩺 Data Health — is every source live & fresh? (open me if numbers look stale)"):
-        try:
-            _health_rows, _health_now = fetch_data_health()
-            st.caption(
-                f"Probed live at {_health_now.strftime('%Y-%m-%d %H:%M:%S')} UTC. "
-                "**How to read this:** if a row shows a *Data as of* from days or weeks ago, "
-                "that source is the problem. If every row says 🟢 live but the tiles still look "
-                "frozen, the app was serving a stale page — hard-reload with Ctrl+Shift+R "
-                "(Cmd+Shift+R on Mac). Sample values let you sanity-check against Google."
-            )
-            st.dataframe(pd.DataFrame(_health_rows), use_container_width=True, hide_index=True)
-        except Exception as _e:
-            st.error(f"Data Health probe failed to run: {type(_e).__name__}: {_e}")
+        st.caption("Probes every data source live and shows **how old each one's data is** — the "
+                   "fastest way to tell 'a source is stale/down' from 'the page just wasn't refreshing'.")
+        if st.button("🔄 Run data health check", key="run_health"):
+            try:
+                st.session_state["_health"] = fetch_data_health()
+            except Exception as _e:
+                st.session_state["_health"] = (f"{type(_e).__name__}: {_e}", None)
+        _h = st.session_state.get("_health")
+        if _h:
+            _rows, _when = _h
+            if _when is None:
+                st.error(f"Data Health probe failed to run: {_rows}")
+            else:
+                st.caption(
+                    f"Probed live at {_when.strftime('%Y-%m-%d %H:%M:%S')} UTC. "
+                    "**How to read this:** if a row shows a *Data as of* from days or weeks ago, "
+                    "that source is the problem. If every row says 🟢 live but the tiles still look "
+                    "frozen, the app was serving a stale page — hard-reload with Ctrl+Shift+R "
+                    "(Cmd+Shift+R on Mac). Sample values let you sanity-check against Google."
+                )
+                st.dataframe(pd.DataFrame(_rows), use_container_width=True, hide_index=True)
 
     pulse_data=fetch_quotes(tuple(ticker for ticker,*_ in PULSE_TICKERS))
 
