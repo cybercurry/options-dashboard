@@ -4,7 +4,7 @@ import pandas as pd
 import numpy as np
 import plotly.graph_objects as go
 from plotly.subplots import make_subplots
-from datetime import datetime
+from datetime import datetime, timedelta, timezone
 import math
 import requests
 from scipy.stats import norm
@@ -227,6 +227,120 @@ def fetch_crypto_fg():
         return score, rating
     except Exception:
         return None, None
+
+def _parse_epoch_or_iso(v):
+    # CNN stamps its score with either epoch-ms/epoch-s or an ISO8601 string depending on
+    # the field — accept all three and hand back a naive-UTC datetime (None if unparseable).
+    if v is None:
+        return None
+    try:
+        if isinstance(v, (int, float)) or (isinstance(v, str) and v.strip().isdigit()):
+            n = float(v)
+            if n > 1e12:      # milliseconds → seconds
+                n /= 1000.0
+            return datetime.utcfromtimestamp(n)
+        dt = datetime.fromisoformat(str(v).replace("Z", "+00:00"))
+        if dt.tzinfo:
+            dt = dt.astimezone(timezone.utc).replace(tzinfo=None)
+        return dt
+    except Exception:
+        return None
+
+@st.cache_data(ttl=60, show_spinner=False)
+def fetch_data_health():
+    # 23 July — "everything on the Overview has been frozen for weeks" spans THREE independent
+    # pipelines (Yahoo, CNN, Alternative.me), which don't fail identically by chance — so we
+    # need to see, per source, whether it connected and HOW OLD its data is. This probe runs in
+    # the deployment (where the data is actually reachable) and reports exactly that, so we can
+    # tell "a source is down / serving stale data" apart from "the app/tab just wasn't
+    # refreshing". Each check is isolated; one failure never blanks the rest of the report.
+    now  = datetime.utcnow()
+    rows = []
+
+    def _age(dt):
+        secs = (now - dt).total_seconds()
+        if secs < 0:      return "future?"
+        if secs < 3600:   return f"{secs/60:.0f} min"
+        if secs < 86400:  return f"{secs/3600:.1f} h"
+        return f"{secs/86400:.1f} d"
+
+    # Yahoo backbone — a daily pull exposes the last bar's DATE, i.e. how old Yahoo's data is.
+    try:
+        df = yf.download("SPY", period="5d", auto_adjust=True, progress=False)
+        if df is not None and not df.empty:
+            last     = pd.to_datetime(df.index[-1]).to_pydatetime().replace(tzinfo=None)
+            age_days = (now.date() - last.date()).days
+            price    = float(df["Close"].squeeze().iloc[-1])
+            rows.append({"Source": "Yahoo Finance (indices · VIX · sectors · watchlist)",
+                         "Status": "🟢 live" if age_days <= 4 else "🟠 STALE",
+                         "Data as of": last.strftime("%Y-%m-%d"), "Age": _age(last),
+                         "Sample value": f"SPY close ${price:,.2f}"})
+        else:
+            rows.append({"Source": "Yahoo Finance (indices · VIX · sectors · watchlist)",
+                         "Status": "🔴 NO DATA", "Data as of": "—", "Age": "—",
+                         "Sample value": "empty response"})
+    except Exception as e:
+        rows.append({"Source": "Yahoo Finance (indices · VIX · sectors · watchlist)",
+                     "Status": "🔴 ERROR", "Data as of": "—", "Age": "—",
+                     "Sample value": f"{type(e).__name__}: {e}"[:70]})
+
+    # Yahoo fast_info — the live intraday path the pulse tiles use.
+    try:
+        lp = getattr(yf.Ticker("SPY").fast_info, "last_price", None)
+        rows.append({"Source": "Yahoo fast_info (live pulse quotes)",
+                     "Status": "🟢 live" if lp else "🔴 NO DATA",
+                     "Data as of": "realtime" if lp else "—", "Age": "~now" if lp else "—",
+                     "Sample value": f"SPY ${float(lp):,.2f}" if lp else "no last_price"})
+    except Exception as e:
+        rows.append({"Source": "Yahoo fast_info (live pulse quotes)",
+                     "Status": "🔴 ERROR", "Data as of": "—", "Age": "—",
+                     "Sample value": f"{type(e).__name__}"})
+
+    # CNN Fear & Greed — Stocks gauge.
+    try:
+        r = requests.get(
+            "https://production.dataviz.cnn.io/index/fearandgreed/graphdata",
+            headers={"User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) "
+                                   "AppleWebKit/537.36 (KHTML, like Gecko) "
+                                   "Chrome/124.0.0.0 Safari/537.36",
+                     "Referer": "https://www.cnn.com/markets/fear-and-greed",
+                     "Origin":  "https://www.cnn.com",
+                     "Accept":  "application/json, text/plain, */*"},
+            timeout=10)
+        fg    = r.json().get("fear_and_greed", {})
+        score = fg.get("score", fg.get("value"))
+        dt    = _parse_epoch_or_iso(fg.get("timestamp"))
+        if dt is not None:
+            age_h = (now - dt).total_seconds() / 3600
+            rows.append({"Source": "CNN Fear & Greed (Stocks gauge)",
+                         "Status": "🟢 live" if age_h <= 48 else "🟠 STALE",
+                         "Data as of": dt.strftime("%Y-%m-%d %H:%M"), "Age": _age(dt),
+                         "Sample value": f"score {float(score):.0f}" if score is not None else "—"})
+        else:
+            rows.append({"Source": "CNN Fear & Greed (Stocks gauge)",
+                         "Status": "🟢 live" if score is not None else "🔴 NO DATA",
+                         "Data as of": "(no timestamp in feed)", "Age": "—",
+                         "Sample value": f"score {float(score):.0f}" if score is not None else "parse failed"})
+    except Exception as e:
+        rows.append({"Source": "CNN Fear & Greed (Stocks gauge)",
+                     "Status": "🔴 ERROR", "Data as of": "—", "Age": "—",
+                     "Sample value": f"{type(e).__name__}"})
+
+    # Alternative.me — Crypto gauge.
+    try:
+        entry = requests.get("https://api.alternative.me/fng/?limit=1", timeout=8).json()["data"][0]
+        dt    = datetime.utcfromtimestamp(int(entry["timestamp"]))
+        age_h = (now - dt).total_seconds() / 3600
+        rows.append({"Source": "Alternative.me (Crypto gauge)",
+                     "Status": "🟢 live" if age_h <= 48 else "🟠 STALE",
+                     "Data as of": dt.strftime("%Y-%m-%d %H:%M"), "Age": _age(dt),
+                     "Sample value": f"score {entry['value']}"})
+    except Exception as e:
+        rows.append({"Source": "Alternative.me (Crypto gauge)",
+                     "Status": "🔴 ERROR", "Data as of": "—", "Age": "—",
+                     "Sample value": f"{type(e).__name__}"})
+
+    return rows, now
 
 @st.cache_data(ttl=60, show_spinner=False)
 def fetch_vix_term():
@@ -1372,6 +1486,33 @@ with st.spinner("Loading market data..."):
 with tab_dash:
     st.subheader("🌍 Market Pulse")
     st.caption(f"Updated: {datetime.utcnow().strftime('%H:%M:%S UTC')}  ·  ~15 min delayed  ·  Toggle 60s refresh in sidebar")
+
+    # ── Data Health — proves, per source, whether it connected and how old its data is ──────
+    # Button-gated: the probe hits the network, so running it on every 60s auto-refresh would
+    # add latency to every render. It runs only when clicked, and the result is stashed in
+    # session_state so it survives the next auto-refresh rerun instead of vanishing.
+    with st.expander("🩺 Data Health — is every source live & fresh? (open me if numbers look stale)"):
+        st.caption("Probes every data source live and shows **how old each one's data is** — the "
+                   "fastest way to tell 'a source is stale/down' from 'the page just wasn't refreshing'.")
+        if st.button("🔄 Run data health check", key="run_health"):
+            try:
+                st.session_state["_health"] = fetch_data_health()
+            except Exception as _e:
+                st.session_state["_health"] = (f"{type(_e).__name__}: {_e}", None)
+        _h = st.session_state.get("_health")
+        if _h:
+            _rows, _when = _h
+            if _when is None:
+                st.error(f"Data Health probe failed to run: {_rows}")
+            else:
+                st.caption(
+                    f"Probed live at {_when.strftime('%Y-%m-%d %H:%M:%S')} UTC. "
+                    "**How to read this:** if a row shows a *Data as of* from days or weeks ago, "
+                    "that source is the problem. If every row says 🟢 live but the tiles still look "
+                    "frozen, the app was serving a stale page — hard-reload with Ctrl+Shift+R "
+                    "(Cmd+Shift+R on Mac). Sample values let you sanity-check against Google."
+                )
+                st.dataframe(pd.DataFrame(_rows), use_container_width=True, hide_index=True)
 
     pulse_data=fetch_quotes(tuple(ticker for ticker,*_ in PULSE_TICKERS))
 
