@@ -35,11 +35,16 @@ VIX_ZONES = [
     (30, 99, "#dc2626", "HIGH — Aggressive premium selling regime"),
 ]
 
+# 23 July — the equity tiles were ETF proxies (SPY/QQQ/DIA/IWM) but LABELLED as the indices,
+# so "S&P 500" read $747 (SPY) instead of ~7499 (the actual index) — a persistent ~10x mismatch
+# that looked like bad/stale data. Point them at the real Yahoo index symbols so the tile matches
+# what you see quoted everywhere (^GSPC = S&P 500, ^NDX = Nasdaq 100, ^DJI = Dow, ^RUT = Russell
+# 2000). Prefix "" because index levels are points, not dollars. Commodities/crypto stay in $.
 PULSE_TICKERS = [
-    ("SPY",      "S&P 500",    "$",  False),
-    ("QQQ",      "Nasdaq 100", "$",  False),
-    ("DIA",      "Dow Jones",  "$",  False),
-    ("IWM",      "R2000",      "$",  False),
+    ("^GSPC",    "S&P 500",    "",   False),
+    ("^NDX",     "Nasdaq 100", "",   False),
+    ("^DJI",     "Dow Jones",  "",   False),
+    ("^RUT",     "R2000",      "",   False),
     ("DX-Y.NYB", "DXY",        "",   False),
     ("CL=F",     "Crude Oil",  "$",  False),
     ("GC=F",     "Gold",       "$",  False),
@@ -1528,7 +1533,7 @@ with tab_dash:
         if q:
             p=q["price"]; pct=q["pct"]
             if is_yield:    disp=f"{p:.2f}%"
-            elif p>10000:   disp=f"${p:,.0f}"
+            elif p>10000:   disp=f"{prefix}{p:,.0f}"
             elif p>100:     disp=f"{prefix}{p:,.2f}"
             else:           disp=f"{prefix}{p:.2f}"
             col.metric(label,disp,f"{pct:+.2f}%",help=help_txt)
