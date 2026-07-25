@@ -1939,8 +1939,15 @@ with tab_chain:
             st.info("Pick a ticker above.")
         else:
             r=results[cur_tkr]; price=r["price"]; all_exps=r.get("all_exps",[])
+            # analyse()'s yfinance reference price can come back NaN (a Yahoo hiccup on this
+            # ticker). That NaN would break moneyness, the chart vlines, and the header — so
+            # fall back to Tradier's real-time last, which we already have on hand.
+            if price is None or (isinstance(price,float) and math.isnan(price)):
+                _t_last=fetch_underlying_last(cur_tkr) if tradier.is_configured() else None
+                if _t_last is not None: price=_t_last
             today_p=datetime.utcnow()
-            st.markdown(f"**Expiry — {cur_tkr} (${price:.2f})**")
+            _price_txt=f"${price:,.2f}" if (price is not None and not (isinstance(price,float) and math.isnan(price))) else "n/a"
+            st.markdown(f"**Expiry — {cur_tkr} ({_price_txt})**")
             cur_exp=st.session_state.get("chain_exp")
             n_cols_e=6
             for i in range(0,len(all_exps),n_cols_e):
@@ -1977,11 +1984,16 @@ with tab_chain:
                     # Real-time last price of the underlying (Tradier), shown right of DTE.
                     _last_px=fetch_underlying_last(sel_c) if tradier.is_configured() else None
                     if _last_px is None: _last_px=price
-                    st.markdown(f"<span style='font-size:1.9rem;font-weight:700;'>${price:.2f}</span>"
+                    # NOTE: dollar signs are escaped as "\$" — Streamlit markdown treats an
+                    # unescaped "$…$" pair as LaTeX math and would swallow the HTML between them.
+                    def _px(v):
+                        return (f"\\${v:,.2f}" if v is not None and
+                                not (isinstance(v,float) and math.isnan(v)) else "n/a")
+                    st.markdown(f"<span style='font-size:1.9rem;font-weight:700;'>{_px(price)}</span>"
                                 f"&nbsp;&nbsp;·&nbsp;&nbsp;"
                                 f"<span style='font-size:1.9rem;font-weight:700;'>{dte} DTE</span>"
                                 f"&nbsp;&nbsp;·&nbsp;&nbsp;"
-                                f"<span style='font-size:1.9rem;font-weight:700;'>${_last_px:,.2f}</span>"
+                                f"<span style='font-size:1.9rem;font-weight:700;'>{_px(_last_px)}</span>"
                                 f"<span style='font-size:0.85rem;opacity:0.65;'>&nbsp;{sel_c} last</span>",
                                 unsafe_allow_html=True)
                     def fmt_chain(df_raw,side):
