@@ -10,6 +10,7 @@ import requests
 from scipy.stats import norm
 from urllib.parse import quote
 from concurrent.futures import ThreadPoolExecutor
+import tradier   # Tradier API access door (real quotes / chains / IV / Greeks)
 import warnings
 warnings.filterwarnings("ignore")
 
@@ -1416,6 +1417,31 @@ with st.sidebar:
                 del st.session_state[key]
         st.success("Cache + screener results cleared.")
         st.rerun()
+
+    st.divider()
+    # ── Tradier connection — the real-data access door ──────────────────────────
+    # Proves the token works and that real data flows even with the market closed
+    # (reads the market clock, which is live 24/7). No token stored here — it lives
+    # in the app's Secrets (TRADIER_TOKEN); see tradier.py for setup.
+    with st.expander("🔌 Tradier data feed", expanded=not tradier.is_configured()):
+        if not tradier.is_configured():
+            st.warning("No token yet. Add **TRADIER_TOKEN** to the app's Secrets "
+                       "(and optionally `TRADIER_ENV=\"production\"`), then Reboot.")
+            st.caption("Streamlit Cloud: Manage app → Settings → Secrets. "
+                       "Get the token in the Tradier dashboard → API Access.")
+        elif st.button("🔌 Test Tradier connection", use_container_width=True):
+            with st.spinner("Opening the door…"):
+                res = tradier.ping()
+            if res["ok"]:
+                st.success(f"Connected ✅  ({res['env']})")
+                st.caption(f"Market: **{res.get('market_state','?')}** — "
+                           f"{res.get('market_desc','')}")
+                if res.get("sample"):
+                    st.caption(f"Live read: {res['sample']}")
+                st.caption("Real data flows even while closed — this read came from a "
+                           "closed-market REST call.")
+            else:
+                st.error(f"Not connected: {res['error']}")
 
     st.divider()
     vix_df=fetch_vix("1y"); vix_now=None; vix_chg=0
