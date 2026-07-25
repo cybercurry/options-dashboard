@@ -469,6 +469,20 @@ def fetch_chain_tradier(ticker, expiry):
     except Exception as e:
         return None, None, None, f"{type(e).__name__}: {e}"
 
+@st.cache_data(ttl=30, show_spinner=False)
+def fetch_underlying_last(ticker):
+    """Real-time last trade for the underlying from Tradier — the actual market price of
+    the asset (None if unavailable). Used to show a live price next to the chain's DTE."""
+    try:
+        qs = tradier.get_quotes(ticker)
+        if qs:
+            last = qs[0].get("last")
+            if last is not None:
+                return float(last)
+    except Exception:
+        pass
+    return None
+
 # ══════════════════════════════════════════════════════════════════════════════
 # BLACK-SCHOLES GREEKS
 # ══════════════════════════════════════════════════════════════════════════════
@@ -1960,9 +1974,15 @@ with tab_chain:
                 st.caption(f"Data source: {_chain_src}")
                 if calls_df is not None:
                     chain=type("_C",(),{"calls":calls_df,"puts":puts_df})()
+                    # Real-time last price of the underlying (Tradier), shown right of DTE.
+                    _last_px=fetch_underlying_last(sel_c) if tradier.is_configured() else None
+                    if _last_px is None: _last_px=price
                     st.markdown(f"<span style='font-size:1.9rem;font-weight:700;'>${price:.2f}</span>"
                                 f"&nbsp;&nbsp;·&nbsp;&nbsp;"
-                                f"<span style='font-size:1.9rem;font-weight:700;'>{dte} DTE</span>",
+                                f"<span style='font-size:1.9rem;font-weight:700;'>{dte} DTE</span>"
+                                f"&nbsp;&nbsp;·&nbsp;&nbsp;"
+                                f"<span style='font-size:1.9rem;font-weight:700;'>${_last_px:,.2f}</span>"
+                                f"<span style='font-size:0.85rem;opacity:0.65;'>&nbsp;{sel_c} last</span>",
                                 unsafe_allow_html=True)
                     def fmt_chain(df_raw,side):
                         df_raw=df_raw.copy()
