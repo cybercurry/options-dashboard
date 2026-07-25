@@ -27,7 +27,8 @@ try:
 except ImportError:
     HAS_AUTOREFRESH = False
 
-DEFAULT_WATCHLIST = ["NVDA", "META", "TSLA", "IBIT", "GLD", "GDXJ", "BE", "VST", "CRWV", "AMZN", "SPCX", "NVTS", "VRT", "SLV", "PLTR", "ORCL", "AAPL", "GOOG", "MSFT", "IREN", "NBIS", "URNM", "COPP", "COPJ", "PURR", "MSTR", "BMNR", "NOW", "CQQQ", "QANT.AS", "WMT"]
+# Baked-in default so even the bare link (no ?tickers=…) loads Jay's list (25 July).
+DEFAULT_WATCHLIST = ["NVDA", "TSLA", "GLD", "BE", "VST", "AMZN", "SPCX", "NVTS", "VRT", "SLV", "PLTR", "AAPL", "GOOG", "IREN", "NBIS", "NOW", "WMT"]
 
 VIX_ZONES = [
     (0,  15, "#16a34a", "LOW — Ideal LEAP buying zone"),
@@ -362,8 +363,32 @@ def fetch_skew():
     q = fetch_quote("^SKEW")
     return q["price"] if q else None
 
+_PERIOD_DAYS = {"6mo": 195, "1y": 370, "2y": 740}
+
 @st.cache_data(ttl=1800, show_spinner=False)
 def fetch_prices(ticker, period="1y"):
+    # 25 July — prefer Tradier daily history (reliable on cloud) over yfinance, which flakes on
+    # shared hosting and was the real cause of watchlist tickers intermittently not loading.
+    # Falls back to yfinance so nothing regresses. Index symbols (^VIX etc.) stay on yfinance —
+    # Tradier uses different index symbology and yfinance handles those fine.
+    if tradier.is_configured() and not ticker.startswith("^"):
+        try:
+            end   = datetime.utcnow().date()
+            start = end - timedelta(days=_PERIOD_DAYS.get(period, 370))
+            days  = tradier.get_history(ticker, interval="daily",
+                                        start=start.isoformat(), end=end.isoformat())
+            if days and len(days) >= 30:
+                df = pd.DataFrame(days)
+                df["date"] = pd.to_datetime(df["date"])
+                df = (df.set_index("date").sort_index()
+                        .rename(columns={"open":"Open","high":"High","low":"Low",
+                                         "close":"Close","volume":"Volume"}))
+                df = df[["Open","High","Low","Close","Volume"]].apply(pd.to_numeric, errors="coerce")
+                df = df.dropna(subset=["Close"])
+                if len(df) >= 30:
+                    return df
+        except Exception:
+            pass  # fall through to yfinance
     try:
         df = yf.download(ticker, period=period, auto_adjust=True, progress=False)
         if df.empty or len(df) < 30: return None
@@ -397,6 +422,15 @@ def _fetch_all_expiries_raw(ticker):
 def fetch_all_expiries(ticker):
     """Uncached wrapper — converts the raise back to the old ([], err) shape so callers
     don't crash, while keeping the underlying cache un-poisoned by failures."""
+    # 25 July — prefer Tradier's expiration list (reliable) over yfinance's .options, with a
+    # yfinance fallback so it can't regress.
+    if tradier.is_configured():
+        try:
+            exps = tradier.get_expirations(ticker)
+            if exps:
+                return exps, None
+        except Exception:
+            pass
     try:
         return _fetch_all_expiries_raw(ticker), None
     except Exception as e:
