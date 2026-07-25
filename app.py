@@ -1062,7 +1062,12 @@ def analyse(ticker, period, vix_current):
     df=fetch_prices(ticker,period)
     if df is None: return None
     cl=df["Close"].squeeze()
-    curr=float(cl.iloc[-1]); prev=float(cl.iloc[-2]); pct_chg=(curr/prev-1)*100
+    # Use the last VALID close, not literally the last row: when the market is closed / a
+    # holiday / just before a fresh print, yfinance often returns a trailing NaN bar, which
+    # would surface as "$nan" in every price column. Drop trailing NaNs first.
+    _clv=cl.dropna()
+    if len(_clv)<2: return None
+    curr=float(_clv.iloc[-1]); prev=float(_clv.iloc[-2]); pct_chg=(curr/prev-1)*100 if prev else 0.0
     hv20_s=calc_hv(cl,20); hv60_s=calc_hv(cl,60)
     hv_cur=float(hv20_s.dropna().iloc[-1]) if not hv20_s.dropna().empty else None
     hvr=calc_iv_rank(hv20_s); hvpct=calc_iv_percentile(hv20_s)
@@ -2300,11 +2305,17 @@ with tab_screener:
     with col_run:
         run_btn=st.button("🔍 Run Screener",type="primary",use_container_width=True)
     with col_note:
-        st.info("First run ~30–60 s. Cached 30 min.")
+        st.info("Runs automatically the first time this session; click to re-run after changing "
+                "targets. Not re-run on the 60 s auto-refresh. First run ~30–60 s.")
 
     show_debug=st.checkbox("🔧 Diagnostic output",value=False)
 
-    if run_btn:
+    # Auto-run once per session so results appear without a first click; manual-only thereafter
+    # (and never on the 60 s auto-refresh). run_btn always forces a fresh scan.
+    _autorun=(bool(results) and "screener_results" not in st.session_state
+              and not st.session_state.get("screener_autorun_done"))
+    if run_btn or _autorun:
+        st.session_state["screener_autorun_done"]=True
         if not results:
             st.warning("No market data loaded.")
         else:
