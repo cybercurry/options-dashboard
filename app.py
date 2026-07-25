@@ -483,6 +483,17 @@ def fetch_underlying_last(ticker):
         pass
     return None
 
+def fetch_chain(ticker, expiry):
+    """Unified chain fetch for the screener / analyse / deep-dive: Tradier real IV & Greeks
+    when a token is configured (find_target_strike then reads the real delta/theta directly
+    instead of Black-Scholes), else yfinance. Same (calls, puts, dte, err) shape either way,
+    and it falls back to yfinance if a Tradier fetch fails so it can never regress."""
+    if tradier.is_configured():
+        calls, puts, dte, err = fetch_chain_tradier(ticker, expiry)
+        if calls is not None:
+            return calls, puts, dte, err
+    return fetch_chain_cached(ticker, expiry)
+
 # ══════════════════════════════════════════════════════════════════════════════
 # BLACK-SCHOLES GREEKS
 # ══════════════════════════════════════════════════════════════════════════════
@@ -591,9 +602,11 @@ def find_target_strike(chain_df, target_delta_abs, option_type, price, dte, hv_p
             try: yahoo_ok = (not pd.isna(d_raw)) and (not pd.isna(t_raw))
             except Exception: pass
 
-        d2_val=None
+        d2_val=None; sigma=None
         if yahoo_ok:
-            d_abs=abs(float(d_raw))*100.0; theta=abs(float(t_raw)); gs="yahoo"
+            # Real vendor Greeks came in on the chain (Tradier/ORATS delta+theta, per-day
+            # theta like _bs_greeks) — use them directly instead of Black-Scholes.
+            d_abs=abs(float(d_raw))*100.0; theta=abs(float(t_raw)); gs="tradier"
             # no d1/d2 available from the raw chain field — POP falls back to None below
         else:
             if 0.01<iv<5.0:              sigma=iv;          src="strike"
@@ -616,7 +629,8 @@ def find_target_strike(chain_df, target_delta_abs, option_type, price, dte, hv_p
         if score < min_score:
             min_score=score
             mid=(bid+ask)/2.0
-            eff_iv=round(iv*100,1) if (gs=="yahoo" and iv>0.01) else round(sigma*100,1)
+            eff_iv=(round(iv*100,1) if (gs=="tradier" and iv>0.01)
+                    else round(sigma*100,1) if sigma is not None else None)
             # POP (§9.2) — probability the short option expires OTM (favorable), via N(d2).
             # Put: favorable if S_T>K -> N(d2). Call: favorable if S_T<K -> N(-d2)=1-N(d2).
             if d2_val is not None:
@@ -798,7 +812,7 @@ def get_screener_row(ticker, result, bb_veto_mode="Hard", soft_penalty=10,
             continue
     if exp_csp is None: return None
 
-    calls_df,puts_df,_,_=fetch_chain_cached(ticker,exp_csp)
+    calls_df,puts_df,_,_=fetch_chain(ticker,exp_csp)
     if puts_df is None or puts_df.empty: return None
 
     hv_sigma=(hv_raw/100.0) if (hv_raw and hv_raw>0) else None
@@ -833,7 +847,7 @@ def get_screener_row(ticker, result, bb_veto_mode="Hard", soft_penalty=10,
     leap=None; leap_nis=None; leap_score=None
     leap_intrinsic=None; leap_extrinsic=None; leap_extrinsic_per_day=None
     if exp_leap is not None:
-        leap_calls_df,_,_,_=fetch_chain_cached(ticker,exp_leap)
+        leap_calls_df,_,_,_=fetch_chain(ticker,exp_leap)
         if leap_calls_df is not None and not leap_calls_df.empty:
             leap=find_target_strike(leap_calls_df,target_delta_leap,"call",price,dte_leap,hv_sigma)
     if leap is not None:
@@ -1070,7 +1084,7 @@ def analyse(ticker, period, vix_current):
         valid=[e for e in all_exps if (datetime.strptime(e,"%Y-%m-%d")-today).days>14]
         if valid:
             exp=valid[0]
-            calls_df,puts_df,dte,chain_err=fetch_chain_cached(ticker,exp)
+            calls_df,puts_df,dte,chain_err=fetch_chain(ticker,exp)
             if calls_df is not None:
                 chain=type("_C",(),{"calls":calls_df,"puts":puts_df})()
                 c_iv,p_iv=calc_atm_iv(chain,curr); pcr_val=calc_pcr(chain)
@@ -1101,7 +1115,7 @@ def fmt(v,fs=".1f",su=""):
     return f"{v:{fs}}{su}" if v is not None else "—"
 
 def greek_source_label(gs):
-    return {"yahoo":"📡 Yahoo","bs_strike":"📐 BS (strike IV)",
+    return {"tradier":"📡 Tradier (real)","yahoo":"📡 Yahoo","bs_strike":"📐 BS (strike IV)",
             "bs_chain_median":"📐 BS (chain med IV)","bs_hv20":"📐 BS (HV20)",
             "bs_default":"📐 BS (30% def)"}.get(gs, gs or "—")
 
@@ -2188,7 +2202,10 @@ with tab_screener:
     CC default settings: Δ30 | 30 DTE<br>
     LEAP settings: Δ80 | 542 DTE (18 months)
     </div>""", unsafe_allow_html=True)
-    st.caption("All greeks via Black-Scholes (strike IV → chain median → HV20 → 30% default)")
+    st.caption("Greeks: **Tradier real (ORATS)** when connected, otherwise Black-Scholes "
+               "(strike IV → chain median → HV20 → 30% default)."
+               if tradier.is_configured() else
+               "All greeks via Black-Scholes (strike IV → chain median → HV20 → 30% default)")
 
     # 26 June — manual target Δ/DTE overrides (Jay: keep Δ30/30DTE as the default, but let a
     # trader dial it manually off-default per chart/support-resistance read, rather than the
@@ -2316,7 +2333,7 @@ with tab_screener:
                         ve=next((e for e in all_exps if 21<=(datetime.strptime(e,"%Y-%m-%d")-today).days<=45),None)
                         if not ve: reason=f"no 21–45 DTE expiry (have:{all_exps[:3]})"
                         else:
-                            _,pdf,_,chain_err=fetch_chain_cached(ticker,ve)
+                            _,pdf,_,chain_err=fetch_chain(ticker,ve)
                             if pdf is None or pdf.empty:
                                 reason=f"chain failed for {ve}"+(f" — {chain_err}" if chain_err else "")
                             else:
@@ -2676,9 +2693,10 @@ with tab_screener:
         #  per-strategy inside each sub-tab via _gate_detail_panel, so CSP/CC/LEAP are symmetric.)
 
     elif "screener_results" not in st.session_state:
-        st.markdown("""<div style='text-align:center;padding:60px;color:#94a3b8;'>
+        _greek_hint="Tradier real greeks" if tradier.is_configured() else "Black-Scholes greeks"
+        st.markdown(f"""<div style='text-align:center;padding:60px;color:#94a3b8;'>
         <h3>Click <strong>Run Screener</strong> to analyse your watchlist</h3>
-        <p>Δ30 · 30 DTE · Black-Scholes greeks · Works any time of day</p>
+        <p>Δ30 · 30 DTE · {_greek_hint} · Works any time of day</p>
         </div>""",unsafe_allow_html=True)
     else:
         st.warning("No screener data. Enable diagnostic output and re-run the screener.")
