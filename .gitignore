@@ -2,3 +2,9 @@ __pycache__/
 *.pyc
 venv/
 .venv/
+
+# Secrets — never commit API tokens (Tradier etc.)
+.streamlit/secrets.toml
+secrets.toml
+.env
+*.env
