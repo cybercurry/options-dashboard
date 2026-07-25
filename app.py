@@ -1981,20 +1981,16 @@ with tab_chain:
                 st.caption(f"Data source: {_chain_src}")
                 if calls_df is not None:
                     chain=type("_C",(),{"calls":calls_df,"puts":puts_df})()
-                    # Real-time last price of the underlying (Tradier), shown right of DTE.
-                    _last_px=fetch_underlying_last(sel_c) if tradier.is_configured() else None
-                    if _last_px is None: _last_px=price
-                    # NOTE: dollar signs are escaped as "\$" — Streamlit markdown treats an
-                    # unescaped "$…$" pair as LaTeX math and would swallow the HTML between them.
+                    # Single price shown left of DTE (the underlying's last, via analyse() with a
+                    # Tradier real-time fallback set above). NOTE: dollar signs are escaped as
+                    # "\$" — Streamlit markdown treats an unescaped "$…$" pair as LaTeX math and
+                    # would swallow the HTML between them.
                     def _px(v):
                         return (f"\\${v:,.2f}" if v is not None and
                                 not (isinstance(v,float) and math.isnan(v)) else "n/a")
                     st.markdown(f"<span style='font-size:1.9rem;font-weight:700;'>{_px(price)}</span>"
                                 f"&nbsp;&nbsp;·&nbsp;&nbsp;"
-                                f"<span style='font-size:1.9rem;font-weight:700;'>{dte} DTE</span>"
-                                f"&nbsp;&nbsp;·&nbsp;&nbsp;"
-                                f"<span style='font-size:1.9rem;font-weight:700;'>{_px(_last_px)}</span>"
-                                f"<span style='font-size:0.85rem;opacity:0.65;'>&nbsp;{sel_c} last</span>",
+                                f"<span style='font-size:1.9rem;font-weight:700;'>{dte} DTE</span>",
                                 unsafe_allow_html=True)
                     def fmt_chain(df_raw,side):
                         df_raw=df_raw.copy()
