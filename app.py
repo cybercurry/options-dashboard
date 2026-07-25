@@ -424,6 +424,51 @@ def fetch_chain_cached(ticker, expiry):
     except Exception as e:
         return None, None, None, f"{type(e).__name__}: {e}"
 
+# ── Tradier-backed chain — REAL vendor IV & Greeks (ORATS), same shape as above ─────
+# 25 July — Jay funded Tradier; the Options Chain tab now prefers real chains over
+# yfinance's calculated/absent Greeks. Returns DataFrames with the SAME column names the
+# display/chart code already expects (strike, impliedVolatility, lastPrice, bid, ask,
+# volume, openInterest, delta, …) so nothing downstream changes. Raises on empty so a
+# transient failure isn't cached (same discipline as the yfinance path).
+@st.cache_data(ttl=60, show_spinner=False)
+def _fetch_chain_tradier_raw(ticker, expiry):
+    opts = tradier.get_option_chain(ticker, expiry, greeks=True)
+    if not opts:
+        raise RuntimeError(f"Tradier returned no contracts for {ticker} {expiry}")
+    rows = []
+    for o in opts:
+        g  = o.get("greeks") or {}
+        iv = g.get("mid_iv")
+        if iv in (None, 0):
+            iv = g.get("smv_vol")           # ORATS surface vol fallback
+        rows.append({
+            "option_type":      o.get("option_type"),
+            "strike":           o.get("strike"),
+            "lastPrice":        o.get("last"),
+            "bid":              o.get("bid"),
+            "ask":              o.get("ask"),
+            "volume":           o.get("volume"),
+            "openInterest":     o.get("open_interest"),
+            "impliedVolatility": iv,          # already a fraction, like yfinance
+            "delta":            g.get("delta"),
+            "gamma":            g.get("gamma"),
+            "theta":            g.get("theta"),
+            "vega":             g.get("vega"),
+        })
+    df    = pd.DataFrame(rows)
+    calls = df[df["option_type"] == "call"].drop(columns=["option_type"]).reset_index(drop=True)
+    puts  = df[df["option_type"] == "put"].drop(columns=["option_type"]).reset_index(drop=True)
+    dte   = (datetime.strptime(expiry, "%Y-%m-%d") - datetime.utcnow()).days
+    return calls, puts, dte
+
+def fetch_chain_tradier(ticker, expiry):
+    """Uncached wrapper — same (calls, puts, dte, err) contract as fetch_chain_cached."""
+    try:
+        calls, puts, dte = _fetch_chain_tradier_raw(ticker, expiry)
+        return calls, puts, dte, None
+    except Exception as e:
+        return None, None, None, f"{type(e).__name__}: {e}"
+
 # ══════════════════════════════════════════════════════════════════════════════
 # BLACK-SCHOLES GREEKS
 # ══════════════════════════════════════════════════════════════════════════════
@@ -1900,7 +1945,19 @@ with tab_chain:
                 st.info("Pick an expiry above.")
             else:
                 st.markdown(f"Loaded: {sel_c} — {selected_exp}")
-                calls_df,puts_df,dte,chain_err=fetch_chain_cached(sel_c,selected_exp)
+                # Prefer Tradier's real IV/Greeks when the token is configured; fall back to
+                # Yahoo (calculated IV, no Greeks) so the tab always works.
+                if tradier.is_configured():
+                    calls_df,puts_df,dte,chain_err=fetch_chain_tradier(sel_c,selected_exp)
+                    _chain_src="🟢 **Tradier** — real IV & Greeks (ORATS)"
+                    if calls_df is None:
+                        calls_df,puts_df,dte,_fb_err=fetch_chain_cached(sel_c,selected_exp)
+                        _chain_src=(f"🟡 **Yahoo** (Tradier fetch failed, fell back — {chain_err})")
+                        chain_err=_fb_err
+                else:
+                    calls_df,puts_df,dte,chain_err=fetch_chain_cached(sel_c,selected_exp)
+                    _chain_src="🟡 **Yahoo** — calculated IV, no Greeks · add a Tradier token for real data"
+                st.caption(f"Data source: {_chain_src}")
                 if calls_df is not None:
                     chain=type("_C",(),{"calls":calls_df,"puts":puts_df})()
                     st.markdown(f"<span style='font-size:1.9rem;font-weight:700;'>${price:.2f}</span>"
