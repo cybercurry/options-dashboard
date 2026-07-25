@@ -2590,30 +2590,34 @@ with tab_screener:
         _ic_csp  = _svgicon(_P_CSP,  "#16a34a")
         _ic_cc   = _svgicon(_P_CC,   "#2563eb")
         _ic_leap = _svgicon(_P_LEAP, "#7c3aed")
-        _K = ".st-key-strategy_subtabs"
-        _B = _K + ' button[data-baseweb="tab"]'
-        _subtab_css = (
-            _K + ' [data-baseweb="tab-list"]{display:flex;gap:14px;border:none!important;background:transparent!important;margin:6px 0 16px;}'
-            + _K + ' [data-baseweb="tab-highlight"],' + _K + ' [data-baseweb="tab-border"]{display:none!important;}'
-            + _B + '{flex-direction:column!important;align-items:center!important;justify-content:center!important;gap:9px!important;min-width:134px;height:auto!important;padding:20px 30px!important;margin:0!important;border-radius:14px!important;border:2px solid rgba(128,128,128,.28)!important;background:transparent!important;transition:all .12s;}'
-            + _B + ':hover{border-color:rgba(128,128,128,.55)!important;}'
-            + _B + ' [data-testid="stMarkdownContainer"] p{font-size:17px!important;font-weight:600!important;margin:0;letter-spacing:.02em;}'
-            + _B + '::before{content:"";width:34px;height:34px;display:block;background-repeat:no-repeat;background-position:center;background-size:contain;}'
-            + _B + ':nth-of-type(1) p{color:#16a34a!important;}'
-            + _B + ':nth-of-type(1)::before{background-image:url("' + _ic_csp + '");}'
-            + _B + ':nth-of-type(2) p{color:#2563eb!important;}'
-            + _B + ':nth-of-type(2)::before{background-image:url("' + _ic_cc + '");}'
-            + _B + ':nth-of-type(3) p{color:#7c3aed!important;}'
-            + _B + ':nth-of-type(3)::before{background-image:url("' + _ic_leap + '");}'
-            + _B + ':nth-of-type(1)[aria-selected="true"]{background:#e7f7ee!important;border-color:#16a34a!important;}'
-            + _B + ':nth-of-type(2)[aria-selected="true"]{background:#e8f0fe!important;border-color:#2563eb!important;}'
-            + _B + ':nth-of-type(3)[aria-selected="true"]{background:#f1ebfd!important;border-color:#7c3aed!important;}'
-        )
-        st.markdown("<style>" + _subtab_css + "</style>", unsafe_allow_html=True)
-        with st.container(key="strategy_subtabs"):
-            t_csp,t_cc,t_leap=st.tabs(["CSP","CC","LEAP"])
+        # Strategy selector as real BUTTONS — robust across Streamlit upgrades. The old tiles
+        # styled Streamlit's internal tab HTML ([data-baseweb="tab"]); a Streamlit version bump
+        # silently changed that HTML and the styling stopped matching, so the tiles collapsed to
+        # plain text. These reuse the same SVG chart icons but key off the stable .st-key-<key>
+        # class on buttons, and drive selection through session_state.
+        if "screener_leg" not in st.session_state:
+            st.session_state["screener_leg"]="CSP"
+        _legs=[("CSP","#16a34a",_ic_csp),("CC","#2563eb",_ic_cc),("LEAP","#7c3aed",_ic_leap)]
+        _leg_css=""
+        for _lbl,_clr,_icon in _legs:
+            _kc=".st-key-legbtn_"+_lbl.lower()+" button"
+            _leg_css+=(_kc+"{display:flex;flex-direction:column;align-items:center;justify-content:center;"
+                       "gap:8px;height:96px;border-radius:14px;border:2px solid "+_clr+"55;"
+                       "font-size:17px;font-weight:700;color:"+_clr+";}"
+                       +_kc+":hover{border-color:"+_clr+";}"
+                       +_kc+"::before{content:'';width:34px;height:34px;background-repeat:no-repeat;"
+                       "background-position:center;background-size:contain;background-image:url('"+_icon+"');}")
+        st.markdown("<style>"+_leg_css+"</style>",unsafe_allow_html=True)
+        _lc=st.columns(3)
+        for _col,(_lbl,_clr,_icon) in zip(_lc,_legs):
+            with _col:
+                if st.button(_lbl,key="legbtn_"+_lbl.lower(),use_container_width=True,
+                             type="primary" if st.session_state["screener_leg"]==_lbl else "secondary"):
+                    st.session_state["screener_leg"]=_lbl
+                    st.rerun()
+        _leg=st.session_state["screener_leg"]
 
-        with t_csp:
+        if _leg=="CSP":
             st.subheader("CSP Targets")
             csp_rows=[]
             for r in screener_rows_sorted:
@@ -2638,7 +2642,7 @@ with tab_screener:
                        + ") · G4 Median — CSP fails ABOVE median (catch the bounce early)")
             _gate_detail_panel(screener_rows_sorted,"csp")
 
-        with t_cc:
+        elif _leg=="CC":
             st.subheader("CC Targets")
             cc_sorted=sorted(screener_rows_sorted,key=lambda x:x["cc_score"],reverse=True)
             cc_rows=[]
@@ -2666,7 +2670,7 @@ with tab_screener:
                        + ") · G4 Median — CC fails BELOW median (catch the topping setup early)")
             _gate_detail_panel(screener_rows_sorted,"cc")
 
-        with t_leap:
+        else:  # LEAP
             st.subheader("LEAP Targets")
             leap_sorted=sorted(screener_rows_sorted,key=lambda x:(x["leap_score"] if x.get("leap_score") is not None else -1),reverse=True)
             leap_rows=[]
