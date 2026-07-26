@@ -409,6 +409,16 @@ def fetch_ovx(period="1y"):
 def fetch_gvz(period="1y"):
     return fetch_prices("^GVZ", period)
 
+@st.cache_data(ttl=21600, show_spinner=False)   # PE barely moves intraday — refresh every 6h
+def fetch_sp500_pe():
+    """S&P 500 trailing & forward P/E via the SPY ETF (its PE tracks the index). Valuation
+    context — rich market = more downside risk to a CSP seller. (yfinance; None if it hiccups.)"""
+    try:
+        info = yf.Ticker("SPY").info
+        return info.get("trailingPE"), info.get("forwardPE")
+    except Exception:
+        return None, None
+
 @st.cache_data(ttl=1800, show_spinner=False)
 def _fetch_all_expiries_raw(ticker):
     # Raises on failure/empty so st.cache_data does NOT cache a bad result (25 June fix) —
@@ -1621,7 +1631,7 @@ watchlist=st.session_state.watchlist
 st.title("Options Intelligence Dashboard")
 
 tab_dash,tab_dive,tab_chain,tab_vix,tab_screener=st.tabs(
-    ["Overview","Deep Dive","Options Chain","🌪️ Market Volatility","⚡ Screener"])
+    ["Overview","Deep Dive","Options Chain","📊 Market Stats","⚡ Screener"])
 
 # Hover explainers for first-time visitors — what each tab is for, in plain language.
 # st.tabs() won't take custom HTML in its own labels, so (same pure-CSS :hover technique as
@@ -2177,6 +2187,25 @@ interest.
 # TAB 4 — MARKET VOLATILITY
 # ══════════════════════════════════════════════════════════════════════════════
 with tab_vix:
+    # ── S&P 500 valuation (P/E) — how expensive is the market you're selling premium into ──
+    st.subheader("S&P 500 Valuation")
+    _pe_t,_pe_f=fetch_sp500_pe()
+    pc1,pc2,pc3=st.columns(3)
+    pc1.metric("S&P 500 P/E (trailing)", f"{_pe_t:.1f}" if _pe_t else "—",
+               help="Price ÷ trailing 12-month earnings for the S&P 500 (via SPY). The market's "
+                    "valuation — how much you pay per $1 of earnings.")
+    pc2.metric("S&P 500 P/E (forward)", f"{_pe_f:.1f}" if _pe_f else "—",
+               help="Price ÷ next-12-month expected earnings. Lower than trailing when earnings "
+                    "are expected to grow.")
+    if _pe_t:
+        if   _pe_t>=25: _pe_short,_pe_full="🔴 Rich","Expensive — stretched vs the long-run average (~16–17)"
+        elif _pe_t>=20: _pe_short,_pe_full="🟡 Above avg","Above the long-run average (~16–17)"
+        else:           _pe_short,_pe_full="🟢 Fair","Around or below the long-run average (~16–17)"
+        pc3.metric("Read", _pe_short, help=_pe_full)
+        st.caption("Long-run average S&P 500 P/E is ~16–17. A rich market has less cushion — "
+                   "relevant to a CSP seller who could end up owning the shares.")
+    st.divider()
+    st.subheader("VIX — Volatility Regime")
     st.caption("VIX is implied volatility, not historical — it's priced off S&P 500 options "
                "and represents what the market expects annualized volatility to be over the "
                "**next 30 days specifically**. That's why it jumps before an event (Fed, "
@@ -2191,17 +2220,6 @@ with tab_vix:
         c2.metric("52wk High",f"{vix_cl.max():.1f}",help="Highest VIX close in the last year")
         c3.metric("52wk Low",f"{vix_cl.min():.1f}",help="Lowest VIX close in the last year")
         c4.metric("52wk Avg",f"{vix_cl.mean():.1f}",help="Average VIX close over the last year")
-        fig_vix=make_subplots(rows=2,cols=1,shared_xaxes=True,row_heights=[0.7,0.3],
-            subplot_titles=["VIX Level","30-day Rolling Avg"])
-        fig_vix.add_trace(go.Scatter(x=vix_df.index,y=vix_cl,name="VIX",fill="tozeroy",
-            line=dict(color="#f87171",width=1.5),fillcolor="rgba(248,113,113,0.12)"),row=1,col=1)
-        for lo,hi,color,label in VIX_ZONES:
-            fig_vix.add_hrect(y0=lo,y1=min(hi,50),fillcolor=color,opacity=0.05,row=1,col=1)
-            fig_vix.add_hline(y=lo,line_dash="dot",line_color=color,opacity=0.4,row=1,col=1)
-        fig_vix.add_trace(go.Scatter(x=vix_df.index,y=vix_cl.rolling(30).mean(),
-            name="30d MA",line=dict(color="#fbbf24",width=1.5)),row=2,col=1)
-        fig_vix.update_layout(height=520,template="plotly_dark",margin=dict(l=0,r=0,t=40,b=0))
-        st.plotly_chart(fig_vix,use_container_width=True)
         st.markdown("""
 | VIX | Regime | LEAP | CC | CSP |
 |---|---|---|---|---|
