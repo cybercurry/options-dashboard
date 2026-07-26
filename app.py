@@ -2205,6 +2205,28 @@ with tab_vix:
         st.caption("Long-run average S&P 500 P/E is ~16–17. A rich market has less cushion — "
                    "relevant to a CSP seller who could end up owning the shares.")
     st.divider()
+    # ── Variance Risk Premium: VIX (30-day implied) − S&P 20-day realized vol. The market-wide
+    #    "are options overpriced vs reality?" edge a premium seller harvests. Kept simple. ──
+    st.subheader("Variance Risk Premium — the seller's edge")
+    _spy_df=fetch_prices("SPY","6mo")
+    _sp_rv=None
+    if _spy_df is not None and not _spy_df.empty:
+        _rvs=calc_hv(_spy_df["Close"].squeeze(),20).dropna()
+        _sp_rv=float(_rvs.iloc[-1]) if not _rvs.empty else None
+    if vix_now is not None and _sp_rv:
+        _vrp=vix_now-_sp_rv
+        _vrp_read=("🟢 Rich — options overpriced vs reality; the edge is there to sell" if _vrp>=4 else
+                   "🟡 Thin edge — premium only a little above actual movement" if _vrp>=0 else
+                   "🔴 Negative — options cheaper than actual moves; careful selling")
+        v1,v2,v3=st.columns(3)
+        v1.metric("VIX (30-day implied)", f"{vix_now:.1f}")
+        v2.metric("S&P realized (20-day)", f"{_sp_rv:.1f}")
+        v3.metric("VRP (implied − realized)", f"{_vrp:+.1f}")
+        st.caption(f"{_vrp_read}.  VRP = what the market *expects* to move (VIX) minus what the S&P "
+                   "*actually* moved. Positive = you're paid a premium over reality to sell — the edge.")
+    else:
+        st.caption("VRP unavailable (need both VIX and S&P realized vol).")
+    st.divider()
     st.subheader("VIX — Volatility Regime")
     st.caption("VIX is implied volatility, not historical — it's priced off S&P 500 options "
                "and represents what the market expects annualized volatility to be over the "
