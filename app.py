@@ -2059,7 +2059,6 @@ with tab_chain:
             if not selected_exp:
                 st.info("Pick an expiry above.")
             else:
-                st.markdown(f"Loaded: {sel_c} — {selected_exp}")
                 # Prefer Tradier's real IV/Greeks when the token is configured; fall back to
                 # Yahoo (calculated IV, no Greeks) so the tab always works.
                 if tradier.is_configured():
@@ -2086,36 +2085,29 @@ with tab_chain:
                                 f"&nbsp;&nbsp;·&nbsp;&nbsp;"
                                 f"<span style='font-size:1.9rem;font-weight:700;'>{dte} DTE</span>",
                                 unsafe_allow_html=True)
-                    def fmt_chain(df_raw,side):
+                    # Lean, seller-focused columns (Jay's declutter): just what picks a strike
+                    # to sell — Strike · Δ · Bid · Ask · IV% · OI. Dropped Last / Moneyness /
+                    # Volume (Δ already tells you moneyness; you sell at the bid, not last).
+                    def fmt_chain(df_raw):
                         df_raw=df_raw.copy()
                         df_raw["IV %"]=(df_raw["impliedVolatility"]*100).round(1)
-                        df_raw["Moneyness"]=df_raw["strike"].apply(
-                            lambda s:"ATM" if abs(s-price)/price<0.02
-                            else("ITM" if((s<price and side=="call")or(s>price and side=="put"))else "OTM"))
-                        cols=["strike","Moneyness","lastPrice","bid","ask","volume","openInterest","IV %","delta"]
+                        cols=["strike","delta","bid","ask","IV %","openInterest"]
                         available=[c for c in cols if c in df_raw.columns]
                         return(df_raw[available]
-                               .rename(columns={"lastPrice":"Last","openInterest":"OI","strike":"Strike",
-                                                 "volume":"Volume","bid":"Bid","ask":"Ask","delta":"Δ"})
+                               .rename(columns={"strike":"Strike","delta":"Δ","bid":"Bid",
+                                                 "ask":"Ask","openInterest":"OI"})
                                .sort_values("Strike").reset_index(drop=True))
-                    # 26 June (step 2) — converted from st.dataframe + a caption-strip legend
-                    # above it to the same in-header hover-tooltip _html_table used by Watchlist
-                    # Overview and the Screener's CSP/CC/LEAP tables (Jay: label every table the
-                    # same way). st.dataframe's header is a canvas-rendered grid and can't carry
-                    # a real tooltip (see _html_table's docstring comment above) — this renders
-                    # the chain as the shared HTML table instead, same sort/fullscreen-for-hover
-                    # tradeoff already made everywhere else.
-                    _CHAIN_LEGEND=[("Strike","Option strike price"),
-                                    ("Moneyness","ATM = at-the-money (within 2% of spot) · "
-                                     "ITM = in-the-money · OTM = out-of-the-money"),
-                                    ("Last","Last traded price"),
-                                    ("Bid","Current bid price"),
-                                    ("Ask","Current ask price"),
-                                    ("Volume","Contracts traded today"),
-                                    ("OI","Open interest — contracts outstanding"),
+                    _CHAIN_LEGEND=[("Strike","Option strike · 🎯 marks the ≈30-delta strike — the usual CSP/CC sell target"),
+                                    ("Δ","Delta — roughly the chance it finishes in-the-money; ~0.30 is the common sell target"),
+                                    ("Bid","What you'd collect selling here (the premium)"),
+                                    ("Ask","Ask price — the Bid↔Ask gap is fill quality (tighter = easier fill)"),
                                     ("IV %","Implied volatility for this strike"),
-                                    ("Δ","Delta — sensitivity per $1 stock move")]
-                    def _chain_html_rows(df_fmt):
+                                    ("OI","Open interest — contracts outstanding; higher = more liquid, easier fills")]
+                    def _target_strike(df_fmt):
+                        if "Δ" not in df_fmt.columns: return None
+                        d=(df_fmt["Δ"].abs()-0.30).abs()
+                        return df_fmt.loc[d.idxmin(),"Strike"] if not d.dropna().empty else None
+                    def _chain_html_rows(df_fmt, target=None):
                         cols=[l for l,_ in _CHAIN_LEGEND]
                         rows=[]
                         for _,row in df_fmt.iterrows():
@@ -2124,50 +2116,44 @@ with tab_chain:
                                 if c not in df_fmt.columns:
                                     d[c]="—"; continue
                                 v=row[c]
-                                if pd.isna(v):
-                                    d[c]="—"
-                                elif c in ("Strike","Last","Bid","Ask"):
-                                    d[c]=f"${v:.2f}"
-                                elif c=="IV %":
-                                    d[c]=f"{v:.1f}%"
-                                elif c=="Δ":
-                                    d[c]=f"{v:.3f}"
-                                elif c in ("Volume","OI"):
-                                    d[c]=f"{int(v):,}"
-                                else:
-                                    d[c]=v
+                                if pd.isna(v):            d[c]="—"
+                                elif c=="Strike":         d[c]=("🎯 " if (target is not None and v==target) else "")+f"${v:.2f}"
+                                elif c in ("Bid","Ask"):  d[c]=f"${v:.2f}"
+                                elif c=="IV %":           d[c]=f"{v:.1f}%"
+                                elif c=="Δ":              d[c]=f"{v:.2f}"
+                                elif c=="OI":             d[c]=f"{int(v):,}"
+                                else:                     d[c]=v
                             rows.append(d)
                         return rows
                     col_c,col_p=st.columns(2)
                     with col_c:
                         st.subheader("Calls")
-                        calls_fmt=fmt_chain(chain.calls,"call")
-                        calls_h=min(38+len(calls_fmt)*35+12,520)
-                        _html_table(_chain_html_rows(calls_fmt),_CHAIN_LEGEND,calls_h)
+                        calls_fmt=fmt_chain(chain.calls)
+                        _html_table(_chain_html_rows(calls_fmt,_target_strike(calls_fmt)),
+                                    _CHAIN_LEGEND,min(38+len(calls_fmt)*35+12,520))
                     with col_p:
                         st.subheader("Puts")
-                        puts_fmt=fmt_chain(chain.puts,"put")
-                        puts_h=min(38+len(puts_fmt)*35+12,520)
-                        _html_table(_chain_html_rows(puts_fmt),_CHAIN_LEGEND,puts_h)
-                    st.subheader("IV Smile")
-                    fig_smile=go.Figure()
-                    fig_smile.add_trace(go.Scatter(x=chain.calls["strike"],y=chain.calls["impliedVolatility"]*100,
-                        name="Calls IV",mode="lines+markers",line=dict(color="#26a69a",width=2),marker=dict(size=5)))
-                    fig_smile.add_trace(go.Scatter(x=chain.puts["strike"], y=chain.puts["impliedVolatility"]*100,
-                        name="Puts IV", mode="lines+markers",line=dict(color="#ef5350",width=2),marker=dict(size=5)))
-                    fig_smile.add_vline(x=price,line_dash="dash",line_color="white",annotation_text=f"${price:.2f}")
-                    fig_smile.update_layout(height=350,template="plotly_dark",xaxis_title="Strike",
-                                            yaxis_title="IV (%)",margin=dict(l=0,r=0,t=20,b=0))
-                    st.plotly_chart(fig_smile,use_container_width=True)
-                    st.subheader("Open Interest by Strike")
-                    fig_oi=go.Figure()
-                    fig_oi.add_trace(go.Bar(x=chain.calls["strike"],y=chain.calls["openInterest"],name="Call OI",marker_color="#26a69a",opacity=0.75))
-                    fig_oi.add_trace(go.Bar(x=chain.puts["strike"], y=chain.puts["openInterest"],name="Put OI", marker_color="#ef5350",opacity=0.75))
-                    fig_oi.add_vline(x=price,line_dash="dash",line_color="white")
-                    fig_oi.update_layout(barmode="overlay",height=320,template="plotly_dark",
-                                         xaxis_title="Strike",yaxis_title="OI",margin=dict(l=0,r=0,t=20,b=0))
-                    st.plotly_chart(fig_oi,use_container_width=True)
-                    with st.expander("📖 How to read IV Smile & Open Interest"):
+                        puts_fmt=fmt_chain(chain.puts)
+                        _html_table(_chain_html_rows(puts_fmt,_target_strike(puts_fmt)),
+                                    _CHAIN_LEGEND,min(38+len(puts_fmt)*35+12,520))
+                    # Optional context — folded away so the default view is just pickers + table.
+                    with st.expander("📊 Skew & liquidity — IV smile · open interest (optional)"):
+                        fig_smile=go.Figure()
+                        fig_smile.add_trace(go.Scatter(x=chain.calls["strike"],y=chain.calls["impliedVolatility"]*100,
+                            name="Calls IV",mode="lines+markers",line=dict(color="#26a69a",width=2),marker=dict(size=5)))
+                        fig_smile.add_trace(go.Scatter(x=chain.puts["strike"], y=chain.puts["impliedVolatility"]*100,
+                            name="Puts IV", mode="lines+markers",line=dict(color="#ef5350",width=2),marker=dict(size=5)))
+                        fig_smile.add_vline(x=price,line_dash="dash",line_color="white",annotation_text=f"${price:.2f}")
+                        fig_smile.update_layout(height=320,template="plotly_dark",xaxis_title="Strike",
+                                                yaxis_title="IV (%)",title="IV Smile",margin=dict(l=0,r=0,t=30,b=0))
+                        st.plotly_chart(fig_smile,use_container_width=True)
+                        fig_oi=go.Figure()
+                        fig_oi.add_trace(go.Bar(x=chain.calls["strike"],y=chain.calls["openInterest"],name="Call OI",marker_color="#26a69a",opacity=0.75))
+                        fig_oi.add_trace(go.Bar(x=chain.puts["strike"], y=chain.puts["openInterest"],name="Put OI", marker_color="#ef5350",opacity=0.75))
+                        fig_oi.add_vline(x=price,line_dash="dash",line_color="white")
+                        fig_oi.update_layout(barmode="overlay",height=300,template="plotly_dark",title="Open Interest by Strike",
+                                             xaxis_title="Strike",yaxis_title="OI",margin=dict(l=0,r=0,t=30,b=0))
+                        st.plotly_chart(fig_oi,use_container_width=True)
                         st.markdown("""
 **IV Smile**
 
@@ -2201,8 +2187,8 @@ interest.
                 else:
                     st.warning(f"Could not load chain for this expiry."
                                + (f" ({chain_err})" if chain_err else "")
-                               + " Try again in a moment — this is usually a transient "
-                                 "Yahoo Finance fetch issue, not cached, so a retry can help.")
+                               + " Try again in a moment — usually a transient data-feed hiccup, "
+                                 "not cached, so a retry helps.")
 
 # ══════════════════════════════════════════════════════════════════════════════
 # TAB 4 — MARKET VOLATILITY
