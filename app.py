@@ -1648,10 +1648,9 @@ st.markdown("""<style>
 }
 .jay-nav-tt:hover .jay-nav-tt-text{visibility:visible;opacity:1;}
 </style>""", unsafe_allow_html=True)
-st.markdown('<div class="jay-nav-tt-row">'+"".join(
-    f'<span class="jay-nav-tt">ⓘ {label}<span class="jay-nav-tt-text">{text}</span></span>'
-    for label, text in _TAB_LEGEND
-)+'</div>', unsafe_allow_html=True)
+# Tab-legend strip removed (per Jay) — it rendered below the tab container, i.e. at the bottom
+# of every tab, which was just clutter. The CSS above stays: _tt() reuses .jay-nav-tt for the
+# inline hover tooltips used throughout.
 
 # 26 June — reusable inline hover-tooltip helper, module scope so every tab below can wrap a
 # bare jargon term (SKEW, DXY, Contango, etc.) in markdown text without re-injecting CSS — the
@@ -1990,22 +1989,6 @@ with tab_dive:
         # RSI stay aligned.
         fig.update_xaxes(range=[df.index.min(), df.index.max()+pd.Timedelta(days=10)])
         st.plotly_chart(fig,use_container_width=True)
-        if r["price"]:
-            st.subheader("Position Sizing Guide")
-            dte_ref=r["dte"] if r.get("dte") else 30
-            iv_ref=(r["c_iv"] or r["p_iv"]) if (r.get("c_iv") or r.get("p_iv")) else None
-            if iv_ref:
-                exp_move=r["price"]*(iv_ref/100.0)*math.sqrt(dte_ref/365.0)
-                st.markdown(f"""
-| Metric | Value |
-|---|---|
-| IV expected move (1 SD, ~{dte_ref}d, ATM IV {iv_ref:.0f}%) | ±${exp_move:.2f} ({exp_move/r['price']*100:.1f}% of price) |
-| Suggested CC strike (1 SD above) | ~${r['price']+exp_move:.2f} |
-| Suggested CSP strike (1 SD below) | ~${r['price']-exp_move:.2f} |
-                """)
-                st.caption("Uses the option market's own forward-looking volatility (ATM IV), scaled to this expiry's actual DTE via √(DTE/365) — a proper 1-standard-deviation expected move. The old ATR-based row is retired: ATR is backward-looking and not time-scaled, so it's fully superseded by this.")
-            else:
-                st.caption("No ATM IV available for this name (no live option chain) — can't compute an expected-move sizing guide.")
 
 # ══════════════════════════════════════════════════════════════════════════════
 # TAB 3 — OPTIONS CHAIN
