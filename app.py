@@ -1072,14 +1072,34 @@ def _mean_reversion_score(pctb_s, rsi_s, df, direction):
         if fired: score+=3; reasons.append(f"✅ {pattern}")
     return score, reasons, (pattern if fired else None)
 
+def _pctb_now(pctb_s):
+    """Latest Bollinger %B. 0.5 == the 20-day midline (the same 'median' the CC/CSP G4 gate
+    uses), so %B<0.5 = below median, %B>0.5 = above median."""
+    c=pctb_s.dropna()
+    return float(c.iloc[-1]) if len(c)>=1 else None
+
+def _setup_label(score, kind, blocked=False):
+    # 25 July — median rule made consistent with the Screener's G4 gate: a CC/CSP timing read
+    # can only go GREEN when price is on the correct side of the median (CC above, CSP below).
+    # If the mean-reversion read is strong but price is on the wrong side, cap at yellow with a
+    # clear "wrong side of median" — never green. Mean-reversion stays the judgement layer.
+    verb = "write now" if kind=="cc" else "sell put"
+    tier = "full" if score>=10 else "partial" if score>=6 else "early" if score>=3 else "none"
+    if blocked and tier in ("full","partial"):
+        return "🟡 Timing ok — wrong side of median"
+    return {"full":f"🟢 FULL SETUP — {verb}","partial":"🟡 PARTIAL SETUP",
+            "early":"🟠 EARLY / WATCH","none":"🔴 NO SETUP"}[tier]
+
 def cc_signal(hvr,pctb_s,rsi_s,df):
     score,reasons,_=_mean_reversion_score(pctb_s,rsi_s,df,"cc")
     if hvr is not None:
         if hvr>55:   score+=2; reasons.append("✅ HV Rank high — premium rich")
         elif hvr>35: score+=1; reasons.append("🟡 HV Rank moderate")
         else:        reasons.append("❌ HV Rank low — thin premium even if setup fires")
-    label=("🟢 FULL SETUP — write now" if score>=10 else "🟡 PARTIAL SETUP" if score>=6
-           else "🟠 EARLY / WATCH" if score>=3 else "🔴 NO SETUP")
+    _pb=_pctb_now(pctb_s); below_median=_pb is not None and _pb<0.5
+    if below_median:
+        reasons.append(f"⛔ Price below median (%B {_pb:.2f}) — CC needs above median; no green")
+    label=_setup_label(score,"cc",blocked=below_median)
     return label, score, reasons
 
 def csp_signal(hvr,pctb_s,rsi_s,df,walking=False):
@@ -1089,8 +1109,10 @@ def csp_signal(hvr,pctb_s,rsi_s,df,walking=False):
     if hvr is not None:
         if hvr>55:   score+=2; reasons.append("✅ High HV Rank — CSP premium rich")
         elif hvr>35: score+=1; reasons.append("🟡 Moderate HV Rank")
-    label=("🟢 FULL SETUP — sell put" if score>=10 else "🟡 PARTIAL SETUP" if score>=6
-           else "🟠 EARLY / WATCH" if score>=3 else "🔴 NO SETUP")
+    _pb=_pctb_now(pctb_s); above_median=_pb is not None and _pb>0.5
+    if above_median:
+        reasons.append(f"⛔ Price above median (%B {_pb:.2f}) — CSP needs below median; no green")
+    label=_setup_label(score,"csp",blocked=above_median)
     return label, score, reasons
 
 def analyse(ticker, period, vix_current):
