@@ -975,16 +975,16 @@ def get_screener_row(ticker, result, bb_veto_mode="Hard", soft_penalty=10,
             "leap_timing_label":leap_lbl2,"leap_timing_score":leap_tsc,"leap_timing_reasons":leap_treasons}
 
 # ── Signal engines ─────────────────────────────────────────────────────────────
-def leap_signal(hvr,rsi_val,above_50ma,above_200ma):
+def leap_signal(iv_ratio,rsi_val,above_50ma,above_200ma):
     # 26 June — dropped the VIX bullet (Jay: too generic, index-wide, not ticker-specific).
     # Deep Dive now appends a Premium Mix tick (real ~80Δ/542-DTE contract, intrinsic vs
     # extrinsic) sourced from the Screener tab's data instead — see tab_dive. vix_lvl is no
     # longer a param here; analyse() still accepts vix_current but no longer threads it in.
     score=0; reasons=[]
-    if hvr is not None:
-        if hvr<25:   score+=3; reasons.append("✅ HV Rank low (<25) — cheap premium")
-        elif hvr<40: score+=2; reasons.append("🟡 HV Rank moderate (25-40)")
-        else:        score-=1; reasons.append("❌ HV Rank elevated — expensive entry")
+    if iv_ratio is not None:   # LEAP buyer wants CHEAP premium → low IV vs realized
+        if iv_ratio<1.0:    score+=3; reasons.append(f"✅ IV cheap vs realized ({iv_ratio:.1f}×) — good entry")
+        elif iv_ratio<1.25: score+=2; reasons.append(f"🟡 IV fair vs realized ({iv_ratio:.1f}×)")
+        else:               score-=1; reasons.append(f"❌ IV rich vs realized ({iv_ratio:.1f}×) — expensive entry")
     if rsi_val is not None:
         if 33<=rsi_val<=52:   score+=2; reasons.append("✅ RSI ideal recovery zone (33-52)")
         elif 52<rsi_val<=65:  score+=1; reasons.append("🟡 RSI extended, not overbought")
@@ -1112,25 +1112,25 @@ def iv_richness(c_iv, p_iv, hv20):
     if ratio >= 1.00: return f"⚪ Fair {ratio:.1f}×"
     return f"🔴 Cheap {ratio:.1f}×"
 
-def cc_signal(hvr,pctb_s,rsi_s,df):
+def cc_signal(iv_ratio,pctb_s,rsi_s,df):
     score,reasons,_=_mean_reversion_score(pctb_s,rsi_s,df,"cc")
-    if hvr is not None:
-        if hvr>55:   score+=2; reasons.append("✅ HV Rank high — premium rich")
-        elif hvr>35: score+=1; reasons.append("🟡 HV Rank moderate")
-        else:        reasons.append("❌ HV Rank low — thin premium even if setup fires")
+    if iv_ratio is not None:   # CC seller wants RICH premium → high IV vs realized
+        if iv_ratio>=1.25:  score+=2; reasons.append(f"✅ IV rich vs realized ({iv_ratio:.1f}×) — premium fat")
+        elif iv_ratio>=1.0: score+=1; reasons.append(f"🟡 IV fair vs realized ({iv_ratio:.1f}×)")
+        else:               reasons.append(f"❌ IV below realized ({iv_ratio:.1f}×) — thin premium even if setup fires")
     _pb=_pctb_now(pctb_s); below_median=_pb is not None and _pb<0.5
     if below_median:
         reasons.append(f"⛔ Price below median (%B {_pb:.2f}) — CC needs above median; no green")
     label=_setup_label(score,"cc",blocked=below_median)
     return label, score, reasons
 
-def csp_signal(hvr,pctb_s,rsi_s,df,walking=False):
+def csp_signal(iv_ratio,pctb_s,rsi_s,df,walking=False):
     score,reasons,_=_mean_reversion_score(pctb_s,rsi_s,df,"csp")
     if walking:
         score=max(0,score-4); reasons.append("❌ Still walking the lower band — breakdown, not a bounce (veto)")
-    if hvr is not None:
-        if hvr>55:   score+=2; reasons.append("✅ High HV Rank — CSP premium rich")
-        elif hvr>35: score+=1; reasons.append("🟡 Moderate HV Rank")
+    if iv_ratio is not None:   # CSP seller wants RICH premium → high IV vs realized
+        if iv_ratio>=1.25:  score+=2; reasons.append(f"✅ IV rich vs realized ({iv_ratio:.1f}×) — CSP premium fat")
+        elif iv_ratio>=1.0: score+=1; reasons.append(f"🟡 IV fair vs realized ({iv_ratio:.1f}×)")
     _pb=_pctb_now(pctb_s); above_median=_pb is not None and _pb>0.5
     if above_median:
         reasons.append(f"⛔ Price above median (%B {_pb:.2f}) — CSP needs below median; no green")
@@ -1172,9 +1172,13 @@ def analyse(ticker, period, vix_current):
             if calls_df is not None:
                 chain=type("_C",(),{"calls":calls_df,"puts":puts_df})()
                 c_iv,p_iv=calc_atm_iv(chain,curr); pcr_val=calc_pcr(chain)
-    leap_lbl,leap_sc,leap_r=leap_signal(hvr,rsi_cur,ab50,ab200)
-    cc_lbl,cc_sc,cc_r=cc_signal(hvr,pctb_s,rsi_s,df)
-    csp_lbl,csp_sc,csp_r=csp_signal(hvr,pctb_s,rsi_s,df,walking_lower)
+    # Premium richness for the signals = ATM IV ÷ 20-day realized vol (replaces HV Rank, which
+    # Jay found meaningless — IV vs realized is what actually matters to a premium seller/buyer).
+    _ivs=[v for v in (c_iv,p_iv) if v]
+    iv_ratio=((sum(_ivs)/len(_ivs))/hv_cur) if (_ivs and hv_cur and hv_cur>0) else None
+    leap_lbl,leap_sc,leap_r=leap_signal(iv_ratio,rsi_cur,ab50,ab200)
+    cc_lbl,cc_sc,cc_r=cc_signal(iv_ratio,pctb_s,rsi_s,df)
+    csp_lbl,csp_sc,csp_r=csp_signal(iv_ratio,pctb_s,rsi_s,df,walking_lower)
     return {"ticker":ticker,"price":curr,"pct":pct_chg,
             "hv20":hv_cur,"hvr":hvr,"hvpct":hvpct,"hv20_s":hv20_s,"hv60_s":hv60_s,
             "rsi":rsi_cur,"rsi_s":rsi_s,"atr":atr_cur,"bbw":bbw_cur,"bbw_s":bbw_s,
