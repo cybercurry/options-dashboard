@@ -2679,32 +2679,33 @@ with tab_screener:
         _P_LEAP = ("<path d='M4 13a8 8 0 0 1 7 7a6 6 0 0 0 3 -5a9 9 0 0 0 6 -8a3 3 0 0 0 -3 -3a9 9 0 0 0 -8 6a6 6 0 0 0 -5 3'/>"
                    "<path d='M7 14a6 6 0 0 0 -3 6a6 6 0 0 0 6 -3'/>"
                    "<path d='M15 9m-1 0a1 1 0 1 0 2 0a1 1 0 1 0 -2 0'/>")
-        _ic_csp  = _svgicon(_P_CSP,  "#16a34a")
-        _ic_cc   = _svgicon(_P_CC,   "#2563eb")
-        _ic_leap = _svgicon(_P_LEAP, "#7c3aed")
-        # Strategy selector as real BUTTONS — robust across Streamlit upgrades. The old tiles
-        # styled Streamlit's internal tab HTML ([data-baseweb="tab"]); a Streamlit version bump
-        # silently changed that HTML and the styling stopped matching, so the tiles collapsed to
-        # plain text. These reuse the same SVG chart icons but key off the stable .st-key-<key>
-        # class on buttons, and drive selection through session_state.
+        _ic_csp  = _svgicon(_P_CSP,  "#ffffff")
+        _ic_cc   = _svgicon(_P_CC,   "#ffffff")
+        _ic_leap = _svgicon(_P_LEAP, "#ffffff")
+        # Strategy selector as real BUTTONS keyed on the stable .st-key-<key> class (robust
+        # across Streamlit upgrades). High-contrast (Jay): white text + icon on dark; the
+        # SELECTED leg fills solid in its muted strategy colour, the rest are outlined.
         if "screener_leg" not in st.session_state:
             st.session_state["screener_leg"]="CSP"
+        _active=st.session_state["screener_leg"]
         _legs=[("CSP","#16a34a",_ic_csp),("CC","#2563eb",_ic_cc),("LEAP","#7c3aed",_ic_leap)]
         _leg_css=""
         for _lbl,_clr,_icon in _legs:
             _kc=".st-key-legbtn_"+_lbl.lower()+" button"
-            _leg_css+=(_kc+"{display:flex;flex-direction:column;align-items:center;justify-content:center;"
-                       "gap:8px;height:96px;border-radius:14px;border:2px solid "+_clr+"55;"
-                       "font-size:17px;font-weight:700;color:"+_clr+";}"
-                       +_kc+":hover{border-color:"+_clr+";}"
-                       +_kc+"::before{content:'';width:34px;height:34px;background-repeat:no-repeat;"
+            _base=(_kc+"{display:flex;flex-direction:column;align-items:center;justify-content:center;"
+                   "gap:8px;height:96px;border-radius:14px;font-size:17px;font-weight:700;color:#ffffff!important;")
+            if _lbl==_active:
+                _leg_css+=_base+"background:"+_clr+"!important;border:2px solid "+_clr+"!important;}"
+            else:
+                _leg_css+=(_base+"background:transparent!important;border:2px solid "+_clr+"!important;}"
+                           +_kc+":hover{background:"+_clr+"22!important;}")
+            _leg_css+=(_kc+"::before{content:'';width:34px;height:34px;background-repeat:no-repeat;"
                        "background-position:center;background-size:contain;background-image:url('"+_icon+"');}")
         st.markdown("<style>"+_leg_css+"</style>",unsafe_allow_html=True)
         _lc=st.columns(3)
         for _col,(_lbl,_clr,_icon) in zip(_lc,_legs):
             with _col:
-                if st.button(_lbl,key="legbtn_"+_lbl.lower(),use_container_width=True,
-                             type="primary" if st.session_state["screener_leg"]==_lbl else "secondary"):
+                if st.button(_lbl,key="legbtn_"+_lbl.lower(),use_container_width=True,type="secondary"):
                     st.session_state["screener_leg"]=_lbl
                     st.rerun()
         _leg=st.session_state["screener_leg"]
