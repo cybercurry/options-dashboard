@@ -136,7 +136,8 @@ def get_expirations(symbol):
     exp = (data.get("expirations") or {}).get("date")
     if exp is None:
         return []
-    return exp if isinstance(exp, list) else [exp]
+    exp = exp if isinstance(exp, list) else [exp]
+    return list(dict.fromkeys(exp))   # dedupe (includeAllRoots can repeat a date per root)
 
 
 def get_option_chain(symbol, expiration, greeks=True):

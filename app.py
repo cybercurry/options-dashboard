@@ -429,7 +429,10 @@ def fetch_all_expiries(ticker):
         try:
             exps = tradier.get_expirations(ticker)
             if exps:
-                return exps, None
+                # Tradier can return the SAME date more than once (one row per option root
+                # when includeAllRoots is on) — dedupe so the Options Chain shows each expiry
+                # tile once, not twice. Preserves chronological order.
+                return list(dict.fromkeys(exps)), None
         except Exception:
             pass
     try:
