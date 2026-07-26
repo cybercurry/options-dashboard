@@ -1899,50 +1899,50 @@ with tab_dive:
     sel=st.selectbox("Select Ticker",list(results.keys()),key="dd_sel")
     if sel and sel in results:
         r=results[sel]; df=r["df"]; cl=r["cl"]
-        c1,c2,c3,c4,c5,c6=st.columns(6)
-        c1.metric("Price",f"${r['price']:.2f}",f"{r['pct']:+.1f}%")
-        # HV Rank dropped (per Jay — leads with ATM IV instead; consistent with the Overview).
-        c2.metric("ATM Call IV",fmt(r["c_iv"],".1f","%"),
-                   help="At-the-money implied volatility on the call (real, Tradier) — the "
-                        "market's forward-looking vol. Higher = richer premium to sell.")
-        c3.metric("ATM Put IV",fmt(r["p_iv"],".1f","%"),
-                   help="At-the-money implied volatility on the put (real, Tradier) — richer = "
-                        "fatter cash-secured-put premium.")
-        c4.metric("RSI (14)",fmt(r["rsi"],".1f"),
-                   help="Relative Strength Index (14-day) — momentum gauge; <30 oversold, "
-                        ">70 overbought")
-        c5.metric("HV Pctile",fmt(r["hvpct"],".0f","%"),
-                   help="Realized-volatility percentile vs its own 1-year range")
-        c6.metric("PCR",fmt(r["pcr"],".2f"),
-                   help="Put/Call Ratio — volume of puts traded vs calls; elevated readings "
-                        "skew bearish")
-        st.caption(f"**Premium worth selling?** {iv_richness(r.get('c_iv'),r.get('p_iv'),r.get('hv20'))}"
-                   "  (🟢 fat · ⚪ ok · 🔴 thin — is the premium rich for how much this stock moves)")
-        sc1,sc2,sc3=st.columns(3)
-        for col,key,lbl in [(sc1,"leap","LEAP"),(sc2,"cc","CC"),(sc3,"csp","CSP")]:
-            with col:
-                lb2,_,reasons=r[key]
-                st.markdown(f"#### {lbl}: {lb2}")
-                if key in ("cc","csp"):
-                    st.caption(median_chip(r.get("pctb"), key))   # Signal 1, side by side
-                with st.expander("Breakdown"):
-                    for reason in reasons: st.write(reason)
-                    if key=="leap":
-                        # 26 June — Premium Mix tick (replaces the old VIX bullet here, which
-                        # was too generic/index-wide). Jay: "data is data... if we talk the
-                        # same data it should be same" — so this reads the real contract's
-                        # G4 straight out of the Screener tab's already-computed data instead
-                        # of recomputing a LEAP-contract fetch independently in analyse(). Only
-                        # available once "Run Screener" has been clicked this session; fails
-                        # silently (no extra line) rather than showing an error-y placeholder
-                        # when it hasn't, since HV Rank above already covers the gap.
-                        _scr=(st.session_state.get("screener_results",[])
-                              if st.session_state.get("screener_schema_version")==_SCREENER_SCHEMA_VERSION
-                              else [])
-                        _row=next((x for x in _scr if x.get("ticker")==sel), None)
-                        _g4=_row.get("gate_result_leap",{}).get("gates",{}).get("G4") if _row else None
-                        if _g4:
-                            st.write(("✅ " if _g4["pass"] else "❌ ") + _g4["reason"])
+        # ── Childlike-simple: a row of chips (the verdicts). Every detail lives on mouseover;
+        #    no tables, no dropdowns. Price · IV-vs-Realized (is the premium worth selling?) ·
+        #    LEAP · CC · CSP (GO / WAIT). Hover any chip for the "why". ──
+        st.markdown("""<style>
+        .dd-chip{position:relative;display:inline-block;padding:11px 18px;border-radius:12px;
+          font-weight:700;font-size:15px;color:#fff;margin:4px 8px 6px 0;cursor:default;}
+        .dd-chip .dd-tip{visibility:hidden;opacity:0;position:absolute;left:0;top:calc(100% + 8px);
+          z-index:9999;width:280px;background:#0f172a;color:#e2e8f0;border:1px solid #334155;
+          border-radius:8px;padding:11px 13px;font-weight:400;font-size:13px;line-height:1.55;
+          text-align:left;box-shadow:0 8px 24px rgba(0,0,0,.55);transition:opacity .12s;}
+        .dd-chip:hover .dd-tip{visibility:visible;opacity:1;}
+        </style>""", unsafe_allow_html=True)
+
+        def _chip(text, color, tip):
+            return (f'<span class="dd-chip" style="background:{color}">{text}'
+                    f'<span class="dd-tip">{tip}</span></span>')
+
+        _chips = []
+        # Price (numbers you used to see as tiles now live in this chip's hover)
+        _chips.append(_chip(
+            f"{sel}  ${r['price']:.2f}  <span style='opacity:.8;font-weight:400'>{r['pct']:+.1f}%</span>",
+            "#334155",
+            f"ATM IV — call {fmt(r['c_iv'],'.0f','%')} / put {fmt(r['p_iv'],'.0f','%')}<br>"
+            f"RSI(14) {fmt(r['rsi'],'.0f')} &nbsp;·&nbsp; PCR {fmt(r['pcr'],'.2f')} &nbsp;·&nbsp; "
+            f"HV%ile {fmt(r['hvpct'],'.0f','%')}"))
+        # IV vs Realized — the headline "worth selling?" read
+        _prem = iv_richness(r.get("c_iv"), r.get("p_iv"), r.get("hv20"))
+        _prem_color = "#16a34a" if "Rich" in _prem else ("#7f1d1d" if "Cheap" in _prem else "#475569")
+        _chips.append(_chip(
+            f"IV vs Realized · {_prem}", _prem_color,
+            "Is the premium worth selling? Implied vol vs how much the stock actually moves. "
+            "🟢 fat premium (good sell) · ⚪ ok · 🔴 thin (underpaid — skip)."))
+        # Strategy verdicts
+        for key, name in [("leap","LEAP"), ("cc","CC"), ("csp","CSP")]:
+            label, _score, reasons = r[key]
+            color, verdict = ("#16a34a","GO") if label.startswith("🟢") else \
+                             ("#a16207","WAIT") if label.startswith("🟡") else ("#475569","WAIT")
+            tip = f"<b>{name}: {label}</b><br>"
+            if key in ("cc","csp"):
+                tip += median_chip(r.get("pctb"), key) + "<br>"
+            tip += "<br>".join(reasons) if reasons else "Not enough data yet."
+            _chips.append(_chip(f"{name} · {verdict}", color, tip))
+        st.markdown("<div style='margin:8px 0 4px'>" + "".join(_chips) + "</div>",
+                    unsafe_allow_html=True)
         st.divider()
         bb_upper,bb_mid,bb_lower=calc_bb_bands(cl)
         vol=df["Volume"].squeeze()
