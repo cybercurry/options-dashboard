@@ -982,9 +982,9 @@ def leap_signal(iv_ratio,rsi_val,above_50ma,above_200ma):
     # longer a param here; analyse() still accepts vix_current but no longer threads it in.
     score=0; reasons=[]
     if iv_ratio is not None:   # LEAP buyer wants CHEAP premium → low IV vs realized
-        if iv_ratio<1.0:    score+=3; reasons.append(f"✅ IV cheap vs realized ({iv_ratio:.1f}×) — good entry")
-        elif iv_ratio<1.25: score+=2; reasons.append(f"🟡 IV fair vs realized ({iv_ratio:.1f}×)")
-        else:               score-=1; reasons.append(f"❌ IV rich vs realized ({iv_ratio:.1f}×) — expensive entry")
+        if iv_ratio<1.0:    score+=3; reasons.append("✅ IV cheap vs realized — good entry")
+        elif iv_ratio<1.25: score+=2; reasons.append("🟡 IV fair vs realized")
+        else:               score-=1; reasons.append("❌ IV rich vs realized — expensive entry")
     if rsi_val is not None:
         if 33<=rsi_val<=52:   score+=2; reasons.append("✅ RSI ideal recovery zone (33-52)")
         elif 52<rsi_val<=65:  score+=1; reasons.append("🟡 RSI extended, not overbought")
@@ -1108,16 +1108,16 @@ def iv_richness(c_iv, p_iv, hv20):
     if not ivs or not hv20 or hv20 <= 0:
         return "—"
     ratio = (sum(ivs)/len(ivs)) / hv20
-    if ratio >= 1.25: return f"🟢 Rich {ratio:.1f}×"
-    if ratio >= 1.00: return f"⚪ Fair {ratio:.1f}×"
-    return f"🔴 Cheap {ratio:.1f}×"
+    if ratio >= 1.25: return "🟢 Rich"
+    if ratio >= 1.00: return "⚪ Fair"
+    return "🔴 Cheap"
 
 def cc_signal(iv_ratio,pctb_s,rsi_s,df):
     score,reasons,_=_mean_reversion_score(pctb_s,rsi_s,df,"cc")
     if iv_ratio is not None:   # CC seller wants RICH premium → high IV vs realized
-        if iv_ratio>=1.25:  score+=2; reasons.append(f"✅ IV rich vs realized ({iv_ratio:.1f}×) — premium fat")
-        elif iv_ratio>=1.0: score+=1; reasons.append(f"🟡 IV fair vs realized ({iv_ratio:.1f}×)")
-        else:               reasons.append(f"❌ IV below realized ({iv_ratio:.1f}×) — thin premium even if setup fires")
+        if iv_ratio>=1.25:  score+=2; reasons.append("✅ IV rich vs realized — premium fat")
+        elif iv_ratio>=1.0: score+=1; reasons.append("🟡 IV fair vs realized")
+        else:               reasons.append("❌ IV below realized — thin premium even if setup fires")
     _pb=_pctb_now(pctb_s); below_median=_pb is not None and _pb<0.5
     if below_median:
         reasons.append(f"⛔ Price below median (%B {_pb:.2f}) — CC needs above median; no green")
@@ -1129,8 +1129,8 @@ def csp_signal(iv_ratio,pctb_s,rsi_s,df,walking=False):
     if walking:
         score=max(0,score-4); reasons.append("❌ Still walking the lower band — breakdown, not a bounce (veto)")
     if iv_ratio is not None:   # CSP seller wants RICH premium → high IV vs realized
-        if iv_ratio>=1.25:  score+=2; reasons.append(f"✅ IV rich vs realized ({iv_ratio:.1f}×) — CSP premium fat")
-        elif iv_ratio>=1.0: score+=1; reasons.append(f"🟡 IV fair vs realized ({iv_ratio:.1f}×)")
+        if iv_ratio>=1.25:  score+=2; reasons.append("✅ IV rich vs realized — CSP premium fat")
+        elif iv_ratio>=1.0: score+=1; reasons.append("🟡 IV fair vs realized")
     _pb=_pctb_now(pctb_s); above_median=_pb is not None and _pb>0.5
     if above_median:
         reasons.append(f"⛔ Price above median (%B {_pb:.2f}) — CSP needs below median; no green")
@@ -1853,9 +1853,8 @@ with tab_dash:
             ("HV%ile","Historical volatility percentile vs its own 1-year range"),
             ("HV20","20-day historical (realized) volatility, annualized"),
             ("ATM IV C/P","At-the-money implied volatility — call / put"),
-            ("IV vs HV","Premium richness: ATM IV ÷ 20-day realized vol. 🟢 Rich (≥1.25× — good "
-                        "to sell, more decay + IV-crush upside) · ⚪ Fair · 🔴 Cheap (<1× — IV "
-                        "below realized, stand down)"),
+            ("IV vs HV","Is the premium worth selling? 🟢 Rich (fat premium for how much this "
+                        "stock moves — good sell) · ⚪ Fair · 🔴 Cheap (underpaid — skip)"),
             ("RSI","Relative Strength Index (14) — momentum; <30 oversold, >70 overbought"),
             ("200MA","Price above (✅) or below (❌) its 200-day moving average — long-term trend"),
             ("PCR","Put/call volume ratio — elevated readings skew bearish"),
@@ -1917,8 +1916,8 @@ with tab_dive:
         c6.metric("PCR",fmt(r["pcr"],".2f"),
                    help="Put/Call Ratio — volume of puts traded vs calls; elevated readings "
                         "skew bearish")
-        st.caption(f"**Premium richness (theta seller):** {iv_richness(r.get('c_iv'),r.get('p_iv'),r.get('hv20'))}"
-                   "  — ATM IV vs 20-day realized vol. 🟢 rich = more decay to harvest + IV-crush upside.")
+        st.caption(f"**Premium worth selling?** {iv_richness(r.get('c_iv'),r.get('p_iv'),r.get('hv20'))}"
+                   "  (🟢 fat · ⚪ ok · 🔴 thin — is the premium rich for how much this stock moves)")
         sc1,sc2,sc3=st.columns(3)
         for col,key,lbl in [(sc1,"leap","LEAP"),(sc2,"cc","CC"),(sc3,"csp","CSP")]:
             with col:
