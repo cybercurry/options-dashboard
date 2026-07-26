@@ -108,18 +108,18 @@ STRATEGY_PARAMS = {
 RISK_FREE_RATE = 0.045
 
 # ══════════════════════════════════════════════════════════════════════════════
-# WATCHLIST SOURCE — Jay's Google Sheet (assets tab, column C), read live each session.
-# Priority on load: ?tickers= URL override  →  Google Sheet  →  baked-in default.
-# The sheet is the ongoing source of truth, so the plain link stays in sync with it and
-# everyone opening it sees the same list. The sheet must be link-viewable ("Anyone with the
-# link → Viewer") so its CSV export is publicly fetchable by the deployed app.
+# WATCHLIST SOURCE — Jay's Google Sheet (assets tab, column C4:C20) is the SINGLE source of
+# truth, read live each session. No tickers in the URL (that's not how a real product works) —
+# the sheet governs, so everyone who opens the app sees the same list. If the sheet is ever
+# unreachable, we fall back to the baked-in default. The sheet must be link-viewable ("Anyone
+# with the link → Viewer") so its CSV export is publicly fetchable by the deployed app.
 # ══════════════════════════════════════════════════════════════════════════════
 _SHEET_ID  = "1GiZjtMLkATMKtvWnl40xCK4Tlgbg8b2aJCQp5sXMcjk"
 _SHEET_GID = "1408572587"   # 'assets' tab
 
 @st.cache_data(ttl=300, show_spinner=False)
 def fetch_watchlist_from_sheet():
-    """Column C (rows 1-20) of the shared sheet → cleaned ticker list, or None on failure."""
+    """Column C (rows 4-20) of the shared sheet → cleaned ticker list, or None on failure."""
     import csv, io
     try:
         url = f"https://docs.google.com/spreadsheets/d/{_SHEET_ID}/export?format=csv&gid={_SHEET_GID}"
@@ -139,37 +139,15 @@ def fetch_watchlist_from_sheet():
     except Exception:
         return None
 
-def _load_watchlist_from_params():
-    try:
-        raw = st.query_params.get("tickers", "")
-        if raw:
-            tickers = [t.strip().upper() for t in raw.split(",") if t.strip()]
-            if tickers:
-                return tickers
-    except Exception:
-        pass
-    return None
-
-def _save_watchlist_to_params(watchlist):
-    try:
-        st.query_params["tickers"] = ",".join(watchlist)
-    except Exception:
-        pass
-
 if "watchlist" not in st.session_state:
-    _url_wl = _load_watchlist_from_params()
-    if _url_wl:                                    # explicit override in the link
-        st.session_state.watchlist = _url_wl
-        st.session_state["_wl_from_sheet"] = False
-    else:
-        _sheet_wl = fetch_watchlist_from_sheet()   # ongoing automated source
-        st.session_state.watchlist = _sheet_wl or DEFAULT_WATCHLIST.copy()
-        st.session_state["_wl_from_sheet"] = bool(_sheet_wl)
-
-# Persist to the URL only when the list is NOT sheet-sourced, so the bare link keeps
-# re-reading the sheet (ongoing sync) while custom/edited lists stay shareable via ?tickers=.
-if not st.session_state.get("_wl_from_sheet"):
-    _save_watchlist_to_params(st.session_state.watchlist)
+    _sheet_wl = fetch_watchlist_from_sheet()
+    st.session_state.watchlist   = _sheet_wl or DEFAULT_WATCHLIST.copy()
+    st.session_state["_wl_source"] = "sheet" if _sheet_wl else "default"
+    # Keep the URL clean — strip any legacy ?tickers= so the sheet is unambiguously the source.
+    try:
+        st.query_params.clear()
+    except Exception:
+        pass
 
 # ══════════════════════════════════════════════════════════════════════════════
 # DATA FETCHERS
@@ -1531,33 +1509,39 @@ def _html_table(rows, legend, height):
 with st.sidebar:
     st.markdown("## ⚙️ Settings")
 
-    new_ticker=st.text_input("Add ticker",placeholder="e.g. AMZN",key="new_ticker_input")
+    # The watchlist comes from the Google Sheet (assets tab, C4:C20). Add/remove here are just
+    # temporary session tweaks — the sheet stays the source of truth; Re-sync returns to it.
+    new_ticker=st.text_input("Add ticker (temporary)",placeholder="e.g. AMZN",key="new_ticker_input")
     if new_ticker:
         t=new_ticker.upper().strip()
         if t and t not in st.session_state.watchlist:
             st.session_state.watchlist.append(t)
-            st.session_state["_wl_from_sheet"]=False   # manual edit becomes a URL override
-            _save_watchlist_to_params(st.session_state.watchlist)
+            st.session_state["_wl_source"]="manual"
             st.rerun()
 
     if st.session_state.watchlist:
-        remove=st.selectbox("Remove ticker",["— select —"]+st.session_state.watchlist)
+        remove=st.selectbox("Remove ticker (temporary)",["— select —"]+st.session_state.watchlist)
         if remove!="— select —":
             st.session_state.watchlist.remove(remove)
-            st.session_state["_wl_from_sheet"]=False   # manual edit becomes a URL override
-            _save_watchlist_to_params(st.session_state.watchlist)
+            st.session_state["_wl_source"]="manual"
             st.rerun()
 
-    if st.session_state.get("_wl_from_sheet"):
-        st.caption("🔗 Watchlist synced from your Google Sheet (assets tab). Edit the sheet to change it.")
-        if st.button("🔄 Re-sync from sheet",use_container_width=True):
-            fetch_watchlist_from_sheet.clear()
-            for _k in ("watchlist","_wl_from_sheet"): st.session_state.pop(_k,None)
-            st.query_params.clear()
-            st.rerun()
+    _src=st.session_state.get("_wl_source")
+    if _src=="sheet":
+        st.caption(f"🔗 Synced from your Google Sheet — {len(st.session_state.watchlist)} tickers. "
+                   "Edit the sheet to change the list.")
+    elif _src=="manual":
+        st.caption(f"✏️ Temporary edits this session ({len(st.session_state.watchlist)} tickers). "
+                   "Re-sync to return to the sheet.")
     else:
-        st.caption(f"**Watchlist:** {', '.join(st.session_state.watchlist)}")
-        st.caption("💾 Saved in URL. Open the plain link (no ?tickers=) to sync from the sheet.")
+        st.warning("⚠️ Couldn't read the Google Sheet — showing the default list. Make sure it's shared "
+                   "**Anyone with the link → Viewer** and the assets tab is right, then Re-sync.")
+    if st.button("🔄 Re-sync from sheet",use_container_width=True):
+        fetch_watchlist_from_sheet.clear()
+        for _k in ("watchlist","_wl_source"): st.session_state.pop(_k,None)
+        try: st.query_params.clear()
+        except Exception: pass
+        st.rerun()
 
     period=st.selectbox("Price History",["6mo","1y","2y"],index=1)
 
