@@ -1882,18 +1882,18 @@ with tab_dive:
         r=results[sel]; df=r["df"]; cl=r["cl"]
         c1,c2,c3,c4,c5,c6=st.columns(6)
         c1.metric("Price",f"${r['price']:.2f}",f"{r['pct']:+.1f}%")
-        c2.metric("HV Rank",fmt(r["hvr"],".0f"),
-                   help="Historical (realized) volatility rank 0–100 vs its own 1-year range — "
-                        "low = cheap premium (good for buying LEAPs), high = rich premium (good "
-                        "for selling CSP/CC)")
-        c3.metric("HV Pctile",fmt(r["hvpct"],".0f","%"),
-                   help="Historical volatility percentile vs its own 1-year range")
+        # HV Rank dropped (per Jay — leads with ATM IV instead; consistent with the Overview).
+        c2.metric("ATM Call IV",fmt(r["c_iv"],".1f","%"),
+                   help="At-the-money implied volatility on the call (real, Tradier) — the "
+                        "market's forward-looking vol. Higher = richer premium to sell.")
+        c3.metric("ATM Put IV",fmt(r["p_iv"],".1f","%"),
+                   help="At-the-money implied volatility on the put (real, Tradier) — richer = "
+                        "fatter cash-secured-put premium.")
         c4.metric("RSI (14)",fmt(r["rsi"],".1f"),
                    help="Relative Strength Index (14-day) — momentum gauge; <30 oversold, "
                         ">70 overbought")
-        c5.metric("ATM Call IV",fmt(r["c_iv"],".1f","%"),
-                   help="At-the-money implied volatility on this call — what the market is "
-                        "pricing for forward-looking volatility")
+        c5.metric("HV Pctile",fmt(r["hvpct"],".0f","%"),
+                   help="Realized-volatility percentile vs its own 1-year range")
         c6.metric("PCR",fmt(r["pcr"],".2f"),
                    help="Put/Call Ratio — volume of puts traded vs calls; elevated readings "
                         "skew bearish")
