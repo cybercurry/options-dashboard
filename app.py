@@ -10,6 +10,8 @@ import requests
 from scipy.stats import norm
 from urllib.parse import quote
 from concurrent.futures import ThreadPoolExecutor
+from pathlib import Path
+import json
 import tradier   # Tradier API access door (real quotes / chains / IV / Greeks)
 import warnings
 warnings.filterwarnings("ignore")
@@ -108,44 +110,27 @@ STRATEGY_PARAMS = {
 RISK_FREE_RATE = 0.045
 
 # ══════════════════════════════════════════════════════════════════════════════
-# WATCHLIST SOURCE — Jay's Google Sheet (assets tab, column C4:C20) is the SINGLE source of
-# truth, read live each session. No tickers in the URL (that's not how a real product works) —
-# the sheet governs, so everyone who opens the app sees the same list. If the sheet is ever
-# unreachable, we fall back to the baked-in default. The sheet must be link-viewable ("Anyone
-# with the link → Viewer") so its CSV export is publicly fetchable by the deployed app.
+# WATCHLIST — kept in watchlist.json, a simple committed list that is the app's home for the
+# watchlist. No tickers in the URL. To change the list permanently, edit that one file (it's
+# just symbols). In-app add/remove are session-only tweaks — Streamlit's host has no writable
+# storage, so runtime edits can't be saved back to the file; edit the file to make it stick.
 # ══════════════════════════════════════════════════════════════════════════════
-_SHEET_ID  = "1GiZjtMLkATMKtvWnl40xCK4Tlgbg8b2aJCQp5sXMcjk"
-_SHEET_GID = "1408572587"   # 'assets' tab
+_WATCHLIST_FILE = Path(__file__).with_name("watchlist.json")
 
-@st.cache_data(ttl=300, show_spinner=False)
-def fetch_watchlist_from_sheet():
-    """Column C (rows 4-20) of the shared sheet → cleaned ticker list, or None on failure."""
-    import csv, io
+def load_watchlist_file():
     try:
-        url = f"https://docs.google.com/spreadsheets/d/{_SHEET_ID}/export?format=csv&gid={_SHEET_GID}"
-        r = requests.get(url, timeout=10)
-        r.raise_for_status()
-        if "<html" in r.text[:200].lower():          # restricted sheet → login HTML, not CSV
-            return None
-        out = []
-        for row in list(csv.reader(io.StringIO(r.text)))[3:20]:   # C4:C20 (skip 3 header rows)
-            if len(row) >= 3:
-                v = row[2].strip().upper()
-                if v and len(v) <= 6 and v.replace(".", "").replace("-", "").isalnum() and not v[0].isdigit():
-                    out.append(v)
-        seen = set()
-        ticks = [t for t in out if not (t in seen or seen.add(t))]
-        return ticks or None
+        ticks = [str(t).strip().upper() for t in json.loads(_WATCHLIST_FILE.read_text()) if str(t).strip()]
+        if ticks:
+            seen = set()
+            return [t for t in ticks if not (t in seen or seen.add(t))]
     except Exception:
-        return None
+        pass
+    return DEFAULT_WATCHLIST.copy()
 
 if "watchlist" not in st.session_state:
-    _sheet_wl = fetch_watchlist_from_sheet()
-    st.session_state.watchlist   = _sheet_wl or DEFAULT_WATCHLIST.copy()
-    st.session_state["_wl_source"] = "sheet" if _sheet_wl else "default"
-    # Keep the URL clean — strip any legacy ?tickers= so the sheet is unambiguously the source.
+    st.session_state.watchlist = load_watchlist_file()
     try:
-        st.query_params.clear()
+        st.query_params.clear()   # keep the URL clean — the saved list is the source
     except Exception:
         pass
 
@@ -1509,8 +1494,8 @@ def _html_table(rows, legend, height):
 with st.sidebar:
     st.markdown("## ⚙️ Settings")
 
-    # The watchlist comes from the Google Sheet (assets tab, C4:C20). Add/remove here are just
-    # temporary session tweaks — the sheet stays the source of truth; Re-sync returns to it.
+    # The watchlist is the saved list in watchlist.json. Add/remove here are session-only
+    # tweaks; "Reset to saved list" reloads the file. Edit the file to change it permanently.
     new_ticker=st.text_input("Add ticker (temporary)",placeholder="e.g. AMZN",key="new_ticker_input")
     if new_ticker:
         t=new_ticker.upper().strip()
@@ -1526,22 +1511,15 @@ with st.sidebar:
             st.session_state["_wl_source"]="manual"
             st.rerun()
 
-    _src=st.session_state.get("_wl_source")
-    if _src=="sheet":
-        st.caption(f"🔗 Synced from your Google Sheet — {len(st.session_state.watchlist)} tickers. "
-                   "Edit the sheet to change the list.")
-    elif _src=="manual":
+    if st.session_state.get("_wl_source")=="manual":
         st.caption(f"✏️ Temporary edits this session ({len(st.session_state.watchlist)} tickers). "
-                   "Re-sync to return to the sheet.")
+                   "Reset to reload the saved list.")
+        if st.button("↩️ Reset to saved list",use_container_width=True):
+            for _k in ("watchlist","_wl_source"): st.session_state.pop(_k,None)
+            st.rerun()
     else:
-        st.warning("⚠️ Couldn't read the Google Sheet — showing the default list. Make sure it's shared "
-                   "**Anyone with the link → Viewer** and the assets tab is right, then Re-sync.")
-    if st.button("🔄 Re-sync from sheet",use_container_width=True):
-        fetch_watchlist_from_sheet.clear()
-        for _k in ("watchlist","_wl_source"): st.session_state.pop(_k,None)
-        try: st.query_params.clear()
-        except Exception: pass
-        st.rerun()
+        st.caption(f"**Watchlist:** {len(st.session_state.watchlist)} tickers (saved in the app). "
+                   "Tell me — or edit watchlist.json — to change it permanently.")
 
     period=st.selectbox("Price History",["6mo","1y","2y"],index=1)
 
