@@ -1090,6 +1090,16 @@ def _setup_label(score, kind, blocked=False):
     return {"full":f"🟢 FULL SETUP — {verb}","partial":"🟡 PARTIAL SETUP",
             "early":"🟠 EARLY / WATCH","none":"🔴 NO SETUP"}[tier]
 
+def median_chip(pctb, leg):
+    """Side-by-side median indicator (Signal 1) shown next to the timing label (Signal 2).
+    Price vs its 20-day median (Bollinger midline, %B 0.5). CC needs above, CSP needs below."""
+    if pctb is None:
+        return "Median: —"
+    above = pctb >= 0.5
+    pos   = "🔼 above" if above else "🔽 below"
+    ok    = above if leg == "cc" else (not above)
+    return f"Median: {pos} " + ("✅" if ok else "❌ needs " + ("above" if leg == "cc" else "below"))
+
 def cc_signal(hvr,pctb_s,rsi_s,df):
     score,reasons,_=_mean_reversion_score(pctb_s,rsi_s,df,"cc")
     if hvr is not None:
@@ -1812,6 +1822,8 @@ with tab_dash:
                      "RSI":fmt(r["rsi"],".0f"),
                      "200MA":"✅" if r["ab200"] else "❌",
                      "PCR":fmt(r["pcr"],".2f"),
+                     "Median":("🔼 Above" if r.get("pctb") is not None and r["pctb"]>=0.5
+                               else "🔽 Below" if r.get("pctb") is not None else "—"),
                      "LEAP":r["leap"][0],"CC":r["cc"][0],"CSP":r["csp"][0]})
     if rows:
         tbl_height=38+len(rows)*35+4      # fits all rows exactly — no scrollbar
@@ -1827,6 +1839,8 @@ with tab_dash:
             ("RSI","Relative Strength Index (14) — momentum; <30 oversold, >70 overbought"),
             ("200MA","Price above (✅) or below (❌) its 200-day moving average — long-term trend"),
             ("PCR","Put/call volume ratio — elevated readings skew bearish"),
+            ("Median","Price vs its 20-day median (midline) — Signal 1. CC needs 🔼 Above for a "
+                      "green, CSP needs 🔽 Below. Shown next to the CC/CSP timing (Signal 2)."),
             ("LEAP","LEAP-buy timing signal (low-IV, oversold-leaning setup)"),
             ("CC","Covered-call timing signal (overbought-leaning setup to write calls)"),
             ("CSP","Cash-secured-put timing signal (oversold-bounce setup to sell puts)"),
@@ -1888,6 +1902,8 @@ with tab_dive:
             with col:
                 lb2,_,reasons=r[key]
                 st.markdown(f"#### {lbl}: {lb2}")
+                if key in ("cc","csp"):
+                    st.caption(median_chip(r.get("pctb"), key))   # Signal 1, side by side
                 with st.expander("Breakdown"):
                     for reason in reasons: st.write(reason)
                     if key=="leap":
