@@ -1,0 +1,37 @@
+name: Log daily ATM IV
+
+# Appends one ATM-IV reading per watchlist ticker to data/iv_history.csv each weekday,
+# building the history that powers IV Rank. Needs the repo secret TRADIER_TOKEN.
+on:
+  schedule:
+    - cron: "0 21 * * 1-5"     # 21:00 UTC, Mon–Fri (after the US cash close)
+  workflow_dispatch: {}         # allow manual "Run workflow" for a first data point
+
+permissions:
+  contents: write               # so the job can commit the updated CSV
+
+concurrency:
+  group: log-iv
+  cancel-in-progress: false
+
+jobs:
+  log-iv:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - run: pip install --quiet requests
+      - name: Log ATM IV
+        env:
+          TRADIER_TOKEN: ${{ secrets.TRADIER_TOKEN }}
+          TRADIER_ENV: production
+        run: python scripts/log_iv.py
+      - name: Commit new rows
+        run: |
+          git config user.name  "iv-logger"
+          git config user.email "actions@users.noreply.github.com"
+          git add data/iv_history.csv
+          git diff --staged --quiet || git commit -m "chore: log daily ATM IV ($(date -u +%Y-%m-%d))"
+          git push
