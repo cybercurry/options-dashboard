@@ -1351,17 +1351,6 @@ def vix_gauge(vix_val):
     fig.update_layout(height=210,template="plotly_dark",margin=dict(l=10,r=10,t=55,b=10))
     return fig
 
-def vix_term_chart(term_data):
-    if not term_data or len(term_data)<2: return None
-    labels=list(term_data.keys()); vals=list(term_data.values())
-    colors=["#60a5fa"]+["#22c55e" if vals[i]>=vals[i-1] else "#ef4444" for i in range(1,len(vals))]
-    fig=go.Figure(go.Bar(x=labels,y=vals,marker_color=colors,
-        text=[f"{v:.1f}" for v in vals],textposition="outside"))
-    fig.update_layout(height=210,template="plotly_dark",
-        title={"text":"<b>VIX Term Structure</b>","font":{"size":12}},
-        yaxis_range=[0,max(vals)*1.3],margin=dict(l=10,r=10,t=50,b=10),showlegend=False)
-    return fig
-
 # ── Sector heatmap helpers ─────────────────────────────────────────────────────
 def sector_tile_color(pct):
     """
@@ -1512,14 +1501,9 @@ with st.sidebar:
             st.rerun()
 
     if st.session_state.get("_wl_source")=="manual":
-        st.caption(f"✏️ Temporary edits this session ({len(st.session_state.watchlist)} tickers). "
-                   "Reset to reload the saved list.")
         if st.button("↩️ Reset to saved list",use_container_width=True):
             for _k in ("watchlist","_wl_source"): st.session_state.pop(_k,None)
             st.rerun()
-    else:
-        st.caption(f"**Watchlist:** {len(st.session_state.watchlist)} tickers (saved in the app). "
-                   "Tell me — or edit watchlist.json — to change it permanently.")
 
     period=st.selectbox("Price History",["6mo","1y","2y"],index=1)
 
@@ -1727,9 +1711,6 @@ with tab_dash:
             st.plotly_chart(vix_gauge(vix_now), use_container_width=True)
         else:
             st.metric("VIX","—")
-        if term_data:
-            tc = vix_term_chart(term_data)
-            if tc: st.plotly_chart(tc, use_container_width=True)
 
     with gcol4:
         st.markdown("**📊 Macro Signals**")
@@ -1761,16 +1742,6 @@ with tab_dash:
                                 "longer-dated — the market is pricing immediate stress higher "
                                 "than the future")
             st.markdown(f"**VIX Shape:** {shape}",unsafe_allow_html=True)
-        if stock_fg_score is not None:
-            color = fg_color(stock_fg_score)
-            st.markdown(f"**Stocks F&G:** <span style='color:{color}'>{stock_fg_score:.0f} — {stock_fg_rating}</span>",
-                        unsafe_allow_html=True)
-            st.caption("Source: CNN")
-        if crypto_fg_score is not None:
-            color = fg_color(crypto_fg_score)
-            st.markdown(f"**Crypto F&G:** <span style='color:{color}'>{crypto_fg_score:.0f} — {crypto_fg_rating}</span>",
-                        unsafe_allow_html=True)
-            st.caption("Source: Alternative.me")
 
     st.divider()
 
@@ -1813,7 +1784,7 @@ with tab_dash:
     rows=[]
     for t,r in results.items():
         rows.append({"Ticker":t,"Price":f"${r['price']:.2f}","Chg %":f"{r['pct']:+.1f}%",
-                     "HV Rank":fmt(r["hvr"],".0f"),"HV%ile":fmt(r["hvpct"],".0f"),
+                     "HV%ile":fmt(r["hvpct"],".0f"),
                      "HV20":fmt(r["hv20"],".1f","%"),
                      "ATM IV C/P":f"{r['c_iv']:.0f}/{r['p_iv']:.0f}%" if r["c_iv"] else "—",
                      "RSI":fmt(r["rsi"],".0f"),
@@ -1828,8 +1799,6 @@ with tab_dash:
             ("Ticker","Stock symbol"),
             ("Price","Current stock price"),
             ("Chg %","Today's percent change"),
-            ("HV Rank","Historical volatility rank 0–100 vs its own 1-year range "
-                       "(low = cheap premium, good for buying; high = rich premium, good for selling)"),
             ("HV%ile","Historical volatility percentile vs its own 1-year range"),
             ("HV20","20-day historical (realized) volatility, annualized"),
             ("ATM IV C/P","At-the-money implied volatility — call / put"),
@@ -1842,18 +1811,18 @@ with tab_dash:
         ]
         _html_table(rows, _WATCH_LEGEND, tbl_height)
 
-    hvr_data={t:r["hvr"] for t,r in results.items() if r["hvr"] is not None}
-    if hvr_data:
-        st.subheader("HV Rank — Entry Zones")
-        colors=["#22c55e" if v<25 else "#eab308" if v<45 else "#f97316" if v<65 else "#ef4444"
-                for v in hvr_data.values()]
-        fig_hvr=go.Figure(go.Bar(x=list(hvr_data.keys()),y=list(hvr_data.values()),
-            marker_color=colors,text=[f"{v:.0f}" for v in hvr_data.values()],textposition="outside"))
-        fig_hvr.add_hline(y=25,line_dash="dash",line_color="#22c55e",annotation_text="25 = LEAP Zone")
-        fig_hvr.add_hline(y=65,line_dash="dash",line_color="#ef4444",annotation_text="65 = CC Zone")
-        fig_hvr.update_layout(height=320,template="plotly_dark",yaxis_title="HV Rank",
-                               yaxis_range=[0,115],margin=dict(l=0,r=0,t=20,b=0))
-        st.plotly_chart(fig_hvr,use_container_width=True)
+    # ATM implied volatility per ticker (avg of call & put ATM IV) — hotter = richer premium
+    # to sell, cheaper to buy. Real Tradier IV.
+    iv_data={t:(r["c_iv"]+r["p_iv"])/2 for t,r in results.items() if r.get("c_iv") and r.get("p_iv")}
+    if iv_data:
+        st.subheader("ATM Implied Volatility")
+        ivv=list(iv_data.values())
+        fig_iv=go.Figure(go.Bar(x=list(iv_data.keys()),y=ivv,
+            marker=dict(color=ivv,colorscale="YlOrRd",showscale=False),
+            text=[f"{v:.0f}%" for v in ivv],textposition="outside"))
+        fig_iv.update_layout(height=320,template="plotly_dark",yaxis_title="ATM IV (%)",
+                              margin=dict(l=0,r=0,t=20,b=0))
+        st.plotly_chart(fig_iv,use_container_width=True)
 
     rsi_data={t:r["rsi"] for t,r in results.items() if r["rsi"] is not None}
     if rsi_data:
