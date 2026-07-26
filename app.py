@@ -2219,11 +2219,19 @@ with tab_vix:
                    "🟡 Thin edge — premium only a little above actual movement" if _vrp>=0 else
                    "🔴 Negative — options cheaper than actual moves; careful selling")
         v1,v2,v3=st.columns(3)
-        v1.metric("VIX (30-day implied)", f"{vix_now:.1f}")
-        v2.metric("S&P realized (20-day)", f"{_sp_rv:.1f}")
-        v3.metric("VRP (implied − realized)", f"{_vrp:+.1f}")
-        st.caption(f"{_vrp_read}.  VRP = what the market *expects* to move (VIX) minus what the S&P "
-                   "*actually* moved. Positive = you're paid a premium over reality to sell — the edge.")
+        v1.metric("VIX (30-day implied)", f"{vix_now:.1f}",
+                  help="What the market EXPECTS the S&P to move over the next 30 days "
+                       "(annualized %), priced into option premiums.")
+        v2.metric("S&P realized (20-day)", f"{_sp_rv:.1f}",
+                  help="What the S&P ACTUALLY moved over the last 20 days (annualized %).")
+        v3.metric("VRP (implied − realized)", f"{_vrp:+.1f}",
+                  help="The gap, in volatility points. +6 means options price in 6 points more "
+                       "movement than the S&P is actually delivering — that extra is the cushion "
+                       "you pocket for selling. Bigger + = fatter edge. Negative = options cheaper "
+                       "than real moves → you'd be underpaid, don't sell.")
+        st.caption(f"{_vrp_read}.  VRP is in volatility points: it's how much *more* the market is "
+                   "pricing in (VIX) than the S&P is *actually* moving. Positive = you're paid a "
+                   "premium over reality to sell — the edge. Hover any number for detail.")
     else:
         st.caption("VRP unavailable (need both VIX and S&P realized vol).")
     st.divider()
