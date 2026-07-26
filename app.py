@@ -1100,6 +1100,18 @@ def median_chip(pctb, leg):
     ok    = above if leg == "cc" else (not above)
     return f"Median: {pos} " + ("✅" if ok else "❌ needs " + ("above" if leg == "cc" else "below"))
 
+def iv_richness(c_iv, p_iv, hv20):
+    """Premium richness for a theta seller: ATM IV vs 20-day realized vol (HV20). IV usually
+    sits above realized (the variance risk premium), so 'rich' means it's meaningfully above —
+    more decay to harvest and an IV-crush tailwind. Returns a short tag (or '—')."""
+    ivs = [v for v in (c_iv, p_iv) if v]
+    if not ivs or not hv20 or hv20 <= 0:
+        return "—"
+    ratio = (sum(ivs)/len(ivs)) / hv20
+    if ratio >= 1.25: return f"🟢 Rich {ratio:.1f}×"
+    if ratio >= 1.00: return f"⚪ Fair {ratio:.1f}×"
+    return f"🔴 Cheap {ratio:.1f}×"
+
 def cc_signal(hvr,pctb_s,rsi_s,df):
     score,reasons,_=_mean_reversion_score(pctb_s,rsi_s,df,"cc")
     if hvr is not None:
@@ -1819,6 +1831,7 @@ with tab_dash:
                      "HV%ile":fmt(r["hvpct"],".0f"),
                      "HV20":fmt(r["hv20"],".1f","%"),
                      "ATM IV C/P":f"{r['c_iv']:.0f}/{r['p_iv']:.0f}%" if r["c_iv"] else "—",
+                     "IV vs HV":iv_richness(r.get("c_iv"),r.get("p_iv"),r.get("hv20")),
                      "RSI":fmt(r["rsi"],".0f"),
                      "200MA":"✅" if r["ab200"] else "❌",
                      "PCR":fmt(r["pcr"],".2f"),
@@ -1836,6 +1849,9 @@ with tab_dash:
             ("HV%ile","Historical volatility percentile vs its own 1-year range"),
             ("HV20","20-day historical (realized) volatility, annualized"),
             ("ATM IV C/P","At-the-money implied volatility — call / put"),
+            ("IV vs HV","Premium richness: ATM IV ÷ 20-day realized vol. 🟢 Rich (≥1.25× — good "
+                        "to sell, more decay + IV-crush upside) · ⚪ Fair · 🔴 Cheap (<1× — IV "
+                        "below realized, stand down)"),
             ("RSI","Relative Strength Index (14) — momentum; <30 oversold, >70 overbought"),
             ("200MA","Price above (✅) or below (❌) its 200-day moving average — long-term trend"),
             ("PCR","Put/call volume ratio — elevated readings skew bearish"),
@@ -1897,6 +1913,8 @@ with tab_dive:
         c6.metric("PCR",fmt(r["pcr"],".2f"),
                    help="Put/Call Ratio — volume of puts traded vs calls; elevated readings "
                         "skew bearish")
+        st.caption(f"**Premium richness (theta seller):** {iv_richness(r.get('c_iv'),r.get('p_iv'),r.get('hv20'))}"
+                   "  — ATM IV vs 20-day realized vol. 🟢 rich = more decay to harvest + IV-crush upside.")
         sc1,sc2,sc3=st.columns(3)
         for col,key,lbl in [(sc1,"leap","LEAP"),(sc2,"cc","CC"),(sc3,"csp","CSP")]:
             with col:
