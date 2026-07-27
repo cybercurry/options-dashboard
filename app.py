@@ -1101,7 +1101,7 @@ def _setup_label(score, kind, blocked=False):
     if blocked and tier in ("full","partial"):
         return "🟡 Timing ok — wrong side of median"
     return {"full":f"🟢 FULL SETUP — {verb}","partial":"🟡 PARTIAL SETUP",
-            "early":"🟠 EARLY / WATCH","none":"🔴 NO SETUP"}[tier]
+            "early":"🟠 BUILDING UP / WAIT","none":"🔴 NO SETUP"}[tier]
 
 def median_chip(pctb, leg):
     """Side-by-side median indicator (Signal 1) shown next to the timing label (Signal 2).
