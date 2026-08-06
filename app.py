@@ -13,6 +13,7 @@ from concurrent.futures import ThreadPoolExecutor
 from pathlib import Path
 import json
 import tradier   # Tradier API access door (real quotes / chains / IV / Greeks)
+import fundamentals   # SEC EDGAR fundamentals door (real 10-K/10-Q XBRL, red flags)
 import warnings
 warnings.filterwarnings("ignore")
 
@@ -565,6 +566,13 @@ def fetch_underlying_last(ticker):
     except Exception:
         pass
     return None
+
+@st.cache_data(ttl=21600, show_spinner=False)   # 6h — filings change quarterly, not intraday
+def fetch_fundamentals(ticker, price):
+    """Cached SEC EDGAR fundamentals read. Price (live, from Tradier) is passed in so valuation
+    ratios use the real market price; it's part of the cache key so a big price move refreshes
+    P/E without waiting out the 6h TTL."""
+    return fundamentals.analyze(ticker, price)
 
 def fetch_chain(ticker, expiry):
     """Unified chain fetch for the screener / analyse / deep-dive: Tradier real IV & Greeks
@@ -1665,8 +1673,8 @@ with st.sidebar:
 watchlist=st.session_state.watchlist
 st.title("Options Intelligence Dashboard")
 
-tab_dash,tab_dive,tab_chain,tab_vix,tab_screener=st.tabs(
-    ["Overview","Deep Dive","Options Chain","📊 Market Stats","⚡ Screener"])
+tab_dash,tab_dive,tab_fund,tab_chain,tab_vix,tab_screener=st.tabs(
+    ["Overview","Deep Dive","🔬 Fundamentals","Options Chain","📊 Market Stats","⚡ Screener"])
 
 # Hover explainers for first-time visitors — what each tab is for, in plain language.
 # st.tabs() won't take custom HTML in its own labels, so (same pure-CSS :hover technique as
@@ -2843,3 +2851,115 @@ with tab_screener:
         </div>""",unsafe_allow_html=True)
     else:
         st.warning("No screener data. Enable diagnostic output and re-run the screener.")
+
+# ══════════════════════════════════════════════════════════════════════════════
+# TAB — FUNDAMENTALS (SEC EDGAR: real filings, no prices/technicals)
+# ══════════════════════════════════════════════════════════════════════════════
+with tab_fund:
+    st.subheader("🔬 Fundamentals")
+    st.caption("Straight from the company's SEC filings (10-K / 10-Q XBRL) — no prices, no "
+               "technicals. Valuation · quality · balance-sheet health · red flags. US-listed filers.")
+
+    # tiny formatters — keep the numbers human
+    def _fx_money(v):
+        if v is None: return "—"
+        a=abs(v); s="-" if v<0 else ""
+        if a>=1e12: return f"{s}${a/1e12:.2f}T"
+        if a>=1e9:  return f"{s}${a/1e9:.2f}B"
+        if a>=1e6:  return f"{s}${a/1e6:.1f}M"
+        return f"{s}${a:,.0f}"
+    def _fx_pct(v):  return "—" if v is None else f"{v*100:.1f}%"
+    def _fx_x(v):    return "—" if v is None else f"{v:.2f}×"
+    def _fx_num(v,d=2): return "—" if v is None else f"{v:.{d}f}"
+
+    st.markdown("""<style>
+    .fx-chip{position:relative;display:inline-block;padding:12px 20px;border-radius:12px;
+      font-weight:700;font-size:15px;color:#fff;margin:4px 10px 6px 0;cursor:default;min-width:150px;
+      text-align:center;}
+    .fx-chip .fx-tip{visibility:hidden;opacity:0;position:absolute;left:0;top:calc(100% + 8px);
+      z-index:9999;width:250px;background:#0f172a;color:#e2e8f0;border:1px solid #334155;
+      border-radius:8px;padding:11px 13px;font-weight:400;font-size:13px;line-height:1.7;
+      text-align:left;box-shadow:0 8px 24px rgba(0,0,0,.55);transition:opacity .12s;}
+    .fx-chip:hover .fx-tip{visibility:visible;opacity:1;}
+    </style>""", unsafe_allow_html=True)
+
+    _wl=st.session_state.get("watchlist",[])
+    _c1,_c2=st.columns([3,1])
+    with _c1:
+        _fx_in=st.text_input("Ticker",value=st.session_state.get("fx_ticker",""),
+                             placeholder="e.g. AAPL",key="fx_input").strip().upper()
+    with _c2:
+        st.markdown("<div style='height:28px'></div>",unsafe_allow_html=True)
+        _fx_go=st.button("Analyse",key="fx_go",use_container_width=True,type="primary")
+    if _wl:
+        st.caption("From your watchlist:")
+        _qc=st.columns(min(len(_wl),9))
+        for _i,_t in enumerate(_wl):
+            with _qc[_i%len(_qc)]:
+                if st.button(_t,key=f"fxq_{_t}",use_container_width=True):
+                    st.session_state["fx_ticker"]=_t; st.rerun()
+
+    _tkr=_fx_in if (_fx_go and _fx_in) else st.session_state.get("fx_ticker","")
+    if _fx_go and _fx_in:
+        st.session_state["fx_ticker"]=_fx_in
+
+    if not _tkr:
+        st.info("Type a ticker (or pick one from the watchlist) and hit **Analyse** — you'll get "
+                "three verdicts and a red-flag list read straight from the latest filings.")
+    else:
+        _price=fetch_underlying_last(_tkr) if tradier.is_configured() else None
+        with st.spinner(f"Reading {_tkr}'s SEC filings…"):
+            _fd=fetch_fundamentals(_tkr,_price)
+        if not _fd.get("ok"):
+            st.error(_fd.get("error","Could not read fundamentals."))
+        else:
+            m=_fd["metrics"]; g=_fd["groups"]
+            _asof=f" · price ${_price:,.2f}" if _price else " · price n/a (add Tradier token for P/E)"
+            st.markdown(f"### {_fd['company']} ({_fd['ticker']})")
+            st.caption(f"SEC CIK {_fd['cik']}{_asof}")
+
+            _vc={"🟢":"#16a34a","🟡":"#a16207","🔴":"#7f1d1d","⚪":"#475569"}
+            def _fx_chip(name,verdict,tip):
+                col=_vc.get(verdict,"#475569")
+                return (f'<span class="fx-chip" style="background:{col}">{verdict} {name}'
+                        f'<span class="fx-tip">{tip}</span></span>')
+            _val_tip=(f"P/E: {_fx_num(m['pe'],1)}<br>PEG: {_fx_num(m['peg'],2)}<br>"
+                      f"FCF yield: {_fx_pct(m['fcf_yield'])}<br>Market cap: {_fx_money(m['market_cap'])}")
+            _qual_tip=(f"Gross margin: {_fx_pct(m['gross_margin'])}<br>Op margin: {_fx_pct(m['op_margin'])}<br>"
+                       f"Net margin: {_fx_pct(m['net_margin'])}<br>ROE: {_fx_pct(m['roe'])}<br>"
+                       f"Revenue YoY: {_fx_pct(m['rev_growth'])}<br>Net income YoY: {_fx_pct(m['ni_growth'])}")
+            _hlth_tip=(f"Debt/Equity: {_fx_x(m['debt_to_equity'])}<br>Current ratio: {_fx_num(m['current_ratio'])}<br>"
+                       f"Interest coverage: {_fx_x(m['interest_coverage'])}<br>Free cash flow: {_fx_money(m['fcf'])}<br>"
+                       f"FCF margin: {_fx_pct(m['fcf_margin'])}<br>Share count YoY: {_fx_pct(m['share_change'])}")
+            st.markdown("<div style='margin:6px 0'>"
+                        +_fx_chip("Valuation",g["Valuation"]["verdict"],_val_tip)
+                        +_fx_chip("Quality",g["Quality"]["verdict"],_qual_tip)
+                        +_fx_chip("Health",g["Health"]["verdict"],_hlth_tip)
+                        +"</div><div style='font-size:12px;color:#64748b;margin-bottom:4px'>"
+                        "Hover a chip for the numbers behind it.</div>",unsafe_allow_html=True)
+
+            st.markdown("#### 🚩 Red flags")
+            _flags=_fd["flags"]
+            if not _flags:
+                st.success("No red flags on the checks we run (profitability, leverage, liquidity, "
+                           "coverage, cash flow, dilution, valuation).")
+            else:
+                for _f in _flags:
+                    st.markdown(f"{_f['sev']} {_f['text']}")
+
+            with st.expander("The numbers (latest annual filing)"):
+                _rows=[
+                    ("Revenue",_fx_money(m["revenue"]),"Prior yr",_fx_money(m["revenue_prev"])),
+                    ("Net income",_fx_money(m["net_income"]),"Prior yr",_fx_money(m["net_income_prev"])),
+                    ("EPS (diluted)",_fx_num(m["eps"]),"Shares out",_fx_money(m["shares"]).replace("$","")),
+                    ("Gross margin",_fx_pct(m["gross_margin"]),"Op margin",_fx_pct(m["op_margin"])),
+                    ("Net margin",_fx_pct(m["net_margin"]),"ROE",_fx_pct(m["roe"])),
+                    ("Free cash flow",_fx_money(m["fcf"]),"FCF margin",_fx_pct(m["fcf_margin"])),
+                    ("Debt / Equity",_fx_x(m["debt_to_equity"]),"Current ratio",_fx_num(m["current_ratio"])),
+                    ("Interest coverage",_fx_x(m["interest_coverage"]),"Market cap",_fx_money(m["market_cap"])),
+                    ("P/E",_fx_num(m["pe"],1),"FCF yield",_fx_pct(m["fcf_yield"])),
+                ]
+                st.dataframe(pd.DataFrame(_rows,columns=["Metric","Value","Metric ","Value "]),
+                             use_container_width=True,hide_index=True)
+            st.caption("Balance-sheet items use the most recent 10-Q/10-K; flows (revenue, income, "
+                       "cash flow) use the latest full fiscal year. Data: SEC EDGAR XBRL.")
