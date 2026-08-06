@@ -191,6 +191,41 @@ def fetch_quotes(tickers):
         results = ex.map(_quote_single, tickers)
     return {t: q for t, q in zip(tickers, results)}
 
+@st.cache_data(ttl=60, show_spinner=False)
+def fetch_sector_quotes(tickers):
+    """Sector-tile quotes, Tradier-first. The SPDR sector ETFs (XLK…XLB) are all Tradier
+    symbols, so pull them in ONE real quote call — reliable, unlike yfinance, which was
+    surfacing stale / day-behind sector tiles (same root cause we already fixed for the
+    Market Pulse and the whole data layer). Crypto (BTC-USD, which Tradier can't quote) and
+    any Tradier miss fall back to yfinance. Returns {ticker: {price, pct}}."""
+    tickers = tuple(tickers)
+    if not tickers:
+        return {}
+    out = {}
+    # Tradier can't quote crypto ("-USD") or Yahoo index ("^") symbols — route only real
+    # equities/ETFs to it; everything else falls through to the yfinance path below.
+    trad = [t for t in tickers if tradier.is_configured()
+            and "-" not in t and not t.startswith("^")]
+    if trad:
+        try:
+            for q in tradier.get_quotes(trad):
+                sym  = q.get("symbol")
+                last = q.get("last")
+                pct  = q.get("change_percentage")
+                if pct is None and last and q.get("prevclose"):
+                    pct = (float(last) / float(q["prevclose"]) - 1) * 100
+                if sym and last is not None and pct is not None:
+                    out[sym] = {"price": float(last), "pct": float(pct)}
+        except Exception:
+            pass  # fall through to yfinance for anything Tradier didn't return
+    # yfinance fallback for whatever Tradier didn't cover (crypto, or a miss).
+    missing = [t for t in tickers if t not in out]
+    for m in missing:
+        q = _quote_single(m)
+        if q:
+            out[m] = q
+    return out
+
 @st.cache_data(ttl=300, show_spinner=False)
 def fetch_cnn_fg():
     """
@@ -1807,9 +1842,9 @@ with tab_dash:
 
     # ── SECTOR HEATMAP ─────────────────────────────────────────────────────────
     st.subheader("🟩 Sector Heatmap")
-    st.caption("SPDR sector ETFs + Bitcoin as Digital Assets · colour intensity = move strength · data ~15 min delayed")
+    st.caption("SPDR sector ETFs (live via Tradier) + Bitcoin as Digital Assets · colour intensity = move strength")
 
-    sector_data = fetch_quotes(tuple(ticker for ticker, *_ in SECTOR_TICKERS))
+    sector_data = fetch_sector_quotes(tuple(ticker for ticker, *_ in SECTOR_TICKERS))
     sector_quotes = []
     for ticker, label, short in SECTOR_TICKERS:
         q = sector_data.get(ticker)
