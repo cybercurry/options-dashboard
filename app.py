@@ -1620,11 +1620,11 @@ with st.sidebar:
     period=st.selectbox("Price History",["6mo","1y","2y"],index=1)
 
     st.divider()
-    # 21 July — default ON so the Market Pulse / sector tiles refresh on their own
-    # (60s cadence matches fetch_quote's cache TTL). Toggle off to freeze the page.
-    auto_refresh=st.toggle("🔄 Auto-refresh (60s)",value=True)
+    # 21 July — default ON so the Market Pulse / sector tiles refresh on their own.
+    # 5-min cadence (Jay found 60s too frequent). Toggle off to freeze the page.
+    auto_refresh=st.toggle("🔄 Auto-refresh (5 min)",value=True)
     if auto_refresh and HAS_AUTOREFRESH:
-        st_autorefresh(interval=60_000,key="pulse_refresh")
+        st_autorefresh(interval=300_000,key="pulse_refresh")
     elif auto_refresh and not HAS_AUTOREFRESH:
         st.warning("Add `streamlit-autorefresh` to requirements.txt")
 
@@ -1733,7 +1733,7 @@ with st.spinner("Loading market data..."):
 # ══════════════════════════════════════════════════════════════════════════════
 with tab_dash:
     st.subheader("🌍 Market Pulse")
-    st.caption(f"Updated: {datetime.utcnow().strftime('%H:%M:%S UTC')}  ·  ~15 min delayed  ·  Toggle 60s refresh in sidebar")
+    st.caption(f"Updated: {datetime.utcnow().strftime('%H:%M:%S UTC')}  ·  ~15 min delayed  ·  Toggle 5-min refresh in sidebar")
 
     # ── Data Health — proves, per source, whether it connected and how old its data is ──────
     # Button-gated: the probe hits the network, so running it on every 60s auto-refresh would
