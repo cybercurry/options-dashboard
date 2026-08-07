@@ -2946,6 +2946,21 @@ with tab_fund:
       box-shadow:0 6px 18px rgba(0,0,0,.30);}
     .fx-news .t{color:#e5edf7;font-weight:600;font-size:14px;line-height:1.4;}
     .fx-news .m{color:#64748b;font-size:12px;margin-top:4px;}
+
+    /* overall verdict bar inside the hero */
+    .fx-hero-verdict{margin-top:14px;display:flex;align-items:center;gap:14px;flex-wrap:wrap;
+      padding:9px 16px;border-radius:12px;box-shadow:0 6px 18px rgba(0,0,0,.35);}
+    .fx-ov{font-size:18px;font-weight:800;color:#fff;letter-spacing:.6px;}
+    .fx-hero-vsub{font-size:13px;font-weight:600;color:rgba(255,255,255,.9);margin-left:auto;}
+    /* section headers with accent bar */
+    .fx-sec{font-size:16px;font-weight:800;color:#f1f5f9;margin:18px 0 8px;padding-left:11px;
+      border-left:3px solid #3b82f6;}
+    /* red-flag callout / clean callout */
+    .fx-flags{background:rgba(153,27,27,.16);border:1px solid #7f1d1d;border-left:4px solid #ef4444;
+      border-radius:10px;padding:8px 14px;margin:2px 0 4px;}
+    .fx-flag{color:#fecaca;font-size:14px;font-weight:600;padding:4px 0;}
+    .fx-clean{background:rgba(22,101,52,.16);border:1px solid #166534;border-left:4px solid #22c55e;
+      border-radius:10px;padding:10px 14px;color:#bbf7d0;font-size:14px;font-weight:600;}
     </style>""", unsafe_allow_html=True)
 
     _wl=st.session_state.get("watchlist",[])
@@ -2989,39 +3004,83 @@ with tab_fund:
                 try: _cls.append(f"{int(_prof['employees']):,} employees")
                 except Exception: pass
 
-            # ── Hero card ──
+            # ── Hero card with an overall verdict badge (the headline decision) ──
+            _verds=[g[k]["verdict"] for k in ("Valuation","Quality","Health")]
+            if   "🔴" in _verds: _ov=("🔴","FRAGILE","#7f1d1d")
+            elif "🟡" in _verds: _ov=("🟡","MIXED","#a16207")
+            elif "🟢" in _verds: _ov=("🟢","SOUND","#166534")
+            else:                _ov=("⚪","NO DATA","#475569")
             _price_str=f"${_price:,.2f}" if _price else "price n/a"
-            _dots="&nbsp;&nbsp;".join(f"{g[k]['verdict']} <b>{k}</b>"
-                                     for k in ("Valuation","Quality","Health"))
+            _dots="&nbsp;&nbsp;".join(f"{g[k]['verdict']} {k}" for k in ("Valuation","Quality","Health"))
             _sub=html.escape("  ·  ".join(_cls)) if _cls else "US-listed filer"
             st.markdown(
                 f"""<div class="fx-hero"><div class="fx-hero-top">
                 <div><div class="fx-hero-name">{html.escape(_fd['company'])}</div>
                      <div class="fx-hero-sub">{_sub}</div></div>
                 <div class="fx-hero-right"><div class="fx-hero-ticker">{html.escape(_fd['ticker'])}</div>
-                     <div class="fx-hero-price">{_price_str}</div></div>
-                </div><div class="fx-hero-dots">{_dots}</div></div>""",
+                     <div class="fx-hero-price">{_price_str}</div></div></div>
+                <div class="fx-hero-verdict" style="background:{_ov[2]}">
+                     <span class="fx-ov">{_ov[0]} {_ov[1]}</span>
+                     <span class="fx-hero-vsub">{_dots}</span></div></div>""",
                 unsafe_allow_html=True)
             st.caption(f"{_srcid}"+("" if _price else " · add Tradier token for P/E"))
 
-            # Perma-visible short summary — condensed from the filing text (AI if a key is set,
-            # else an excerpt of the company's own words). Full text lives in the expander below.
+            # ── Verdict chips (decision first) ──
+            _vc={"🟢":"#16a34a","🟡":"#a16207","🔴":"#7f1d1d","⚪":"#475569"}
+            def _fx_chip(name,verdict,tip):
+                col=_vc.get(verdict,"#475569")
+                return (f'<span class="fx-chip" style="background:{col}">{verdict} {name}'
+                        f'<span class="fx-tip">{tip}</span></span>')
+            _val_tip=(f"P/E: {_fx_num(m['pe'],1)}<br>PEG: {_fx_num(m['peg'],2)}<br>"
+                      f"FCF yield: {_fx_pct(m['fcf_yield'])}<br>Market cap: {_fx_money(m['market_cap'])}")
+            _qual_tip=(f"Gross margin: {_fx_pct(m['gross_margin'])}<br>Op margin: {_fx_pct(m['op_margin'])}<br>"
+                       f"Net margin: {_fx_pct(m['net_margin'])}<br>ROE: {_fx_pct(m['roe'])}<br>"
+                       f"Revenue YoY: {_fx_pct(m['rev_growth'])}<br>Net income YoY: {_fx_pct(m['ni_growth'])}")
+            _hlth_tip=(f"Debt/Equity: {_fx_x(m['debt_to_equity'])}<br>Current ratio: {_fx_num(m['current_ratio'])}<br>"
+                       f"Interest coverage: {_fx_x(m['interest_coverage'])}<br>Free cash flow: {_fx_money(m['fcf'])}<br>"
+                       f"FCF margin: {_fx_pct(m['fcf_margin'])}<br>Share count YoY: {_fx_pct(m['share_change'])}")
+            st.markdown("<div style='margin:8px 0 2px'>"
+                        +_fx_chip("Valuation",g["Valuation"]["verdict"],_val_tip)
+                        +_fx_chip("Quality",g["Quality"]["verdict"],_qual_tip)
+                        +_fx_chip("Health",g["Health"]["verdict"],_hlth_tip)
+                        +"</div><div style='font-size:12px;color:#64748b;margin-bottom:2px'>"
+                        "Hover a chip for the numbers behind it.</div>",unsafe_allow_html=True)
+
+            # ── Red flags — a callout box so problems pop ──
+            st.markdown("<div class='fx-sec'>🚩 Red flags</div>",unsafe_allow_html=True)
+            _flags=_fd["flags"]
+            if not _flags:
+                st.markdown("<div class='fx-clean'>✅ No red flags on the checks we run — "
+                            "profitability, leverage, liquidity, coverage, cash flow, dilution, "
+                            "valuation.</div>",unsafe_allow_html=True)
+            else:
+                _fb="<div class='fx-flags'>"
+                for _f in _flags:
+                    _fb+=f"<div class='fx-flag'>{_f['sev']} {html.escape(_f['text'])}</div>"
+                st.markdown(_fb+"</div>",unsafe_allow_html=True)
+
+            # ── Short summary (perma-visible) ──
             if _prof.get("summary_short"):
                 _tag="✨ AI summary" if _prof.get("summary_ai") else "📝 In brief"
                 st.markdown(f"<div class='fx-summary'><span class='fx-summary-tag'>{_tag}</span>"
                             f"{html.escape(_prof['summary_short'])}</div>",unsafe_allow_html=True)
 
-            # Financial trend — computed facts, stated plainly (no interpretation).
+            # ── Financial trend — color-coded (green = good, red = bad) ──
+            _grn="#4ade80"; _red="#f87171"
+            def _cspan(txt,good):
+                return f"<span style='color:{_grn if good else _red};font-weight:700'>{txt}</span>"
             _tr=[]
-            if m.get("rev_growth") is not None: _tr.append(f"Revenue {m['rev_growth']*100:+.0f}% YoY")
-            if m.get("ni_growth")  is not None: _tr.append(f"Net income {m['ni_growth']*100:+.0f}% YoY")
+            if m.get("rev_growth") is not None:
+                _tr.append(_cspan(f"Revenue {m['rev_growth']*100:+.0f}% YoY", m["rev_growth"]>=0))
+            if m.get("ni_growth") is not None:
+                _tr.append(_cspan(f"Net income {m['ni_growth']*100:+.0f}% YoY", m["ni_growth"]>=0))
             if m.get("net_income_prev") and m.get("revenue_prev") and m.get("net_margin") is not None:
-                _pm_prev=m["net_income_prev"]/m["revenue_prev"]
-                _tr.append("margins expanding" if m["net_margin"]>_pm_prev else "margins compressing")
+                _exp=m["net_margin"]>(m["net_income_prev"]/m["revenue_prev"])
+                _tr.append(_cspan("margins expanding" if _exp else "margins compressing", _exp))
             if m.get("fcf") is not None:
-                _tr.append("FCF positive" if m["fcf"]>=0 else "FCF negative")
+                _tr.append(_cspan("FCF positive" if m["fcf"]>=0 else "FCF negative", m["fcf"]>=0))
             if _tr:
-                st.markdown("📈 **Trend (from filings):** "+" · ".join(_tr))
+                st.markdown("📈 <b>Trend (from filings):</b> "+" · ".join(_tr),unsafe_allow_html=True)
             # What they invest in — real dollar figures from the filings.
             _inv=[]
             if m.get("rnd"):   _inv.append(f"R&D {_fx_money(m['rnd'])}/yr")
@@ -3039,39 +3098,10 @@ with tab_fund:
                     st.caption("Summary sourced verbatim from the company's own filing "
                                "(via Yahoo Finance) — not AI-generated.")
 
-            _vc={"🟢":"#16a34a","🟡":"#a16207","🔴":"#7f1d1d","⚪":"#475569"}
-            def _fx_chip(name,verdict,tip):
-                col=_vc.get(verdict,"#475569")
-                return (f'<span class="fx-chip" style="background:{col}">{verdict} {name}'
-                        f'<span class="fx-tip">{tip}</span></span>')
-            _val_tip=(f"P/E: {_fx_num(m['pe'],1)}<br>PEG: {_fx_num(m['peg'],2)}<br>"
-                      f"FCF yield: {_fx_pct(m['fcf_yield'])}<br>Market cap: {_fx_money(m['market_cap'])}")
-            _qual_tip=(f"Gross margin: {_fx_pct(m['gross_margin'])}<br>Op margin: {_fx_pct(m['op_margin'])}<br>"
-                       f"Net margin: {_fx_pct(m['net_margin'])}<br>ROE: {_fx_pct(m['roe'])}<br>"
-                       f"Revenue YoY: {_fx_pct(m['rev_growth'])}<br>Net income YoY: {_fx_pct(m['ni_growth'])}")
-            _hlth_tip=(f"Debt/Equity: {_fx_x(m['debt_to_equity'])}<br>Current ratio: {_fx_num(m['current_ratio'])}<br>"
-                       f"Interest coverage: {_fx_x(m['interest_coverage'])}<br>Free cash flow: {_fx_money(m['fcf'])}<br>"
-                       f"FCF margin: {_fx_pct(m['fcf_margin'])}<br>Share count YoY: {_fx_pct(m['share_change'])}")
-            st.markdown("<div style='margin:6px 0'>"
-                        +_fx_chip("Valuation",g["Valuation"]["verdict"],_val_tip)
-                        +_fx_chip("Quality",g["Quality"]["verdict"],_qual_tip)
-                        +_fx_chip("Health",g["Health"]["verdict"],_hlth_tip)
-                        +"</div><div style='font-size:12px;color:#64748b;margin-bottom:4px'>"
-                        "Hover a chip for the numbers behind it.</div>",unsafe_allow_html=True)
-
-            st.markdown("#### 🚩 Red flags")
-            _flags=_fd["flags"]
-            if not _flags:
-                st.success("No red flags on the checks we run (profitability, leverage, liquidity, "
-                           "coverage, cash flow, dilution, valuation).")
-            else:
-                for _f in _flags:
-                    st.markdown(f"{_f['sev']} {_f['text']}")
-
             # ── Recent headlines — real Yahoo Finance articles, links open the source ──
             _news=fetch_company_news(_tkr)
             if _news:
-                st.markdown("#### 📰 Recent headlines")
+                st.markdown("<div class='fx-sec'>📰 Recent headlines</div>",unsafe_allow_html=True)
                 _nh="<div class='fx-news'>"
                 for _n in _news:
                     _meta=" · ".join([x for x in (_n.get("publisher"),_n.get("when")) if x])
