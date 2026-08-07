@@ -7,3 +7,4 @@ plotly>=5.18.0
 scipy>=1.11.0
 requests>=2.31.0
 streamlit-autorefresh
+anthropic>=0.40.0   # optional — only used if ANTHROPIC_API_KEY is set (AI company summary)

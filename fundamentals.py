@@ -15,7 +15,14 @@ Design (per Jay): real data over calculated, extreme simplicity. The app renders
 chips (Valuation / Quality / Health) + a red-flag list; every raw number rides in the hover.
 """
 
+import os
 import requests
+
+try:                       # streamlit is present in the app; keep this importable standalone.
+    import streamlit as _st
+    _HAS_ST_SECRETS = True
+except Exception:
+    _HAS_ST_SECRETS = False
 
 # SEC's "fair access" policy REQUIRES a User-Agent that names the app AND a contact email —
 # a UA without an email is rejected with HTTP 403. This is a declaration header, not auth: no
@@ -310,6 +317,62 @@ def _metrics_from_yf(ticker, price):
 
 
 # ── company profile: sourced facts only, NOTHING generated ────────────────────────
+def _extractive_short(text, max_sentences=2, max_chars=300):
+    """A no-AI 'summary': the first 1-2 sentences of the company's own filing text. Clean because
+    it ends on real sentence boundaries — never a mid-thought truncation. Zero hallucination risk
+    (it IS the source text), zero setup."""
+    import re
+    parts = re.split(r'(?<=[.!?])\s+', text.strip())
+    out, total = [], 0
+    for p in parts:
+        if out and total + len(p) > max_chars:
+            break
+        out.append(p); total += len(p)
+        if len(out) >= max_sentences:
+            break
+    return " ".join(out) if out else text[:max_chars]
+
+
+def _anthropic_key():
+    # Optional. st.secrets first (Streamlit Cloud), then env. Guarded so an unconfigured app
+    # never crashes — no key just means we use the extractive summary instead.
+    if _HAS_ST_SECRETS:
+        try:
+            if "ANTHROPIC_API_KEY" in _st.secrets:
+                return _st.secrets["ANTHROPIC_API_KEY"]
+        except Exception:
+            pass
+    return os.environ.get("ANTHROPIC_API_KEY")
+
+
+def ai_summary(text):
+    """Short plain-English 'what this company does'. If an Anthropic key is configured, an LLM
+    CONDENSES THE SUPPLIED filing text (summarizing given text, not recalling facts from memory —
+    so it can't invent). With no key, falls back to the extractive first-sentences summary.
+    Returns (text, is_ai). Never fabricates: no source text → (None, False)."""
+    if not text:
+        return None, False
+    key = _anthropic_key()
+    if key:
+        try:
+            import anthropic
+            client = anthropic.Anthropic(api_key=key)
+            msg = client.messages.create(
+                model="claude-haiku-4-5-20251001",
+                max_tokens=140,
+                system=("Summarise the company in 1-2 short, plain-English sentences: what it does "
+                        "and its main products/markets. Use ONLY the text provided — do not add any "
+                        "fact that isn't in it. No preamble, no lists."),
+                messages=[{"role": "user", "content": text[:4000]}],
+            )
+            out = "".join(getattr(b, "text", "") for b in msg.content).strip()
+            if out:
+                return out, True
+        except Exception:
+            pass   # any failure (no package, bad key, network) → extractive fallback
+    return _extractive_short(text), False
+
+
 def _sec_sic(cik):
     """SEC's own industry classification (SIC description) from the submissions endpoint."""
     try:
@@ -343,7 +406,14 @@ def company_profile(ticker, cik=None):
         if sic:
             prof["sic"] = sic
             prof.setdefault("industry", sic)   # fall back to SEC's label if Yahoo had none
-    return {k: v for k, v in prof.items() if v}
+    # Short perma-visible summary (AI-condensed from the filing text if a key is set, else an
+    # extractive excerpt). The long verbatim text stays in `summary` for the drill-down.
+    if prof.get("summary"):
+        s, is_ai = ai_summary(prof["summary"])
+        if s:
+            prof["summary_short"] = s
+            prof["summary_ai"] = is_ai
+    return {k: v for k, v in prof.items() if v not in (None, "")}
 
 
 def company_news(ticker, limit=6):

@@ -2931,6 +2931,13 @@ with tab_fund:
     .fx-hero-dots{margin-top:9px;font-size:12px;color:#94a3b8;}
     .fx-hero-dots b{color:#e2e8f0;font-weight:600;}
 
+    /* perma-visible short summary */
+    .fx-summary{background:#0f172a;border:1px solid #24314a;border-radius:12px;
+      padding:13px 16px;margin:0 0 12px;color:#cbd5e1;font-size:14.5px;line-height:1.55;}
+    .fx-summary-tag{display:inline-block;background:#0b2740;color:#7dd3fc;font-size:11px;
+      font-weight:700;letter-spacing:.4px;padding:2px 9px;border-radius:6px;margin-right:9px;
+      vertical-align:middle;}
+
     /* news cards */
     .fx-news a{display:block;text-decoration:none;background:#0f172a;border:1px solid #1e2a3f;
       border-left:3px solid #3b82f6;border-radius:10px;padding:10px 14px;margin:7px 0;
@@ -2997,6 +3004,13 @@ with tab_fund:
                 unsafe_allow_html=True)
             st.caption(f"{_srcid}"+("" if _price else " · add Tradier token for P/E"))
 
+            # Perma-visible short summary — condensed from the filing text (AI if a key is set,
+            # else an excerpt of the company's own words). Full text lives in the expander below.
+            if _prof.get("summary_short"):
+                _tag="✨ AI summary" if _prof.get("summary_ai") else "📝 In brief"
+                st.markdown(f"<div class='fx-summary'><span class='fx-summary-tag'>{_tag}</span>"
+                            f"{html.escape(_prof['summary_short'])}</div>",unsafe_allow_html=True)
+
             # Financial trend — computed facts, stated plainly (no interpretation).
             _tr=[]
             if m.get("rev_growth") is not None: _tr.append(f"Revenue {m['rev_growth']*100:+.0f}% YoY")
@@ -3016,7 +3030,7 @@ with tab_fund:
                 st.markdown("🔧 **Invests in:** "+" · ".join(_inv))
             # Business summary — quoted verbatim from the company's filing, never generated.
             if _prof.get("summary"):
-                with st.expander("📄 What this company does (from its filings)"):
+                with st.expander("📄 Full business description (verbatim from filings)"):
                     st.write(_prof["summary"])
                     _wl_bits=[]
                     if _prof.get("website"): _wl_bits.append(_prof["website"])
