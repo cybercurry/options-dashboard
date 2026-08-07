@@ -1681,8 +1681,8 @@ with st.sidebar:
 watchlist=st.session_state.watchlist
 st.title("Options Intelligence Dashboard")
 
-tab_dash,tab_dive,tab_fund,tab_chain,tab_vix,tab_screener=st.tabs(
-    ["Overview","Deep Dive","🔬 Fundamentals","Options Chain","📊 Market Stats","⚡ Screener"])
+tab_dash,tab_dive,tab_chain,tab_vix,tab_screener,tab_fund=st.tabs(
+    ["Overview","Deep Dive","Options Chain","📊 Market Stats","⚡ Screener","🔬 Fundamentals"])
 
 # Hover explainers for first-time visitors — what each tab is for, in plain language.
 # st.tabs() won't take custom HTML in its own labels, so (same pure-CSS :hover technique as
