@@ -17,8 +17,15 @@ chips (Valuation / Quality / Health) + a red-flag list; every raw number rides i
 
 import requests
 
-# SEC asks for a UA that identifies the app and a contact. No secret, no PII.
-_HEADERS = {"User-Agent": "options-dashboard (github.com/cybercurry/options-dashboard)"}
+# SEC's "fair access" policy REQUIRES a User-Agent that names the app AND a contact email —
+# a UA without an email is rejected with HTTP 403. This is a declaration header, not auth: no
+# secret, no personal PII (a neutral project mailbox, not Jay's address). Accept-Encoding is
+# also expected. https://www.sec.gov/os/webmaster-faq#developers
+_HEADERS = {
+    "User-Agent": "options-dashboard/1.0 (contact: options-dashboard@proton.me)",
+    "Accept-Encoding": "gzip, deflate",
+    "Accept": "application/json, text/plain, */*",
+}
 _TIMEOUT = 15
 
 # ── thresholds (one place to tune) ───────────────────────────────────────────────
@@ -140,19 +147,71 @@ def _div(a, b):
     return (a / b) if (a is not None and b not in (None, 0)) else None
 
 
-# ── the analysis ─────────────────────────────────────────────────────────────────
-def analyze(ticker, price=None):
-    """One ticker → structured fundamentals. `price` (live, from Tradier) powers valuation.
-    Returns a dict the app renders directly; never raises — errors come back in `error`."""
-    try:
-        cik, name = ticker_to_cik(ticker)
-        if not cik:
-            return {"ok": False, "error": f"{ticker.upper()} not found in SEC's filer list "
-                    "(US-listed filers only — foreign/ADR names may be absent)."}
-        facts = company_facts(cik)
-    except Exception as e:
-        return {"ok": False, "error": f"SEC fetch failed — {type(e).__name__}: {e}"}
+# ── assessment: raw metrics → red flags + group verdicts (source-agnostic) ────────
+def _assess(m):
+    """Turn a metrics dict (whatever the source) into (flags, groups). Shared by the SEC and
+    Yahoo paths so the verdict logic is identical no matter where the numbers came from."""
+    flags = []
+    def flag(sev, text): flags.append({"sev": sev, "text": text})
 
+    if m["net_margin"] is not None and m["net_margin"] < 0:
+        flag("🔴", "Unprofitable — negative net margin")
+    if m["fcf"] is not None and m["fcf"] < 0:
+        flag("🔴", "Burning cash — negative free cash flow")
+    if m["debt_to_equity"] is not None and m["debt_to_equity"] > T["de_danger"]:
+        flag("🔴", f"High leverage — debt/equity {m['debt_to_equity']:.1f}×")
+    if m["current_ratio"] is not None and m["current_ratio"] < T["cr_danger"]:
+        flag("🔴", f"Liquidity tight — current ratio {m['current_ratio']:.2f}")
+    if m["interest_coverage"] is not None and m["interest_coverage"] < T["cover_danger"]:
+        flag("🔴", f"Thin interest coverage — {m['interest_coverage']:.1f}×")
+    if m["rev_growth"] is not None and m["rev_growth"] < 0:
+        flag("🟡", f"Revenue shrinking — {m['rev_growth']*100:+.0f}% YoY")
+    if m["roe"] is not None and m["roe"] < 0:
+        flag("🟡", "Negative return on equity")
+    if m["share_change"] is not None and m["share_change"] > T["dilution"]:
+        flag("🟡", f"Dilution — shares {m['share_change']*100:+.0f}% YoY")
+    if m["pe"] is not None and m["pe"] > T["pe_rich"]:
+        flag("🟡", f"Rich valuation — P/E {m['pe']:.0f}")
+
+    def verdict(reds, ambers):
+        if any(reds):   return "🔴"
+        if any(ambers): return "🟡"
+        return "🟢"
+
+    groups = {
+        "Valuation": {"verdict": verdict(
+            [m["pe"] is not None and m["pe"] > T["pe_high"],
+             m["fcf_yield"] is not None and m["fcf_yield"] < 0],
+            [m["pe"] is not None and m["pe"] > T["pe_rich"],
+             m["fcf_yield"] is not None and m["fcf_yield"] < T["fcfy_thin"],
+             m["peg"] is not None and m["peg"] > T["peg_high"]])},
+        "Quality": {"verdict": verdict(
+            [m["net_margin"] is not None and m["net_margin"] < 0,
+             m["roe"] is not None and m["roe"] < 0],
+            [m["net_margin"] is not None and m["net_margin"] < T["netmargin_thin"],
+             m["roe"] is not None and m["roe"] < T["roe_thin"]])},
+        "Health": {"verdict": verdict(
+            [m["debt_to_equity"] is not None and m["debt_to_equity"] > T["de_danger"],
+             m["current_ratio"] is not None and m["current_ratio"] < T["cr_danger"],
+             m["interest_coverage"] is not None and m["interest_coverage"] < T["cover_danger"],
+             m["fcf"] is not None and m["fcf"] < 0],
+            [m["debt_to_equity"] is not None and m["debt_to_equity"] > T["de_high"],
+             m["current_ratio"] is not None and m["current_ratio"] < T["cr_thin"],
+             m["interest_coverage"] is not None and m["interest_coverage"] < T["cover_thin"]])},
+    }
+    # A group with no data at all shows a neutral dot, not a false green.
+    if m["pe"] is None and m["fcf_yield"] is None and m["peg"] is None:
+        groups["Valuation"]["verdict"] = "⚪"
+    if m["net_margin"] is None and m["roe"] is None:
+        groups["Quality"]["verdict"] = "⚪"
+    if m["debt_to_equity"] is None and m["current_ratio"] is None and m["fcf"] is None:
+        groups["Health"]["verdict"] = "⚪"
+    return flags, groups
+
+
+def _metrics_from_sec(facts, price):
+    """Build the metrics dict from SEC companyfacts. Flows use the latest full fiscal year;
+    balance-sheet items use the most recent reported period."""
     rev,  rev_p  = _annual_last_two(facts, _C["revenue"])
     ni,   ni_p   = _annual_last_two(facts, _C["net_income"])
     gp,   _      = _annual_last_two(facts, _C["gross_profit"])
@@ -191,69 +250,87 @@ def analyze(ticker, price=None):
         "eps": eps, "shares": shares,
         "share_change": _div(shd - shd_p, shd_p) if (shd is not None and shd_p) else None,
     }
-    # valuation needs a live price
     m["market_cap"] = (price * shares) if (price and shares) else None
     m["pe"] = _div(price, eps) if (price and eps and eps > 0) else None
     m["fcf_yield"] = _div(fcf, m["market_cap"])
     m["peg"] = (m["pe"] / (m["ni_growth"] * 100)) if (m["pe"] and m["ni_growth"] and m["ni_growth"] > 0) else None
+    return m
 
-    flags = []
-    def flag(sev, text): flags.append({"sev": sev, "text": text})
 
-    # ── red-flag detection ──
-    if m["net_margin"] is not None and m["net_margin"] < 0:
-        flag("🔴", "Unprofitable — negative net margin")
-    if m["fcf"] is not None and m["fcf"] < 0:
-        flag("🔴", "Burning cash — negative free cash flow")
-    if m["debt_to_equity"] is not None and m["debt_to_equity"] > T["de_danger"]:
-        flag("🔴", f"High leverage — debt/equity {m['debt_to_equity']:.1f}×")
-    if m["current_ratio"] is not None and m["current_ratio"] < T["cr_danger"]:
-        flag("🔴", f"Liquidity tight — current ratio {m['current_ratio']:.2f}")
-    if m["interest_coverage"] is not None and m["interest_coverage"] < T["cover_danger"]:
-        flag("🔴", f"Thin interest coverage — {m['interest_coverage']:.1f}×")
-    if m["rev_growth"] is not None and m["rev_growth"] < 0:
-        flag("🟡", f"Revenue shrinking — {m['rev_growth']*100:+.0f}% YoY")
-    if m["roe"] is not None and m["roe"] < 0:
-        flag("🟡", "Negative return on equity")
-    if m["share_change"] is not None and m["share_change"] > T["dilution"]:
-        flag("🟡", f"Dilution — shares {m['share_change']*100:+.0f}% YoY")
-    if m["pe"] is not None and m["pe"] > T["pe_rich"]:
-        flag("🟡", f"Rich valuation — P/E {m['pe']:.0f}")
-
-    # ── group verdicts (worst signal in the group wins) ──
-    def verdict(reds, ambers):
-        if any(reds):   return "🔴"
-        if any(ambers): return "🟡"
-        return "🟢"
-
-    groups = {
-        "Valuation": {"verdict": verdict(
-            [m["pe"] is not None and m["pe"] > T["pe_high"],
-             m["fcf_yield"] is not None and m["fcf_yield"] < 0],
-            [m["pe"] is not None and m["pe"] > T["pe_rich"],
-             m["fcf_yield"] is not None and m["fcf_yield"] < T["fcfy_thin"],
-             m["peg"] is not None and m["peg"] > T["peg_high"]])},
-        "Quality": {"verdict": verdict(
-            [m["net_margin"] is not None and m["net_margin"] < 0,
-             m["roe"] is not None and m["roe"] < 0],
-            [m["net_margin"] is not None and m["net_margin"] < T["netmargin_thin"],
-             m["roe"] is not None and m["roe"] < T["roe_thin"]])},
-        "Health": {"verdict": verdict(
-            [m["debt_to_equity"] is not None and m["debt_to_equity"] > T["de_danger"],
-             m["current_ratio"] is not None and m["current_ratio"] < T["cr_danger"],
-             m["interest_coverage"] is not None and m["interest_coverage"] < T["cover_danger"],
-             m["fcf"] is not None and m["fcf"] < 0],
-            [m["debt_to_equity"] is not None and m["debt_to_equity"] > T["de_high"],
-             m["current_ratio"] is not None and m["current_ratio"] < T["cr_thin"],
-             m["interest_coverage"] is not None and m["interest_coverage"] < T["cover_thin"]])},
+def _metrics_from_yf(ticker, price):
+    """Fallback source: Yahoo Finance fundamentals (yfinance). Yahoo aggregates the same SEC
+    filings, so it's a credible backup when SEC's endpoint refuses us. Fewer trend fields than
+    the raw filings (no YoY share count / interest coverage), so those come back None → their
+    checks simply don't fire. Returns None if Yahoo has nothing usable."""
+    try:
+        import yfinance as yf
+        info = yf.Ticker(ticker).info or {}
+    except Exception:
+        return None
+    if not info:
+        return None
+    rev = info.get("totalRevenue")
+    ni  = info.get("netIncomeToCommon")
+    fcf = info.get("freeCashflow")
+    mcap = info.get("marketCap")
+    de = info.get("debtToEquity")
+    de = (de / 100.0) if de is not None else None          # yfinance reports D/E as a percent
+    eps = info.get("trailingEps")
+    shares = info.get("sharesOutstanding")
+    pe = info.get("trailingPE") or (_div(price, eps) if (price and eps and eps > 0) else None)
+    m = {
+        "revenue": rev, "revenue_prev": None,
+        "net_income": ni, "net_income_prev": None,
+        "rev_growth": info.get("revenueGrowth"),
+        "ni_growth":  info.get("earningsGrowth"),
+        "gross_margin": info.get("grossMargins"),
+        "op_margin":    info.get("operatingMargins"),
+        "net_margin":   info.get("profitMargins"),
+        "roe":          info.get("returnOnEquity"),
+        "fcf": fcf, "fcf_margin": _div(fcf, rev),
+        "debt_to_equity": de,
+        "current_ratio":  info.get("currentRatio"),
+        "interest_coverage": None,
+        "eps": eps, "shares": shares,
+        "share_change": None,
+        "market_cap": mcap or ((price * shares) if (price and shares) else None),
+        "pe": pe,
+        "fcf_yield": _div(fcf, mcap),
+        "peg": info.get("trailingPegRatio") or info.get("pegRatio"),
     }
-    # A group with no data at all shows a dash, not a false green.
-    if m["pe"] is None and m["fcf_yield"] is None and m["peg"] is None:
-        groups["Valuation"]["verdict"] = "⚪"
-    if m["net_margin"] is None and m["roe"] is None:
-        groups["Quality"]["verdict"] = "⚪"
-    if m["debt_to_equity"] is None and m["current_ratio"] is None and m["fcf"] is None:
-        groups["Health"]["verdict"] = "⚪"
+    # Guard against an empty/placeholder info dict — require at least one substantive number.
+    if all(m[k] is None for k in ("revenue", "net_income", "pe", "net_margin", "market_cap")):
+        return None
+    return m
 
-    return {"ok": True, "error": None, "ticker": ticker.upper(), "company": name,
-            "cik": cik, "metrics": m, "groups": groups, "flags": flags}
+
+# ── the analysis: SEC first (raw filings), Yahoo as automatic fallback ────────────
+def analyze(ticker, price=None):
+    """One ticker → structured fundamentals. `price` (live, from Tradier) powers valuation.
+    Tries SEC EDGAR first (the authoritative filings); if SEC is unreachable/unknown, falls
+    back to Yahoo. Returns a dict the app renders directly; never raises."""
+    sec_err = None
+    try:
+        cik, name = ticker_to_cik(ticker)
+        if cik:
+            facts = company_facts(cik)
+            m = _metrics_from_sec(facts, price)
+            flags, groups = _assess(m)
+            return {"ok": True, "error": None, "ticker": ticker.upper(), "company": name,
+                    "cik": cik, "source": "SEC EDGAR — 10-K / 10-Q filings",
+                    "metrics": m, "groups": groups, "flags": flags}
+        sec_err = f"{ticker.upper()} not in SEC's ticker list (US-listed filers only)."
+    except Exception as e:
+        sec_err = f"{type(e).__name__}: {e}"
+
+    # SEC failed — fall back to Yahoo (same underlying filings, vendor-derived).
+    m = _metrics_from_yf(ticker, price)
+    if m:
+        flags, groups = _assess(m)
+        return {"ok": True, "error": None, "ticker": ticker.upper(),
+                "company": ticker.upper(), "cik": None,
+                "source": "Yahoo Finance — SEC unreachable, vendor-derived",
+                "metrics": m, "groups": groups, "flags": flags}
+
+    return {"ok": False, "error": f"No fundamentals available. SEC: {sec_err} "
+            "Yahoo fallback also returned nothing (foreign/ADR names may lack coverage)."}
