@@ -2915,8 +2915,9 @@ with tab_fund:
         else:
             m=_fd["metrics"]; g=_fd["groups"]
             _asof=f" · price ${_price:,.2f}" if _price else " · price n/a (add Tradier token for P/E)"
+            _srcid=f"SEC CIK {_fd['cik']}" if _fd.get("cik") else "Yahoo Finance"
             st.markdown(f"### {_fd['company']} ({_fd['ticker']})")
-            st.caption(f"SEC CIK {_fd['cik']}{_asof}")
+            st.caption(f"{_srcid}{_asof}")
 
             _vc={"🟢":"#16a34a","🟡":"#a16207","🔴":"#7f1d1d","⚪":"#475569"}
             def _fx_chip(name,verdict,tip):
@@ -2961,5 +2962,6 @@ with tab_fund:
                 ]
                 st.dataframe(pd.DataFrame(_rows,columns=["Metric","Value","Metric ","Value "]),
                              use_container_width=True,hide_index=True)
-            st.caption("Balance-sheet items use the most recent 10-Q/10-K; flows (revenue, income, "
-                       "cash flow) use the latest full fiscal year. Data: SEC EDGAR XBRL.")
+            st.caption(f"Data source: {_fd.get('source','—')}. "
+                       "SEC path: balance-sheet items from the most recent 10-Q/10-K, flows "
+                       "(revenue, income, cash flow) from the latest full fiscal year.")
