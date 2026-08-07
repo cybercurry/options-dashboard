@@ -567,12 +567,20 @@ def fetch_underlying_last(ticker):
         pass
     return None
 
-@st.cache_data(ttl=21600, show_spinner=False)   # 6h — filings change quarterly, not intraday
 def fetch_fundamentals(ticker, price):
-    """Cached SEC EDGAR fundamentals read. Price (live, from Tradier) is passed in so valuation
-    ratios use the real market price; it's part of the cache key so a big price move refreshes
-    P/E without waiting out the 6h TTL."""
-    return fundamentals.analyze(ticker, price)
+    """Fundamentals read (SEC EDGAR → Yahoo fallback). Caches ONLY successful reads, in
+    session — so a failed lookup (bad ticker, transient SEC blip) is never sticky: the next
+    attempt re-fetches instead of being pinned to the miss for hours. Filings change quarterly,
+    so a session-lived cache of successes is plenty; a full page reload refetches. Price is part
+    of the key so a big move refreshes P/E."""
+    key = f"{ticker.upper()}|{round(price, 2) if price else 0}"
+    cache = st.session_state.setdefault("_fx_cache", {})
+    if key in cache:
+        return cache[key]
+    res = fundamentals.analyze(ticker, price)
+    if res.get("ok"):
+        cache[key] = res          # cache successes only — misses always retry
+    return res
 
 def fetch_chain(ticker, expiry):
     """Unified chain fetch for the screener / analyse / deep-dive: Tradier real IV & Greeks
