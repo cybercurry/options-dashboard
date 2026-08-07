@@ -2933,7 +2933,7 @@ with tab_fund:
 
     /* perma-visible short summary */
     .fx-summary{background:#0f172a;border:1px solid #24314a;border-radius:12px;
-      padding:13px 16px;margin:0 0 12px;color:#cbd5e1;font-size:14.5px;line-height:1.55;}
+      padding:15px 18px;margin:0 0 12px;color:#dbe4f0;font-size:16.5px;line-height:1.62;}
     .fx-summary-tag{display:inline-block;background:#0b2740;color:#7dd3fc;font-size:11px;
       font-weight:700;letter-spacing:.4px;padding:2px 9px;border-radius:6px;margin-right:9px;
       vertical-align:middle;}

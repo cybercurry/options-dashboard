@@ -317,7 +317,7 @@ def _metrics_from_yf(ticker, price):
 
 
 # ── company profile: sourced facts only, NOTHING generated ────────────────────────
-def _extractive_short(text, max_sentences=2, max_chars=300):
+def _extractive_short(text, max_sentences=3, max_chars=460):
     """A no-AI 'summary': the first 1-2 sentences of the company's own filing text. Clean because
     it ends on real sentence boundaries — never a mid-thought truncation. Zero hallucination risk
     (it IS the source text), zero setup."""
@@ -359,10 +359,11 @@ def ai_summary(text):
             client = anthropic.Anthropic(api_key=key)
             msg = client.messages.create(
                 model="claude-haiku-4-5-20251001",
-                max_tokens=140,
-                system=("Summarise the company in 1-2 short, plain-English sentences: what it does "
-                        "and its main products/markets. Use ONLY the text provided — do not add any "
-                        "fact that isn't in it. No preamble, no lists."),
+                max_tokens=240,
+                system=("Summarise the company in 2-3 plain-English sentences: what it does, its "
+                        "main products or services, and the markets/customers it serves. Use ONLY "
+                        "the text provided — do not add any fact that isn't in it. No preamble, "
+                        "no lists."),
                 messages=[{"role": "user", "content": text[:4000]}],
             )
             out = "".join(getattr(b, "text", "") for b in msg.content).strip()
