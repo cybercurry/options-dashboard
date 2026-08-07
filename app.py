@@ -2970,6 +2970,30 @@ with tab_fund:
                 ]
                 st.dataframe(pd.DataFrame(_rows,columns=["Metric","Value","Metric ","Value "]),
                              use_container_width=True,hide_index=True)
+
+            with st.expander("What makes each verdict 🟢 / 🟡 / 🔴"):
+                _T=fundamentals.T
+                st.markdown(
+                    "Each chip shows the **worst** signal among its metrics — a single red "
+                    "metric turns the whole chip red. (🟢 all clear · 🟡 caution · 🔴 problem · "
+                    "⚪ no data.)\n\n"
+                    "**Valuation**\n"
+                    f"- 🔴 P/E > {_T['pe_high']:.0f}, or FCF yield < 0\n"
+                    f"- 🟡 P/E > {_T['pe_rich']:.0f}, FCF yield < {_T['fcfy_thin']*100:.0f}%, or PEG > {_T['peg_high']:.0f}\n"
+                    "- 🟢 none of the above\n\n"
+                    "**Quality**\n"
+                    "- 🔴 net margin < 0, or ROE < 0\n"
+                    f"- 🟡 net margin < {_T['netmargin_thin']*100:.0f}%, or ROE < {_T['roe_thin']*100:.0f}%\n"
+                    "- 🟢 profitable, with healthy margins and ROE\n\n"
+                    "**Health**\n"
+                    f"- 🔴 debt/equity > {_T['de_danger']:.1f}×, current ratio < {_T['cr_danger']:.1f}, "
+                    f"interest coverage < {_T['cover_danger']:.0f}×, or negative free cash flow\n"
+                    f"- 🟡 debt/equity > {_T['de_high']:.1f}×, current ratio < {_T['cr_thin']:.1f}, "
+                    f"or interest coverage < {_T['cover_thin']:.0f}×\n"
+                    "- 🟢 low leverage, comfortable liquidity and coverage, positive FCF\n\n"
+                    f"The **🚩 Red-flag list** also calls out: revenue shrinking YoY, negative ROE, "
+                    f"dilution (shares +{_T['dilution']*100:.0f}%/yr or more), and rich valuation (P/E > {_T['pe_rich']:.0f})."
+                )
             st.caption(f"Data source: {_fd.get('source','—')}. "
                        "SEC path: balance-sheet items from the most recent 10-Q/10-K, flows "
                        "(revenue, income, cash flow) from the latest full fiscal year.")
