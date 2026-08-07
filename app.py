@@ -12,6 +12,7 @@ from urllib.parse import quote
 from concurrent.futures import ThreadPoolExecutor
 from pathlib import Path
 import json
+import html
 import tradier   # Tradier API access door (real quotes / chains / IV / Greeks)
 import fundamentals   # SEC EDGAR fundamentals door (real 10-K/10-Q XBRL, red flags)
 import warnings
@@ -581,6 +582,12 @@ def fetch_fundamentals(ticker, price):
     if res.get("ok"):
         cache[key] = res          # cache successes only — misses always retry
     return res
+
+@st.cache_data(ttl=1800, show_spinner=False)   # 30 min — headlines refresh a few times a day
+def fetch_company_news(ticker):
+    """Recent real headlines (Yahoo Finance). Cached separately from the fundamentals so news
+    stays fresher than the 6h filings data."""
+    return fundamentals.company_news(ticker)
 
 def fetch_chain(ticker, expiry):
     """Unified chain fetch for the screener / analyse / deep-dive: Tradier real IV & Greeks
@@ -2883,12 +2890,55 @@ with tab_fund:
     st.markdown("""<style>
     .fx-chip{position:relative;display:inline-block;padding:12px 20px;border-radius:12px;
       font-weight:700;font-size:15px;color:#fff;margin:4px 10px 6px 0;cursor:default;min-width:150px;
-      text-align:center;}
+      text-align:center;box-shadow:0 4px 14px rgba(0,0,0,.28);}
     .fx-chip .fx-tip{visibility:hidden;opacity:0;position:absolute;left:0;top:calc(100% + 8px);
       z-index:9999;width:250px;background:#0f172a;color:#e2e8f0;border:1px solid #334155;
       border-radius:8px;padding:11px 13px;font-weight:400;font-size:13px;line-height:1.7;
       text-align:left;box-shadow:0 8px 24px rgba(0,0,0,.55);transition:opacity .12s;}
     .fx-chip:hover .fx-tip{visibility:visible;opacity:1;}
+
+    /* search box */
+    .st-key-fx_input input{background:#0f172a!important;border:1px solid #334155!important;
+      border-radius:12px!important;color:#e2e8f0!important;font-size:16px!important;
+      padding:12px 14px!important;}
+    .st-key-fx_input input:focus{border-color:#3b82f6!important;
+      box-shadow:0 0 0 3px rgba(59,130,246,.22)!important;}
+    /* Analyse button — accent gradient */
+    .st-key-fx_go button{background:linear-gradient(135deg,#3b82f6,#2563eb)!important;
+      border:none!important;color:#fff!important;font-weight:700!important;border-radius:12px!important;
+      height:46px!important;box-shadow:0 6px 18px rgba(37,99,235,.35)!important;}
+    .st-key-fx_go button:hover{filter:brightness(1.09);transform:translateY(-1px);}
+    /* watchlist ticker pills */
+    [class*="st-key-fxq_"] button{background:#1e293b!important;border:1px solid #334155!important;
+      color:#cbd5e1!important;border-radius:999px!important;font-weight:600!important;
+      font-size:13px!important;padding:5px 6px!important;transition:all .12s!important;
+      box-shadow:none!important;}
+    [class*="st-key-fxq_"] button:hover{background:#273449!important;border-color:#3b82f6!important;
+      color:#fff!important;transform:translateY(-2px);}
+
+    /* company hero */
+    .fx-hero{background:linear-gradient(135deg,#0b1220 0%,#152036 52%,#25324d 100%);
+      border:1px solid #2c3a52;border-radius:18px;padding:20px 24px;margin:4px 0 14px;
+      box-shadow:0 12px 34px rgba(0,0,0,.40);}
+    .fx-hero-top{display:flex;justify-content:space-between;align-items:flex-start;gap:16px;
+      flex-wrap:wrap;}
+    .fx-hero-name{font-size:25px;font-weight:800;color:#f8fafc;line-height:1.15;}
+    .fx-hero-sub{font-size:12.5px;color:#93a3b8;margin-top:6px;letter-spacing:.2px;}
+    .fx-hero-right{text-align:right;white-space:nowrap;}
+    .fx-hero-ticker{display:inline-block;background:#2563eb;color:#fff;font-weight:800;
+      font-size:14px;letter-spacing:.6px;padding:4px 12px;border-radius:8px;}
+    .fx-hero-price{font-size:21px;font-weight:700;color:#e2e8f0;margin-top:9px;}
+    .fx-hero-dots{margin-top:9px;font-size:12px;color:#94a3b8;}
+    .fx-hero-dots b{color:#e2e8f0;font-weight:600;}
+
+    /* news cards */
+    .fx-news a{display:block;text-decoration:none;background:#0f172a;border:1px solid #1e2a3f;
+      border-left:3px solid #3b82f6;border-radius:10px;padding:10px 14px;margin:7px 0;
+      transition:all .12s;}
+    .fx-news a:hover{background:#111c33;border-left-color:#60a5fa;transform:translateX(3px);
+      box-shadow:0 6px 18px rgba(0,0,0,.30);}
+    .fx-news .t{color:#e5edf7;font-weight:600;font-size:14px;line-height:1.4;}
+    .fx-news .m{color:#64748b;font-size:12px;margin-top:4px;}
     </style>""", unsafe_allow_html=True)
 
     _wl=st.session_state.get("watchlist",[])
@@ -2922,10 +2972,7 @@ with tab_fund:
             st.error(_fd.get("error","Could not read fundamentals."))
         else:
             m=_fd["metrics"]; g=_fd["groups"]
-            _asof=f" · price ${_price:,.2f}" if _price else " · price n/a (add Tradier token for P/E)"
             _srcid=f"SEC CIK {_fd['cik']}" if _fd.get("cik") else "Yahoo Finance"
-            st.markdown(f"### {_fd['company']} ({_fd['ticker']})")
-            st.caption(f"{_srcid}{_asof}")
 
             # ── Company profile — every line is either sourced verbatim or computed from the
             #    filings; nothing here is AI-written. ──
@@ -2934,8 +2981,22 @@ with tab_fund:
             if _prof.get("employees"):
                 try: _cls.append(f"{int(_prof['employees']):,} employees")
                 except Exception: pass
-            if _cls:
-                st.markdown("**"+"  ·  ".join(_cls)+"**")
+
+            # ── Hero card ──
+            _price_str=f"${_price:,.2f}" if _price else "price n/a"
+            _dots="&nbsp;&nbsp;".join(f"{g[k]['verdict']} <b>{k}</b>"
+                                     for k in ("Valuation","Quality","Health"))
+            _sub=html.escape("  ·  ".join(_cls)) if _cls else "US-listed filer"
+            st.markdown(
+                f"""<div class="fx-hero"><div class="fx-hero-top">
+                <div><div class="fx-hero-name">{html.escape(_fd['company'])}</div>
+                     <div class="fx-hero-sub">{_sub}</div></div>
+                <div class="fx-hero-right"><div class="fx-hero-ticker">{html.escape(_fd['ticker'])}</div>
+                     <div class="fx-hero-price">{_price_str}</div></div>
+                </div><div class="fx-hero-dots">{_dots}</div></div>""",
+                unsafe_allow_html=True)
+            st.caption(f"{_srcid}"+("" if _price else " · add Tradier token for P/E"))
+
             # Financial trend — computed facts, stated plainly (no interpretation).
             _tr=[]
             if m.get("rev_growth") is not None: _tr.append(f"Revenue {m['rev_growth']*100:+.0f}% YoY")
@@ -2992,6 +3053,20 @@ with tab_fund:
             else:
                 for _f in _flags:
                     st.markdown(f"{_f['sev']} {_f['text']}")
+
+            # ── Recent headlines — real Yahoo Finance articles, links open the source ──
+            _news=fetch_company_news(_tkr)
+            if _news:
+                st.markdown("#### 📰 Recent headlines")
+                _nh="<div class='fx-news'>"
+                for _n in _news:
+                    _meta=" · ".join([x for x in (_n.get("publisher"),_n.get("when")) if x])
+                    _nh+=(f"<a href='{html.escape(_n['link'])}' target='_blank' rel='noopener'>"
+                          f"<div class='t'>{html.escape(_n['title'])}</div>"
+                          f"<div class='m'>{html.escape(_meta)}</div></a>")
+                _nh+="</div>"
+                st.markdown(_nh,unsafe_allow_html=True)
+                st.caption("Headlines via Yahoo Finance — click to open the original article.")
 
             with st.expander("The numbers (latest annual filing)"):
                 _rows=[

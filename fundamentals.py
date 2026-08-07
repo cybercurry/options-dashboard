@@ -346,6 +346,50 @@ def company_profile(ticker, cik=None):
     return {k: v for k, v in prof.items() if v}
 
 
+def company_news(ticker, limit=6):
+    """Recent REAL headlines from Yahoo Finance (yfinance `.news`) — actual articles with working
+    links, nothing generated. yfinance has shipped two schemas (flat, and nested under 'content'),
+    so parse both defensively. Returns [{title, publisher, link, when}]; [] if unavailable."""
+    try:
+        import yfinance as yf
+        raw = yf.Ticker(ticker).news or []
+    except Exception:
+        return []
+    import datetime as _dt
+    out = []
+    for it in raw:
+        if not isinstance(it, dict):
+            continue
+        c = it.get("content") if isinstance(it.get("content"), dict) else it
+        title = c.get("title")
+        if not title:
+            continue
+        link = c.get("link")
+        for k in ("canonicalUrl", "clickThroughUrl"):
+            u = c.get(k)
+            if isinstance(u, dict) and u.get("url"):
+                link = u["url"]; break
+        publisher = c.get("publisher")
+        prov = c.get("provider")
+        if isinstance(prov, dict) and prov.get("displayName"):
+            publisher = prov["displayName"]
+        when = None
+        ts = c.get("providerPublishTime")
+        pd_ = c.get("pubDate") or c.get("displayTime")
+        try:
+            if ts:
+                when = _dt.datetime.utcfromtimestamp(int(ts)).strftime("%b %d")
+            elif pd_:
+                when = _dt.datetime.fromisoformat(str(pd_).replace("Z", "+00:00")).strftime("%b %d")
+        except Exception:
+            when = None
+        if link:
+            out.append({"title": title, "publisher": publisher, "link": link, "when": when})
+        if len(out) >= limit:
+            break
+    return out
+
+
 # ── the analysis: SEC first (raw filings), Yahoo as automatic fallback ────────────
 def analyze(ticker, price=None):
     """One ticker → structured fundamentals. `price` (live, from Tradier) powers valuation.
