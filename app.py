@@ -2927,6 +2927,43 @@ with tab_fund:
             st.markdown(f"### {_fd['company']} ({_fd['ticker']})")
             st.caption(f"{_srcid}{_asof}")
 
+            # ── Company profile — every line is either sourced verbatim or computed from the
+            #    filings; nothing here is AI-written. ──
+            _prof=_fd.get("profile") or {}
+            _cls=[x for x in (_prof.get("sector"),_prof.get("industry"),_prof.get("country")) if x]
+            if _prof.get("employees"):
+                try: _cls.append(f"{int(_prof['employees']):,} employees")
+                except Exception: pass
+            if _cls:
+                st.markdown("**"+"  ·  ".join(_cls)+"**")
+            # Financial trend — computed facts, stated plainly (no interpretation).
+            _tr=[]
+            if m.get("rev_growth") is not None: _tr.append(f"Revenue {m['rev_growth']*100:+.0f}% YoY")
+            if m.get("ni_growth")  is not None: _tr.append(f"Net income {m['ni_growth']*100:+.0f}% YoY")
+            if m.get("net_income_prev") and m.get("revenue_prev") and m.get("net_margin") is not None:
+                _pm_prev=m["net_income_prev"]/m["revenue_prev"]
+                _tr.append("margins expanding" if m["net_margin"]>_pm_prev else "margins compressing")
+            if m.get("fcf") is not None:
+                _tr.append("FCF positive" if m["fcf"]>=0 else "FCF negative")
+            if _tr:
+                st.markdown("📈 **Trend (from filings):** "+" · ".join(_tr))
+            # What they invest in — real dollar figures from the filings.
+            _inv=[]
+            if m.get("rnd"):   _inv.append(f"R&D {_fx_money(m['rnd'])}/yr")
+            if m.get("capex"): _inv.append(f"Capex {_fx_money(m['capex'])}/yr")
+            if _inv:
+                st.markdown("🔧 **Invests in:** "+" · ".join(_inv))
+            # Business summary — quoted verbatim from the company's filing, never generated.
+            if _prof.get("summary"):
+                with st.expander("📄 What this company does (from its filings)"):
+                    st.write(_prof["summary"])
+                    _wl_bits=[]
+                    if _prof.get("website"): _wl_bits.append(_prof["website"])
+                    if _prof.get("sic"):     _wl_bits.append(f"SEC industry: {_prof['sic']}")
+                    if _wl_bits: st.caption("  ·  ".join(_wl_bits))
+                    st.caption("Summary sourced verbatim from the company's own filing "
+                               "(via Yahoo Finance) — not AI-generated.")
+
             _vc={"🟢":"#16a34a","🟡":"#a16207","🔴":"#7f1d1d","⚪":"#475569"}
             def _fx_chip(name,verdict,tip):
                 col=_vc.get(verdict,"#475569")
@@ -2964,6 +3001,7 @@ with tab_fund:
                     ("Gross margin",_fx_pct(m["gross_margin"]),"Op margin",_fx_pct(m["op_margin"])),
                     ("Net margin",_fx_pct(m["net_margin"]),"ROE",_fx_pct(m["roe"])),
                     ("Free cash flow",_fx_money(m["fcf"]),"FCF margin",_fx_pct(m["fcf_margin"])),
+                    ("R&D spend",_fx_money(m.get("rnd")),"Capex",_fx_money(m.get("capex"))),
                     ("Debt / Equity",_fx_x(m["debt_to_equity"]),"Current ratio",_fx_num(m["current_ratio"])),
                     ("Interest coverage",_fx_x(m["interest_coverage"]),"Market cap",_fx_money(m["market_cap"])),
                     ("P/E",_fx_num(m["pe"],1),"FCF yield",_fx_pct(m["fcf_yield"])),

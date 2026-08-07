@@ -59,6 +59,8 @@ _C = {
     "cfo": ["NetCashProvidedByUsedInOperatingActivities",
             "NetCashProvidedByUsedInOperatingActivitiesContinuingOperations"],
     "capex": ["PaymentsToAcquirePropertyPlantAndEquipment", "PaymentsToAcquireProductiveAssets"],
+    "rnd": ["ResearchAndDevelopmentExpense",
+            "ResearchAndDevelopmentExpenseExcludingAcquiredInProcessCost"],
     "interest": ["InterestExpense", "InterestExpenseDebt"],
     "eps": ["EarningsPerShareDiluted", "EarningsPerShareBasic"],
     "sh_diluted": ["WeightedAverageNumberOfDilutedSharesOutstanding"],
@@ -218,6 +220,7 @@ def _metrics_from_sec(facts, price):
     opi,  _      = _annual_last_two(facts, _C["op_income"])
     cfo,  _      = _annual_last_two(facts, _C["cfo"])
     capex, _     = _annual_last_two(facts, _C["capex"])
+    rnd,  _      = _annual_last_two(facts, _C["rnd"])
     intr, _      = _annual_last_two(facts, _C["interest"])
     eps,  _      = _annual_last_two(facts, _C["eps"])
     shd,  shd_p  = _annual_last_two(facts, _C["sh_diluted"])
@@ -249,6 +252,7 @@ def _metrics_from_sec(facts, price):
         "interest_coverage": _div(opi, intr),
         "eps": eps, "shares": shares,
         "share_change": _div(shd - shd_p, shd_p) if (shd is not None and shd_p) else None,
+        "capex": capex, "rnd": rnd,
     }
     m["market_cap"] = (price * shares) if (price and shares) else None
     m["pe"] = _div(price, eps) if (price and eps and eps > 0) else None
@@ -293,6 +297,7 @@ def _metrics_from_yf(ticker, price):
         "interest_coverage": None,
         "eps": eps, "shares": shares,
         "share_change": None,
+        "capex": None, "rnd": None,
         "market_cap": mcap or ((price * shares) if (price and shares) else None),
         "pe": pe,
         "fcf_yield": _div(fcf, mcap),
@@ -302,6 +307,43 @@ def _metrics_from_yf(ticker, price):
     if all(m[k] is None for k in ("revenue", "net_income", "pe", "net_margin", "market_cap")):
         return None
     return m
+
+
+# ── company profile: sourced facts only, NOTHING generated ────────────────────────
+def _sec_sic(cik):
+    """SEC's own industry classification (SIC description) from the submissions endpoint."""
+    try:
+        d = _get(f"https://data.sec.gov/submissions/CIK{cik}.json")
+        return d.get("sicDescription")
+    except Exception:
+        return None
+
+
+def company_profile(ticker, cik=None):
+    """Factual profile — never AI-written. The business summary is Yahoo's `longBusinessSummary`,
+    which is the company's own 'Item 1. Business' description aggregated from its filings, shown
+    verbatim. Sector/industry/country/employees are provider metadata; industry is cross-checked
+    against SEC's SIC classification. Returns {} if nothing is available."""
+    prof = {}
+    try:
+        import yfinance as yf
+        info = yf.Ticker(ticker).info or {}
+        prof = {
+            "summary":   info.get("longBusinessSummary"),
+            "sector":    info.get("sector"),
+            "industry":  info.get("industry"),
+            "country":   info.get("country"),
+            "employees": info.get("fullTimeEmployees"),
+            "website":   info.get("website"),
+        }
+    except Exception:
+        pass
+    if cik:
+        sic = _sec_sic(cik)
+        if sic:
+            prof["sic"] = sic
+            prof.setdefault("industry", sic)   # fall back to SEC's label if Yahoo had none
+    return {k: v for k, v in prof.items() if v}
 
 
 # ── the analysis: SEC first (raw filings), Yahoo as automatic fallback ────────────
@@ -318,6 +360,7 @@ def analyze(ticker, price=None):
             flags, groups = _assess(m)
             return {"ok": True, "error": None, "ticker": ticker.upper(), "company": name,
                     "cik": cik, "source": "SEC EDGAR — 10-K / 10-Q filings",
+                    "profile": company_profile(ticker, cik),
                     "metrics": m, "groups": groups, "flags": flags}
         sec_err = f"{ticker.upper()} not in SEC's ticker list (US-listed filers only)."
     except Exception as e:
@@ -330,6 +373,7 @@ def analyze(ticker, price=None):
         return {"ok": True, "error": None, "ticker": ticker.upper(),
                 "company": ticker.upper(), "cik": None,
                 "source": "Yahoo Finance — SEC unreachable, vendor-derived",
+                "profile": company_profile(ticker, None),
                 "metrics": m, "groups": groups, "flags": flags}
 
     return {"ok": False, "error": f"No fundamentals available. SEC: {sec_err} "
