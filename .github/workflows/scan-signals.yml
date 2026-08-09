@@ -27,6 +27,7 @@ jobs:
         with:
           python-version: "3.11"
       - run: pip install --quiet requests yfinance
+      # sheets.py reads the published Google-Sheet CSV (no key needed).
       - name: Scan for signals
         env:
           TRADIER_TOKEN: ${{ secrets.TRADIER_TOKEN }}
@@ -36,6 +37,6 @@ jobs:
         run: |
           git config user.name  "signals-bot"
           git config user.email "actions@users.noreply.github.com"
-          git add data/signals.json
+          git add data/signals.json wheel_universe.json
           git diff --staged --quiet || git commit -m "chore: refresh wheel signals ($(date -u +%Y-%m-%dT%H:%MZ))"
           git push
