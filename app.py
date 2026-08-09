@@ -16,6 +16,7 @@ import html
 import tradier   # Tradier API access door (real quotes / chains / IV / Greeks)
 import fundamentals   # SEC EDGAR fundamentals door (real 10-K/10-Q XBRL, red flags)
 import signals   # headless wheel-signal scan engine (CSP/CC premium opportunities)
+import sheets   # published Google-Sheet CSV reader (live wheel/growth universe)
 import warnings
 warnings.filterwarnings("ignore")
 
@@ -590,16 +591,22 @@ def fetch_company_news(ticker):
     stays fresher than the 6h filings data."""
     return fundamentals.company_news(ticker)
 
+@st.cache_data(ttl=1800, show_spinner=False)
 def load_signal_universe():
-    """Signal universe (wheel + growth ticker lists), seeded from Jay's planning sheet. Falls
-    back to the plain watchlist if the file is missing."""
+    """Signal universe (wheel + growth). LIVE from the published Google-Sheet CSV each scan;
+    falls back to the committed wheel_universe.json (then the watchlist) if the sheet is
+    unreachable, so a Google hiccup never blanks the scan."""
+    cfg = {}
     try:
-        u = json.loads((Path(__file__).parent / "wheel_universe.json").read_text())
-        if u.get("wheel"):
-            return u
+        cfg = json.loads((Path(__file__).parent / "wheel_universe.json").read_text())
     except Exception:
         pass
-    return {"wheel": st.session_state.get("watchlist", []), "growth": []}
+    live = sheets.fetch_universe(cfg.get("source_url")) if cfg.get("source_url") else {}
+    if live.get("wheel"):
+        return {**live, "_source": "sheet"}
+    if cfg.get("wheel"):
+        return {**cfg, "_source": "file"}
+    return {"wheel": st.session_state.get("watchlist", []), "growth": [], "_source": "watchlist"}
 
 @st.cache_data(ttl=1800, show_spinner=False)
 def run_signal_scan(nonce):
@@ -3230,6 +3237,12 @@ with tab_signals:
     if _live:
         st.session_state["sg_nonce"]=st.session_state.get("sg_nonce",0)+1
         st.session_state["sg_use_live"]=True; _use_live=True
+
+    _uni=load_signal_universe()
+    _uni_src={"sheet":"Google Sheet (live)","file":"committed cache","watchlist":"watchlist"}.get(
+        _uni.get("_source"),"—")
+    st.caption(f"Universe: {len(_uni.get('wheel',[]))} wheel · {len(_uni.get('growth',[]))} growth "
+               f"· source: {_uni_src}")
 
     if _use_live and tradier.is_configured():
         with st.spinner("Scanning the wheel universe via Tradier… (~40–90s)"):
