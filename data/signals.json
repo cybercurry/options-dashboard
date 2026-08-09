@@ -1,6 +1,22 @@
 {
-  "generated": null,
-  "count": 0,
   "signals": [],
-  "params": {}
+  "leaps": [],
+  "params": {
+    "min_premium_pct": 1.2,
+    "strong_premium_pct": 1.5,
+    "dte": [
+      21,
+      45
+    ],
+    "delta_opt": 0.3,
+    "premium_basis": "premium \u00f7 spot",
+    "iv_buckets": [
+      30.0,
+      60.0
+    ],
+    "earnings_blackout": true
+  },
+  "count": 0,
+  "leap_count": 0,
+  "generated": "2026-08-09T08:45:26Z"
 }

@@ -1,6 +1,38 @@
 {
-  "note": "Signal universe. LIVE source is the published Google Sheet CSV below (assetsincome tab, WHEEL + GROWTH columns) — read every scan. The wheel/growth lists here are a committed fallback cache used only if the sheet is unreachable; the cron refreshes them. Duplicates are deduped at read time.",
+  "note": "Signal universe. LIVE source is the published Google Sheet CSV below (assetsincome tab, WHEEL + GROWTH columns) \u2014 read every scan. The wheel/growth lists here are a committed fallback cache used only if the sheet is unreachable; the cron refreshes them. Duplicates are deduped at read time.",
   "source_url": "https://docs.google.com/spreadsheets/d/e/2PACX-1vRoZ_Tr1ndKMbK4dbmBDvz5q2TeI83KW1A1m6vlMCdN-qfzHdlnErBxIk4IvW3eN2m0qpJOW4-RNiWq/pub?gid=1408572587&single=true&output=csv",
-  "wheel":  ["TSLA","SOFI","NVDA","AMZN","MSFT","CEG","VRT","CMG","GLD","SLV","PLTR","WMT","AAPL","GOOG","LLY"],
-  "growth": ["TSLA","SPCX","NVTS","NVDA","AMZN","NOW","CQQQ","QANT","CRWV","BE","VRT","IREN","PLTR","PURR","NBIS"]
+  "wheel": [
+    "TSLA",
+    "SOFI",
+    "NVDA",
+    "AMZN",
+    "MSFT",
+    "CEG",
+    "VRT",
+    "CMG",
+    "GLD",
+    "SLV",
+    "PLTR",
+    "WMT",
+    "AAPL",
+    "GOOG",
+    "LLY"
+  ],
+  "growth": [
+    "TSLA",
+    "SPCX",
+    "NVTS",
+    "NVDA",
+    "AMZN",
+    "NOW",
+    "CQQQ",
+    "QANT",
+    "CRWV",
+    "BE",
+    "VRT",
+    "IREN",
+    "PLTR",
+    "PURR",
+    "NBIS"
+  ]
 }
