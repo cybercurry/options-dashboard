@@ -49,6 +49,11 @@ def _load_universe():
 
 
 def main():
+    # Diagnostic: prove whether Tradier accepts the token (no secret is printed — ping() only
+    # returns ok/state/error). A 401 here explains an empty scan.
+    import tradier
+    print(f"Tradier ping: {tradier.ping()}")
+
     result = signals.scan(_load_universe())
     result["generated"] = datetime.datetime.utcnow().replace(microsecond=0).isoformat() + "Z"
     OUT.parent.mkdir(parents=True, exist_ok=True)
