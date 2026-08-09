@@ -15,6 +15,7 @@ import json
 import html
 import tradier   # Tradier API access door (real quotes / chains / IV / Greeks)
 import fundamentals   # SEC EDGAR fundamentals door (real 10-K/10-Q XBRL, red flags)
+import signals   # headless wheel-signal scan engine (CSP/CC premium opportunities)
 import warnings
 warnings.filterwarnings("ignore")
 
@@ -588,6 +589,12 @@ def fetch_company_news(ticker):
     """Recent real headlines (Yahoo Finance). Cached separately from the fundamentals so news
     stays fresher than the 6h filings data."""
     return fundamentals.company_news(ticker)
+
+@st.cache_data(ttl=1800, show_spinner=False)
+def run_signal_scan(watchlist_key, nonce):
+    """Live wheel-signal scan (same engine the cron uses). `nonce` lets the Scan-now button force
+    a refresh past the 30-min cache."""
+    return signals.scan(list(watchlist_key))
 
 def fetch_chain(ticker, expiry):
     """Unified chain fetch for the screener / analyse / deep-dive: Tradier real IV & Greeks
@@ -1688,8 +1695,8 @@ with st.sidebar:
 watchlist=st.session_state.watchlist
 st.title("Options Intelligence Dashboard")
 
-tab_dash,tab_dive,tab_chain,tab_vix,tab_screener,tab_fund=st.tabs(
-    ["Overview","Deep Dive","Options Chain","📊 Market Stats","⚡ Screener","🔬 Fundamentals"])
+tab_dash,tab_dive,tab_chain,tab_vix,tab_screener,tab_signals,tab_fund=st.tabs(
+    ["Overview","Deep Dive","Options Chain","📊 Market Stats","⚡ Screener","🎯 Signals","🔬 Fundamentals"])
 
 # Hover explainers for first-time visitors — what each tab is for, in plain language.
 # st.tabs() won't take custom HTML in its own labels, so (same pure-CSS :hover technique as
@@ -3154,3 +3161,169 @@ with tab_fund:
             st.caption(f"Data source: {_fd.get('source','—')}. "
                        "SEC path: balance-sheet items from the most recent 10-Q/10-K, flows "
                        "(revenue, income, cash flow) from the latest full fiscal year.")
+
+# ══════════════════════════════════════════════════════════════════════════════
+# TAB — SIGNALS (wheel premium-selling opportunities across the watchlist)
+# ══════════════════════════════════════════════════════════════════════════════
+with tab_signals:
+    st.subheader("🎯 Signals")
+    st.caption("Cash-secured-put (and covered-call) premium opportunities across your watchlist, "
+               "ranked by per-trade yield with the app's gates (Δ≈0.30 · 21–45 DTE · median rule · "
+               "liquidity · earnings blackout). Suggestions only — you place them manually.")
+
+    st.markdown("""<style>
+    .sg-card{background:#0f172a;border:1px solid #24314a;border-left:4px solid #3b82f6;
+      border-radius:12px;padding:12px 16px;margin:8px 0;box-shadow:0 6px 18px rgba(0,0,0,.25);}
+    .sg-top{display:flex;justify-content:space-between;align-items:baseline;gap:10px;flex-wrap:wrap;}
+    .sg-tkr{font-size:18px;font-weight:800;color:#f8fafc;}
+    .sg-badge{display:inline-block;font-size:11px;font-weight:800;letter-spacing:.5px;
+      padding:2px 9px;border-radius:6px;color:#fff;margin-left:8px;vertical-align:middle;}
+    .sg-prem{font-size:20px;font-weight:800;}
+    .sg-sub{color:#94a3b8;font-size:12.5px;margin-top:5px;}
+    .sg-sub b{color:#dbe4f0;font-weight:600;}
+    .sg-size{color:#7dd3fc;font-size:13px;font-weight:700;margin-top:6px;}
+    .sg-sec{font-size:16px;font-weight:800;color:#f1f5f9;margin:16px 0 6px;padding-left:11px;
+      border-left:3px solid #3b82f6;}
+    </style>""", unsafe_allow_html=True)
+
+    _SIGNALS_FILE = Path(__file__).parent / "data" / "signals.json"
+
+    def _load_signals_file():
+        try:
+            return json.loads(_SIGNALS_FILE.read_text())
+        except Exception:
+            return {"generated": None, "count": 0, "signals": [], "params": {}}
+
+    # ── controls: capital + live scan ──
+    _sc1,_sc2,_sc3 = st.columns([1.4,1,1])
+    with _sc1:
+        _cap = st.number_input("Combined capital ($) — solo + joint", min_value=0.0,
+                               value=float(st.session_state.get("sg_capital",0.0)), step=5000.0,
+                               help="Used only to size contracts (90% deployed, 10% reserved for "
+                                    "your manual longs). Leave 0 to just see the opportunities.")
+        st.session_state["sg_capital"]=_cap
+    with _sc2:
+        st.markdown("<div style='height:28px'></div>",unsafe_allow_html=True)
+        _live = st.button("🔄 Scan now (live)", use_container_width=True, type="primary",
+                          disabled=not tradier.is_configured())
+    with _sc3:
+        st.markdown("<div style='height:28px'></div>",unsafe_allow_html=True)
+        _use_live = st.toggle("Use live scan", value=st.session_state.get("sg_use_live",False),
+                              help="On: show the just-run live scan. Off: show the last scheduled "
+                                   "scan committed by the scanner (updates ~3×/day + Sunday).")
+        st.session_state["sg_use_live"]=_use_live
+    if not tradier.is_configured():
+        st.info("Add your Tradier token to run a live scan. The scheduled scan (GitHub Action) "
+                "also needs the TRADIER_TOKEN repo secret to populate signals automatically.")
+
+    if _live:
+        st.session_state["sg_nonce"]=st.session_state.get("sg_nonce",0)+1
+        st.session_state["sg_use_live"]=True; _use_live=True
+
+    if _use_live and tradier.is_configured():
+        with st.spinner("Scanning the watchlist via Tradier… (~30–60s)"):
+            _data = run_signal_scan(tuple(st.session_state.get("watchlist",[])),
+                                    st.session_state.get("sg_nonce",0))
+        _src_note = "Live scan (this session)"
+    else:
+        _data = _load_signals_file()
+        _gen = _data.get("generated")
+        _src_note = f"Scheduled scan · generated {_gen} UTC" if _gen else "No scheduled scan yet"
+
+    _sigs = _data.get("signals",[])
+    _short = [s for s in _sigs if s.get("shortlist")]
+    _params = _data.get("params",{})
+
+    st.caption(f"{_src_note}  ·  {len(_sigs)} opportunities  ·  {len(_short)} on the shortlist")
+
+    if not _sigs:
+        st.info("No signals yet. Hit **Scan now (live)** (needs your Tradier token), or wait for "
+                "the scheduled scanner to commit the first batch.")
+    else:
+        # ── capital sizing over the shortlist (CSP collateral = strike×100) ──
+        _rows=[]; _deployed=0.0
+        if _cap>0:
+            _budget=_cap*0.90; _name_cap=_cap*0.10; _sector_cap=_cap*0.25
+            _sec_used={}
+            for s in _short:
+                _coll_per=s["strike"]*100.0
+                _sec=s.get("sector") or "—"
+                _room=min(_name_cap,_budget-_deployed,_sector_cap-_sec_used.get(_sec,0.0))
+                _n=int(_room//_coll_per) if _coll_per>0 else 0
+                _coll=_n*_coll_per; _prem=_n*s["mid"]*100.0
+                if _n>=1:
+                    _deployed+=_coll; _sec_used[_sec]=_sec_used.get(_sec,0.0)+_coll
+                _rows.append({**s,"contracts":_n,"collateral":_coll,"premium":_prem})
+            _tot_prem=sum(r["premium"] for r in _rows)
+            _m1,_m2,_m3,_m4=st.columns(4)
+            _m1.metric("Deployable (90%)", f"${_budget:,.0f}")
+            _m2.metric("Would deploy", f"${_deployed:,.0f}", f"{(_deployed/_cap*100):.0f}% of capital")
+            _m3.metric("Est. premium / cycle", f"${_tot_prem:,.0f}")
+            _m4.metric("Reserved (10%)", f"${_cap*0.10:,.0f}")
+        else:
+            _rows=[{**s,"contracts":None,"collateral":None,"premium":None} for s in _short]
+
+        # ── shortlist cards ──
+        st.markdown("<div class='sg-sec'>⭐ Shortlist — best cashflow entries (CSP)</div>",
+                    unsafe_allow_html=True)
+        if not _rows:
+            st.warning("No CSP passed all gates (premium ≥1.2%, Δ≈0.30, below median, liquid, "
+                       "no earnings before expiry) this scan. Covered-call ideas may still be below.")
+        for r in _rows:
+            _pc = r["premium_pct"]; _pcol = "#4ade80" if r.get("strong") else "#e2e8f0"
+            _strong = " 🔥" if r.get("strong") else ""
+            _size_line = ""
+            if _cap>0:
+                if r["contracts"]>=1:
+                    _size_line=(f"<div class='sg-size'>➜ {r['contracts']} contract(s) · "
+                                f"${r['collateral']:,.0f} collateral · ${r['premium']:,.0f} premium</div>")
+                else:
+                    _size_line="<div class='sg-size' style='color:#94a3b8'>➜ doesn't fit under the caps</div>"
+            _earn = " · ⚠️ earnings soon" if r.get("earnings_before_expiry") else ""
+            st.markdown(
+                f"""<div class='sg-card'><div class='sg-top'>
+                <div><span class='sg-tkr'>{html.escape(r['ticker'])}</span>
+                     <span class='sg-badge' style='background:#16a34a'>CSP</span></div>
+                <div class='sg-prem' style='color:{_pcol}'>{_pc:.2f}%{_strong}</div></div>
+                <div class='sg-sub'>Sell <b>${r['strike']:.1f}</b> put · <b>{r['expiry']}</b> "
+                f"({r['dte']}d) · mid <b>${r['mid']:.2f}</b> · Δ {r.get('delta')} · "
+                f"POP <b>{r.get('pop')}%</b> · IV {r.get('iv')}% · "
+                f"<b>{html.escape(str(r.get('sector')))}</b> · {r.get('vol_bucket')}{_earn}</div>"
+                f"{_size_line}</div>""", unsafe_allow_html=True)
+
+        # ── covered-call ideas (only if you hold the shares) ──
+        _ccs=[s for s in _sigs if s["strategy"]=="CC" and s.get("median_ok")]
+        _ccs.sort(key=lambda s:s["premium_pct"],reverse=True)
+        if _ccs:
+            st.markdown("<div class='sg-sec'>📞 Covered-call ideas — only if you already hold ≥100 shares</div>",
+                        unsafe_allow_html=True)
+            for r in _ccs[:8]:
+                _strong=" 🔥" if r.get("strong") else ""
+                st.markdown(
+                    f"""<div class='sg-card' style='border-left-color:#2563eb'><div class='sg-top'>
+                    <div><span class='sg-tkr'>{html.escape(r['ticker'])}</span>
+                         <span class='sg-badge' style='background:#2563eb'>CC</span></div>
+                    <div class='sg-prem' style='color:#e2e8f0'>{r['premium_pct']:.2f}%{_strong}</div></div>
+                    <div class='sg-sub'>Sell <b>${r['strike']:.1f}</b> call · <b>{r['expiry']}</b> "
+                    f"({r['dte']}d) · mid <b>${r['mid']:.2f}</b> · Δ {r.get('delta')} · "
+                    f"POP <b>{r.get('pop')}%</b> · <b>{html.escape(str(r.get('sector')))}</b> · "
+                    f"{r.get('vol_bucket')}</div></div>""", unsafe_allow_html=True)
+
+        # ── full table for the curious ──
+        with st.expander("All opportunities (full scan, incl. below-median & filtered)"):
+            _tbl=[]
+            for s in _sigs:
+                _tbl.append({"Ticker":s["ticker"],"Type":s["strategy"],"Strike":s["strike"],
+                    "Expiry":s["expiry"],"DTE":s["dte"],"Prem %":s["premium_pct"],
+                    "Δ":s.get("delta"),"POP %":s.get("pop"),"IV %":s.get("iv"),
+                    "Sector":s.get("sector"),"Vol":s.get("vol_bucket"),
+                    "Median ok":"✅" if s.get("median_ok") else "—",
+                    "OI":s.get("oi"),"Shortlist":"⭐" if s.get("shortlist") else ""})
+            st.dataframe(pd.DataFrame(_tbl),use_container_width=True,hide_index=True)
+
+        _pp=_params or {}
+        st.caption(f"Gates: premium ≥{_pp.get('min_premium_pct',1.2)}% (🔥 ≥{_pp.get('strong_premium_pct',1.5)}%) · "
+                   f"Δ≈{_pp.get('delta_opt',0.3)} · DTE {_pp.get('dte',[21,45])} · median rule · "
+                   f"earnings blackout {'on' if _pp.get('earnings_blackout',True) else 'off'}. "
+                   "Sizing: 90% deployed, 10% reserved · ≤10%/name · ≤25%/sector. "
+                   "Not advice — verify each fill and place manually.")

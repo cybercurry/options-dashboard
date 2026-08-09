@@ -1,0 +1,41 @@
+name: Scan wheel signals
+
+# Scans the watchlist for CSP/CC premium-selling opportunities and commits the ranked
+# shortlist to data/signals.json, which the Signals tab renders. Needs the repo secret
+# TRADIER_TOKEN (same one the IV logger uses).
+on:
+  schedule:
+    - cron: "0 14 * * 1-5"     # ~post-open   (14:00 UTC, Mon–Fri)
+    - cron: "0 17 * * 1-5"     # ~midday      (17:00 UTC, Mon–Fri)
+    - cron: "30 19 * * 1-5"    # ~pre-close   (19:30 UTC, Mon–Fri)
+    - cron: "0 15 * * 0"       # Sunday plan  (15:00 UTC = 19:00 Dubai)
+  workflow_dispatch: {}         # manual "Run workflow" for an on-demand scan
+
+permissions:
+  contents: write
+
+concurrency:
+  group: scan-signals
+  cancel-in-progress: false
+
+jobs:
+  scan:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - run: pip install --quiet requests yfinance
+      - name: Scan for signals
+        env:
+          TRADIER_TOKEN: ${{ secrets.TRADIER_TOKEN }}
+          TRADIER_ENV: production
+        run: python scripts/scan_signals.py
+      - name: Commit refreshed signals
+        run: |
+          git config user.name  "signals-bot"
+          git config user.email "actions@users.noreply.github.com"
+          git add data/signals.json
+          git diff --staged --quiet || git commit -m "chore: refresh wheel signals ($(date -u +%Y-%m-%dT%H:%MZ))"
+          git push
