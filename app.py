@@ -590,11 +590,22 @@ def fetch_company_news(ticker):
     stays fresher than the 6h filings data."""
     return fundamentals.company_news(ticker)
 
+def load_signal_universe():
+    """Signal universe (wheel + growth ticker lists), seeded from Jay's planning sheet. Falls
+    back to the plain watchlist if the file is missing."""
+    try:
+        u = json.loads((Path(__file__).parent / "wheel_universe.json").read_text())
+        if u.get("wheel"):
+            return u
+    except Exception:
+        pass
+    return {"wheel": st.session_state.get("watchlist", []), "growth": []}
+
 @st.cache_data(ttl=1800, show_spinner=False)
-def run_signal_scan(watchlist_key, nonce):
+def run_signal_scan(nonce):
     """Live wheel-signal scan (same engine the cron uses). `nonce` lets the Scan-now button force
     a refresh past the 30-min cache."""
-    return signals.scan(list(watchlist_key))
+    return signals.scan(load_signal_universe())
 
 def fetch_chain(ticker, expiry):
     """Unified chain fetch for the screener / analyse / deep-dive: Tradier real IV & Greeks
@@ -3221,9 +3232,8 @@ with tab_signals:
         st.session_state["sg_use_live"]=True; _use_live=True
 
     if _use_live and tradier.is_configured():
-        with st.spinner("Scanning the watchlist via Tradier… (~30–60s)"):
-            _data = run_signal_scan(tuple(st.session_state.get("watchlist",[])),
-                                    st.session_state.get("sg_nonce",0))
+        with st.spinner("Scanning the wheel universe via Tradier… (~40–90s)"):
+            _data = run_signal_scan(st.session_state.get("sg_nonce",0))
         _src_note = "Live scan (this session)"
     else:
         _data = _load_signals_file()
@@ -3308,6 +3318,24 @@ with tab_signals:
                     f"({r['dte']}d) · mid <b>${r['mid']:.2f}</b> · Δ {r.get('delta')} · "
                     f"POP <b>{r.get('pop')}%</b> · <b>{html.escape(str(r.get('sector')))}</b> · "
                     f"{r.get('vol_bucket')}</div></div>""", unsafe_allow_html=True)
+
+        # ── LEAP / PMCC ideas (growth + covered-call basis) ──
+        _leaps=_data.get("leaps",[])
+        if _leaps:
+            st.markdown("<div class='sg-sec'>🚀 LEAP ideas — growth &amp; PMCC basis (a BUY, not premium)</div>",
+                        unsafe_allow_html=True)
+            for r in _leaps[:8]:
+                _pm=" · ✅ good PMCC basis" if r.get("good_pmcc") else ""
+                st.markdown(
+                    f"""<div class='sg-card' style='border-left-color:#7c3aed'><div class='sg-top'>
+                    <div><span class='sg-tkr'>{html.escape(r['ticker'])}</span>
+                         <span class='sg-badge' style='background:#7c3aed'>LEAP</span></div>
+                    <div class='sg-prem' style='color:#e2e8f0;font-size:16px'>${r.get('cost',0):,.0f}</div></div>
+                    <div class='sg-sub'>Buy <b>${r['strike']:.1f}</b> call · <b>{r['expiry']}</b> "
+                    f"({r['dte']}d) · Δ <b>{r.get('delta')}</b> · mid ${r['mid']:.2f} · "
+                    f"time value <b>{r.get('extrinsic_pct')}%</b>{_pm} · "
+                    f"<b>{html.escape(str(r.get('sector')))}</b></div></div>""",
+                    unsafe_allow_html=True)
 
         # ── full table for the curious ──
         with st.expander("All opportunities (full scan, incl. below-median & filtered)"):

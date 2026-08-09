@@ -26,16 +26,21 @@ import tradier
 
 # ── tunable parameters (one place) ───────────────────────────────────────────────
 P = {
+    # CSP / CC (the wheel)
     "dte_lo": 21, "dte_hi": 45, "dte_opt": 30,
     "delta_opt": 0.30, "delta_lo": 0.18, "delta_hi": 0.40,
-    "min_premium": 0.012,        # 1.2% per-trade floor (of collateral)
+    "min_premium": 0.012,        # 1.2% per-trade floor — premium ÷ SPOT (Jay's definition)
     "strong_premium": 0.015,     # 1.5%+ = flagged strong
     "min_oi": 100,
     "max_spread_pct": 0.15,      # (ask-bid)/mid
-    "earnings_blackout": True,
-    "iv_anchor": 0.30, "iv_high": 0.55,   # vol buckets: <30 anchor, 30-55 med, >55 high
+    "earnings_blackout": True,   # no new position if earnings falls before expiry
+    "iv_anchor": 0.30, "iv_high": 0.60,   # vol buckets: <30 anchor · 30-60 med · ≥60 high
     "max_per_sector": 2,         # shortlist diversification
     "shortlist_n": 10,
+    # LEAP (growth + PMCC basis) — long-dated deep-ITM call
+    "leap_dte_lo": 300, "leap_dte_hi": 540, "leap_dte_opt": 420,
+    "leap_delta_opt": 0.75, "leap_delta_lo": 0.65, "leap_delta_hi": 0.85,
+    "leap_max_extrinsic": 0.12,  # ≤12% of the premium is time value → good PMCC basis
 }
 
 
@@ -168,12 +173,9 @@ def _build(ticker, strat, o, spot, expiry, dte, sector, iv_atm, earn):
     mid = _mid(o.get("bid"), o.get("ask"))
     oi = o.get("open_interest") or 0
     spr = _spread_pct(o.get("bid"), o.get("ask"))
-    if strike is None or mid is None or not strike:
+    if strike is None or mid is None or not strike or not spot:
         return None
-    denom = strike if strat == "CSP" else spot          # collateral basis
-    if not denom:
-        return None
-    prem_pct = mid / denom
+    prem_pct = mid / spot          # Jay's definition: premium ÷ stock price (both CSP and CC)
     pop = (1 - abs(delta)) if delta is not None else None    # ≈ prob of expiring OTM
     # filters
     if prem_pct < P["min_premium"]:
@@ -276,18 +278,100 @@ def _shortlist(signals):
     return picked
 
 
-def scan(watchlist):
-    """Full scan → dict ready to serialise. Never raises."""
+def scan_leap_ticker(ticker):
+    """Best long-dated deep-ITM call = a LEAP for growth AND a PMCC basis. A BUY, not premium —
+    ranked by low extrinsic (time value) so it's an efficient PMCC base. Returns 0-1 dict."""
+    try:
+        today = datetime.date.today()
+        quotes = tradier.get_quotes(ticker)
+        spot = _f(quotes[0].get("last")) if quotes else None
+        if not spot:
+            return None
+        exps = tradier.get_expirations(ticker)
+        dated = []
+        for e in exps:
+            try:
+                d = (datetime.date.fromisoformat(e) - today).days
+            except Exception:
+                continue
+            if P["leap_dte_lo"] <= d <= P["leap_dte_hi"]:
+                dated.append((d, e))
+        if not dated:
+            return None
+        dte, expiry = min(dated, key=lambda t: abs(t[0] - P["leap_dte_opt"]))
+        chain = tradier.get_option_chain(ticker, expiry, greeks=True)
+        if not chain:
+            return None
+        call = None; best = 1e9
+        for o in chain:
+            if o.get("option_type") != "call":
+                continue
+            dl = _f((o.get("greeks") or {}).get("delta"))
+            if dl is None or not (P["leap_delta_lo"] <= dl <= P["leap_delta_hi"]):
+                continue
+            gap = abs(dl - P["leap_delta_opt"])
+            if gap < best:
+                call, best = o, gap
+        if not call:
+            return None
+        strike = _f(call.get("strike"))
+        mid = _mid(call.get("bid"), call.get("ask"))
+        dl = _f((call.get("greeks") or {}).get("delta"))
+        iv = _f((call.get("greeks") or {}).get("mid_iv"))
+        if strike is None or mid is None:
+            return None
+        intrinsic = max(0.0, spot - strike)
+        extrinsic = mid - intrinsic
+        ext_pct = (extrinsic / mid) if mid else None
+        return {
+            "ticker": ticker, "strategy": "LEAP", "spot": round(spot, 2),
+            "expiry": expiry, "dte": dte, "strike": strike,
+            "delta": round(dl, 3) if dl is not None else None,
+            "mid": round(mid, 2), "cost": round(mid * 100, 0),
+            "intrinsic": round(intrinsic, 2), "extrinsic": round(extrinsic, 2),
+            "extrinsic_pct": round(ext_pct * 100, 1) if ext_pct is not None else None,
+            "iv": round(iv * 100, 1) if iv is not None else None,
+            "sector": _sector(ticker),
+            "good_pmcc": bool(ext_pct is not None and ext_pct <= P["leap_max_extrinsic"]),
+        }
+    except Exception:
+        return None
+
+
+def scan(universe):
+    """Full scan → dict ready to serialise. Never raises.
+
+    `universe` is a dict {"wheel": [...], "growth": [...]}. Wheel names → CSP/CC premium
+    signals; wheel ∪ growth → LEAP (growth + PMCC basis) ideas. A plain list is treated as the
+    wheel list with no growth names (back-compat)."""
+    if isinstance(universe, dict):
+        wheel = [str(t).strip().upper() for t in (universe.get("wheel") or []) if str(t).strip()]
+        growth = [str(t).strip().upper() for t in (universe.get("growth") or []) if str(t).strip()]
+    else:
+        wheel = [str(t).strip().upper() for t in universe if str(t).strip()]
+        growth = []
+
     all_sigs = []
-    for t in watchlist:
-        all_sigs.extend(scan_ticker(str(t).strip().upper()))
+    for t in wheel:
+        all_sigs.extend(scan_ticker(t))
     _shortlist(all_sigs)
     all_sigs.sort(key=lambda s: (s["strategy"] != "CSP", -(s["premium_pct"] or 0)))
+
+    leaps = []
+    for t in list(dict.fromkeys(growth + wheel)):     # growth first, deduped
+        lp = scan_leap_ticker(t)
+        if lp:
+            leaps.append(lp)
+    leaps.sort(key=lambda s: (not s.get("good_pmcc"), s.get("extrinsic_pct") or 99))
+
     return {
         "signals": all_sigs,
+        "leaps": leaps,
         "params": {"min_premium_pct": P["min_premium"] * 100,
                    "strong_premium_pct": P["strong_premium"] * 100,
                    "dte": [P["dte_lo"], P["dte_hi"]], "delta_opt": P["delta_opt"],
+                   "premium_basis": "premium ÷ spot",
+                   "iv_buckets": [P["iv_anchor"] * 100, P["iv_high"] * 100],
                    "earnings_blackout": P["earnings_blackout"]},
-        "count": len(all_sigs),
+        "count": len(all_sigs), "leap_count": len(leaps),
     }
