@@ -686,10 +686,18 @@ def calc_bb_pctb(close, window=20):
     return (close-lower)/(upper-lower+1e-10)
 
 def calc_atm_iv(chain, price):
+    # Return None (never NaN) when a strike's IV is missing — a NaN is truthy in Python, so it
+    # would slip past `if c_iv` checks and surface as "nan%" in the Overview chart/table.
+    def _iv(v):
+        try:
+            v = float(v)
+            return round(v*100, 1) if math.isfinite(v) and v > 0 else None
+        except (TypeError, ValueError):
+            return None
     try:
         c_atm = chain.calls.iloc[(chain.calls["strike"]-price).abs().argsort()[:1]]
         p_atm = chain.puts.iloc[(chain.puts["strike"]-price).abs().argsort()[:1]]
-        return round(c_atm["impliedVolatility"].values[0]*100,1), round(p_atm["impliedVolatility"].values[0]*100,1)
+        return _iv(c_atm["impliedVolatility"].values[0]), _iv(p_atm["impliedVolatility"].values[0])
     except Exception:
         return None, None
 
@@ -1296,7 +1304,13 @@ def vix_zone(v):
     return "#6b7280","Unknown"
 
 def fmt(v,fs=".1f",su=""):
-    return f"{v:{fs}}{su}" if v is not None else "—"
+    # None- AND NaN/inf-safe: a NaN is not None, so it would otherwise print as "nan".
+    try:
+        if v is None or (isinstance(v,float) and not math.isfinite(v)):
+            return "—"
+        return f"{v:{fs}}{su}"
+    except (TypeError, ValueError):
+        return "—"
 
 def greek_source_label(gs):
     return {"tradier":"📡 Tradier (real)","yahoo":"📡 Yahoo","bs_strike":"📐 BS (strike IV)",
@@ -1929,7 +1943,7 @@ with tab_dash:
         rows.append({"Ticker":t,"Price":f"${r['price']:.2f}","Chg %":f"{r['pct']:+.1f}%",
                      "HV%ile":fmt(r["hvpct"],".0f"),
                      "HV20":fmt(r["hv20"],".1f","%"),
-                     "ATM IV C/P":f"{r['c_iv']:.0f}/{r['p_iv']:.0f}%" if r["c_iv"] else "—",
+                     "ATM IV C/P":f"{r['c_iv']:.0f}/{r['p_iv']:.0f}%" if (r.get("c_iv") and r.get("p_iv")) else "—",
                      "IV vs HV":iv_richness(r.get("c_iv"),r.get("p_iv"),r.get("hv20")),
                      "RSI":fmt(r["rsi"],".0f"),
                      "200MA":"✅" if r["ab200"] else "❌",
@@ -1963,7 +1977,9 @@ with tab_dash:
 
     # ATM implied volatility per ticker (avg of call & put ATM IV) — hotter = richer premium
     # to sell, cheaper to buy. Real Tradier IV.
-    iv_data={t:(r["c_iv"]+r["p_iv"])/2 for t,r in results.items() if r.get("c_iv") and r.get("p_iv")}
+    def _fin(x): return isinstance(x,(int,float)) and math.isfinite(x) and x>0
+    iv_data={t:(r["c_iv"]+r["p_iv"])/2 for t,r in results.items()
+             if _fin(r.get("c_iv")) and _fin(r.get("p_iv"))}
     if iv_data:
         st.subheader("ATM Implied Volatility")
         ivv=list(iv_data.values())
