@@ -17,7 +17,12 @@ import requests
 
 _TIMEOUT = 15
 _TICKER = re.compile(r"^[A-Z][A-Z0-9.\-]{0,5}$")     # plausible US ticker
-_SKIP = {"WHEEL", "GROWTH", "STOCK", "TICKER", "CASH", "TOTAL", "SUM", "SIZE", "NA", "N/A"}
+_SKIP = {"WHEEL", "GROWTH", "STOCK", "TICKER", "CASH", "TOTAL", "SUM", "SIZE", "NA", "N/A",
+         # position-block keywords — so a positions table on the same tab can't bleed into the
+         # universe columns and be mistaken for tickers.
+         "TYPE", "STRATEGY", "LEG", "STRIKE", "EXPIRY", "EXP", "EXPIRATION", "CONTRACTS", "QTY",
+         "QUANTITY", "POSITION", "POSITIONS", "OPEN", "SYMBOL", "NAME",
+         "CSP", "CC", "LEAP", "PMCC", "PUT", "CALL"}
 
 
 def _norm(s):
@@ -70,3 +75,72 @@ def fetch_universe(url):
         return u if u.get("wheel") else {}
     except Exception:
         return {}
+
+
+# ── open positions block (for the Positions / trade-management view) ──────────────
+_POS_TICKER = {"TICKER", "SYMBOL", "POSITION", "NAME"}
+_POS_TYPE   = {"TYPE", "STRATEGY", "LEG"}
+_POS_STRIKE = {"STRIKE"}
+_POS_EXPIRY = {"EXPIRY", "EXP", "EXPIRATION"}
+_POS_QTY    = {"CONTRACTS", "QTY", "QUANTITY", "CTR", "#"}
+
+
+def parse_positions(csv_text):
+    """Extract open positions from the published CSV. Finds the header row that contains an
+    EXPIRY cell (unique to the positions block — the universe block has none), then reads the
+    Ticker / Type / Strike / Expiry / Contracts columns by their header text. Returns a list of
+    dicts (strings kept raw; the app parses dates/numbers). [] if no positions block is present."""
+    rows = list(csv.reader(io.StringIO(csv_text)))
+    hdr_i = cols = None
+    for i, row in enumerate(rows):
+        cells = [_norm(c) for c in row]
+        if not any(c in _POS_EXPIRY for c in cells):
+            continue
+        c = {}
+        for j, cell in enumerate(cells):
+            if cell in _POS_TICKER and "ticker" not in c: c["ticker"] = j
+            elif cell in _POS_TYPE and "type" not in c:   c["type"] = j
+            elif cell in _POS_STRIKE and "strike" not in c: c["strike"] = j
+            elif cell in _POS_EXPIRY and "expiry" not in c: c["expiry"] = j
+            elif cell in _POS_QTY and "qty" not in c:      c["qty"] = j
+        if "ticker" in c and "expiry" in c:      # a real positions header row
+            hdr_i, cols = i, c
+            break
+    if hdr_i is None:
+        return []
+
+    def _cell(row, key):
+        j = cols.get(key)
+        return row[j].strip() if (j is not None and j < len(row)) else ""
+
+    out, blanks = [], 0
+    for row in rows[hdr_i + 1:]:
+        tk = _norm(_cell(row, "ticker"))
+        if not tk:
+            blanks += 1
+            if blanks >= 3:
+                break
+            continue
+        blanks = 0
+        if not _TICKER.match(tk) or tk in _SKIP:
+            continue
+        out.append({
+            "ticker": tk,
+            "type":   _cell(row, "type").upper() or "—",
+            "strike": _cell(row, "strike"),
+            "expiry": _cell(row, "expiry"),
+            "contracts": _cell(row, "qty"),
+        })
+    return out
+
+
+def fetch_positions(url):
+    """GET the published CSV and parse the positions block. [] on any error."""
+    if not url:
+        return []
+    try:
+        r = requests.get(url, timeout=_TIMEOUT)
+        r.raise_for_status()
+        return parse_positions(r.text)
+    except Exception:
+        return []
