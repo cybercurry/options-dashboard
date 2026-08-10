@@ -3212,31 +3212,24 @@ with tab_signals:
         except Exception:
             return {"generated": None, "count": 0, "signals": [], "params": {}}
 
-    # ── controls: capital + live scan ──
-    _sc1,_sc2,_sc3 = st.columns([1.4,1,1])
+    # ── controls: capital + one clear action ──
+    _sc1,_sc2 = st.columns([2,1])
     with _sc1:
-        _cap = st.number_input("Combined capital ($) — solo + joint", min_value=0.0,
+        _cap = st.number_input("Available capital ($)", min_value=0.0,
                                value=float(st.session_state.get("sg_capital",0.0)), step=5000.0,
                                help="Used only to size contracts (90% deployed, 10% reserved for "
                                     "your manual longs). Leave 0 to just see the opportunities.")
         st.session_state["sg_capital"]=_cap
     with _sc2:
         st.markdown("<div style='height:28px'></div>",unsafe_allow_html=True)
-        _live = st.button("🔄 Scan now (live)", use_container_width=True, type="primary",
+        _live = st.button("🔄 Scan now", use_container_width=True, type="primary",
                           disabled=not tradier.is_configured())
-    with _sc3:
-        st.markdown("<div style='height:28px'></div>",unsafe_allow_html=True)
-        _use_live = st.toggle("Use live scan", value=st.session_state.get("sg_use_live",False),
-                              help="On: show the just-run live scan. Off: show the last scheduled "
-                                   "scan committed by the scanner (updates ~3×/day + Sunday).")
-        st.session_state["sg_use_live"]=_use_live
     if not tradier.is_configured():
-        st.info("Add your Tradier token to run a live scan. The scheduled scan (GitHub Action) "
-                "also needs the TRADIER_TOKEN repo secret to populate signals automatically.")
+        st.info("Add your Tradier token to Streamlit secrets to run a scan.")
 
     if _live:
         st.session_state["sg_nonce"]=st.session_state.get("sg_nonce",0)+1
-        st.session_state["sg_use_live"]=True; _use_live=True
+        st.session_state["sg_scanned"]=True
 
     _uni=load_signal_universe()
     _uni_src={"sheet":"Google Sheet (live)","file":"committed cache","watchlist":"watchlist"}.get(
@@ -3244,24 +3237,27 @@ with tab_signals:
     st.caption(f"Universe: {len(_uni.get('wheel',[]))} wheel · {len(_uni.get('growth',[]))} growth "
                f"· source: {_uni_src}")
 
-    if _use_live and tradier.is_configured():
+    if st.session_state.get("sg_scanned") and tradier.is_configured():
         with st.spinner("Scanning the wheel universe via Tradier… (~40–90s)"):
             _data = run_signal_scan(st.session_state.get("sg_nonce",0))
-        _src_note = "Live scan (this session)"
     else:
-        _data = _load_signals_file()
-        _gen = _data.get("generated")
-        _src_note = f"Scheduled scan · generated {_gen} UTC" if _gen else "No scheduled scan yet"
+        _data = {"signals": [], "leaps": [], "params": {}, "count": 0}
 
     _sigs = _data.get("signals",[])
     _short = [s for s in _sigs if s.get("shortlist")]
     _params = _data.get("params",{})
-
-    st.caption(f"{_src_note}  ·  {len(_sigs)} opportunities  ·  {len(_short)} on the shortlist")
+    if _sigs:
+        st.caption(f"Live scan  ·  {len(_sigs)} opportunities  ·  {len(_short)} on the shortlist")
 
     if not _sigs:
-        st.info("No signals yet. Hit **Scan now (live)** (needs your Tradier token), or wait for "
-                "the scheduled scanner to commit the first batch.")
+        if not st.session_state.get("sg_scanned"):
+            st.info("Press **🔄 Scan now** to pull live CSP / CC / LEAP signals for your wheel "
+                    "universe from Tradier. Enter your available capital first if you want "
+                    "contract sizing.")
+        else:
+            st.warning("Scan ran, but nothing passed the gates right now (premium ≥1.2%, Δ≈0.30, "
+                       "below median, liquid, no earnings before expiry). Markets are likely "
+                       "closed — try again when they're open.")
     else:
         # ── capital sizing over the shortlist (CSP collateral = strike×100) ──
         _rows=[]; _deployed=0.0
