@@ -6,6 +6,7 @@ import plotly.graph_objects as go
 from plotly.subplots import make_subplots
 from datetime import datetime, timedelta, timezone
 import math
+import re
 import requests
 from scipy.stats import norm
 from urllib.parse import quote
@@ -2610,7 +2611,21 @@ with tab_fund:
             # Business summary — quoted verbatim from the company's filing, never generated.
             if _prof.get("summary"):
                 with st.expander("📄 Full business description (verbatim from filings)"):
-                    st.write(_prof["summary"])
+                    # Break the single wall-of-text into balanced ~220-char paragraphs at sentence
+                    # boundaries — words kept verbatim, only whitespace added — for readability.
+                    _txt=_prof["summary"].strip()
+                    _parts=re.split(r'(?<=[.!?])\s+', _txt)
+                    _paras=[]; _buf=""
+                    for _p in _parts:
+                        _buf=(_buf+" "+_p).strip()
+                        if len(_buf)>=220:
+                            _paras.append(_buf); _buf=""
+                    if _buf: _paras.append(_buf)
+                    for _pa in (_paras or [_txt]):
+                        st.markdown(
+                            "<p style='margin:0 0 11px;line-height:1.65;color:#cbd5e1;"
+                            f"padding-left:10px;border-left:2px solid #24314a'>{html.escape(_pa)}</p>",
+                            unsafe_allow_html=True)
                     _wl_bits=[]
                     if _prof.get("website"): _wl_bits.append(_prof["website"])
                     if _prof.get("sic"):     _wl_bits.append(f"SEC industry: {_prof['sic']}")
