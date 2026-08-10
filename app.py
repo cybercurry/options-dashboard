@@ -615,6 +615,15 @@ def run_signal_scan(nonce):
     a refresh past the 30-min cache."""
     return signals.scan(load_signal_universe())
 
+@st.cache_data(ttl=600, show_spinner=False)
+def load_positions():
+    """Open option positions from the same published sheet (positions block). [] if none."""
+    try:
+        cfg = json.loads((Path(__file__).parent / "wheel_universe.json").read_text())
+        return sheets.fetch_positions(cfg.get("source_url"))
+    except Exception:
+        return []
+
 def fetch_chain(ticker, expiry):
     """Unified chain fetch for the screener / analyse / deep-dive: Tradier real IV & Greeks
     when a token is configured (find_target_strike then reads the real delta/theta directly
@@ -1728,8 +1737,8 @@ with st.sidebar:
 watchlist=st.session_state.watchlist
 st.title("Options Intelligence Dashboard")
 
-tab_dash,tab_dive,tab_chain,tab_vix,tab_signals,tab_fund=st.tabs(
-    ["Overview","Deep Dive","Options Chain","📊 Market Stats","🎯 Signals","🔬 Fundamentals"])
+tab_dash,tab_dive,tab_chain,tab_vix,tab_signals,tab_pos,tab_fund=st.tabs(
+    ["Overview","Deep Dive","Options Chain","📊 Market Stats","🎯 Signals","📌 Positions","🔬 Fundamentals"])
 
 # Hover explainers for first-time visitors — what each tab is for, in plain language.
 # st.tabs() won't take custom HTML in its own labels, so (same pure-CSS :hover technique as
@@ -2880,3 +2889,78 @@ with tab_signals:
                    f"no new position within {_pp.get('earnings_blackout_days',7)}d of earnings. "
                    "Sizing: 90% deployed, 10% reserved · ≤10%/name · ≤25%/sector. "
                    "Not advice — verify each fill and place manually.")
+
+# ══════════════════════════════════════════════════════════════════════════════
+# TAB — POSITIONS (open trades from the sheet, coloured by days-to-expiry)
+# ══════════════════════════════════════════════════════════════════════════════
+with tab_pos:
+    st.subheader("📌 Positions")
+    st.caption("Your open option positions from the sheet, coloured by days to expiry — "
+               "🟧 manage soon · 🟥 act now. Regular: orange ≤10d, red ≤3d · LEAP: orange ≤90d, red ≤30d.")
+
+    st.markdown("""<style>
+    .pos-card{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;
+      border-radius:11px;padding:11px 16px;margin:7px 0;border:1px solid #24314a;}
+    .pos-l{font-size:15px;color:#e5edf7;}
+    .pos-l b{color:#f8fafc;}
+    .pos-badge{display:inline-block;font-size:11px;font-weight:800;letter-spacing:.4px;
+      padding:2px 8px;border-radius:6px;color:#fff;margin-right:8px;vertical-align:middle;}
+    .pos-dte{font-size:17px;font-weight:800;white-space:nowrap;}
+    </style>""", unsafe_allow_html=True)
+
+    _positions = load_positions()
+    if not _positions:
+        st.info("No positions found yet. Add a block to your published sheet with a header row "
+                "containing **Ticker · Type · Strike · Expiry · Contracts** "
+                "(Type = CSP / CC / LEAP · Expiry = YYYY-MM-DD), then a row per open trade. "
+                "It shows up here automatically — no code needed.")
+    else:
+        _today = datetime.utcnow().date()
+        _rows = []
+        for p in _positions:
+            try:
+                _exp = datetime.strptime(p.get("expiry","").strip(), "%Y-%m-%d").date()
+                _dte = (_exp - _today).days
+            except Exception:
+                _exp, _dte = None, None
+            _rows.append({**p, "dte": _dte})
+        # most urgent first (soonest DTE); undated/expired sink appropriately
+        _rows.sort(key=lambda r: (r["dte"] is None, r["dte"] if r["dte"] is not None else 1e9))
+
+        _n_red=_n_orange=0
+        _cards=[]
+        _btype={"CSP":"#16a34a","CC":"#2563eb","LEAP":"#7c3aed","PMCC":"#7c3aed"}
+        for r in _rows:
+            _is_leap = r.get("type") in ("LEAP","PMCC")
+            _dte = r["dte"]
+            if _dte is None:
+                _bg="rgba(71,85,105,.18)";_bd="#475569";_dcol="#94a3b8";_dtxt="—"
+            elif _dte < 0:
+                _bg="rgba(71,85,105,.25)";_bd="#64748b";_dcol="#94a3b8";_dtxt="expired"
+            else:
+                _red,_orange = (30,90) if _is_leap else (3,10)
+                if _dte <= _red:
+                    _bg="rgba(220,38,38,.20)";_bd="#ef4444";_dcol="#fca5a5";_n_red+=1
+                elif _dte <= _orange:
+                    _bg="rgba(251,146,60,.16)";_bd="#fb923c";_dcol="#fdba74";_n_orange+=1
+                else:
+                    _bg="rgba(34,197,94,.10)";_bd="#1f5132";_dcol="#86efac"
+                _dtxt=f"{_dte}d"
+            _strike=r.get("strike","").strip()
+            _strike_txt=f"${_strike}" if _strike else ""
+            _qty=r.get("contracts","").strip()
+            _qty_txt=f" · {_qty}×" if _qty else ""
+            _badge_c=_btype.get(r.get("type"),"#475569")
+            _cards.append(
+                f"<div class='pos-card' style='background:{_bg};border-color:{_bd}'>"
+                f"<div class='pos-l'><span class='pos-badge' style='background:{_badge_c}'>{html.escape(r.get('type','—'))}</span>"
+                f"<b>{html.escape(r.get('ticker',''))}</b> {_strike_txt} · exp <b>{html.escape(r.get('expiry','—'))}</b>{_qty_txt}</div>"
+                f"<div class='pos-dte' style='color:{_dcol}'>{_dtxt}</div></div>")
+        st.markdown("".join(_cards), unsafe_allow_html=True)
+
+        _m1,_m2,_m3=st.columns(3)
+        _m1.metric("Open positions", len(_rows))
+        _m2.metric("🟧 Manage soon", _n_orange)
+        _m3.metric("🟥 Act now", _n_red)
+        st.caption("Reads the positions block from your published sheet (15-min cache). "
+                   "Update the sheet to add/close trades. Not advice — verify in your broker.")
