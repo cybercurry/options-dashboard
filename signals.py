@@ -28,7 +28,7 @@ import tradier
 P = {
     # CSP / CC (the wheel)
     "dte_lo": 21, "dte_hi": 45, "dte_opt": 30,
-    "delta_opt": 0.30, "delta_lo": 0.18, "delta_hi": 0.40,
+    "delta_opt": 0.30, "delta_lo": 0.20, "delta_hi": 0.45,   # matches Screener CSP window
     "min_premium": 0.012,        # 1.2% per-trade floor — premium ÷ SPOT (Jay's definition)
     "strong_premium": 0.015,     # 1.5%+ = flagged strong
     "min_oi": 100,
@@ -38,9 +38,10 @@ P = {
     "iv_anchor": 0.30, "iv_high": 0.60,   # vol buckets: <30 anchor · 30-60 med · ≥60 high
     "max_per_sector": 2,         # shortlist diversification
     "shortlist_n": 10,
-    # LEAP (growth + PMCC basis) — long-dated deep-ITM call
-    "leap_dte_lo": 300, "leap_dte_hi": 540, "leap_dte_opt": 420,
-    "leap_delta_opt": 0.75, "leap_delta_lo": 0.65, "leap_delta_hi": 0.85,
+    # LEAP (growth + PMCC basis) — long-dated deep-ITM call. Targets match the Screener's LEAP
+    # (Δ80, 542 DTE, 180-900 window) so the same name shows the same LEAP in both tabs.
+    "leap_dte_lo": 180, "leap_dte_hi": 900, "leap_dte_opt": 542,
+    "leap_delta_opt": 0.80, "leap_delta_lo": 0.60, "leap_delta_hi": 0.95,
     "leap_max_extrinsic": 0.12,  # ≤12% of the premium is time value → good PMCC basis
 }
 
