@@ -3200,6 +3200,9 @@ with tab_signals:
     .sg-sub{color:#94a3b8;font-size:12.5px;margin-top:5px;}
     .sg-sub b{color:#dbe4f0;font-weight:600;}
     .sg-size{color:#7dd3fc;font-size:13px;font-weight:700;margin-top:6px;}
+    .sg-earn{margin-top:7px;background:rgba(251,191,36,.14);border:1px solid #b45309;
+      border-left:4px solid #fbbf24;border-radius:8px;padding:5px 10px;color:#fcd34d;
+      font-size:12.5px;font-weight:700;}
     .sg-sec{font-size:16px;font-weight:800;color:#f1f5f9;margin:16px 0 6px;padding-left:11px;
       border-left:3px solid #3b82f6;}
     </style>""", unsafe_allow_html=True)
@@ -3298,7 +3301,8 @@ with tab_signals:
                                 f"${r['collateral']:,.0f} collateral · ${r['premium']:,.0f} premium</div>")
                 else:
                     _size_line="<div class='sg-size' style='color:#94a3b8'>➜ doesn't fit under the caps</div>"
-            _earn = " · ⚠️ earnings <7d" if r.get("earnings_soon") else ""
+            _ewarn = ("<div class='sg-earn'>⚠️ Earnings during the trade — assess carefully</div>"
+                      if r.get("earnings_in_window") else "")
             st.markdown(
                 f"""<div class='sg-card'><div class='sg-top'>
                 <div><span class='sg-tkr'>{html.escape(r['ticker'])}</span>
@@ -3307,8 +3311,8 @@ with tab_signals:
                 <div class='sg-sub'>Sell <b>${r['strike']:.1f}</b> put · <b>{r['expiry']}</b> "
                 f"({r['dte']}d) · mid <b>${r['mid']:.2f}</b> · Δ {r.get('delta')} · "
                 f"POP <b>{r.get('pop')}%</b> · IV {r.get('iv')}% · "
-                f"<b>{html.escape(str(r.get('sector')))}</b> · {r.get('vol_bucket')}{_earn}</div>"
-                f"{_size_line}</div>""", unsafe_allow_html=True)
+                f"<b>{html.escape(str(r.get('sector')))}</b> · {r.get('vol_bucket')}</div>"
+                f"{_ewarn}{_size_line}</div>""", unsafe_allow_html=True)
 
         # ── covered-call ideas (only if you hold the shares) ──
         _ccs=[s for s in _sigs if s["strategy"]=="CC" and s.get("median_ok")]
@@ -3318,6 +3322,8 @@ with tab_signals:
                         unsafe_allow_html=True)
             for r in _ccs[:8]:
                 _strong=" 🔥" if r.get("strong") else ""
+                _ewarn = ("<div class='sg-earn'>⚠️ Earnings during the trade — assess carefully</div>"
+                          if r.get("earnings_in_window") else "")
                 st.markdown(
                     f"""<div class='sg-card' style='border-left-color:#2563eb'><div class='sg-top'>
                     <div><span class='sg-tkr'>{html.escape(r['ticker'])}</span>
@@ -3326,7 +3332,7 @@ with tab_signals:
                     <div class='sg-sub'>Sell <b>${r['strike']:.1f}</b> call · <b>{r['expiry']}</b> "
                     f"({r['dte']}d) · mid <b>${r['mid']:.2f}</b> · Δ {r.get('delta')} · "
                     f"POP <b>{r.get('pop')}%</b> · <b>{html.escape(str(r.get('sector')))}</b> · "
-                    f"{r.get('vol_bucket')}</div></div>""", unsafe_allow_html=True)
+                    f"{r.get('vol_bucket')}</div>{_ewarn}</div>""", unsafe_allow_html=True)
 
         # ── LEAP / PMCC ideas (growth + covered-call basis) ──
         _leaps=_data.get("leaps",[])

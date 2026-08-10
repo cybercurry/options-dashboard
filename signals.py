@@ -123,11 +123,10 @@ def _sector(ticker):
         return "—"
 
 
-def _earnings_soon(ticker, within_days=7):
-    """True if an earnings date falls within the next `within_days` days — Jay's rule: no NEW
-    position in the 7 days before an earnings call. Holding through a more distant earnings date
-    is allowed (a name with earnings 10+ days out still fires). Best-effort via yfinance; on any
-    failure returns False (don't block a trade just because we couldn't check)."""
+def _earnings_date(ticker):
+    """Next earnings date (a date) or None. Best-effort via Yahoo's earnings calendar (yfinance);
+    None on any failure or when Yahoo has no confirmed date (fail-open — we don't block or warn on
+    data we don't have)."""
     try:
         import yfinance as yf
         cal = yf.Ticker(ticker).calendar
@@ -139,13 +138,12 @@ def _earnings_soon(ticker, within_days=7):
             else:
                 dt = ed
         if dt is None:
-            return False
+            return None
         if hasattr(dt, "date"):
             dt = dt.date()
-        today = datetime.date.today()
-        return today <= dt <= today + datetime.timedelta(days=within_days)
+        return dt
     except Exception:
-        return False
+        return None
 
 
 def _nearest_delta(options, opt_type, target=0.30):
@@ -167,8 +165,10 @@ def _nearest_delta(options, opt_type, target=0.30):
     return best
 
 
-def _build(ticker, strat, o, spot, expiry, dte, sector, iv_atm, earn):
-    """Assemble one signal dict from a chosen option contract, or None if it fails filters."""
+def _build(ticker, strat, o, spot, expiry, dte, sector, iv_atm, earn_soon, earn_window):
+    """Assemble one signal dict from a chosen option contract, or None if it fails filters.
+    `earn_soon` (earnings ≤7d out) EXCLUDES the trade; `earn_window` (earnings before expiry but
+    further out) only sets a warning flag — the trade still shows."""
     strike = _f(o.get("strike"))
     g = o.get("greeks") or {}
     delta = _f(g.get("delta"))
@@ -187,7 +187,7 @@ def _build(ticker, strat, o, spot, expiry, dte, sector, iv_atm, earn):
         return None
     if spr is not None and spr > P["max_spread_pct"]:
         return None
-    if P["earnings_blackout"] and earn:
+    if P["earnings_blackout"] and earn_soon:
         return None
     return {
         "ticker": ticker, "strategy": strat, "spot": round(spot, 2),
@@ -199,7 +199,8 @@ def _build(ticker, strat, o, spot, expiry, dte, sector, iv_atm, earn):
         "iv_atm": round(iv_atm * 100, 1) if iv_atm is not None else None,
         "sector": sector, "vol_bucket": vol_bucket(iv_atm),
         "oi": int(oi), "spread_pct": round(spr * 100, 1) if spr is not None else None,
-        "earnings_soon": bool(earn),
+        "earnings_soon": bool(earn_soon),
+        "earnings_in_window": bool(earn_window),
         "strong": prem_pct >= P["strong_premium"],
     }
 
@@ -236,12 +237,17 @@ def scan_ticker(ticker):
         below_median = (spot < sma20) if sma20 else None      # CSP wants below, CC wants above
 
         sector = _sector(ticker)
-        earn = _earnings_soon(ticker, P["earnings_blackout_days"])
+        # Earnings: within 7 days → exclude (entry blackout); before expiry but further out →
+        # warn only. One calendar lookup, two flags.
+        edate = _earnings_date(ticker)
+        exp_date = datetime.date.fromisoformat(expiry)
+        earn_soon = bool(edate and today <= edate <= today + datetime.timedelta(days=P["earnings_blackout_days"]))
+        earn_window = bool(edate and today <= edate <= exp_date)
 
         # CSP — needs price BELOW the median to go on the shortlist (else flagged)
         put = _nearest_delta(chain, "put", P["delta_opt"])
         if put:
-            s = _build(ticker, "CSP", put, spot, expiry, dte, sector, iv_atm, earn)
+            s = _build(ticker, "CSP", put, spot, expiry, dte, sector, iv_atm, earn_soon, earn_window)
             if s:
                 s["median_ok"] = bool(below_median) if below_median is not None else None
                 s["pct_b"] = round(pctb, 2) if pctb is not None else None
@@ -249,7 +255,7 @@ def scan_ticker(ticker):
         # CC — needs price ABOVE the median
         call = _nearest_delta(chain, "call", P["delta_opt"])
         if call:
-            s = _build(ticker, "CC", call, spot, expiry, dte, sector, iv_atm, earn)
+            s = _build(ticker, "CC", call, spot, expiry, dte, sector, iv_atm, earn_soon, earn_window)
             if s:
                 above_median = (not below_median) if below_median is not None else None
                 s["median_ok"] = bool(above_median) if above_median is not None else None
