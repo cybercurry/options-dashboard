@@ -4,12 +4,15 @@ name: Scan wheel signals
 # shortlist to data/signals.json, which the Signals tab renders. Needs the repo secret
 # TRADIER_TOKEN (same one the IV logger uses).
 on:
-  schedule:
-    - cron: "0 14 * * 1-5"     # ~post-open   (14:00 UTC, Mon–Fri)
-    - cron: "0 17 * * 1-5"     # ~midday      (17:00 UTC, Mon–Fri)
-    - cron: "30 19 * * 1-5"    # ~pre-close   (19:30 UTC, Mon–Fri)
-    - cron: "0 15 * * 0"       # Sunday plan  (15:00 UTC = 19:00 Dubai)
-  workflow_dispatch: {}         # manual "Run workflow" for an on-demand scan
+  # Auto-schedule is OFF (Jay uses the in-app "Scan now" button, which runs live off the
+  # Streamlit token). To re-enable the 3×/day + Sunday scans later, add a valid TRADIER_TOKEN
+  # repo secret and uncomment the schedule block below.
+  # schedule:
+  #   - cron: "0 14 * * 1-5"     # ~post-open   (14:00 UTC, Mon–Fri)
+  #   - cron: "0 17 * * 1-5"     # ~midday      (17:00 UTC, Mon–Fri)
+  #   - cron: "30 19 * * 1-5"    # ~pre-close   (19:30 UTC, Mon–Fri)
+  #   - cron: "0 15 * * 0"       # Sunday plan  (15:00 UTC = 19:00 Dubai)
+  workflow_dispatch: {}         # manual "Run workflow" stays available
 
 permissions:
   contents: write
