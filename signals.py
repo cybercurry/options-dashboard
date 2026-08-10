@@ -33,7 +33,8 @@ P = {
     "strong_premium": 0.015,     # 1.5%+ = flagged strong
     "min_oi": 100,
     "max_spread_pct": 0.15,      # (ask-bid)/mid
-    "earnings_blackout": True,   # no new position if earnings falls before expiry
+    "earnings_blackout": True,   # no new position within `earnings_blackout_days` of earnings
+    "earnings_blackout_days": 7, # Jay's rule: skip only in the 7 days BEFORE an earnings call
     "iv_anchor": 0.30, "iv_high": 0.60,   # vol buckets: <30 anchor · 30-60 med · ≥60 high
     "max_per_sector": 2,         # shortlist diversification
     "shortlist_n": 10,
@@ -122,9 +123,11 @@ def _sector(ticker):
         return "—"
 
 
-def _earnings_before(ticker, expiry):
-    """True if an earnings date falls between today and the expiry (blackout). Best-effort via
-    yfinance; on any failure returns False (don't block a trade just because we couldn't check)."""
+def _earnings_soon(ticker, within_days=7):
+    """True if an earnings date falls within the next `within_days` days — Jay's rule: no NEW
+    position in the 7 days before an earnings call. Holding through a more distant earnings date
+    is allowed (a name with earnings 10+ days out still fires). Best-effort via yfinance; on any
+    failure returns False (don't block a trade just because we couldn't check)."""
     try:
         import yfinance as yf
         cal = yf.Ticker(ticker).calendar
@@ -139,8 +142,8 @@ def _earnings_before(ticker, expiry):
             return False
         if hasattr(dt, "date"):
             dt = dt.date()
-        exp = datetime.date.fromisoformat(expiry)
-        return datetime.date.today() <= dt <= exp
+        today = datetime.date.today()
+        return today <= dt <= today + datetime.timedelta(days=within_days)
     except Exception:
         return False
 
@@ -196,7 +199,7 @@ def _build(ticker, strat, o, spot, expiry, dte, sector, iv_atm, earn):
         "iv_atm": round(iv_atm * 100, 1) if iv_atm is not None else None,
         "sector": sector, "vol_bucket": vol_bucket(iv_atm),
         "oi": int(oi), "spread_pct": round(spr * 100, 1) if spr is not None else None,
-        "earnings_before_expiry": bool(earn),
+        "earnings_soon": bool(earn),
         "strong": prem_pct >= P["strong_premium"],
     }
 
@@ -233,7 +236,7 @@ def scan_ticker(ticker):
         below_median = (spot < sma20) if sma20 else None      # CSP wants below, CC wants above
 
         sector = _sector(ticker)
-        earn = _earnings_before(ticker, expiry)
+        earn = _earnings_soon(ticker, P["earnings_blackout_days"])
 
         # CSP — needs price BELOW the median to go on the shortlist (else flagged)
         put = _nearest_delta(chain, "put", P["delta_opt"])
@@ -372,6 +375,7 @@ def scan(universe):
                    "dte": [P["dte_lo"], P["dte_hi"]], "delta_opt": P["delta_opt"],
                    "premium_basis": "premium ÷ spot",
                    "iv_buckets": [P["iv_anchor"] * 100, P["iv_high"] * 100],
-                   "earnings_blackout": P["earnings_blackout"]},
+                   "earnings_blackout": P["earnings_blackout"],
+                   "earnings_blackout_days": P["earnings_blackout_days"]},
         "count": len(all_sigs), "leap_count": len(leaps),
     }

@@ -3298,7 +3298,7 @@ with tab_signals:
                                 f"${r['collateral']:,.0f} collateral · ${r['premium']:,.0f} premium</div>")
                 else:
                     _size_line="<div class='sg-size' style='color:#94a3b8'>➜ doesn't fit under the caps</div>"
-            _earn = " · ⚠️ earnings soon" if r.get("earnings_before_expiry") else ""
+            _earn = " · ⚠️ earnings <7d" if r.get("earnings_soon") else ""
             st.markdown(
                 f"""<div class='sg-card'><div class='sg-top'>
                 <div><span class='sg-tkr'>{html.escape(r['ticker'])}</span>
@@ -3361,6 +3361,6 @@ with tab_signals:
         _pp=_params or {}
         st.caption(f"Gates: premium ≥{_pp.get('min_premium_pct',1.2)}% (🔥 ≥{_pp.get('strong_premium_pct',1.5)}%) · "
                    f"Δ≈{_pp.get('delta_opt',0.3)} · DTE {_pp.get('dte',[21,45])} · median rule · "
-                   f"earnings blackout {'on' if _pp.get('earnings_blackout',True) else 'off'}. "
+                   f"no new position within {_pp.get('earnings_blackout_days',7)}d of earnings. "
                    "Sizing: 90% deployed, 10% reserved · ≤10%/name · ≤25%/sector. "
                    "Not advice — verify each fill and place manually.")
