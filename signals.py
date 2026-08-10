@@ -234,7 +234,10 @@ def scan_ticker(ticker):
         hist = tradier.get_history(ticker, interval="daily", start=start, end=today.isoformat())
         closes = [_f(d.get("close")) for d in hist] if hist else []
         sma20, pctb = _sma20_pctb(closes)
-        below_median = (spot < sma20) if sma20 else None      # CSP wants below, CC wants above
+        # Median gate uses Bollinger %B off the last CLOSE (%B < 0.5 = below the 20-day median) —
+        # identical to the Deep Dive tab, so the two never disagree. (Was comparing the live
+        # last-trade price vs the SMA, which could flip a name sitting right on the line.)
+        below_median = (pctb < 0.5) if pctb is not None else None   # CSP wants below, CC above
 
         sector = _sector(ticker)
         # Earnings: within 7 days → exclude (entry blackout); before expiry but further out →
