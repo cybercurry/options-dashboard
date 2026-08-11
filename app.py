@@ -18,6 +18,7 @@ import tradier   # Tradier API access door (real quotes / chains / IV / Greeks)
 import fundamentals   # SEC EDGAR fundamentals door (real 10-K/10-Q XBRL, red flags)
 import signals   # headless wheel-signal scan engine (CSP/CC premium opportunities)
 import sheets   # published Google-Sheet CSV reader (live wheel/growth universe)
+import macro   # keyless macro data — Treasury yield curve, Fed rate, econ calendar (FRED/FF)
 import warnings
 warnings.filterwarnings("ignore")
 
@@ -623,6 +624,18 @@ def load_positions():
         return sheets.fetch_positions(cfg.get("source_url"))
     except Exception:
         return []
+
+@st.cache_data(ttl=21600, show_spinner=False)   # 6h — FRED daily series
+def fetch_yield_curve():
+    return macro.yield_curve()
+
+@st.cache_data(ttl=21600, show_spinner=False)
+def fetch_fed_rate():
+    return macro.fed_funds_rate()
+
+@st.cache_data(ttl=3600, show_spinner=False)     # 1h — this-week econ calendar
+def fetch_econ_calendar():
+    return macro.econ_calendar()
 
 def fetch_chain(ticker, expiry):
     """Unified chain fetch for the screener / analyse / deep-dive: Tradier real IV & Greeks
@@ -2296,6 +2309,51 @@ interest.
 # TAB 4 — MARKET VOLATILITY
 # ══════════════════════════════════════════════════════════════════════════════
 with tab_vix:
+    # ── Rates & the yield curve — the bond-market backdrop for everything else ──
+    st.subheader("🏦 Rates & the Yield Curve")
+    _curve=fetch_yield_curve()
+    _fed=fetch_fed_rate()
+    _cd=dict(_curve)
+    _spread=macro.curve_spread_2s10s(_curve)
+    rc1,rc2,rc3,rc4=st.columns(4)
+    rc1.metric("Fed funds (effective)", f"{_fed:.2f}%" if _fed is not None else "—",
+               help="The Fed's policy rate — the floor under all other rates. Hiking = tightening "
+                    "(headwind for stocks, vol up); cutting = easing (tailwind).")
+    rc2.metric("2Y Treasury", f"{_cd['2Y']:.2f}%" if '2Y' in _cd else "—",
+               help="Short end — tracks where the market expects the Fed to be in ~2 years.")
+    rc3.metric("10Y Treasury", f"{_cd['10Y']:.2f}%" if '10Y' in _cd else "—",
+               help="The benchmark long rate — growth & inflation expectations, and the discount "
+                    "rate equities are valued against. Rising 10Y pressures high-multiple stocks.")
+    rc4.metric("2s10s spread", f"{_spread:+d} bps" if _spread is not None else "—",
+               help="10-year minus 2-year yield. Positive/steep = normal growth expectations. "
+                    "NEGATIVE = inverted: the bond market pricing rate cuts / recession ahead — "
+                    "historically leads recessions by 6–18 months, and vol spikes tend to follow. "
+                    "This is the single most-watched sentiment gauge in the bond market.")
+    if len(_curve)>=3:
+        _xs=[t for t,_ in _curve]; _ys=[y for _,y in _curve]
+        _line="#ef4444" if (_spread is not None and _spread<0) else "#3b82f6"
+        fig_yc=go.Figure(go.Scatter(x=_xs,y=_ys,mode="lines+markers",
+            line=dict(color=_line,width=2.5),marker=dict(size=8),
+            text=[f"{y:.2f}%" for y in _ys],hovertemplate="%{x}: %{y:.2f}%<extra></extra>"))
+        fig_yc.update_layout(height=280,template="plotly_dark",yaxis_title="Yield (%)",
+                             xaxis_title="Maturity",margin=dict(l=0,r=0,t=20,b=0))
+        st.plotly_chart(fig_yc,use_container_width=True)
+    if _spread is not None:
+        if _spread<0:
+            st.caption("🔴 **Inverted curve** — short rates above long rates. The bond market is "
+                       "pricing rate cuts / recession; a classic warning that leads downturns by "
+                       "6–18 months. For a premium seller, inversions often precede vol spikes — "
+                       "keep size modest.")
+        elif _spread<25:
+            st.caption("🟡 **Flat curve** — little gap between short and long rates. Late-cycle / "
+                       "uncertain; watch for it tipping into inversion.")
+        else:
+            st.caption("🟢 **Normal (upward) curve** — long rates above short. Healthy growth "
+                       "expectations, the market's default state.")
+    else:
+        st.caption("Yield-curve data unavailable right now (FRED source).")
+    st.divider()
+
     # ── S&P 500 valuation (P/E) — how expensive is the market you're selling premium into ──
     st.subheader("S&P 500 Valuation")
     _pe_t,_pe_f=fetch_sp500_pe()
