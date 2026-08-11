@@ -2455,6 +2455,45 @@ with tab_vix:
         [("<14","Calm"),("14–18","Normal"),("18–24","Elevated"),(">24","Extreme — usually a flight-to-safety spike")],
         "A GVZ spike means your GLD option premium just got richer — and usually signals something macro breaking.")
 
+    st.divider()
+    # ── This week's economic calendar (ForexFactory weekly JSON, rendered natively) ──
+    st.subheader("📅 This Week — Economic Calendar")
+    st.caption("Scheduled high-impact events (via ForexFactory) — Fed decisions, CPI, jobs — the "
+               "ones that move the whole market. Don't open fresh premium right before a big red one.")
+    _events=fetch_econ_calendar()
+    if not _events:
+        st.info("Calendar unavailable right now (ForexFactory feed).")
+    else:
+        _show_med=st.toggle("Include medium-impact",value=False,key="cal_med")
+        _want={"High"} | ({"Medium"} if _show_med else set())
+        _cal=[]
+        for e in _events:
+            if e.get("impact") not in _want:
+                continue
+            _dt=None
+            try:
+                _dt=datetime.fromisoformat(str(e.get("date","")).replace("Z","+00:00"))
+            except Exception:
+                pass
+            _cal.append((_dt,e))
+        _cal.sort(key=lambda t:(t[0] is None, t[0].timestamp() if t[0] else 9e18))
+        if not _cal:
+            st.caption("No high-impact events match this week.")
+        else:
+            _calrows=[]
+            for _dt,e in _cal:
+                _calrows.append({
+                    "Day":_dt.strftime("%a %d") if _dt else "—",
+                    "Time":_dt.strftime("%H:%M") if _dt else "",
+                    "Cur":e.get("country","") or "",
+                    "Impact":"🔴" if e.get("impact")=="High" else "🟠",
+                    "Event":e.get("title","") or "",
+                    "Forecast":e.get("forecast","") or "—",
+                    "Previous":e.get("previous","") or "—"})
+            st.dataframe(pd.DataFrame(_calrows),use_container_width=True,hide_index=True)
+            st.caption("Times as provided by ForexFactory (US Eastern). 🔴 high · 🟠 medium impact. "
+                       "Refreshes hourly.")
+
 # ══════════════════════════════════════════════════════════════════════════════
 # TAB — FUNDAMENTALS (SEC EDGAR: real filings, no prices/technicals)
 # ══════════════════════════════════════════════════════════════════════════════
