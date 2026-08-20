@@ -36,7 +36,7 @@ except ImportError:
     HAS_AUTOREFRESH = False
 
 # Baked-in default so even the bare link (no ?tickers=…) loads Jay's list (25 July).
-DEFAULT_WATCHLIST = ["NVDA", "TSLA", "GLD", "BE", "VST", "AMZN", "SPCX", "NVTS", "VRT", "SLV", "PLTR", "AAPL", "GOOG", "IREN", "NBIS", "NOW", "WMT"]
+DEFAULT_WATCHLIST = ["NVDA", "TSLA", "GLD", "VST", "AMZN", "SPCX", "NVTS", "VRT", "SLV", "PLTR", "AAPL", "GOOG", "IREN", "NBIS", "NOW", "WMT"]
 
 VIX_ZONES = [
     (0,  15, "#16a34a", "LOW — Ideal LEAP buying zone"),
