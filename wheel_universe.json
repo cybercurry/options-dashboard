@@ -33,5 +33,31 @@
     "PLTR",
     "PURR",
     "NBIS"
-  ]
+  ],
+  "iv_brackets": {
+    "_note": "IV % zones [low_max, mid_max, high_max]. Low IV = below [0]; Mid IV = [0]–[1] (sell zone); High IV = [1]–[2] (check catalyst first); Extreme = above [2] (avoid selling).",
+    "AAPL":  [18, 28, 40],
+    "AMZN":  [22, 35, 50],
+    "CEG":   [28, 42, 65],
+    "CMG":   [22, 35, 50],
+    "CQQQ":  [25, 40, 60],
+    "CRWV":  [65, 95, 130],
+    "GLD":   [12, 18, 28],
+    "GOOG":  [20, 30, 45],
+    "IREN":  [80, 110, 150],
+    "MSFT":  [18, 28, 40],
+    "NBIS":  [50, 75, 105],
+    "NOW":   [28, 42, 60],
+    "NVDA":  [38, 58, 80],
+    "NVTS":  [60, 88, 120],
+    "PLTR":  [55, 80, 110],
+    "PURR":  [75, 105, 145],
+    "QANT":  [40, 62, 90],
+    "SLV":   [20, 32, 48],
+    "SOFI":  [35, 55, 80],
+    "SPCX":  [28, 42, 65],
+    "TSLA":  [50, 72, 100],
+    "VRT":   [38, 58, 80],
+    "WMT":   [14, 22, 32]
+  }
 }
