@@ -34,8 +34,15 @@
     "PURR",
     "NBIS"
   ],
+  "iv_levels": {
+    "_note": "Global IV classification (applies across all equity options). Use as a universal reference alongside per-ticker brackets.",
+    "low":     {"max": 20,  "label": "Low IV",     "meaning": "Thin premiums — wheel unattractive unless stock is already a conviction hold"},
+    "mid":     {"min": 20,  "max": 40, "label": "Mid IV",     "meaning": "Normal sell zone — standard wheel/CSP conditions"},
+    "high":    {"min": 40,  "max": 65, "label": "High IV",    "meaning": "Rich premiums — verify no binary catalyst (earnings, FDA, etc.) before selling"},
+    "extreme": {"min": 65,  "label": "Extreme IV",  "meaning": "Elevated event risk — avoid selling naked exposure; PMCC or defined-risk only"}
+  },
   "iv_brackets": {
-    "_note": "IV % zones [low_max, mid_max, high_max]. Low IV = below [0]; Mid IV = [0]–[1] (sell zone); High IV = [1]–[2] (check catalyst first); Extreme = above [2] (avoid selling).",
+    "_note": "Per-ticker IV zones [low_max, mid_max, high_max] — calibrated to each ticker's normal vol range. Low IV = below [0]; Mid IV = [0]–[1] (sell zone); High IV = [1]–[2] (check catalyst); Extreme = above [2] (avoid).",
     "AAPL":  [18, 28, 40],
     "AMZN":  [22, 35, 50],
     "CEG":   [28, 42, 65],
