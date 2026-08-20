@@ -2847,6 +2847,20 @@ with tab_signals:
     st.caption(f"Universe: {len(_uni.get('wheel',[]))} wheel · {len(_uni.get('growth',[]))} growth "
                f"· source: {_uni_src}")
 
+    # IV level legend pulled from wheel_universe.json
+    _ivl = _uni.get("iv_levels", {})
+    _iv_low  = _ivl.get("low",  {}).get("max", 20)
+    _iv_mid  = _ivl.get("mid",  {}).get("max", 40)
+    _iv_high = _ivl.get("high", {}).get("max", 65)
+
+    def _sec_header(label, iv_note):
+        _h1, _h2 = st.columns([3, 1])
+        _h1.markdown(f"<div class='sg-sec'>{label}</div>", unsafe_allow_html=True)
+        _h2.markdown(
+            f"<div style='text-align:right;font-size:11.5px;color:#94a3b8;"
+            f"padding-top:22px;line-height:1.6'>{iv_note}</div>",
+            unsafe_allow_html=True)
+
     if st.session_state.get("sg_scanned") and tradier.is_configured():
         with st.spinner("Scanning the wheel universe via Tradier… (~40–90s)"):
             _data = run_signal_scan(st.session_state.get("sg_nonce",0))
@@ -2893,8 +2907,8 @@ with tab_signals:
             _rows=[{**s,"contracts":None,"collateral":None,"premium":None} for s in _short]
 
         # ── shortlist cards ──
-        st.markdown("<div class='sg-sec'>⭐ Shortlist — best cashflow entries (CSP)</div>",
-                    unsafe_allow_html=True)
+        _sec_header("⭐ Shortlist — best cashflow entries (CSP)",
+                    f"Low IV &lt;{_iv_low}% · Mid IV {_iv_low}–{_iv_mid}% · High IV {_iv_mid}–{_iv_high}% · Extreme &gt;{_iv_high}%")
         if not _rows:
             st.warning("No CSP passed all gates (premium ≥1.2%, Δ≈0.30, below median, liquid, "
                        "no earnings before expiry) this scan. Covered-call ideas may still be below.")
@@ -2925,8 +2939,8 @@ with tab_signals:
         _ccs=[s for s in _sigs if s["strategy"]=="CC" and s.get("median_ok")]
         _ccs.sort(key=lambda s:s["premium_pct"],reverse=True)
         if _ccs:
-            st.markdown("<div class='sg-sec'>📞 Covered-call ideas — only if you already hold ≥100 shares</div>",
-                        unsafe_allow_html=True)
+            _sec_header("📞 Covered-call ideas — only if you already hold ≥100 shares",
+                        f"Sell zone: Mid IV {_iv_low}–{_iv_mid}% · High IV {_iv_mid}–{_iv_high}%")
             for r in _ccs[:8]:
                 _strong=" 🔥" if r.get("strong") else ""
                 _ewarn = ("<div class='sg-earn'>⚠️ Earnings during the trade — assess carefully</div>"
@@ -2944,8 +2958,8 @@ with tab_signals:
         # ── LEAP / PMCC ideas (growth + covered-call basis) ──
         _leaps=_data.get("leaps",[])
         if _leaps:
-            st.markdown("<div class='sg-sec'>🚀 LEAP ideas — growth &amp; PMCC basis (a BUY, not premium)</div>",
-                        unsafe_allow_html=True)
+            _sec_header("🚀 Growth engine — LEAP &amp; PMCC basis (a BUY, not premium)",
+                        f"Buy when IV Low–Mid (&lt;{_iv_mid}%) · avoid Extreme (&gt;{_iv_high}%)")
             for r in _leaps[:8]:
                 _pm=" · ✅ good PMCC basis" if r.get("good_pmcc") else ""
                 st.markdown(
