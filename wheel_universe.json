@@ -16,7 +16,7 @@
     "WMT",
     "AAPL",
     "GOOG",
-    "NOW"
+    "LLY"
   ],
   "growth": [
     "TSLA",
@@ -28,63 +28,11 @@
     "CQQQ",
     "QANT",
     "CRWV",
+    "BE",
     "VRT",
     "IREN",
     "PLTR",
     "PURR",
     "NBIS"
-  ],
-  "categories": {
-    "anchors": {
-      "label": "⚓ Anchors",
-      "iv_range": "IV 15–25%",
-      "description": "Stable, low-vol names. Thin premium — high POP, capital preservation.",
-      "tickers": ["GLD", "WMT", "AAPL", "MSFT", "SLV"]
-    },
-    "income": {
-      "label": "💰 Income Diversifiers",
-      "iv_range": "IV 25–45%",
-      "description": "Solid growth names with consistent mid-IV. Core wheel income zone.",
-      "tickers": ["AMZN", "GOOG", "CMG", "CEG", "NOW", "SPCX", "CQQQ"]
-    },
-    "growth": {
-      "label": "🚀 Growth Engine",
-      "iv_range": "IV 45%+",
-      "description": "High-beta, fat premiums. Active management needed. LEAPs & PMCC here.",
-      "tickers": ["TSLA", "SOFI", "NVDA", "VRT", "PLTR", "NVTS", "CRWV", "IREN", "PURR", "NBIS", "QANT"]
-    }
-  },
-  "iv_levels": {
-    "_note": "Global IV classification (applies across all equity options). Use as a universal reference alongside per-ticker brackets.",
-    "low":     {"max": 20,  "label": "Low IV",     "meaning": "Thin premiums — wheel unattractive unless stock is already a conviction hold"},
-    "mid":     {"min": 20,  "max": 40, "label": "Mid IV",     "meaning": "Normal sell zone — standard wheel/CSP conditions"},
-    "high":    {"min": 40,  "max": 65, "label": "High IV",    "meaning": "Rich premiums — verify no binary catalyst (earnings, FDA, etc.) before selling"},
-    "extreme": {"min": 65,  "label": "Extreme IV",  "meaning": "Elevated event risk — avoid selling naked exposure; PMCC or defined-risk only"}
-  },
-  "iv_brackets": {
-    "_note": "Per-ticker IV zones [low_max, mid_max, high_max] — calibrated to each ticker's normal vol range. Low IV = below [0]; Mid IV = [0]–[1] (sell zone); High IV = [1]–[2] (check catalyst); Extreme = above [2] (avoid).",
-    "AAPL":  [18, 28, 40],
-    "AMZN":  [22, 35, 50],
-    "CEG":   [28, 42, 65],
-    "CMG":   [22, 35, 50],
-    "CQQQ":  [25, 40, 60],
-    "CRWV":  [65, 95, 130],
-    "GLD":   [12, 18, 28],
-    "GOOG":  [20, 30, 45],
-    "IREN":  [80, 110, 150],
-    "MSFT":  [18, 28, 40],
-    "NBIS":  [50, 75, 105],
-    "NOW":   [28, 42, 60],
-    "NVDA":  [38, 58, 80],
-    "NVTS":  [60, 88, 120],
-    "PLTR":  [55, 80, 110],
-    "PURR":  [75, 105, 145],
-    "QANT":  [40, 62, 90],
-    "SLV":   [20, 32, 48],
-    "SOFI":  [35, 55, 80],
-    "SPCX":  [28, 42, 65],
-    "TSLA":  [50, 72, 100],
-    "VRT":   [38, 58, 80],
-    "WMT":   [14, 22, 32]
-  }
+  ]
 }
