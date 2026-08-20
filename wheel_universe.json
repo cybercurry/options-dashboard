@@ -34,6 +34,26 @@
     "PURR",
     "NBIS"
   ],
+  "categories": {
+    "anchors": {
+      "label": "⚓ Anchors",
+      "iv_range": "IV 15–25%",
+      "description": "Stable, low-vol names. Thin premium — high POP, capital preservation.",
+      "tickers": ["GLD", "WMT", "AAPL", "MSFT", "SLV"]
+    },
+    "income": {
+      "label": "💰 Income Diversifiers",
+      "iv_range": "IV 25–45%",
+      "description": "Solid growth names with consistent mid-IV. Core wheel income zone.",
+      "tickers": ["AMZN", "GOOG", "CMG", "CEG", "NOW", "SPCX", "CQQQ"]
+    },
+    "growth": {
+      "label": "🚀 Growth Engine",
+      "iv_range": "IV 45%+",
+      "description": "High-beta, fat premiums. Active management needed. LEAPs & PMCC here.",
+      "tickers": ["TSLA", "SOFI", "NVDA", "VRT", "PLTR", "NVTS", "CRWV", "IREN", "PURR", "NBIS", "QANT"]
+    }
+  },
   "iv_levels": {
     "_note": "Global IV classification (applies across all equity options). Use as a universal reference alongside per-ticker brackets.",
     "low":     {"max": 20,  "label": "Low IV",     "meaning": "Thin premiums — wheel unattractive unless stock is already a conviction hold"},

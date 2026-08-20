@@ -2844,14 +2844,28 @@ with tab_signals:
     _uni=load_signal_universe()
     _uni_src={"sheet":"Google Sheet (live)","file":"committed cache","watchlist":"watchlist"}.get(
         _uni.get("_source"),"—")
-    st.caption(f"Universe: {len(_uni.get('wheel',[]))} wheel · {len(_uni.get('growth',[]))} growth "
-               f"· source: {_uni_src}")
 
     # IV level legend pulled from wheel_universe.json
     _ivl = _uni.get("iv_levels", {})
     _iv_low  = _ivl.get("low",  {}).get("max", 20)
     _iv_mid  = _ivl.get("mid",  {}).get("max", 40)
     _iv_high = _ivl.get("high", {}).get("max", 65)
+
+    # Three-category universe display
+    _cats = _uni.get("categories", {})
+    if _cats:
+        _c1, _c2, _c3 = st.columns(3)
+        for _col, _key, _border in [(_c1,"anchors","#64748b"), (_c2,"income","#16a34a"), (_c3,"growth","#7c3aed")]:
+            _cd = _cats.get(_key, {})
+            _tkrs = " · ".join(_cd.get("tickers", []))
+            _col.markdown(
+                f"<div style='border-left:3px solid {_border};padding:8px 10px;margin-bottom:4px;"
+                f"background:rgba(255,255,255,0.03);border-radius:0 6px 6px 0'>"
+                f"<div style='font-size:13px;font-weight:700;color:#f1f5f9'>{_cd.get('label','')}</div>"
+                f"<div style='font-size:11px;font-weight:700;color:{_border};margin:2px 0'>{_cd.get('iv_range','')}</div>"
+                f"<div style='font-size:11px;color:#64748b;line-height:1.4'>{_tkrs}</div>"
+                f"</div>", unsafe_allow_html=True)
+    st.caption(f"Source: {_uni_src}")
 
     def _sec_header(label, iv_note):
         _h1, _h2 = st.columns([3, 1])
