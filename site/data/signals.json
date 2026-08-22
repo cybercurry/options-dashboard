@@ -1,0 +1,16 @@
+{
+  "signals": [
+    {"ticker":"NVDA","strategy":"CSP","spot":181.24,"expiry":"2026-10-17","dte":32,"strike":170,"delta":-0.28,"mid":2.90,"premium_pct":1.6,"pop":72.0,"iv":38.4,"iv_atm":37.9,"sector":"Technology","vol_bucket":"med","median_ok":true,"pct_b":0.34,"strong":true,"earnings_in_window":false},
+    {"ticker":"SOFI","strategy":"CSP","spot":18.30,"expiry":"2026-10-03","dte":24,"strike":17,"delta":-0.31,"mid":0.44,"premium_pct":2.4,"pop":69.0,"iv":52.1,"iv_atm":51.0,"sector":"Financial Services","vol_bucket":"high","median_ok":true,"pct_b":0.28,"strong":true,"earnings_in_window":false},
+    {"ticker":"TSLA","strategy":"CC","spot":365.10,"expiry":"2026-10-17","dte":30,"strike":400,"delta":0.30,"mid":8.00,"premium_pct":2.2,"pop":70.0,"iv":49.5,"iv_atm":48.8,"sector":"Consumer Cyclical","vol_bucket":"high","median_ok":true,"pct_b":0.62,"strong":true,"earnings_in_window":true},
+    {"ticker":"AMZN","strategy":"CSP","spot":228.40,"expiry":"2026-10-17","dte":31,"strike":215,"delta":-0.27,"mid":3.20,"premium_pct":1.4,"pop":73.0,"iv":31.2,"iv_atm":30.6,"sector":"Consumer Cyclical","vol_bucket":"med","median_ok":true,"pct_b":0.41,"strong":false,"earnings_in_window":false},
+    {"ticker":"GLD","strategy":"CSP","spot":415.60,"expiry":"2026-10-24","dte":38,"strike":400,"delta":-0.25,"mid":5.00,"premium_pct":1.2,"pop":78.0,"iv":16.8,"iv_atm":16.4,"sector":"Commodities","vol_bucket":"anchor","median_ok":true,"pct_b":0.44,"strong":false,"earnings_in_window":false}
+  ],
+  "leaps": [
+    {"ticker":"GLD","strategy":"LEAP","spot":415.60,"expiry":"2027-03-19","dte":560,"strike":330,"delta":0.82,"mid":96.40,"cost":9640,"intrinsic":85.6,"extrinsic":10.8,"extrinsic_pct":11.2,"iv":16.8,"sector":"Commodities","good_pmcc":true},
+    {"ticker":"AMZN","strategy":"LEAP","spot":228.40,"expiry":"2027-02-19","dte":545,"strike":180,"delta":0.80,"mid":62.10,"cost":6210,"intrinsic":48.4,"extrinsic":13.7,"extrinsic_pct":22.1,"iv":31.2,"sector":"Consumer Cyclical","good_pmcc":false}
+  ],
+  "params": {"min_premium_pct":1.2,"strong_premium_pct":1.5,"delta_opt":0.30,"dte":[21,45],"earnings_blackout_days":7},
+  "generated_at": "2026-08-22T09:40:00+00:00",
+  "universe": {"wheel":15,"growth":5,"source":"sample"}
+}

@@ -1,0 +1,219 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>OptionIntel — Wheel Signals</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📈</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;700;800&family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
+<style>
+:root{
+  --ink:#F5F8FD; --surface:#FFFFFF; --surface-2:#EDF2F9; --line:#D9E1EE; --line-soft:#E8EEF7;
+  --text:#0F1A2C; --muted:#5B6B85; --faint:#8695AC; --accent:#2E63F0; --accent-soft:#E4ECFF;
+  --csp:#0E9F66; --cc:#2E63F0; --leap:#7C4DE0; --good:#0E9F66; --bad:#CF3E2A; --warn:#B87914; --track:#E1E8F3;
+  --shadow:0 1px 2px rgba(16,26,44,.06),0 8px 24px rgba(16,26,44,.06);
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --ink:#0B111E; --surface:#131B2A; --surface-2:#1A2434; --line:#273248; --line-soft:#1E2838;
+  --text:#E9EEF8; --muted:#8A98B0; --faint:#65748F; --accent:#6F99FF; --accent-soft:#1B2942;
+  --csp:#37C88F; --cc:#6F99FF; --leap:#B197F2; --good:#37C88F; --bad:#ED6853; --warn:#E6AA43; --track:#212C41;
+  --shadow:0 1px 2px rgba(0,0,0,.3),0 10px 30px rgba(0,0,0,.35);}}
+:root[data-theme="dark"]{
+  --ink:#0B111E; --surface:#131B2A; --surface-2:#1A2434; --line:#273248; --line-soft:#1E2838;
+  --text:#E9EEF8; --muted:#8A98B0; --faint:#65748F; --accent:#6F99FF; --accent-soft:#1B2942;
+  --csp:#37C88F; --cc:#6F99FF; --leap:#B197F2; --good:#37C88F; --bad:#ED6853; --warn:#E6AA43; --track:#212C41;
+  --shadow:0 1px 2px rgba(0,0,0,.3),0 10px 30px rgba(0,0,0,.35);}
+*{box-sizing:border-box}
+body{margin:0; background:var(--ink); color:var(--text); font-family:"IBM Plex Sans",system-ui,sans-serif; font-size:15px; line-height:1.5; -webkit-font-smoothing:antialiased}
+.mono{font-family:"IBM Plex Mono",ui-monospace,monospace; font-variant-numeric:tabular-nums}
+.wrap{max-width:1200px; margin:0 auto; padding:0 22px}
+header{position:sticky; top:0; z-index:10; background:color-mix(in srgb,var(--ink) 90%,transparent); backdrop-filter:blur(10px); border-bottom:1px solid var(--line)}
+.bar{display:flex; align-items:center; gap:24px; height:58px}
+.brand{display:flex; align-items:center; gap:10px; font-family:"Archivo",sans-serif; font-weight:800; letter-spacing:-.02em; font-size:20px}
+.brand .dot{width:11px;height:11px;border-radius:50%;background:var(--accent); box-shadow:0 0 0 4px color-mix(in srgb,var(--accent) 22%,transparent)}
+.brand b{color:var(--text)} .brand span{color:var(--faint); font-weight:600}
+nav{display:flex; gap:4px; margin-left:6px}
+nav a{color:var(--muted); text-decoration:none; font-weight:500; font-size:14px; padding:7px 12px; border-radius:8px}
+nav a:hover{color:var(--text); background:var(--surface-2)} nav a.on{color:var(--accent); background:var(--accent-soft)}
+.tag{margin-left:auto; font-size:11px; font-weight:600; letter-spacing:.08em; text-transform:uppercase; color:var(--faint)}
+.tape{border-bottom:1px solid var(--line); background:var(--surface); overflow:hidden}
+.tape .track{display:inline-flex; gap:30px; padding:9px 0; white-space:nowrap; animation:scroll 40s linear infinite}
+.tape:hover .track{animation-play-state:paused}
+@keyframes scroll{from{transform:translateX(0)} to{transform:translateX(-50%)}}
+.tk-item{font-size:13px; font-weight:500} .tk-item b{font-weight:700; margin-right:7px} .tk-item .mono{color:var(--muted)}
+.up{color:var(--good)} .down{color:var(--bad)}
+.pulse{display:flex; gap:10px; flex-wrap:wrap; padding:18px 0 4px}
+.chip{flex:1 1 150px; background:var(--surface); border:1px solid var(--line); border-radius:12px; padding:11px 14px; box-shadow:var(--shadow)}
+.chip .k{display:flex; align-items:center; gap:7px; font-size:11px; letter-spacing:.06em; text-transform:uppercase; color:var(--faint); font-weight:600}
+.chip .v{font-size:22px; font-weight:600; margin-top:3px} .chip .s{font-size:12px; color:var(--muted)}
+.led{width:8px;height:8px;border-radius:50%} .led.g{background:var(--good)} .led.a{background:var(--warn)}
+.head{margin:28px 0 4px} .head h1{font-family:"Archivo",sans-serif; font-weight:700; font-size:26px; letter-spacing:-.02em; margin:0}
+.head .meta{color:var(--muted); font-size:13px; margin-top:6px} .head .meta b{color:var(--text); font-weight:600}
+.tablewrap{overflow-x:auto; border:1px solid var(--line); border-radius:14px; box-shadow:var(--shadow); margin-top:16px; background:var(--surface)}
+table{width:100%; border-collapse:collapse; min-width:860px}
+thead th{position:sticky; top:0; text-align:right; font-size:11px; letter-spacing:.05em; text-transform:uppercase; color:var(--faint); font-weight:600; padding:12px 14px; background:var(--surface-2); border-bottom:1px solid var(--line); white-space:nowrap}
+thead th.l{text-align:left} thead th.sortable{cursor:pointer; user-select:none} thead th.sortable:hover{color:var(--text)} thead th .ar{opacity:.5; font-size:9px}
+tbody td{text-align:right; padding:13px 14px; border-bottom:1px solid var(--line-soft); white-space:nowrap}
+tbody tr{cursor:pointer} tbody tr:last-child td{border-bottom:0} tbody tr:hover{background:var(--surface-2)} tbody tr.sel{background:var(--accent-soft)}
+td.l{text-align:left}
+.tk{font-family:"Archivo",sans-serif; font-weight:700; font-size:15px}
+.pill{display:inline-block; font-size:11px; font-weight:700; letter-spacing:.03em; padding:3px 9px; border-radius:999px; color:#fff}
+.p-csp{background:var(--csp)} .p-cc{background:var(--cc)} .p-leap{background:var(--leap)}
+.trade{font-family:"IBM Plex Mono"; font-weight:600; font-size:14px} .t-csp{color:var(--csp)} .t-cc{color:var(--cc)} .t-leap{color:var(--leap)}
+.dim{color:var(--faint)}
+.fl{font-size:11px; font-weight:600; padding:2px 7px; border-radius:6px; margin-left:4px; white-space:nowrap}
+.fl-strong{color:var(--warn); background:color-mix(in srgb,var(--warn) 15%,transparent)}
+.fl-er{color:var(--bad); background:color-mix(in srgb,var(--bad) 13%,transparent)}
+.fl-pmcc{color:var(--leap); background:color-mix(in srgb,var(--leap) 15%,transparent)}
+.chart{margin-top:24px; border:1px solid var(--line); border-radius:14px; background:var(--surface); box-shadow:var(--shadow); overflow:hidden}
+.chart .top{display:flex; align-items:center; gap:14px; padding:14px 18px; border-bottom:1px solid var(--line); flex-wrap:wrap}
+.chart .sym{font-family:"Archivo",sans-serif; font-weight:800; font-size:22px} .chart .sub{font-size:12px; color:var(--faint)}
+.chart .tv{margin-left:auto; font-size:11px; color:var(--faint)} .chart .tv b{color:var(--muted); font-weight:600}
+.picker{display:flex; gap:7px; align-items:center; padding:12px 18px; border-bottom:1px solid var(--line); flex-wrap:wrap}
+.picker input{font-family:"IBM Plex Mono"; font-size:13px; width:96px; padding:6px 10px; border:1px solid var(--line); border-radius:8px; background:var(--surface-2); color:var(--text)}
+.picker input:focus{outline:2px solid var(--accent); outline-offset:1px}
+.tchip{font-family:"IBM Plex Mono"; font-size:12.5px; font-weight:600; color:var(--muted); background:var(--surface-2); border:1px solid var(--line); padding:5px 11px; border-radius:8px; cursor:pointer}
+.tchip:hover{color:var(--text)} .tchip.on{color:#fff; background:var(--accent); border-color:var(--accent)}
+#cv{display:block; width:100%; height:320px}
+.tvnote{margin-top:16px; font-size:12.5px; color:var(--faint); text-align:center}
+footer{color:var(--faint); font-size:12.5px; text-align:center; padding:30px 0 40px; margin-top:22px; border-top:1px solid var(--line)}
+footer b{color:var(--muted); font-weight:600}
+@media (max-width:560px){ nav{display:none} }
+@media (prefers-reduced-motion:reduce){ *{transition:none!important} .tape .track{animation:none} }
+</style>
+</head>
+<body>
+<header><div class="wrap bar">
+  <div class="brand"><span class="dot"></span><b>OptionIntel</b><span>.app</span></div>
+  <nav><a href="#" class="on">Signals</a><a href="#">Options Chain</a><a href="#">Market</a><a href="#">Watchlist</a><a href="#">Deep Dive</a></nav>
+  <span class="tag" id="upd">loading…</span>
+</div></header>
+
+<div class="tape" aria-hidden="true"><div class="track" id="tape"></div></div>
+
+<main class="wrap">
+  <section class="pulse" aria-label="Market pulse">
+    <div class="chip"><div class="k"><span class="led g"></span>VIX</div><div class="v mono">16.4</div><div class="s">Calm · contango</div></div>
+    <div class="chip"><div class="k"><span class="led a"></span>Fear &amp; Greed</div><div class="v mono">62</div><div class="s">Greed</div></div>
+    <div class="chip"><div class="k"><span class="led g"></span>10Y Treasury</div><div class="v mono">4.18%</div><div class="s">steepening</div></div>
+    <div class="chip"><div class="k"><span class="led g"></span>Fed Funds</div><div class="v mono">3.75%</div><div class="s">held</div></div>
+    <div class="chip"><div class="k"><span class="led a"></span>BTC F&amp;G</div><div class="v mono">55</div><div class="s">Neutral</div></div>
+  </section>
+
+  <div class="head"><h1>Suggested entries</h1><div class="meta" id="meta">scanning…</div></div>
+
+  <div class="tablewrap"><table><thead><tr>
+    <th class="l">Ticker</th><th class="l">Strategy</th><th class="l">Suggested trade</th>
+    <th class="sortable" data-k="dte">DTE <span class="ar">▾</span></th>
+    <th class="sortable" data-k="delta">Δ <span class="ar">▾</span></th>
+    <th class="sortable" data-k="prem">Prem % <span class="ar">▾</span></th>
+    <th class="sortable" data-k="pop">POP <span class="ar">▾</span></th>
+    <th class="sortable" data-k="ann">Ann % <span class="ar">▾</span></th>
+    <th class="sortable" data-k="iv">IV <span class="ar">▾</span></th>
+    <th class="l">Notes</th>
+  </tr></thead><tbody id="tb"></tbody></table></div>
+
+  <section class="chart" aria-label="Chart">
+    <div class="top"><div><span class="sym" id="sym">—</span> <span class="sub" id="symsub">check the setup</span></div>
+      <span class="tv"><b>TradingView</b> · BB(20,2) + RSI(14)</span></div>
+    <div class="picker"><input id="symin" placeholder="symbol…" aria-label="Chart symbol"><span id="chips"></span></div>
+    <canvas id="cv"></canvas>
+  </section>
+  <div class="tvnote">Charts are TradingView Advanced Chart widgets — full candles, indicators, timeframes.</div>
+</main>
+
+<footer class="wrap"><b>optionintel.app</b> — real-time chains &amp; greeks via Tradier · four-gate + delta-target engine · only setups meeting every criterion shown · <b>research only, not advice</b></footer>
+
+<script>
+const KIND={csp:"CSP",cc:"CC",leap:"LEAP"};
+let ROWS=[], dir={};
+const sccls=null;
+function fmtTrade(strat,strike){return strat==='cc'?`Sell $${strike} Call`:strat==='leap'?`Buy $${strike} Call`:`Sell $${strike} Put`;}
+
+fetch('data/signals.json',{cache:'no-store'}).then(r=>r.json()).then(J=>{
+  const sigs=(J.signals||[]).filter(s=>s.median_ok!==false);
+  ROWS=sigs.map(s=>({tk:s.ticker,strat:s.strategy.toLowerCase(),trade:fmtTrade(s.strategy.toLowerCase(),s.strike),
+      dte:s.dte,delta:Math.abs(s.delta||0),prem:s.premium_pct,pop:s.pop,
+      ann:(s.premium_pct&&s.dte)?+(s.premium_pct*365/s.dte).toFixed(0):null,iv:s.iv,
+      strong:s.strong,earn:s.earnings_in_window}))
+    .concat((J.leaps||[]).map(l=>({tk:l.ticker,strat:'leap',trade:fmtTrade('leap',l.strike),
+      dte:l.dte,delta:Math.abs(l.delta||0),prem:null,pop:null,ann:null,iv:l.iv,
+      pmcc:l.good_pmcc,extr:l.extrinsic_pct})));
+  ROWS.sort((a,b)=>(b.prem??-1)-(a.prem??-1)||b.dte-a.dte);
+  const dt=J.generated_at?new Date(J.generated_at):null;
+  document.getElementById('upd').textContent=dt?'updated '+dt.toUTCString().slice(17,22)+' UTC':'preview';
+  const u=J.universe||{}; const nprem=sigs.length, nleap=(J.leaps||[]).length;
+  document.getElementById('meta').innerHTML=`<b>${nprem+nleap} viable setups</b> from ${(u.wheel||0)+(u.growth||0)} names — passed the median &amp; premium gates · ranked by premium %`;
+  buildTape(); draw(); if(ROWS[0]) setSym(ROWS[0].tk);
+}).catch(e=>{document.getElementById('meta').textContent='could not load signals ('+e+')';});
+
+function buildTape(){
+  const seen={}; ROWS.forEach(r=>seen[r.tk]=1);
+  const items=Object.keys(seen).map(t=>`<span class="tk-item"><b>${t}</b><span class="mono">—</span></span>`);
+  document.getElementById('tape').innerHTML=[...items,...items].join('');
+  document.getElementById('chips').innerHTML=Object.keys(seen).map(t=>`<span class="tchip" data-t="${t}">${t}</span>`).join('');
+  document.querySelectorAll('.tchip').forEach(c=>c.onclick=()=>setSym(c.dataset.t));
+}
+function notes(r){
+  if(r.strat==='leap') return r.pmcc?'<span class="fl fl-pmcc">PMCC ✓</span>':`<span class="dim">${r.extr??''}% ext</span>`;
+  let s=''; if(r.strong)s+='<span class="fl fl-strong">🔥 strong</span>'; if(r.earn)s+='<span class="fl fl-er">⚠ earnings</span>'; return s||'<span class="dim">—</span>';
+}
+function cell(v,suf){return v==null?'<span class="dim">—</span>':(suf==='%'?v.toFixed?v.toFixed(1)+'%':v+'%':v);}
+function draw(){
+  document.getElementById('tb').innerHTML=ROWS.map(r=>`<tr data-tk="${r.tk}">
+    <td class="l"><span class="tk">${r.tk}</span></td>
+    <td class="l"><span class="pill p-${r.strat}">${KIND[r.strat]}</span></td>
+    <td class="l trade t-${r.strat}">${r.trade}</td>
+    <td class="mono">${r.dte}</td>
+    <td class="mono">${r.delta.toFixed(2)}</td>
+    <td class="mono">${r.prem==null?'<span class="dim">—</span>':r.prem.toFixed(1)+'%'}</td>
+    <td class="mono">${r.pop==null?'<span class="dim">—</span>':r.pop.toFixed(0)+'%'}</td>
+    <td class="mono">${r.ann==null?'<span class="dim">—</span>':r.ann+'%'}</td>
+    <td class="mono">${r.iv==null?'<span class="dim">—</span>':r.iv.toFixed(0)+'%'}</td>
+    <td class="l">${notes(r)}</td></tr>`).join('');
+  document.querySelectorAll('#tb tr').forEach(tr=>tr.onclick=()=>setSym(tr.dataset.tk));
+  markRow();
+}
+document.querySelectorAll('th.sortable').forEach(th=>th.onclick=()=>{const k=th.dataset.k; dir[k]=!dir[k];
+  ROWS.sort((a,b)=>{const av=a[k]??-1,bv=b[k]??-1; return dir[k]?av-bv:bv-av;}); draw();});
+
+/* chart (mock stand-in for the TradingView widget) */
+let CUR=null;
+function rsi14(cl,p){const o=Array(cl.length).fill(null); let g=0,l=0;
+  for(let i=1;i<=p&&i<cl.length;i++){const c=cl[i]-cl[i-1]; c>=0?g+=c:l-=c;} g/=p; l/=p; o[p]=100-100/(1+g/(l||1e-9));
+  for(let i=p+1;i<cl.length;i++){const c=cl[i]-cl[i-1],gg=c>0?c:0,ll=c<0?-c:0; g=(g*(p-1)+gg)/p; l=(l*(p-1)+ll)/p; o[i]=100-100/(1+g/(l||1e-9));} return o;}
+function candles(sym){let h=0; for(const c of sym)h=(h*31+c.charCodeAt(0))>>>0; let s=h||1;
+  const r=()=>{s=(s*1664525+1013904223)>>>0; return s/4294967296;}; let p=40+r()*160; const out=[];
+  for(let i=0;i<56;i++){const o=p,c=Math.max(1,o+(r()-0.46)*p*0.045); out.push([o,Math.max(o,c)+r()*p*0.02,Math.min(o,c)-r()*p*0.02,c]); p=c;} return out;}
+function drawChart(){
+  const cv=document.getElementById("cv"); if(!cv||!CUR)return; const ctx=cv.getContext("2d"),w=cv.clientWidth,H=cv.clientHeight,dpr=devicePixelRatio||1;
+  cv.width=w*dpr; cv.height=H*dpr; ctx.setTransform(dpr,0,0,dpr,0,0); ctx.clearRect(0,0,w,H);
+  const cs=getComputedStyle(document.body),up=cs.getPropertyValue('--good').trim(),dn=cs.getPropertyValue('--bad').trim(),
+    gl=cs.getPropertyValue('--line').trim(),ac=cs.getPropertyValue('--accent').trim(),fa=cs.getPropertyValue('--faint').trim();
+  const d=candles(CUR),cl=d.map(x=>x[3]),pad=14,rsiH=66,gap=10,pH=H-rsiH-gap;
+  const bb=cl.map((_,i)=>{if(i<19)return null; const s=cl.slice(i-19,i+1),m=s.reduce((a,b)=>a+b)/20,sd=Math.sqrt(s.reduce((a,b)=>a+(b-m)*(b-m),0)/20); return [m+2*sd,m,m-2*sd];});
+  const hi=Math.max(...d.map(x=>x[1]),...bb.filter(Boolean).map(b=>b[0])),lo=Math.min(...d.map(x=>x[2]),...bb.filter(Boolean).map(b=>b[2])),rg=(hi-lo)||1;
+  const Y=v=>pad+(hi-v)/rg*(pH-2*pad),cw=(w-2*pad)/d.length;
+  ctx.strokeStyle=gl; ctx.globalAlpha=.5; for(let g=0;g<=4;g++){const y=pad+g/4*(pH-2*pad); ctx.beginPath(); ctx.moveTo(pad,y); ctx.lineTo(w-pad,y); ctx.stroke();} ctx.globalAlpha=1;
+  const band=ac+"88";
+  function bl(k,st,dash){ctx.beginPath(); let s=0; bb.forEach((b,i)=>{if(!b)return; const x=pad+i*cw+cw/2,y=Y(b[k]); s++?ctx.lineTo(x,y):ctx.moveTo(x,y);}); ctx.setLineDash(dash||[]); ctx.strokeStyle=st; ctx.lineWidth=1.1; ctx.stroke(); ctx.setLineDash([]);}
+  bl(0,band); bl(2,band); bl(1,ac,[4,3]);
+  d.forEach((x,i)=>{const cx=pad+i*cw+cw/2,c=x[3]>=x[0]?up:dn; ctx.strokeStyle=c; ctx.fillStyle=c; ctx.lineWidth=1;
+    ctx.beginPath(); ctx.moveTo(cx,Y(x[1])); ctx.lineTo(cx,Y(x[2])); ctx.stroke();
+    const bw=Math.max(2,cw*0.6),yo=Y(x[0]),yc=Y(x[3]); ctx.fillRect(cx-bw/2,Math.min(yo,yc),bw,Math.max(1.5,Math.abs(yc-yo)));});
+  const rt=pH+gap,R=v=>rt+(100-v)/100*rsiH,rs=rsi14(cl,14);
+  ctx.strokeStyle=gl; ctx.globalAlpha=.6; ctx.setLineDash([4,3]); [30,70].forEach(v=>{ctx.beginPath(); ctx.moveTo(pad,R(v)); ctx.lineTo(w-pad,R(v)); ctx.stroke();}); ctx.setLineDash([]); ctx.globalAlpha=1;
+  ctx.beginPath(); let s=0; rs.forEach((v,i)=>{if(v==null)return; const x=pad+i*cw+cw/2,y=R(v); s++?ctx.lineTo(x,y):ctx.moveTo(x,y);}); ctx.strokeStyle=ac; ctx.lineWidth=1.4; ctx.stroke();
+  ctx.fillStyle=fa; ctx.font='10px "IBM Plex Mono",monospace'; ctx.fillText("RSI 14",pad,rt+11); ctx.fillText("70",w-pad-18,R(70)-3); ctx.fillText("30",w-pad-18,R(30)+10);
+}
+function markRow(){document.querySelectorAll('#tb tr').forEach(tr=>tr.classList.toggle('sel',tr.dataset.tk===CUR));
+  document.querySelectorAll('.tchip').forEach(c=>c.classList.toggle('on',c.dataset.t===CUR));}
+function setSym(t){t=(t||'').toUpperCase().trim(); if(!t)return; CUR=t;
+  document.getElementById('sym').textContent=t; document.getElementById('symsub').textContent='check the setup'; drawChart(); markRow();}
+document.getElementById('symin').addEventListener('keydown',e=>{if(e.key==='Enter'){setSym(e.target.value); e.target.value='';}});
+addEventListener('resize',drawChart);
+</script>
+</body>
+</html>
