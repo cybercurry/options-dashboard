@@ -109,7 +109,9 @@ def main():
     data["generated_at"] = datetime.datetime.now(datetime.timezone.utc).isoformat(timespec="seconds")
     data["universe"] = {"wheel": len(uni.get("wheel", [])),
                         "growth": len(uni.get("growth", [])),
-                        "source": uni.get("_source")}
+                        "source": uni.get("_source"),
+                        "wheel_names": [str(t).upper() for t in uni.get("wheel", [])],
+                        "growth_names": [str(t).upper() for t in uni.get("growth", [])]}
     OUT.mkdir(parents=True, exist_ok=True)
     (OUT / "signals.json").write_text(json.dumps(data, indent=2, default=str))
     print("wrote {} — {} signals, {} leaps (universe: {})".format(

@@ -9,22 +9,16 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;700;800&family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
 <style>
+/* Dark, editorial, "all signal no noise" — MNI-inspired: near-black navy, one amber accent,
+   tiles that glow amber on hover. Committed dark (deliberate single look). */
 :root{
-  --ink:#F5F8FD; --surface:#FFFFFF; --surface-2:#EDF2F9; --line:#D9E1EE; --line-soft:#E8EEF7;
-  --text:#0F1A2C; --muted:#5B6B85; --faint:#8695AC; --accent:#2E63F0; --accent-soft:#E4ECFF;
-  --csp:#0E9F66; --cc:#2E63F0; --leap:#7C4DE0; --good:#0E9F66; --bad:#CF3E2A; --warn:#B87914; --track:#E1E8F3;
-  --shadow:0 1px 2px rgba(16,26,44,.06),0 8px 24px rgba(16,26,44,.06);
+  --ink:#080B12; --surface:#0F1522; --surface-2:#151D2C; --line:#212B3E; --line-soft:#18202F;
+  --text:#EAF1FB; --muted:#95A3B8; --faint:#5C6B84; --accent:#F5A524; --accent-2:#F5A524;
+  --accent-soft:#241B0E; --accent-line:#4A3A1C;
+  --csp:#2FC08A; --cc:#5B8DEF; --leap:#B389F2; --good:#2FC08A; --bad:#F0684C; --warn:#F5A524; --track:#18202F;
+  --shadow:0 1px 2px rgba(0,0,0,.5),0 14px 34px rgba(0,0,0,.4);
+  --glow:0 0 0 1px var(--accent),0 8px 30px rgba(245,165,36,.16);
 }
-@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
-  --ink:#0B111E; --surface:#131B2A; --surface-2:#1A2434; --line:#273248; --line-soft:#1E2838;
-  --text:#E9EEF8; --muted:#8A98B0; --faint:#65748F; --accent:#6F99FF; --accent-soft:#1B2942;
-  --csp:#37C88F; --cc:#6F99FF; --leap:#B197F2; --good:#37C88F; --bad:#ED6853; --warn:#E6AA43; --track:#212C41;
-  --shadow:0 1px 2px rgba(0,0,0,.3),0 10px 30px rgba(0,0,0,.35);}}
-:root[data-theme="dark"]{
-  --ink:#0B111E; --surface:#131B2A; --surface-2:#1A2434; --line:#273248; --line-soft:#1E2838;
-  --text:#E9EEF8; --muted:#8A98B0; --faint:#65748F; --accent:#6F99FF; --accent-soft:#1B2942;
-  --csp:#37C88F; --cc:#6F99FF; --leap:#B197F2; --good:#37C88F; --bad:#ED6853; --warn:#E6AA43; --track:#212C41;
-  --shadow:0 1px 2px rgba(0,0,0,.3),0 10px 30px rgba(0,0,0,.35);}
 *{box-sizing:border-box}
 body{margin:0; background:var(--ink); color:var(--text); font-family:"IBM Plex Sans",system-ui,sans-serif; font-size:15px; line-height:1.5; -webkit-font-smoothing:antialiased}
 .mono{font-family:"IBM Plex Mono",ui-monospace,monospace; font-variant-numeric:tabular-nums}
@@ -88,6 +82,30 @@ td.l{text-align:left}
 .reasons{margin:12px 0 0; padding-top:11px; border-top:1px solid var(--line-soft); font-size:12.5px; color:var(--muted); line-height:1.7}
 .reasons .r{display:block}
 .gate{display:inline-flex; align-items:center; gap:5px; font-size:12px; margin-right:12px}
+/* deep-dive: compact leg tiles, gate detail on hover/focus */
+.legtile{position:relative; border:1px solid var(--line); border-radius:14px; background:var(--surface); padding:15px 17px; outline:none; transition:border-color .15s, box-shadow .15s, transform .15s}
+.legtile:hover,.legtile:focus-within{border-color:var(--accent); box-shadow:var(--glow); transform:translateY(-1px)}
+.legtile:hover .th .pill,.legtile:focus-within .th .pill{filter:brightness(1.05)}
+.legtile .th{display:flex; align-items:center; gap:8px; font-family:"Archivo",sans-serif; font-weight:700; font-size:13.5px}
+.legtile .trade{font-size:16px; margin:9px 0 11px}
+.fchips{display:flex; gap:7px; flex-wrap:wrap}
+.lchip{font-size:12px; background:var(--surface-2); border:1px solid var(--line); border-radius:8px; padding:4px 9px; color:var(--faint); font-family:"IBM Plex Mono"} .lchip b{color:var(--text); margin-left:5px; font-weight:600}
+.legtile .detail{position:absolute; left:50%; transform:translateX(-50%); top:100%; margin-top:8px; z-index:20; width:min(380px,88vw); background:var(--surface); border:1px solid var(--accent); border-radius:12px; box-shadow:var(--glow); padding:12px 14px; display:none}
+.legtile:hover .detail,.legtile:focus-within .detail{display:block}
+.hint{font-size:12.5px; color:var(--faint); margin:2px 0 0}
+/* constellation / data-web (MNI-style hover reveal) */
+.web{position:relative; width:100%; height:250px}
+.weblines{position:absolute; inset:0; width:100%; height:100%; overflow:visible}
+.weblines line{stroke:var(--accent-line); stroke-width:1; vector-effect:non-scaling-stroke; opacity:.75}
+.wcenter{position:absolute; left:50%; top:50%; transform:translate(-50%,-50%); z-index:3; white-space:nowrap;
+  background:var(--surface-2); border:1px solid var(--accent); border-radius:10px; padding:6px 11px;
+  font-family:"Archivo",sans-serif; font-weight:700; font-size:12px; box-shadow:0 0 22px rgba(245,165,36,.22)}
+.wnode{position:absolute; transform:translate(-50%,-50%); z-index:2; white-space:nowrap; color:var(--muted);
+  background:var(--surface); border:1px solid var(--line); border-radius:999px; padding:3px 9px;
+  font-size:10.5px; font-family:"IBM Plex Mono"}
+.wn-ok{border-color:color-mix(in srgb,var(--good) 55%,var(--line)); color:var(--good)}
+.wn-no{border-color:color-mix(in srgb,var(--bad) 55%,var(--line)); color:var(--bad)}
+.webfoot{text-align:center; font-size:11px; color:var(--faint); font-family:"IBM Plex Mono"; border-top:1px solid var(--line-soft); padding-top:9px; margin-top:2px}
 .mkt-grid{display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:14px; margin-top:18px}
 .mkt{border:1px solid var(--line); border-radius:14px; background:var(--surface); box-shadow:var(--shadow); padding:16px 18px}
 .mkt .kk{font-size:11px; letter-spacing:.06em; text-transform:uppercase; color:var(--faint); font-weight:600; display:flex; align-items:center; gap:7px}
@@ -110,10 +128,10 @@ footer b{color:var(--muted); font-weight:600}
 </head>
 <body>
 <header><div class="wrap bar">
-  <div class="brand" data-tab="signals"><span class="dot"></span><b>OptionIntel</b><span>.app</span></div>
+  <div class="brand" data-tab="overview"><span class="dot"></span><b>OptionIntel</b><span>.app</span></div>
   <nav id="nav">
-    <a data-tab="signals" class="on">Signals</a>
-    <a data-tab="watchlist">Watchlist</a>
+    <a data-tab="overview" class="on">Overview</a>
+    <a data-tab="signals">Signals</a>
     <a data-tab="chain">Options Chain</a>
     <a data-tab="deep">Deep Dive</a>
     <a data-tab="market">Market</a>
@@ -125,7 +143,7 @@ footer b{color:var(--muted); font-weight:600}
 <main class="wrap">
 
   <!-- ══════════ SIGNALS ══════════ -->
-  <section id="v-signals" class="view">
+  <section id="v-signals" class="view" hidden>
     <section class="pulse" id="pulse" aria-label="Market pulse"></section>
 
     <div class="head"><h1>Suggested entries</h1><div class="meta" id="meta">scanning…</div></div>
@@ -147,9 +165,9 @@ footer b{color:var(--muted); font-weight:600}
     <div class="tvnote">Live TradingView daily candles — change the timeframe, add indicators, or draw right in the chart.</div>
   </section>
 
-  <!-- ══════════ WATCHLIST ══════════ -->
-  <section id="v-watchlist" class="view" hidden>
-    <div class="head"><h1>Watchlist</h1><div class="meta">Every scanned name and its live read — CSP/CC timing, position in the bands, RSI, and whether a qualifying LEAP exists. This is the full field; the Signals tab is just what's actionable now.</div></div>
+  <!-- ══════════ OVERVIEW ══════════ -->
+  <section id="v-overview" class="view">
+    <div class="head"><h1>Overview</h1><div class="meta">Every name in the universe and its live read — CSP/CC timing, position in the bands, RSI, and whether a qualifying LEAP exists. The whole field at a glance; Signals is just what's actionable right now.</div></div>
     <div class="tablewrap"><table><thead><tr>
       <th class="l">Ticker</th><th class="l">Sector</th>
       <th class="l">CSP setup</th><th class="l">CC setup</th>
@@ -301,7 +319,7 @@ fetch('data/signals.json',{cache:'no-store'}).then(r=>r.json()).then(J=>{
   const u=J.universe||{};
   document.getElementById('meta').innerHTML=`<b>${READY.length} setup${READY.length===1?'':'s'} ready</b> + <b>${LEAPQ.length} LEAP${LEAPQ.length===1?'':'s'}</b> from ${(u.wheel||0)+(u.growth||0)} names · full field in Watchlist`;
 
-  renderPulse(); renderReady(); renderLeaps(); renderWatchlist(); renderChain(); buildChips(); renderMarket();
+  renderPulse(); renderReady(); renderLeaps(); renderOverview(); renderChain(); buildChips(); renderMarket();
   const first=(READY[0]&&READY[0].ticker)||(LEAPQ[0]&&LEAPQ[0].ticker)||(SIGS[0]&&SIGS[0].ticker);
   if(first) setSym(first);
 }).catch(e=>{document.getElementById('meta').textContent='could not load signals ('+e+')';});
@@ -342,8 +360,8 @@ function noteFlags(s){let x=''; if(s.strong)x+='<span class="fl fl-strong">🔥 
 function renderReady(){
   document.getElementById('n-ready').textContent=READY.length?READY.length+' ready':'';
   if(!READY.length){ document.getElementById('ready-wrap').innerHTML=
-    `<div class="empty">No fresh CSP/CC setup right now — nothing on a confirmed turnaround. <b>${SIGS.length} names</b> scanned; see them all in <a data-tab="watchlist" style="color:var(--accent);cursor:pointer">Watchlist</a>.</div>`;
-    document.querySelector('#ready-wrap [data-tab]')?.addEventListener('click',()=>go('watchlist')); return; }
+    `<div class="empty">No fresh CSP/CC setup right now — nothing on a confirmed turnaround. <b>${SIGS.length} names</b> scanned; see them all in <a data-tab="overview" style="color:var(--accent);cursor:pointer">Overview</a>.</div>`;
+    document.querySelector('#ready-wrap [data-tab]')?.addEventListener('click',()=>go('overview')); return; }
   const rows=READY.map(s=>{const k=s.strategy.toLowerCase();return `<tr class="clk" data-tk="${s.ticker}">
     <td class="l"><span class="tk">${s.ticker}</span></td>
     <td class="l"><span class="pill p-${k}">${s.strategy}</span></td>
@@ -362,8 +380,8 @@ function renderReady(){
 function renderLeaps(){
   document.getElementById('n-leap').textContent=LEAPQ.length?LEAPQ.length+' qualify':'';
   if(!LEAPQ.length){ document.getElementById('leap-wrap').innerHTML=
-    `<div class="empty">No LEAP qualifies today — none clears Gate A + Gate C on a clear uptrend at once. Near-misses are in <a data-tab="watchlist" style="color:var(--accent);cursor:pointer">Watchlist</a>.</div>`;
-    document.querySelector('#leap-wrap [data-tab]')?.addEventListener('click',()=>go('watchlist')); return; }
+    `<div class="empty">No LEAP qualifies today — none clears Gate A + Gate C on a clear uptrend at once. Near-misses are in <a data-tab="overview" style="color:var(--accent);cursor:pointer">Overview</a>.</div>`;
+    document.querySelector('#leap-wrap [data-tab]')?.addEventListener('click',()=>go('overview')); return; }
   const rows=LEAPQ.map(l=>`<tr class="clk" data-tk="${l.ticker}">
     <td class="l"><span class="tk">${l.ticker}</span></td>
     <td class="l trade t-leap">${fmtTrade('leap',l.strike)}</td>
@@ -380,7 +398,7 @@ function wireRows(sel){document.querySelectorAll(sel+' tr.clk').forEach(tr=>tr.o
 
 /* ---------- watchlist ---------- */
 let wlDir={};
-function renderWatchlist(){
+function renderOverview(){
   let list=Object.values(BYTK);
   list.sort((a,b)=>(a.ticker<b.ticker?-1:1));
   document.getElementById('wl-tb').innerHTML=list.map(o=>{
@@ -411,38 +429,65 @@ function renderChain(f){
 
 /* ---------- deep dive ---------- */
 function gateRow(ok,label){return `<span class="gate">${ok?'<span class="ok">✓</span>':'<span class="no">✗</span>'} ${label}</span>`;}
-function legCard(s){const k=s.strategy.toLowerCase();
-  const kv=[['Strike','$'+s.strike],['Expiry',s.expiry],['DTE',s.dte],['Delta',num(s.delta,3)],
-    ['Mid','$'+num(s.mid,2)],['Premium',num(s.premium_pct,2,'%')],['POP',num(s.pop,0,'%')],
-    ['IV',num(s.iv,0,'%')],['OI',s.oi],['Spread',num(s.spread_pct,0,'%')],['%B',num(s.pct_b,2)]];
-  const rs=(s.timing_reasons||[]).map(r=>`<span class="r">· ${r}</span>`).join('');
-  return `<div class="card"><h3><span class="pill p-${k}">${s.strategy}</span> ${shortSetup(s.timing_label)}</h3>
-    <div class="trade t-${k}">${fmtTrade(k,s.strike)}</div>
-    <div class="kv">${kv.map(x=>`<span class="kk">${x[0]}</span><span class="vv">${x[1]==null?'—':x[1]}</span>`).join('')}</div>
-    ${rs?`<div class="reasons">${rs}</div>`:''}</div>`;
+function chip(l,v){return `<span class="lchip">${l}<b>${v==null?'—':v}</b></span>`;}
+/* constellation: a center node with satellite nodes on an ellipse, connected by lines.
+   nodes: [{l:label, s:'ok'|'no'|''}] — the MNI "hover unfurls a web of connected data" reveal. */
+function web(center, nodes){
+  const n=Math.max(nodes.length,1), cx=50, cy=50, rx=39, ry=41; let lines='', pills='';
+  nodes.forEach((nd,i)=>{
+    const a=-Math.PI/2 + i*2*Math.PI/n;
+    const x=+(cx+rx*Math.cos(a)).toFixed(1), y=+(cy+ry*Math.sin(a)).toFixed(1);
+    lines+=`<line x1="${cx}" y1="${cy}" x2="${x}" y2="${y}"/>`;
+    pills+=`<span class="wnode ${nd.s==='ok'?'wn-ok':nd.s==='no'?'wn-no':''}" style="left:${x}%;top:${y}%">${nd.l}</span>`;
+  });
+  return `<div class="web"><svg class="weblines" viewBox="0 0 100 100" preserveAspectRatio="none">${lines}</svg><span class="wcenter">${center}</span>${pills}</div>`;
 }
-function leapCard(l){
-  const kv=[['Strike','$'+l.strike],['Expiry',l.expiry],['DTE',l.dte],['Delta',num(l.delta,3)],
-    ['Mid','$'+num(l.mid,2)],['Cost','$'+(l.cost||'')],['Intrinsic','$'+num(l.intrinsic,2)],
-    ['Extrinsic','$'+num(l.extrinsic,2)+' ('+num(l.extrinsic_pct,0,'%')+')'],['Carry',num(l.carry_pct,1,'%/yr')],
-    ['IV',num(l.iv,0,'%')],['RSI',num(l.rsi,0)]];
-  const gates=gateRow(l.gate_a,'Gate A ext≤40%')+gateRow(l.gate_c,'Gate C carry≤8%')+
-    gateRow(l.trend_ok,'Clear trend')+gateRow(l.above_50ma,'>50MA')+gateRow(l.above_200ma,'>200MA')+
-    gateRow(l.ma_aligned,'50≥200')+gateRow(l.rsi_rising,'RSI rising');
+function legTile(s){const k=s.strategy.toLowerCase();
+  const nodes=(s.timing_reasons||[]).map(r=>({l:r.replace(/\s*\([^)]*\)/,'').replace(/⛔\s*/,'').trim().slice(0,20),
+                                              s:r.indexOf('⛔')>=0?'no':'ok'}));
+  const foot=`Exp ${s.expiry} · DTE ${s.dte} · POP ${num(s.pop,0,'%')} · OI ${s.oi} · spr ${num(s.spread_pct,0,'%')}`;
+  return `<div class="legtile" tabindex="0">
+    <div class="th"><span class="pill p-${k}">${s.strategy}</span> ${shortSetup(s.timing_label)}</div>
+    <div class="trade t-${k}">${fmtTrade(k,s.strike)}</div>
+    <div class="fchips">${chip('Δ ',num(s.delta,2))}${chip('prem ',num(s.premium_pct,1,'%'))}${chip('IV ',num(s.iv,0,'%'))}${chip('%B ',num(s.pct_b,2))}</div>
+    <div class="detail">${web(s.strategy+' $'+s.strike, nodes)}<div class="webfoot">${foot}</div></div></div>`;
+}
+function emptyTile(kind,msg){const k=kind.toLowerCase();
+  return `<div class="legtile" style="opacity:.65"><div class="th"><span class="pill p-${k}">${kind}</span> <span class="dim">— none</span></div>
+    <div class="dim" style="font-size:13px;margin-top:10px">${msg}</div></div>`;}
+function leapTile(l){
+  const gnodes=[
+    {l:'A · ext≤40', s:l.gate_a?'ok':'no'},   {l:'C · carry≤8', s:l.gate_c?'ok':'no'},
+    {l:'clear trend', s:l.trend_ok?'ok':'no'},{l:'>50-MA', s:l.above_50ma?'ok':'no'},
+    {l:'>200-MA', s:l.above_200ma?'ok':'no'}, {l:'50≥200', s:l.ma_aligned?'ok':'no'},
+    {l:'RSI rising', s:l.rsi_rising?'ok':'no'} ];
+  const foot=`Exp ${l.expiry} · DTE ${l.dte} · cost $${l.cost} · intr $${num(l.intrinsic,0)} · ext $${num(l.extrinsic,0)}`;
   const tt=(l.timing_label||'').replace(/[^\x20-\x7E]/g,'').replace(/ENTRY/i,'').trim().toLowerCase();
   const verdict=l.qualifies?'<span class="ok">✓ qualifies</span>'
-    :'<span class="no">✗ does not qualify</span> <span class="dim" style="font-weight:400;font-size:12px">· timing '+tt+'</span>';
-  return `<div class="card"><h3><span class="pill p-leap">LEAP</span> ${verdict}</h3>
+    :'<span class="no">✗ no</span> <span class="dim" style="font-weight:400;font-size:11px">timing '+tt+'</span>';
+  return `<div class="legtile" tabindex="0">
+    <div class="th"><span class="pill p-leap">LEAP</span> ${verdict}</div>
     <div class="trade t-leap">${fmtTrade('leap',l.strike)}</div>
-    <div class="kv">${kv.map(x=>`<span class="kk">${x[0]}</span><span class="vv">${x[1]==null?'—':x[1]}</span>`).join('')}</div>
-    <div class="reasons">${gates}</div></div>`;
+    <div class="fchips">${chip('Δ ',num(l.delta,2))}${chip('ext ',num(l.extrinsic_pct,0,'%'))}${chip('carry ',num(l.carry_pct,1,'%/yr'))}</div>
+    <div class="detail">${web('LEAP $'+l.strike, gnodes)}<div class="webfoot">${foot}</div></div></div>`;
 }
 function renderDeep(tk){
   const o=BYTK[tk]; const host=document.getElementById('deep-body');
   if(!o){host.innerHTML=`<div class="empty">Pick a ticker to see its full breakdown.</div>`;return;}
-  const cards=[]; if(o.csp)cards.push(legCard(o.csp)); if(o.cc)cards.push(legCard(o.cc)); if(o.leap)cards.push(leapCard(o.leap));
-  host.innerHTML=`<div class="head" style="margin:6px 0 0"><h1 style="font-size:22px">${tk} <span class="dim" style="font-size:14px;font-weight:400">${o.sector||''}</span></h1></div>`+
-    (cards.length?`<div class="cards">${cards.join('')}</div>`:`<div class="empty">No qualifying contracts for ${tk} right now.</div>`);
+  const wset=new Set((DATA.universe&&DATA.universe.wheel_names)||[]);
+  const isWheel=wset.size?wset.has(tk):!!(o.csp||o.cc);   // wheel name = CSP+CC+LEAP; growth = LEAP only
+  const role=isWheel?'wheel + LEAP':'growth · LEAP only';
+  let tiles;
+  if(isWheel){
+    tiles=[ o.csp?legTile(o.csp):emptyTile('CSP','No ~30Δ put cleared the premium / OI / spread / earnings gates.'),
+            o.cc ?legTile(o.cc) :emptyTile('CC','No ~30Δ call cleared the gates.'),
+            o.leap?leapTile(o.leap):emptyTile('LEAP','No call in the 180–900 DTE · Δ70–85 window.') ];
+  } else {
+    tiles=[ o.leap?leapTile(o.leap):emptyTile('LEAP','No LEAP contract found.') ];
+  }
+  host.innerHTML=`<div class="head" style="margin:6px 0 0"><h1 style="font-size:22px">${tk} <span class="dim" style="font-size:14px;font-weight:400">${o.sector||''} · ${role}</span></h1></div>
+    <p class="hint">Hover a tile for the full metrics &amp; gate breakdown.</p>
+    <div class="cards">${tiles.join('')}</div>`;
   document.getElementById('sym2').textContent=tk; mountChart('tvchart2',tk);
 }
 function buildChips(){
@@ -455,7 +500,7 @@ function buildChips(){
 
 /* ---------- TradingView (two hosts: signals + deep) ---------- */
 let CUR=null, TV_READY=false;
-function tvTheme(){return matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light';}
+function tvTheme(){return 'dark';}   /* committed dark, MNI aesthetic */
 function mountChart(hostId,sym){
   if(!TV_READY||!window.TradingView)return; const host=document.getElementById(hostId); if(!host||!sym)return;
   host.innerHTML='';
@@ -477,10 +522,11 @@ document.getElementById('deep-in').addEventListener('keydown',e=>{if(e.key==='En
 document.getElementById('chain-f').addEventListener('input',e=>renderChain(e.target.value));
 
 /* ---------- tab router ---------- */
-const TABS=['signals','watchlist','chain','deep','market','rules'];
+const TABS=['overview','signals','chain','deep','market','rules'];
 function go(tab){
   TABS.forEach(t=>document.getElementById('v-'+t).hidden=(t!==tab));
   document.querySelectorAll('#nav a').forEach(a=>a.classList.toggle('on',a.dataset.tab===tab));
+  if(tab==='signals'&&CUR) mountChart('tvchart',CUR);
   if(tab==='deep'){ renderDeep(CUR||Object.keys(BYTK)[0]); }
   window.scrollTo(0,0);
 }
