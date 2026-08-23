@@ -3,6 +3,15 @@ name: Refresh optionintel data
 # Runs the wheel engine (Tradier) and commits a fresh site/data/signals.json.
 # Cloudflare Pages (connected to this repo) auto-deploys on the push.
 on:
+  push:
+    branches: [main]
+    paths:                          # refresh on any change to the engine/data pipeline
+      - "signals.py"
+      - "build_json.py"
+      - "tradier.py"
+      - "sheets.py"
+      - "wheel_universe.json"
+      - ".github/workflows/refresh-optionintel.yml"
   schedule:
     - cron: "*/30 13-21 * * 1-5"   # every 30 min, ~US market hours (UTC), Mon–Fri
   workflow_dispatch: {}             # manual "Run workflow" button
