@@ -83,13 +83,63 @@ def _btc_fng():
         return None, None
 
 
+def _yf_quote(sym):
+    """(price, pct-change) from the last two daily closes via yfinance."""
+    try:
+        import yfinance as yf
+        c = yf.Ticker(sym).history(period="5d")["Close"].dropna()
+        if len(c) >= 2:
+            p, pv = float(c.iloc[-1]), float(c.iloc[-2])
+            return p, ((p / pv - 1) * 100 if pv else None)
+        if len(c) == 1:
+            return float(c.iloc[-1]), None
+    except Exception:
+        pass
+    return None, None
+
+
+def _yf_last(sym):
+    p, _ = _yf_quote(sym)
+    return round(p, 2) if p is not None else None
+
+
+# The app's PULSE_TICKERS / SECTOR_TICKERS, verbatim.
+PULSE = [("^GSPC", "S&P 500", "", False), ("^NDX", "Nasdaq 100", "", False), ("^DJI", "Dow Jones", "", False),
+         ("^RUT", "R2000", "", False), ("DX-Y.NYB", "DXY", "", False), ("CL=F", "Crude Oil", "$", False),
+         ("GC=F", "Gold", "$", False), ("BTC-USD", "Bitcoin", "$", False), ("^TNX", "10Y Yield", "", True),
+         ("^IRX", "3M Yield", "", True)]
+SECTORS = [("XLK", "Technology"), ("XLF", "Financials"), ("XLV", "Health Care"), ("XLE", "Energy"),
+           ("XLI", "Industrials"), ("XLC", "Comm. Services"), ("XLY", "Consumer Disc."),
+           ("XLP", "Consumer Staples"), ("XLU", "Utilities"), ("XLRE", "Real Estate"),
+           ("XLB", "Materials"), ("BTC-USD", "Digital Assets")]
+
+
+def fetch_pulse():
+    out = []
+    for sym, label, prefix, is_yield in PULSE:
+        p, pct = _yf_quote(sym)
+        out.append({"label": label, "price": p, "pct": pct, "prefix": prefix, "is_yield": is_yield})
+    return out
+
+
+def fetch_sectors():
+    out = []
+    for sym, label in SECTORS:
+        p, pct = _yf_quote(sym)
+        out.append({"label": label, "ticker": ("BTC" if sym == "BTC-USD" else sym), "pct": pct, "price": p})
+    return out
+
+
 def fetch_market():
-    """Keyless market-pulse snapshot — VIX, stock & BTC Fear/Greed, 10Y, 2s10s curve, Fed funds.
+    """Keyless market snapshot — VIX + F&G + curve + Fed + the Overview's macro-signal extras.
     Each source degrades to None independently; never aborts the build."""
     vix = _vix()
     fng, fng_lbl = _cnn_fng()
     btc, btc_lbl = _btc_fng()
     t10, t2, fed = _fred_last("DGS10"), _fred_last("DGS2"), _fred_last("DFF")
+    three_m = _yf_last("^IRX")               # 3M yield (for the 10Y−3M curve on Overview)
+    skew = _yf_last("^SKEW")                  # CBOE SKEW (tail risk)
+    vix9d = _yf_last("^VIX9D")               # 9-day VIX (vs 30-day → contango/backwardation)
     curve = None
     if t10 is not None and t2 is not None:
         spr = t10 - t2
@@ -99,13 +149,16 @@ def fetch_market():
         vix_lbl = "calm" if vix < 15 else "normal" if vix < 20 else "elevated" if vix < 30 else "high"
     return {"vix": vix, "vix_label": vix_lbl, "fng": fng, "fng_label": fng_lbl,
             "btc_fng": btc, "btc_fng_label": btc_lbl,
-            "ten_year": t10, "two_year": t2, "curve": curve, "fed_funds": fed}
+            "ten_year": t10, "two_year": t2, "three_month": three_m, "curve": curve, "fed_funds": fed,
+            "skew": skew, "vix9d": vix9d}
 
 
 def main():
     uni = load_universe()
     data = signals.scan(uni)                       # {"signals": [...], "leaps": [...], "params": {...}}
     data["market"] = fetch_market()
+    data["pulse"] = fetch_pulse()
+    data["sectors"] = fetch_sectors()
     data["generated_at"] = datetime.datetime.now(datetime.timezone.utc).isoformat(timespec="seconds")
     data["universe"] = {"wheel": len(uni.get("wheel", [])),
                         "growth": len(uni.get("growth", [])),

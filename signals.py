@@ -186,6 +186,40 @@ def _hv20(closes):
     return statistics.pstdev(rets) * math.sqrt(252)
 
 
+def _hv_percentile(closes, window=20, lookback=252):
+    """Percentile rank (0-100) of today's 20-day HV within the last ~year of daily 20-day HVs.
+    Mirrors app.py's HV%ile column."""
+    c = [x for x in closes if x]
+    if len(c) < window + 3:
+        return None
+    hvs = []
+    for i in range(window, len(c)):
+        seg = c[i - window:i + 1]
+        rets = [math.log(seg[j] / seg[j - 1]) for j in range(1, len(seg)) if seg[j - 1] > 0]
+        if len(rets) >= 2:
+            hvs.append(statistics.pstdev(rets) * math.sqrt(252))
+    if len(hvs) < 3:
+        return None
+    tail = hvs[-lookback:]
+    cur = tail[-1]
+    return sum(1 for v in tail if v <= cur) / len(tail) * 100.0
+
+
+# Chain cache — keeps Tradier calls sane when scan_ticker, scan_leap_ticker AND the Overview
+# row all want the same expiry's chain. Cleared at the start of every scan().
+_CHAIN_CACHE = {}
+
+
+def _get_chain(ticker, expiry):
+    key = (ticker, expiry)
+    if key not in _CHAIN_CACHE:
+        try:
+            _CHAIN_CACHE[key] = tradier.get_option_chain(ticker, expiry, greeks=True) or []
+        except Exception:
+            _CHAIN_CACHE[key] = []
+    return _CHAIN_CACHE[key]
+
+
 def _candle_reversal(ohlc, direction, lookback=3):
     """Port of app.py _candle_reversal — any one bullish/bearish 2-3 day pattern fires (OR logic)."""
     n = len(ohlc)
@@ -269,6 +303,8 @@ def _indicators(ticker):
             "rsi_5": rsi_c[-5:] if len(rsi_c) >= 5 else rsi_c,
             "rsi_5ago": rsi_c[-6] if len(rsi_c) >= 6 else (rsi_c[0] if rsi_c else None),
             "sma20": _sma(closes, 20), "ma50": ma50, "ma200": ma200, "hv20": _hv20(closes),
+            "hvpct": _hv_percentile(closes),
+            "pct_chg": ((closes[-1] / closes[-2]) - 1) * 100 if (len(closes) >= 2 and closes[-2]) else None,
             "walking_lower": bool(len(pctb_c) >= 2 and pctb_c[-1] <= 0.2 and pctb_c[-2] <= 0.2),
             "above_50": bool(ma50 is not None and spot > ma50),
             "above_200": bool(ma200 is not None and spot > ma200),
@@ -438,7 +474,7 @@ def scan_ticker(ticker):
         expiry, dte = pick_expiry(exps, today)
         if not expiry:
             return out
-        chain = tradier.get_option_chain(ticker, expiry, greeks=True)
+        chain = _get_chain(ticker, expiry)
         if not chain:
             return out
         # ATM IV (nearest strike, avg call/put mid_iv) → vol bucket
@@ -535,7 +571,7 @@ def scan_leap_ticker(ticker):
         if not dated:
             return None
         dte, expiry = min(dated, key=lambda t: abs(t[0] - P["leap_dte_opt"]))
-        chain = tradier.get_option_chain(ticker, expiry, greeks=True)
+        chain = _get_chain(ticker, expiry)
         if not chain:
             return None
         call = None; best = 1e9
@@ -615,6 +651,69 @@ def scan_leap_ticker(ticker):
         return None
 
 
+_OVERVIEW = {}   # ticker -> Watchlist-Overview row, rebuilt each scan()
+
+
+def _iv_richness(c_iv, p_iv, hv):
+    """app.py's 'IV vs HV' column: is the premium rich/fair/cheap vs realized vol?"""
+    ivs = [v for v in (c_iv, p_iv) if v]
+    if not ivs or not hv or hv <= 0:
+        return "—"
+    ratio = (sum(ivs) / len(ivs)) / hv
+    return "rich" if ratio >= 1.25 else "fair" if ratio >= 1.0 else "cheap"
+
+
+def overview_row(ticker):
+    """One Watchlist-Overview row per ticker (the app's tab_dash table), computed headless:
+    price/chg, HV%ile, HV20, ATM IV C/P, IV-vs-HV, RSI, 200-MA, PCR, median (%B), CC/CSP timing."""
+    try:
+        today = datetime.date.today()
+        ind = _indicators(ticker)
+        quotes = tradier.get_quotes(ticker)
+        spot = _f(quotes[0].get("last")) if quotes else (ind.get("closes")[-1] if ind.get("ok") else None)
+        c_iv = p_iv = pcr = None
+        try:
+            expiry, _dte = pick_expiry(tradier.get_expirations(ticker), today)
+            chain = _get_chain(ticker, expiry) if expiry else []
+            if chain and spot:
+                ats = _f(min(chain, key=lambda o: abs((_f(o.get("strike")) or 1e9) - spot)).get("strike"))
+                c_iv = next((_f((o.get("greeks") or {}).get("mid_iv")) for o in chain
+                             if _f(o.get("strike")) == ats and o.get("option_type") == "call"
+                             and _f((o.get("greeks") or {}).get("mid_iv"))), None)
+                p_iv = next((_f((o.get("greeks") or {}).get("mid_iv")) for o in chain
+                             if _f(o.get("strike")) == ats and o.get("option_type") == "put"
+                             and _f((o.get("greeks") or {}).get("mid_iv"))), None)
+                cvol = sum((o.get("volume") or 0) for o in chain if o.get("option_type") == "call")
+                pvol = sum((o.get("volume") or 0) for o in chain if o.get("option_type") == "put")
+                pcr = (pvol / cvol) if cvol else None
+        except Exception:
+            pass
+        hv = ind.get("hv20")
+        iv_ratio = (((c_iv + p_iv) / 2) / hv) if (c_iv and p_iv and hv) else None
+        csp_tl = cc_tl = None
+        if ind.get("ok"):
+            csp_tl = _timing(ind, iv_ratio, "csp")[0]
+            cc_tl = _timing(ind, iv_ratio, "cc")[0]
+        pctb = ind.get("pctb")
+        _OVERVIEW[ticker] = {
+            "ticker": ticker, "sector": _sector(ticker),
+            "price": round(spot, 2) if spot else None,
+            "pct": round(ind.get("pct_chg"), 1) if ind.get("pct_chg") is not None else None,
+            "hv20": round(hv * 100, 1) if hv else None,
+            "hvpct": round(ind["hvpct"]) if ind.get("hvpct") is not None else None,
+            "c_iv": round(c_iv * 100) if c_iv else None, "p_iv": round(p_iv * 100) if p_iv else None,
+            "iv_vs_hv": _iv_richness(c_iv, p_iv, hv),
+            "rsi": round(ind["rsi"]) if ind.get("rsi") is not None else None,
+            "above_200": bool(ind.get("above_200")),
+            "pcr": round(pcr, 2) if pcr is not None else None,
+            "pctb": round(pctb, 2) if pctb is not None else None,
+            "csp_timing": csp_tl, "cc_timing": cc_tl,
+        }
+    except Exception:
+        _OVERVIEW[ticker] = {"ticker": ticker}
+    return _OVERVIEW[ticker]
+
+
 def scan(universe):
     """Full scan → dict ready to serialise. Never raises.
 
@@ -628,7 +727,9 @@ def scan(universe):
         wheel = [str(t).strip().upper() for t in universe if str(t).strip()]
         growth = []
 
-    _IND_CACHE.clear()                       # fresh technicals per scan
+    _IND_CACHE.clear(); _CHAIN_CACHE.clear(); _OVERVIEW.clear()   # fresh per scan
+    all_names = list(dict.fromkeys(wheel + growth))
+
     all_sigs = []
     for t in wheel:
         all_sigs.extend(scan_ticker(t))
@@ -643,9 +744,22 @@ def scan(universe):
     leaps.sort(key=lambda s: (not s.get("qualifies"),
                               s.get("carry_pct") if s.get("carry_pct") is not None else 999))
 
+    # Watchlist-Overview rows for EVERY name (the app analyses all of them, not just the wheel).
+    for t in all_names:
+        overview_row(t)
+    leap_tl = {lp["ticker"]: lp.get("timing_label") for lp in leaps}
+    overview = []
+    for t in all_names:
+        row = _OVERVIEW.get(t)
+        if row:
+            row["leap_timing"] = leap_tl.get(t)
+            row["is_wheel"] = t in wheel
+            overview.append(row)
+
     return {
         "signals": all_sigs,
         "leaps": leaps,
+        "overview": overview,
         "params": {"min_premium_pct": P["min_premium"] * 100,
                    "strong_premium_pct": P["strong_premium"] * 100,
                    "dte": [P["dte_lo"], P["dte_hi"]], "delta_opt": P["delta_opt"],
