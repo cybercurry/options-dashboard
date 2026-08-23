@@ -562,24 +562,34 @@ def scan_leap_ticker(ticker):
         carry = (extrinsic / spot) * (365.0 / dte) if (spot and dte) else None  # Gate C: annualised carry
         gate_a = bool(ext_share is not None and ext_share <= P["leap_max_ext_share"])
         gate_c = bool(carry is not None and carry <= P["leap_max_carry"])
-        # 5-session trend confirmation — a longer-term, "clear trend" read for a long-term buy.
+        # CLEAR-TREND confirmation (revised 23 Aug — Jay: "we want a clear trend", after AAPL
+        # slipped through a too-weak gate: it was below the 50-MA with a bearish candle, yet the
+        # old `above_200 + RSI-rising` gate passed it). A LEAP buy now needs an ESTABLISHED
+        # uptrend, not a dip: above BOTH 50 & 200 MA, 50≥200 (aligned), RSI≥50 & rising over
+        # 5 sessions, and NO bearish reversal candle in the last 5 sessions.
         ind = _indicators(ticker)
-        above_200 = ind.get("above_200"); above_50 = ind.get("above_50")
+        above_200 = bool(ind.get("above_200")); above_50 = bool(ind.get("above_50"))
+        ma50 = ind.get("ma50"); ma200 = ind.get("ma200")
+        aligned = bool(ma50 is not None and ma200 is not None and ma50 >= ma200)
         rsi_now = ind.get("rsi"); rsi_5ago = ind.get("rsi_5ago")
         rsi_rising = bool(rsi_now is not None and rsi_5ago is not None and rsi_now > rsi_5ago)
-        trend_ok = bool(above_200 and rsi_rising)
+        rsi_bullish = bool(rsi_now is not None and rsi_now >= 50 and rsi_rising)
+        bearish_recent = False
+        if ind.get("ok"):
+            bearish_recent, _bpat = _candle_reversal(ind["ohlc"], "bearish", P["leap_trend_lookback"])
+        trend_ok = bool(above_50 and above_200 and aligned and rsi_bullish and not bearish_recent)
         hv20 = ind.get("hv20")
         iv_ratio = (iv / hv20) if (iv and hv20) else None       # IV cheap-vs-realized = timing, NOT cost
         qualifies = bool(gate_a and gate_c and trend_ok)
-        # entry-timing score (the green dot): cheap IV + RSI recovery + trend intact (criteria doc §2)
+        # entry-timing score (green dot among qualifiers): cheap IV + healthy-bullish RSI + aligned trend
         tscore = 0
         if iv_ratio is not None:
             tscore += 3 if iv_ratio < 1.0 else 2 if iv_ratio < 1.25 else -1
         if rsi_now is not None:
-            tscore += 2 if 33 <= rsi_now <= 52 else 1 if 52 < rsi_now <= 65 else 1 if rsi_now < 30 else -1
+            tscore += 2 if 50 <= rsi_now <= 65 else 1 if 65 < rsi_now <= 72 else -1 if rsi_now > 72 else 0
         tscore += 2 if above_200 else -1
-        if above_50:
-            tscore += 1
+        if above_50: tscore += 1
+        if aligned: tscore += 1
         tlabel = ("🟢 STRONG ENTRY" if tscore >= 7 else "🟡 DECENT ENTRY" if tscore >= 4
                   else "🟠 MARGINAL" if tscore >= 2 else "🔴 AVOID")
         return {
@@ -592,7 +602,7 @@ def scan_leap_ticker(ticker):
             "carry_pct": round(carry * 100, 2) if carry is not None else None,
             "iv": round(iv * 100, 1) if iv is not None else None,
             "iv_ratio": round(iv_ratio, 2) if iv_ratio is not None else None,
-            "above_200ma": bool(above_200), "above_50ma": bool(above_50),
+            "above_200ma": bool(above_200), "above_50ma": bool(above_50), "ma_aligned": aligned,
             "rsi": round(rsi_now, 1) if rsi_now is not None else None,
             "rsi_rising": rsi_rising,
             "gate_a": gate_a, "gate_c": gate_c, "trend_ok": trend_ok,
