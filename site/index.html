@@ -42,6 +42,33 @@ nav a:hover{color:var(--text); background:var(--surface-2)} nav a.on{color:var(-
 .subhead{font-family:"Archivo",sans-serif; font-weight:700; font-size:17px; margin:30px 0 2px; display:flex; align-items:center; gap:9px}
 .subhead .n{font-size:12px; font-weight:600; color:var(--faint); font-family:"IBM Plex Mono")}
 .note{color:var(--muted); font-size:13px; margin:4px 0 0}
+.up{color:var(--good)} .down{color:var(--bad)}
+/* Overview: pulse tiles · gauges · sector heat · bar charts */
+.pulse10{display:grid; grid-template-columns:repeat(auto-fit,minmax(112px,1fr)); gap:8px; margin:16px 0 6px}
+.ptile{background:var(--surface); border:1px solid var(--line); border-radius:10px; padding:9px 11px}
+.ptile .pl{font-size:10.5px; letter-spacing:.04em; text-transform:uppercase; color:var(--faint); font-weight:600; white-space:nowrap; overflow:hidden; text-overflow:ellipsis}
+.ptile .pv{font-size:16px; font-weight:600; margin-top:3px} .ptile .pc{font-size:12px; margin-top:1px}
+.gauges{display:grid; grid-template-columns:repeat(auto-fit,minmax(210px,1fr)); gap:12px; margin:10px 0 4px}
+.gcard{background:var(--surface); border:1px solid var(--line); border-radius:12px; padding:14px 16px; box-shadow:var(--shadow)}
+.gcard .gl{font-size:11px; letter-spacing:.05em; text-transform:uppercase; color:var(--faint); font-weight:600}
+.gcard .gv{font-size:30px; font-weight:600; line-height:1.1; margin:6px 0 9px}
+.gmeter{height:6px; border-radius:999px; background:var(--track); overflow:hidden}
+.gfill{height:100%; border-radius:999px}
+.gcard .gr{font-size:12px; color:var(--muted); margin-top:9px}
+.macro .mrow{display:flex; justify-content:space-between; gap:10px; font-size:12.5px; padding:6px 0; border-bottom:1px solid var(--line-soft)}
+.macro .mrow:last-child{border-bottom:0} .macro .mrow span{color:var(--muted)} .macro .mrow b{text-align:right; font-weight:600}
+.heat{display:grid; grid-template-columns:repeat(auto-fit,minmax(118px,1fr)); gap:6px; margin:14px 0}
+.hcell{border-radius:9px; padding:11px 12px; color:#fff}
+.hcell .hl{font-size:12px; font-weight:600; opacity:.95} .hcell .hp{font-size:14px; margin-top:3px}
+.twocol{display:grid; grid-template-columns:1fr 1fr; gap:20px; margin-top:4px}
+@media (max-width:760px){.twocol{grid-template-columns:1fr}}
+.barbox{border:1px solid var(--line); border-radius:12px; background:var(--surface); padding:14px 12px 8px; margin-top:12px; overflow-x:auto}
+.bars{display:flex; align-items:flex-end; gap:4px; height:210px; min-width:min-content}
+.bcol{display:flex; flex-direction:column; align-items:center; justify-content:flex-end; flex:1 0 22px; height:100%}
+.bval{font-size:9.5px; color:var(--muted); margin-bottom:3px}
+.bwrap{width:100%; flex:1; display:flex; align-items:flex-end}
+.bar{width:100%; border-radius:3px 3px 0 0; min-height:3px}
+.btk{font-size:9px; color:var(--faint); margin-top:5px; writing-mode:vertical-rl; transform:rotate(180deg); white-space:nowrap}
 .tablewrap{overflow-x:auto; border:1px solid var(--line); border-radius:14px; box-shadow:var(--shadow); margin-top:14px; background:var(--surface)}
 table{width:100%; border-collapse:collapse; min-width:760px}
 thead th{position:sticky; top:0; text-align:right; font-size:11px; letter-spacing:.05em; text-transform:uppercase; color:var(--faint); font-weight:600; padding:12px 14px; background:var(--surface-2); border-bottom:1px solid var(--line); white-space:nowrap}
@@ -170,14 +197,17 @@ footer b{color:var(--muted); font-weight:600}
 
   <!-- ══════════ OVERVIEW ══════════ -->
   <section id="v-overview" class="view">
-    <div class="head"><h1>Overview</h1><div class="meta">Every name in the universe and its live read — CSP/CC timing, position in the bands, RSI, and whether a qualifying LEAP exists. The whole field at a glance; Signals is just what's actionable right now.</div></div>
-    <div class="tablewrap"><table><thead><tr>
-      <th class="l">Ticker</th><th class="l">Sector</th>
-      <th class="l">CSP setup</th><th class="l">CC setup</th>
-      <th class="sortable" data-k="pctb">%B <span class="ar">▾</span></th>
-      <th class="sortable" data-k="rsi">RSI <span class="ar">▾</span></th>
-      <th class="l">LEAP</th>
-    </tr></thead><tbody id="wl-tb"></tbody></table></div>
+    <div class="head"><h1>Market Pulse</h1><div class="meta" id="ov-upd">Live market backdrop, sector rotation, and the full watchlist read.</div></div>
+    <div class="pulse10" id="ov-pulse"></div>
+    <div class="gauges" id="ov-gauges"></div>
+    <div class="subhead">Sector Heatmap <span class="n">SPDR sectors + BTC · colour = move strength</span></div>
+    <div class="heat" id="ov-heat"></div>
+    <div class="subhead">Watchlist Overview <span class="n" id="ov-count"></span></div>
+    <div id="ov-watch"></div>
+    <div class="twocol">
+      <div><div class="subhead">ATM Implied Volatility</div><div class="barbox" id="ov-ivbar"></div></div>
+      <div><div class="subhead">RSI Snapshot</div><div class="barbox" id="ov-rsibar"></div></div>
+    </div>
   </section>
 
   <!-- ══════════ OPTIONS CHAIN ══════════ -->
@@ -400,21 +430,90 @@ function renderLeaps(){
 function wireRows(sel){document.querySelectorAll(sel+' tr.clk').forEach(tr=>tr.onclick=()=>setSym(tr.dataset.tk));}
 
 /* ---------- watchlist ---------- */
-let wlDir={};
+function fmtPrice(p,prefix,isYield){ if(p==null)return '—';
+  if(isYield)return p.toFixed(2)+'%';
+  if(p>10000)return prefix+p.toLocaleString(undefined,{maximumFractionDigits:0});
+  if(p>100)return prefix+p.toLocaleString(undefined,{minimumFractionDigits:2,maximumFractionDigits:2});
+  return prefix+p.toFixed(2); }
+function heatColor(pct){ if(pct==null)return 'var(--surface-2)';
+  if(pct>=3)return '#12532e'; if(pct>=1)return '#176a3a'; if(pct>=0)return '#245b41';
+  if(pct>-1)return '#6e3a34'; if(pct>-3)return '#9a3325'; return '#611c15'; }
+function gauge(label,value,rating,source){
+  const v=value==null?null:Math.max(0,Math.min(value,100));
+  const col=v==null?'var(--faint)':(v<25?'#ef4444':v<45?'#f59e0b':v<=55?'#eab308':v<75?'#84cc16':'#22c55e');
+  return `<div class="gcard"><div class="gl">${label}</div>
+    <div class="gv mono" style="color:${col}">${v==null?'—':Math.round(v)}</div>
+    <div class="gmeter"><div class="gfill" style="width:${v==null?0:v}%;background:${col}"></div></div>
+    <div class="gr">${rating||'—'} <span class="dim">· ${source}</span></div></div>`; }
+function vixGaugeCard(vix,label){
+  const v=vix==null?null:vix, col=v==null?'var(--faint)':(v<15?'#22c55e':v<20?'#84cc16':v<30?'#f59e0b':'#ef4444');
+  return `<div class="gcard"><div class="gl">VIX</div>
+    <div class="gv mono" style="color:${col}">${v==null?'—':v.toFixed(1)}</div>
+    <div class="gmeter"><div class="gfill" style="width:${v==null?0:Math.min(v/50*100,100)}%;background:${col}"></div></div>
+    <div class="gr">${label||'—'} <span class="dim">· 30-day expected move</span></div></div>`; }
+function ivvsTag(v){ return v==='rich'?'<span class="ok">🟢 Rich</span>':v==='cheap'?'<span class="no">🔴 Cheap</span>'
+  :v==='fair'?'<span class="dim">⚪ Fair</span>':'<span class="dim">—</span>'; }
+function ivColor(v){ return v>=60?'#dc2626':v>=40?'#f97316':v>=25?'#eab308':'#84cc16'; }
+function rsiColor(v){ return (33<=v&&v<=52)?'#22c55e':(52<v&&v<=65)?'#eab308':v>65?'#f97316':'#94a3b8'; }
+function barChart(id,data,suffix,colorFn,maxY){
+  const host=document.getElementById(id); if(!host)return;
+  if(!data.length){host.innerHTML='<div class="dim" style="padding:24px;text-align:center">no data</div>';return;}
+  const max=maxY||Math.max(...data.map(d=>d.v))*1.15||1;
+  host.innerHTML='<div class="bars">'+data.map(d=>{const h=Math.max(3,d.v/max*100);
+    return `<div class="bcol" title="${d.t} ${Math.round(d.v)}${suffix}"><div class="bval mono">${Math.round(d.v)}</div>
+      <div class="bwrap"><div class="bar" style="height:${h}%;background:${colorFn(d.v)}"></div></div>
+      <div class="btk mono">${d.t}</div></div>`;}).join('')+'</div>'; }
+
 function renderOverview(){
-  let list=Object.values(BYTK);
-  list.sort((a,b)=>(a.ticker<b.ticker?-1:1));
-  document.getElementById('wl-tb').innerHTML=list.map(o=>{
-    const lc=leapVerdict(o.leap);
-    return `<tr class="clk" data-tk="${o.ticker}">
-      <td class="l"><span class="tk">${o.ticker}</span></td>
-      <td class="l dim">${o.sector||'—'}</td>
-      <td class="l">${o.csp?shortSetup(o.csp.timing_label):'<span class="dim">—</span>'}</td>
-      <td class="l">${o.cc?shortSetup(o.cc.timing_label):'<span class="dim">—</span>'}</td>
-      <td class="mono">${o.pctb==null?'<span class="dim">—</span>':o.pctb.toFixed(2)}</td>
-      <td class="mono">${o.rsi==null?'<span class="dim">—</span>':o.rsi.toFixed(0)}</td>
-      <td class="l">${lc}</td></tr>`;}).join('');
-  document.querySelectorAll('#wl-tb tr').forEach(tr=>tr.onclick=()=>{setSym(tr.dataset.tk); go('deep');});
+  const m=DATA.market||{};
+  document.getElementById('ov-pulse').innerHTML=(DATA.pulse||[]).map(p=>{
+    const up=p.pct==null?'':(p.pct>=0?'up':'down');
+    return `<div class="ptile"><div class="pl">${p.label}</div><div class="pv mono">${fmtPrice(p.price,p.prefix,p.is_yield)}</div>
+      <div class="pc mono ${up}">${p.pct==null?'—':(p.pct>=0?'+':'')+p.pct.toFixed(2)+'%'}</div></div>`;}).join('');
+  const yc=(m.ten_year!=null&&m.three_month!=null)?(m.ten_year-m.three_month):null;
+  const ycl=yc==null?'':(yc>0.5?'🟢 Normal':yc>-0.3?'🟡 Flat':'🔴 Inverted');
+  const sk=m.skew==null?'':(m.skew>145?'🔴 Elevated':m.skew>130?'🟡 Moderate':'🟢 Low');
+  const shape=(m.vix!=null&&m.vix9d!=null)?(m.vix>m.vix9d?'🟢 Contango':'🔴 Backwardation'):'—';
+  document.getElementById('ov-gauges').innerHTML=
+    gauge('Stocks Fear &amp; Greed',m.fng,m.fng_label,'CNN')+
+    gauge('Crypto Fear &amp; Greed',m.btc_fng,m.btc_fng_label,'Alternative.me')+
+    vixGaugeCard(m.vix,m.vix_label)+
+    `<div class="gcard macro"><div class="gl">📊 Macro Signals</div>
+      <div class="mrow"><span>Yield Curve 10Y−3M</span><b>${yc==null?'—':(yc>=0?'+':'')+yc.toFixed(2)+'% '+ycl}</b></div>
+      <div class="mrow"><span>SKEW</span><b>${m.skew==null?'—':m.skew.toFixed(1)+' '+sk}</b></div>
+      <div class="mrow"><span>VIX Shape</span><b>${shape}</b></div></div>`;
+  document.getElementById('ov-heat').innerHTML=(DATA.sectors||[]).map(s=>
+    `<div class="hcell" style="background:${heatColor(s.pct)}"><div class="hl">${s.label}</div>
+      <div class="hp mono">${s.pct==null?'—':(s.pct>=0?'+':'')+s.pct.toFixed(2)+'%'}</div></div>`).join('');
+  renderWatchTable();
+  const ov=DATA.overview||[];
+  barChart('ov-ivbar', ov.filter(o=>o.c_iv!=null&&o.p_iv!=null).map(o=>({t:o.ticker,v:(o.c_iv+o.p_iv)/2})),'%',ivColor);
+  barChart('ov-rsibar', ov.filter(o=>o.rsi!=null).map(o=>({t:o.ticker,v:o.rsi})),'',rsiColor,115);
+}
+function renderWatchTable(){
+  const ov=(DATA.overview||[]).slice().sort((a,b)=>a.ticker<b.ticker?-1:1);
+  document.getElementById('ov-count').textContent=ov.length+' names';
+  const rows=ov.map(o=>`<tr class="clk" data-tk="${o.ticker}">
+    <td class="l"><span class="tk">${o.ticker}</span></td>
+    <td class="mono">${o.price==null?'—':'$'+o.price.toFixed(2)}</td>
+    <td class="mono ${o.pct==null?'':o.pct>=0?'up':'down'}">${o.pct==null?'—':(o.pct>=0?'+':'')+o.pct.toFixed(1)+'%'}</td>
+    <td class="mono">${o.hvpct==null?'—':o.hvpct}</td>
+    <td class="mono">${o.hv20==null?'—':o.hv20.toFixed(1)+'%'}</td>
+    <td class="mono">${o.c_iv==null||o.p_iv==null?'—':o.c_iv+'/'+o.p_iv+'%'}</td>
+    <td class="l">${ivvsTag(o.iv_vs_hv)}</td>
+    <td class="mono">${o.rsi==null?'—':o.rsi}</td>
+    <td>${o.above_200?'<span class="ok">✅</span>':'<span class="no">❌</span>'}</td>
+    <td class="mono">${o.pcr==null?'—':o.pcr.toFixed(2)}</td>
+    <td class="l">${o.pctb==null?'—':(o.pctb>=0.5?'🔼 Above':'🔽 Below')}</td>
+    <td class="l">${shortSetup(o.leap_timing)}</td>
+    <td class="l">${shortSetup(o.cc_timing)}</td>
+    <td class="l">${shortSetup(o.csp_timing)}</td></tr>`).join('');
+  document.getElementById('ov-watch').innerHTML=`<div class="tablewrap"><table><thead><tr>
+    <th class="l">Ticker</th><th>Price</th><th>Chg %</th><th>HV%ile</th><th>HV20</th><th>ATM IV C/P</th>
+    <th class="l">IV vs HV</th><th>RSI</th><th>200MA</th><th>PCR</th><th class="l">Median</th>
+    <th class="l">LEAP</th><th class="l">CC</th><th class="l">CSP</th>
+  </tr></thead><tbody>${rows}</tbody></table></div>`;
+  document.querySelectorAll('#ov-watch tr.clk').forEach(tr=>tr.onclick=()=>{setSym(tr.dataset.tk); go('deep');});
 }
 
 /* ---------- options chain ---------- */
