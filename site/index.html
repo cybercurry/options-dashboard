@@ -84,17 +84,20 @@ td.l{text-align:left}
 .gate{display:inline-flex; align-items:center; gap:5px; font-size:12px; margin-right:12px}
 /* deep-dive: compact leg tiles, gate detail on hover/focus */
 .legtile{position:relative; border:1px solid var(--line); border-radius:14px; background:var(--surface); padding:15px 17px; outline:none; transition:border-color .15s, box-shadow .15s, transform .15s}
-.legtile:hover,.legtile:focus-within{border-color:var(--accent); box-shadow:var(--glow); transform:translateY(-1px)}
+.legtile:hover,.legtile:focus-within{border-color:var(--accent); box-shadow:var(--glow); transform:translateY(-1px); z-index:60}
 .legtile:hover .th .pill,.legtile:focus-within .th .pill{filter:brightness(1.05)}
+/* lift the deep-dive tiles (and their hover web) above the chart below them */
+#v-deep .cards{position:relative; z-index:40}
+#v-deep .chart{position:relative; z-index:1}
 .legtile .th{display:flex; align-items:center; gap:8px; font-family:"Archivo",sans-serif; font-weight:700; font-size:13.5px}
 .legtile .trade{font-size:16px; margin:9px 0 11px}
 .fchips{display:flex; gap:7px; flex-wrap:wrap}
 .lchip{font-size:12px; background:var(--surface-2); border:1px solid var(--line); border-radius:8px; padding:4px 9px; color:var(--faint); font-family:"IBM Plex Mono"} .lchip b{color:var(--text); margin-left:5px; font-weight:600}
-.legtile .detail{position:absolute; left:50%; transform:translateX(-50%); top:100%; margin-top:8px; z-index:20; width:min(380px,88vw); background:var(--surface); border:1px solid var(--accent); border-radius:12px; box-shadow:var(--glow); padding:12px 14px; display:none}
+.legtile .detail{position:absolute; left:50%; transform:translateX(-50%); top:100%; margin-top:8px; z-index:70; width:min(310px,86vw); background:var(--surface); border:1px solid var(--accent); border-radius:12px; box-shadow:var(--glow); padding:10px 12px; display:none}
 .legtile:hover .detail,.legtile:focus-within .detail{display:block}
 .hint{font-size:12.5px; color:var(--faint); margin:2px 0 0}
 /* constellation / data-web (MNI-style hover reveal) */
-.web{position:relative; width:100%; height:250px}
+.web{position:relative; width:100%; height:150px}
 .weblines{position:absolute; inset:0; width:100%; height:100%; overflow:visible}
 .weblines line{stroke:var(--accent-line); stroke-width:1; vector-effect:non-scaling-stroke; opacity:.75}
 .wcenter{position:absolute; left:50%; top:50%; transform:translate(-50%,-50%); z-index:3; white-space:nowrap;
@@ -433,7 +436,7 @@ function chip(l,v){return `<span class="lchip">${l}<b>${v==null?'—':v}</b></sp
 /* constellation: a center node with satellite nodes on an ellipse, connected by lines.
    nodes: [{l:label, s:'ok'|'no'|''}] — the MNI "hover unfurls a web of connected data" reveal. */
 function web(center, nodes){
-  const n=Math.max(nodes.length,1), cx=50, cy=50, rx=39, ry=41; let lines='', pills='';
+  const n=Math.max(nodes.length,1), cx=50, cy=50, rx=34, ry=43; let lines='', pills='';
   nodes.forEach((nd,i)=>{
     const a=-Math.PI/2 + i*2*Math.PI/n;
     const x=+(cx+rx*Math.cos(a)).toFixed(1), y=+(cy+ry*Math.sin(a)).toFixed(1);
