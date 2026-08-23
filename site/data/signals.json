@@ -1238,10 +1238,45 @@
     "curve": "flat",
     "fed_funds": 3.63
   },
-  "generated_at": "2026-08-23T06:42:11+00:00",
+  "generated_at": "2026-08-23T15:39:15+00:00",
   "universe": {
     "wheel": 16,
     "growth": 15,
-    "source": "sheet"
+    "source": "sheet",
+    "wheel_names": [
+      "TSLA",
+      "SOFI",
+      "NVDA",
+      "AMZN",
+      "MSFT",
+      "CEG",
+      "VRT",
+      "CMG",
+      "GLD",
+      "SLV",
+      "PLTR",
+      "WMT",
+      "AAPL",
+      "GOOG",
+      "AMD",
+      "ZS"
+    ],
+    "growth_names": [
+      "TSLA",
+      "SPCX",
+      "NVTS",
+      "NVDA",
+      "AMZN",
+      "NOW",
+      "CQQQ",
+      "QANT",
+      "CRWV",
+      "BE",
+      "VRT",
+      "IREN",
+      "PLTR",
+      "PURR",
+      "NBIS"
+    ]
   }
 }
