@@ -43,6 +43,18 @@ nav a:hover{color:var(--text); background:var(--surface-2)} nav a.on{color:var(-
 .subhead .n{font-size:12px; font-weight:600; color:var(--faint); font-family:"IBM Plex Mono")}
 .note{color:var(--muted); font-size:13px; margin:4px 0 0}
 .up{color:var(--good)} .down{color:var(--bad)}
+/* hover popup on a title/label (MNI-style reveal) */
+.hastip{position:relative; cursor:help; border-bottom:1px dotted var(--faint); outline:none}
+.hastip .tip{position:absolute; left:0; top:100%; margin-top:9px; z-index:50; width:min(440px,88vw);
+  background:var(--surface); border:1px solid var(--accent); border-radius:12px; box-shadow:var(--glow);
+  padding:14px 16px; display:none; font-family:"IBM Plex Sans",sans-serif; font-weight:400; font-size:13px;
+  color:var(--text); line-height:1.6; text-transform:none; letter-spacing:0}
+.hastip:hover .tip,.hastip:focus-within .tip{display:block}
+.tip .tl{font-size:10.5px; text-transform:uppercase; letter-spacing:.05em; color:var(--muted); font-weight:600; margin-top:4px}
+.tip .tks{font-family:"IBM Plex Mono"; font-size:12.5px; margin:2px 0 6px}
+.tip .foot{border-top:1px solid var(--line-soft); padding-top:8px; margin-top:6px; font-size:12px; color:var(--muted)}
+.editlink{font-size:12.5px; color:var(--accent); text-decoration:none; font-family:"IBM Plex Sans",sans-serif; font-weight:600; margin-left:6px; white-space:nowrap}
+.editlink:hover{text-decoration:underline}
 /* Overview: pulse tiles · gauges · sector heat · bar charts */
 .pulse10{display:grid; grid-template-columns:repeat(auto-fit,minmax(112px,1fr)); gap:8px; margin:16px 0 6px}
 .ptile{background:var(--surface); border:1px solid var(--line); border-radius:10px; padding:9px 11px}
@@ -201,7 +213,7 @@ footer b{color:var(--muted); font-weight:600}
     <div class="gauges" id="ov-gauges"></div>
     <div class="subhead">Sector Heatmap <span class="n">SPDR sectors + BTC · colour = move strength</span></div>
     <div class="heat" id="ov-heat"></div>
-    <div class="subhead">Watchlist Overview <span class="n" id="ov-count"></span></div>
+    <div class="subhead">Watchlist Overview <span class="n" id="ov-count"></span> <a class="editlink" id="ov-edit" target="_blank" rel="noopener" title="Add or remove tickers in your Google Sheet — the next 30-min scan picks up changes">✎ edit list ↗</a></div>
     <div id="ov-watch"></div>
     <div class="twocol">
       <div><div class="subhead">ATM Implied Volatility</div><div class="barbox" id="ov-ivbar"></div></div>
@@ -305,6 +317,7 @@ footer b{color:var(--muted); font-weight:600}
 
 <script>
 const KIND={csp:"CSP",cc:"CC",leap:"LEAP"};
+const SHEET_EDIT_URL="";   // editable Google-Sheet URL for the watchlist (add/remove tickers) — set once known
 let DATA=null, SIGS=[], LEAPS=[], MKT={}, BYTK={}, READY=[], LEAPQ=[], CHAINROWS=[];
 const num=(v,d=1,s='')=>v==null?'<span class="dim">—</span>':(typeof v==='number'?v.toFixed(d):v)+s;
 const abs=v=>Math.abs(v||0);
@@ -485,6 +498,8 @@ function renderOverview(){
     `<div class="hcell" style="background:${heatColor(s.pct)}"><div class="hl">${s.label}</div>
       <div class="hp mono">${s.pct==null?'—':(s.pct>=0?'+':'')+s.pct.toFixed(2)+'%'}</div></div>`).join('');
   renderWatchTable();
+  const el=document.getElementById('ov-edit');
+  if(el){ if(SHEET_EDIT_URL) el.href=SHEET_EDIT_URL; else el.style.display='none'; }
   const ov=DATA.overview||[];
   barChart('ov-ivbar', ov.filter(o=>o.c_iv!=null&&o.p_iv!=null).map(o=>({t:o.ticker,v:(o.c_iv+o.p_iv)/2})),'%',ivColor);
   barChart('ov-rsibar', ov.filter(o=>o.rsi!=null).map(o=>({t:o.ticker,v:o.rsi})),'',rsiColor,115);
