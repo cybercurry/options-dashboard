@@ -76,7 +76,7 @@ td.l{text-align:left}
 .picker input:focus{outline:2px solid var(--accent); outline-offset:1px}
 .tchip{font-family:"IBM Plex Mono"; font-size:12.5px; font-weight:600; color:var(--muted); background:var(--surface-2); border:1px solid var(--line); padding:5px 11px; border-radius:8px; cursor:pointer}
 .tchip:hover{color:var(--text)} .tchip.on{color:#fff; background:var(--accent); border-color:var(--accent)}
-#cv{display:block; width:100%; height:320px}
+#tvchart{width:100%; height:480px}
 .tvnote{margin-top:16px; font-size:12.5px; color:var(--faint); text-align:center}
 footer{color:var(--faint); font-size:12.5px; text-align:center; padding:30px 0 40px; margin-top:22px; border-top:1px solid var(--line)}
 footer b{color:var(--muted); font-weight:600}
@@ -119,9 +119,9 @@ footer b{color:var(--muted); font-weight:600}
     <div class="top"><div><span class="sym" id="sym">—</span> <span class="sub" id="symsub">check the setup</span></div>
       <span class="tv"><b>TradingView</b> · BB(20,2) + RSI(14)</span></div>
     <div class="picker"><input id="symin" placeholder="symbol…" aria-label="Chart symbol"><span id="chips"></span></div>
-    <canvas id="cv"></canvas>
+    <div id="tvchart"></div>
   </section>
-  <div class="tvnote">Charts are TradingView Advanced Chart widgets — full candles, indicators, timeframes.</div>
+  <div class="tvnote">Live TradingView daily candles · BB(20,2) + RSI(14) preloaded — change the timeframe, add indicators, or draw right in the chart.</div>
 </main>
 
 <footer class="wrap"><b>optionintel.app</b> — real-time chains &amp; greeks via Tradier · four-gate + delta-target engine · only setups meeting every criterion shown · <b>research only, not advice</b></footer>
@@ -179,41 +179,32 @@ function draw(){
 document.querySelectorAll('th.sortable').forEach(th=>th.onclick=()=>{const k=th.dataset.k; dir[k]=!dir[k];
   ROWS.sort((a,b)=>{const av=a[k]??-1,bv=b[k]??-1; return dir[k]?av-bv:bv-av;}); draw();});
 
-/* chart (mock stand-in for the TradingView widget) */
 let CUR=null;
-function rsi14(cl,p){const o=Array(cl.length).fill(null); let g=0,l=0;
-  for(let i=1;i<=p&&i<cl.length;i++){const c=cl[i]-cl[i-1]; c>=0?g+=c:l-=c;} g/=p; l/=p; o[p]=100-100/(1+g/(l||1e-9));
-  for(let i=p+1;i<cl.length;i++){const c=cl[i]-cl[i-1],gg=c>0?c:0,ll=c<0?-c:0; g=(g*(p-1)+gg)/p; l=(l*(p-1)+ll)/p; o[i]=100-100/(1+g/(l||1e-9));} return o;}
-function candles(sym){let h=0; for(const c of sym)h=(h*31+c.charCodeAt(0))>>>0; let s=h||1;
-  const r=()=>{s=(s*1664525+1013904223)>>>0; return s/4294967296;}; let p=40+r()*160; const out=[];
-  for(let i=0;i<56;i++){const o=p,c=Math.max(1,o+(r()-0.46)*p*0.045); out.push([o,Math.max(o,c)+r()*p*0.02,Math.min(o,c)-r()*p*0.02,c]); p=c;} return out;}
-function drawChart(){
-  const cv=document.getElementById("cv"); if(!cv||!CUR)return; const ctx=cv.getContext("2d"),w=cv.clientWidth,H=cv.clientHeight,dpr=devicePixelRatio||1;
-  cv.width=w*dpr; cv.height=H*dpr; ctx.setTransform(dpr,0,0,dpr,0,0); ctx.clearRect(0,0,w,H);
-  const cs=getComputedStyle(document.body),up=cs.getPropertyValue('--good').trim(),dn=cs.getPropertyValue('--bad').trim(),
-    gl=cs.getPropertyValue('--line').trim(),ac=cs.getPropertyValue('--accent').trim(),fa=cs.getPropertyValue('--faint').trim();
-  const d=candles(CUR),cl=d.map(x=>x[3]),pad=14,rsiH=66,gap=10,pH=H-rsiH-gap;
-  const bb=cl.map((_,i)=>{if(i<19)return null; const s=cl.slice(i-19,i+1),m=s.reduce((a,b)=>a+b)/20,sd=Math.sqrt(s.reduce((a,b)=>a+(b-m)*(b-m),0)/20); return [m+2*sd,m,m-2*sd];});
-  const hi=Math.max(...d.map(x=>x[1]),...bb.filter(Boolean).map(b=>b[0])),lo=Math.min(...d.map(x=>x[2]),...bb.filter(Boolean).map(b=>b[2])),rg=(hi-lo)||1;
-  const Y=v=>pad+(hi-v)/rg*(pH-2*pad),cw=(w-2*pad)/d.length;
-  ctx.strokeStyle=gl; ctx.globalAlpha=.5; for(let g=0;g<=4;g++){const y=pad+g/4*(pH-2*pad); ctx.beginPath(); ctx.moveTo(pad,y); ctx.lineTo(w-pad,y); ctx.stroke();} ctx.globalAlpha=1;
-  const band=ac+"88";
-  function bl(k,st,dash){ctx.beginPath(); let s=0; bb.forEach((b,i)=>{if(!b)return; const x=pad+i*cw+cw/2,y=Y(b[k]); s++?ctx.lineTo(x,y):ctx.moveTo(x,y);}); ctx.setLineDash(dash||[]); ctx.strokeStyle=st; ctx.lineWidth=1.1; ctx.stroke(); ctx.setLineDash([]);}
-  bl(0,band); bl(2,band); bl(1,ac,[4,3]);
-  d.forEach((x,i)=>{const cx=pad+i*cw+cw/2,c=x[3]>=x[0]?up:dn; ctx.strokeStyle=c; ctx.fillStyle=c; ctx.lineWidth=1;
-    ctx.beginPath(); ctx.moveTo(cx,Y(x[1])); ctx.lineTo(cx,Y(x[2])); ctx.stroke();
-    const bw=Math.max(2,cw*0.6),yo=Y(x[0]),yc=Y(x[3]); ctx.fillRect(cx-bw/2,Math.min(yo,yc),bw,Math.max(1.5,Math.abs(yc-yo)));});
-  const rt=pH+gap,R=v=>rt+(100-v)/100*rsiH,rs=rsi14(cl,14);
-  ctx.strokeStyle=gl; ctx.globalAlpha=.6; ctx.setLineDash([4,3]); [30,70].forEach(v=>{ctx.beginPath(); ctx.moveTo(pad,R(v)); ctx.lineTo(w-pad,R(v)); ctx.stroke();}); ctx.setLineDash([]); ctx.globalAlpha=1;
-  ctx.beginPath(); let s=0; rs.forEach((v,i)=>{if(v==null)return; const x=pad+i*cw+cw/2,y=R(v); s++?ctx.lineTo(x,y):ctx.moveTo(x,y);}); ctx.strokeStyle=ac; ctx.lineWidth=1.4; ctx.stroke();
-  ctx.fillStyle=fa; ctx.font='10px "IBM Plex Mono",monospace'; ctx.fillText("RSI 14",pad,rt+11); ctx.fillText("70",w-pad-18,R(70)-3); ctx.fillText("30",w-pad-18,R(30)+10);
+/* Real, fully-interactive TradingView Advanced Chart (daily default, BB+RSI preloaded).
+   Re-mounted on symbol change; the user can change timeframe / indicators / draw in-widget. */
+let TV_READY=false;
+function tvTheme(){return matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light';}
+function mountChart(){
+  if(!CUR||!TV_READY||!window.TradingView)return;
+  const host=document.getElementById('tvchart'); if(!host)return;
+  host.innerHTML='';
+  new TradingView.widget({
+    container_id:'tvchart', autosize:true,
+    symbol:CUR, interval:'D', timezone:'Etc/UTC', locale:'en',
+    theme:tvTheme(), style:'1', withdateranges:true,
+    hide_side_toolbar:false, allow_symbol_change:true,
+    studies:['BB@tv-basicstudies','RSI@tv-basicstudies']
+  });
 }
+(function(){const s=document.createElement('script'); s.src='https://s3.tradingview.com/tv.js';
+  s.onload=()=>{TV_READY=true; mountChart();}; document.head.appendChild(s);})();
+matchMedia('(prefers-color-scheme: dark)').addEventListener('change',mountChart);
 function markRow(){document.querySelectorAll('#tb tr').forEach(tr=>tr.classList.toggle('sel',tr.dataset.tk===CUR));
   document.querySelectorAll('.tchip').forEach(c=>c.classList.toggle('on',c.dataset.t===CUR));}
 function setSym(t){t=(t||'').toUpperCase().trim(); if(!t)return; CUR=t;
-  document.getElementById('sym').textContent=t; document.getElementById('symsub').textContent='check the setup'; drawChart(); markRow();}
+  document.getElementById('sym').textContent=t; document.getElementById('symsub').textContent='check the setup'; mountChart(); markRow();}
 document.getElementById('symin').addEventListener('keydown',e=>{if(e.key==='Enter'){setSym(e.target.value); e.target.value='';}});
-addEventListener('resize',drawChart);
+/* TradingView widget autosizes — no manual resize redraw needed */
 </script>
 </body>
 </html>
