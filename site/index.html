@@ -30,44 +30,45 @@ body{margin:0; background:var(--ink); color:var(--text); font-family:"IBM Plex S
 .mono{font-family:"IBM Plex Mono",ui-monospace,monospace; font-variant-numeric:tabular-nums}
 .wrap{max-width:1200px; margin:0 auto; padding:0 22px}
 header{position:sticky; top:0; z-index:10; background:color-mix(in srgb,var(--ink) 90%,transparent); backdrop-filter:blur(10px); border-bottom:1px solid var(--line)}
-.bar{display:flex; align-items:center; gap:24px; height:58px}
-.brand{display:flex; align-items:center; gap:10px; font-family:"Archivo",sans-serif; font-weight:800; letter-spacing:-.02em; font-size:20px}
+.bar{display:flex; align-items:center; gap:22px; height:58px}
+.brand{display:flex; align-items:center; gap:10px; font-family:"Archivo",sans-serif; font-weight:800; letter-spacing:-.02em; font-size:20px; cursor:pointer}
 .brand .dot{width:11px;height:11px;border-radius:50%;background:var(--accent); box-shadow:0 0 0 4px color-mix(in srgb,var(--accent) 22%,transparent)}
 .brand b{color:var(--text)} .brand span{color:var(--faint); font-weight:600}
-nav{display:flex; gap:4px; margin-left:6px}
-nav a{color:var(--muted); text-decoration:none; font-weight:500; font-size:14px; padding:7px 12px; border-radius:8px}
+nav{display:flex; gap:4px; margin-left:6px; flex-wrap:wrap}
+nav a{color:var(--muted); text-decoration:none; font-weight:500; font-size:14px; padding:7px 12px; border-radius:8px; cursor:pointer}
 nav a:hover{color:var(--text); background:var(--surface-2)} nav a.on{color:var(--accent); background:var(--accent-soft)}
-.tag{margin-left:auto; font-size:11px; font-weight:600; letter-spacing:.08em; text-transform:uppercase; color:var(--faint)}
-.tape{border-bottom:1px solid var(--line); background:var(--surface); overflow:hidden}
-.tape .track{display:inline-flex; gap:30px; padding:9px 0; white-space:nowrap; animation:scroll 40s linear infinite}
-.tape:hover .track{animation-play-state:paused}
-@keyframes scroll{from{transform:translateX(0)} to{transform:translateX(-50%)}}
-.tk-item{font-size:13px; font-weight:500} .tk-item b{font-weight:700; margin-right:7px} .tk-item .mono{color:var(--muted)}
-.up{color:var(--good)} .down{color:var(--bad)}
+.tag{margin-left:auto; font-size:11px; font-weight:600; letter-spacing:.08em; text-transform:uppercase; color:var(--faint); white-space:nowrap}
 .pulse{display:flex; gap:10px; flex-wrap:wrap; padding:18px 0 4px}
 .chip{flex:1 1 150px; background:var(--surface); border:1px solid var(--line); border-radius:12px; padding:11px 14px; box-shadow:var(--shadow)}
 .chip .k{display:flex; align-items:center; gap:7px; font-size:11px; letter-spacing:.06em; text-transform:uppercase; color:var(--faint); font-weight:600}
 .chip .v{font-size:22px; font-weight:600; margin-top:3px} .chip .s{font-size:12px; color:var(--muted)}
-.led{width:8px;height:8px;border-radius:50%} .led.g{background:var(--good)} .led.a{background:var(--warn)}
-.head{margin:28px 0 4px} .head h1{font-family:"Archivo",sans-serif; font-weight:700; font-size:26px; letter-spacing:-.02em; margin:0}
+.led{width:8px;height:8px;border-radius:50%; background:var(--faint)} .led.g{background:var(--good)} .led.a{background:var(--warn)} .led.r{background:var(--bad)}
+.head{margin:26px 0 2px} .head h1{font-family:"Archivo",sans-serif; font-weight:700; font-size:26px; letter-spacing:-.02em; margin:0}
 .head .meta{color:var(--muted); font-size:13px; margin-top:6px} .head .meta b{color:var(--text); font-weight:600}
-.tablewrap{overflow-x:auto; border:1px solid var(--line); border-radius:14px; box-shadow:var(--shadow); margin-top:16px; background:var(--surface)}
-table{width:100%; border-collapse:collapse; min-width:860px}
+.subhead{font-family:"Archivo",sans-serif; font-weight:700; font-size:17px; margin:30px 0 2px; display:flex; align-items:center; gap:9px}
+.subhead .n{font-size:12px; font-weight:600; color:var(--faint); font-family:"IBM Plex Mono")}
+.note{color:var(--muted); font-size:13px; margin:4px 0 0}
+.tablewrap{overflow-x:auto; border:1px solid var(--line); border-radius:14px; box-shadow:var(--shadow); margin-top:14px; background:var(--surface)}
+table{width:100%; border-collapse:collapse; min-width:760px}
 thead th{position:sticky; top:0; text-align:right; font-size:11px; letter-spacing:.05em; text-transform:uppercase; color:var(--faint); font-weight:600; padding:12px 14px; background:var(--surface-2); border-bottom:1px solid var(--line); white-space:nowrap}
 thead th.l{text-align:left} thead th.sortable{cursor:pointer; user-select:none} thead th.sortable:hover{color:var(--text)} thead th .ar{opacity:.5; font-size:9px}
-tbody td{text-align:right; padding:13px 14px; border-bottom:1px solid var(--line-soft); white-space:nowrap}
-tbody tr{cursor:pointer} tbody tr:last-child td{border-bottom:0} tbody tr:hover{background:var(--surface-2)} tbody tr.sel{background:var(--accent-soft)}
+tbody td{text-align:right; padding:12px 14px; border-bottom:1px solid var(--line-soft); white-space:nowrap; vertical-align:middle}
+tbody tr.clk{cursor:pointer} tbody tr:last-child td{border-bottom:0} tbody tr:hover{background:var(--surface-2)} tbody tr.sel{background:var(--accent-soft)}
 td.l{text-align:left}
 .tk{font-family:"Archivo",sans-serif; font-weight:700; font-size:15px}
 .pill{display:inline-block; font-size:11px; font-weight:700; letter-spacing:.03em; padding:3px 9px; border-radius:999px; color:#fff}
 .p-csp{background:var(--csp)} .p-cc{background:var(--cc)} .p-leap{background:var(--leap)}
 .trade{font-family:"IBM Plex Mono"; font-weight:600; font-size:14px} .t-csp{color:var(--csp)} .t-cc{color:var(--cc)} .t-leap{color:var(--leap)}
 .dim{color:var(--faint)}
+.setup{font-size:12px; font-weight:600; white-space:nowrap}
+.s-full{color:var(--good)} .s-part{color:var(--warn)} .s-early{color:var(--faint)} .s-no{color:var(--faint)}
 .fl{font-size:11px; font-weight:600; padding:2px 7px; border-radius:6px; margin-left:4px; white-space:nowrap}
 .fl-strong{color:var(--warn); background:color-mix(in srgb,var(--warn) 15%,transparent)}
 .fl-er{color:var(--bad); background:color-mix(in srgb,var(--bad) 13%,transparent)}
-.fl-pmcc{color:var(--leap); background:color-mix(in srgb,var(--leap) 15%,transparent)}
-.chart{margin-top:24px; border:1px solid var(--line); border-radius:14px; background:var(--surface); box-shadow:var(--shadow); overflow:hidden}
+.ok{color:var(--good); font-weight:700} .no{color:var(--bad); font-weight:700}
+.empty{border:1px dashed var(--line); border-radius:14px; padding:26px; text-align:center; color:var(--muted); margin-top:14px; background:var(--surface)}
+.empty b{color:var(--text)}
+.chart{margin-top:22px; border:1px solid var(--line); border-radius:14px; background:var(--surface); box-shadow:var(--shadow); overflow:hidden}
 .chart .top{display:flex; align-items:center; gap:14px; padding:14px 18px; border-bottom:1px solid var(--line); flex-wrap:wrap}
 .chart .sym{font-family:"Archivo",sans-serif; font-weight:800; font-size:22px} .chart .sub{font-size:12px; color:var(--faint)}
 .chart .tv{margin-left:auto; font-size:11px; color:var(--faint)} .chart .tv b{color:var(--muted); font-weight:600}
@@ -76,135 +77,414 @@ td.l{text-align:left}
 .picker input:focus{outline:2px solid var(--accent); outline-offset:1px}
 .tchip{font-family:"IBM Plex Mono"; font-size:12.5px; font-weight:600; color:var(--muted); background:var(--surface-2); border:1px solid var(--line); padding:5px 11px; border-radius:8px; cursor:pointer}
 .tchip:hover{color:var(--text)} .tchip.on{color:#fff; background:var(--accent); border-color:var(--accent)}
-#tvchart{width:100%; height:480px}
-.tvnote{margin-top:16px; font-size:12.5px; color:var(--faint); text-align:center}
+.tvhost{width:100%; height:460px}
+.tvnote{margin-top:14px; font-size:12.5px; color:var(--faint); text-align:center}
+.cards{display:grid; grid-template-columns:repeat(auto-fit,minmax(250px,1fr)); gap:14px; margin-top:16px}
+.card{border:1px solid var(--line); border-radius:14px; background:var(--surface); box-shadow:var(--shadow); padding:16px 18px}
+.card h3{margin:0 0 3px; font-family:"Archivo",sans-serif; font-size:16px; display:flex; align-items:center; gap:8px}
+.card .trade{font-size:15px; margin:6px 0 12px}
+.kv{display:grid; grid-template-columns:auto auto; gap:6px 14px; font-size:13px}
+.kv .kk{color:var(--faint)} .kv .vv{text-align:right; font-family:"IBM Plex Mono"; font-variant-numeric:tabular-nums}
+.reasons{margin:12px 0 0; padding-top:11px; border-top:1px solid var(--line-soft); font-size:12.5px; color:var(--muted); line-height:1.7}
+.reasons .r{display:block}
+.gate{display:inline-flex; align-items:center; gap:5px; font-size:12px; margin-right:12px}
+.mkt-grid{display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:14px; margin-top:18px}
+.mkt{border:1px solid var(--line); border-radius:14px; background:var(--surface); box-shadow:var(--shadow); padding:16px 18px}
+.mkt .kk{font-size:11px; letter-spacing:.06em; text-transform:uppercase; color:var(--faint); font-weight:600; display:flex; align-items:center; gap:7px}
+.mkt .vv{font-size:28px; font-weight:600; margin:6px 0 2px} .mkt .ss{font-size:12.5px; color:var(--muted)}
+.rules-sec{margin-top:26px} .rules-sec h2{font-family:"Archivo",sans-serif; font-size:18px; margin:0 0 4px}
+.rules-sec p{color:var(--muted); font-size:13px; margin:2px 0 10px}
+.rtable{width:100%; border-collapse:collapse; border:1px solid var(--line); border-radius:12px; overflow:hidden; font-size:13.5px; margin-top:6px}
+.rtable th{text-align:left; background:var(--surface-2); color:var(--muted); font-weight:600; padding:9px 13px; border-bottom:1px solid var(--line); font-size:12px; letter-spacing:.03em; text-transform:uppercase}
+.rtable td{padding:9px 13px; border-bottom:1px solid var(--line-soft); vertical-align:top; text-align:left; white-space:normal}
+.rtable tr:last-child td{border-bottom:0} .rtable td.mono{font-family:"IBM Plex Mono"}
+.src{display:flex; flex-wrap:wrap; gap:8px; margin-top:10px}
+.src span{font-size:12px; background:var(--surface-2); border:1px solid var(--line); border-radius:8px; padding:5px 10px; color:var(--muted)}
+.src b{color:var(--text); font-weight:600}
 footer{color:var(--faint); font-size:12.5px; text-align:center; padding:30px 0 40px; margin-top:22px; border-top:1px solid var(--line)}
 footer b{color:var(--muted); font-weight:600}
-@media (max-width:560px){ nav{display:none} }
-@media (prefers-reduced-motion:reduce){ *{transition:none!important} .tape .track{animation:none} }
+[hidden]{display:none!important}
+@media (max-width:640px){ .tag{display:none} }
+@media (prefers-reduced-motion:reduce){ *{transition:none!important} }
 </style>
 </head>
 <body>
 <header><div class="wrap bar">
-  <div class="brand"><span class="dot"></span><b>OptionIntel</b><span>.app</span></div>
-  <nav><a href="#" class="on">Signals</a><a href="#">Options Chain</a><a href="#">Market</a><a href="#">Watchlist</a><a href="#">Deep Dive</a></nav>
+  <div class="brand" data-tab="signals"><span class="dot"></span><b>OptionIntel</b><span>.app</span></div>
+  <nav id="nav">
+    <a data-tab="signals" class="on">Signals</a>
+    <a data-tab="watchlist">Watchlist</a>
+    <a data-tab="chain">Options Chain</a>
+    <a data-tab="deep">Deep Dive</a>
+    <a data-tab="market">Market</a>
+    <a data-tab="rules">Rules</a>
+  </nav>
   <span class="tag" id="upd">loading…</span>
 </div></header>
 
-<div class="tape" aria-hidden="true"><div class="track" id="tape"></div></div>
-
 <main class="wrap">
-  <section class="pulse" aria-label="Market pulse">
-    <div class="chip"><div class="k"><span class="led g"></span>VIX</div><div class="v mono">16.4</div><div class="s">Calm · contango</div></div>
-    <div class="chip"><div class="k"><span class="led a"></span>Fear &amp; Greed</div><div class="v mono">62</div><div class="s">Greed</div></div>
-    <div class="chip"><div class="k"><span class="led g"></span>10Y Treasury</div><div class="v mono">4.18%</div><div class="s">steepening</div></div>
-    <div class="chip"><div class="k"><span class="led g"></span>Fed Funds</div><div class="v mono">3.75%</div><div class="s">held</div></div>
-    <div class="chip"><div class="k"><span class="led a"></span>BTC F&amp;G</div><div class="v mono">55</div><div class="s">Neutral</div></div>
+
+  <!-- ══════════ SIGNALS ══════════ -->
+  <section id="v-signals" class="view">
+    <section class="pulse" id="pulse" aria-label="Market pulse"></section>
+
+    <div class="head"><h1>Suggested entries</h1><div class="meta" id="meta">scanning…</div></div>
+
+    <div class="subhead">Sell now — CSP / CC <span class="n" id="n-ready"></span></div>
+    <p class="note">Confirmed mean-reversion setups on the right side of the 20-day median (score ≥ 6). Nothing here means no clean entry today — that's the point.</p>
+    <div id="ready-wrap"></div>
+
+    <div class="subhead">LEAP ideas — a buy, not premium <span class="n" id="n-leap"></span></div>
+    <p class="note">Δ75–80 long-dated calls that pass <b>Gate A</b> (extrinsic ≤40%) <b>and Gate C</b> (carry ≤8%/yr) <b>and</b> a clear 5-day uptrend.</p>
+    <div id="leap-wrap"></div>
+
+    <section class="chart" aria-label="Chart">
+      <div class="top"><div><span class="sym" id="sym">—</span> <span class="sub" id="symsub">tap a row to chart it</span></div>
+        <span class="tv"><b>TradingView</b> · BB(20,2) + RSI(14)</span></div>
+      <div class="picker"><input id="symin" placeholder="symbol…" aria-label="Chart symbol"><span id="chips"></span></div>
+      <div id="tvchart" class="tvhost"></div>
+    </section>
+    <div class="tvnote">Live TradingView daily candles — change the timeframe, add indicators, or draw right in the chart.</div>
   </section>
 
-  <div class="head"><h1>Suggested entries</h1><div class="meta" id="meta">scanning…</div></div>
-
-  <div class="tablewrap"><table><thead><tr>
-    <th class="l">Ticker</th><th class="l">Strategy</th><th class="l">Suggested trade</th>
-    <th class="sortable" data-k="dte">DTE <span class="ar">▾</span></th>
-    <th class="sortable" data-k="delta">Δ <span class="ar">▾</span></th>
-    <th class="sortable" data-k="prem">Prem % <span class="ar">▾</span></th>
-    <th class="sortable" data-k="pop">POP <span class="ar">▾</span></th>
-    <th class="sortable" data-k="ann">Ann % <span class="ar">▾</span></th>
-    <th class="sortable" data-k="iv">IV <span class="ar">▾</span></th>
-    <th class="l">Notes</th>
-  </tr></thead><tbody id="tb"></tbody></table></div>
-
-  <section class="chart" aria-label="Chart">
-    <div class="top"><div><span class="sym" id="sym">—</span> <span class="sub" id="symsub">check the setup</span></div>
-      <span class="tv"><b>TradingView</b> · BB(20,2) + RSI(14)</span></div>
-    <div class="picker"><input id="symin" placeholder="symbol…" aria-label="Chart symbol"><span id="chips"></span></div>
-    <div id="tvchart"></div>
+  <!-- ══════════ WATCHLIST ══════════ -->
+  <section id="v-watchlist" class="view" hidden>
+    <div class="head"><h1>Watchlist</h1><div class="meta">Every scanned name and its live read — CSP/CC timing, position in the bands, RSI, and whether a qualifying LEAP exists. This is the full field; the Signals tab is just what's actionable now.</div></div>
+    <div class="tablewrap"><table><thead><tr>
+      <th class="l">Ticker</th><th class="l">Sector</th>
+      <th class="l">CSP setup</th><th class="l">CC setup</th>
+      <th class="sortable" data-k="pctb">%B <span class="ar">▾</span></th>
+      <th class="sortable" data-k="rsi">RSI <span class="ar">▾</span></th>
+      <th class="l">LEAP</th>
+    </tr></thead><tbody id="wl-tb"></tbody></table></div>
   </section>
-  <div class="tvnote">Live TradingView daily candles · BB(20,2) + RSI(14) preloaded — change the timeframe, add indicators, or draw right in the chart.</div>
+
+  <!-- ══════════ OPTIONS CHAIN ══════════ -->
+  <section id="v-chain" class="view" hidden>
+    <div class="head"><h1>Engine-selected contracts</h1><div class="meta">The exact contract the engine targets per name — CSP &amp; CC at Δ≈30 (21–45 DTE), LEAP at Δ≈78 (180–900 DTE). Real Tradier greeks. Not a full chain — the working strikes only.</div></div>
+    <div class="picker" style="border:0;padding:14px 0"><input id="chain-f" placeholder="filter ticker…" aria-label="Filter ticker"><span class="dim" style="font-size:12.5px">type to filter</span></div>
+    <div class="tablewrap"><table><thead><tr>
+      <th class="l">Ticker</th><th class="l">Type</th><th>Strike</th><th class="l">Expiry</th><th>DTE</th>
+      <th>Δ</th><th>Mid</th><th>IV</th><th>OI</th><th>Spread</th><th>POP</th><th class="l">Yield / cost</th>
+    </tr></thead><tbody id="chain-tb"></tbody></table></div>
+  </section>
+
+  <!-- ══════════ DEEP DIVE ══════════ -->
+  <section id="v-deep" class="view" hidden>
+    <div class="head"><h1>Deep dive</h1><div class="meta">One name, every leg — the CSP, CC and LEAP the engine found, with the full reasoning behind each verdict.</div></div>
+    <div class="picker" style="border:0;padding:14px 0"><input id="deep-in" placeholder="ticker…" aria-label="Deep dive ticker"><span id="deep-chips"></span></div>
+    <div id="deep-body"></div>
+    <section class="chart" aria-label="Chart" style="margin-top:18px">
+      <div class="top"><div><span class="sym" id="sym2">—</span> <span class="sub">daily · BB + RSI</span></div>
+        <span class="tv"><b>TradingView</b></span></div>
+      <div id="tvchart2" class="tvhost"></div>
+    </section>
+  </section>
+
+  <!-- ══════════ MARKET ══════════ -->
+  <section id="v-market" class="view" hidden>
+    <div class="head"><h1>Market backdrop</h1><div class="meta">The macro context every wheel decision sits inside — volatility, sentiment, the curve, and policy. Keyless public sources, refreshed with each scan.</div></div>
+    <div class="mkt-grid" id="mkt-grid"></div>
+    <p class="note" style="margin-top:18px">Sources: VIX via Yahoo · stock Fear&amp;Greed via CNN · crypto Fear&amp;Greed via alternative.me · 2Y/10Y &amp; Fed funds via FRED. Context only — the signal rules key off each ticker's own price action, not these.</p>
+  </section>
+
+  <!-- ══════════ RULES ══════════ -->
+  <section id="v-rules" class="view" hidden>
+    <div class="head"><h1>The rules</h1><div class="meta">Exactly what the engine checks — no black box. Every suggestion on this site passes these, computed from the data inputs listed at the bottom.</div></div>
+
+    <div class="rules-sec">
+      <h2>1 · Structural gates — every CSP &amp; CC must pass all</h2>
+      <table class="rtable"><thead><tr><th>Rule</th><th>Threshold</th><th>Why</th></tr></thead><tbody>
+        <tr><td>DTE (days to expiry)</td><td class="mono">21–45 · target 30</td><td>the monthly cycle</td></tr>
+        <tr><td>Delta</td><td class="mono">0.20–0.45 · target 0.30</td><td>~30Δ sweet spot</td></tr>
+        <tr><td>Premium</td><td class="mono">≥ 1.2% of spot</td><td>worth selling; ≥1.5% = 🔥 strong</td></tr>
+        <tr><td>Open interest</td><td class="mono">≥ 100</td><td>liquidity</td></tr>
+        <tr><td>Bid/ask spread</td><td class="mono">≤ 15% of mid</td><td>tradeable</td></tr>
+        <tr><td>Earnings</td><td class="mono">none within 7 days</td><td>no gap risk into the print</td></tr>
+      </tbody></table>
+    </div>
+
+    <div class="rules-sec">
+      <h2>2 · Bollinger median — the directional gate</h2>
+      <table class="rtable"><thead><tr><th>Strategy</th><th>Rule</th><th>Meaning</th></tr></thead><tbody>
+        <tr><td><span class="pill p-csp">CSP</span></td><td class="mono">%B &lt; 0.5 (below 20-day median)</td><td>sell puts into weakness</td></tr>
+        <tr><td><span class="pill p-cc">CC</span></td><td class="mono">%B ≥ 0.5 (above median)</td><td>sell calls into strength</td></tr>
+      </tbody></table>
+    </div>
+
+    <div class="rules-sec">
+      <h2>3 · Mean-reversion timing — the setup score</h2>
+      <p>A turnaround, not just the right side of the median. Points accrue; <b>🟢 FULL ≥10 · 🟡 PARTIAL ≥6 · 🟠 building ≥3 · 🔴 none</b>. Only ≥6 is listed as a suggestion.</p>
+      <table class="rtable"><thead><tr><th>CSP (fade a bottom)</th><th>CC (fade a top)</th></tr></thead><tbody>
+        <tr><td>Dropped to lower band then bounced (3-session)</td><td>Spiked to upper band then rolled over (3-session)</td></tr>
+        <tr><td>RSI dipped &lt;30 and turned up (5-session)</td><td>RSI ran &gt;70 and turned down (5-session)</td></tr>
+        <tr><td>Bullish candle reversal (3-session)</td><td>Bearish candle reversal (3-session)</td></tr>
+        <tr><td>IV rich vs realized (fatter premium)</td><td>IV rich vs realized (fatter premium)</td></tr>
+        <tr><td>Veto: still walking the lower band = breakdown</td><td>—</td></tr>
+      </tbody></table>
+    </div>
+
+    <div class="rules-sec">
+      <h2>4 · LEAP — a buy, not premium income</h2>
+      <p>Cost is judged in <b>extrinsic value</b> (the dollars you pay for time), not IV — IV is only the input that inflates it. A LEAP <b>qualifies only if it passes A and C and the trend</b>.</p>
+      <table class="rtable"><thead><tr><th>Element</th><th>Rule</th></tr></thead><tbody>
+        <tr><td>Delta</td><td class="mono">0.75–0.80 (deep ITM = intrinsic-led)</td></tr>
+        <tr><td>DTE</td><td class="mono">180–900 · target ~542 (Jan-2027+)</td></tr>
+        <tr><td><b>Gate A</b> — time-premium share</td><td class="mono">extrinsic ≤ 40% of premium</td></tr>
+        <tr><td><b>Gate C</b> — carry rate</td><td class="mono">(extrinsic ÷ spot) × 365/DTE ≤ 8%/yr</td></tr>
+        <tr><td><b>Clear trend</b> (5-session)</td><td class="mono">above 50 &amp; 200-MA · 50≥200 · RSI≥50 rising · no bearish candle</td></tr>
+        <tr><td>Green dot (timing)</td><td class="mono">cheap IV vs realized + healthy RSI + aligned trend</td></tr>
+      </tbody></table>
+    </div>
+
+    <div class="rules-sec">
+      <h2>Data inputs — open by design</h2>
+      <div class="src">
+        <span><b>Tradier</b> — option chains, vendor greeks (Δ/IV), daily price history</span>
+        <span><b>FRED</b> — 2Y / 10Y Treasury, Fed funds</span>
+        <span><b>CNN</b> — stock Fear &amp; Greed</span>
+        <span><b>alternative.me</b> — crypto Fear &amp; Greed</span>
+        <span><b>Yahoo</b> — VIX, sector, earnings date</span>
+      </div>
+    </div>
+  </section>
+
 </main>
 
-<footer class="wrap"><b>optionintel.app</b> — real-time chains &amp; greeks via Tradier · four-gate + delta-target engine · only setups meeting every criterion shown · <b>research only, not advice</b></footer>
+<footer class="wrap"><b>optionintel.app</b> — one engine, every tab · real Tradier chains &amp; greeks · the same rules the <b>Rules</b> tab lists · <b>research only, not advice</b></footer>
 
 <script>
 const KIND={csp:"CSP",cc:"CC",leap:"LEAP"};
-let ROWS=[], dir={};
-const sccls=null;
+let DATA=null, SIGS=[], LEAPS=[], MKT={}, BYTK={}, READY=[], LEAPQ=[], CHAINROWS=[];
+const num=(v,d=1,s='')=>v==null?'<span class="dim">—</span>':(typeof v==='number'?v.toFixed(d):v)+s;
+const abs=v=>Math.abs(v||0);
 function fmtTrade(strat,strike){return strat==='cc'?`Sell $${strike} Call`:strat==='leap'?`Buy $${strike} Call`:`Sell $${strike} Put`;}
+function setupClass(lbl){lbl=lbl||'';return lbl[0]==='🟢'?'s-full':lbl[0]==='🟡'?'s-part':lbl[0]==='🟠'?'s-early':'s-no';}
+function shortSetup(lbl){if(!lbl)return '<span class="dim">—</span>';const c=setupClass(lbl);
+  const t=lbl.replace(/—.*/,'').trim();return `<span class="setup ${c}">${t}</span>`;}
+/* LEAP qualification verdict — qualifies, or the exact blocking gate(s). Never the timing dot
+   alone (a "strong" timing read that fails a cost gate is NOT a buy — keep it honest). */
+function leapVerdict(l){
+  if(!l) return '<span class="dim">—</span>';
+  if(l.qualifies) return '<span class="ok">✓ qualifies</span>';
+  const r=[];
+  if(!l.gate_a) r.push('ext '+(l.extrinsic_pct)+'%');
+  if(!l.gate_c) r.push('carry '+(l.carry_pct)+'%');
+  if(!l.trend_ok) r.push('no trend');
+  return '<span class="dim">'+(r.join(' · ')||'—')+'</span>';
+}
 
 fetch('data/signals.json',{cache:'no-store'}).then(r=>r.json()).then(J=>{
-  const sigs=(J.signals||[]).filter(s=>s.median_ok!==false);
-  ROWS=sigs.map(s=>({tk:s.ticker,strat:s.strategy.toLowerCase(),trade:fmtTrade(s.strategy.toLowerCase(),s.strike),
-      dte:s.dte,delta:Math.abs(s.delta||0),prem:s.premium_pct,pop:s.pop,
-      ann:(s.premium_pct&&s.dte)?+(s.premium_pct*365/s.dte).toFixed(0):null,iv:s.iv,
-      strong:s.strong,earn:s.earnings_in_window}))
-    .concat((J.leaps||[]).map(l=>({tk:l.ticker,strat:'leap',trade:fmtTrade('leap',l.strike),
-      dte:l.dte,delta:Math.abs(l.delta||0),prem:null,pop:null,ann:null,iv:l.iv,
-      pmcc:l.good_pmcc,extr:l.extrinsic_pct})));
-  ROWS.sort((a,b)=>(b.prem??-1)-(a.prem??-1)||b.dte-a.dte);
+  DATA=J; SIGS=J.signals||[]; LEAPS=J.leaps||[]; MKT=J.market||{};
+  // ready = actionable CSP/CC (right side of median + real setup)
+  READY=SIGS.filter(s=>s.median_ok===true && (s.timing_score||0)>=6)
+            .sort((a,b)=>(b.timing_score||0)-(a.timing_score||0)||(b.premium_pct||0)-(a.premium_pct||0));
+  LEAPQ=LEAPS.filter(l=>l.qualifies)
+             .sort((a,b)=>(b.timing_score||0)-(a.timing_score||0)||(a.carry_pct||99)-(b.carry_pct||99));
+  // per-ticker merge for watchlist / deep dive
+  BYTK={};
+  const put=(t)=>BYTK[t]||(BYTK[t]={ticker:t,sector:'—'});
+  SIGS.forEach(s=>{const o=put(s.ticker); o.sector=s.sector||o.sector; o.pctb=s.pct_b;
+    if(s.strategy==='CSP')o.csp=s; if(s.strategy==='CC')o.cc=s;});
+  LEAPS.forEach(l=>{const o=put(l.ticker); o.sector=(o.sector==='—'?l.sector:o.sector)||'—'; o.leap=l; o.rsi=l.rsi;});
+  // chain rows = every engine-selected contract
+  CHAINROWS=[];
+  SIGS.forEach(s=>CHAINROWS.push({tk:s.ticker,type:s.strategy,strike:s.strike,exp:s.expiry,dte:s.dte,
+    delta:s.delta,mid:s.mid,iv:s.iv,oi:s.oi,spread:s.spread_pct,pop:s.pop,
+    yield:(s.premium_pct!=null?s.premium_pct.toFixed(1)+'% prem':'')}));
+  LEAPS.forEach(l=>CHAINROWS.push({tk:l.ticker,type:'LEAP',strike:l.strike,exp:l.expiry,dte:l.dte,
+    delta:l.delta,mid:l.mid,iv:l.iv,oi:null,spread:null,pop:null,
+    yield:(l.extrinsic_pct!=null?l.extrinsic_pct+'% ext · '+num(l.carry_pct,1,'%/yr'):'')}));
+
   const dt=J.generated_at?new Date(J.generated_at):null;
   document.getElementById('upd').textContent=dt?'updated '+dt.toUTCString().slice(17,22)+' UTC':'preview';
-  const u=J.universe||{}; const nprem=sigs.length, nleap=(J.leaps||[]).length;
-  document.getElementById('meta').innerHTML=`<b>${nprem+nleap} viable setups</b> from ${(u.wheel||0)+(u.growth||0)} names — passed the median &amp; premium gates · ranked by premium %`;
-  buildTape(); draw(); if(ROWS[0]) setSym(ROWS[0].tk);
+  const u=J.universe||{};
+  document.getElementById('meta').innerHTML=`<b>${READY.length} setup${READY.length===1?'':'s'} ready</b> + <b>${LEAPQ.length} LEAP${LEAPQ.length===1?'':'s'}</b> from ${(u.wheel||0)+(u.growth||0)} names · full field in Watchlist`;
+
+  renderPulse(); renderReady(); renderLeaps(); renderWatchlist(); renderChain(); buildChips(); renderMarket();
+  const first=(READY[0]&&READY[0].ticker)||(LEAPQ[0]&&LEAPQ[0].ticker)||(SIGS[0]&&SIGS[0].ticker);
+  if(first) setSym(first);
 }).catch(e=>{document.getElementById('meta').textContent='could not load signals ('+e+')';});
 
-function buildTape(){
-  const seen={}; ROWS.forEach(r=>seen[r.tk]=1);
-  const items=Object.keys(seen).map(t=>`<span class="tk-item"><b>${t}</b><span class="mono">—</span></span>`);
-  document.getElementById('tape').innerHTML=[...items,...items].join('');
-  document.getElementById('chips').innerHTML=Object.keys(seen).map(t=>`<span class="tchip" data-t="${t}">${t}</span>`).join('');
-  document.querySelectorAll('.tchip').forEach(c=>c.onclick=()=>setSym(c.dataset.t));
+/* ---------- market pulse (shared strip + market tab) ---------- */
+function ledFor(kind,v){ if(v==null)return '';
+  if(kind==='vix')return v<20?'g':v<30?'a':'r';
+  if(kind==='fng'||kind==='btc')return v<25?'r':v<45?'a':v<=55?'a':'g';
+  return 'g'; }
+function renderPulse(){
+  const m=MKT, cells=[
+    ['vix','VIX',num(m.vix,1),m.vix_label||''],
+    ['fng','Fear & Greed',num(m.fng,0),m.fng_label||''],
+    ['t10','10Y Treasury',num(m.ten_year,2,'%'),m.curve||''],
+    ['fed','Fed Funds',num(m.fed_funds,2,'%'),'current target'],
+    ['btc','BTC F&G',num(m.btc_fng,0),m.btc_fng_label||''],
+  ];
+  const led={vix:ledFor('vix',m.vix),fng:ledFor('fng',m.fng),t10:'g',fed:'g',btc:ledFor('btc',m.btc_fng)};
+  document.getElementById('pulse').innerHTML=cells.map(c=>
+    `<div class="chip"><div class="k"><span class="led ${led[c[0]]||''}"></span>${c[1]}</div><div class="v mono">${c[2]}</div><div class="s">${c[3]}</div></div>`).join('');
 }
-function notes(r){
-  if(r.strat==='leap') return r.pmcc?'<span class="fl fl-pmcc">PMCC ✓</span>':`<span class="dim">${r.extr??''}% ext</span>`;
-  let s=''; if(r.strong)s+='<span class="fl fl-strong">🔥 strong</span>'; if(r.earn)s+='<span class="fl fl-er">⚠ earnings</span>'; return s||'<span class="dim">—</span>';
+function renderMarket(){
+  const m=MKT, items=[
+    ['VIX — implied volatility',num(m.vix,1),(m.vix_label||'')+' · S&P 30-day expected move',ledFor('vix',m.vix)],
+    ['Fear & Greed — stocks',num(m.fng,0),m.fng_label||'CNN composite',ledFor('fng',m.fng)],
+    ['Fear & Greed — crypto',num(m.btc_fng,0),m.btc_fng_label||'',ledFor('btc',m.btc_fng)],
+    ['10Y Treasury',num(m.ten_year,2,'%'),'curve '+(m.curve||'—'),'g'],
+    ['2Y Treasury',num(m.two_year,2,'%'),'policy-sensitive short end','g'],
+    ['Fed Funds',num(m.fed_funds,2,'%'),'current effective target','g'],
+  ];
+  document.getElementById('mkt-grid').innerHTML=items.map(i=>
+    `<div class="mkt"><div class="kk"><span class="led ${i[3]||''}"></span>${i[0]}</div><div class="vv mono">${i[1]}</div><div class="ss">${i[2]}</div></div>`).join('');
 }
-function cell(v,suf){return v==null?'<span class="dim">—</span>':(suf==='%'?v.toFixed?v.toFixed(1)+'%':v+'%':v);}
-function draw(){
-  document.getElementById('tb').innerHTML=ROWS.map(r=>`<tr data-tk="${r.tk}">
-    <td class="l"><span class="tk">${r.tk}</span></td>
-    <td class="l"><span class="pill p-${r.strat}">${KIND[r.strat]}</span></td>
-    <td class="l trade t-${r.strat}">${r.trade}</td>
-    <td class="mono">${r.dte}</td>
-    <td class="mono">${r.delta.toFixed(2)}</td>
-    <td class="mono">${r.prem==null?'<span class="dim">—</span>':r.prem.toFixed(1)+'%'}</td>
-    <td class="mono">${r.pop==null?'<span class="dim">—</span>':r.pop.toFixed(0)+'%'}</td>
-    <td class="mono">${r.ann==null?'<span class="dim">—</span>':r.ann+'%'}</td>
-    <td class="mono">${r.iv==null?'<span class="dim">—</span>':r.iv.toFixed(0)+'%'}</td>
-    <td class="l">${notes(r)}</td></tr>`).join('');
-  document.querySelectorAll('#tb tr').forEach(tr=>tr.onclick=()=>setSym(tr.dataset.tk));
-  markRow();
-}
-document.querySelectorAll('th.sortable').forEach(th=>th.onclick=()=>{const k=th.dataset.k; dir[k]=!dir[k];
-  ROWS.sort((a,b)=>{const av=a[k]??-1,bv=b[k]??-1; return dir[k]?av-bv:bv-av;}); draw();});
 
-let CUR=null;
-/* Real, fully-interactive TradingView Advanced Chart (daily default, BB+RSI preloaded).
-   Re-mounted on symbol change; the user can change timeframe / indicators / draw in-widget. */
-let TV_READY=false;
+/* ---------- signals: ready CSP/CC ---------- */
+function noteFlags(s){let x=''; if(s.strong)x+='<span class="fl fl-strong">🔥 strong</span>';
+  if(s.earnings_in_window)x+='<span class="fl fl-er">⚠ earnings</span>'; return x; }
+function renderReady(){
+  document.getElementById('n-ready').textContent=READY.length?READY.length+' ready':'';
+  if(!READY.length){ document.getElementById('ready-wrap').innerHTML=
+    `<div class="empty">No fresh CSP/CC setup right now — nothing on a confirmed turnaround. <b>${SIGS.length} names</b> scanned; see them all in <a data-tab="watchlist" style="color:var(--accent);cursor:pointer">Watchlist</a>.</div>`;
+    document.querySelector('#ready-wrap [data-tab]')?.addEventListener('click',()=>go('watchlist')); return; }
+  const rows=READY.map(s=>{const k=s.strategy.toLowerCase();return `<tr class="clk" data-tk="${s.ticker}">
+    <td class="l"><span class="tk">${s.ticker}</span></td>
+    <td class="l"><span class="pill p-${k}">${s.strategy}</span></td>
+    <td class="l trade t-${k}">${fmtTrade(k,s.strike)}</td>
+    <td class="l">${shortSetup(s.timing_label)}</td>
+    <td class="mono">${s.dte}</td><td class="mono">${abs(s.delta).toFixed(2)}</td>
+    <td class="mono">${num(s.premium_pct,1,'%')}</td><td class="mono">${num(s.pop,0,'%')}</td>
+    <td class="mono">${num(s.iv,0,'%')}</td><td class="l">${noteFlags(s)||'<span class="dim">—</span>'}</td></tr>`;}).join('');
+  document.getElementById('ready-wrap').innerHTML=`<div class="tablewrap"><table><thead><tr>
+    <th class="l">Ticker</th><th class="l">Strategy</th><th class="l">Suggested trade</th><th class="l">Setup</th>
+    <th>DTE</th><th>Δ</th><th>Prem %</th><th>POP</th><th>IV</th><th class="l">Notes</th>
+  </tr></thead><tbody>${rows}</tbody></table></div>`;
+  wireRows('#ready-wrap');
+}
+/* ---------- signals: qualifying LEAPs ---------- */
+function renderLeaps(){
+  document.getElementById('n-leap').textContent=LEAPQ.length?LEAPQ.length+' qualify':'';
+  if(!LEAPQ.length){ document.getElementById('leap-wrap').innerHTML=
+    `<div class="empty">No LEAP qualifies today — none clears Gate A + Gate C on a clear uptrend at once. Near-misses are in <a data-tab="watchlist" style="color:var(--accent);cursor:pointer">Watchlist</a>.</div>`;
+    document.querySelector('#leap-wrap [data-tab]')?.addEventListener('click',()=>go('watchlist')); return; }
+  const rows=LEAPQ.map(l=>`<tr class="clk" data-tk="${l.ticker}">
+    <td class="l"><span class="tk">${l.ticker}</span></td>
+    <td class="l trade t-leap">${fmtTrade('leap',l.strike)}</td>
+    <td class="l">${shortSetup(l.timing_label)}</td>
+    <td class="mono">${num(l.delta,2)}</td><td class="mono">${num(l.extrinsic_pct,0,'%')}</td>
+    <td class="mono">${num(l.carry_pct,1,'%/yr')}</td><td class="mono">${l.dte}d</td><td class="mono">${num(l.iv,0,'%')}</td></tr>`).join('');
+  document.getElementById('leap-wrap').innerHTML=`<div class="tablewrap"><table><thead><tr>
+    <th class="l">Ticker</th><th class="l">Suggested trade</th><th class="l">Entry</th>
+    <th>Δ</th><th>Extrinsic</th><th>Carry</th><th>DTE</th><th>IV</th>
+  </tr></thead><tbody>${rows}</tbody></table></div>`;
+  wireRows('#leap-wrap');
+}
+function wireRows(sel){document.querySelectorAll(sel+' tr.clk').forEach(tr=>tr.onclick=()=>setSym(tr.dataset.tk));}
+
+/* ---------- watchlist ---------- */
+let wlDir={};
+function renderWatchlist(){
+  let list=Object.values(BYTK);
+  list.sort((a,b)=>(a.ticker<b.ticker?-1:1));
+  document.getElementById('wl-tb').innerHTML=list.map(o=>{
+    const lc=leapVerdict(o.leap);
+    return `<tr class="clk" data-tk="${o.ticker}">
+      <td class="l"><span class="tk">${o.ticker}</span></td>
+      <td class="l dim">${o.sector||'—'}</td>
+      <td class="l">${o.csp?shortSetup(o.csp.timing_label):'<span class="dim">—</span>'}</td>
+      <td class="l">${o.cc?shortSetup(o.cc.timing_label):'<span class="dim">—</span>'}</td>
+      <td class="mono">${o.pctb==null?'<span class="dim">—</span>':o.pctb.toFixed(2)}</td>
+      <td class="mono">${o.rsi==null?'<span class="dim">—</span>':o.rsi.toFixed(0)}</td>
+      <td class="l">${lc}</td></tr>`;}).join('');
+  document.querySelectorAll('#wl-tb tr').forEach(tr=>tr.onclick=()=>{setSym(tr.dataset.tk); go('deep');});
+}
+
+/* ---------- options chain ---------- */
+function renderChain(f){
+  f=(f||'').toUpperCase();
+  const rows=CHAINROWS.filter(r=>!f||r.tk.includes(f)).map(r=>{const k=r.type.toLowerCase();
+    return `<tr><td class="l"><span class="tk">${r.tk}</span></td>
+    <td class="l"><span class="pill p-${k}">${r.type}</span></td>
+    <td class="mono">$${r.strike}</td><td class="l mono dim">${r.exp||''}</td><td class="mono">${r.dte}</td>
+    <td class="mono">${num(r.delta,2)}</td><td class="mono">${num(r.mid,2)}</td><td class="mono">${num(r.iv,0,'%')}</td>
+    <td class="mono">${r.oi==null?'<span class="dim">—</span>':r.oi}</td><td class="mono">${r.spread==null?'<span class="dim">—</span>':r.spread.toFixed(0)+'%'}</td>
+    <td class="mono">${num(r.pop,0,'%')}</td><td class="l dim">${r.yield||'—'}</td></tr>`;}).join('');
+  document.getElementById('chain-tb').innerHTML=rows||`<tr><td class="l dim" colspan="12">no match</td></tr>`;
+}
+
+/* ---------- deep dive ---------- */
+function gateRow(ok,label){return `<span class="gate">${ok?'<span class="ok">✓</span>':'<span class="no">✗</span>'} ${label}</span>`;}
+function legCard(s){const k=s.strategy.toLowerCase();
+  const kv=[['Strike','$'+s.strike],['Expiry',s.expiry],['DTE',s.dte],['Delta',num(s.delta,3)],
+    ['Mid','$'+num(s.mid,2)],['Premium',num(s.premium_pct,2,'%')],['POP',num(s.pop,0,'%')],
+    ['IV',num(s.iv,0,'%')],['OI',s.oi],['Spread',num(s.spread_pct,0,'%')],['%B',num(s.pct_b,2)]];
+  const rs=(s.timing_reasons||[]).map(r=>`<span class="r">· ${r}</span>`).join('');
+  return `<div class="card"><h3><span class="pill p-${k}">${s.strategy}</span> ${shortSetup(s.timing_label)}</h3>
+    <div class="trade t-${k}">${fmtTrade(k,s.strike)}</div>
+    <div class="kv">${kv.map(x=>`<span class="kk">${x[0]}</span><span class="vv">${x[1]==null?'—':x[1]}</span>`).join('')}</div>
+    ${rs?`<div class="reasons">${rs}</div>`:''}</div>`;
+}
+function leapCard(l){
+  const kv=[['Strike','$'+l.strike],['Expiry',l.expiry],['DTE',l.dte],['Delta',num(l.delta,3)],
+    ['Mid','$'+num(l.mid,2)],['Cost','$'+(l.cost||'')],['Intrinsic','$'+num(l.intrinsic,2)],
+    ['Extrinsic','$'+num(l.extrinsic,2)+' ('+num(l.extrinsic_pct,0,'%')+')'],['Carry',num(l.carry_pct,1,'%/yr')],
+    ['IV',num(l.iv,0,'%')],['RSI',num(l.rsi,0)]];
+  const gates=gateRow(l.gate_a,'Gate A ext≤40%')+gateRow(l.gate_c,'Gate C carry≤8%')+
+    gateRow(l.trend_ok,'Clear trend')+gateRow(l.above_50ma,'>50MA')+gateRow(l.above_200ma,'>200MA')+
+    gateRow(l.ma_aligned,'50≥200')+gateRow(l.rsi_rising,'RSI rising');
+  const tt=(l.timing_label||'').replace(/[^\x20-\x7E]/g,'').replace(/ENTRY/i,'').trim().toLowerCase();
+  const verdict=l.qualifies?'<span class="ok">✓ qualifies</span>'
+    :'<span class="no">✗ does not qualify</span> <span class="dim" style="font-weight:400;font-size:12px">· timing '+tt+'</span>';
+  return `<div class="card"><h3><span class="pill p-leap">LEAP</span> ${verdict}</h3>
+    <div class="trade t-leap">${fmtTrade('leap',l.strike)}</div>
+    <div class="kv">${kv.map(x=>`<span class="kk">${x[0]}</span><span class="vv">${x[1]==null?'—':x[1]}</span>`).join('')}</div>
+    <div class="reasons">${gates}</div></div>`;
+}
+function renderDeep(tk){
+  const o=BYTK[tk]; const host=document.getElementById('deep-body');
+  if(!o){host.innerHTML=`<div class="empty">Pick a ticker to see its full breakdown.</div>`;return;}
+  const cards=[]; if(o.csp)cards.push(legCard(o.csp)); if(o.cc)cards.push(legCard(o.cc)); if(o.leap)cards.push(leapCard(o.leap));
+  host.innerHTML=`<div class="head" style="margin:6px 0 0"><h1 style="font-size:22px">${tk} <span class="dim" style="font-size:14px;font-weight:400">${o.sector||''}</span></h1></div>`+
+    (cards.length?`<div class="cards">${cards.join('')}</div>`:`<div class="empty">No qualifying contracts for ${tk} right now.</div>`);
+  document.getElementById('sym2').textContent=tk; mountChart('tvchart2',tk);
+}
+function buildChips(){
+  const tks=Object.keys(BYTK).sort();
+  document.getElementById('chips').innerHTML=tks.map(t=>`<span class="tchip" data-t="${t}">${t}</span>`).join('');
+  document.getElementById('deep-chips').innerHTML=tks.map(t=>`<span class="tchip" data-t="${t}">${t}</span>`).join('');
+  document.querySelectorAll('#chips .tchip').forEach(c=>c.onclick=()=>setSym(c.dataset.t));
+  document.querySelectorAll('#deep-chips .tchip').forEach(c=>c.onclick=()=>{setSym(c.dataset.t); renderDeep(c.dataset.t);});
+}
+
+/* ---------- TradingView (two hosts: signals + deep) ---------- */
+let CUR=null, TV_READY=false;
 function tvTheme(){return matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light';}
-function mountChart(){
-  if(!CUR||!TV_READY||!window.TradingView)return;
-  const host=document.getElementById('tvchart'); if(!host)return;
+function mountChart(hostId,sym){
+  if(!TV_READY||!window.TradingView)return; const host=document.getElementById(hostId); if(!host||!sym)return;
   host.innerHTML='';
-  new TradingView.widget({
-    container_id:'tvchart', autosize:true,
-    symbol:CUR, interval:'D', timezone:'Etc/UTC', locale:'en',
-    theme:tvTheme(), style:'1', withdateranges:true,
-    hide_side_toolbar:false, allow_symbol_change:true,
-    studies:['BB@tv-basicstudies','RSI@tv-basicstudies']
-  });
+  new TradingView.widget({container_id:hostId,autosize:true,symbol:sym,interval:'D',timezone:'Etc/UTC',
+    locale:'en',theme:tvTheme(),style:'1',withdateranges:true,hide_side_toolbar:false,
+    allow_symbol_change:true,studies:['BB@tv-basicstudies','RSI@tv-basicstudies']});
 }
 (function(){const s=document.createElement('script'); s.src='https://s3.tradingview.com/tv.js';
-  s.onload=()=>{TV_READY=true; mountChart();}; document.head.appendChild(s);})();
-matchMedia('(prefers-color-scheme: dark)').addEventListener('change',mountChart);
-function markRow(){document.querySelectorAll('#tb tr').forEach(tr=>tr.classList.toggle('sel',tr.dataset.tk===CUR));
+  s.onload=()=>{TV_READY=true; if(CUR)mountChart('tvchart',CUR);}; document.head.appendChild(s);})();
+matchMedia('(prefers-color-scheme: dark)').addEventListener('change',()=>{ if(CUR){mountChart('tvchart',CUR);
+  if(!document.getElementById('v-deep').hidden)mountChart('tvchart2',CUR);} });
+function markSel(){document.querySelectorAll('tr.clk').forEach(tr=>tr.classList.toggle('sel',tr.dataset.tk===CUR));
   document.querySelectorAll('.tchip').forEach(c=>c.classList.toggle('on',c.dataset.t===CUR));}
 function setSym(t){t=(t||'').toUpperCase().trim(); if(!t)return; CUR=t;
-  document.getElementById('sym').textContent=t; document.getElementById('symsub').textContent='check the setup'; mountChart(); markRow();}
+  document.getElementById('sym').textContent=t;
+  mountChart('tvchart',t); if(!document.getElementById('v-deep').hidden){document.getElementById('sym2').textContent=t; mountChart('tvchart2',t);} markSel();}
 document.getElementById('symin').addEventListener('keydown',e=>{if(e.key==='Enter'){setSym(e.target.value); e.target.value='';}});
-/* TradingView widget autosizes — no manual resize redraw needed */
+document.getElementById('deep-in').addEventListener('keydown',e=>{if(e.key==='Enter'){const t=e.target.value.toUpperCase().trim(); setSym(t); renderDeep(t); e.target.value='';}});
+document.getElementById('chain-f').addEventListener('input',e=>renderChain(e.target.value));
+
+/* ---------- tab router ---------- */
+const TABS=['signals','watchlist','chain','deep','market','rules'];
+function go(tab){
+  TABS.forEach(t=>document.getElementById('v-'+t).hidden=(t!==tab));
+  document.querySelectorAll('#nav a').forEach(a=>a.classList.toggle('on',a.dataset.tab===tab));
+  if(tab==='deep'){ renderDeep(CUR||Object.keys(BYTK)[0]); }
+  window.scrollTo(0,0);
+}
+document.querySelectorAll('[data-tab]').forEach(el=>el.addEventListener('click',e=>{e.preventDefault(); go(el.dataset.tab);}));
 </script>
 </body>
 </html>
