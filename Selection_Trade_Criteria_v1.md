@@ -229,6 +229,22 @@ rule, picking up here.
 
 ---
 
+## 9. NEW BACKLOG ITEM — Stock rating tab (inspired by Optionsfy's "HotScore")
+
+Looked at Optionsfy (optionsfy.com) as a comp — they're a paid black-box signal service: daily
+AI-picked trades across 8 strategies with a proprietary "HotScore" rating per opportunity,
+delivered by email. Their methodology isn't published and the performance claims are
+unverified, so nothing to copy mechanically — but the *idea* of a single, visible per-stock
+rating is worth building, transparently, into our own dashboard as a new "stock analysis" tab.
+
+Not started — needs a rules-first discussion next session: what factors feed the rating, what
+scale (0–100? letter grade?), how it differs from (or feeds into) the existing NIS/suitability
+scores already in the Screener tab, and whether it's ticker-level (like Gates/Status, §8 above)
+or per-strategy. Likely connects directly to the §8 screener rework, since both are about
+turning today's single generic verdict into something richer/more decision-specific.
+
+---
+
 ## 9. External research review (overnight pass, 21 June) — NIS, missing CSP metrics, screener split
 
 You brought outside research on NIS, missing CSP metrics, composite score, and a correlation
@@ -524,6 +540,47 @@ Gates/Status appears in all three tables for a given ticker. §8 floated true pe
 call, next session" — never locked as a decision — so it wasn't built here. Flag if you want
 that as a separate follow-up item.
 
+**RESOLVED — 26 June.** Per-leg gating is now built: `calc_four_gates()` takes a `leg`
+param and CSP/CC each get their own `gate_result` (`gate_result_csp`/`gate_result_cc`), plus a
+new 4th gate, **G4 Median** — checks price vs. the 20-day median (middle Bollinger band), with
+opposite pass conditions per leg. Triggered by the BE case: 90 score, all-green Gates, riding
+the top of the bands, "no setup" in Timing — Gates had no concept of "already extended, little
+runway left." Direction (corrected same day after first pass): CSP fails when price is *above*
+the median (catch a bounce early, with up-move runway still ahead); CC fails when price is
+*below* the median (catch a top early, with down-move runway still ahead). **LEAP still uses
+the original 3 gates — no G4.** Not requested, left as-is rather than guessed at; open question
+for whenever the Screener tab comes back up: does LEAP want an equivalent runway check, and if
+so, which direction (a long-call buyer arguably wants the CC-style "fail below median" mirror,
+catching an early move rather than chasing one already extended — but this hasn't been
+discussed and shouldn't be assumed).
+
+**RESOLVED — 26 June.** LEAP got its own G4, but a different kind than CSP/CC's median check:
+**G4 Premium Mix** — fails when extrinsic (time value) is more than 60% of the real ~80Δ/542-
+DTE contract's mid premium (intrinsic vs extrinsic, both already computed in `get_screener_row()`
+for the LEAP cost-metrics columns). 60% = the 50/50 "are you paying for real value or rented
+time" split Jay proposed, plus a 10-point buffer so a contract a percent or two over the line
+doesn't flip needlessly. Considered and rejected: gating on the contract's own IV directly, or
+on an IV/HV ratio proxy — Jay's reasoning was that IV is just the input that inflates extrinsic;
+the dollar consequence (intrinsic vs extrinsic split) is the thing that actually matters and was
+already sitting in the data unused.
+
+Also replaces the VIX bullet in **Deep Dive's** LEAP breakdown (`leap_signal()`) — Jay flagged
+VIX there as "too generic," index-wide, not ticker-specific. Considered and rejected: swapping
+in HV Rank as a like-for-like replacement — HV Rank is realized vol (computed from price
+history) and Premium Mix is driven by implied vol on the specific contract; they correlate
+directionally but decouple exactly around event risk (earnings, etc. — calm realized vol, pumped
+implied vol), which is exactly the kind of gap G4 Median was built to catch for CSP/CC. HV Rank
+stays as a separate bullet, not a substitute.
+
+Architecture: Deep Dive does **not** independently recompute the LEAP contract pick. Jay's call
+("data is data... if we talk the same data it should be same, no?") — Deep Dive reads
+`gate_result_leap`'s G4 straight out of `st.session_state["screener_results"]` (the same data
+the Screener tab computed), rather than duplicating the 80Δ/542-DTE contract-selection logic
+inside `analyse()`. Tradeoff accepted: this only works once "Run Screener" has been clicked at
+least once this session. Resolved as a silent fallback (no extra line shown) rather than an
+error/nudge message, since HV Rank's existing bullet already covers the gap until Screener has
+run. `_SCREENER_SCHEMA_VERSION` bumped 2→3 since `gate_result_leap`'s shape changed (new G4 key).
+
 The two charts below the tables (CSP Suitability Ranking, Strategy Score Comparison) are
 unchanged — still comparing all three legs' scores side by side, which seemed useful to keep
 regardless of the table split.
@@ -612,3 +669,50 @@ this for now; Screener tab work proceeds on the current yfinance + Black-Scholes
 pipeline (§ above re: fallback chain still applies, including its failure modes). Revisit Tradier
 once signup works. This does not block any of §9/§10's screener changes below — none of them
 depend on the data source.
+
+---
+
+## 12. ONE ENGINE — consolidation for optionintel.app (23 Aug 2026 session)
+
+**Problem found:** the rules were cemented (§2, §10, §10.5) *and* implemented in app.py's
+Overview/Screener (`csp_signal`/`cc_signal`/`get_screener_row`), but a **separate, cruder engine**
+— `signals.scan()` in `signals.py` — powered the 🎯 Signals tab **and** the new static site
+(optionintel.app via `build_json.py`). It applied only the blunt `%B<0.5` median flag (none of
+§10's mean-reversion) and a LEAP gate of extrinsic ≤12% — contradicting §10.5's ≤60% and yielding
+"0 qualify". Three engines, drifted apart; the website inherited the weakest.
+
+**Decision (locked): one engine for all pages.** `signals.py` now carries the §10 logic itself
+(ports of `_rsi_series`/`_pctb_series`/`_candle_reversal`/`_mean_reversion_score` → `_timing()`),
+so the Signals tab, Overview, Screener and the static site read identical numbers. Next step
+(not yet done): point app.py's `csp_signal`/`cc_signal` at these shared functions to delete the
+literal fork.
+
+### 12.1 CSP / CC — unchanged rules, now in the shared engine
+§10 mean-reversion, verbatim: median block (CSP below / CC above), band bounce (3-session),
+RSI rollover from <30 / >70 (5-session), candle reversal (3-session, "3 days trading"),
+walking-band veto (CSP). Output = a **score/label** on every signal (`timing_label`,
+`timing_score`, `timing_reasons`), 🟢 FULL ≥10 · 🟡 PARTIAL ≥6 · 🟠 ≥3 · 🔴.
+
+### 12.2 LEAP — retuned (supersedes the ≤12% `good_pmcc` gate)
+A LEAP **qualifies** only if it passes **Gate A AND Gate C** on a Δ75-80 contract **AND** a
+5-day trend confirms. Cost is measured in **extrinsic value, not IV** (IV is only the input that
+inflates extrinsic; the dollar consequence is what matters — Jay, restating §10.5). IV's job is
+timing (cheap-vs-realized), not cost.
+
+| Element | Rule |
+|---|---|
+| **Delta** ("B" folds into the pick) | target **0.78**, window 0.70–0.85 |
+| **DTE** | 180–900, target ~542 (Jan-2027+) |
+| **Gate A — time-premium share** | extrinsic ≤ **40%** of premium |
+| **Gate C — carry rate** | annualised carry = (extrinsic ÷ spot) × 365/DTE ≤ **8%/yr** |
+| **Qualify** | Gate A **and** Gate C **and** 5-day trend |
+| **Trend (5-session)** | above 200-MA **and** RSI rising over 5 sessions |
+| **Green dot (timing)** | cheap IV vs realized + RSI recovery + trend intact (§2) |
+
+**A (40%) and C (8%/yr) are the two tuning knobs** — starting values, to be adjusted after
+watching real fires on the live watchlist (that tuning pass is the reason for this session's run).
+
+### 12.3 TODO — a "Rules" tab on optionintel.app
+Once the Signals page is finished/correct, add a **public "Rules" tab** to the site presenting
+this whole ruleset in a clean tabular layout, as a permanent reference for anyone using the app.
+Build it from this section (§12) once A/C are tuned and locked.
