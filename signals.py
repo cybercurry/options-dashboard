@@ -20,6 +20,7 @@ Everything degrades quietly: one bad ticker never aborts the scan.
 """
 
 import datetime
+import math
 import statistics
 
 import tradier
@@ -38,11 +39,16 @@ P = {
     "iv_anchor": 0.30, "iv_high": 0.60,   # vol buckets: <30 anchor · 30-60 med · ≥60 high
     "max_per_sector": 2,         # shortlist diversification
     "shortlist_n": 10,
-    # LEAP (growth + PMCC basis) — long-dated deep-ITM call. Targets match the Screener's LEAP
-    # (Δ80, 542 DTE, 180-900 window) so the same name shows the same LEAP in both tabs.
+    # mean-reversion timing (criteria doc §10) — lookback windows
+    "mr_bb_lookback": 3,         # BB %B peak/trough within the last 3 sessions
+    "mr_rsi_lookback": 5,        # RSI >70 / <30 rollover within the last 5 sessions
+    "mr_candle_lookback": 3,     # candle-reversal search window (Jay: "3 days trading")
+    # LEAP (growth + PMCC basis) — long-dated deep-ITM call, Δ75-80 (criteria doc §2/§10.5)
     "leap_dte_lo": 180, "leap_dte_hi": 900, "leap_dte_opt": 542,
-    "leap_delta_opt": 0.80, "leap_delta_lo": 0.60, "leap_delta_hi": 0.95,
-    "leap_max_extrinsic": 0.12,  # ≤12% of the premium is time value → good PMCC basis
+    "leap_delta_opt": 0.78, "leap_delta_lo": 0.70, "leap_delta_hi": 0.85,
+    "leap_max_ext_share": 0.40,  # Gate A: extrinsic ≤40% of premium (pay for value, not rented time)
+    "leap_max_carry": 0.08,      # Gate C: annualised carry (extrinsic/spot × 365/DTE) ≤ 8%/yr
+    "leap_trend_lookback": 5,    # 5-session trend confirmation (Jay: longer-term, clear trend)
 }
 
 
@@ -114,6 +120,219 @@ def _sma20_pctb(closes):
     lower = sma - 2 * sd
     pctb = (c[-1] - lower) / (4 * sd)
     return sma, pctb
+
+
+# ── technicals for the §10 mean-reversion timing signal ──────────────────────────
+# Plain-Python ports of app.py's calc_rsi / calc_bb_pctb / _candle_reversal /
+# _mean_reversion_score, so the SAME rules drive the Signals tab, Overview, Screener
+# AND the static site — one engine, one source of truth (criteria doc §10).
+_IND_CACHE = {}   # ticker -> indicator bundle, cleared at the start of every scan()
+
+
+def _sma(vals, n):
+    v = [x for x in vals if x is not None]
+    return sum(v[-n:]) / n if len(v) >= n else None
+
+
+def _rsi_series(closes, period=14):
+    """Wilder's RSI, aligned to `closes` (None during warm-up)."""
+    n = len(closes)
+    out = [None] * n
+    if n < period + 1:
+        return out
+    gains = [max(closes[i] - closes[i - 1], 0.0) for i in range(1, n)]
+    losses = [max(closes[i - 1] - closes[i], 0.0) for i in range(1, n)]
+    avg_g = sum(gains[:period]) / period
+    avg_l = sum(losses[:period]) / period
+
+    def _rsi(g, l):
+        if l == 0:
+            return 100.0
+        rs = g / l
+        return 100.0 - 100.0 / (1.0 + rs)
+
+    out[period] = _rsi(avg_g, avg_l)
+    for i in range(period + 1, n):
+        avg_g = (avg_g * (period - 1) + gains[i - 1]) / period
+        avg_l = (avg_l * (period - 1) + losses[i - 1]) / period
+        out[i] = _rsi(avg_g, avg_l)
+    return out
+
+
+def _pctb_series(closes, window=20):
+    """Bollinger %B per day (None during warm-up). 0.5 = the 20-day midline (the 'median')."""
+    n = len(closes)
+    out = [None] * n
+    for i in range(window - 1, n):
+        w = closes[i - window + 1:i + 1]
+        sma = sum(w) / window
+        sd = statistics.pstdev(w)
+        if sd == 0:
+            out[i] = 0.5
+            continue
+        lower = sma - 2 * sd
+        out[i] = (closes[i] - lower) / (4 * sd)
+    return out
+
+
+def _hv20(closes):
+    """Annualised 20-day realised (historical) volatility, as a decimal."""
+    c = [x for x in closes if x]
+    if len(c) < 21:
+        return None
+    rets = [math.log(c[i] / c[i - 1]) for i in range(len(c) - 20, len(c)) if c[i - 1] > 0]
+    if len(rets) < 2:
+        return None
+    return statistics.pstdev(rets) * math.sqrt(252)
+
+
+def _candle_reversal(ohlc, direction, lookback=3):
+    """Port of app.py _candle_reversal — any one bullish/bearish 2-3 day pattern fires (OR logic)."""
+    n = len(ohlc)
+    if n < 4:
+        return False, None
+    for off in range(lookback):
+        t = n - 1 - off; t1 = t - 1; t2 = t - 2
+        if t1 < 0:
+            continue
+        o_t, h_t, l_t, c_t = ohlc[t]["o"], ohlc[t]["h"], ohlc[t]["l"], ohlc[t]["c"]
+        o1, h1, l1, c1 = ohlc[t1]["o"], ohlc[t1]["h"], ohlc[t1]["l"], ohlc[t1]["c"]
+        body_t = abs(c_t - o_t); body1 = abs(c1 - o1); rng1 = max(h1 - l1, 1e-9)
+        uw1 = h1 - max(o1, c1); lw1 = min(o1, c1) - l1
+        if direction == "bearish":
+            if c1 > o1 and c_t < o_t and o_t >= c1 and c_t <= o1 and body_t > body1 * 0.9:
+                return True, "Bearish engulfing"
+            mid1 = (o1 + c1) / 2
+            if c1 > o1 and o_t > c1 and c_t < o_t and o1 < c_t < mid1:
+                return True, "Dark cloud cover"
+            if abs(h_t - h1) / rng1 < 0.015 and c_t < o_t:
+                return True, "Tweezer top"
+            if uw1 >= 2 * body1 and lw1 <= body1 * 0.3 and c_t < o_t and c_t < c1:
+                return True, "Shooting star + confirmation"
+            if t2 >= 0:
+                o2, c2 = ohlc[t2]["o"], ohlc[t2]["c"]
+                body2 = abs(c2 - o2); rngt = max(h_t - l_t, 1e-9)
+                if c2 > o2 and body2 > rngt * 0.5 and body1 < rng1 * 0.3 and c_t < o_t and c_t < (o2 + c2) / 2:
+                    return True, "Evening star"
+        else:
+            if c1 < o1 and c_t > o_t and o_t <= c1 and c_t >= o1 and body_t > body1 * 0.9:
+                return True, "Bullish engulfing"
+            mid1 = (o1 + c1) / 2
+            if c1 < o1 and o_t < c1 and c_t > o_t and mid1 < c_t < o1:
+                return True, "Piercing line"
+            if abs(l_t - l1) / rng1 < 0.015 and c_t > o_t:
+                return True, "Tweezer bottom"
+            if lw1 >= 2 * body1 and uw1 <= body1 * 0.3 and c_t > o_t and c_t > c1:
+                return True, "Hammer + confirmation"
+            if t2 >= 0:
+                o2, c2 = ohlc[t2]["o"], ohlc[t2]["c"]
+                body2 = abs(c2 - o2); rngt = max(h_t - l_t, 1e-9)
+                if c2 < o2 and body2 > rngt * 0.5 and body1 < rng1 * 0.3 and c_t > o_t and c_t > (o2 + c2) / 2:
+                    return True, "Morning star"
+    return False, None
+
+
+def _indicators(ticker):
+    """One daily-history fetch per ticker → every technical the signal rules need. Cached per
+    scan() run so scan_ticker (CSP/CC) and scan_leap_ticker (LEAP) share identical numbers."""
+    if ticker in _IND_CACHE:
+        return _IND_CACHE[ticker]
+    bundle = {"ok": False}
+    try:
+        today = datetime.date.today()
+        start = (today - datetime.timedelta(days=420)).isoformat()   # ~290 trading days → 200-MA
+        hist = tradier.get_history(ticker, interval="daily", start=start, end=today.isoformat())
+        rows = []
+        for d in (hist or []):
+            c = _f(d.get("close")); o = _f(d.get("open")); h = _f(d.get("high")); l = _f(d.get("low"))
+            if c is None:
+                continue
+            rows.append({"o": o if o is not None else c, "h": h if h is not None else c,
+                         "l": l if l is not None else c, "c": c})
+        closes = [r["c"] for r in rows]
+        if len(closes) < 20:
+            _IND_CACHE[ticker] = bundle
+            return bundle
+        pctb = _pctb_series(closes, 20)
+        rsi = _rsi_series(closes, 14)
+        pctb_c = [x for x in pctb if x is not None]
+        rsi_c = [x for x in rsi if x is not None]
+        spot = closes[-1]
+        ma50 = _sma(closes, 50); ma200 = _sma(closes, 200)
+        bundle = {
+            "ok": True, "ohlc": rows, "closes": closes,
+            "pctb": pctb_c[-1] if pctb_c else None,
+            "pctb_prev": pctb_c[-2] if len(pctb_c) >= 2 else None,
+            "pctb_3": pctb_c[-3:] if len(pctb_c) >= 3 else pctb_c,
+            "rsi": rsi_c[-1] if rsi_c else None,
+            "rsi_prev": rsi_c[-2] if len(rsi_c) >= 2 else None,
+            "rsi_5": rsi_c[-5:] if len(rsi_c) >= 5 else rsi_c,
+            "rsi_5ago": rsi_c[-6] if len(rsi_c) >= 6 else (rsi_c[0] if rsi_c else None),
+            "sma20": _sma(closes, 20), "ma50": ma50, "ma200": ma200, "hv20": _hv20(closes),
+            "walking_lower": bool(len(pctb_c) >= 2 and pctb_c[-1] <= 0.2 and pctb_c[-2] <= 0.2),
+            "above_50": bool(ma50 is not None and spot > ma50),
+            "above_200": bool(ma200 is not None and spot > ma200),
+        }
+    except Exception:
+        bundle = {"ok": False}
+    _IND_CACHE[ticker] = bundle
+    return bundle
+
+
+def _mr_score(ind, direction):
+    """§10.1/10.2 mean-reversion score — fade a bottom (csp) or a top (cc). (score, reasons, pattern)."""
+    pctb_today = ind.get("pctb"); pctb_prev = ind.get("pctb_prev")
+    pctb_3 = ind.get("pctb_3") or []
+    rsi_today = ind.get("rsi"); rsi_prev = ind.get("rsi_prev")
+    rsi_5 = ind.get("rsi_5") or []
+    if (pctb_today is None or pctb_prev is None or len(pctb_3) < 3
+            or rsi_today is None or rsi_prev is None or len(rsi_5) < 5):
+        return 0, ["Insufficient history for mean-reversion read"], None
+    score = 0; reasons = []
+    lb = P["mr_candle_lookback"]
+    if direction == "cc":
+        fired, pattern = _candle_reversal(ind["ohlc"], "bearish", lb)
+        if pctb_today >= 0.85: score += 2; reasons.append("Near/touching upper BB (%.2f)" % pctb_today)
+        if max(pctb_3) >= 0.95 and pctb_today < pctb_prev: score += 3; reasons.append("Spiked then rolled over")
+        if pctb_today > 0.5: score += 1; reasons.append("Above midline")
+        if max(rsi_5) > 70 and rsi_today < rsi_prev: score += 3; reasons.append("RSI exceeded 70, turning down (%.0f)" % rsi_today)
+        if fired: score += 3; reasons.append(pattern)
+    else:
+        fired, pattern = _candle_reversal(ind["ohlc"], "bullish", lb)
+        if pctb_today <= 0.15: score += 2; reasons.append("Near/touching lower BB (%.2f)" % pctb_today)
+        if min(pctb_3) <= 0.05 and pctb_today > pctb_prev: score += 3; reasons.append("Dropped then bounced")
+        if pctb_today < 0.5: score += 1; reasons.append("Below midline")
+        if min(rsi_5) < 30 and rsi_today > rsi_prev: score += 3; reasons.append("RSI dropped below 30, turning up (%.0f)" % rsi_today)
+        if fired: score += 3; reasons.append(pattern)
+    return score, reasons, (pattern if fired else None)
+
+
+def _setup_label(score, kind, blocked=False):
+    tier = "full" if score >= 10 else "partial" if score >= 6 else "early" if score >= 3 else "none"
+    if blocked and tier in ("full", "partial"):
+        return "🟡 Timing ok — wrong side of median"
+    verb = "write now" if kind == "cc" else "sell put"
+    return {"full": "🟢 FULL SETUP — " + verb, "partial": "🟡 PARTIAL SETUP",
+            "early": "🟠 BUILDING UP / WAIT", "none": "🔴 NO SETUP"}[tier]
+
+
+def _timing(ind, iv_ratio, direction):
+    """Wrap _mr_score with the IV-richness add-on + the G4 median block (§10.3/§10.5)."""
+    score, reasons, _ = _mr_score(ind, direction)
+    if iv_ratio is not None:            # premium seller wants RICH premium (IV > realized)
+        if iv_ratio >= 1.25: score += 2; reasons.append("IV rich vs realized — premium fat")
+        elif iv_ratio >= 1.0: score += 1; reasons.append("IV fair vs realized")
+        else: reasons.append("IV below realized — thin premium")
+    pctb = ind.get("pctb")
+    if direction == "csp":
+        if ind.get("walking_lower"):
+            score = max(0, score - 4); reasons.append("Still walking the lower band — breakdown, veto")
+        blocked = pctb is not None and pctb > 0.5      # CSP needs BELOW median
+        if blocked: reasons.append("⛔ Above median (%%B %.2f) — CSP needs below" % pctb)
+        return _setup_label(score, "csp", blocked), score, reasons
+    blocked = pctb is not None and pctb < 0.5          # CC needs ABOVE median
+    if blocked: reasons.append("⛔ Below median (%%B %.2f) — CC needs above" % pctb)
+    return _setup_label(score, "cc", blocked), score, reasons
 
 
 def _sector(ticker):
@@ -230,15 +449,13 @@ def scan_ticker(ticker):
         atm_ivs = [v for v in atm_ivs if v]
         iv_atm = (sum(atm_ivs) / len(atm_ivs)) if atm_ivs else None
 
-        # median gate from Tradier daily history
-        start = (today - datetime.timedelta(days=60)).isoformat()
-        hist = tradier.get_history(ticker, interval="daily", start=start, end=today.isoformat())
-        closes = [_f(d.get("close")) for d in hist] if hist else []
-        sma20, pctb = _sma20_pctb(closes)
-        # Median gate uses Bollinger %B off the last CLOSE (%B < 0.5 = below the 20-day median) —
-        # identical to the Deep Dive tab, so the two never disagree. (Was comparing the live
-        # last-trade price vs the SMA, which could flip a name sitting right on the line.)
+        # Technicals: median gate + §10 mean-reversion timing, from one shared bundle so the
+        # Signals tab, Overview, Screener and the static site all read identical numbers.
+        ind = _indicators(ticker)
+        pctb = ind.get("pctb")
         below_median = (pctb < 0.5) if pctb is not None else None   # CSP wants below, CC above
+        hv20 = ind.get("hv20")
+        iv_ratio = (iv_atm / hv20) if (iv_atm and hv20) else None   # ATM IV vs realized (richness)
 
         sector = _sector(ticker)
         # Earnings: within 7 days → exclude (entry blackout); before expiry but further out →
@@ -255,6 +472,9 @@ def scan_ticker(ticker):
             if s:
                 s["median_ok"] = bool(below_median) if below_median is not None else None
                 s["pct_b"] = round(pctb, 2) if pctb is not None else None
+                if ind.get("ok"):
+                    lbl, sc, rs = _timing(ind, iv_ratio, "csp")
+                    s["timing_label"], s["timing_score"], s["timing_reasons"] = lbl, sc, rs
                 out.append(s)
         # CC — needs price ABOVE the median
         call = _nearest_delta(chain, "call", P["delta_opt"])
@@ -264,6 +484,9 @@ def scan_ticker(ticker):
                 above_median = (not below_median) if below_median is not None else None
                 s["median_ok"] = bool(above_median) if above_median is not None else None
                 s["pct_b"] = round(pctb, 2) if pctb is not None else None
+                if ind.get("ok"):
+                    lbl, sc, rs = _timing(ind, iv_ratio, "cc")
+                    s["timing_label"], s["timing_score"], s["timing_reasons"] = lbl, sc, rs
                 out.append(s)
     except Exception:
         return out
@@ -334,18 +557,49 @@ def scan_leap_ticker(ticker):
         if strike is None or mid is None:
             return None
         intrinsic = max(0.0, spot - strike)
-        extrinsic = mid - intrinsic
-        ext_pct = (extrinsic / mid) if mid else None
+        extrinsic = max(0.0, mid - intrinsic)
+        ext_share = (extrinsic / mid) if mid else None                          # Gate A basis
+        carry = (extrinsic / spot) * (365.0 / dte) if (spot and dte) else None  # Gate C: annualised carry
+        gate_a = bool(ext_share is not None and ext_share <= P["leap_max_ext_share"])
+        gate_c = bool(carry is not None and carry <= P["leap_max_carry"])
+        # 5-session trend confirmation — a longer-term, "clear trend" read for a long-term buy.
+        ind = _indicators(ticker)
+        above_200 = ind.get("above_200"); above_50 = ind.get("above_50")
+        rsi_now = ind.get("rsi"); rsi_5ago = ind.get("rsi_5ago")
+        rsi_rising = bool(rsi_now is not None and rsi_5ago is not None and rsi_now > rsi_5ago)
+        trend_ok = bool(above_200 and rsi_rising)
+        hv20 = ind.get("hv20")
+        iv_ratio = (iv / hv20) if (iv and hv20) else None       # IV cheap-vs-realized = timing, NOT cost
+        qualifies = bool(gate_a and gate_c and trend_ok)
+        # entry-timing score (the green dot): cheap IV + RSI recovery + trend intact (criteria doc §2)
+        tscore = 0
+        if iv_ratio is not None:
+            tscore += 3 if iv_ratio < 1.0 else 2 if iv_ratio < 1.25 else -1
+        if rsi_now is not None:
+            tscore += 2 if 33 <= rsi_now <= 52 else 1 if 52 < rsi_now <= 65 else 1 if rsi_now < 30 else -1
+        tscore += 2 if above_200 else -1
+        if above_50:
+            tscore += 1
+        tlabel = ("🟢 STRONG ENTRY" if tscore >= 7 else "🟡 DECENT ENTRY" if tscore >= 4
+                  else "🟠 MARGINAL" if tscore >= 2 else "🔴 AVOID")
         return {
             "ticker": ticker, "strategy": "LEAP", "spot": round(spot, 2),
             "expiry": expiry, "dte": dte, "strike": strike,
             "delta": round(dl, 3) if dl is not None else None,
             "mid": round(mid, 2), "cost": round(mid * 100, 0),
             "intrinsic": round(intrinsic, 2), "extrinsic": round(extrinsic, 2),
-            "extrinsic_pct": round(ext_pct * 100, 1) if ext_pct is not None else None,
+            "extrinsic_pct": round(ext_share * 100, 1) if ext_share is not None else None,
+            "carry_pct": round(carry * 100, 2) if carry is not None else None,
             "iv": round(iv * 100, 1) if iv is not None else None,
+            "iv_ratio": round(iv_ratio, 2) if iv_ratio is not None else None,
+            "above_200ma": bool(above_200), "above_50ma": bool(above_50),
+            "rsi": round(rsi_now, 1) if rsi_now is not None else None,
+            "rsi_rising": rsi_rising,
+            "gate_a": gate_a, "gate_c": gate_c, "trend_ok": trend_ok,
+            "qualifies": qualifies,
+            "timing_label": tlabel, "timing_score": tscore,
             "sector": _sector(ticker),
-            "good_pmcc": bool(ext_pct is not None and ext_pct <= P["leap_max_extrinsic"]),
+            "good_pmcc": qualifies,   # back-compat alias for any UI still reading good_pmcc
         }
     except Exception:
         return None
@@ -364,6 +618,7 @@ def scan(universe):
         wheel = [str(t).strip().upper() for t in universe if str(t).strip()]
         growth = []
 
+    _IND_CACHE.clear()                       # fresh technicals per scan
     all_sigs = []
     for t in wheel:
         all_sigs.extend(scan_ticker(t))
@@ -375,7 +630,8 @@ def scan(universe):
         lp = scan_leap_ticker(t)
         if lp:
             leaps.append(lp)
-    leaps.sort(key=lambda s: (not s.get("good_pmcc"), s.get("extrinsic_pct") or 99))
+    leaps.sort(key=lambda s: (not s.get("qualifies"),
+                              s.get("carry_pct") if s.get("carry_pct") is not None else 999))
 
     return {
         "signals": all_sigs,
