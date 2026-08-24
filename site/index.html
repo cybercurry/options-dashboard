@@ -93,6 +93,17 @@ nav a:hover{color:var(--text); background:var(--surface-2)} nav a.on{color:var(-
 .fxnews{display:block; text-decoration:none; background:var(--surface-2); border:1px solid var(--line); border-left:3px solid var(--accent); border-radius:10px; padding:10px 14px; margin:8px 0; transition:transform .12s}
 .fxnews:hover{transform:translateX(3px)}
 .fxnews .t{color:var(--text); font-weight:600; font-size:14px; line-height:1.4} .fxnews .m{color:var(--faint); font-size:12px; margin-top:4px}
+/* big icon tiles — hover drops the data full-width BELOW the row (never over the other tiles) */
+.fxtiles{position:relative; display:grid; grid-template-columns:repeat(3,1fr); gap:14px; margin:20px 0 34px}
+.fxtile{border:1px solid var(--line); border-radius:16px; background:var(--surface); box-shadow:var(--shadow); padding:30px 20px; text-align:center; cursor:default; outline:none; transition:border-color .15s, box-shadow .15s; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:11px}
+.fxtile:hover,.fxtile:focus-within{border-color:var(--accent); box-shadow:var(--glow); z-index:20}
+.fxtile>svg{width:44px; height:44px; color:var(--accent)}
+.fxtile-lbl{font-family:"Archivo",sans-serif; font-weight:700; font-size:17px}
+.fxtile-hint{font-size:12.5px; color:var(--muted)}
+.fxtile-panel{position:absolute; left:0; right:0; top:100%; z-index:30; display:none; padding-top:12px}
+.fxtile:hover .fxtile-panel,.fxtile:focus-within .fxtile-panel{display:block}
+.fxtile-inner{background:var(--surface); border:1px solid var(--accent); border-radius:14px; box-shadow:var(--glow); padding:16px 20px; text-align:left; max-height:440px; overflow:auto}
+@media (max-width:680px){.fxtiles{grid-template-columns:1fr}}
 /* Overview: pulse tiles · gauges · sector heat · bar charts */
 .pulse10{display:grid; grid-template-columns:repeat(auto-fit,minmax(112px,1fr)); gap:8px; margin:16px 0 6px}
 .ptile{background:var(--surface); border:1px solid var(--line); border-radius:10px; padding:9px 11px}
@@ -719,13 +730,15 @@ function renderFund(tk){
   const profCap=[p.website,p.sic?('SEC industry: '+p.sic):''].filter(Boolean).join('  ·  ');
   const news=(f.news||[]);
   const newsHtml=news.length?news.map(n=>`<a class="fxnews" href="${n.link}" target="_blank" rel="noopener"><div class="t">${n.title||''}</div><div class="m">${[n.publisher,n.when].filter(Boolean).join(' · ')}</div></a>`).join(''):'<div class="dim">No recent headlines found.</div>';
-  const dropdowns=`
-    <details class="fxdd"><summary>${FXICON.profile}<span>Company profile — full business description</span>${FXICON.chev}</summary>
-      <div class="fxdd-body">${fxParas(p.summary)}${profCap?`<div class="fxdd-cap">${profCap}</div>`:''}<div class="fxdd-cap">Quoted verbatim from the company's own filing — not AI-generated.</div></div></details>
-    <details class="fxdd"><summary>${FXICON.numbers}<span>The numbers (latest annual filing)</span>${FXICON.chev}</summary>
-      <div class="fxdd-body">${numTable}<div class="fxdd-cap">Balance-sheet items from the most recent 10-Q/10-K; flows from the latest full fiscal year.</div></div></details>
-    <details class="fxdd"><summary>${FXICON.news}<span>Recent headlines</span>${FXICON.chev}</summary>
-      <div class="fxdd-body">${newsHtml}<div class="fxdd-cap">Headlines via Yahoo Finance — click to open the original article.</div></div></details>`;
+  const cap1=`${profCap?`<div class="fxdd-cap">${profCap}</div>`:''}<div class="fxdd-cap">Quoted verbatim from the company's own filing — not AI-generated.</div>`;
+  const tiles=`<div class="fxtiles">
+    <div class="fxtile" tabindex="0">${FXICON.profile}<div class="fxtile-lbl">Company profile</div><div class="fxtile-hint">full business description</div>
+      <div class="fxtile-panel"><div class="fxtile-inner">${fxParas(p.summary)||'<div class="dim">No description on file.</div>'}${cap1}</div></div></div>
+    <div class="fxtile" tabindex="0">${FXICON.numbers}<div class="fxtile-lbl">The numbers</div><div class="fxtile-hint">latest annual filing</div>
+      <div class="fxtile-panel"><div class="fxtile-inner">${numTable}<div class="fxdd-cap">Balance-sheet items from the most recent 10-Q/10-K; flows from the latest full fiscal year.</div></div></div></div>
+    <div class="fxtile" tabindex="0">${FXICON.news}<div class="fxtile-lbl">Recent headlines</div><div class="fxtile-hint">via Yahoo Finance</div>
+      <div class="fxtile-panel"><div class="fxtile-inner">${newsHtml}<div class="fxdd-cap">Headlines via Yahoo Finance — click to open the original article.</div></div></div></div>
+  </div>`;
   host.innerHTML=`
     <div class="fxhero"><div class="fxhero-top">
       <div><div class="fxhero-name">${f.company||tk}</div><div class="fxhero-sub">${cls}</div></div>
@@ -741,7 +754,7 @@ function renderFund(tk){
     ${p.summary_short?`<div class="fxsummary"><span class="fxtag">${p.summary_ai?'✨ AI summary':'📝 In brief'}</span>${p.summary_short}</div>`:''}
     ${tr.length?`<div class="fxtrend">📈 <b>Trend (from filings):</b> ${tr.join(' · ')}</div>`:''}
     ${inv.length?`<div class="fxtrend">🔧 <b>Invests in:</b> ${inv.join(' · ')}</div>`:''}
-    ${dropdowns}`;
+    ${tiles}`;
 }
 
 /* ---------- TradingView (two hosts: signals + deep) ---------- */
