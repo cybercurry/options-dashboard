@@ -191,6 +191,7 @@ td.l{text-align:left}
 .legtile.earn{border-style:dashed; border-color:color-mix(in srgb,var(--bad) 45%,var(--line))}
 .legtile.earn .th .setup{opacity:.5}
 .earnfail{font-family:"Archivo",sans-serif; font-weight:800; font-size:16px; color:var(--bad); margin:10px 0 2px; letter-spacing:.02em}
+.earndate{font-size:12.5px; color:var(--muted); margin:0 0 2px}
 .hint{font-size:12.5px; color:var(--faint); margin:2px 0 0}
 /* constellation / data-web (MNI-style hover reveal) */
 .web{position:relative; width:100%; height:150px}
@@ -705,6 +706,7 @@ function web(center, nodes){
   });
   return `<div class="web"><svg class="weblines" viewBox="0 0 100 100" preserveAspectRatio="none">${lines}</svg><span class="wcenter">${center}</span>${pills}</div>`;
 }
+function fmtDMY(iso){ if(!iso) return ''; const p=String(iso).split('-'); return p.length===3?`${p[2]}/${p[1]}`:''; }
 function legTile(s){const k=s.strategy.toLowerCase();
   // Full pass/fail scorecard from the engine (every gate, passed or failed). Falls back to the
   // old timing-reasons web for data written before `gates` existed.
@@ -724,7 +726,8 @@ function legTile(s){const k=s.strategy.toLowerCase();
   if(earnRed){
     cls=' earn';
     head='<span class="setup s-no">🔴 NO SETUP</span>';
-    body='<div class="earnfail">FAILED EARNINGS GATE</div>';
+    const ed=fmtDMY(s.earnings_date);
+    body=`<div class="earnfail">Failed due high VOL.</div><div class="earndate">Earnings date${ed?': '+ed:''}</div>`;
   } else if(setup){
     head=shortSetup(s.timing_label);
     body=`<div class="trade t-${k}">${fmtTrade(k,s.strike)}</div>${chips}`;

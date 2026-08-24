@@ -539,6 +539,7 @@ def scan_ticker(ticker):
                 if ind.get("ok"):
                     lbl, sc, rs = _timing(ind, iv_ratio, "csp")
                     s["timing_label"], s["timing_score"], s["timing_reasons"] = lbl, sc, rs
+                s["earnings_date"] = edate.isoformat() if edate else None
                 s["gates"] = _leg_gates(s, iv_ratio)
                 out.append(s)
         # CC — needs price ABOVE the median
@@ -552,6 +553,7 @@ def scan_ticker(ticker):
                 if ind.get("ok"):
                     lbl, sc, rs = _timing(ind, iv_ratio, "cc")
                     s["timing_label"], s["timing_score"], s["timing_reasons"] = lbl, sc, rs
+                s["earnings_date"] = edate.isoformat() if edate else None
                 s["gates"] = _leg_gates(s, iv_ratio)
                 out.append(s)
     except Exception:
