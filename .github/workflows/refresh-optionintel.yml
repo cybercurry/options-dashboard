@@ -53,5 +53,18 @@ jobs:
             git config user.email "optionintel-bot@users.noreply.github.com"
             git add site/data/signals.json
             git commit -m "data: refresh signals [skip ci]"
-            git push
+            # Race-safe push: a code-push-triggered refresh and the 30-min cron can overlap, so
+            # another run may land first. On rejection, rebase our data commit onto the latest
+            # main (favouring our freshly-generated file) and retry, instead of failing the run.
+            pushed=0
+            for i in 1 2 3 4 5; do
+              if git push; then pushed=1; break; fi
+              echo "push rejected — rebasing on latest origin/main (attempt $i)"
+              git fetch origin main
+              git rebase -X theirs origin/main || git rebase --abort
+              sleep $((i * 3))
+            done
+            if [ "$pushed" != "1" ]; then
+              echo "::error::could not push refreshed data after 5 attempts"; exit 1
+            fi
           fi
