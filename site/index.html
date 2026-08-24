@@ -674,7 +674,7 @@ function fxParas(txt){ if(!txt)return ''; const parts=txt.trim().split(/(?<=[.!?
   for(const p of parts){ buf=(buf+' '+p).trim(); if(buf.length>=220){out.push(buf);buf='';} } if(buf)out.push(buf);
   return (out.length?out:[txt]).map(x=>`<p class="fxpara">${x}</p>`).join(''); }
 const VCOL={'🟢':'#166534','🟡':'#a16207','🔴':'#7f1d1d','⚪':'#475569'};
-const _svg='<svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">';
+const _svg='<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">';
 const FXICON={
   profile:_svg+'<path d="M3 21h18"/><path d="M5 21V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v16"/><path d="M9 7.5h1M9 11h1M9 14.5h1M14 7.5h1M14 11h1M14 14.5h1"/></svg>',
   numbers:_svg+'<rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 10h18M10 4v16"/></svg>',
