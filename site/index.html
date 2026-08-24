@@ -200,6 +200,32 @@ td.l{text-align:left}
 .mkt{border:1px solid var(--line); border-radius:14px; background:var(--surface); box-shadow:var(--shadow); padding:16px 18px}
 .mkt .kk{font-size:11px; letter-spacing:.06em; text-transform:uppercase; color:var(--faint); font-weight:600; display:flex; align-items:center; gap:7px}
 .mkt .vv{font-size:28px; font-weight:600; margin:6px 0 2px} .mkt .ss{font-size:12.5px; color:var(--muted)}
+/* Market Stats — stat tiles with hover explainer + regime bands */
+.msec{font-family:"Archivo",sans-serif; font-size:17px; font-weight:700; margin:26px 0 10px}
+.mrow{display:grid; grid-template-columns:repeat(auto-fit,minmax(190px,1fr)); gap:12px}
+.mtile{position:relative; border:1px solid var(--line); border-radius:14px; background:var(--surface); box-shadow:var(--shadow); padding:15px 17px; outline:none; transition:border-color .15s, box-shadow .15s}
+.mtile:hover,.mtile:focus-within{border-color:var(--accent); box-shadow:var(--glow); z-index:30}
+.mtile .ml{display:flex; align-items:center; gap:6px; font-size:11.5px; letter-spacing:.04em; text-transform:uppercase; color:var(--muted); font-weight:600}
+.mtile .ml::after{content:'?'; margin-left:auto; width:16px; height:16px; border-radius:50%; border:1px solid var(--faint); color:var(--faint); font-size:10px; font-weight:700; display:inline-flex; align-items:center; justify-content:center}
+.mtile:hover .ml::after,.mtile:focus-within .ml::after{border-color:var(--accent); color:var(--accent)}
+.mtile .mv{font-size:26px; font-weight:600; margin-top:6px} .mtile .ms{font-size:12px; color:var(--muted); margin-top:3px}
+.mtip{position:absolute; left:0; top:100%; margin-top:8px; z-index:60; width:min(300px,82vw); display:none; background:var(--surface); border:1px solid var(--accent); border-radius:12px; box-shadow:var(--glow); padding:13px 15px; font-size:13px; line-height:1.55; color:var(--text); text-transform:none; letter-spacing:0; font-weight:400}
+.mtile:hover .mtip,.mtile:focus-within .mtip{display:block}
+.mtip-d{color:var(--muted)}
+.mbands{width:100%; border-collapse:collapse; margin-top:10px; font-size:12px}
+.mbands td{padding:4px 8px; border-bottom:1px solid var(--line-soft)} .mbands tr:last-child td{border-bottom:0}
+.mbands td:first-child{font-family:"IBM Plex Mono"; color:var(--text)} .mbands td:last-child{color:var(--muted); text-align:right}
+.yc{border:1px solid var(--line); border-radius:14px; background:var(--surface); padding:16px 18px 12px; margin-top:12px}
+.yc svg{width:100%; height:130px; display:block}
+.ycpts{display:flex; justify-content:space-between; margin-top:8px}
+.ycpt{display:flex; flex-direction:column; align-items:center; gap:1px; font-size:11px} .ycpt span:first-child{font-weight:600} .ycpt span:last-child{color:var(--faint)}
+.regime{width:100%; border-collapse:collapse; font-size:13px; margin-top:12px; border:1px solid var(--line); border-radius:12px; overflow:hidden}
+.regime th{background:var(--surface-2); color:var(--muted); text-align:left; padding:9px 12px; font-size:11px; text-transform:uppercase; letter-spacing:.04em}
+.regime td{padding:8px 12px; border-top:1px solid var(--line-soft); color:var(--muted)} .regime td:first-child,.regime td:nth-child(2){color:var(--text)}
+.caltoggle{display:inline-flex; align-items:center; gap:8px; font-size:13px; color:var(--muted); margin:12px 0 4px; cursor:pointer}
+.cal{width:100%; border-collapse:collapse; min-width:640px; font-size:13.5px}
+.cal th{background:var(--surface-2); color:var(--faint); text-align:left; padding:9px 12px; font-size:11px; text-transform:uppercase; letter-spacing:.04em; white-space:nowrap}
+.cal td{padding:8px 12px; border-bottom:1px solid var(--line-soft); white-space:nowrap} .cal tr:last-child td{border-bottom:0}
 .rules-sec{margin-top:26px} .rules-sec h2{font-family:"Archivo",sans-serif; font-size:18px; margin:0 0 4px}
 .rules-sec p{color:var(--muted); font-size:13px; margin:2px 0 10px}
 .rtable{width:100%; border-collapse:collapse; border:1px solid var(--line); border-radius:12px; overflow:hidden; font-size:13.5px; margin-top:6px}
@@ -293,11 +319,10 @@ footer b{color:var(--muted); font-weight:600}
     </section>
   </section>
 
-  <!-- ══════════ MARKET ══════════ -->
+  <!-- ══════════ MARKET STATS ══════════ -->
   <section id="v-market" class="view" hidden>
-    <div class="head"><h1>Market backdrop</h1><div class="meta">The macro context every wheel decision sits inside — volatility, sentiment, the curve, and policy. Keyless public sources, refreshed with each scan.</div></div>
-    <div class="mkt-grid" id="mkt-grid"></div>
-    <p class="note" style="margin-top:18px">Sources: VIX via Yahoo · stock Fear&amp;Greed via CNN · crypto Fear&amp;Greed via alternative.me · 2Y/10Y &amp; Fed funds via FRED. Context only — the signal rules key off each ticker's own price action, not these.</p>
+    <div class="head"><h1>Market Stats</h1><div class="meta">Rates, valuation, the seller's edge, the volatility regime, and this week's events. Hover any tile (look for the ⍰) for what the term means and its regime bands.</div></div>
+    <div id="mkt-body"></div>
   </section>
 
   <!-- ══════════ FUNDAMENTALS ══════════ -->
@@ -443,17 +468,69 @@ function renderPulse(){
   document.getElementById('pulse').innerHTML=cells.map(c=>
     `<div class="chip"><div class="k"><span class="led ${led[c[0]]||''}"></span>${c[1]}</div><div class="v mono">${c[2]}</div><div class="s">${c[3]}</div></div>`).join('');
 }
+let MKT_MED=false;
+function mtile(label,value,sub,desc,bands){
+  const b=bands?`<table class="mbands">${bands.map(x=>`<tr><td>${x[0]}</td><td>${x[1]}</td></tr>`).join('')}</table>`:'';
+  return `<div class="mtile" tabindex="0"><div class="ml">${label}</div><div class="mv mono">${value}</div>${sub?`<div class="ms">${sub}</div>`:''}
+    <div class="mtip"><div class="mtip-d">${desc}</div>${b}</div></div>`;
+}
+function yieldCurveSvg(pts,inverted){
+  if(!pts.length) return '';
+  const ys=pts.map(p=>p[1]), mn=Math.min(...ys), mx=Math.max(...ys), rng=(mx-mn)||1, pad=7;
+  const X=i=>pad+i*(100-2*pad)/(pts.length-1), Y=v=>pad+(mx-v)/rng*(100-2*pad);
+  const poly=pts.map((p,i)=>`${X(i).toFixed(1)},${Y(p[1]).toFixed(1)}`).join(' ');
+  const col=inverted?'var(--bad)':'var(--accent)';
+  const dots=pts.map((p,i)=>`<circle cx="${X(i).toFixed(1)}" cy="${Y(p[1]).toFixed(1)}" r="1.5" fill="${col}" vector-effect="non-scaling-stroke"/>`).join('');
+  const labs=pts.map(p=>`<div class="ycpt"><span class="mono">${p[1].toFixed(2)}</span><span>${p[0]}</span></div>`).join('');
+  return `<div class="yc"><svg viewBox="0 0 100 100" preserveAspectRatio="none"><polyline points="${poly}" fill="none" stroke="${col}" stroke-width="1.4" vector-effect="non-scaling-stroke"/>${dots}</svg><div class="ycpts">${labs}</div></div>`;
+}
+function calendarTable(events){
+  const want=MKT_MED?['High','Medium']:['High'];
+  const evs=(events||[]).filter(e=>want.includes(e.impact)).map(e=>({d:e.date?new Date(e.date):null,e:e}))
+    .sort((a,b)=>(a.d?a.d.getTime():9e18)-(b.d?b.d.getTime():9e18));
+  const tz={timeZone:'America/New_York'};
+  const toggle=`<label class="caltoggle"><input type="checkbox" ${MKT_MED?'checked':''} onchange="MKT_MED=this.checked;renderMarket()"> include medium-impact</label>`;
+  if(!evs.length) return toggle+'<div class="empty">No high-impact events match this week.</div>';
+  const rows=evs.map(({d,e})=>`<tr><td>${d?d.toLocaleDateString('en-US',{...tz,weekday:'short',day:'2-digit'}):'—'}</td>
+    <td class="mono">${d?d.toLocaleTimeString('en-US',{...tz,hour:'2-digit',minute:'2-digit'}):''}</td>
+    <td>${e.country||''}</td><td>${e.impact==='High'?'🔴':'🟠'}</td><td>${e.title||''}</td>
+    <td class="mono">${e.forecast||'—'}</td><td class="mono">${e.previous||'—'}</td></tr>`).join('');
+  return toggle+`<div class="tablewrap"><table class="cal"><thead><tr><th class="l">Day</th><th class="l">Time</th><th class="l">Cur</th><th class="l">Impact</th><th class="l">Event</th><th class="l">Forecast</th><th class="l">Previous</th></tr></thead><tbody>${rows}</tbody></table></div>
+    <div class="fxdd-cap">Times US Eastern (via ForexFactory). 🔴 high · 🟠 medium impact.</div>`;
+}
 function renderMarket(){
-  const m=MKT, items=[
-    ['VIX — implied volatility',num(m.vix,1),(m.vix_label||'')+' · S&P 30-day expected move',ledFor('vix',m.vix)],
-    ['Fear & Greed — stocks',num(m.fng,0),m.fng_label||'CNN composite',ledFor('fng',m.fng)],
-    ['Fear & Greed — crypto',num(m.btc_fng,0),m.btc_fng_label||'',ledFor('btc',m.btc_fng)],
-    ['10Y Treasury',num(m.ten_year,2,'%'),'curve '+(m.curve||'—'),'g'],
-    ['2Y Treasury',num(m.two_year,2,'%'),'policy-sensitive short end','g'],
-    ['Fed Funds',num(m.fed_funds,2,'%'),'current effective target','g'],
-  ];
-  document.getElementById('mkt-grid').innerHTML=items.map(i=>
-    `<div class="mkt"><div class="kk"><span class="led ${i[3]||''}"></span>${i[0]}</div><div class="vv mono">${i[1]}</div><div class="ss">${i[2]}</div></div>`).join('');
+  const ms=DATA.market_stats;
+  const host=document.getElementById('mkt-body');
+  if(!ms){ host.innerHTML='<div class="empty">Market stats populate on the next scan cycle — check back shortly.</div>'; return; }
+  const yc=ms.yield_curve||[], ycMap=Object.fromEntries(yc), spread=ms.spread_2s10s;
+  const sRead=spread==null?'':(spread<0?'🔴 Inverted':spread<25?'🟡 Flat':'🟢 Normal');
+  const rates=[
+    mtile('Fed funds',ms.fed!=null?ms.fed.toFixed(2)+'%':'—','effective',"The Fed's policy rate — the floor under all other rates. Hiking = tightening (headwind for stocks, vol up); cutting = easing."),
+    mtile('2Y Treasury',ycMap['2Y']!=null?ycMap['2Y'].toFixed(2)+'%':'—','short end',"Tracks where the market expects the Fed to be in ~2 years."),
+    mtile('10Y Treasury',ycMap['10Y']!=null?ycMap['10Y'].toFixed(2)+'%':'—','benchmark',"The benchmark long rate — growth & inflation expectations, and the discount rate equities are valued against. A rising 10Y pressures high-multiple stocks."),
+    mtile('2s10s spread',spread!=null?((spread>=0?'+':'')+spread+' bps'):'—',sRead,"10-year minus 2-year yield. Positive/steep = normal growth expectations. NEGATIVE = inverted — the bond market pricing rate cuts / recession, historically leading downturns by 6–18 months, with vol spikes tending to follow.")
+  ].join('');
+  const val=[
+    mtile('S&P 500 P/E',ms.pe_trailing!=null?ms.pe_trailing.toFixed(1):'—','trailing',"Price ÷ trailing 12-month S&P earnings (via SPY). The market's valuation. Long-run average ~16–17; a rich market leaves a CSP seller less cushion."),
+    mtile('S&P 500 P/E',ms.pe_forward!=null?ms.pe_forward.toFixed(1):'—','forward',"Price ÷ next-12-month expected earnings. Lower than trailing when earnings are expected to grow."),
+    mtile('S&P realized vol',ms.spy_realized!=null?ms.spy_realized.toFixed(1):'—','20-day actual',"What the S&P ACTUALLY moved over the last 20 days (annualized %)."),
+    mtile('VRP',ms.vrp!=null?((ms.vrp>=0?'+':'')+ms.vrp):'—','VIX − realized',"Variance Risk Premium — implied (VIX) minus realized vol, in vol points. Positive = options price in more movement than the S&P delivers; that extra is the edge you pocket selling premium. Negative = you'd be underpaid — don't sell.")
+  ].join('');
+  const vol=[
+    mtile('VIX',ms.vix!=null?ms.vix.toFixed(1):'—',(ms.vix_chg!=null?((ms.vix_chg>=0?'+':'')+ms.vix_chg):'')+' · 52wk '+(ms.vix_lo??'?')+'–'+(ms.vix_hi??'?'),"CBOE Volatility Index — implied 30-day S&P volatility priced off options. What the market EXPECTS over the next 30 days, not what's already happened — which is why it jumps before events.",[['<15','Low'],['15–20','Normal'],['20–30','Elevated'],['>30','Fear']]),
+    mtile('OVX',ms.ovx!=null?ms.ovx.toFixed(1):'—',ms.ovx_chg!=null?((ms.ovx_chg>=0?'+':'')+ms.ovx_chg):'',"CBOE Crude Oil Volatility Index — oil's implied vol. Spikes hard on supply shocks (2020 negative oil prices, 2022 invasion). Watch it if energy names are on your watchlist.",[['<25','Calm'],['25–40','Normal'],['40–60','Elevated'],['>60','Extreme — supply shock']]),
+    mtile('GVZ',ms.gvz!=null?ms.gvz.toFixed(1):'—',ms.gvz_chg!=null?((ms.gvz_chg>=0?'+':'')+ms.gvz_chg):'',"CBOE Gold Volatility Index — gold's implied vol. A GVZ spike means your GLD option premium just got richer — and usually signals something macro breaking.",[['<14','Calm'],['14–18','Normal'],['18–24','Elevated'],['>24','Extreme — flight to safety']])
+  ].join('');
+  const regime=`<table class="regime"><thead><tr><th>VIX</th><th>Regime</th><th>LEAP</th><th>CC</th><th>CSP</th></tr></thead><tbody>
+    <tr><td class="mono">&lt;15</td><td>Low</td><td>Best — cheapest premium</td><td>Thin</td><td>Good if trend up</td></tr>
+    <tr><td class="mono">15–20</td><td>Normal</td><td>Decent</td><td>Moderate</td><td>OK</td></tr>
+    <tr><td class="mono">20–30</td><td>Elevated</td><td>Expensive — selective</td><td>Rich</td><td>Rich</td></tr>
+    <tr><td class="mono">&gt;30</td><td>Fear</td><td>Very expensive — wait</td><td>Maximum</td><td>High risk</td></tr></tbody></table>`;
+  host.innerHTML=`
+    <div class="msec">Rates &amp; the Yield Curve</div><div class="mrow">${rates}</div>${yieldCurveSvg(yc,spread!=null&&spread<0)}
+    <div class="msec">Valuation &amp; the Seller's Edge</div><div class="mrow">${val}</div>
+    <div class="msec">Volatility Regime</div><div class="mrow">${vol}</div>${regime}
+    <div class="msec">This Week — Economic Calendar</div>${calendarTable(ms.calendar)}`;
 }
 
 /* ---------- signals: ready CSP/CC ---------- */
