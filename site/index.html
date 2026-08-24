@@ -230,6 +230,7 @@ td.l{text-align:left}
 .wn-ok{border-color:color-mix(in srgb,var(--good) 55%,var(--line)); color:var(--good)}
 .wn-no{border-color:color-mix(in srgb,var(--bad) 55%,var(--line)); color:var(--bad)}
 .webfoot{text-align:center; font-size:11px; color:var(--faint); font-family:"IBM Plex Mono"; border-top:1px solid var(--line-soft); padding-top:9px; margin-top:2px}
+.webkey{font-size:11.5px; color:var(--muted); line-height:1.5; margin-top:8px; padding-top:8px; border-top:1px solid var(--line-soft)}
 .mkt-grid{display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:14px; margin-top:18px}
 .mkt{border:1px solid var(--line); border-radius:14px; background:var(--surface); box-shadow:var(--shadow); padding:16px 18px}
 .mkt .kk{font-size:11px; letter-spacing:.06em; text-transform:uppercase; color:var(--faint); font-weight:600; display:flex; align-items:center; gap:7px}
@@ -269,6 +270,7 @@ td.l{text-align:left}
 .rtable th{text-align:left; background:var(--surface-2); color:var(--muted); font-weight:600; padding:9px 13px; border-bottom:1px solid var(--line); font-size:12px; letter-spacing:.03em; text-transform:uppercase}
 .rtable td{padding:9px 13px; border-bottom:1px solid var(--line-soft); vertical-align:top; text-align:left; white-space:normal}
 .rtable tr:last-child td{border-bottom:0} .rtable td.mono{font-family:"IBM Plex Mono"}
+.rules-sec p.rnote{margin-top:10px; padding:9px 12px; background:var(--surface-2); border:1px solid var(--line-soft); border-radius:9px; font-size:12.5px}
 .src{display:flex; flex-wrap:wrap; gap:8px; margin-top:10px}
 .src span{font-size:12px; background:var(--surface-2); border:1px solid var(--line); border-radius:8px; padding:5px 10px; color:var(--muted)}
 .src b{color:var(--text); font-weight:600}
@@ -309,14 +311,6 @@ footer b{color:var(--muted); font-weight:600}
     <div class="subhead">LEAP ideas — a buy, not premium <span class="n" id="n-leap"></span></div>
     <p class="note">Δ75–80 long-dated calls that pass <b>Gate A</b> (extrinsic ≤40%) <b>and Gate C</b> (carry ≤8%/yr) <b>and</b> a clear 5-day uptrend.</p>
     <div id="leap-wrap"></div>
-
-    <section class="chart" aria-label="Chart">
-      <div class="top"><div><span class="sym" id="sym">—</span> <span class="sub" id="symsub">tap a row to chart it</span></div>
-        <span class="tv"><b>TradingView</b> · BB(20,2) + RSI(14)</span></div>
-      <div class="picker"><input id="symin" placeholder="symbol…" aria-label="Chart symbol"><span id="chips"></span></div>
-      <div id="tvchart" class="tvhost"></div>
-    </section>
-    <div class="tvnote">Live TradingView daily candles — change the timeframe, add indicators, or draw right in the chart.</div>
   </section>
 
   <!-- ══════════ OVERVIEW ══════════ -->
@@ -392,8 +386,8 @@ footer b{color:var(--muted); font-weight:600}
     </div>
 
     <div class="rules-sec">
-      <h2>3 · Mean-reversion timing — the setup score</h2>
-      <p>A turnaround, not just the right side of the median. Points accrue; <b>🟢 FULL ≥10 · 🟡 PARTIAL ≥6 · 🟠 building ≥3 · 🔴 none</b>. Only ≥6 is listed as a suggestion.</p>
+      <h2>3 · Entry timing — the mean-reversion setup score</h2>
+      <p><b>Entry timing</b> = is now a good moment to sell? A turnaround off an extreme (in your favour) with premium richer than the stock's actual moves — not just the right side of the median. Points accrue; <b>🟢 FULL ≥10 · 🟡 PARTIAL ≥6 · 🟠 building ≥3 · 🔴 none</b>. Only ≥6 is listed as a suggestion.</p>
       <table class="rtable"><thead><tr><th>CSP (fade a bottom)</th><th>CC (fade a top)</th></tr></thead><tbody>
         <tr><td>Dropped to lower band then bounced (3-session)</td><td>Spiked to upper band then rolled over (3-session)</td></tr>
         <tr><td>RSI dipped &lt;30 and turned up (5-session)</td><td>RSI ran &gt;70 and turned down (5-session)</td></tr>
@@ -409,11 +403,11 @@ footer b{color:var(--muted); font-weight:600}
       <table class="rtable"><thead><tr><th>Element</th><th>Rule</th></tr></thead><tbody>
         <tr><td>Delta</td><td class="mono">0.75–0.80 (deep ITM = intrinsic-led)</td></tr>
         <tr><td>DTE</td><td class="mono">180–900 · target ~542 (Jan-2027+)</td></tr>
-        <tr><td><b>Gate A</b> — time-premium share</td><td class="mono">extrinsic ≤ 40% of premium</td></tr>
-        <tr><td><b>Gate C</b> — carry rate</td><td class="mono">(extrinsic ÷ spot) × 365/DTE ≤ 8%/yr</td></tr>
-        <tr><td><b>Clear trend</b> (5-session)</td><td class="mono">above 50 &amp; 200-MA · 50≥200 · RSI≥50 rising · no bearish candle</td></tr>
-        <tr><td>Green dot (timing)</td><td class="mono">cheap IV vs realized + healthy RSI + aligned trend</td></tr>
+        <tr><td><b>Gate A</b> — Time value ≤ 40%</td><td class="mono">extrinsic (premium − intrinsic) ≤ 40% of premium</td></tr>
+        <tr><td><b>Gate C</b> — Carry ≤ 8%/yr</td><td class="mono">carry = (extrinsic ÷ spot) × 365/DTE — the time-value you pay per year, as % of the share price</td></tr>
+        <tr><td><b>Clear uptrend</b></td><td class="mono">price &gt; 50-MA · price &gt; 200-MA · 50-MA &gt; 200-MA</td></tr>
       </tbody></table>
+      <p class="rnote">Entry timing (the mean-reversion setup) is <b>informational only</b> on a LEAP — it is not a gate. A LEAP qualifies on <b>Gate A + Gate C + a clear uptrend</b>; RSI-rising is shown as extra colour, not a pass/fail.</p>
     </div>
 
     <div class="rules-sec">
@@ -610,7 +604,7 @@ function renderLeaps(){
   </tr></thead><tbody>${rows}</tbody></table></div>`;
   wireRows('#leap-wrap');
 }
-function wireRows(sel){document.querySelectorAll(sel+' tr.clk').forEach(tr=>tr.onclick=()=>setSym(tr.dataset.tk));}
+function wireRows(sel){document.querySelectorAll(sel+' tr.clk').forEach(tr=>tr.onclick=()=>{setSym(tr.dataset.tk); go('deep');});}
 
 /* ---------- watchlist ---------- */
 function fmtPrice(p,prefix,isYield){ if(p==null)return '—';
@@ -778,11 +772,13 @@ function fmtDMY(iso){ if(!iso) return ''; const p=String(iso).split('-'); return
 function legTile(s){const k=s.strategy.toLowerCase();
   // Full pass/fail scorecard from the engine (every gate, passed or failed). Falls back to the
   // old timing-reasons web for data written before `gates` existed.
+  const GLBL={timing:'Entry timing'};   // clearer node label (rest already read plainly)
   const nodes=(s.gates&&s.gates.length)
-    ? s.gates.map(g=>({l:g.l, s:g.s}))
+    ? s.gates.map(g=>({l:GLBL[g.l]||g.l, s:g.s}))
     : (s.timing_reasons||[]).map(r=>({l:r.replace(/\s*\([^)]*\)/,'').replace(/⛔\s*/,'').trim().slice(0,20),
                                       s:r.indexOf('⛔')>=0?'no':'ok'}));
   const foot=`Exp ${s.expiry} · DTE ${s.dte} · POP ${num(s.pop,0,'%')} · OI ${s.oi} · spr ${num(s.spread_pct,0,'%')}`;
+  const key=`Entry timing = a mean-reversion setup: buy an oversold bounce (put) / fade an overbought top (call) while IV is richer than realized. median = the right side of the 20-day midline.`;
   // Face rules (popup is ALWAYS shown, red or green — it's the educational bit):
   //  • earnings blackout (≤7d) = the one hard no-no → grey the tile + big "FAILED EARNINGS GATE".
   //  • a setup has fired (🟢 FULL / 🟡 PARTIAL) → show the strike ("Sell $X Put").
@@ -806,18 +802,19 @@ function legTile(s){const k=s.strategy.toLowerCase();
   return `<div class="legtile${cls}" tabindex="0">
     <div class="th"><span class="pill p-${k}">${s.strategy}</span> ${head}</div>
     ${body}
-    <div class="detail">${web(s.strategy+' $'+s.strike, nodes)}<div class="webfoot">${foot}</div></div></div>`;
+    <div class="detail">${web(s.strategy+' $'+s.strike, nodes)}<div class="webfoot">${foot}</div><div class="webkey">${key}</div></div></div>`;
 }
 function emptyTile(kind,msg){const k=kind.toLowerCase();
   return `<div class="legtile" style="opacity:.65"><div class="th"><span class="pill p-${k}">${kind}</span> <span class="dim">— none</span></div>
     <div class="dim" style="font-size:13px;margin-top:10px">${msg}</div></div>`;}
 function leapTile(l){
   const gnodes=[
-    {l:'A · ext≤40', s:l.gate_a?'ok':'no'},   {l:'C · carry≤8', s:l.gate_c?'ok':'no'},
-    {l:'clear trend', s:l.trend_ok?'ok':'no'},{l:'>50-MA', s:l.above_50ma?'ok':'no'},
-    {l:'>200-MA', s:l.above_200ma?'ok':'no'}, {l:'50≥200', s:l.ma_aligned?'ok':'no'},
+    {l:'Time value ≤40%', s:l.gate_a?'ok':'no'}, {l:'Carry ≤8%/yr', s:l.gate_c?'ok':'no'},
+    {l:'Clear uptrend', s:l.trend_ok?'ok':'no'}, {l:'Price > 50 MA', s:l.above_50ma?'ok':'no'},
+    {l:'Price > 200 MA', s:l.above_200ma?'ok':'no'}, {l:'50 MA > 200 MA', s:l.ma_aligned?'ok':'no'},
     {l:'RSI rising', s:l.rsi_rising?'ok':'no'} ];
   const foot=`Exp ${l.expiry} · DTE ${l.dte} · cost $${l.cost} · intr $${num(l.intrinsic,0)} · ext $${num(l.extrinsic,0)}`;
+  const key=`Time value = premium minus intrinsic. Carry = its cost per year, as % of the share price.`;
   const tt=(l.timing_label||'').replace(/[^\x20-\x7E]/g,'').replace(/ENTRY/i,'').trim().toLowerCase();
   const verdict=l.qualifies?'<span class="ok">✓ qualifies</span>'
     :'<span class="no">✗ no</span> <span class="dim" style="font-weight:400;font-size:11px">timing '+tt+'</span>';
@@ -825,7 +822,7 @@ function leapTile(l){
     <div class="th"><span class="pill p-leap">LEAP</span> ${verdict}</div>
     <div class="trade t-leap">${fmtTrade('leap',l.strike)}</div>
     <div class="fchips">${chip('Δ ',num(l.delta,2))}${chip('ext ',num(l.extrinsic_pct,0,'%'))}${chip('carry ',num(l.carry_pct,1,'%/yr'))}</div>
-    <div class="detail">${web('LEAP $'+l.strike, gnodes)}<div class="webfoot">${foot}</div></div></div>`;
+    <div class="detail">${web('LEAP $'+l.strike, gnodes)}<div class="webfoot">${foot}</div><div class="webkey">${key}</div></div></div>`;
 }
 function renderDeep(tk){
   const o=BYTK[tk]; const host=document.getElementById('deep-body');
@@ -847,10 +844,8 @@ function renderDeep(tk){
 function buildChips(){
   const tks=Object.keys(BYTK).sort();
   const chipHtml=tks.map(t=>`<span class="tchip" data-t="${t}">${t}</span>`).join('');
-  document.getElementById('chips').innerHTML=chipHtml;
   document.getElementById('deep-chips').innerHTML=chipHtml;
   document.getElementById('fund-chips').innerHTML=chipHtml;
-  document.querySelectorAll('#chips .tchip').forEach(c=>c.onclick=()=>setSym(c.dataset.t));
   document.querySelectorAll('#deep-chips .tchip').forEach(c=>c.onclick=()=>{setSym(c.dataset.t); renderDeep(c.dataset.t);});
   document.querySelectorAll('#fund-chips .tchip').forEach(c=>c.onclick=()=>{CUR=c.dataset.t; renderFund(c.dataset.t);});
 }
@@ -955,9 +950,7 @@ matchMedia('(prefers-color-scheme: dark)').addEventListener('change',()=>{ if(CU
 function markSel(){document.querySelectorAll('tr.clk').forEach(tr=>tr.classList.toggle('sel',tr.dataset.tk===CUR));
   document.querySelectorAll('.tchip').forEach(c=>c.classList.toggle('on',c.dataset.t===CUR));}
 function setSym(t){t=(t||'').toUpperCase().trim(); if(!t)return; CUR=t;
-  document.getElementById('sym').textContent=t;
-  mountChart('tvchart',t); if(!document.getElementById('v-deep').hidden){document.getElementById('sym2').textContent=t; mountChart('tvchart2',t);} markSel();}
-document.getElementById('symin').addEventListener('keydown',e=>{if(e.key==='Enter'){setSym(e.target.value); e.target.value='';}});
+  if(!document.getElementById('v-deep').hidden){document.getElementById('sym2').textContent=t; mountChart('tvchart2',t);} markSel();}
 document.getElementById('deep-in').addEventListener('keydown',e=>{if(e.key==='Enter'){const t=e.target.value.toUpperCase().trim(); setSym(t); renderDeep(t); e.target.value='';}});
 document.getElementById('fund-in').addEventListener('keydown',e=>{if(e.key==='Enter'){const t=e.target.value.toUpperCase().trim(); CUR=t; renderFund(t); e.target.value='';}});
 
@@ -966,7 +959,6 @@ const TABS=['overview','signals','chain','deep','market','fund','rules'];
 function showTab(tab){
   TABS.forEach(t=>document.getElementById('v-'+t).hidden=(t!==tab));
   document.querySelectorAll('#nav a').forEach(a=>a.classList.toggle('on',a.dataset.tab===tab));
-  if(tab==='signals'&&CUR) mountChart('tvchart',CUR);
   if(tab==='deep') renderDeep(CUR||Object.keys(BYTK)[0]);
   if(tab==='chain' && CUR && (DATA.chains||{})[CUR]) renderChainTk(CUR);   // open on the ticker you were viewing
   if(tab==='fund') renderFund(CUR||Object.keys(DATA.fundamentals||{})[0]||Object.keys(BYTK)[0]);
