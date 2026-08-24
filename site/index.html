@@ -173,6 +173,9 @@ td.l{text-align:left}
 .ch2{display:grid; grid-template-columns:1fr 1fr; gap:14px}
 @media (max-width:680px){.ch2{grid-template-columns:1fr}}
 #v-chain tbody tr.tgt td{background:var(--accent-soft)}
+/* strike nearest the live price (ATM) — a clear amber marker line */
+#v-chain tbody tr.atm td{background:color-mix(in srgb,var(--warn) 15%,transparent)}
+#v-chain tbody tr.atm td:first-child{border-left:3px solid var(--warn); font-weight:700; color:var(--text)}
 .chainpx{font-family:"Archivo",sans-serif; font-size:19px; font-weight:700; margin:4px 0 2px}
 .chainpx b{font-size:25px; color:var(--text)} .chainpx .dim{font-family:"IBM Plex Sans"; font-size:12px; font-weight:400}
 .bidcell{cursor:pointer; color:var(--accent); border-bottom:1px dotted var(--accent)}
@@ -699,11 +702,12 @@ function renderWatchTable(){
 }
 
 /* ---------- options chain ---------- */
-function _ladder(rows, title, type){
+function _ladder(rows, title, type, spot){
   if(!rows||!rows.length) return `<div><div class="subhead">${title}</div><div class="dim" style="font-size:13px">no strikes in range</div></div>`;
   let ti=-1, best=9; rows.forEach((r,i)=>{ if(r.d!=null){const e=Math.abs(Math.abs(r.d)-0.30); if(e<best){best=e;ti=i;}} });
-  const body=rows.map((r,i)=>`<tr class="${i===ti?'tgt':''}">
-    <td class="l mono">${i===ti?'🎯 ':''}$${r.k}</td>
+  let ai=-1, ab=Infinity; if(spot) rows.forEach((r,i)=>{const e=Math.abs(r.k-spot); if(e<ab){ab=e;ai=i;}});
+  const body=rows.map((r,i)=>`<tr class="${i===ti?'tgt ':''}${i===ai?'atm':''}">
+    <td class="l mono">${i===ai?'▸ ':(i===ti?'🎯 ':'')}$${r.k}</td>
     <td class="mono">${r.d==null?'—':r.d.toFixed(2)}</td>
     <td class="mono">${r.b==null?'—':`<span class="bidcell" data-t="${type}" data-k="${r.k}" data-b="${r.b}">$${r.b.toFixed(2)}</span>`}</td>
     <td class="mono">${r.a==null?'—':'$'+r.a.toFixed(2)}</td>
@@ -722,7 +726,7 @@ function renderChainExp(tk, exp){
   const host=document.getElementById('chain-body');
   if(!ex){ host.innerHTML='<div class="empty">No chain for this expiry.</div>'; return; }
   const pxline=`<div class="chainpx">${tk} <b>$${spot!=null?(+spot).toFixed(2):'—'}</b> <span class="dim">· ${fmtDMY(exp)} · ${ex.dte}d · tap a Bid to size the trade</span></div>`;
-  host.innerHTML=`${pxline}<div class="ch2">${_ladder(ex.calls,'Calls','call')}${_ladder(ex.puts,'Puts','put')}</div>`;
+  host.innerHTML=`${pxline}<div class="ch2">${_ladder(ex.calls,'Calls','call',spot)}${_ladder(ex.puts,'Puts','put',spot)}</div>`;
 }
 function renderChainTk(tk){
   CHAIN_TK=tk;
