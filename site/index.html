@@ -214,7 +214,7 @@ td.l{text-align:left}
 .mtile:hover .ml::after,.mtile:focus-within .ml::after{border-color:var(--accent); color:var(--accent)}
 .mtile .mv{font-size:26px; font-weight:600; margin-top:6px} .mtile .ms{font-size:12px; color:var(--muted); margin-top:3px}
 .mtip{position:absolute; left:0; top:100%; margin-top:8px; z-index:60; width:min(300px,82vw); display:none; background:var(--surface); border:1px solid var(--accent); border-radius:12px; box-shadow:var(--glow); padding:13px 15px; font-size:13px; line-height:1.55; color:var(--text); text-transform:none; letter-spacing:0; font-weight:400}
-@media (hover:hover){.mtile:hover .mtip,.mtile:focus-within .mtip{display:block}}
+@media (hover:hover){.mtile:not(.oi-shut):hover .mtip,.mtile:not(.oi-shut):focus-within .mtip{display:block}}
 .mtile.oi-open .mtip{display:block}
 @media (hover:hover){.mtile:hover .ml::after,.mtile:focus-within .ml::after{border-color:var(--accent); color:var(--accent)}}
 .mtile.oi-open .ml::after{border-color:var(--accent); color:var(--accent)}
@@ -905,11 +905,22 @@ history.replaceState({tab:'overview',sym:null},'','#overview');   // seed the fi
     if(el.closest(POP)) return;                    // tapping inside an open popup — let them read/scroll
     var t = el.closest(TRIG);
     if(t){
-      if(t.classList.contains('oi-open')) t.classList.remove('oi-open');   // 2nd tap -> stow
-      else { closeAll(t); t.classList.add('oi-open'); }                    // open this, close others
+      if(t.classList.contains('oi-open')){          // 2nd tap/click -> collapse
+        t.classList.remove('oi-open');
+        t.classList.add('oi-shut');                 // also beat desktop :hover until the pointer leaves
+      } else {                                       // open this, close others
+        closeAll(t);
+        t.classList.remove('oi-shut');
+        t.classList.add('oi-open');
+      }
       return;
     }
     closeAll(null);                                // tap anywhere else -> stow all
+  }, true);
+  // desktop: once the pointer leaves a just-collapsed tile, allow hover-preview again
+  document.addEventListener('mouseout', function(e){
+    var t = e.target && e.target.closest ? e.target.closest(TRIG) : null;
+    if(t && t.classList.contains('oi-shut') && !t.contains(e.relatedTarget)) t.classList.remove('oi-shut');
   }, true);
 })();
 </script>
