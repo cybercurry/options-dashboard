@@ -1,0 +1,7 @@
+# Cloudflare Pages response headers.
+# Keep the app shell revalidated so a new deploy shows up immediately (the data JSON
+# is already fetched with cache:'no-store'). Hashed assets can stay cacheable.
+/
+  Cache-Control: no-cache
+/index.html
+  Cache-Control: no-cache
