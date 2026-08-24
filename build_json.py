@@ -153,12 +153,31 @@ def fetch_market():
             "skew": skew, "vix9d": vix9d}
 
 
+def fetch_fundamentals_all(names, prices):
+    """SEC-filing fundamentals per name (the app's Fundamentals tab), via the same pure
+    `fundamentals.analyze()` module. Each ticker degrades to ok:False on its own error."""
+    try:
+        import fundamentals
+    except Exception:
+        return {}
+    out = {}
+    for t in names:
+        try:
+            out[t] = fundamentals.analyze(t, prices.get(t))
+        except Exception as e:
+            out[t] = {"ok": False, "error": "%s: %s" % (type(e).__name__, e), "ticker": t}
+    return out
+
+
 def main():
     uni = load_universe()
     data = signals.scan(uni)                       # {"signals": [...], "leaps": [...], "params": {...}}
     data["market"] = fetch_market()
     data["pulse"] = fetch_pulse()
     data["sectors"] = fetch_sectors()
+    _names = [o.get("ticker") for o in data.get("overview", []) if o.get("ticker")]
+    _prices = {o.get("ticker"): o.get("price") for o in data.get("overview", [])}
+    data["fundamentals"] = fetch_fundamentals_all(_names, _prices)
     data["generated_at"] = datetime.datetime.now(datetime.timezone.utc).isoformat(timespec="seconds")
     data["universe"] = {"wheel": len(uni.get("wheel", [])),
                         "growth": len(uni.get("growth", [])),
