@@ -161,6 +161,18 @@ td.l{text-align:left}
 .picker input:focus{outline:2px solid var(--accent); outline-offset:1px}
 .tchip{font-family:"IBM Plex Mono"; font-size:12.5px; font-weight:600; color:var(--muted); background:var(--surface-2); border:1px solid var(--line); padding:5px 11px; border-radius:8px; cursor:pointer}
 .tchip:hover{color:var(--text)} .tchip.on{color:#fff; background:var(--accent); border-color:var(--accent)}
+/* Options Chain browser: own ticker-chip class so the global markSel() highlight
+   (which targets .tchip) doesn't fight the chain's independent selection. */
+.cchip{font-family:"IBM Plex Mono"; font-size:12.5px; font-weight:600; color:var(--muted); background:var(--surface-2); border:1px solid var(--line); padding:5px 11px; border-radius:8px; cursor:pointer}
+.cchip:hover{color:var(--text)} .cchip.on{color:#fff; background:var(--accent); border-color:var(--accent)}
+.cchip.noch{opacity:.45}
+.chips{display:flex; flex-wrap:wrap; gap:7px; margin:10px 0 2px}
+.etiles{display:flex; flex-wrap:wrap; gap:7px; margin:10px 0}
+.etile{font-family:"IBM Plex Mono"; font-size:12.5px; font-weight:600; color:var(--muted); background:var(--surface-2); border:1px solid var(--line); padding:6px 11px; border-radius:8px; cursor:pointer; white-space:nowrap}
+.etile:hover{color:var(--text)} .etile.on{color:#fff; background:var(--accent); border-color:var(--accent)}
+.ch2{display:grid; grid-template-columns:1fr 1fr; gap:14px}
+@media (max-width:680px){.ch2{grid-template-columns:1fr}}
+#v-chain tbody tr.tgt td{background:var(--accent-soft)}
 .tvhost{width:100%; height:460px}
 .tvnote{margin-top:14px; font-size:12.5px; color:var(--faint); text-align:center}
 .cards{display:grid; grid-template-columns:repeat(auto-fit,minmax(250px,1fr)); gap:14px; margin-top:16px}
@@ -312,12 +324,10 @@ footer b{color:var(--muted); font-weight:600}
 
   <!-- ══════════ OPTIONS CHAIN ══════════ -->
   <section id="v-chain" class="view" hidden>
-    <div class="head"><h1>Engine-selected contracts</h1><div class="meta">The exact contract the engine targets per name — CSP &amp; CC at Δ≈30 (21–45 DTE), LEAP at Δ≈78 (180–900 DTE). Real Tradier greeks. Not a full chain — the working strikes only.</div></div>
-    <div class="picker" style="border:0;padding:14px 0"><input id="chain-f" placeholder="filter ticker…" aria-label="Filter ticker"><span class="dim" style="font-size:12.5px">type to filter</span></div>
-    <div class="tablewrap"><table><thead><tr>
-      <th class="l">Ticker</th><th class="l">Type</th><th>Strike</th><th class="l">Expiry</th><th>DTE</th>
-      <th>Δ</th><th>Mid</th><th>IV</th><th>OI</th><th>Spread</th><th>POP</th><th class="l">Yield / cost</th>
-    </tr></thead><tbody id="chain-tb"></tbody></table></div>
+    <div class="head"><h1>Options Chain</h1><div class="meta">Pick a ticker, then an expiry (DTE) — the full calls &amp; puts ladder with Δ, bid/ask, IV and OI. 🎯 marks the ≈30Δ strike (the usual CSP/CC sell target).</div></div>
+    <div id="chain-chips" class="chips"></div>
+    <div id="chain-exps" class="etiles"></div>
+    <div id="chain-body"></div>
   </section>
 
   <!-- ══════════ DEEP DIVE ══════════ -->
@@ -414,6 +424,7 @@ footer b{color:var(--muted); font-weight:600}
 const KIND={csp:"CSP",cc:"CC",leap:"LEAP"};
 const SHEET_EDIT_URL="https://docs.google.com/spreadsheets/d/1GiZjtMLkATMKtvWnl40xCK4Tlgbg8b2aJCQp5sXMcjk/edit";   // watchlist: col C = WHEEL, col H = GROWTH
 let DATA=null, SIGS=[], LEAPS=[], MKT={}, BYTK={}, READY=[], LEAPQ=[], CHAINROWS=[];
+let CHAIN_TK=null, CHAIN_EXP=null;
 const num=(v,d=1,s='')=>v==null?'<span class="dim">—</span>':(typeof v==='number'?v.toFixed(d):v)+s;
 const abs=v=>Math.abs(v||0);
 function fmtTrade(strat,strike){return strat==='cc'?`Sell $${strike} Call`:strat==='leap'?`Buy $${strike} Call`:`Sell $${strike} Put`;}
@@ -679,16 +690,46 @@ function renderWatchTable(){
 }
 
 /* ---------- options chain ---------- */
-function renderChain(f){
-  f=(f||'').toUpperCase();
-  const rows=CHAINROWS.filter(r=>!f||r.tk.includes(f)).map(r=>{const k=r.type.toLowerCase();
-    return `<tr><td class="l"><span class="tk">${r.tk}</span></td>
-    <td class="l"><span class="pill p-${k}">${r.type}</span></td>
-    <td class="mono">$${r.strike}</td><td class="l mono dim">${r.exp||''}</td><td class="mono">${r.dte}</td>
-    <td class="mono">${num(r.delta,2)}</td><td class="mono">${num(r.mid,2)}</td><td class="mono">${num(r.iv,0,'%')}</td>
-    <td class="mono">${r.oi==null?'<span class="dim">—</span>':r.oi}</td><td class="mono">${r.spread==null?'<span class="dim">—</span>':r.spread.toFixed(0)+'%'}</td>
-    <td class="mono">${num(r.pop,0,'%')}</td><td class="l dim">${r.yield||'—'}</td></tr>`;}).join('');
-  document.getElementById('chain-tb').innerHTML=rows||`<tr><td class="l dim" colspan="12">no match</td></tr>`;
+function _ladder(rows, title){
+  if(!rows||!rows.length) return `<div><div class="subhead">${title}</div><div class="dim" style="font-size:13px">no strikes in range</div></div>`;
+  let ti=-1, best=9; rows.forEach((r,i)=>{ if(r.d!=null){const e=Math.abs(Math.abs(r.d)-0.30); if(e<best){best=e;ti=i;}} });
+  const body=rows.map((r,i)=>`<tr class="${i===ti?'tgt':''}">
+    <td class="l mono">${i===ti?'🎯 ':''}$${r.k}</td>
+    <td class="mono">${r.d==null?'—':r.d.toFixed(2)}</td>
+    <td class="mono">${r.b==null?'—':'$'+r.b.toFixed(2)}</td>
+    <td class="mono">${r.a==null?'—':'$'+r.a.toFixed(2)}</td>
+    <td class="mono">${r.iv==null?'—':r.iv.toFixed(0)+'%'}</td>
+    <td class="mono">${r.oi==null?'—':r.oi.toLocaleString()}</td></tr>`).join('');
+  return `<div><div class="subhead">${title}</div>
+    <div class="tablewrap"><table><thead><tr><th class="l">Strike</th><th>Δ</th><th>Bid</th><th>Ask</th><th>IV</th><th>OI</th></tr></thead>
+    <tbody>${body}</tbody></table></div></div>`;
+}
+function renderChainExp(tk, exp){
+  CHAIN_EXP=exp;
+  document.querySelectorAll('#chain-exps .etile').forEach(el=>el.classList.toggle('on', el.dataset.e===exp));
+  const c=(DATA.chains||{})[tk]; const ex=((c&&c.expiries)||[]).find(x=>x.exp===exp);
+  const host=document.getElementById('chain-body');
+  host.innerHTML=ex ? `<div class="ch2">${_ladder(ex.calls,'Calls')}${_ladder(ex.puts,'Puts')}</div>`
+                    : '<div class="empty">No chain for this expiry.</div>';
+}
+function renderChainTk(tk){
+  CHAIN_TK=tk;
+  document.querySelectorAll('#chain-chips .cchip').forEach(el=>el.classList.toggle('on', el.dataset.t===tk));
+  const c=(DATA.chains||{})[tk]; const exps=(c&&c.expiries)||[];
+  const et=document.getElementById('chain-exps');
+  if(!exps.length){ et.innerHTML=''; document.getElementById('chain-body').innerHTML=`<div class="empty">No chain embedded for ${tk} yet — it populates on the next scan.</div>`; return; }
+  et.innerHTML=exps.map(x=>`<span class="etile" data-e="${x.exp}">${fmtDMY(x.exp)} · ${x.dte}d</span>`).join('');
+  et.querySelectorAll('.etile').forEach(el=>el.onclick=()=>renderChainExp(tk, el.dataset.e));
+  let pick=exps[0].exp, best=1e9; exps.forEach(x=>{const e=Math.abs((x.dte||0)-30); if(e<best){best=e;pick=x.exp;}});
+  renderChainExp(tk, pick);
+}
+function renderChain(){
+  const chains=DATA.chains||{}; const tks=Object.keys(BYTK).sort();
+  const cc=document.getElementById('chain-chips');
+  cc.innerHTML=tks.map(t=>`<span class="cchip${chains[t]?'':' noch'}" data-t="${t}">${t}</span>`).join('');
+  cc.querySelectorAll('.cchip').forEach(el=>el.onclick=()=>renderChainTk(el.dataset.t));
+  const first=(CHAIN_TK&&chains[CHAIN_TK]?CHAIN_TK:null)||tks.find(t=>chains[t])||tks[0];
+  if(first) renderChainTk(first);
 }
 
 /* ---------- deep dive ---------- */
@@ -892,7 +933,6 @@ function setSym(t){t=(t||'').toUpperCase().trim(); if(!t)return; CUR=t;
 document.getElementById('symin').addEventListener('keydown',e=>{if(e.key==='Enter'){setSym(e.target.value); e.target.value='';}});
 document.getElementById('deep-in').addEventListener('keydown',e=>{if(e.key==='Enter'){const t=e.target.value.toUpperCase().trim(); setSym(t); renderDeep(t); e.target.value='';}});
 document.getElementById('fund-in').addEventListener('keydown',e=>{if(e.key==='Enter'){const t=e.target.value.toUpperCase().trim(); CUR=t; renderFund(t); e.target.value='';}});
-document.getElementById('chain-f').addEventListener('input',e=>renderChain(e.target.value));
 
 /* ---------- tab router ---------- */
 const TABS=['overview','signals','chain','deep','market','fund','rules'];
@@ -901,6 +941,7 @@ function showTab(tab){
   document.querySelectorAll('#nav a').forEach(a=>a.classList.toggle('on',a.dataset.tab===tab));
   if(tab==='signals'&&CUR) mountChart('tvchart',CUR);
   if(tab==='deep') renderDeep(CUR||Object.keys(BYTK)[0]);
+  if(tab==='chain' && CUR && (DATA.chains||{})[CUR]) renderChainTk(CUR);   // open on the ticker you were viewing
   if(tab==='fund') renderFund(CUR||Object.keys(DATA.fundamentals||{})[0]||Object.keys(BYTK)[0]);
   window.scrollTo(0,0);
 }

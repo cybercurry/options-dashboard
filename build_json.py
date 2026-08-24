@@ -236,6 +236,85 @@ def fetch_market_stats():
     return ms
 
 
+# ── Options-chain embed ──────────────────────────────────────────────────────────
+# The static site has no live backend, so the browsable Options Chain must be baked into
+# the JSON. Bounded (expiries + strike band) to keep the file light and the scan fast.
+CHAIN_MAX_EXPIRIES = 6      # expiries per name (nearest first)
+CHAIN_DTE_MAX      = 120    # only embed expiries within ~4 months
+CHAIN_STRIKE_BAND  = 0.25   # strikes within ±25% of spot …
+CHAIN_STRIKES_SIDE = 28     # … and at most this many each side of ATM
+
+
+def _fnum(v):
+    try:
+        return float(v)
+    except (TypeError, ValueError):
+        return None
+
+
+def fetch_chains(names, prices):
+    """Per name: a bounded set of expiries, each with the calls/puts ladder (strike, delta,
+    bid, ask, IV%, OI). Compact keys keep the JSON small. Never raises for one bad name."""
+    import tradier
+    import datetime as _dt
+    import bisect
+    if not tradier.is_configured():
+        return {}
+    today = _dt.date.today()
+    out = {}
+    for t in names:
+        try:
+            spot = _fnum(prices.get(t))
+            exps = list(dict.fromkeys(tradier.get_expirations(t) or []))
+            picked = []
+            for e in exps:
+                try:
+                    d = (_dt.date.fromisoformat(e) - today).days
+                except Exception:
+                    continue
+                if 0 <= d <= CHAIN_DTE_MAX:
+                    picked.append((e, d))
+                if len(picked) >= CHAIN_MAX_EXPIRIES:
+                    break
+            if not picked:
+                continue
+            lo = spot * (1 - CHAIN_STRIKE_BAND) if spot else None
+            hi = spot * (1 + CHAIN_STRIKE_BAND) if spot else None
+            exp_out = []
+            for e, d in picked:
+                opts = tradier.get_option_chain(t, e, greeks=True) or []
+                calls, puts = [], []
+                for o in opts:
+                    k = _fnum(o.get("strike"))
+                    if k is None or (lo is not None and (k < lo or k > hi)):
+                        continue
+                    g = o.get("greeks") or {}
+                    iv = g.get("mid_iv") or g.get("smv_vol")
+                    dv = g.get("delta")
+                    row = {"k": k,
+                           "d": round(_fnum(dv), 3) if dv is not None else None,
+                           "b": _fnum(o.get("bid")), "a": _fnum(o.get("ask")),
+                           "iv": round(_fnum(iv) * 100, 1) if iv else None,
+                           "oi": int(o.get("open_interest") or 0)}
+                    (calls if o.get("option_type") == "call" else puts).append(row)
+
+                def _trim(rows):
+                    rows.sort(key=lambda r: r["k"])
+                    if spot and len(rows) > 2 * CHAIN_STRIKES_SIDE:
+                        i = bisect.bisect_left([r["k"] for r in rows], spot)
+                        rows = rows[max(0, i - CHAIN_STRIKES_SIDE): i + CHAIN_STRIKES_SIDE]
+                    return rows
+
+                calls, puts = _trim(calls), _trim(puts)
+                if calls or puts:
+                    exp_out.append({"exp": e, "dte": d, "calls": calls, "puts": puts})
+            if exp_out:
+                out[t] = {"spot": round(spot, 2) if spot else None, "expiries": exp_out}
+        except Exception:
+            continue
+    return out
+
+
 def main():
     uni = load_universe()
     data = signals.scan(uni)                       # {"signals": [...], "leaps": [...], "params": {...}}
@@ -245,6 +324,7 @@ def main():
     _names = [o.get("ticker") for o in data.get("overview", []) if o.get("ticker")]
     _prices = {o.get("ticker"): o.get("price") for o in data.get("overview", [])}
     data["fundamentals"] = fetch_fundamentals_all(_names, _prices)
+    data["chains"] = fetch_chains(_names, _prices)
     data["market_stats"] = fetch_market_stats()
     data["generated_at"] = datetime.datetime.now(datetime.timezone.utc).isoformat(timespec="seconds")
     data["universe"] = {"wheel": len(uni.get("wheel", [])),
