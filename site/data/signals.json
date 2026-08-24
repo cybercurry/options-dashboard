@@ -1,6 +1,145 @@
 {
   "signals": [
     {
+      "ticker": "PURR",
+      "strategy": "CSP",
+      "spot": 10.58,
+      "expiry": "2026-09-25",
+      "dte": 32,
+      "strike": 9.5,
+      "delta": -0.306,
+      "mid": 0.82,
+      "premium_pct": 7.8,
+      "pop": 69.4,
+      "iv": 107.4,
+      "iv_atm": 113.0,
+      "sector": "Financial Services",
+      "vol_bucket": "high",
+      "oi": 5,
+      "spread_pct": 54.5,
+      "earnings_soon": true,
+      "earnings_in_window": true,
+      "strong": true,
+      "qualifies": false,
+      "median_ok": false,
+      "pct_b": 1.18,
+      "timing_label": "\ud83d\udd34 NO SETUP",
+      "timing_score": 1,
+      "timing_reasons": [
+        "IV fair vs realized",
+        "\u26d4 Above median (%B 1.18) \u2014 CSP needs below"
+      ],
+      "gates": [
+        {
+          "l": "\u0394 0.31",
+          "s": "ok"
+        },
+        {
+          "l": "DTE 32",
+          "s": "ok"
+        },
+        {
+          "l": "prem 7.8%",
+          "s": "ok"
+        },
+        {
+          "l": "OI 5",
+          "s": "no"
+        },
+        {
+          "l": "spr 54%",
+          "s": "no"
+        },
+        {
+          "l": "earnings",
+          "s": "warn"
+        },
+        {
+          "l": "median",
+          "s": "no"
+        },
+        {
+          "l": "IV rich",
+          "s": "ok"
+        },
+        {
+          "l": "timing",
+          "s": "ok"
+        }
+      ],
+      "shortlist": false
+    },
+    {
+      "ticker": "IREN",
+      "strategy": "CSP",
+      "spot": 41.88,
+      "expiry": "2026-09-25",
+      "dte": 32,
+      "strike": 38.0,
+      "delta": -0.314,
+      "mid": 3.08,
+      "premium_pct": 7.37,
+      "pop": 68.6,
+      "iv": 98.4,
+      "iv_atm": 101.3,
+      "sector": "Financial Services",
+      "vol_bucket": "high",
+      "oi": 248,
+      "spread_pct": 7.5,
+      "earnings_soon": true,
+      "earnings_in_window": true,
+      "strong": true,
+      "qualifies": false,
+      "median_ok": false,
+      "pct_b": 0.63,
+      "timing_label": "\ud83d\udfe0 BUILDING UP / WAIT",
+      "timing_score": 3,
+      "timing_reasons": [
+        "Piercing line",
+        "IV below realized \u2014 thin premium",
+        "\u26d4 Above median (%B 0.63) \u2014 CSP needs below"
+      ],
+      "gates": [
+        {
+          "l": "\u0394 0.31",
+          "s": "ok"
+        },
+        {
+          "l": "DTE 32",
+          "s": "ok"
+        },
+        {
+          "l": "prem 7.4%",
+          "s": "ok"
+        },
+        {
+          "l": "OI 248",
+          "s": "ok"
+        },
+        {
+          "l": "spr 8%",
+          "s": "ok"
+        },
+        {
+          "l": "earnings",
+          "s": "warn"
+        },
+        {
+          "l": "median",
+          "s": "no"
+        },
+        {
+          "l": "IV thin",
+          "s": "no"
+        },
+        {
+          "l": "timing",
+          "s": "ok"
+        }
+      ],
+      "shortlist": false
+    },
+    {
       "ticker": "BE",
       "strategy": "CSP",
       "spot": 201.45,
@@ -20,6 +159,7 @@
       "earnings_soon": false,
       "earnings_in_window": false,
       "strong": true,
+      "qualifies": true,
       "median_ok": true,
       "pct_b": 0.37,
       "timing_label": "\ud83d\udd34 NO SETUP",
@@ -69,6 +209,144 @@
       "shortlist": true
     },
     {
+      "ticker": "NBIS",
+      "strategy": "CSP",
+      "spot": 219.13,
+      "expiry": "2026-09-25",
+      "dte": 32,
+      "strike": 195.0,
+      "delta": -0.285,
+      "mid": 12.73,
+      "premium_pct": 5.81,
+      "pop": 71.5,
+      "iv": 90.4,
+      "iv_atm": 90.3,
+      "sector": "Communication Services",
+      "vol_bucket": "high",
+      "oi": 204,
+      "spread_pct": 32.6,
+      "earnings_soon": false,
+      "earnings_in_window": false,
+      "strong": true,
+      "qualifies": false,
+      "median_ok": false,
+      "pct_b": 0.54,
+      "timing_label": "\ud83d\udd34 NO SETUP",
+      "timing_score": 0,
+      "timing_reasons": [
+        "IV below realized \u2014 thin premium",
+        "\u26d4 Above median (%B 0.54) \u2014 CSP needs below"
+      ],
+      "gates": [
+        {
+          "l": "\u0394 0.28",
+          "s": "ok"
+        },
+        {
+          "l": "DTE 32",
+          "s": "ok"
+        },
+        {
+          "l": "prem 5.8%",
+          "s": "ok"
+        },
+        {
+          "l": "OI 204",
+          "s": "ok"
+        },
+        {
+          "l": "spr 33%",
+          "s": "no"
+        },
+        {
+          "l": "earnings",
+          "s": "ok"
+        },
+        {
+          "l": "median",
+          "s": "no"
+        },
+        {
+          "l": "IV thin",
+          "s": "no"
+        },
+        {
+          "l": "timing",
+          "s": "no"
+        }
+      ],
+      "shortlist": false
+    },
+    {
+      "ticker": "NVTS",
+      "strategy": "CSP",
+      "spot": 12.97,
+      "expiry": "2026-09-25",
+      "dte": 32,
+      "strike": 11.5,
+      "delta": -0.279,
+      "mid": 0.74,
+      "premium_pct": 5.71,
+      "pop": 72.1,
+      "iv": 91.4,
+      "iv_atm": 90.1,
+      "sector": "Technology",
+      "vol_bucket": "high",
+      "oi": 36,
+      "spread_pct": 27.0,
+      "earnings_soon": false,
+      "earnings_in_window": false,
+      "strong": true,
+      "qualifies": false,
+      "median_ok": false,
+      "pct_b": 0.58,
+      "timing_label": "\ud83d\udd34 NO SETUP",
+      "timing_score": 0,
+      "timing_reasons": [
+        "IV below realized \u2014 thin premium",
+        "\u26d4 Above median (%B 0.58) \u2014 CSP needs below"
+      ],
+      "gates": [
+        {
+          "l": "\u0394 0.28",
+          "s": "ok"
+        },
+        {
+          "l": "DTE 32",
+          "s": "ok"
+        },
+        {
+          "l": "prem 5.7%",
+          "s": "ok"
+        },
+        {
+          "l": "OI 36",
+          "s": "no"
+        },
+        {
+          "l": "spr 27%",
+          "s": "no"
+        },
+        {
+          "l": "earnings",
+          "s": "ok"
+        },
+        {
+          "l": "median",
+          "s": "no"
+        },
+        {
+          "l": "IV thin",
+          "s": "no"
+        },
+        {
+          "l": "timing",
+          "s": "no"
+        }
+      ],
+      "shortlist": false
+    },
+    {
       "ticker": "CRWV",
       "strategy": "CSP",
       "spot": 87.85,
@@ -88,6 +366,7 @@
       "earnings_soon": false,
       "earnings_in_window": false,
       "strong": true,
+      "qualifies": true,
       "median_ok": false,
       "pct_b": 0.5,
       "timing_label": "\ud83d\udd34 NO SETUP",
@@ -137,6 +416,351 @@
       "shortlist": false
     },
     {
+      "ticker": "ZS",
+      "strategy": "CSP",
+      "spot": 181.75,
+      "expiry": "2026-09-25",
+      "dte": 32,
+      "strike": 167.5,
+      "delta": -0.306,
+      "mid": 9.1,
+      "premium_pct": 5.01,
+      "pop": 69.4,
+      "iv": 72.0,
+      "iv_atm": 70.5,
+      "sector": "Technology",
+      "vol_bucket": "high",
+      "oi": 14,
+      "spread_pct": 25.3,
+      "earnings_soon": false,
+      "earnings_in_window": true,
+      "strong": true,
+      "qualifies": false,
+      "median_ok": false,
+      "pct_b": 0.73,
+      "timing_label": "\ud83d\udd34 NO SETUP",
+      "timing_score": 2,
+      "timing_reasons": [
+        "IV rich vs realized \u2014 premium fat",
+        "\u26d4 Above median (%B 0.73) \u2014 CSP needs below"
+      ],
+      "gates": [
+        {
+          "l": "\u0394 0.31",
+          "s": "ok"
+        },
+        {
+          "l": "DTE 32",
+          "s": "ok"
+        },
+        {
+          "l": "prem 5.0%",
+          "s": "ok"
+        },
+        {
+          "l": "OI 14",
+          "s": "no"
+        },
+        {
+          "l": "spr 25%",
+          "s": "no"
+        },
+        {
+          "l": "earnings",
+          "s": "warn"
+        },
+        {
+          "l": "median",
+          "s": "no"
+        },
+        {
+          "l": "IV rich",
+          "s": "ok"
+        },
+        {
+          "l": "timing",
+          "s": "ok"
+        }
+      ],
+      "shortlist": false
+    },
+    {
+      "ticker": "VRT",
+      "strategy": "CSP",
+      "spot": 261.95,
+      "expiry": "2026-09-25",
+      "dte": 32,
+      "strike": 245.0,
+      "delta": -0.317,
+      "mid": 10.15,
+      "premium_pct": 3.87,
+      "pop": 68.3,
+      "iv": 55.7,
+      "iv_atm": 55.7,
+      "sector": "Industrials",
+      "vol_bucket": "med",
+      "oi": 51,
+      "spread_pct": 17.7,
+      "earnings_soon": false,
+      "earnings_in_window": false,
+      "strong": true,
+      "qualifies": false,
+      "median_ok": true,
+      "pct_b": 0.41,
+      "timing_label": "\ud83d\udd34 NO SETUP",
+      "timing_score": 1,
+      "timing_reasons": [
+        "Below midline",
+        "IV below realized \u2014 thin premium"
+      ],
+      "gates": [
+        {
+          "l": "\u0394 0.32",
+          "s": "ok"
+        },
+        {
+          "l": "DTE 32",
+          "s": "ok"
+        },
+        {
+          "l": "prem 3.9%",
+          "s": "ok"
+        },
+        {
+          "l": "OI 51",
+          "s": "no"
+        },
+        {
+          "l": "spr 18%",
+          "s": "no"
+        },
+        {
+          "l": "earnings",
+          "s": "ok"
+        },
+        {
+          "l": "median",
+          "s": "ok"
+        },
+        {
+          "l": "IV thin",
+          "s": "no"
+        },
+        {
+          "l": "timing",
+          "s": "ok"
+        }
+      ],
+      "shortlist": false
+    },
+    {
+      "ticker": "SPCX",
+      "strategy": "CSP",
+      "spot": 136.97,
+      "expiry": "2026-09-25",
+      "dte": 32,
+      "strike": 127.0,
+      "delta": -0.301,
+      "mid": 5.28,
+      "premium_pct": 3.85,
+      "pop": 69.9,
+      "iv": 58.5,
+      "iv_atm": 58.3,
+      "sector": "Industrials",
+      "vol_bucket": "med",
+      "oi": 67,
+      "spread_pct": 2.8,
+      "earnings_soon": false,
+      "earnings_in_window": false,
+      "strong": true,
+      "qualifies": false,
+      "median_ok": false,
+      "pct_b": 0.67,
+      "timing_label": "\ud83d\udd34 NO SETUP",
+      "timing_score": 0,
+      "timing_reasons": [
+        "IV below realized \u2014 thin premium",
+        "\u26d4 Above median (%B 0.67) \u2014 CSP needs below"
+      ],
+      "gates": [
+        {
+          "l": "\u0394 0.30",
+          "s": "ok"
+        },
+        {
+          "l": "DTE 32",
+          "s": "ok"
+        },
+        {
+          "l": "prem 3.9%",
+          "s": "ok"
+        },
+        {
+          "l": "OI 67",
+          "s": "no"
+        },
+        {
+          "l": "spr 3%",
+          "s": "ok"
+        },
+        {
+          "l": "earnings",
+          "s": "ok"
+        },
+        {
+          "l": "median",
+          "s": "no"
+        },
+        {
+          "l": "IV thin",
+          "s": "no"
+        },
+        {
+          "l": "timing",
+          "s": "no"
+        }
+      ],
+      "shortlist": false
+    },
+    {
+      "ticker": "NOW",
+      "strategy": "CSP",
+      "spot": 128.48,
+      "expiry": "2026-09-25",
+      "dte": 32,
+      "strike": 120.0,
+      "delta": -0.295,
+      "mid": 4.25,
+      "premium_pct": 3.31,
+      "pop": 70.5,
+      "iv": 52.3,
+      "iv_atm": 52.8,
+      "sector": "Technology",
+      "vol_bucket": "med",
+      "oi": 99,
+      "spread_pct": 18.8,
+      "earnings_soon": false,
+      "earnings_in_window": false,
+      "strong": true,
+      "qualifies": false,
+      "median_ok": false,
+      "pct_b": 0.8,
+      "timing_label": "\ud83d\udd34 NO SETUP",
+      "timing_score": 0,
+      "timing_reasons": [
+        "IV below realized \u2014 thin premium",
+        "\u26d4 Above median (%B 0.80) \u2014 CSP needs below"
+      ],
+      "gates": [
+        {
+          "l": "\u0394 0.29",
+          "s": "ok"
+        },
+        {
+          "l": "DTE 32",
+          "s": "ok"
+        },
+        {
+          "l": "prem 3.3%",
+          "s": "ok"
+        },
+        {
+          "l": "OI 99",
+          "s": "no"
+        },
+        {
+          "l": "spr 19%",
+          "s": "no"
+        },
+        {
+          "l": "earnings",
+          "s": "ok"
+        },
+        {
+          "l": "median",
+          "s": "no"
+        },
+        {
+          "l": "IV thin",
+          "s": "no"
+        },
+        {
+          "l": "timing",
+          "s": "no"
+        }
+      ],
+      "shortlist": false
+    },
+    {
+      "ticker": "AMD",
+      "strategy": "CSP",
+      "spot": 473.25,
+      "expiry": "2026-09-25",
+      "dte": 32,
+      "strike": 440.0,
+      "delta": -0.288,
+      "mid": 15.5,
+      "premium_pct": 3.28,
+      "pop": 71.2,
+      "iv": 52.7,
+      "iv_atm": 52.3,
+      "sector": "Technology",
+      "vol_bucket": "med",
+      "oi": 792,
+      "spread_pct": 16.8,
+      "earnings_soon": false,
+      "earnings_in_window": false,
+      "strong": true,
+      "qualifies": false,
+      "median_ok": true,
+      "pct_b": 0.4,
+      "timing_label": "\ud83d\udd34 NO SETUP",
+      "timing_score": 1,
+      "timing_reasons": [
+        "Below midline",
+        "IV below realized \u2014 thin premium"
+      ],
+      "gates": [
+        {
+          "l": "\u0394 0.29",
+          "s": "ok"
+        },
+        {
+          "l": "DTE 32",
+          "s": "ok"
+        },
+        {
+          "l": "prem 3.3%",
+          "s": "ok"
+        },
+        {
+          "l": "OI 792",
+          "s": "ok"
+        },
+        {
+          "l": "spr 17%",
+          "s": "no"
+        },
+        {
+          "l": "earnings",
+          "s": "ok"
+        },
+        {
+          "l": "median",
+          "s": "ok"
+        },
+        {
+          "l": "IV thin",
+          "s": "no"
+        },
+        {
+          "l": "timing",
+          "s": "ok"
+        }
+      ],
+      "shortlist": false
+    },
+    {
       "ticker": "PLTR",
       "strategy": "CSP",
       "spot": 179.94,
@@ -156,6 +780,7 @@
       "earnings_soon": false,
       "earnings_in_window": false,
       "strong": true,
+      "qualifies": true,
       "median_ok": false,
       "pct_b": 0.76,
       "timing_label": "\ud83d\udd34 NO SETUP",
@@ -205,6 +830,75 @@
       "shortlist": false
     },
     {
+      "ticker": "NVDA",
+      "strategy": "CSP",
+      "spot": 214.72,
+      "expiry": "2026-09-25",
+      "dte": 32,
+      "strike": 205.0,
+      "delta": -0.321,
+      "mid": 6.0,
+      "premium_pct": 2.79,
+      "pop": 68.0,
+      "iv": 39.9,
+      "iv_atm": 39.3,
+      "sector": "Technology",
+      "vol_bucket": "med",
+      "oi": 1011,
+      "spread_pct": 3.3,
+      "earnings_soon": true,
+      "earnings_in_window": true,
+      "strong": true,
+      "qualifies": false,
+      "median_ok": false,
+      "pct_b": 0.53,
+      "timing_label": "\ud83d\udd34 NO SETUP",
+      "timing_score": 1,
+      "timing_reasons": [
+        "IV fair vs realized",
+        "\u26d4 Above median (%B 0.53) \u2014 CSP needs below"
+      ],
+      "gates": [
+        {
+          "l": "\u0394 0.32",
+          "s": "ok"
+        },
+        {
+          "l": "DTE 32",
+          "s": "ok"
+        },
+        {
+          "l": "prem 2.8%",
+          "s": "ok"
+        },
+        {
+          "l": "OI 1011",
+          "s": "ok"
+        },
+        {
+          "l": "spr 3%",
+          "s": "ok"
+        },
+        {
+          "l": "earnings",
+          "s": "warn"
+        },
+        {
+          "l": "median",
+          "s": "no"
+        },
+        {
+          "l": "IV rich",
+          "s": "ok"
+        },
+        {
+          "l": "timing",
+          "s": "ok"
+        }
+      ],
+      "shortlist": false
+    },
+    {
       "ticker": "SOFI",
       "strategy": "CSP",
       "spot": 18.91,
@@ -224,6 +918,7 @@
       "earnings_soon": false,
       "earnings_in_window": false,
       "strong": true,
+      "qualifies": true,
       "median_ok": false,
       "pct_b": 0.82,
       "timing_label": "\ud83d\udd34 NO SETUP",
@@ -292,6 +987,7 @@
       "earnings_soon": false,
       "earnings_in_window": false,
       "strong": true,
+      "qualifies": true,
       "median_ok": false,
       "pct_b": 1.04,
       "timing_label": "\ud83d\udd34 NO SETUP",
@@ -341,6 +1037,75 @@
       "shortlist": false
     },
     {
+      "ticker": "CEG",
+      "strategy": "CSP",
+      "spot": 272.88,
+      "expiry": "2026-09-25",
+      "dte": 32,
+      "strike": 260.0,
+      "delta": -0.32,
+      "mid": 7.4,
+      "premium_pct": 2.71,
+      "pop": 68.0,
+      "iv": 40.1,
+      "iv_atm": 42.1,
+      "sector": "Utilities",
+      "vol_bucket": "med",
+      "oi": 41,
+      "spread_pct": 21.6,
+      "earnings_soon": false,
+      "earnings_in_window": false,
+      "strong": true,
+      "qualifies": false,
+      "median_ok": false,
+      "pct_b": 0.6,
+      "timing_label": "\ud83d\udd34 NO SETUP",
+      "timing_score": 1,
+      "timing_reasons": [
+        "IV fair vs realized",
+        "\u26d4 Above median (%B 0.60) \u2014 CSP needs below"
+      ],
+      "gates": [
+        {
+          "l": "\u0394 0.32",
+          "s": "ok"
+        },
+        {
+          "l": "DTE 32",
+          "s": "ok"
+        },
+        {
+          "l": "prem 2.7%",
+          "s": "ok"
+        },
+        {
+          "l": "OI 41",
+          "s": "no"
+        },
+        {
+          "l": "spr 22%",
+          "s": "no"
+        },
+        {
+          "l": "earnings",
+          "s": "ok"
+        },
+        {
+          "l": "median",
+          "s": "no"
+        },
+        {
+          "l": "IV rich",
+          "s": "ok"
+        },
+        {
+          "l": "timing",
+          "s": "ok"
+        }
+      ],
+      "shortlist": false
+    },
+    {
       "ticker": "SLV",
       "strategy": "CSP",
       "spot": 62.72,
@@ -360,6 +1125,7 @@
       "earnings_soon": false,
       "earnings_in_window": false,
       "strong": true,
+      "qualifies": true,
       "median_ok": false,
       "pct_b": 0.95,
       "timing_label": "\ud83d\udd34 NO SETUP",
@@ -409,6 +1175,75 @@
       "shortlist": false
     },
     {
+      "ticker": "CMG",
+      "strategy": "CSP",
+      "spot": 36.9,
+      "expiry": "2026-09-25",
+      "dte": 32,
+      "strike": 35.0,
+      "delta": -0.3,
+      "mid": 0.76,
+      "premium_pct": 2.05,
+      "pop": 70.0,
+      "iv": 34.5,
+      "iv_atm": 36.0,
+      "sector": "Consumer Cyclical",
+      "vol_bucket": "med",
+      "oi": 16,
+      "spread_pct": 33.1,
+      "earnings_soon": false,
+      "earnings_in_window": false,
+      "strong": true,
+      "qualifies": false,
+      "median_ok": false,
+      "pct_b": 0.86,
+      "timing_label": "\ud83d\udd34 NO SETUP",
+      "timing_score": 0,
+      "timing_reasons": [
+        "IV below realized \u2014 thin premium",
+        "\u26d4 Above median (%B 0.86) \u2014 CSP needs below"
+      ],
+      "gates": [
+        {
+          "l": "\u0394 0.30",
+          "s": "ok"
+        },
+        {
+          "l": "DTE 32",
+          "s": "ok"
+        },
+        {
+          "l": "prem 2.0%",
+          "s": "ok"
+        },
+        {
+          "l": "OI 16",
+          "s": "no"
+        },
+        {
+          "l": "spr 33%",
+          "s": "no"
+        },
+        {
+          "l": "earnings",
+          "s": "ok"
+        },
+        {
+          "l": "median",
+          "s": "no"
+        },
+        {
+          "l": "IV thin",
+          "s": "no"
+        },
+        {
+          "l": "timing",
+          "s": "no"
+        }
+      ],
+      "shortlist": false
+    },
+    {
       "ticker": "AMZN",
       "strategy": "CSP",
       "spot": 258.63,
@@ -428,6 +1263,7 @@
       "earnings_soon": false,
       "earnings_in_window": false,
       "strong": true,
+      "qualifies": true,
       "median_ok": true,
       "pct_b": 0.46,
       "timing_label": "\ud83d\udfe0 BUILDING UP / WAIT",
@@ -478,6 +1314,75 @@
       "shortlist": true
     },
     {
+      "ticker": "GOOG",
+      "strategy": "CSP",
+      "spot": 341.75,
+      "expiry": "2026-09-25",
+      "dte": 32,
+      "strike": 330.0,
+      "delta": -0.318,
+      "mid": 6.38,
+      "premium_pct": 1.87,
+      "pop": 68.2,
+      "iv": 28.0,
+      "iv_atm": 28.0,
+      "sector": "Communication Services",
+      "vol_bucket": "anchor",
+      "oi": 824,
+      "spread_pct": 21.2,
+      "earnings_soon": false,
+      "earnings_in_window": false,
+      "strong": true,
+      "qualifies": false,
+      "median_ok": true,
+      "pct_b": 0.4,
+      "timing_label": "\ud83d\udd34 NO SETUP",
+      "timing_score": 1,
+      "timing_reasons": [
+        "Below midline",
+        "IV below realized \u2014 thin premium"
+      ],
+      "gates": [
+        {
+          "l": "\u0394 0.32",
+          "s": "ok"
+        },
+        {
+          "l": "DTE 32",
+          "s": "ok"
+        },
+        {
+          "l": "prem 1.9%",
+          "s": "ok"
+        },
+        {
+          "l": "OI 824",
+          "s": "ok"
+        },
+        {
+          "l": "spr 21%",
+          "s": "no"
+        },
+        {
+          "l": "earnings",
+          "s": "ok"
+        },
+        {
+          "l": "median",
+          "s": "ok"
+        },
+        {
+          "l": "IV thin",
+          "s": "no"
+        },
+        {
+          "l": "timing",
+          "s": "ok"
+        }
+      ],
+      "shortlist": false
+    },
+    {
       "ticker": "AAPL",
       "strategy": "CSP",
       "spot": 309.35,
@@ -497,6 +1402,7 @@
       "earnings_soon": false,
       "earnings_in_window": false,
       "strong": true,
+      "qualifies": true,
       "median_ok": true,
       "pct_b": 0.4,
       "timing_label": "\ud83d\udd34 NO SETUP",
@@ -546,6 +1452,358 @@
       "shortlist": true
     },
     {
+      "ticker": "MSFT",
+      "strategy": "CSP",
+      "spot": 483.24,
+      "expiry": "2026-09-25",
+      "dte": 32,
+      "strike": 465.0,
+      "delta": -0.285,
+      "mid": 7.55,
+      "premium_pct": 1.56,
+      "pop": 71.5,
+      "iv": 26.6,
+      "iv_atm": 25.7,
+      "sector": "Technology",
+      "vol_bucket": "anchor",
+      "oi": 256,
+      "spread_pct": 21.2,
+      "earnings_soon": false,
+      "earnings_in_window": false,
+      "strong": true,
+      "qualifies": false,
+      "median_ok": false,
+      "pct_b": 0.57,
+      "timing_label": "\ud83d\udfe0 BUILDING UP / WAIT",
+      "timing_score": 3,
+      "timing_reasons": [
+        "Piercing line",
+        "IV below realized \u2014 thin premium",
+        "\u26d4 Above median (%B 0.57) \u2014 CSP needs below"
+      ],
+      "gates": [
+        {
+          "l": "\u0394 0.28",
+          "s": "ok"
+        },
+        {
+          "l": "DTE 32",
+          "s": "ok"
+        },
+        {
+          "l": "prem 1.6%",
+          "s": "ok"
+        },
+        {
+          "l": "OI 256",
+          "s": "ok"
+        },
+        {
+          "l": "spr 21%",
+          "s": "no"
+        },
+        {
+          "l": "earnings",
+          "s": "ok"
+        },
+        {
+          "l": "median",
+          "s": "no"
+        },
+        {
+          "l": "IV thin",
+          "s": "no"
+        },
+        {
+          "l": "timing",
+          "s": "ok"
+        }
+      ],
+      "shortlist": false
+    },
+    {
+      "ticker": "GLD",
+      "strategy": "CSP",
+      "spot": 423.36,
+      "expiry": "2026-09-25",
+      "dte": 32,
+      "strike": 409.0,
+      "delta": -0.298,
+      "mid": 6.45,
+      "premium_pct": 1.52,
+      "pop": 70.2,
+      "iv": 24.9,
+      "iv_atm": 25.4,
+      "sector": "\u2014",
+      "vol_bucket": "anchor",
+      "oi": 41,
+      "spread_pct": 4.7,
+      "earnings_soon": false,
+      "earnings_in_window": false,
+      "strong": true,
+      "qualifies": false,
+      "median_ok": false,
+      "pct_b": 0.97,
+      "timing_label": "\ud83d\udd34 NO SETUP",
+      "timing_score": 1,
+      "timing_reasons": [
+        "IV fair vs realized",
+        "\u26d4 Above median (%B 0.97) \u2014 CSP needs below"
+      ],
+      "gates": [
+        {
+          "l": "\u0394 0.30",
+          "s": "ok"
+        },
+        {
+          "l": "DTE 32",
+          "s": "ok"
+        },
+        {
+          "l": "prem 1.5%",
+          "s": "ok"
+        },
+        {
+          "l": "OI 41",
+          "s": "no"
+        },
+        {
+          "l": "spr 5%",
+          "s": "ok"
+        },
+        {
+          "l": "earnings",
+          "s": "ok"
+        },
+        {
+          "l": "median",
+          "s": "no"
+        },
+        {
+          "l": "IV rich",
+          "s": "ok"
+        },
+        {
+          "l": "timing",
+          "s": "ok"
+        }
+      ],
+      "shortlist": false
+    },
+    {
+      "ticker": "WMT",
+      "strategy": "CSP",
+      "spot": 103.7,
+      "expiry": "2026-09-25",
+      "dte": 32,
+      "strike": 101.0,
+      "delta": -0.313,
+      "mid": 1.5,
+      "premium_pct": 1.44,
+      "pop": 68.7,
+      "iv": 21.9,
+      "iv_atm": 21.9,
+      "sector": "Consumer Defensive",
+      "vol_bucket": "anchor",
+      "oi": 70,
+      "spread_pct": 23.4,
+      "earnings_soon": false,
+      "earnings_in_window": false,
+      "strong": false,
+      "qualifies": false,
+      "median_ok": true,
+      "pct_b": -0.16,
+      "timing_label": "\ud83d\udd34 NO SETUP",
+      "timing_score": 2,
+      "timing_reasons": [
+        "Near/touching lower BB (-0.16)",
+        "Dropped then bounced",
+        "Below midline",
+        "IV below realized \u2014 thin premium",
+        "Still walking the lower band \u2014 breakdown, veto"
+      ],
+      "gates": [
+        {
+          "l": "\u0394 0.31",
+          "s": "ok"
+        },
+        {
+          "l": "DTE 32",
+          "s": "ok"
+        },
+        {
+          "l": "prem 1.4%",
+          "s": "ok"
+        },
+        {
+          "l": "OI 70",
+          "s": "no"
+        },
+        {
+          "l": "spr 23%",
+          "s": "no"
+        },
+        {
+          "l": "earnings",
+          "s": "ok"
+        },
+        {
+          "l": "median",
+          "s": "ok"
+        },
+        {
+          "l": "IV thin",
+          "s": "no"
+        },
+        {
+          "l": "timing",
+          "s": "ok"
+        }
+      ],
+      "shortlist": false
+    },
+    {
+      "ticker": "PURR",
+      "strategy": "CC",
+      "spot": 10.58,
+      "expiry": "2026-09-25",
+      "dte": 32,
+      "strike": 14.0,
+      "delta": 0.303,
+      "mid": 0.62,
+      "premium_pct": 5.91,
+      "pop": 69.7,
+      "iv": 120.0,
+      "iv_atm": 113.0,
+      "sector": "Financial Services",
+      "vol_bucket": "high",
+      "oi": 1,
+      "spread_pct": 104.0,
+      "earnings_soon": true,
+      "earnings_in_window": true,
+      "strong": true,
+      "qualifies": false,
+      "median_ok": true,
+      "pct_b": 1.18,
+      "timing_label": "\ud83d\udfe1 PARTIAL SETUP",
+      "timing_score": 7,
+      "timing_reasons": [
+        "Near/touching upper BB (1.18)",
+        "Spiked then rolled over",
+        "Above midline",
+        "IV fair vs realized"
+      ],
+      "gates": [
+        {
+          "l": "\u0394 0.30",
+          "s": "ok"
+        },
+        {
+          "l": "DTE 32",
+          "s": "ok"
+        },
+        {
+          "l": "prem 5.9%",
+          "s": "ok"
+        },
+        {
+          "l": "OI 1",
+          "s": "no"
+        },
+        {
+          "l": "spr 104%",
+          "s": "no"
+        },
+        {
+          "l": "earnings",
+          "s": "warn"
+        },
+        {
+          "l": "median",
+          "s": "ok"
+        },
+        {
+          "l": "IV rich",
+          "s": "ok"
+        },
+        {
+          "l": "timing",
+          "s": "ok"
+        }
+      ],
+      "shortlist": false
+    },
+    {
+      "ticker": "IREN",
+      "strategy": "CC",
+      "spot": 41.88,
+      "expiry": "2026-09-25",
+      "dte": 32,
+      "strike": 52.0,
+      "delta": 0.302,
+      "mid": 2.08,
+      "premium_pct": 4.98,
+      "pop": 69.8,
+      "iv": 99.6,
+      "iv_atm": 101.3,
+      "sector": "Financial Services",
+      "vol_bucket": "high",
+      "oi": 50,
+      "spread_pct": 30.2,
+      "earnings_soon": true,
+      "earnings_in_window": true,
+      "strong": true,
+      "qualifies": false,
+      "median_ok": true,
+      "pct_b": 0.63,
+      "timing_label": "\ud83d\udfe0 BUILDING UP / WAIT",
+      "timing_score": 4,
+      "timing_reasons": [
+        "Above midline",
+        "Bearish engulfing",
+        "IV below realized \u2014 thin premium"
+      ],
+      "gates": [
+        {
+          "l": "\u0394 0.30",
+          "s": "ok"
+        },
+        {
+          "l": "DTE 32",
+          "s": "ok"
+        },
+        {
+          "l": "prem 5.0%",
+          "s": "ok"
+        },
+        {
+          "l": "OI 50",
+          "s": "no"
+        },
+        {
+          "l": "spr 30%",
+          "s": "no"
+        },
+        {
+          "l": "earnings",
+          "s": "warn"
+        },
+        {
+          "l": "median",
+          "s": "ok"
+        },
+        {
+          "l": "IV thin",
+          "s": "no"
+        },
+        {
+          "l": "timing",
+          "s": "ok"
+        }
+      ],
+      "shortlist": false
+    },
+    {
       "ticker": "BE",
       "strategy": "CC",
       "spot": 201.45,
@@ -565,6 +1823,7 @@
       "earnings_soon": false,
       "earnings_in_window": false,
       "strong": true,
+      "qualifies": true,
       "median_ok": false,
       "pct_b": 0.37,
       "timing_label": "\ud83d\udd34 NO SETUP",
@@ -614,6 +1873,352 @@
       "shortlist": false
     },
     {
+      "ticker": "NBIS",
+      "strategy": "CC",
+      "spot": 219.13,
+      "expiry": "2026-09-25",
+      "dte": 32,
+      "strike": 265.0,
+      "delta": 0.301,
+      "mid": 9.97,
+      "premium_pct": 4.55,
+      "pop": 69.9,
+      "iv": 90.0,
+      "iv_atm": 90.3,
+      "sector": "Communication Services",
+      "vol_bucket": "high",
+      "oi": 42,
+      "spread_pct": 17.5,
+      "earnings_soon": false,
+      "earnings_in_window": false,
+      "strong": true,
+      "qualifies": false,
+      "median_ok": true,
+      "pct_b": 0.54,
+      "timing_label": "\ud83d\udd34 NO SETUP",
+      "timing_score": 1,
+      "timing_reasons": [
+        "Above midline",
+        "IV below realized \u2014 thin premium"
+      ],
+      "gates": [
+        {
+          "l": "\u0394 0.30",
+          "s": "ok"
+        },
+        {
+          "l": "DTE 32",
+          "s": "ok"
+        },
+        {
+          "l": "prem 4.5%",
+          "s": "ok"
+        },
+        {
+          "l": "OI 42",
+          "s": "no"
+        },
+        {
+          "l": "spr 18%",
+          "s": "no"
+        },
+        {
+          "l": "earnings",
+          "s": "ok"
+        },
+        {
+          "l": "median",
+          "s": "ok"
+        },
+        {
+          "l": "IV thin",
+          "s": "no"
+        },
+        {
+          "l": "timing",
+          "s": "ok"
+        }
+      ],
+      "shortlist": false
+    },
+    {
+      "ticker": "NVTS",
+      "strategy": "CC",
+      "spot": 12.97,
+      "expiry": "2026-09-25",
+      "dte": 32,
+      "strike": 16.0,
+      "delta": 0.284,
+      "mid": 0.57,
+      "premium_pct": 4.36,
+      "pop": 71.6,
+      "iv": 91.8,
+      "iv_atm": 90.1,
+      "sector": "Technology",
+      "vol_bucket": "high",
+      "oi": 84,
+      "spread_pct": 40.7,
+      "earnings_soon": false,
+      "earnings_in_window": false,
+      "strong": true,
+      "qualifies": false,
+      "median_ok": true,
+      "pct_b": 0.58,
+      "timing_label": "\ud83d\udd34 NO SETUP",
+      "timing_score": 1,
+      "timing_reasons": [
+        "Above midline",
+        "IV below realized \u2014 thin premium"
+      ],
+      "gates": [
+        {
+          "l": "\u0394 0.28",
+          "s": "ok"
+        },
+        {
+          "l": "DTE 32",
+          "s": "ok"
+        },
+        {
+          "l": "prem 4.4%",
+          "s": "ok"
+        },
+        {
+          "l": "OI 84",
+          "s": "no"
+        },
+        {
+          "l": "spr 41%",
+          "s": "no"
+        },
+        {
+          "l": "earnings",
+          "s": "ok"
+        },
+        {
+          "l": "median",
+          "s": "ok"
+        },
+        {
+          "l": "IV thin",
+          "s": "no"
+        },
+        {
+          "l": "timing",
+          "s": "ok"
+        }
+      ],
+      "shortlist": false
+    },
+    {
+      "ticker": "CRWV",
+      "strategy": "CC",
+      "spot": 87.85,
+      "expiry": "2026-09-25",
+      "dte": 32,
+      "strike": 103.0,
+      "delta": 0.302,
+      "mid": 3.52,
+      "premium_pct": 4.01,
+      "pop": 69.8,
+      "iv": 76.2,
+      "iv_atm": 75.8,
+      "sector": "Technology",
+      "vol_bucket": "high",
+      "oi": 53,
+      "spread_pct": 7.1,
+      "earnings_soon": false,
+      "earnings_in_window": false,
+      "strong": true,
+      "qualifies": false,
+      "median_ok": true,
+      "pct_b": 0.5,
+      "timing_label": "\ud83d\udd34 NO SETUP",
+      "timing_score": 1,
+      "timing_reasons": [
+        "Above midline",
+        "IV below realized \u2014 thin premium"
+      ],
+      "gates": [
+        {
+          "l": "\u0394 0.30",
+          "s": "ok"
+        },
+        {
+          "l": "DTE 32",
+          "s": "ok"
+        },
+        {
+          "l": "prem 4.0%",
+          "s": "ok"
+        },
+        {
+          "l": "OI 53",
+          "s": "no"
+        },
+        {
+          "l": "spr 7%",
+          "s": "ok"
+        },
+        {
+          "l": "earnings",
+          "s": "ok"
+        },
+        {
+          "l": "median",
+          "s": "ok"
+        },
+        {
+          "l": "IV thin",
+          "s": "no"
+        },
+        {
+          "l": "timing",
+          "s": "ok"
+        }
+      ],
+      "shortlist": false
+    },
+    {
+      "ticker": "ZS",
+      "strategy": "CC",
+      "spot": 181.75,
+      "expiry": "2026-09-25",
+      "dte": 32,
+      "strike": 207.5,
+      "delta": 0.308,
+      "mid": 6.6,
+      "premium_pct": 3.63,
+      "pop": 69.2,
+      "iv": 67.8,
+      "iv_atm": 70.5,
+      "sector": "Technology",
+      "vol_bucket": "high",
+      "oi": 0,
+      "spread_pct": 31.8,
+      "earnings_soon": false,
+      "earnings_in_window": true,
+      "strong": true,
+      "qualifies": false,
+      "median_ok": true,
+      "pct_b": 0.73,
+      "timing_label": "\ud83d\udfe1 PARTIAL SETUP",
+      "timing_score": 6,
+      "timing_reasons": [
+        "Above midline",
+        "Bearish engulfing",
+        "IV rich vs realized \u2014 premium fat"
+      ],
+      "gates": [
+        {
+          "l": "\u0394 0.31",
+          "s": "ok"
+        },
+        {
+          "l": "DTE 32",
+          "s": "ok"
+        },
+        {
+          "l": "prem 3.6%",
+          "s": "ok"
+        },
+        {
+          "l": "OI 0",
+          "s": "no"
+        },
+        {
+          "l": "spr 32%",
+          "s": "no"
+        },
+        {
+          "l": "earnings",
+          "s": "warn"
+        },
+        {
+          "l": "median",
+          "s": "ok"
+        },
+        {
+          "l": "IV rich",
+          "s": "ok"
+        },
+        {
+          "l": "timing",
+          "s": "ok"
+        }
+      ],
+      "shortlist": false
+    },
+    {
+      "ticker": "VRT",
+      "strategy": "CC",
+      "spot": 261.95,
+      "expiry": "2026-09-25",
+      "dte": 32,
+      "strike": 290.0,
+      "delta": 0.307,
+      "mid": 8.15,
+      "premium_pct": 3.11,
+      "pop": 69.3,
+      "iv": 55.1,
+      "iv_atm": 55.7,
+      "sector": "Industrials",
+      "vol_bucket": "med",
+      "oi": 25,
+      "spread_pct": 25.8,
+      "earnings_soon": false,
+      "earnings_in_window": false,
+      "strong": true,
+      "qualifies": false,
+      "median_ok": false,
+      "pct_b": 0.41,
+      "timing_label": "\ud83d\udd34 NO SETUP",
+      "timing_score": 0,
+      "timing_reasons": [
+        "IV below realized \u2014 thin premium",
+        "\u26d4 Below median (%B 0.41) \u2014 CC needs above"
+      ],
+      "gates": [
+        {
+          "l": "\u0394 0.31",
+          "s": "ok"
+        },
+        {
+          "l": "DTE 32",
+          "s": "ok"
+        },
+        {
+          "l": "prem 3.1%",
+          "s": "ok"
+        },
+        {
+          "l": "OI 25",
+          "s": "no"
+        },
+        {
+          "l": "spr 26%",
+          "s": "no"
+        },
+        {
+          "l": "earnings",
+          "s": "ok"
+        },
+        {
+          "l": "median",
+          "s": "no"
+        },
+        {
+          "l": "IV thin",
+          "s": "no"
+        },
+        {
+          "l": "timing",
+          "s": "no"
+        }
+      ],
+      "shortlist": false
+    },
+    {
       "ticker": "SPCX",
       "strategy": "CC",
       "spot": 136.97,
@@ -633,6 +2238,7 @@
       "earnings_soon": false,
       "earnings_in_window": false,
       "strong": true,
+      "qualifies": true,
       "median_ok": true,
       "pct_b": 0.67,
       "timing_label": "\ud83d\udfe0 BUILDING UP / WAIT",
@@ -683,6 +2289,76 @@
       "shortlist": false
     },
     {
+      "ticker": "NOW",
+      "strategy": "CC",
+      "spot": 128.48,
+      "expiry": "2026-09-25",
+      "dte": 32,
+      "strike": 142.0,
+      "delta": 0.308,
+      "mid": 3.75,
+      "premium_pct": 2.92,
+      "pop": 69.2,
+      "iv": 52.1,
+      "iv_atm": 52.8,
+      "sector": "Technology",
+      "vol_bucket": "med",
+      "oi": 3,
+      "spread_pct": 24.0,
+      "earnings_soon": false,
+      "earnings_in_window": false,
+      "strong": true,
+      "qualifies": false,
+      "median_ok": true,
+      "pct_b": 0.8,
+      "timing_label": "\ud83d\udfe0 BUILDING UP / WAIT",
+      "timing_score": 4,
+      "timing_reasons": [
+        "Above midline",
+        "Dark cloud cover",
+        "IV below realized \u2014 thin premium"
+      ],
+      "gates": [
+        {
+          "l": "\u0394 0.31",
+          "s": "ok"
+        },
+        {
+          "l": "DTE 32",
+          "s": "ok"
+        },
+        {
+          "l": "prem 2.9%",
+          "s": "ok"
+        },
+        {
+          "l": "OI 3",
+          "s": "no"
+        },
+        {
+          "l": "spr 24%",
+          "s": "no"
+        },
+        {
+          "l": "earnings",
+          "s": "ok"
+        },
+        {
+          "l": "median",
+          "s": "ok"
+        },
+        {
+          "l": "IV thin",
+          "s": "no"
+        },
+        {
+          "l": "timing",
+          "s": "ok"
+        }
+      ],
+      "shortlist": false
+    },
+    {
       "ticker": "AMD",
       "strategy": "CC",
       "spot": 473.25,
@@ -702,6 +2378,7 @@
       "earnings_soon": false,
       "earnings_in_window": false,
       "strong": true,
+      "qualifies": true,
       "median_ok": false,
       "pct_b": 0.4,
       "timing_label": "\ud83d\udd34 NO SETUP",
@@ -770,6 +2447,7 @@
       "earnings_soon": false,
       "earnings_in_window": false,
       "strong": true,
+      "qualifies": true,
       "median_ok": true,
       "pct_b": 0.82,
       "timing_label": "\ud83d\udfe0 BUILDING UP / WAIT",
@@ -839,6 +2517,7 @@
       "earnings_soon": false,
       "earnings_in_window": false,
       "strong": true,
+      "qualifies": true,
       "median_ok": true,
       "pct_b": 0.76,
       "timing_label": "\ud83d\udd34 NO SETUP",
@@ -907,6 +2586,7 @@
       "earnings_soon": false,
       "earnings_in_window": false,
       "strong": true,
+      "qualifies": true,
       "median_ok": true,
       "pct_b": 1.04,
       "timing_label": "\ud83d\udfe0 BUILDING UP / WAIT",
@@ -957,6 +2637,75 @@
       "shortlist": false
     },
     {
+      "ticker": "CEG",
+      "strategy": "CC",
+      "spot": 272.88,
+      "expiry": "2026-09-25",
+      "dte": 32,
+      "strike": 295.0,
+      "delta": 0.3,
+      "mid": 6.55,
+      "premium_pct": 2.4,
+      "pop": 70.0,
+      "iv": 42.1,
+      "iv_atm": 42.1,
+      "sector": "Utilities",
+      "vol_bucket": "med",
+      "oi": 15,
+      "spread_pct": 65.6,
+      "earnings_soon": false,
+      "earnings_in_window": false,
+      "strong": true,
+      "qualifies": false,
+      "median_ok": true,
+      "pct_b": 0.6,
+      "timing_label": "\ud83d\udd34 NO SETUP",
+      "timing_score": 2,
+      "timing_reasons": [
+        "Above midline",
+        "IV fair vs realized"
+      ],
+      "gates": [
+        {
+          "l": "\u0394 0.30",
+          "s": "ok"
+        },
+        {
+          "l": "DTE 32",
+          "s": "ok"
+        },
+        {
+          "l": "prem 2.4%",
+          "s": "ok"
+        },
+        {
+          "l": "OI 15",
+          "s": "no"
+        },
+        {
+          "l": "spr 66%",
+          "s": "no"
+        },
+        {
+          "l": "earnings",
+          "s": "ok"
+        },
+        {
+          "l": "median",
+          "s": "ok"
+        },
+        {
+          "l": "IV rich",
+          "s": "ok"
+        },
+        {
+          "l": "timing",
+          "s": "ok"
+        }
+      ],
+      "shortlist": false
+    },
+    {
       "ticker": "SLV",
       "strategy": "CC",
       "spot": 62.72,
@@ -976,6 +2725,7 @@
       "earnings_soon": false,
       "earnings_in_window": false,
       "strong": true,
+      "qualifies": true,
       "median_ok": true,
       "pct_b": 0.95,
       "timing_label": "\ud83d\udfe0 BUILDING UP / WAIT",
@@ -1026,6 +2776,145 @@
       "shortlist": false
     },
     {
+      "ticker": "NVDA",
+      "strategy": "CC",
+      "spot": 214.72,
+      "expiry": "2026-09-25",
+      "dte": 32,
+      "strike": 230.0,
+      "delta": 0.311,
+      "mid": 4.92,
+      "premium_pct": 2.29,
+      "pop": 68.9,
+      "iv": 39.1,
+      "iv_atm": 39.3,
+      "sector": "Technology",
+      "vol_bucket": "med",
+      "oi": 1559,
+      "spread_pct": 3.0,
+      "earnings_soon": true,
+      "earnings_in_window": true,
+      "strong": true,
+      "qualifies": false,
+      "median_ok": true,
+      "pct_b": 0.53,
+      "timing_label": "\ud83d\udd34 NO SETUP",
+      "timing_score": 2,
+      "timing_reasons": [
+        "Above midline",
+        "IV fair vs realized"
+      ],
+      "gates": [
+        {
+          "l": "\u0394 0.31",
+          "s": "ok"
+        },
+        {
+          "l": "DTE 32",
+          "s": "ok"
+        },
+        {
+          "l": "prem 2.3%",
+          "s": "ok"
+        },
+        {
+          "l": "OI 1559",
+          "s": "ok"
+        },
+        {
+          "l": "spr 3%",
+          "s": "ok"
+        },
+        {
+          "l": "earnings",
+          "s": "warn"
+        },
+        {
+          "l": "median",
+          "s": "ok"
+        },
+        {
+          "l": "IV rich",
+          "s": "ok"
+        },
+        {
+          "l": "timing",
+          "s": "ok"
+        }
+      ],
+      "shortlist": false
+    },
+    {
+      "ticker": "CMG",
+      "strategy": "CC",
+      "spot": 36.9,
+      "expiry": "2026-09-25",
+      "dte": 32,
+      "strike": 39.0,
+      "delta": 0.331,
+      "mid": 0.84,
+      "premium_pct": 2.29,
+      "pop": 66.9,
+      "iv": 35.9,
+      "iv_atm": 36.0,
+      "sector": "Consumer Cyclical",
+      "vol_bucket": "med",
+      "oi": 121,
+      "spread_pct": 24.9,
+      "earnings_soon": false,
+      "earnings_in_window": false,
+      "strong": true,
+      "qualifies": false,
+      "median_ok": true,
+      "pct_b": 0.86,
+      "timing_label": "\ud83d\udfe0 BUILDING UP / WAIT",
+      "timing_score": 3,
+      "timing_reasons": [
+        "Near/touching upper BB (0.86)",
+        "Above midline",
+        "IV below realized \u2014 thin premium"
+      ],
+      "gates": [
+        {
+          "l": "\u0394 0.33",
+          "s": "ok"
+        },
+        {
+          "l": "DTE 32",
+          "s": "ok"
+        },
+        {
+          "l": "prem 2.3%",
+          "s": "ok"
+        },
+        {
+          "l": "OI 121",
+          "s": "ok"
+        },
+        {
+          "l": "spr 25%",
+          "s": "no"
+        },
+        {
+          "l": "earnings",
+          "s": "ok"
+        },
+        {
+          "l": "median",
+          "s": "ok"
+        },
+        {
+          "l": "IV thin",
+          "s": "no"
+        },
+        {
+          "l": "timing",
+          "s": "ok"
+        }
+      ],
+      "shortlist": false
+    },
+    {
       "ticker": "GOOG",
       "strategy": "CC",
       "spot": 341.75,
@@ -1045,6 +2934,7 @@
       "earnings_soon": false,
       "earnings_in_window": false,
       "strong": true,
+      "qualifies": true,
       "median_ok": false,
       "pct_b": 0.4,
       "timing_label": "\ud83d\udd34 NO SETUP",
@@ -1094,6 +2984,75 @@
       "shortlist": false
     },
     {
+      "ticker": "CQQQ",
+      "strategy": "CC",
+      "spot": 49.37,
+      "expiry": "2026-09-18",
+      "dte": 25,
+      "strike": 51.0,
+      "delta": 0.326,
+      "mid": 0.8,
+      "premium_pct": 1.62,
+      "pop": 67.4,
+      "iv": 43.1,
+      "iv_atm": 24.9,
+      "sector": "\u2014",
+      "vol_bucket": "anchor",
+      "oi": 12,
+      "spread_pct": 200.0,
+      "earnings_soon": false,
+      "earnings_in_window": false,
+      "strong": true,
+      "qualifies": false,
+      "median_ok": false,
+      "pct_b": 0.17,
+      "timing_label": "\ud83d\udd34 NO SETUP",
+      "timing_score": 1,
+      "timing_reasons": [
+        "IV fair vs realized",
+        "\u26d4 Below median (%B 0.17) \u2014 CC needs above"
+      ],
+      "gates": [
+        {
+          "l": "\u0394 0.33",
+          "s": "ok"
+        },
+        {
+          "l": "DTE 25",
+          "s": "ok"
+        },
+        {
+          "l": "prem 1.6%",
+          "s": "ok"
+        },
+        {
+          "l": "OI 12",
+          "s": "no"
+        },
+        {
+          "l": "spr 200%",
+          "s": "no"
+        },
+        {
+          "l": "earnings",
+          "s": "ok"
+        },
+        {
+          "l": "median",
+          "s": "no"
+        },
+        {
+          "l": "IV rich",
+          "s": "ok"
+        },
+        {
+          "l": "timing",
+          "s": "ok"
+        }
+      ],
+      "shortlist": false
+    },
+    {
       "ticker": "MSFT",
       "strategy": "CC",
       "spot": 483.24,
@@ -1113,6 +3072,7 @@
       "earnings_soon": false,
       "earnings_in_window": false,
       "strong": true,
+      "qualifies": true,
       "median_ok": true,
       "pct_b": 0.57,
       "timing_label": "\ud83d\udd34 NO SETUP",
@@ -1162,6 +3122,76 @@
       "shortlist": false
     },
     {
+      "ticker": "GLD",
+      "strategy": "CC",
+      "spot": 423.36,
+      "expiry": "2026-09-25",
+      "dte": 32,
+      "strike": 445.0,
+      "delta": 0.296,
+      "mid": 6.42,
+      "premium_pct": 1.52,
+      "pop": 70.3,
+      "iv": 26.8,
+      "iv_atm": 25.4,
+      "sector": "\u2014",
+      "vol_bucket": "anchor",
+      "oi": 80,
+      "spread_pct": 3.9,
+      "earnings_soon": false,
+      "earnings_in_window": false,
+      "strong": true,
+      "qualifies": false,
+      "median_ok": true,
+      "pct_b": 0.97,
+      "timing_label": "\ud83d\udfe0 BUILDING UP / WAIT",
+      "timing_score": 4,
+      "timing_reasons": [
+        "Near/touching upper BB (0.97)",
+        "Above midline",
+        "IV fair vs realized"
+      ],
+      "gates": [
+        {
+          "l": "\u0394 0.30",
+          "s": "ok"
+        },
+        {
+          "l": "DTE 32",
+          "s": "ok"
+        },
+        {
+          "l": "prem 1.5%",
+          "s": "ok"
+        },
+        {
+          "l": "OI 80",
+          "s": "no"
+        },
+        {
+          "l": "spr 4%",
+          "s": "ok"
+        },
+        {
+          "l": "earnings",
+          "s": "ok"
+        },
+        {
+          "l": "median",
+          "s": "ok"
+        },
+        {
+          "l": "IV rich",
+          "s": "ok"
+        },
+        {
+          "l": "timing",
+          "s": "ok"
+        }
+      ],
+      "shortlist": false
+    },
+    {
       "ticker": "AMZN",
       "strategy": "CC",
       "spot": 258.63,
@@ -1181,6 +3211,7 @@
       "earnings_soon": false,
       "earnings_in_window": false,
       "strong": false,
+      "qualifies": true,
       "median_ok": false,
       "pct_b": 0.46,
       "timing_label": "\ud83d\udd34 NO SETUP",
@@ -1249,6 +3280,7 @@
       "earnings_soon": false,
       "earnings_in_window": false,
       "strong": false,
+      "qualifies": true,
       "median_ok": false,
       "pct_b": 0.4,
       "timing_label": "\ud83d\udfe0 BUILDING UP / WAIT",
@@ -1294,6 +3326,75 @@
         {
           "l": "timing",
           "s": "ok"
+        }
+      ],
+      "shortlist": false
+    },
+    {
+      "ticker": "WMT",
+      "strategy": "CC",
+      "spot": 103.7,
+      "expiry": "2026-09-25",
+      "dte": 32,
+      "strike": 108.0,
+      "delta": 0.306,
+      "mid": 1.27,
+      "premium_pct": 1.22,
+      "pop": 69.4,
+      "iv": 21.2,
+      "iv_atm": 21.9,
+      "sector": "Consumer Defensive",
+      "vol_bucket": "anchor",
+      "oi": 79,
+      "spread_pct": 28.3,
+      "earnings_soon": false,
+      "earnings_in_window": false,
+      "strong": false,
+      "qualifies": false,
+      "median_ok": false,
+      "pct_b": -0.16,
+      "timing_label": "\ud83d\udd34 NO SETUP",
+      "timing_score": 0,
+      "timing_reasons": [
+        "IV below realized \u2014 thin premium",
+        "\u26d4 Below median (%B -0.16) \u2014 CC needs above"
+      ],
+      "gates": [
+        {
+          "l": "\u0394 0.31",
+          "s": "ok"
+        },
+        {
+          "l": "DTE 32",
+          "s": "ok"
+        },
+        {
+          "l": "prem 1.2%",
+          "s": "ok"
+        },
+        {
+          "l": "OI 79",
+          "s": "no"
+        },
+        {
+          "l": "spr 28%",
+          "s": "no"
+        },
+        {
+          "l": "earnings",
+          "s": "ok"
+        },
+        {
+          "l": "median",
+          "s": "no"
+        },
+        {
+          "l": "IV thin",
+          "s": "no"
+        },
+        {
+          "l": "timing",
+          "s": "no"
         }
       ],
       "shortlist": false
@@ -2563,7 +4664,7 @@
     "earnings_blackout": true,
     "earnings_blackout_days": 7
   },
-  "count": 19,
+  "count": 49,
   "leap_count": 25,
   "market": {
     "vix": 15.87,
@@ -2611,29 +4712,29 @@
     },
     {
       "label": "DXY",
-      "price": 98.99500274658203,
-      "pct": 0.19736810607391408,
+      "price": 99.00599670410156,
+      "pct": 0.2084955930981458,
       "prefix": "",
       "is_yield": false
     },
     {
       "label": "Crude Oil",
-      "price": 84.9800033569336,
-      "pct": -2.3891503101183376,
+      "price": 85.08000183105469,
+      "pct": -2.27428874691441,
       "prefix": "$",
       "is_yield": false
     },
     {
       "label": "Gold",
-      "price": 4697.39990234375,
-      "pct": 1.585169073754522,
+      "price": 4695.89990234375,
+      "pct": 1.5527303296027695,
       "prefix": "$",
       "is_yield": false
     },
     {
       "label": "Bitcoin",
-      "price": 77223.5078125,
-      "pct": -0.6838865615411471,
+      "price": 77267.609375,
+      "pct": -0.6271681359200532,
       "prefix": "$",
       "is_yield": false
     },
@@ -2722,8 +4823,8 @@
     {
       "label": "Digital Assets",
       "ticker": "BTC",
-      "pct": -0.6838865615411471,
-      "price": 77223.5078125
+      "pct": -0.6271681359200532,
+      "price": 77267.609375
     }
   ],
   "fundamentals": {
@@ -5852,7 +7953,7 @@
       }
     ]
   },
-  "generated_at": "2026-08-24T09:11:40+00:00",
+  "generated_at": "2026-08-24T09:24:36+00:00",
   "universe": {
     "wheel": 16,
     "growth": 15,
