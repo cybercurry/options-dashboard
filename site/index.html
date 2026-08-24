@@ -700,8 +700,12 @@ function web(center, nodes){
   return `<div class="web"><svg class="weblines" viewBox="0 0 100 100" preserveAspectRatio="none">${lines}</svg><span class="wcenter">${center}</span>${pills}</div>`;
 }
 function legTile(s){const k=s.strategy.toLowerCase();
-  const nodes=(s.timing_reasons||[]).map(r=>({l:r.replace(/\s*\([^)]*\)/,'').replace(/⛔\s*/,'').trim().slice(0,20),
-                                              s:r.indexOf('⛔')>=0?'no':'ok'}));
+  // Full pass/fail scorecard from the engine (every gate, passed or failed). Falls back to the
+  // old timing-reasons web for data written before `gates` existed.
+  const nodes=(s.gates&&s.gates.length)
+    ? s.gates.map(g=>({l:g.l, s:g.s}))
+    : (s.timing_reasons||[]).map(r=>({l:r.replace(/\s*\([^)]*\)/,'').replace(/⛔\s*/,'').trim().slice(0,20),
+                                      s:r.indexOf('⛔')>=0?'no':'ok'}));
   const foot=`Exp ${s.expiry} · DTE ${s.dte} · POP ${num(s.pop,0,'%')} · OI ${s.oi} · spr ${num(s.spread_pct,0,'%')}`;
   return `<div class="legtile" tabindex="0">
     <div class="th"><span class="pill p-${k}">${s.strategy}</span> ${shortSetup(s.timing_label)}</div>
@@ -732,16 +736,14 @@ function renderDeep(tk){
   const o=BYTK[tk]; const host=document.getElementById('deep-body');
   if(!o){host.innerHTML=`<div class="empty">Pick a ticker to see its full breakdown.</div>`;return;}
   const wset=new Set((DATA.universe&&DATA.universe.wheel_names)||[]);
-  const isWheel=wset.size?wset.has(tk):!!(o.csp||o.cc);   // wheel name = CSP+CC+LEAP; growth = LEAP only
-  const role=isWheel?'wheel + LEAP':'growth · LEAP only';
-  let tiles;
-  if(isWheel){
-    tiles=[ o.csp?legTile(o.csp):emptyTile('CSP','No ~30Δ put cleared the premium / OI / spread / earnings gates.'),
-            o.cc ?legTile(o.cc) :emptyTile('CC','No ~30Δ call cleared the gates.'),
-            o.leap?leapTile(o.leap):emptyTile('LEAP','No call in the 180–900 DTE · Δ70–85 window.') ];
-  } else {
-    tiles=[ o.leap?leapTile(o.leap):emptyTile('LEAP','No LEAP contract found.') ];
-  }
+  const gset=new Set((DATA.universe&&DATA.universe.growth_names)||[]);
+  const inW=wset.has(tk), inG=gset.has(tk);
+  const role=(inW&&inG)?'wheel + growth':inW?'wheel':inG?'growth':'watchlist';
+  // Every ticker gets all three legs — a CSP is also a paid way to enter a growth name,
+  // so the user decides per ticker what to do. Greyed 'none' tile when a leg has no contract.
+  const tiles=[ o.csp?legTile(o.csp):emptyTile('CSP','No ~30Δ put cleared the premium / OI / spread / earnings gates.'),
+                o.cc ?legTile(o.cc) :emptyTile('CC','No ~30Δ call cleared the gates.'),
+                o.leap?leapTile(o.leap):emptyTile('LEAP','No call in the 180–900 DTE · Δ70–85 window.') ];
   host.innerHTML=`<div class="head" style="margin:6px 0 0"><h1 style="font-size:22px">${tk} <span class="dim" style="font-size:14px;font-weight:400">${o.sector||''} · ${role}</span></h1></div>
     <p class="hint">Hover a tile for the full metrics &amp; gate breakdown.</p>
     <div class="cards">${tiles.join('')}</div>`;

@@ -461,6 +461,33 @@ def _build(ticker, strat, o, spot, expiry, dte, sector, iv_atm, earn_soon, earn_
     }
 
 
+def _leg_gates(s, iv_ratio):
+    """Full pass/fail scorecard for a CSP/CC leg — one node per gate, so the TA-tile web can
+    show every parameter (passed or failed), not just the timing reasons. 's': ok/no/warn."""
+    d = abs(s.get("delta") or 0)
+    dte = s.get("dte") or 0
+    prem = s.get("premium_pct")           # already ×100 (percent)
+    oi = s.get("oi") or 0
+    spr = s.get("spread_pct")             # already ×100 (percent)
+    mo = s.get("median_ok")
+    ts = s.get("timing_score")
+    g = [
+        {"l": "Δ %.2f" % d,        "s": "ok" if P["delta_lo"] <= d <= P["delta_hi"] else "no"},
+        {"l": "DTE %d" % dte,           "s": "ok" if P["dte_lo"] <= dte <= P["dte_hi"] else "no"},
+        {"l": "prem %.1f%%" % (prem or 0), "s": "ok" if (prem or 0) >= P["min_premium"] * 100 else "no"},
+        {"l": "OI %d" % oi,             "s": "ok" if oi >= P["min_oi"] else "no"},
+        {"l": "spr %.0f%%" % (spr or 0), "s": "ok" if (spr is not None and spr <= P["max_spread_pct"] * 100) else "no"},
+        {"l": "earnings",               "s": "warn" if s.get("earnings_in_window") else "ok"},
+        {"l": "median",                 "s": "ok" if mo else ("no" if mo is not None else "warn")},
+    ]
+    if iv_ratio is not None:
+        g.append({"l": "IV rich" if iv_ratio >= 1.0 else "IV thin", "s": "ok" if iv_ratio >= 1.0 else "no"})
+    else:
+        g.append({"l": "IV vs real", "s": "warn"})
+    g.append({"l": "timing", "s": "ok" if (ts or 0) > 0 else ("no" if ts is not None else "warn")})
+    return g
+
+
 def scan_ticker(ticker):
     """Best qualifying CSP and CC for one ticker. Returns a list (0-2 signals)."""
     out = []
@@ -511,6 +538,7 @@ def scan_ticker(ticker):
                 if ind.get("ok"):
                     lbl, sc, rs = _timing(ind, iv_ratio, "csp")
                     s["timing_label"], s["timing_score"], s["timing_reasons"] = lbl, sc, rs
+                s["gates"] = _leg_gates(s, iv_ratio)
                 out.append(s)
         # CC — needs price ABOVE the median
         call = _nearest_delta(chain, "call", P["delta_opt"])
@@ -523,6 +551,7 @@ def scan_ticker(ticker):
                 if ind.get("ok"):
                     lbl, sc, rs = _timing(ind, iv_ratio, "cc")
                     s["timing_label"], s["timing_score"], s["timing_reasons"] = lbl, sc, rs
+                s["gates"] = _leg_gates(s, iv_ratio)
                 out.append(s)
     except Exception:
         return out
@@ -731,7 +760,7 @@ def scan(universe):
     all_names = list(dict.fromkeys(wheel + growth))
 
     all_sigs = []
-    for t in wheel:
+    for t in all_names:                 # CSP/CC for every name — CSPs also enter growth names
         all_sigs.extend(scan_ticker(t))
     _shortlist(all_sigs)
     all_sigs.sort(key=lambda s: (s["strategy"] != "CSP", -(s["premium_pct"] or 0)))
