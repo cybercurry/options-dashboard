@@ -173,6 +173,15 @@ td.l{text-align:left}
 .ch2{display:grid; grid-template-columns:1fr 1fr; gap:14px}
 @media (max-width:680px){.ch2{grid-template-columns:1fr}}
 #v-chain tbody tr.tgt td{background:var(--accent-soft)}
+.chainpx{font-family:"Archivo",sans-serif; font-size:19px; font-weight:700; margin:4px 0 2px}
+.chainpx b{font-size:25px; color:var(--text)} .chainpx .dim{font-family:"IBM Plex Sans"; font-size:12px; font-weight:400}
+.bidcell{cursor:pointer; color:var(--accent); border-bottom:1px dotted var(--accent)}
+/* Bid → profit calculator popover */
+.calcpop{position:fixed; z-index:200; background:var(--surface); border:1px solid var(--accent); border-radius:12px; box-shadow:var(--glow); padding:13px 20px}
+.calcpop[hidden]{display:none}
+.cx-min{text-align:center; white-space:nowrap}
+.cx-min b{display:block; font-family:"Archivo",sans-serif; font-weight:800; font-size:32px; color:var(--good); line-height:1.05}
+.cx-min span{font-size:12.5px; color:var(--muted); letter-spacing:.02em}
 .tvhost{width:100%; height:460px}
 .tvnote{margin-top:14px; font-size:12.5px; color:var(--faint); text-align:center}
 .cards{display:grid; grid-template-columns:repeat(auto-fit,minmax(250px,1fr)); gap:14px; margin-top:16px}
@@ -424,7 +433,7 @@ footer b{color:var(--muted); font-weight:600}
 const KIND={csp:"CSP",cc:"CC",leap:"LEAP"};
 const SHEET_EDIT_URL="https://docs.google.com/spreadsheets/d/1GiZjtMLkATMKtvWnl40xCK4Tlgbg8b2aJCQp5sXMcjk/edit";   // watchlist: col C = WHEEL, col H = GROWTH
 let DATA=null, SIGS=[], LEAPS=[], MKT={}, BYTK={}, READY=[], LEAPQ=[], CHAINROWS=[];
-let CHAIN_TK=null, CHAIN_EXP=null;
+let CHAIN_TK=null, CHAIN_EXP=null, CALC_CTX=null;
 const num=(v,d=1,s='')=>v==null?'<span class="dim">—</span>':(typeof v==='number'?v.toFixed(d):v)+s;
 const abs=v=>Math.abs(v||0);
 function fmtTrade(strat,strike){return strat==='cc'?`Sell $${strike} Call`:strat==='leap'?`Buy $${strike} Call`:`Sell $${strike} Put`;}
@@ -690,13 +699,13 @@ function renderWatchTable(){
 }
 
 /* ---------- options chain ---------- */
-function _ladder(rows, title){
+function _ladder(rows, title, type){
   if(!rows||!rows.length) return `<div><div class="subhead">${title}</div><div class="dim" style="font-size:13px">no strikes in range</div></div>`;
   let ti=-1, best=9; rows.forEach((r,i)=>{ if(r.d!=null){const e=Math.abs(Math.abs(r.d)-0.30); if(e<best){best=e;ti=i;}} });
   const body=rows.map((r,i)=>`<tr class="${i===ti?'tgt':''}">
     <td class="l mono">${i===ti?'🎯 ':''}$${r.k}</td>
     <td class="mono">${r.d==null?'—':r.d.toFixed(2)}</td>
-    <td class="mono">${r.b==null?'—':'$'+r.b.toFixed(2)}</td>
+    <td class="mono">${r.b==null?'—':`<span class="bidcell" data-t="${type}" data-k="${r.k}" data-b="${r.b}">$${r.b.toFixed(2)}</span>`}</td>
     <td class="mono">${r.a==null?'—':'$'+r.a.toFixed(2)}</td>
     <td class="mono">${r.iv==null?'—':r.iv.toFixed(0)+'%'}</td>
     <td class="mono">${r.oi==null?'—':r.oi.toLocaleString()}</td></tr>`).join('');
@@ -708,9 +717,12 @@ function renderChainExp(tk, exp){
   CHAIN_EXP=exp;
   document.querySelectorAll('#chain-exps .etile').forEach(el=>el.classList.toggle('on', el.dataset.e===exp));
   const c=(DATA.chains||{})[tk]; const ex=((c&&c.expiries)||[]).find(x=>x.exp===exp);
+  const spot=c&&c.spot;
+  CALC_CTX={tk, spot, exp, dte:ex?ex.dte:null};
   const host=document.getElementById('chain-body');
-  host.innerHTML=ex ? `<div class="ch2">${_ladder(ex.calls,'Calls')}${_ladder(ex.puts,'Puts')}</div>`
-                    : '<div class="empty">No chain for this expiry.</div>';
+  if(!ex){ host.innerHTML='<div class="empty">No chain for this expiry.</div>'; return; }
+  const pxline=`<div class="chainpx">${tk} <b>$${spot!=null?(+spot).toFixed(2):'—'}</b> <span class="dim">· ${fmtDMY(exp)} · ${ex.dte}d · tap a Bid to size the trade</span></div>`;
+  host.innerHTML=`${pxline}<div class="ch2">${_ladder(ex.calls,'Calls','call')}${_ladder(ex.puts,'Puts','put')}</div>`;
 }
 function renderChainTk(tk){
   CHAIN_TK=tk;
@@ -730,6 +742,14 @@ function renderChain(){
   cc.querySelectorAll('.cchip').forEach(el=>el.onclick=()=>renderChainTk(el.dataset.t));
   const first=(CHAIN_TK&&chains[CHAIN_TK]?CHAIN_TK:null)||tks.find(t=>chains[t])||tks[0];
   if(first) renderChainTk(first);
+}
+// Tap a Bid → sell-yield calculator: premium ÷ stock price × 100 = return for that expiry's window.
+function openCalc(type,k,b){
+  const cx=CALC_CTX||{}, spot=cx.spot, dte=cx.dte||0;
+  const per=(spot? b/spot*100 : null);            // premium ÷ stock price × 100 — % for the window
+  const m=document.getElementById('calc'); if(!m) return;
+  m.querySelector('.cx-body').innerHTML=`<div class="cx-min"><b>${per!=null?per.toFixed(1)+'%':'—'}</b><span>in ${dte} DTE</span></div>`;
+  m.hidden=false;
 }
 
 /* ---------- deep dive ---------- */
@@ -993,6 +1013,40 @@ history.replaceState({tab:'overview',sym:null},'','#overview');   // seed the fi
     if(t && t.classList.contains('oi-shut') && !t.contains(e.relatedTarget)) t.classList.remove('oi-shut');
   }, true);
 })();
+</script>
+<div id="calc" class="calcpop" hidden><div class="cx-body"></div></div>
+<script>
+/* Chain Bid → profit calculator. Desktop: HOVER the Bid to open (prepopulated; hover-off closes).
+   Touch: TAP pins it open; tap elsewhere / × / Esc closes. Fixed-position popover so the
+   horizontally-scrollable ladder never clips it. */
+var CALC_PIN=false, CALC_CELL=null;
+function positionCalc(cell){
+  var m=document.getElementById('calc'); if(!m||!cell) return;
+  var r=cell.getBoundingClientRect(), w=m.offsetWidth, h=m.offsetHeight;
+  var left=Math.min(window.innerWidth-w-8, Math.max(8, r.left));
+  var top=r.bottom+8; if(top+h>window.innerHeight-8) top=Math.max(8, r.top-h-8);
+  m.style.left=left+'px'; m.style.top=top+'px';
+}
+function showCalcAt(cell){ openCalc(cell.dataset.t, +cell.dataset.k, +cell.dataset.b); CALC_CELL=cell; positionCalc(cell); }
+function hideCalc(force){ if(CALC_PIN && !force) return; var m=document.getElementById('calc'); if(m) m.hidden=true; CALC_PIN=false; CALC_CELL=null; }
+document.addEventListener('mouseover',function(e){
+  if(!matchMedia('(hover:hover)').matches) return;
+  var bc=e.target.closest&&e.target.closest('.bidcell');
+  if(bc && bc!==CALC_CELL){ CALC_PIN=false; showCalcAt(bc); }
+});
+document.addEventListener('mouseout',function(e){
+  if(!matchMedia('(hover:hover)').matches || CALC_PIN) return;
+  var bc=e.target.closest&&e.target.closest('.bidcell'); if(!bc) return;
+  var m=document.getElementById('calc'), to=e.relatedTarget;
+  if(!(m && to && (to===m || m.contains(to)))) hideCalc();
+});
+document.addEventListener('click',function(e){
+  var bc=e.target.closest&&e.target.closest('.bidcell');
+  if(bc){ showCalcAt(bc); CALC_PIN=true; return; }
+  var m=document.getElementById('calc');
+  if(m && !m.hidden && ((e.target.closest&&e.target.closest('.modal-x')) || !(e.target.closest&&e.target.closest('#calc')))) hideCalc(true);
+});
+document.addEventListener('keydown',function(e){ if(e.key==='Escape') hideCalc(true); });
 </script>
 </body>
 </html>
