@@ -29,6 +29,7 @@
         "IV fair vs realized",
         "\u26d4 Above median (%B 1.18) \u2014 CSP needs below"
       ],
+      "earnings_date": "2026-08-27",
       "gates": [
         {
           "l": "\u0394 0.31",
@@ -99,6 +100,7 @@
         "IV below realized \u2014 thin premium",
         "\u26d4 Above median (%B 0.63) \u2014 CSP needs below"
       ],
+      "earnings_date": "2026-08-27",
       "gates": [
         {
           "l": "\u0394 0.31",
@@ -168,6 +170,7 @@
         "Below midline",
         "IV below realized \u2014 thin premium"
       ],
+      "earnings_date": "2026-10-27",
       "gates": [
         {
           "l": "\u0394 0.32",
@@ -237,6 +240,7 @@
         "IV below realized \u2014 thin premium",
         "\u26d4 Above median (%B 0.54) \u2014 CSP needs below"
       ],
+      "earnings_date": "2026-11-10",
       "gates": [
         {
           "l": "\u0394 0.28",
@@ -306,6 +310,7 @@
         "IV below realized \u2014 thin premium",
         "\u26d4 Above median (%B 0.58) \u2014 CSP needs below"
       ],
+      "earnings_date": "2026-07-27",
       "gates": [
         {
           "l": "\u0394 0.28",
@@ -375,6 +380,7 @@
         "IV below realized \u2014 thin premium",
         "\u26d4 Above median (%B 0.50) \u2014 CSP needs below"
       ],
+      "earnings_date": "2026-11-11",
       "gates": [
         {
           "l": "\u0394 0.31",
@@ -444,6 +450,7 @@
         "IV rich vs realized \u2014 premium fat",
         "\u26d4 Above median (%B 0.73) \u2014 CSP needs below"
       ],
+      "earnings_date": "2026-09-03",
       "gates": [
         {
           "l": "\u0394 0.31",
@@ -513,6 +520,7 @@
         "Below midline",
         "IV below realized \u2014 thin premium"
       ],
+      "earnings_date": "2026-10-21",
       "gates": [
         {
           "l": "\u0394 0.32",
@@ -582,6 +590,7 @@
         "IV below realized \u2014 thin premium",
         "\u26d4 Above median (%B 0.67) \u2014 CSP needs below"
       ],
+      "earnings_date": "2026-11-03",
       "gates": [
         {
           "l": "\u0394 0.30",
@@ -651,6 +660,7 @@
         "IV below realized \u2014 thin premium",
         "\u26d4 Above median (%B 0.80) \u2014 CSP needs below"
       ],
+      "earnings_date": "2026-10-28",
       "gates": [
         {
           "l": "\u0394 0.29",
@@ -720,6 +730,7 @@
         "Below midline",
         "IV below realized \u2014 thin premium"
       ],
+      "earnings_date": "2026-11-03",
       "gates": [
         {
           "l": "\u0394 0.29",
@@ -789,6 +800,7 @@
         "IV below realized \u2014 thin premium",
         "\u26d4 Above median (%B 0.76) \u2014 CSP needs below"
       ],
+      "earnings_date": "2026-11-02",
       "gates": [
         {
           "l": "\u0394 0.31",
@@ -858,6 +870,7 @@
         "IV fair vs realized",
         "\u26d4 Above median (%B 0.53) \u2014 CSP needs below"
       ],
+      "earnings_date": "2026-08-26",
       "gates": [
         {
           "l": "\u0394 0.32",
@@ -927,6 +940,7 @@
         "IV below realized \u2014 thin premium",
         "\u26d4 Above median (%B 0.82) \u2014 CSP needs below"
       ],
+      "earnings_date": "2026-10-27",
       "gates": [
         {
           "l": "\u0394 0.27",
@@ -996,6 +1010,7 @@
         "IV fair vs realized",
         "\u26d4 Above median (%B 1.04) \u2014 CSP needs below"
       ],
+      "earnings_date": "2026-10-21",
       "gates": [
         {
           "l": "\u0394 0.31",
@@ -1065,6 +1080,7 @@
         "IV fair vs realized",
         "\u26d4 Above median (%B 0.60) \u2014 CSP needs below"
       ],
+      "earnings_date": "2026-11-09",
       "gates": [
         {
           "l": "\u0394 0.32",
@@ -1134,6 +1150,7 @@
         "IV rich vs realized \u2014 premium fat",
         "\u26d4 Above median (%B 0.95) \u2014 CSP needs below"
       ],
+      "earnings_date": null,
       "gates": [
         {
           "l": "\u0394 0.29",
@@ -1203,6 +1220,7 @@
         "IV below realized \u2014 thin premium",
         "\u26d4 Above median (%B 0.86) \u2014 CSP needs below"
       ],
+      "earnings_date": "2026-07-29",
       "gates": [
         {
           "l": "\u0394 0.30",
@@ -1273,6 +1291,7 @@
         "Morning star",
         "IV below realized \u2014 thin premium"
       ],
+      "earnings_date": "2026-10-29",
       "gates": [
         {
           "l": "\u0394 0.33",
@@ -1342,6 +1361,7 @@
         "Below midline",
         "IV below realized \u2014 thin premium"
       ],
+      "earnings_date": "2026-10-28",
       "gates": [
         {
           "l": "\u0394 0.32",
@@ -1411,6 +1431,7 @@
         "Below midline",
         "IV below realized \u2014 thin premium"
       ],
+      "earnings_date": "2026-10-29",
       "gates": [
         {
           "l": "\u0394 0.31",
@@ -1481,6 +1502,7 @@
         "IV below realized \u2014 thin premium",
         "\u26d4 Above median (%B 0.57) \u2014 CSP needs below"
       ],
+      "earnings_date": "2026-10-28",
       "gates": [
         {
           "l": "\u0394 0.28",
@@ -1550,6 +1572,7 @@
         "IV fair vs realized",
         "\u26d4 Above median (%B 0.97) \u2014 CSP needs below"
       ],
+      "earnings_date": null,
       "gates": [
         {
           "l": "\u0394 0.30",
@@ -1622,6 +1645,7 @@
         "IV below realized \u2014 thin premium",
         "Still walking the lower band \u2014 breakdown, veto"
       ],
+      "earnings_date": "2026-11-19",
       "gates": [
         {
           "l": "\u0394 0.31",
@@ -1693,6 +1717,7 @@
         "Above midline",
         "IV fair vs realized"
       ],
+      "earnings_date": "2026-08-27",
       "gates": [
         {
           "l": "\u0394 0.30",
@@ -1763,6 +1788,7 @@
         "Bearish engulfing",
         "IV below realized \u2014 thin premium"
       ],
+      "earnings_date": "2026-08-27",
       "gates": [
         {
           "l": "\u0394 0.30",
@@ -1832,6 +1858,7 @@
         "IV below realized \u2014 thin premium",
         "\u26d4 Below median (%B 0.37) \u2014 CC needs above"
       ],
+      "earnings_date": "2026-10-27",
       "gates": [
         {
           "l": "\u0394 0.31",
@@ -1901,6 +1928,7 @@
         "Above midline",
         "IV below realized \u2014 thin premium"
       ],
+      "earnings_date": "2026-11-10",
       "gates": [
         {
           "l": "\u0394 0.30",
@@ -1970,6 +1998,7 @@
         "Above midline",
         "IV below realized \u2014 thin premium"
       ],
+      "earnings_date": "2026-07-27",
       "gates": [
         {
           "l": "\u0394 0.28",
@@ -2039,6 +2068,7 @@
         "Above midline",
         "IV below realized \u2014 thin premium"
       ],
+      "earnings_date": "2026-11-11",
       "gates": [
         {
           "l": "\u0394 0.30",
@@ -2109,6 +2139,7 @@
         "Bearish engulfing",
         "IV rich vs realized \u2014 premium fat"
       ],
+      "earnings_date": "2026-09-03",
       "gates": [
         {
           "l": "\u0394 0.31",
@@ -2178,6 +2209,7 @@
         "IV below realized \u2014 thin premium",
         "\u26d4 Below median (%B 0.41) \u2014 CC needs above"
       ],
+      "earnings_date": "2026-10-21",
       "gates": [
         {
           "l": "\u0394 0.31",
@@ -2248,6 +2280,7 @@
         "Bearish engulfing",
         "IV below realized \u2014 thin premium"
       ],
+      "earnings_date": "2026-11-03",
       "gates": [
         {
           "l": "\u0394 0.29",
@@ -2318,6 +2351,7 @@
         "Dark cloud cover",
         "IV below realized \u2014 thin premium"
       ],
+      "earnings_date": "2026-10-28",
       "gates": [
         {
           "l": "\u0394 0.31",
@@ -2387,6 +2421,7 @@
         "IV below realized \u2014 thin premium",
         "\u26d4 Below median (%B 0.40) \u2014 CC needs above"
       ],
+      "earnings_date": "2026-11-03",
       "gates": [
         {
           "l": "\u0394 0.30",
@@ -2457,6 +2492,7 @@
         "Dark cloud cover",
         "IV below realized \u2014 thin premium"
       ],
+      "earnings_date": "2026-10-27",
       "gates": [
         {
           "l": "\u0394 0.28",
@@ -2526,6 +2562,7 @@
         "Above midline",
         "IV below realized \u2014 thin premium"
       ],
+      "earnings_date": "2026-11-02",
       "gates": [
         {
           "l": "\u0394 0.29",
@@ -2596,6 +2633,7 @@
         "Above midline",
         "IV fair vs realized"
       ],
+      "earnings_date": "2026-10-21",
       "gates": [
         {
           "l": "\u0394 0.31",
@@ -2665,6 +2703,7 @@
         "Above midline",
         "IV fair vs realized"
       ],
+      "earnings_date": "2026-11-09",
       "gates": [
         {
           "l": "\u0394 0.30",
@@ -2735,6 +2774,7 @@
         "Above midline",
         "IV rich vs realized \u2014 premium fat"
       ],
+      "earnings_date": null,
       "gates": [
         {
           "l": "\u0394 0.27",
@@ -2804,6 +2844,7 @@
         "Above midline",
         "IV fair vs realized"
       ],
+      "earnings_date": "2026-08-26",
       "gates": [
         {
           "l": "\u0394 0.31",
@@ -2874,6 +2915,7 @@
         "Above midline",
         "IV below realized \u2014 thin premium"
       ],
+      "earnings_date": "2026-07-29",
       "gates": [
         {
           "l": "\u0394 0.33",
@@ -2943,6 +2985,7 @@
         "IV below realized \u2014 thin premium",
         "\u26d4 Below median (%B 0.40) \u2014 CC needs above"
       ],
+      "earnings_date": "2026-10-28",
       "gates": [
         {
           "l": "\u0394 0.30",
@@ -3012,6 +3055,7 @@
         "IV fair vs realized",
         "\u26d4 Below median (%B 0.17) \u2014 CC needs above"
       ],
+      "earnings_date": null,
       "gates": [
         {
           "l": "\u0394 0.33",
@@ -3081,6 +3125,7 @@
         "Above midline",
         "IV below realized \u2014 thin premium"
       ],
+      "earnings_date": "2026-10-28",
       "gates": [
         {
           "l": "\u0394 0.32",
@@ -3151,6 +3196,7 @@
         "Above midline",
         "IV fair vs realized"
       ],
+      "earnings_date": null,
       "gates": [
         {
           "l": "\u0394 0.30",
@@ -3220,6 +3266,7 @@
         "IV below realized \u2014 thin premium",
         "\u26d4 Below median (%B 0.46) \u2014 CC needs above"
       ],
+      "earnings_date": "2026-10-29",
       "gates": [
         {
           "l": "\u0394 0.27",
@@ -3290,6 +3337,7 @@
         "IV below realized \u2014 thin premium",
         "\u26d4 Below median (%B 0.40) \u2014 CC needs above"
       ],
+      "earnings_date": "2026-10-29",
       "gates": [
         {
           "l": "\u0394 0.28",
@@ -3359,6 +3407,7 @@
         "IV below realized \u2014 thin premium",
         "\u26d4 Below median (%B -0.16) \u2014 CC needs above"
       ],
+      "earnings_date": "2026-11-19",
       "gates": [
         {
           "l": "\u0394 0.31",
@@ -4677,7 +4726,7 @@
     "two_year": 4.19,
     "three_month": 3.71,
     "curve": "flat",
-    "fed_funds": null,
+    "fed_funds": 3.63,
     "skew": 143.9,
     "vix9d": 12.58
   },
@@ -4719,22 +4768,22 @@
     },
     {
       "label": "Crude Oil",
-      "price": 85.1500015258789,
-      "pct": -2.1938847763341207,
+      "price": 85.0199966430664,
+      "pct": -2.3432126955372,
       "prefix": "$",
       "is_yield": false
     },
     {
       "label": "Gold",
-      "price": 4701.60009765625,
-      "pct": 1.6760017811742633,
+      "price": 4701.5,
+      "pct": 1.6738370863334184,
       "prefix": "$",
       "is_yield": false
     },
     {
       "label": "Bitcoin",
-      "price": 77532.671875,
-      "pct": -0.2862748242331681,
+      "price": 77715.3515625,
+      "pct": -0.05133293826362628,
       "prefix": "$",
       "is_yield": false
     },
@@ -4823,8 +4872,8 @@
     {
       "label": "Digital Assets",
       "ticker": "BTC",
-      "pct": -0.2862748242331681,
-      "price": 77532.671875
+      "pct": -0.05133293826362628,
+      "price": 77715.3515625
     }
   ],
   "fundamentals": {
@@ -5111,10 +5160,16 @@
       ],
       "news": [
         {
-          "title": "Nvidia earnings and Jackson Hole: What to watch this week",
+          "title": "Stock market today: Dow, S&P 500, Nasdaq futures mixed after US-Canada talks break down",
           "publisher": "Yahoo Finance",
-          "link": "https://finance.yahoo.com/markets/article/nvidia-earnings-and-jackson-hole-what-to-watch-this-week-100000082.html",
-          "when": "Aug 23"
+          "link": "https://finance.yahoo.com/markets/live/stock-market-today-monday-august-24-dow-sp-500-nasdaq-080306047.html",
+          "when": "Aug 24"
+        },
+        {
+          "title": "The One Line in Anthropic's S-1 That Amazon Investors Should Read First",
+          "publisher": "Motley Fool",
+          "link": "https://www.fool.com/investing/2026/08/24/line-anthropic-s-1-amazon-investors/",
+          "when": "Aug 24"
         },
         {
           "title": "Should You Buy Dogecoin While It's Below $0.10? The Answer Might Shock You.",
@@ -5138,12 +5193,6 @@
           "title": "Nvidia\u2019s $30B Perplexity Bet Extends the Compute Landlord Thesis Into AI Search",
           "publisher": "Forkast News",
           "link": "https://finance.yahoo.com/technology/ai/articles/nvidia-30b-perplexity-bet-extends-093340421.html",
-          "when": "Aug 24"
-        },
-        {
-          "title": "Take Five: Six months of war",
-          "publisher": "Reuters",
-          "link": "https://finance.yahoo.com/economy/policy/articles/five-six-months-war-093306852.html",
           "when": "Aug 24"
         }
       ]
@@ -5212,6 +5261,12 @@
           "when": "Aug 23"
         },
         {
+          "title": "The One Line in Anthropic's S-1 That Amazon Investors Should Read First",
+          "publisher": "Motley Fool",
+          "link": "https://www.fool.com/investing/2026/08/24/line-anthropic-s-1-amazon-investors/",
+          "when": "Aug 24"
+        },
+        {
           "title": "The Zacks Analyst Blog Highlights Apple, Alphabet, Microsoft and Amazon",
           "publisher": "Zacks",
           "link": "https://finance.yahoo.com/markets/stocks/articles/zacks-analyst-blog-highlights-apple-092400354.html",
@@ -5233,12 +5288,6 @@
           "title": "WMT Stock Heads For Fourth Month In Red: Walmart Reportedly Bets On Under-$25 Fashion Line To Take On Amazon",
           "publisher": "Stocktwits",
           "link": "https://stocktwits.com/news-articles/markets/equity/wmt-stock-heads-for-fourth-month-in-red-walmart-reportedly-bets-on-under-25-fashion-line-to-take-on-amazon/cZYKTyZRJnP",
-          "when": "Aug 24"
-        },
-        {
-          "title": "Elon Musk just got into another airline disagreement",
-          "publisher": "TheStreet",
-          "link": "https://www.thestreet.com/technology/elon-musk-just-got-into-another-airline-disagreement-delta-airlines-amazon",
           "when": "Aug 24"
         }
       ]
@@ -6483,6 +6532,12 @@
       "flags": [],
       "news": [
         {
+          "title": "The One Line in Anthropic's S-1 That Amazon Investors Should Read First",
+          "publisher": "Motley Fool",
+          "link": "https://www.fool.com/investing/2026/08/24/line-anthropic-s-1-amazon-investors/",
+          "when": "Aug 24"
+        },
+        {
           "title": "Why Are Nasdaq, S&P 500 Futures Falling Premarket? NVDA, BABA, PSKY, SLS, AAOI, SPCX, RKLB Stocks In Focus",
           "publisher": "Stocktwits",
           "link": "https://stocktwits.com/news-articles/markets/equity/why-nasdaq-futures-falling-today-nvidia-alibaba-iran-sanctions-sls-spcx-rklb-stocks/cZYKBA7RJni",
@@ -6510,12 +6565,6 @@
           "title": "A New SEC Filing Reveals Exactly How Many Shares of SpaceX Elon Musk Owns. Here's Why It Matters.",
           "publisher": "Motley Fool",
           "link": "https://www.fool.com/investing/2026/08/23/a-new-sec-filing-reveals-exactly-how-many-shares-o/",
-          "when": "Aug 24"
-        },
-        {
-          "title": "Elon Musk Makes Fresh Starlink Pitch for India, Says It Could Help the \u2018Least Served\u2019 in Rural Areas",
-          "publisher": "Benzinga",
-          "link": "https://finance.yahoo.com/technology/articles/elon-musk-makes-fresh-starlink-003054167.html",
           "when": "Aug 24"
         }
       ]
@@ -7953,7 +8002,7 @@
       }
     ]
   },
-  "generated_at": "2026-08-24T10:00:51+00:00",
+  "generated_at": "2026-08-24T10:08:20+00:00",
   "universe": {
     "wheel": 16,
     "growth": 15,
