@@ -1,6 +1,142 @@
 {
   "signals": [
     {
+      "ticker": "BE",
+      "strategy": "CSP",
+      "spot": 201.45,
+      "expiry": "2026-09-25",
+      "dte": 32,
+      "strike": 185.0,
+      "delta": -0.317,
+      "mid": 12.9,
+      "premium_pct": 6.4,
+      "pop": 68.3,
+      "iv": 85.8,
+      "iv_atm": 85.1,
+      "sector": "Industrials",
+      "vol_bucket": "high",
+      "oi": 295,
+      "spread_pct": 7.8,
+      "earnings_soon": false,
+      "earnings_in_window": false,
+      "strong": true,
+      "median_ok": true,
+      "pct_b": 0.37,
+      "timing_label": "\ud83d\udd34 NO SETUP",
+      "timing_score": 1,
+      "timing_reasons": [
+        "Below midline",
+        "IV below realized \u2014 thin premium"
+      ],
+      "gates": [
+        {
+          "l": "\u0394 0.32",
+          "s": "ok"
+        },
+        {
+          "l": "DTE 32",
+          "s": "ok"
+        },
+        {
+          "l": "prem 6.4%",
+          "s": "ok"
+        },
+        {
+          "l": "OI 295",
+          "s": "ok"
+        },
+        {
+          "l": "spr 8%",
+          "s": "ok"
+        },
+        {
+          "l": "earnings",
+          "s": "ok"
+        },
+        {
+          "l": "median",
+          "s": "ok"
+        },
+        {
+          "l": "IV thin",
+          "s": "no"
+        },
+        {
+          "l": "timing",
+          "s": "ok"
+        }
+      ],
+      "shortlist": true
+    },
+    {
+      "ticker": "CRWV",
+      "strategy": "CSP",
+      "spot": 87.85,
+      "expiry": "2026-09-25",
+      "dte": 32,
+      "strike": 81.0,
+      "delta": -0.308,
+      "mid": 4.72,
+      "premium_pct": 5.38,
+      "pop": 69.2,
+      "iv": 75.8,
+      "iv_atm": 75.8,
+      "sector": "Technology",
+      "vol_bucket": "high",
+      "oi": 104,
+      "spread_pct": 5.3,
+      "earnings_soon": false,
+      "earnings_in_window": false,
+      "strong": true,
+      "median_ok": false,
+      "pct_b": 0.5,
+      "timing_label": "\ud83d\udd34 NO SETUP",
+      "timing_score": 0,
+      "timing_reasons": [
+        "IV below realized \u2014 thin premium",
+        "\u26d4 Above median (%B 0.50) \u2014 CSP needs below"
+      ],
+      "gates": [
+        {
+          "l": "\u0394 0.31",
+          "s": "ok"
+        },
+        {
+          "l": "DTE 32",
+          "s": "ok"
+        },
+        {
+          "l": "prem 5.4%",
+          "s": "ok"
+        },
+        {
+          "l": "OI 104",
+          "s": "ok"
+        },
+        {
+          "l": "spr 5%",
+          "s": "ok"
+        },
+        {
+          "l": "earnings",
+          "s": "ok"
+        },
+        {
+          "l": "median",
+          "s": "no"
+        },
+        {
+          "l": "IV thin",
+          "s": "no"
+        },
+        {
+          "l": "timing",
+          "s": "no"
+        }
+      ],
+      "shortlist": false
+    },
+    {
       "ticker": "PLTR",
       "strategy": "CSP",
       "spot": 179.94,
@@ -27,6 +163,44 @@
       "timing_reasons": [
         "IV below realized \u2014 thin premium",
         "\u26d4 Above median (%B 0.76) \u2014 CSP needs below"
+      ],
+      "gates": [
+        {
+          "l": "\u0394 0.31",
+          "s": "ok"
+        },
+        {
+          "l": "DTE 32",
+          "s": "ok"
+        },
+        {
+          "l": "prem 3.2%",
+          "s": "ok"
+        },
+        {
+          "l": "OI 481",
+          "s": "ok"
+        },
+        {
+          "l": "spr 3%",
+          "s": "ok"
+        },
+        {
+          "l": "earnings",
+          "s": "ok"
+        },
+        {
+          "l": "median",
+          "s": "no"
+        },
+        {
+          "l": "IV thin",
+          "s": "no"
+        },
+        {
+          "l": "timing",
+          "s": "no"
+        }
       ],
       "shortlist": false
     },
@@ -58,6 +232,44 @@
         "IV below realized \u2014 thin premium",
         "\u26d4 Above median (%B 0.82) \u2014 CSP needs below"
       ],
+      "gates": [
+        {
+          "l": "\u0394 0.27",
+          "s": "ok"
+        },
+        {
+          "l": "DTE 32",
+          "s": "ok"
+        },
+        {
+          "l": "prem 2.8%",
+          "s": "ok"
+        },
+        {
+          "l": "OI 292",
+          "s": "ok"
+        },
+        {
+          "l": "spr 6%",
+          "s": "ok"
+        },
+        {
+          "l": "earnings",
+          "s": "ok"
+        },
+        {
+          "l": "median",
+          "s": "no"
+        },
+        {
+          "l": "IV thin",
+          "s": "no"
+        },
+        {
+          "l": "timing",
+          "s": "no"
+        }
+      ],
       "shortlist": false
     },
     {
@@ -88,6 +300,44 @@
         "IV fair vs realized",
         "\u26d4 Above median (%B 1.04) \u2014 CSP needs below"
       ],
+      "gates": [
+        {
+          "l": "\u0394 0.31",
+          "s": "ok"
+        },
+        {
+          "l": "DTE 32",
+          "s": "ok"
+        },
+        {
+          "l": "prem 2.7%",
+          "s": "ok"
+        },
+        {
+          "l": "OI 171",
+          "s": "ok"
+        },
+        {
+          "l": "spr 2%",
+          "s": "ok"
+        },
+        {
+          "l": "earnings",
+          "s": "ok"
+        },
+        {
+          "l": "median",
+          "s": "no"
+        },
+        {
+          "l": "IV rich",
+          "s": "ok"
+        },
+        {
+          "l": "timing",
+          "s": "ok"
+        }
+      ],
       "shortlist": false
     },
     {
@@ -117,6 +367,44 @@
       "timing_reasons": [
         "IV rich vs realized \u2014 premium fat",
         "\u26d4 Above median (%B 0.95) \u2014 CSP needs below"
+      ],
+      "gates": [
+        {
+          "l": "\u0394 0.29",
+          "s": "ok"
+        },
+        {
+          "l": "DTE 32",
+          "s": "ok"
+        },
+        {
+          "l": "prem 2.7%",
+          "s": "ok"
+        },
+        {
+          "l": "OI 147",
+          "s": "ok"
+        },
+        {
+          "l": "spr 6%",
+          "s": "ok"
+        },
+        {
+          "l": "earnings",
+          "s": "ok"
+        },
+        {
+          "l": "median",
+          "s": "no"
+        },
+        {
+          "l": "IV rich",
+          "s": "ok"
+        },
+        {
+          "l": "timing",
+          "s": "ok"
+        }
       ],
       "shortlist": false
     },
@@ -149,6 +437,44 @@
         "Morning star",
         "IV below realized \u2014 thin premium"
       ],
+      "gates": [
+        {
+          "l": "\u0394 0.33",
+          "s": "ok"
+        },
+        {
+          "l": "DTE 32",
+          "s": "ok"
+        },
+        {
+          "l": "prem 2.0%",
+          "s": "ok"
+        },
+        {
+          "l": "OI 1182",
+          "s": "ok"
+        },
+        {
+          "l": "spr 6%",
+          "s": "ok"
+        },
+        {
+          "l": "earnings",
+          "s": "ok"
+        },
+        {
+          "l": "median",
+          "s": "ok"
+        },
+        {
+          "l": "IV thin",
+          "s": "no"
+        },
+        {
+          "l": "timing",
+          "s": "ok"
+        }
+      ],
       "shortlist": true
     },
     {
@@ -179,7 +505,182 @@
         "Below midline",
         "IV below realized \u2014 thin premium"
       ],
+      "gates": [
+        {
+          "l": "\u0394 0.31",
+          "s": "ok"
+        },
+        {
+          "l": "DTE 32",
+          "s": "ok"
+        },
+        {
+          "l": "prem 1.6%",
+          "s": "ok"
+        },
+        {
+          "l": "OI 626",
+          "s": "ok"
+        },
+        {
+          "l": "spr 6%",
+          "s": "ok"
+        },
+        {
+          "l": "earnings",
+          "s": "ok"
+        },
+        {
+          "l": "median",
+          "s": "ok"
+        },
+        {
+          "l": "IV thin",
+          "s": "no"
+        },
+        {
+          "l": "timing",
+          "s": "ok"
+        }
+      ],
       "shortlist": true
+    },
+    {
+      "ticker": "BE",
+      "strategy": "CC",
+      "spot": 201.45,
+      "expiry": "2026-09-25",
+      "dte": 32,
+      "strike": 240.0,
+      "delta": 0.309,
+      "mid": 9.27,
+      "premium_pct": 4.6,
+      "pop": 69.1,
+      "iv": 86.7,
+      "iv_atm": 85.1,
+      "sector": "Industrials",
+      "vol_bucket": "high",
+      "oi": 135,
+      "spread_pct": 9.2,
+      "earnings_soon": false,
+      "earnings_in_window": false,
+      "strong": true,
+      "median_ok": false,
+      "pct_b": 0.37,
+      "timing_label": "\ud83d\udd34 NO SETUP",
+      "timing_score": 0,
+      "timing_reasons": [
+        "IV below realized \u2014 thin premium",
+        "\u26d4 Below median (%B 0.37) \u2014 CC needs above"
+      ],
+      "gates": [
+        {
+          "l": "\u0394 0.31",
+          "s": "ok"
+        },
+        {
+          "l": "DTE 32",
+          "s": "ok"
+        },
+        {
+          "l": "prem 4.6%",
+          "s": "ok"
+        },
+        {
+          "l": "OI 135",
+          "s": "ok"
+        },
+        {
+          "l": "spr 9%",
+          "s": "ok"
+        },
+        {
+          "l": "earnings",
+          "s": "ok"
+        },
+        {
+          "l": "median",
+          "s": "no"
+        },
+        {
+          "l": "IV thin",
+          "s": "no"
+        },
+        {
+          "l": "timing",
+          "s": "no"
+        }
+      ],
+      "shortlist": false
+    },
+    {
+      "ticker": "SPCX",
+      "strategy": "CC",
+      "spot": 136.97,
+      "expiry": "2026-09-25",
+      "dte": 32,
+      "strike": 155.0,
+      "delta": 0.286,
+      "mid": 4.17,
+      "premium_pct": 3.05,
+      "pop": 71.4,
+      "iv": 60.2,
+      "iv_atm": 58.3,
+      "sector": "Industrials",
+      "vol_bucket": "med",
+      "oi": 265,
+      "spread_pct": 3.6,
+      "earnings_soon": false,
+      "earnings_in_window": false,
+      "strong": true,
+      "median_ok": true,
+      "pct_b": 0.67,
+      "timing_label": "\ud83d\udfe0 BUILDING UP / WAIT",
+      "timing_score": 4,
+      "timing_reasons": [
+        "Above midline",
+        "Bearish engulfing",
+        "IV below realized \u2014 thin premium"
+      ],
+      "gates": [
+        {
+          "l": "\u0394 0.29",
+          "s": "ok"
+        },
+        {
+          "l": "DTE 32",
+          "s": "ok"
+        },
+        {
+          "l": "prem 3.0%",
+          "s": "ok"
+        },
+        {
+          "l": "OI 265",
+          "s": "ok"
+        },
+        {
+          "l": "spr 4%",
+          "s": "ok"
+        },
+        {
+          "l": "earnings",
+          "s": "ok"
+        },
+        {
+          "l": "median",
+          "s": "ok"
+        },
+        {
+          "l": "IV thin",
+          "s": "no"
+        },
+        {
+          "l": "timing",
+          "s": "ok"
+        }
+      ],
+      "shortlist": false
     },
     {
       "ticker": "AMD",
@@ -208,6 +709,44 @@
       "timing_reasons": [
         "IV below realized \u2014 thin premium",
         "\u26d4 Below median (%B 0.40) \u2014 CC needs above"
+      ],
+      "gates": [
+        {
+          "l": "\u0394 0.30",
+          "s": "ok"
+        },
+        {
+          "l": "DTE 32",
+          "s": "ok"
+        },
+        {
+          "l": "prem 2.8%",
+          "s": "ok"
+        },
+        {
+          "l": "OI 444",
+          "s": "ok"
+        },
+        {
+          "l": "spr 10%",
+          "s": "ok"
+        },
+        {
+          "l": "earnings",
+          "s": "ok"
+        },
+        {
+          "l": "median",
+          "s": "no"
+        },
+        {
+          "l": "IV thin",
+          "s": "no"
+        },
+        {
+          "l": "timing",
+          "s": "no"
+        }
       ],
       "shortlist": false
     },
@@ -240,6 +779,44 @@
         "Dark cloud cover",
         "IV below realized \u2014 thin premium"
       ],
+      "gates": [
+        {
+          "l": "\u0394 0.28",
+          "s": "ok"
+        },
+        {
+          "l": "DTE 32",
+          "s": "ok"
+        },
+        {
+          "l": "prem 2.5%",
+          "s": "ok"
+        },
+        {
+          "l": "OI 1635",
+          "s": "ok"
+        },
+        {
+          "l": "spr 6%",
+          "s": "ok"
+        },
+        {
+          "l": "earnings",
+          "s": "ok"
+        },
+        {
+          "l": "median",
+          "s": "ok"
+        },
+        {
+          "l": "IV thin",
+          "s": "no"
+        },
+        {
+          "l": "timing",
+          "s": "ok"
+        }
+      ],
       "shortlist": false
     },
     {
@@ -269,6 +846,44 @@
       "timing_reasons": [
         "Above midline",
         "IV below realized \u2014 thin premium"
+      ],
+      "gates": [
+        {
+          "l": "\u0394 0.29",
+          "s": "ok"
+        },
+        {
+          "l": "DTE 32",
+          "s": "ok"
+        },
+        {
+          "l": "prem 2.5%",
+          "s": "ok"
+        },
+        {
+          "l": "OI 107",
+          "s": "ok"
+        },
+        {
+          "l": "spr 4%",
+          "s": "ok"
+        },
+        {
+          "l": "earnings",
+          "s": "ok"
+        },
+        {
+          "l": "median",
+          "s": "ok"
+        },
+        {
+          "l": "IV thin",
+          "s": "no"
+        },
+        {
+          "l": "timing",
+          "s": "ok"
+        }
       ],
       "shortlist": false
     },
@@ -301,6 +916,44 @@
         "Above midline",
         "IV fair vs realized"
       ],
+      "gates": [
+        {
+          "l": "\u0394 0.31",
+          "s": "ok"
+        },
+        {
+          "l": "DTE 32",
+          "s": "ok"
+        },
+        {
+          "l": "prem 2.5%",
+          "s": "ok"
+        },
+        {
+          "l": "OI 547",
+          "s": "ok"
+        },
+        {
+          "l": "spr 2%",
+          "s": "ok"
+        },
+        {
+          "l": "earnings",
+          "s": "ok"
+        },
+        {
+          "l": "median",
+          "s": "ok"
+        },
+        {
+          "l": "IV rich",
+          "s": "ok"
+        },
+        {
+          "l": "timing",
+          "s": "ok"
+        }
+      ],
       "shortlist": false
     },
     {
@@ -332,6 +985,44 @@
         "Above midline",
         "IV rich vs realized \u2014 premium fat"
       ],
+      "gates": [
+        {
+          "l": "\u0394 0.27",
+          "s": "ok"
+        },
+        {
+          "l": "DTE 32",
+          "s": "ok"
+        },
+        {
+          "l": "prem 2.3%",
+          "s": "ok"
+        },
+        {
+          "l": "OI 40649",
+          "s": "ok"
+        },
+        {
+          "l": "spr 3%",
+          "s": "ok"
+        },
+        {
+          "l": "earnings",
+          "s": "ok"
+        },
+        {
+          "l": "median",
+          "s": "ok"
+        },
+        {
+          "l": "IV rich",
+          "s": "ok"
+        },
+        {
+          "l": "timing",
+          "s": "ok"
+        }
+      ],
       "shortlist": false
     },
     {
@@ -361,6 +1052,44 @@
       "timing_reasons": [
         "IV below realized \u2014 thin premium",
         "\u26d4 Below median (%B 0.40) \u2014 CC needs above"
+      ],
+      "gates": [
+        {
+          "l": "\u0394 0.30",
+          "s": "ok"
+        },
+        {
+          "l": "DTE 32",
+          "s": "ok"
+        },
+        {
+          "l": "prem 1.6%",
+          "s": "ok"
+        },
+        {
+          "l": "OI 402",
+          "s": "ok"
+        },
+        {
+          "l": "spr 13%",
+          "s": "ok"
+        },
+        {
+          "l": "earnings",
+          "s": "ok"
+        },
+        {
+          "l": "median",
+          "s": "no"
+        },
+        {
+          "l": "IV thin",
+          "s": "no"
+        },
+        {
+          "l": "timing",
+          "s": "no"
+        }
       ],
       "shortlist": false
     },
@@ -392,6 +1121,44 @@
         "Above midline",
         "IV below realized \u2014 thin premium"
       ],
+      "gates": [
+        {
+          "l": "\u0394 0.32",
+          "s": "ok"
+        },
+        {
+          "l": "DTE 32",
+          "s": "ok"
+        },
+        {
+          "l": "prem 1.5%",
+          "s": "ok"
+        },
+        {
+          "l": "OI 241",
+          "s": "ok"
+        },
+        {
+          "l": "spr 13%",
+          "s": "ok"
+        },
+        {
+          "l": "earnings",
+          "s": "ok"
+        },
+        {
+          "l": "median",
+          "s": "ok"
+        },
+        {
+          "l": "IV thin",
+          "s": "no"
+        },
+        {
+          "l": "timing",
+          "s": "ok"
+        }
+      ],
       "shortlist": false
     },
     {
@@ -421,6 +1188,44 @@
       "timing_reasons": [
         "IV below realized \u2014 thin premium",
         "\u26d4 Below median (%B 0.46) \u2014 CC needs above"
+      ],
+      "gates": [
+        {
+          "l": "\u0394 0.27",
+          "s": "ok"
+        },
+        {
+          "l": "DTE 32",
+          "s": "ok"
+        },
+        {
+          "l": "prem 1.4%",
+          "s": "ok"
+        },
+        {
+          "l": "OI 314",
+          "s": "ok"
+        },
+        {
+          "l": "spr 7%",
+          "s": "ok"
+        },
+        {
+          "l": "earnings",
+          "s": "ok"
+        },
+        {
+          "l": "median",
+          "s": "no"
+        },
+        {
+          "l": "IV thin",
+          "s": "no"
+        },
+        {
+          "l": "timing",
+          "s": "no"
+        }
       ],
       "shortlist": false
     },
@@ -452,6 +1257,44 @@
         "Dark cloud cover",
         "IV below realized \u2014 thin premium",
         "\u26d4 Below median (%B 0.40) \u2014 CC needs above"
+      ],
+      "gates": [
+        {
+          "l": "\u0394 0.28",
+          "s": "ok"
+        },
+        {
+          "l": "DTE 32",
+          "s": "ok"
+        },
+        {
+          "l": "prem 1.2%",
+          "s": "ok"
+        },
+        {
+          "l": "OI 1032",
+          "s": "ok"
+        },
+        {
+          "l": "spr 6%",
+          "s": "ok"
+        },
+        {
+          "l": "earnings",
+          "s": "ok"
+        },
+        {
+          "l": "median",
+          "s": "no"
+        },
+        {
+          "l": "IV thin",
+          "s": "no"
+        },
+        {
+          "l": "timing",
+          "s": "ok"
+        }
       ],
       "shortlist": false
     }
@@ -1221,7 +2064,7 @@
       "iv_vs_hv": "fair",
       "rsi": 58,
       "above_200": false,
-      "pcr": 0.38,
+      "pcr": null,
       "pctb": 1.04,
       "csp_timing": "\ud83d\udd34 NO SETUP",
       "cc_timing": "\ud83d\udfe0 BUILDING UP / WAIT",
@@ -1240,7 +2083,7 @@
       "iv_vs_hv": "cheap",
       "rsi": 58,
       "above_200": false,
-      "pcr": 0.29,
+      "pcr": null,
       "pctb": 0.82,
       "csp_timing": "\ud83d\udd34 NO SETUP",
       "cc_timing": "\ud83d\udfe0 BUILDING UP / WAIT",
@@ -1259,7 +2102,7 @@
       "iv_vs_hv": "fair",
       "rsi": 51,
       "above_200": true,
-      "pcr": 0.49,
+      "pcr": null,
       "pctb": 0.53,
       "csp_timing": "\ud83d\udd34 NO SETUP",
       "cc_timing": "\ud83d\udd34 NO SETUP",
@@ -1278,7 +2121,7 @@
       "iv_vs_hv": "cheap",
       "rsi": 50,
       "above_200": true,
-      "pcr": 0.47,
+      "pcr": null,
       "pctb": 0.46,
       "csp_timing": "\ud83d\udfe0 BUILDING UP / WAIT",
       "cc_timing": "\ud83d\udd34 NO SETUP",
@@ -1297,7 +2140,7 @@
       "iv_vs_hv": "cheap",
       "rsi": 62,
       "above_200": true,
-      "pcr": 0.66,
+      "pcr": null,
       "pctb": 0.57,
       "csp_timing": "\ud83d\udfe0 BUILDING UP / WAIT",
       "cc_timing": "\ud83d\udd34 NO SETUP",
@@ -1316,7 +2159,7 @@
       "iv_vs_hv": "fair",
       "rsi": 53,
       "above_200": false,
-      "pcr": 2.95,
+      "pcr": null,
       "pctb": 0.6,
       "csp_timing": "\ud83d\udd34 NO SETUP",
       "cc_timing": "\ud83d\udd34 NO SETUP",
@@ -1335,7 +2178,7 @@
       "iv_vs_hv": "cheap",
       "rsi": 42,
       "above_200": true,
-      "pcr": 2.34,
+      "pcr": null,
       "pctb": 0.41,
       "csp_timing": "\ud83d\udd34 NO SETUP",
       "cc_timing": "\ud83d\udd34 NO SETUP",
@@ -1354,7 +2197,7 @@
       "iv_vs_hv": "cheap",
       "rsi": 62,
       "above_200": true,
-      "pcr": 0.18,
+      "pcr": null,
       "pctb": 0.86,
       "csp_timing": "\ud83d\udd34 NO SETUP",
       "cc_timing": "\ud83d\udfe0 BUILDING UP / WAIT",
@@ -1373,7 +2216,7 @@
       "iv_vs_hv": "fair",
       "rsi": 71,
       "above_200": true,
-      "pcr": 0.52,
+      "pcr": null,
       "pctb": 0.97,
       "csp_timing": "\ud83d\udd34 NO SETUP",
       "cc_timing": "\ud83d\udfe0 BUILDING UP / WAIT",
@@ -1392,7 +2235,7 @@
       "iv_vs_hv": "rich",
       "rsi": 67,
       "above_200": false,
-      "pcr": 0.45,
+      "pcr": null,
       "pctb": 0.95,
       "csp_timing": "\ud83d\udd34 NO SETUP",
       "cc_timing": "\ud83d\udfe0 BUILDING UP / WAIT",
@@ -1411,7 +2254,7 @@
       "iv_vs_hv": "cheap",
       "rsi": 69,
       "above_200": true,
-      "pcr": 0.59,
+      "pcr": null,
       "pctb": 0.76,
       "csp_timing": "\ud83d\udd34 NO SETUP",
       "cc_timing": "\ud83d\udd34 NO SETUP",
@@ -1430,7 +2273,7 @@
       "iv_vs_hv": "cheap",
       "rsi": 30,
       "above_200": false,
-      "pcr": 1.03,
+      "pcr": null,
       "pctb": -0.16,
       "csp_timing": "\ud83d\udd34 NO SETUP",
       "cc_timing": "\ud83d\udd34 NO SETUP",
@@ -1449,7 +2292,7 @@
       "iv_vs_hv": "cheap",
       "rsi": 47,
       "above_200": true,
-      "pcr": 0.26,
+      "pcr": null,
       "pctb": 0.4,
       "csp_timing": "\ud83d\udd34 NO SETUP",
       "cc_timing": "\ud83d\udfe0 BUILDING UP / WAIT",
@@ -1468,7 +2311,7 @@
       "iv_vs_hv": "cheap",
       "rsi": 46,
       "above_200": true,
-      "pcr": 1.22,
+      "pcr": null,
       "pctb": 0.4,
       "csp_timing": "\ud83d\udd34 NO SETUP",
       "cc_timing": "\ud83d\udd34 NO SETUP",
@@ -1487,7 +2330,7 @@
       "iv_vs_hv": "cheap",
       "rsi": 46,
       "above_200": true,
-      "pcr": 1.68,
+      "pcr": null,
       "pctb": 0.4,
       "csp_timing": "\ud83d\udd34 NO SETUP",
       "cc_timing": "\ud83d\udd34 NO SETUP",
@@ -1506,7 +2349,7 @@
       "iv_vs_hv": "rich",
       "rsi": 63,
       "above_200": true,
-      "pcr": 1.25,
+      "pcr": null,
       "pctb": 0.73,
       "csp_timing": "\ud83d\udd34 NO SETUP",
       "cc_timing": "\ud83d\udfe1 PARTIAL SETUP",
@@ -1525,7 +2368,7 @@
       "iv_vs_hv": "cheap",
       "rsi": 52,
       "above_200": false,
-      "pcr": 1.68,
+      "pcr": null,
       "pctb": 0.67,
       "csp_timing": "\ud83d\udd34 NO SETUP",
       "cc_timing": "\ud83d\udfe0 BUILDING UP / WAIT",
@@ -1544,7 +2387,7 @@
       "iv_vs_hv": "cheap",
       "rsi": 47,
       "above_200": true,
-      "pcr": 0.99,
+      "pcr": null,
       "pctb": 0.58,
       "csp_timing": "\ud83d\udd34 NO SETUP",
       "cc_timing": "\ud83d\udd34 NO SETUP",
@@ -1563,7 +2406,7 @@
       "iv_vs_hv": "cheap",
       "rsi": 62,
       "above_200": true,
-      "pcr": 0.83,
+      "pcr": null,
       "pctb": 0.8,
       "csp_timing": "\ud83d\udd34 NO SETUP",
       "cc_timing": "\ud83d\udfe0 BUILDING UP / WAIT",
@@ -1582,7 +2425,7 @@
       "iv_vs_hv": "fair",
       "rsi": 40,
       "above_200": false,
-      "pcr": 0.43,
+      "pcr": null,
       "pctb": 0.17,
       "csp_timing": "\ud83d\udd34 NO SETUP",
       "cc_timing": "\ud83d\udd34 NO SETUP",
@@ -1620,7 +2463,7 @@
       "iv_vs_hv": "cheap",
       "rsi": 48,
       "above_200": false,
-      "pcr": 0.5,
+      "pcr": null,
       "pctb": 0.5,
       "csp_timing": "\ud83d\udd34 NO SETUP",
       "cc_timing": "\ud83d\udd34 NO SETUP",
@@ -1639,7 +2482,7 @@
       "iv_vs_hv": "cheap",
       "rsi": 43,
       "above_200": true,
-      "pcr": 0.93,
+      "pcr": null,
       "pctb": 0.37,
       "csp_timing": "\ud83d\udd34 NO SETUP",
       "cc_timing": "\ud83d\udd34 NO SETUP",
@@ -1658,7 +2501,7 @@
       "iv_vs_hv": "cheap",
       "rsi": 50,
       "above_200": false,
-      "pcr": 0.74,
+      "pcr": null,
       "pctb": 0.63,
       "csp_timing": "\ud83d\udfe0 BUILDING UP / WAIT",
       "cc_timing": "\ud83d\udfe0 BUILDING UP / WAIT",
@@ -1677,7 +2520,7 @@
       "iv_vs_hv": "fair",
       "rsi": 79,
       "above_200": false,
-      "pcr": 0.79,
+      "pcr": null,
       "pctb": 1.18,
       "csp_timing": "\ud83d\udd34 NO SETUP",
       "cc_timing": "\ud83d\udfe1 PARTIAL SETUP",
@@ -1696,7 +2539,7 @@
       "iv_vs_hv": "cheap",
       "rsi": 50,
       "above_200": true,
-      "pcr": 0.83,
+      "pcr": null,
       "pctb": 0.54,
       "csp_timing": "\ud83d\udd34 NO SETUP",
       "cc_timing": "\ud83d\udd34 NO SETUP",
@@ -1720,10 +2563,10 @@
     "earnings_blackout": true,
     "earnings_blackout_days": 7
   },
-  "count": 15,
+  "count": 19,
   "leap_count": 25,
   "market": {
-    "vix": 15.13,
+    "vix": 15.89,
     "vix_label": "normal",
     "fng": 55,
     "fng_label": "Greed",
@@ -1768,29 +2611,29 @@
     },
     {
       "label": "DXY",
-      "price": 98.85900115966797,
-      "pct": 0.05971468227510268,
+      "price": 98.98999786376953,
+      "pct": 0.19230243536751956,
       "prefix": "",
       "is_yield": false
     },
     {
       "label": "Crude Oil",
-      "price": 85.4000015258789,
-      "pct": -1.9067264866365563,
+      "price": 85.36000061035156,
+      "pct": -1.95267286459323,
       "prefix": "$",
       "is_yield": false
     },
     {
       "label": "Gold",
-      "price": 4704.5,
-      "pct": 1.738714574636946,
+      "price": 4696.2001953125,
+      "pct": 1.5592244141253486,
       "prefix": "$",
       "is_yield": false
     },
     {
       "label": "Bitcoin",
-      "price": 77324.453125,
-      "pct": 0.3126989968355032,
+      "price": 77094.6875,
+      "pct": -0.8495606306405667,
       "prefix": "$",
       "is_yield": false
     },
@@ -1879,8 +2722,8 @@
     {
       "label": "Digital Assets",
       "ticker": "BTC",
-      "pct": 0.3126989968355032,
-      "price": 77324.453125
+      "pct": -0.8495606306405667,
+      "price": 77094.6875
     }
   ],
   "fundamentals": {
@@ -2167,39 +3010,39 @@
       ],
       "news": [
         {
-          "title": "Nvidia's Q2 earnings to test resurgent AI trade",
+          "title": "Stock market today: Dow, S&P 500, Nasdaq futures mixed after US-Canada talks break down",
           "publisher": "Yahoo Finance",
-          "link": "https://finance.yahoo.com/news/nvidias-q2-earnings-to-test-resurgent-ai-trade-112502189.html",
-          "when": "Aug 23"
-        },
-        {
-          "title": "Nvidia earnings and Jackson Hole: What to watch this week",
-          "publisher": "Yahoo Finance",
-          "link": "https://finance.yahoo.com/markets/article/nvidia-earnings-and-jackson-hole-what-to-watch-this-week-100000082.html",
-          "when": "Aug 23"
-        },
-        {
-          "title": "Billionaire Investor Stanley Druckenmiller Sold Broadcom, Intel, and Micron and Bought Another Chip Stock That Expects to Double Data Center Sales in 2027",
-          "publisher": "Motley Fool",
-          "link": "https://www.fool.com/investing/2026/08/24/billionaire-stanley-druckenmiller-sold-micron-2027/",
+          "link": "https://finance.yahoo.com/markets/live/stock-market-today-monday-august-24-dow-sp-500-nasdaq-080306047.html",
           "when": "Aug 24"
         },
         {
-          "title": "Shares, oil slip awaiting US details of Iran sanctions",
+          "title": "Oil falls as Trump pledges economic war on Iran",
+          "publisher": "AFP",
+          "link": "https://finance.yahoo.com/energy/articles/oil-falls-trump-pledges-economic-030019769.html",
+          "when": "Aug 24"
+        },
+        {
+          "title": "Will Nvidia Stock Soar After Aug. 26? Here's What History Shows.",
+          "publisher": "Motley Fool",
+          "link": "https://www.fool.com/investing/2026/08/24/will-nvidia-stock-soar-after-aug-26-here-s-what-history-shows/",
+          "when": "Aug 24"
+        },
+        {
+          "title": "Anthropic Has a $65 Billion Run Rate. Buy These Stocks to Profit From It.",
+          "publisher": "Motley Fool",
+          "link": "https://www.fool.com/investing/2026/08/24/anthropic-has-a-65-billion-run-rate-buy-these-stoc/",
+          "when": "Aug 24"
+        },
+        {
+          "title": "BlackRock Says the Long-Term Investment Thesis for Bitcoin Remains Intact. Is Bitcoin Now a Buy?",
+          "publisher": "Motley Fool",
+          "link": "https://www.fool.com/investing/2026/08/24/blackrock-says-the-long-term-investment-thesis-for/",
+          "when": "Aug 24"
+        },
+        {
+          "title": "Shares, oil dip as US sanctions on Iran loom",
           "publisher": "Reuters",
           "link": "https://finance.yahoo.com/news/shares-flat-asia-iran-sanctions-004936320.html",
-          "when": "Aug 24"
-        },
-        {
-          "title": "This Week\u2019s Big Events Are Priced In for Stocks: Will Bitcoin Agree?",
-          "publisher": "BeInCrypto",
-          "link": "https://beincrypto.com/bitcoin-priced-in-reaction-stocks/",
-          "when": "Aug 24"
-        },
-        {
-          "title": "How Farmers & Merchants Bancorp\u2019s Dividend Hike Shapes FMCB\u2019s Capital Return Strategy for Investors",
-          "publisher": "Simply Wall St.",
-          "link": "https://finance.yahoo.com/markets/stocks/articles/farmers-merchants-bancorp-dividend-hike-042949456.html",
           "when": "Aug 24"
         }
       ]
@@ -2268,6 +3111,12 @@
           "when": "Aug 23"
         },
         {
+          "title": "I've Covered Semiconductors for Years. Nvidia Is My No. 1 Pick Heading Into 2027.",
+          "publisher": "Motley Fool",
+          "link": "https://www.fool.com/investing/2026/08/24/ive-covered-semiconductors-for-years-nvidia-is-m/",
+          "when": "Aug 24"
+        },
+        {
           "title": "WMT Stock Heads For Fourth Month In Red: Walmart Reportedly Bets On Under-$25 Fashion Line To Take On Amazon",
           "publisher": "Stocktwits",
           "link": "https://stocktwits.com/news-articles/markets/equity/wmt-stock-heads-for-fourth-month-in-red-walmart-reportedly-bets-on-under-25-fashion-line-to-take-on-amazon/cZYKTyZRJnP",
@@ -2290,12 +3139,6 @@
           "publisher": "Motley Fool",
           "link": "https://www.fool.com/investing/2026/08/23/ups-stopped-carrying-2-million-amazon-packages-a-day-amazon-still-has-to-move-them/",
           "when": "Aug 24"
-        },
-        {
-          "title": "Novo Nordisk Expands Its AI Push With AWS, But Can It Accelerate Drug Discovery?",
-          "publisher": "Insider Monkey",
-          "link": "https://finance.yahoo.com/healthcare/articles/novo-nordisk-expands-ai-push-234353024.html",
-          "when": "Aug 23"
         }
       ]
     },
@@ -2363,6 +3206,12 @@
           "when": "Aug 23"
         },
         {
+          "title": "I've Covered Semiconductors for Years. Nvidia Is My No. 1 Pick Heading Into 2027.",
+          "publisher": "Motley Fool",
+          "link": "https://www.fool.com/investing/2026/08/24/ive-covered-semiconductors-for-years-nvidia-is-m/",
+          "when": "Aug 24"
+        },
+        {
           "title": "How Farmers & Merchants Bancorp\u2019s Dividend Hike Shapes FMCB\u2019s Capital Return Strategy for Investors",
           "publisher": "Simply Wall St.",
           "link": "https://finance.yahoo.com/markets/stocks/articles/farmers-merchants-bancorp-dividend-hike-042949456.html",
@@ -2384,12 +3233,6 @@
           "title": "This Company Just Paid Out $6.8 Billion. Its AI Bill Was 4x That",
           "publisher": "24/7 Wall St.",
           "link": "https://247wallst.com/investing/2026/08/23/this-company-just-paid-out-6-8-billion-its-ai-bill-was-4x-that/",
-          "when": "Aug 23"
-        },
-        {
-          "title": "Microsoft (MSFT) Gets New Australia News Rules As AI Commerce Push Deepens",
-          "publisher": "Simply Wall St.",
-          "link": "https://finance.yahoo.com/technology/ai/articles/microsoft-msft-gets-australia-news-170738761.html",
           "when": "Aug 23"
         }
       ]
@@ -3141,6 +3984,18 @@
       ],
       "news": [
         {
+          "title": "AAPL Stock Ticks Up Premarket As New Foldable iPhone Details Emerge",
+          "publisher": "Stocktwits",
+          "link": "https://stocktwits.com/news-articles/markets/equity/aapl-stock-ticks-up-premarket-as-new-foldable-i-phone-details-emerge/cZYKBwsRJnj",
+          "when": "Aug 24"
+        },
+        {
+          "title": "Xiaomi launches new Xring chip, partners with TSMC for production, sources say",
+          "publisher": "Reuters",
+          "link": "https://finance.yahoo.com/technology/articles/xiaomi-launches-new-xring-chip-partners-with-tsmc-for-production-sources-say-062221305.html",
+          "when": "Aug 24"
+        },
+        {
           "title": "A $650 smartphone takes aim at Apple and Samsung\u2019s surging repair costs",
           "publisher": "TheStreet",
           "link": "https://www.thestreet.com/retail/a-650-smartphone-takes-aim-at-apple-and-samsungs-surging-repair-costs",
@@ -3162,18 +4017,6 @@
           "title": "4 Low-Cost ETFs Every Investor Should Own",
           "publisher": "24/7 Wall St.",
           "link": "https://247wallst.com/investing/2026/08/23/4-low-cost-etfs-every-investor-should-own/",
-          "when": "Aug 23"
-        },
-        {
-          "title": "3 Tech Compounders Fit for Warren Buffett's Portfolio",
-          "publisher": "Motley Fool",
-          "link": "https://www.fool.com/investing/2026/08/23/tech-compounders-fit-for-warren-buffett-portfolio/",
-          "when": "Aug 23"
-        },
-        {
-          "title": "Apple Cut Its Standard EU App Store Commission From 30% to 26%",
-          "publisher": "Motley Fool",
-          "link": "https://www.fool.com/investing/2026/08/22/apple-cut-its-standard-eu-app-store-commission-from-30-to-26/",
           "when": "Aug 23"
         }
       ]
@@ -3242,6 +4085,12 @@
           "when": "Aug 23"
         },
         {
+          "title": "I've Covered Semiconductors for Years. Nvidia Is My No. 1 Pick Heading Into 2027.",
+          "publisher": "Motley Fool",
+          "link": "https://www.fool.com/investing/2026/08/24/ive-covered-semiconductors-for-years-nvidia-is-m/",
+          "when": "Aug 24"
+        },
+        {
           "title": "Broadcom Has Seen Its Biggest Customer Drop a Key Chip Before. History Says What the Stock Did Next.",
           "publisher": "Motley Fool",
           "link": "https://www.fool.com/investing/2026/08/23/broadcom-has-seen-its-biggest-customer-drop-a-key-chip-before-history-says-what-the-stock-did-next/",
@@ -3263,12 +4112,6 @@
           "title": "Hugging Face exploring sale valuing it at $13 billion, Business Insider says",
           "publisher": "Reuters",
           "link": "https://finance.yahoo.com/technology/ai/articles/hugging-face-exploring-sale-valuing-200012818.html",
-          "when": "Aug 23"
-        },
-        {
-          "title": "Verizon Communications (VZ) Rolls Out New Wireless Plans With AI Perks And Upgrades",
-          "publisher": "Simply Wall St.",
-          "link": "https://finance.yahoo.com/technology/ai/articles/verizon-communications-vz-rolls-wireless-190709855.html",
           "when": "Aug 23"
         }
       ]
@@ -3539,6 +4382,12 @@
       "flags": [],
       "news": [
         {
+          "title": "Why Are Nasdaq, S&P 500 Futures Falling Premarket? NVDA, BABA, PSKY, SLS, AAOI, SPCX, RKLB Stocks In Focus",
+          "publisher": "Stocktwits",
+          "link": "https://stocktwits.com/news-articles/markets/equity/why-nasdaq-futures-falling-today-nvidia-alibaba-iran-sanctions-sls-spcx-rklb-stocks/cZYKBA7RJni",
+          "when": "Aug 24"
+        },
+        {
           "title": "SPCX Stock Slides Overnight: Musk Maps Falcon Wind-Down For Starship \u2014 Rare \u2018Sell\u2019 Call Sees 27% Downside",
           "publisher": "Stocktwits",
           "link": "https://stocktwits.com/news-articles/markets/equity/spcx-musk-falcon-wind-down-starship-rare-sell-call-downside/cZYKd6aRJne",
@@ -3567,12 +4416,6 @@
           "publisher": "Benzinga",
           "link": "https://finance.yahoo.com/technology/articles/elon-musk-makes-fresh-starlink-003054167.html",
           "when": "Aug 24"
-        },
-        {
-          "title": "Space Exploration Technologies (SPCX) Says China Is Its Top Rival In AI And Rockets",
-          "publisher": "Simply Wall St.",
-          "link": "https://finance.yahoo.com/markets/stocks/articles/space-exploration-technologies-spcx-says-170738295.html",
-          "when": "Aug 23"
         }
       ]
     },
@@ -4467,13 +5310,13 @@
     "spread_2s10s": 50,
     "pe_trailing": 25.794857,
     "pe_forward": null,
-    "vix": 15.1,
-    "vix_chg": -0.88,
+    "vix": 15.9,
+    "vix_chg": 0.77,
     "vix_hi": 31.0,
     "vix_lo": 13.5,
     "vix_avg": 18.1,
     "spy_realized": 12.8,
-    "vrp": 2.3,
+    "vrp": 3.1,
     "ovx": 49.6,
     "ovx_chg": -0.01,
     "gvz": 27.3,
@@ -5009,7 +5852,7 @@
       }
     ]
   },
-  "generated_at": "2026-08-24T06:21:54+00:00",
+  "generated_at": "2026-08-24T08:52:50+00:00",
   "universe": {
     "wheel": 16,
     "growth": 15,
