@@ -163,7 +163,12 @@ def fetch_fundamentals_all(names, prices):
     out = {}
     for t in names:
         try:
-            out[t] = fundamentals.analyze(t, prices.get(t))
+            res = fundamentals.analyze(t, prices.get(t))
+            try:
+                res["news"] = fundamentals.company_news(t)
+            except Exception:
+                res["news"] = []
+            out[t] = res
         except Exception as e:
             out[t] = {"ok": False, "error": "%s: %s" % (type(e).__name__, e), "ticker": t}
     return out
