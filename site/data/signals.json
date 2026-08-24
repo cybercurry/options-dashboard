@@ -5,7 +5,7 @@
       "strategy": "CSP",
       "spot": 179.94,
       "expiry": "2026-09-25",
-      "dte": 33,
+      "dte": 32,
       "strike": 170.0,
       "delta": -0.31,
       "mid": 5.85,
@@ -35,7 +35,7 @@
       "strategy": "CSP",
       "spot": 18.91,
       "expiry": "2026-09-25",
-      "dte": 33,
+      "dte": 32,
       "strike": 17.5,
       "delta": -0.274,
       "mid": 0.53,
@@ -65,7 +65,7 @@
       "strategy": "CSP",
       "spot": 362.86,
       "expiry": "2026-09-25",
-      "dte": 33,
+      "dte": 32,
       "strike": 345.0,
       "delta": -0.307,
       "mid": 9.9,
@@ -95,7 +95,7 @@
       "strategy": "CSP",
       "spot": 62.72,
       "expiry": "2026-09-25",
-      "dte": 33,
+      "dte": 32,
       "strike": 59.0,
       "delta": -0.29,
       "mid": 1.67,
@@ -125,7 +125,7 @@
       "strategy": "CSP",
       "spot": 258.63,
       "expiry": "2026-09-25",
-      "dte": 33,
+      "dte": 32,
       "strike": 250.0,
       "delta": -0.325,
       "mid": 5.15,
@@ -156,7 +156,7 @@
       "strategy": "CSP",
       "spot": 309.35,
       "expiry": "2026-09-25",
-      "dte": 33,
+      "dte": 32,
       "strike": 300.0,
       "delta": -0.31,
       "mid": 5.0,
@@ -186,7 +186,7 @@
       "strategy": "CC",
       "spot": 473.25,
       "expiry": "2026-09-25",
-      "dte": 33,
+      "dte": 32,
       "strike": 525.0,
       "delta": 0.299,
       "mid": 13.3,
@@ -216,7 +216,7 @@
       "strategy": "CC",
       "spot": 18.91,
       "expiry": "2026-09-25",
-      "dte": 33,
+      "dte": 32,
       "strike": 21.0,
       "delta": 0.278,
       "mid": 0.47,
@@ -247,7 +247,7 @@
       "strategy": "CC",
       "spot": 179.94,
       "expiry": "2026-09-25",
-      "dte": 33,
+      "dte": 32,
       "strike": 197.5,
       "delta": 0.289,
       "mid": 4.45,
@@ -277,7 +277,7 @@
       "strategy": "CC",
       "spot": 362.86,
       "expiry": "2026-09-25",
-      "dte": 33,
+      "dte": 32,
       "strike": 390.0,
       "delta": 0.309,
       "mid": 8.9,
@@ -308,7 +308,7 @@
       "strategy": "CC",
       "spot": 62.72,
       "expiry": "2026-09-25",
-      "dte": 33,
+      "dte": 32,
       "strike": 70.0,
       "delta": 0.267,
       "mid": 1.45,
@@ -339,7 +339,7 @@
       "strategy": "CC",
       "spot": 341.75,
       "expiry": "2026-09-25",
-      "dte": 33,
+      "dte": 32,
       "strike": 360.0,
       "delta": 0.298,
       "mid": 5.62,
@@ -369,7 +369,7 @@
       "strategy": "CC",
       "spot": 483.24,
       "expiry": "2026-09-25",
-      "dte": 33,
+      "dte": 32,
       "strike": 505.0,
       "delta": 0.318,
       "mid": 7.32,
@@ -399,7 +399,7 @@
       "strategy": "CC",
       "spot": 258.63,
       "expiry": "2026-09-25",
-      "dte": 33,
+      "dte": 32,
       "strike": 275.0,
       "delta": 0.267,
       "mid": 3.67,
@@ -429,7 +429,7 @@
       "strategy": "CC",
       "spot": 309.35,
       "expiry": "2026-09-25",
-      "dte": 33,
+      "dte": 32,
       "strike": 325.0,
       "delta": 0.28,
       "mid": 3.88,
@@ -462,7 +462,7 @@
       "strategy": "LEAP",
       "spot": 49.37,
       "expiry": "2027-03-19",
-      "dte": 208,
+      "dte": 207,
       "strike": 40.0,
       "delta": 0.816,
       "mid": 11.15,
@@ -470,7 +470,7 @@
       "intrinsic": 9.37,
       "extrinsic": 1.78,
       "extrinsic_pct": 16.0,
-      "carry_pct": 6.33,
+      "carry_pct": 6.36,
       "iv": 58.0,
       "iv_ratio": 2.35,
       "above_200ma": false,
@@ -488,41 +488,11 @@
       "good_pmcc": false
     },
     {
-      "ticker": "WMT",
-      "strategy": "LEAP",
-      "spot": 103.7,
-      "expiry": "2028-01-21",
-      "dte": 516,
-      "strike": 90.0,
-      "delta": 0.766,
-      "mid": 23.6,
-      "cost": 2360.0,
-      "intrinsic": 13.7,
-      "extrinsic": 9.9,
-      "extrinsic_pct": 41.9,
-      "carry_pct": 6.75,
-      "iv": 27.9,
-      "iv_ratio": 0.73,
-      "above_200ma": false,
-      "above_50ma": false,
-      "ma_aligned": false,
-      "rsi": 29.6,
-      "rsi_rising": false,
-      "gate_a": false,
-      "gate_c": true,
-      "trend_ok": false,
-      "qualifies": false,
-      "timing_label": "\ud83d\udfe0 MARGINAL",
-      "timing_score": 2,
-      "sector": "Consumer Defensive",
-      "good_pmcc": false
-    },
-    {
       "ticker": "GLD",
       "strategy": "LEAP",
       "spot": 423.36,
       "expiry": "2028-01-21",
-      "dte": 516,
+      "dte": 515,
       "strike": 375.0,
       "delta": 0.784,
       "mid": 88.8,
@@ -530,7 +500,7 @@
       "intrinsic": 48.36,
       "extrinsic": 40.44,
       "extrinsic_pct": 45.5,
-      "carry_pct": 6.76,
+      "carry_pct": 6.77,
       "iv": 24.4,
       "iv_ratio": 0.99,
       "above_200ma": true,
@@ -548,11 +518,41 @@
       "good_pmcc": false
     },
     {
+      "ticker": "WMT",
+      "strategy": "LEAP",
+      "spot": 103.7,
+      "expiry": "2028-01-21",
+      "dte": 515,
+      "strike": 90.0,
+      "delta": 0.766,
+      "mid": 23.6,
+      "cost": 2360.0,
+      "intrinsic": 13.7,
+      "extrinsic": 9.9,
+      "extrinsic_pct": 41.9,
+      "carry_pct": 6.77,
+      "iv": 27.9,
+      "iv_ratio": 0.73,
+      "above_200ma": false,
+      "above_50ma": false,
+      "ma_aligned": false,
+      "rsi": 29.6,
+      "rsi_rising": false,
+      "gate_a": false,
+      "gate_c": true,
+      "trend_ok": false,
+      "qualifies": false,
+      "timing_label": "\ud83d\udfe0 MARGINAL",
+      "timing_score": 2,
+      "sector": "Consumer Defensive",
+      "good_pmcc": false
+    },
+    {
       "ticker": "AAPL",
       "strategy": "LEAP",
       "spot": 309.35,
       "expiry": "2028-01-21",
-      "dte": 516,
+      "dte": 515,
       "strike": 260.0,
       "delta": 0.792,
       "mid": 80.47,
@@ -560,7 +560,7 @@
       "intrinsic": 49.35,
       "extrinsic": 31.12,
       "extrinsic_pct": 38.7,
-      "carry_pct": 7.12,
+      "carry_pct": 7.13,
       "iv": 30.7,
       "iv_ratio": 0.95,
       "above_200ma": true,
@@ -582,7 +582,7 @@
       "strategy": "LEAP",
       "spot": 483.24,
       "expiry": "2028-01-21",
-      "dte": 516,
+      "dte": 515,
       "strike": 400.0,
       "delta": 0.781,
       "mid": 133.4,
@@ -590,7 +590,7 @@
       "intrinsic": 83.24,
       "extrinsic": 50.16,
       "extrinsic_pct": 37.6,
-      "carry_pct": 7.34,
+      "carry_pct": 7.36,
       "iv": 34.4,
       "iv_ratio": 0.62,
       "above_200ma": true,
@@ -612,7 +612,7 @@
       "strategy": "LEAP",
       "spot": 341.75,
       "expiry": "2028-01-21",
-      "dte": 516,
+      "dte": 515,
       "strike": 280.0,
       "delta": 0.79,
       "mid": 101.35,
@@ -620,7 +620,7 @@
       "intrinsic": 61.75,
       "extrinsic": 39.6,
       "extrinsic_pct": 39.1,
-      "carry_pct": 8.2,
+      "carry_pct": 8.21,
       "iv": 37.3,
       "iv_ratio": 1.01,
       "above_200ma": true,
@@ -642,7 +642,7 @@
       "strategy": "LEAP",
       "spot": 62.72,
       "expiry": "2028-01-21",
-      "dte": 516,
+      "dte": 515,
       "strike": 50.0,
       "delta": 0.777,
       "mid": 20.07,
@@ -650,7 +650,7 @@
       "intrinsic": 12.72,
       "extrinsic": 7.36,
       "extrinsic_pct": 36.6,
-      "carry_pct": 8.3,
+      "carry_pct": 8.31,
       "iv": 43.6,
       "iv_ratio": 1.23,
       "above_200ma": false,
@@ -672,7 +672,7 @@
       "strategy": "LEAP",
       "spot": 214.72,
       "expiry": "2028-01-21",
-      "dte": 516,
+      "dte": 515,
       "strike": 175.0,
       "delta": 0.778,
       "mid": 67.35,
@@ -680,7 +680,7 @@
       "intrinsic": 39.72,
       "extrinsic": 27.63,
       "extrinsic_pct": 41.0,
-      "carry_pct": 9.1,
+      "carry_pct": 9.12,
       "iv": 42.2,
       "iv_ratio": 1.13,
       "above_200ma": true,
@@ -702,7 +702,7 @@
       "strategy": "LEAP",
       "spot": 36.9,
       "expiry": "2028-01-21",
-      "dte": 516,
+      "dte": 515,
       "strike": 30.0,
       "delta": 0.791,
       "mid": 11.65,
@@ -710,7 +710,7 @@
       "intrinsic": 6.9,
       "extrinsic": 4.75,
       "extrinsic_pct": 40.8,
-      "carry_pct": 9.11,
+      "carry_pct": 9.12,
       "iv": 40.4,
       "iv_ratio": 0.62,
       "above_200ma": true,
@@ -732,7 +732,7 @@
       "strategy": "LEAP",
       "spot": 258.63,
       "expiry": "2028-01-21",
-      "dte": 516,
+      "dte": 515,
       "strike": 220.0,
       "delta": 0.772,
       "mid": 72.53,
@@ -740,7 +740,7 @@
       "intrinsic": 38.63,
       "extrinsic": 33.9,
       "extrinsic_pct": 46.7,
-      "carry_pct": 9.27,
+      "carry_pct": 9.29,
       "iv": 37.2,
       "iv_ratio": 0.64,
       "above_200ma": true,
@@ -762,7 +762,7 @@
       "strategy": "LEAP",
       "spot": 272.88,
       "expiry": "2028-01-21",
-      "dte": 516,
+      "dte": 515,
       "strike": 220.0,
       "delta": 0.775,
       "mid": 91.25,
@@ -770,7 +770,7 @@
       "intrinsic": 52.88,
       "extrinsic": 38.37,
       "extrinsic_pct": 42.0,
-      "carry_pct": 9.95,
+      "carry_pct": 9.97,
       "iv": 47.0,
       "iv_ratio": 1.35,
       "above_200ma": false,
@@ -792,7 +792,7 @@
       "strategy": "LEAP",
       "spot": 362.86,
       "expiry": "2028-01-21",
-      "dte": 516,
+      "dte": 515,
       "strike": 290.0,
       "delta": 0.788,
       "mid": 129.05,
@@ -800,7 +800,7 @@
       "intrinsic": 72.86,
       "extrinsic": 56.19,
       "extrinsic_pct": 43.5,
-      "carry_pct": 10.95,
+      "carry_pct": 10.98,
       "iv": 49.6,
       "iv_ratio": 1.38,
       "above_200ma": false,
@@ -822,7 +822,7 @@
       "strategy": "LEAP",
       "spot": 136.97,
       "expiry": "2028-01-21",
-      "dte": 516,
+      "dte": 515,
       "strike": 105.0,
       "delta": 0.788,
       "mid": 56.4,
@@ -830,7 +830,7 @@
       "intrinsic": 31.97,
       "extrinsic": 24.43,
       "extrinsic_pct": 43.3,
-      "carry_pct": 12.62,
+      "carry_pct": 12.64,
       "iv": 63.2,
       "iv_ratio": 0.64,
       "above_200ma": false,
@@ -852,7 +852,7 @@
       "strategy": "LEAP",
       "spot": 473.25,
       "expiry": "2028-01-21",
-      "dte": 516,
+      "dte": 515,
       "strike": 380.0,
       "delta": 0.776,
       "mid": 182.15,
@@ -860,7 +860,7 @@
       "intrinsic": 93.25,
       "extrinsic": 88.9,
       "extrinsic_pct": 48.8,
-      "carry_pct": 13.29,
+      "carry_pct": 13.31,
       "iv": 59.4,
       "iv_ratio": 0.77,
       "above_200ma": true,
@@ -882,7 +882,7 @@
       "strategy": "LEAP",
       "spot": 179.94,
       "expiry": "2028-01-21",
-      "dte": 516,
+      "dte": 515,
       "strike": 145.0,
       "delta": 0.776,
       "mid": 68.9,
@@ -890,7 +890,7 @@
       "intrinsic": 34.94,
       "extrinsic": 33.96,
       "extrinsic_pct": 49.3,
-      "carry_pct": 13.35,
+      "carry_pct": 13.38,
       "iv": 58.7,
       "iv_ratio": 0.57,
       "above_200ma": true,
@@ -912,7 +912,7 @@
       "strategy": "LEAP",
       "spot": 128.48,
       "expiry": "2028-01-21",
-      "dte": 516,
+      "dte": 515,
       "strike": 104.0,
       "delta": 0.775,
       "mid": 48.9,
@@ -920,7 +920,7 @@
       "intrinsic": 24.48,
       "extrinsic": 24.42,
       "extrinsic_pct": 49.9,
-      "carry_pct": 13.44,
+      "carry_pct": 13.47,
       "iv": 58.2,
       "iv_ratio": 1.09,
       "above_200ma": true,
@@ -942,7 +942,7 @@
       "strategy": "LEAP",
       "spot": 18.91,
       "expiry": "2028-01-21",
-      "dte": 516,
+      "dte": 515,
       "strike": 15.0,
       "delta": 0.782,
       "mid": 7.53,
@@ -950,7 +950,7 @@
       "intrinsic": 3.91,
       "extrinsic": 3.62,
       "extrinsic_pct": 48.0,
-      "carry_pct": 13.52,
+      "carry_pct": 13.55,
       "iv": 60.2,
       "iv_ratio": 0.91,
       "above_200ma": false,
@@ -972,7 +972,7 @@
       "strategy": "LEAP",
       "spot": 181.75,
       "expiry": "2028-01-21",
-      "dte": 516,
+      "dte": 515,
       "strike": 145.0,
       "delta": 0.778,
       "mid": 71.88,
@@ -980,7 +980,7 @@
       "intrinsic": 36.75,
       "extrinsic": 35.13,
       "extrinsic_pct": 48.9,
-      "carry_pct": 13.67,
+      "carry_pct": 13.7,
       "iv": 61.4,
       "iv_ratio": 1.34,
       "above_200ma": true,
@@ -1002,7 +1002,7 @@
       "strategy": "LEAP",
       "spot": 261.95,
       "expiry": "2028-01-21",
-      "dte": 516,
+      "dte": 515,
       "strike": 210.0,
       "delta": 0.774,
       "mid": 106.45,
@@ -1010,7 +1010,7 @@
       "intrinsic": 51.95,
       "extrinsic": 54.5,
       "extrinsic_pct": 51.2,
-      "carry_pct": 14.72,
+      "carry_pct": 14.75,
       "iv": 65.5,
       "iv_ratio": 0.74,
       "above_200ma": true,
@@ -1032,7 +1032,7 @@
       "strategy": "LEAP",
       "spot": 87.85,
       "expiry": "2028-01-21",
-      "dte": 516,
+      "dte": 515,
       "strike": 72.5,
       "delta": 0.778,
       "mid": 40.55,
@@ -1040,7 +1040,7 @@
       "intrinsic": 15.35,
       "extrinsic": 25.2,
       "extrinsic_pct": 62.1,
-      "carry_pct": 20.29,
+      "carry_pct": 20.33,
       "iv": 82.5,
       "iv_ratio": 0.61,
       "above_200ma": false,
@@ -1062,7 +1062,7 @@
       "strategy": "LEAP",
       "spot": 201.45,
       "expiry": "2028-01-21",
-      "dte": 516,
+      "dte": 515,
       "strike": 170.0,
       "delta": 0.778,
       "mid": 96.95,
@@ -1070,7 +1070,7 @@
       "intrinsic": 31.45,
       "extrinsic": 65.5,
       "extrinsic_pct": 67.6,
-      "carry_pct": 23.0,
+      "carry_pct": 23.04,
       "iv": 91.0,
       "iv_ratio": 0.79,
       "above_200ma": true,
@@ -1092,7 +1092,7 @@
       "strategy": "LEAP",
       "spot": 219.13,
       "expiry": "2028-01-21",
-      "dte": 516,
+      "dte": 515,
       "strike": 185.0,
       "delta": 0.783,
       "mid": 110.42,
@@ -1100,7 +1100,7 @@
       "intrinsic": 34.13,
       "extrinsic": 76.3,
       "extrinsic_pct": 69.1,
-      "carry_pct": 24.63,
+      "carry_pct": 24.68,
       "iv": 97.4,
       "iv_ratio": 0.56,
       "above_200ma": true,
@@ -1122,7 +1122,7 @@
       "strategy": "LEAP",
       "spot": 41.88,
       "expiry": "2028-01-21",
-      "dte": 516,
+      "dte": 515,
       "strike": 37.0,
       "delta": 0.777,
       "mid": 20.05,
@@ -1130,7 +1130,7 @@
       "intrinsic": 4.88,
       "extrinsic": 15.17,
       "extrinsic_pct": 75.7,
-      "carry_pct": 25.62,
+      "carry_pct": 25.67,
       "iv": 92.2,
       "iv_ratio": 0.71,
       "above_200ma": false,
@@ -1152,7 +1152,7 @@
       "strategy": "LEAP",
       "spot": 10.58,
       "expiry": "2028-01-21",
-      "dte": 516,
+      "dte": 515,
       "strike": 10.0,
       "delta": 0.754,
       "mid": 5.05,
@@ -1160,7 +1160,7 @@
       "intrinsic": 0.58,
       "extrinsic": 4.47,
       "extrinsic_pct": 88.5,
-      "carry_pct": 29.89,
+      "carry_pct": 29.94,
       "iv": 100.0,
       "iv_ratio": 0.99,
       "above_200ma": false,
@@ -1182,7 +1182,7 @@
       "strategy": "LEAP",
       "spot": 12.97,
       "expiry": "2028-01-21",
-      "dte": 516,
+      "dte": 515,
       "strike": 12.0,
       "delta": 0.773,
       "mid": 6.47,
@@ -1190,7 +1190,7 @@
       "intrinsic": 0.97,
       "extrinsic": 5.5,
       "extrinsic_pct": 85.0,
-      "carry_pct": 30.02,
+      "carry_pct": 30.08,
       "iv": 102.5,
       "iv_ratio": 1.02,
       "above_200ma": true,
@@ -1727,7 +1727,7 @@
     "vix_label": "normal",
     "fng": 55,
     "fng_label": "Greed",
-    "btc_fng": 66,
+    "btc_fng": 73,
     "btc_fng_label": "Greed",
     "ten_year": 4.69,
     "two_year": 4.19,
@@ -1768,29 +1768,29 @@
     },
     {
       "label": "DXY",
-      "price": 98.80000305175781,
-      "pct": -0.10111069017013641,
+      "price": 98.84400177001953,
+      "pct": 0.04453311427397022,
       "prefix": "",
       "is_yield": false
     },
     {
       "label": "Crude Oil",
-      "price": 87.05999755859375,
-      "pct": -0.876698458850178,
+      "price": 85.58999633789062,
+      "pct": -1.6884921455617707,
       "prefix": "$",
       "is_yield": false
     },
     {
       "label": "Gold",
-      "price": 4680.60009765625,
-      "pct": 3.637940351041835,
+      "price": 4694.2998046875,
+      "pct": 1.5181268906101497,
       "prefix": "$",
       "is_yield": false
     },
     {
       "label": "Bitcoin",
-      "price": 77362.640625,
-      "pct": 0.3622394854924327,
+      "price": 77213.390625,
+      "pct": 0.1686180666500059,
       "prefix": "$",
       "is_yield": false
     },
@@ -1879,11 +1879,1605 @@
     {
       "label": "Digital Assets",
       "ticker": "BTC",
-      "pct": 0.3622394854924327,
-      "price": 77362.640625
+      "pct": 0.1686180666500059,
+      "price": 77213.390625
     }
   ],
-  "generated_at": "2026-08-23T16:34:25+00:00",
+  "fundamentals": {
+    "TSLA": {
+      "ok": true,
+      "error": null,
+      "ticker": "TSLA",
+      "company": "Tesla, Inc.",
+      "cik": "0001318605",
+      "source": "SEC EDGAR \u2014 10-K / 10-Q filings",
+      "profile": {
+        "summary": "Tesla, Inc. designs, develops, manufactures, leases, and sells electric vehicles, and energy generation and storage systems in the United States, China, and internationally. The company operates in two segments, Automotive; and Energy Generation and Storage. The company offers electric vehicles, as well as sells automotive regulatory credits; and non-warranty maintenance services and collision, automotive insurance services, as well as part sales and retail merchandise sale. It also provides sedans and sport utility vehicles through direct and used vehicle sales, a network of Tesla Superchargers, and in-app upgrades; purchase financing and leasing services; services for electric vehicles through its company-owned service locations and Tesla mobile service technicians; and vehicle limited warranties and extended service plans. In addition, the company engages in the design, manufacture, installation, sale, and leasing of solar energy generation and energy storage products, and related services to residential, commercial, and industrial customers and utilities through its website, stores, and galleries, as well as through a network of channel partners. Further, it provides services and repairs to its energy product customers, including under warranty and extended service plans; and various financing options to its residential customers; lithium-ion battery energy storage products, such as Powerwall and Megapack; energy generation products, including solar panels and solar roof; self-driving development and artificial intelligence software, vehicle control and infotainment software, and battery and powertrain. The company was formerly known as Tesla Motors, Inc. and changed its name to Tesla, Inc. in February 2017. Tesla, Inc. was incorporated in 2003 and is headquartered in Austin, Texas.",
+        "sector": "Consumer Cyclical",
+        "industry": "Auto Manufacturers",
+        "country": "United States",
+        "employees": 134785,
+        "website": "https://www.tesla.com",
+        "sic": "Motor Vehicles & Passenger Car Bodies",
+        "summary_short": "Tesla, Inc. designs, develops, manufactures, leases, and sells electric vehicles, and energy generation and storage systems in the United States, China, and internationally. The company operates in two segments, Automotive; and Energy Generation and Storage.",
+        "summary_ai": false
+      },
+      "metrics": {
+        "revenue": 94827000000.0,
+        "revenue_prev": 97690000000.0,
+        "net_income": 3794000000.0,
+        "net_income_prev": 7091000000.0,
+        "rev_growth": -0.029306991503736307,
+        "ni_growth": -0.46495557749259625,
+        "gross_margin": 0.18026511436616155,
+        "op_margin": 0.04592573845001951,
+        "net_margin": 0.04000970187815706,
+        "roe": 0.04368048999516452,
+        "fcf": 6220000000.0,
+        "fcf_margin": 0.06559313275754795,
+        "debt_to_equity": 0.00746552994542817,
+        "current_ratio": 1.9409456598447423,
+        "interest_coverage": 27.916666666666668,
+        "eps": 1.08,
+        "shares": 3949000000.0,
+        "share_change": 0.008576329331046312,
+        "capex": 8527000000.0,
+        "rnd": 6411000000.0,
+        "market_cap": 1432934140000.0,
+        "pe": 335.98148148148147,
+        "fcf_yield": 0.004340743811156596,
+        "peg": null
+      },
+      "groups": {
+        "Valuation": {
+          "verdict": "\ud83d\udd34"
+        },
+        "Quality": {
+          "verdict": "\ud83d\udfe1"
+        },
+        "Health": {
+          "verdict": "\ud83d\udfe2"
+        }
+      },
+      "flags": [
+        {
+          "sev": "\ud83d\udfe1",
+          "text": "Revenue shrinking \u2014 -3% YoY"
+        },
+        {
+          "sev": "\ud83d\udfe1",
+          "text": "Rich valuation \u2014 P/E 336"
+        }
+      ]
+    },
+    "SOFI": {
+      "ok": true,
+      "error": null,
+      "ticker": "SOFI",
+      "company": "SoFi Technologies, Inc.",
+      "cik": "0001818874",
+      "source": "SEC EDGAR \u2014 10-K / 10-Q filings",
+      "profile": {
+        "summary": "SoFi Technologies, Inc. provides various financial services in the United States, Latin America, Canada, and Hong Kong. The company operates through three segments: Lending, Technology Platform, and Financial Services. It offers lending and financial services and products that allows its members to borrow, save, spend, invest, and protect money; and personal loans, student loans, home loans, and related services. The company also operates Galileo, a technology platform that offers services to financial and non-financial institution; and Technisys, a cloud-native digital and core banking platform that provides software licenses and associated services, including implementation and maintenance. In addition, it provides SoFi Money offers checking and savings accounts, and cash management products; SoFi Invest, a mobile-first investment platform that offers access to trading and advisory solutions, such as investing and robo-advisory; and SoFI Crypto, a new digital asset trading platform. Further, the company offers SoFi Credit Card that provides cash back rewards on every purchase; Sofi Relay, a personal finance management product that allows to track all of their financial accounts comprising credit score and spending behaviors; SoFi Protect which offers insurance product; SoFi Travel, an application that manages travel search and booking experience; SoFi At Work provides financial benefits to employees, including student loan payments made on their employees' behalf; Lantern Credit, a financial services marketplace platform for seeking alternative products and provide product comparisons; and other lending as a service that offers pre-qualified borrower referrals and offers loans to third-party partner. The company was founded in 2011 and is based in San Francisco, California.",
+        "sector": "Financial Services",
+        "industry": "Credit Services",
+        "country": "United States",
+        "employees": 6100,
+        "website": "https://www.sofi.com",
+        "sic": "Finance Services",
+        "summary_short": "SoFi Technologies, Inc. provides various financial services in the United States, Latin America, Canada, and Hong Kong. The company operates through three segments: Lending, Technology Platform, and Financial Services.",
+        "summary_ai": false
+      },
+      "metrics": {
+        "revenue": 619353000.0,
+        "revenue_prev": 503123000.0,
+        "net_income": 481320000.0,
+        "net_income_prev": 498665000.0,
+        "rev_growth": 0.2310170673970381,
+        "ni_growth": -0.03478287026360382,
+        "gross_margin": null,
+        "op_margin": -0.0010714584413089143,
+        "net_margin": 0.7771335571152477,
+        "roe": 0.04345523073877052,
+        "fcf": -3984902000.0,
+        "fcf_margin": -6.433975455031299,
+        "debt_to_equity": 0.49528435991786735,
+        "current_ratio": 0.15027735200334175,
+        "interest_coverage": -0.0008407301409935299,
+        "eps": 0.39,
+        "shares": 1290312404.0,
+        "share_change": 0.13653383451819973,
+        "capex": 242444000.0,
+        "rnd": 648332000.0,
+        "market_cap": 24399807559.64,
+        "pe": 48.48717948717949,
+        "fcf_yield": -0.16331694380210898,
+        "peg": null
+      },
+      "groups": {
+        "Valuation": {
+          "verdict": "\ud83d\udd34"
+        },
+        "Quality": {
+          "verdict": "\ud83d\udfe1"
+        },
+        "Health": {
+          "verdict": "\ud83d\udd34"
+        }
+      },
+      "flags": [
+        {
+          "sev": "\ud83d\udd34",
+          "text": "Burning cash \u2014 negative free cash flow"
+        },
+        {
+          "sev": "\ud83d\udd34",
+          "text": "Liquidity tight \u2014 current ratio 0.15"
+        },
+        {
+          "sev": "\ud83d\udd34",
+          "text": "Thin interest coverage \u2014 -0.0\u00d7"
+        },
+        {
+          "sev": "\ud83d\udfe1",
+          "text": "Dilution \u2014 shares +14% YoY"
+        },
+        {
+          "sev": "\ud83d\udfe1",
+          "text": "Rich valuation \u2014 P/E 48"
+        }
+      ]
+    },
+    "NVDA": {
+      "ok": true,
+      "error": null,
+      "ticker": "NVDA",
+      "company": "NVIDIA CORP",
+      "cik": "0001045810",
+      "source": "SEC EDGAR \u2014 10-K / 10-Q filings",
+      "profile": {
+        "summary": "NVIDIA Corporation operates as a data center scale AI infrastructure company in the United States, Taiwan, China, Hong Kong, Europe, and internationally. It operates through Compute & Networking, and Graphics segments. The Compute & Networking segment provides data center accelerated computing and networking platforms and artificial intelligence solutions and software, and automotive platforms and autonomous and electric vehicle solutions, including software. The Graphics segment offers GeForce GPUs for gaming and PCs; Quadro/NVIDIA RTX GPUs for enterprise workstation graphics. The company's products are used in gaming, professional visualization, data center, and automotive markets. It sells its products to original equipment manufacturers, original device manufacturers, system integrators and distributors, independent software vendors, cloud service providers, add-in board manufacturers, distributors, automotive manufacturers and tier-1 automotive suppliers, and other ecosystem participants. NVIDIA Corporation was incorporated in 1993 and is headquartered in Santa Clara, California.",
+        "sector": "Technology",
+        "industry": "Semiconductors",
+        "country": "United States",
+        "employees": 42000,
+        "website": "https://www.nvidia.com",
+        "sic": "Semiconductors & Related Devices",
+        "summary_short": "NVIDIA Corporation operates as a data center scale AI infrastructure company in the United States, Taiwan, China, Hong Kong, Europe, and internationally. It operates through Compute & Networking, and Graphics segments.",
+        "summary_ai": false
+      },
+      "metrics": {
+        "revenue": 26914000000.0,
+        "revenue_prev": 16675000000.0,
+        "net_income": 120067000000.0,
+        "net_income_prev": 72880000000.0,
+        "rev_growth": 0.6140329835082459,
+        "ni_growth": 0.6474615806805708,
+        "gross_margin": 5.701976666418964,
+        "op_margin": 4.844579029501375,
+        "net_margin": 4.46113546852939,
+        "roe": 0.6142351412464062,
+        "fcf": 102579265000.0,
+        "fcf_margin": 3.811371962547373,
+        "debt_to_equity": 0.04333057081760234,
+        "current_ratio": 3.440775681341719,
+        "interest_coverage": 507.3424124513619,
+        "eps": 4.9,
+        "shares": 24304000000.0,
+        "share_change": -0.011691662635058862,
+        "capex": 138735000.0,
+        "rnd": 18497000000.0,
+        "market_cap": 5218554880000.0,
+        "pe": 43.820408163265306,
+        "fcf_yield": 0.019656641993578115,
+        "peg": 0.6768032184582142
+      },
+      "groups": {
+        "Valuation": {
+          "verdict": "\ud83d\udfe1"
+        },
+        "Quality": {
+          "verdict": "\ud83d\udfe2"
+        },
+        "Health": {
+          "verdict": "\ud83d\udfe2"
+        }
+      },
+      "flags": [
+        {
+          "sev": "\ud83d\udfe1",
+          "text": "Rich valuation \u2014 P/E 44"
+        }
+      ]
+    },
+    "AMZN": {
+      "ok": true,
+      "error": null,
+      "ticker": "AMZN",
+      "company": "AMAZON COM INC",
+      "cik": "0001018724",
+      "source": "SEC EDGAR \u2014 10-K / 10-Q filings",
+      "profile": {
+        "summary": "Amazon.com, Inc. engages in the retail sale of consumer products, advertising, and subscriptions service through online and physical stores in North America and internationally. The company operates through three segments: North America, International, and Amazon Web Services (AWS). It also manufactures and sells electronic devices, including Kindle, fire tablets, fire TVs, echo, ring, blink, and eero; and develops and produces media content. In addition, the company offers programs that enable sellers to sell their products in its stores; and programs that allow authors, independent publishers, musicians, filmmakers, Twitch streamers, skill and app developers, and others to publish and sell content. Further, it provides compute, storage, Artificial intelligence, database, analytics, machine learning, and other services, as well as advertising services through programs, such as sponsored ads, display, and video advertising. Additionally, the company offers Amazon Prime, a membership program. The company's products offered through its stores include merchandise and content purchased for resale and products offered by third-party sellers. It serves consumers, sellers, developers, enterprises, content creators, advertisers, and employees. The company was incorporated in 1994 and is headquartered in Seattle, Washington.",
+        "sector": "Consumer Cyclical",
+        "industry": "Internet Retail",
+        "country": "United States",
+        "employees": 1595000,
+        "website": "https://www.amazon.com",
+        "sic": "Retail-Catalog & Mail-Order Houses",
+        "summary_short": "Amazon.com, Inc. engages in the retail sale of consumer products, advertising, and subscriptions service through online and physical stores in North America and internationally. The company operates through three segments: North America, International, and Amazon Web Services (AWS).",
+        "summary_ai": false
+      },
+      "metrics": {
+        "revenue": 716924000000.0,
+        "revenue_prev": 637959000000.0,
+        "net_income": 77670000000.0,
+        "net_income_prev": 59248000000.0,
+        "rev_growth": 0.12377754683294695,
+        "ni_growth": 0.3109303267620848,
+        "gross_margin": 0.0077149042297370435,
+        "op_margin": 0.11155296795755199,
+        "net_margin": 0.10833784334183261,
+        "roe": 0.1408034516514992,
+        "fcf": 132777000000.0,
+        "fcf_margin": 0.18520373149734143,
+        "debt_to_equity": 0.23970124360973133,
+        "current_ratio": 1.0331158765552857,
+        "interest_coverage": 25.133563796354494,
+        "eps": 7.17,
+        "shares": 10783000000.0,
+        "share_change": 0.009887137393899823,
+        "capex": 6737000000.0,
+        "rnd": null,
+        "market_cap": 2788807290000.0,
+        "pe": 36.07112970711297,
+        "fcf_yield": 0.04761067588861617,
+        "peg": 1.1601032965405653
+      },
+      "groups": {
+        "Valuation": {
+          "verdict": "\ud83d\udfe2"
+        },
+        "Quality": {
+          "verdict": "\ud83d\udfe2"
+        },
+        "Health": {
+          "verdict": "\ud83d\udfe1"
+        }
+      },
+      "flags": []
+    },
+    "MSFT": {
+      "ok": true,
+      "error": null,
+      "ticker": "MSFT",
+      "company": "MICROSOFT CORP",
+      "cik": "0000789019",
+      "source": "SEC EDGAR \u2014 10-K / 10-Q filings",
+      "profile": {
+        "summary": "Microsoft Corporation, a technology company, develops and supports a portfolio of technology solutions for individuals and businesses worldwide. Its products include operating systems, server applications, business solution applications, software development tools, desktop and server management tools, and video games; and devices, such as PCs, tablets, gaming and entertainment consoles, other intelligent devices, and related accessories. The company's Productivity and Business Processes segment offers Microsoft 365 Commercial, Enterprise Mobility + Security, Power BI, Exchange, SharePoint, Microsoft Teams, Microsoft 365 Security and Compliance, Microsoft 365 Copilot, and Windows Commercial on-premises and Office licensed on-premises. This segment also provides Microsoft 365 Consumer products and cloud services; LinkedIn, including talent solutions, marketing solutions, subscriptions, and sales solutions; Dynamics 365, a set of cloud-based applications; and on-premises ERP and CRM applications. Its Intelligent Cloud segment offers server products and cloud services; cloud and AI consumption-based services, GitHub cloud services, health and life sciences cloud services, as well as virtual desktop offerings, and other cloud services; SQL Server, Windows Server, Visual Studio, System Center, and related client access licenses; and enterprise support services, industry solutions, Microsoft partner network, and learning experience. The company's More Personal Computing segment provides Windows OEM licensing and devices comprising Surface and PC accessories; XBOX hardware, and XBOX first- and third-party content and services; XBOX Game Pass and other subscriptions; XBOX Cloud Gaming, advertising, and other cloud services; and search advertising consisting of Bing, Copilot, Microsoft News, Microsoft Edge, and third-party affiliates. It sells its products through partners and retail networks. The company was founded in 1975 and is headquartered in Redmond, Washington.",
+        "sector": "Technology",
+        "industry": "Software - Infrastructure",
+        "country": "United States",
+        "employees": 223000,
+        "website": "https://www.microsoft.com",
+        "sic": "Services-Prepackaged Software",
+        "summary_short": "Microsoft Corporation, a technology company, develops and supports a portfolio of technology solutions for individuals and businesses worldwide. Its products include operating systems, server applications, business solution applications, software development tools, desktop and server management tools, and video games; and devices, such as PCs, tablets, gaming and entertainment consoles, other intelligent devices, and related accessories.",
+        "summary_ai": false
+      },
+      "metrics": {
+        "revenue": 331839000000.0,
+        "revenue_prev": 281724000000.0,
+        "net_income": 133749000000.0,
+        "net_income_prev": 101832000000.0,
+        "rev_growth": 0.1778868679984666,
+        "ni_growth": 0.3134279990572708,
+        "gross_margin": 0.6794409337058032,
+        "op_margin": 0.4678081840892722,
+        "net_margin": 0.4030538905915218,
+        "roe": 0.30233483352811,
+        "fcf": 66987000000.0,
+        "fcf_margin": 0.20186596512164032,
+        "debt_to_equity": 0.09108314665666034,
+        "current_ratio": 1.2303272619576484,
+        "interest_coverage": 52.891652470187395,
+        "eps": 17.95,
+        "shares": 7427000000.0,
+        "share_change": -0.001607501674480911,
+        "capex": 115948000000.0,
+        "rnd": 35562000000.0,
+        "market_cap": 3589023480000.0,
+        "pe": 26.921448467966574,
+        "fcf_yield": 0.018664408403368818,
+        "peg": 0.8589356582354144
+      },
+      "groups": {
+        "Valuation": {
+          "verdict": "\ud83d\udfe1"
+        },
+        "Quality": {
+          "verdict": "\ud83d\udfe2"
+        },
+        "Health": {
+          "verdict": "\ud83d\udfe1"
+        }
+      },
+      "flags": []
+    },
+    "CEG": {
+      "ok": true,
+      "error": null,
+      "ticker": "CEG",
+      "company": "Constellation Energy Corp",
+      "cik": "0001868275",
+      "source": "SEC EDGAR \u2014 10-K / 10-Q filings",
+      "profile": {
+        "summary": "Constellation Energy Corporation produces and sells energy products and services in the United States. The company operates through five segments: Mid-Atlantic, Midwest, New York, ERCOT, and Other Power Regions. It offers electricity, natural gas, energy-related products, and sustainable solutions. The company has approximately 31,676 megawatts of generating capacity consisting of nuclear, wind, solar, natural gas, and hydroelectric assets. It serves distribution utilities, municipalities, cooperatives, and commercial, industrial, public sector, and residential customers. The company was incorporated in 2021 and is headquartered in Baltimore, Maryland.",
+        "sector": "Utilities",
+        "industry": "Utilities - Independent Power Producers",
+        "country": "United States",
+        "employees": 15291,
+        "website": "https://www.constellationenergy.com",
+        "sic": "Electric Services",
+        "summary_short": "Constellation Energy Corporation produces and sells energy products and services in the United States. The company operates through five segments: Mid-Atlantic, Midwest, New York, ERCOT, and Other Power Regions. It offers electricity, natural gas, energy-related products, and sustainable solutions.",
+        "summary_ai": false
+      },
+      "metrics": {
+        "revenue": 22663000000.0,
+        "revenue_prev": 18964000000.0,
+        "net_income": 2319000000.0,
+        "net_income_prev": 3749000000.0,
+        "rev_growth": 0.1950537861210715,
+        "ni_growth": -0.3814350493464924,
+        "gross_margin": null,
+        "op_margin": 0.1361690861757049,
+        "net_margin": 0.1023253761637912,
+        "roe": 0.07252087437845951,
+        "fcf": 1288000000.0,
+        "fcf_margin": 0.056832722940475665,
+        "debt_to_equity": 0.6090002189073397,
+        "current_ratio": 1.4552639656230817,
+        "interest_coverage": 7.1600928074245935,
+        "eps": 7.4,
+        "shares": 355000000.0,
+        "share_change": -0.0031746031746031746,
+        "capex": 2949000000.0,
+        "rnd": null,
+        "market_cap": 96872400000.0,
+        "pe": 36.87567567567567,
+        "fcf_yield": 0.013295840714176587,
+        "peg": null
+      },
+      "groups": {
+        "Valuation": {
+          "verdict": "\ud83d\udfe1"
+        },
+        "Quality": {
+          "verdict": "\ud83d\udfe1"
+        },
+        "Health": {
+          "verdict": "\ud83d\udfe1"
+        }
+      },
+      "flags": []
+    },
+    "VRT": {
+      "ok": true,
+      "error": null,
+      "ticker": "VRT",
+      "company": "Vertiv Holdings Co",
+      "cik": "0001674101",
+      "source": "SEC EDGAR \u2014 10-K / 10-Q filings",
+      "profile": {
+        "summary": "Vertiv Holdings Co designs, manufactures, and services critical digital infrastructure technologies and life cycle services for data centers, communication networks, and commercial and industrial environments in the Americas, the Asia Pacific, Europe, the Middle East, and Africa. The company offers AC and DC power management products, low/medium voltage switchgear, busbar, thermal management products, air cooled and liquid cooled thermal management products, integrated modular solutions, racks, single phase UPS, rack power distribution, rack thermal systems, configurable integrated solutions, energy storage solutions, hardware, and software infrastructure that are integral to the technologies used for various services, including artificial intelligence, e-commerce, online banking, file sharing, video on-demand, energy storage, wireless communications, Internet of Things, and online gaming. It also provides lifecycle management services, predictive analytics, and professional services for deploying, maintaining, and optimizing its products and their related systems; and preventative maintenance, acceptance testing, engineering and consulting, fluid management, performance assessments, remote monitoring, training, spare parts, and critical digital infrastructure software services. The company offers its products primarily under the Vertiv, Liebert, NetSure, Geist, Energy Labs, ERS, Alb\u00e9r, and Avocent brands. It serves through a network of direct sales professionals, independent sales representatives, channel partners, and original equipment manufacturers. The company is headquartered in Westerville, Ohio.",
+        "sector": "Industrials",
+        "industry": "Electrical Equipment & Parts",
+        "country": "United States",
+        "employees": 34000,
+        "website": "https://www.vertiv.com",
+        "sic": "Electronic Components, NEC",
+        "summary_short": "Vertiv Holdings Co designs, manufactures, and services critical digital infrastructure technologies and life cycle services for data centers, communication networks, and commercial and industrial environments in the Americas, the Asia Pacific, Europe, the Middle East, and Africa.",
+        "summary_ai": false
+      },
+      "metrics": {
+        "revenue": 10229900000.0,
+        "revenue_prev": 8011800000.0,
+        "net_income": 1332800000.0,
+        "net_income_prev": 495800000.0,
+        "rev_growth": 0.27685414014328863,
+        "ni_growth": 1.6881807180314643,
+        "gross_margin": null,
+        "op_margin": 0.1788580533534052,
+        "net_margin": 0.13028475351665217,
+        "roe": 0.2801412476879099,
+        "fcf": 1893800000.0,
+        "fcf_margin": 0.18512399925707973,
+        "debt_to_equity": 0.6179165966033294,
+        "current_ratio": 1.3785586083114731,
+        "interest_coverage": 21.250871080139373,
+        "eps": 3.41,
+        "shares": 384936985.0,
+        "share_change": 0.011202395263731508,
+        "capex": 220000000.0,
+        "rnd": 441700000.0,
+        "market_cap": 100834243220.75,
+        "pe": 76.81818181818181,
+        "fcf_yield": 0.018781318126760014,
+        "peg": 0.45503529922884756
+      },
+      "groups": {
+        "Valuation": {
+          "verdict": "\ud83d\udd34"
+        },
+        "Quality": {
+          "verdict": "\ud83d\udfe2"
+        },
+        "Health": {
+          "verdict": "\ud83d\udfe1"
+        }
+      },
+      "flags": [
+        {
+          "sev": "\ud83d\udfe1",
+          "text": "Rich valuation \u2014 P/E 77"
+        }
+      ]
+    },
+    "CMG": {
+      "ok": true,
+      "error": null,
+      "ticker": "CMG",
+      "company": "CHIPOTLE MEXICAN GRILL INC",
+      "cik": "0001058090",
+      "source": "SEC EDGAR \u2014 10-K / 10-Q filings",
+      "profile": {
+        "summary": "Chipotle Mexican Grill, Inc., together with its subsidiaries, owns and operates Chipotle Mexican Grill restaurants. The company sells food and beverages, such as burritos, burrito bowls, quesadillas, tacos, and salads, as well as kids' meals, chips, and sides. It also offers Mexican-inspired meals using responsibly sourced meats, such as chicken, beef, and pork under the Responsibly Raised brand. In addition, the company provides digital ordering through its website, mobile app, and third-party delivery platforms. It operates in the United States, Canada, France, Germany, and the United Kingdom. Chipotle Mexican Grill, Inc. was founded in 1993 and is headquartered in Newport Beach, California.",
+        "sector": "Consumer Cyclical",
+        "industry": "Restaurants",
+        "country": "United States",
+        "employees": 140000,
+        "website": "https://www.chipotle.com",
+        "sic": "Retail-Eating  Places",
+        "summary_short": "Chipotle Mexican Grill, Inc., together with its subsidiaries, owns and operates Chipotle Mexican Grill restaurants. The company sells food and beverages, such as burritos, burrito bowls, quesadillas, tacos, and salads, as well as kids' meals, chips, and sides. It also offers Mexican-inspired meals using responsibly sourced meats, such as chicken, beef, and pork under the Responsibly Raised brand.",
+        "summary_ai": false
+      },
+      "metrics": {
+        "revenue": 11925601000.0,
+        "revenue_prev": 11313853000.0,
+        "net_income": 1535761000.0,
+        "net_income_prev": 1534110000.0,
+        "rev_growth": 0.05407070429499128,
+        "ni_growth": 0.0010761940147707792,
+        "gross_margin": null,
+        "op_margin": 0.16232288838105519,
+        "net_margin": 0.12877849929743582,
+        "roe": 0.6981395050711636,
+        "fcf": 1447590000.0,
+        "fcf_margin": 0.12138507736423515,
+        "debt_to_equity": 0.0,
+        "current_ratio": 0.7153473552939745,
+        "interest_coverage": null,
+        "eps": 1.14,
+        "shares": 1265418000.0,
+        "share_change": -0.024655026497306682,
+        "capex": 666336000.0,
+        "rnd": null,
+        "market_cap": 46693924200.0,
+        "pe": 32.36842105263158,
+        "fcf_yield": 0.031001677944215277,
+        "peg": 300.7675252637955
+      },
+      "groups": {
+        "Valuation": {
+          "verdict": "\ud83d\udfe1"
+        },
+        "Quality": {
+          "verdict": "\ud83d\udfe2"
+        },
+        "Health": {
+          "verdict": "\ud83d\udd34"
+        }
+      },
+      "flags": [
+        {
+          "sev": "\ud83d\udd34",
+          "text": "Liquidity tight \u2014 current ratio 0.72"
+        }
+      ]
+    },
+    "GLD": {
+      "ok": true,
+      "error": null,
+      "ticker": "GLD",
+      "company": "SPDR GOLD TRUST",
+      "cik": "0001222333",
+      "source": "SEC EDGAR \u2014 10-K / 10-Q filings",
+      "profile": {
+        "summary": "The Trust holds gold bars and from time to time, issues Baskets in exchange for deposits of gold and distributes gold in connection with redemptions of Baskets. The investment objective of the Trust is for the Shares to reflect the performance of the price of gold bullion, less the Trust\u2019s expenses. The Sponsor believes that, for many investors, the Shares represent a cost-effective investment in gold.",
+        "sic": "Commodity Contracts Brokers & Dealers",
+        "summary_short": "The Trust holds gold bars and from time to time, issues Baskets in exchange for deposits of gold and distributes gold in connection with redemptions of Baskets. The investment objective of the Trust is for the Shares to reflect the performance of the price of gold bullion, less the Trust\u2019s expenses. The Sponsor believes that, for many investors, the Shares represent a cost-effective investment in gold.",
+        "summary_ai": false
+      },
+      "metrics": {
+        "revenue": null,
+        "revenue_prev": null,
+        "net_income": 35553539000.0,
+        "net_income_prev": 5055515000.0,
+        "rev_growth": null,
+        "ni_growth": 6.032624569405886,
+        "gross_margin": null,
+        "op_margin": null,
+        "net_margin": null,
+        "roe": null,
+        "fcf": null,
+        "fcf_margin": null,
+        "debt_to_equity": null,
+        "current_ratio": null,
+        "interest_coverage": null,
+        "eps": 111.13,
+        "shares": 257300000.0,
+        "share_change": null,
+        "capex": null,
+        "rnd": null,
+        "market_cap": 108930528000.0,
+        "pe": 3.80959236929722,
+        "fcf_yield": null,
+        "peg": 0.006314983346746541
+      },
+      "groups": {
+        "Valuation": {
+          "verdict": "\ud83d\udfe2"
+        },
+        "Quality": {
+          "verdict": "\u26aa"
+        },
+        "Health": {
+          "verdict": "\u26aa"
+        }
+      },
+      "flags": []
+    },
+    "SLV": {
+      "ok": true,
+      "error": null,
+      "ticker": "SLV",
+      "company": "iShares Silver Trust",
+      "cik": "0001330568",
+      "source": "SEC EDGAR \u2014 10-K / 10-Q filings",
+      "profile": {
+        "summary": "The Trust seeks to reflect such performance before payment of the Trust's expenses and liabilities. It is not actively managed. The Trust does not engage in any activities designed to obtain a profit from, or to ameliorate losses caused by, changes in the price of silver.",
+        "sic": "Commodity Contracts Brokers & Dealers",
+        "summary_short": "The Trust seeks to reflect such performance before payment of the Trust's expenses and liabilities. It is not actively managed. The Trust does not engage in any activities designed to obtain a profit from, or to ameliorate losses caused by, changes in the price of silver.",
+        "summary_ai": false
+      },
+      "metrics": {
+        "revenue": -1914970000.0,
+        "revenue_prev": 438796000.0,
+        "net_income": 21306921615.0,
+        "net_income_prev": 2165540895.0,
+        "rev_growth": -5.364146437068706,
+        "ni_growth": 8.839076077572757,
+        "gross_margin": null,
+        "op_margin": 0.04989439886786738,
+        "net_margin": -11.126504130613013,
+        "roe": 4.851364592763478,
+        "fcf": null,
+        "fcf_margin": null,
+        "debt_to_equity": null,
+        "current_ratio": null,
+        "interest_coverage": null,
+        "eps": 40.9,
+        "shares": 538200000.0,
+        "share_change": null,
+        "capex": null,
+        "rnd": null,
+        "market_cap": 33755904000.0,
+        "pe": 1.5334963325183375,
+        "fcf_yield": null,
+        "peg": 0.0017349056836486027
+      },
+      "groups": {
+        "Valuation": {
+          "verdict": "\ud83d\udfe2"
+        },
+        "Quality": {
+          "verdict": "\ud83d\udd34"
+        },
+        "Health": {
+          "verdict": "\u26aa"
+        }
+      },
+      "flags": [
+        {
+          "sev": "\ud83d\udd34",
+          "text": "Unprofitable \u2014 negative net margin"
+        },
+        {
+          "sev": "\ud83d\udfe1",
+          "text": "Revenue shrinking \u2014 -536% YoY"
+        }
+      ]
+    },
+    "PLTR": {
+      "ok": true,
+      "error": null,
+      "ticker": "PLTR",
+      "company": "Palantir Technologies Inc.",
+      "cik": "0001321655",
+      "source": "SEC EDGAR \u2014 10-K / 10-Q filings",
+      "profile": {
+        "summary": "Palantir Technologies Inc. builds and deploys software platforms for the intelligence community to assist in counterterrorism investigations and operations in the United States, the United Kingdom, and internationally. It provides Palantir Gotham integrates with other platforms for defense offerings which enables users to see, understand, and act in the modern battlespace; operations centers to the tactical edge; integrating data from domains and sensors in near real-time; and situational awareness and accelerating operational decision-making, as well as facilitates the hand-off between analysts and operational users, helping operators plan and execute real-world responses to threats that have been identified within the platform. The company also offers Palantir Foundry, a platform that helps organizations operate by creating a central operating system for their data; and allows individual users to integrate and analyze the data they need in one place. In addition, it provides Palantir Apollo, a software that delivers software and updates across the business, as well as enables customers to deploy their software virtually in any environment; and Palantir Artificial Intelligence Platform that provides unified access to open-source, self-hosted, and commercial large language models (LLMs) that can transform structured and unstructured data into LLM-understandable objects and can turn organizations' actions and processes into tools for humans and LLM-driven agents. The company also has a strategic partnership with Ondas Inc. to develop and deploy AI-enabled operational capabilities to scale stratospheric, aerial, and land-based ISR missions. The company has a strategic collaboration with NVIDIA to deliver an intelligent engine for running NVIDIA AI and Nemotron open models in sovereign environments. The company was incorporated in 2003 and is headquartered in Aventura, Florida.",
+        "sector": "Technology",
+        "industry": "Software - Infrastructure",
+        "country": "United States",
+        "employees": 4401,
+        "website": "https://www.palantir.com",
+        "sic": "Services-Prepackaged Software",
+        "summary_short": "Palantir Technologies Inc. builds and deploys software platforms for the intelligence community to assist in counterterrorism investigations and operations in the United States, the United Kingdom, and internationally.",
+        "summary_ai": false
+      },
+      "metrics": {
+        "revenue": 4475446000.0,
+        "revenue_prev": 2865507000.0,
+        "net_income": 1625033000.0,
+        "net_income_prev": 462190000.0,
+        "rev_growth": 0.5618339093221548,
+        "ni_growth": 2.5159414959215907,
+        "gross_margin": 0.8236651721415028,
+        "op_margin": 0.3159495165398041,
+        "net_margin": 0.3630996776634105,
+        "roe": 0.1662574939683006,
+        "fcf": 2100591000.0,
+        "fcf_margin": 0.4693590314797676,
+        "debt_to_equity": 0.0,
+        "current_ratio": 7.228212495327504,
+        "interest_coverage": 407.4971181556196,
+        "eps": 0.63,
+        "shares": 2402897000.0,
+        "share_change": 0.04666972414924323,
+        "capex": 33882000.0,
+        "rnd": 557677000.0,
+        "market_cap": 432377286180.0,
+        "pe": 285.6190476190476,
+        "fcf_yield": 0.004858236237519464,
+        "peg": 1.1352372385528193
+      },
+      "groups": {
+        "Valuation": {
+          "verdict": "\ud83d\udd34"
+        },
+        "Quality": {
+          "verdict": "\ud83d\udfe2"
+        },
+        "Health": {
+          "verdict": "\ud83d\udfe2"
+        }
+      },
+      "flags": [
+        {
+          "sev": "\ud83d\udfe1",
+          "text": "Rich valuation \u2014 P/E 286"
+        }
+      ]
+    },
+    "WMT": {
+      "ok": true,
+      "error": null,
+      "ticker": "WMT",
+      "company": "Walmart Inc.",
+      "cik": "0000104169",
+      "source": "SEC EDGAR \u2014 10-K / 10-Q filings",
+      "profile": {
+        "summary": "Walmart Inc. engages in the operation of retail and wholesale stores and clubs, ecommerce websites, and mobile applications worldwide. The company operates through three segments: Walmart U.S., Walmart International, and Sam's Club U.S. It operates supercenters, supermarkets, warehouse clubs, cash and carry stores, and discount stores under Walmart and Walmart Neighborhood Market brands; membership-only warehouse clubs; and ecommerce websites, such as walmart.com.mx, walmart.ca, flipkart.com, PhonePe and other sites. It offers grocery items, including dry grocery, snacks, dairy, meat, produce, deli and bakery, frozen foods, alcoholic and nonalcoholic beverages, as well as consumables, such as health and beauty aids, pet supplies, household chemicals, paper goods, and baby products; and fuel and other categories. In addition, it is involved in the provision of health and wellness products covering pharmacy, optical and hearing services, over-the-counter drugs, and protein and nutrition products; and home, hardlines, and seasonal items, including home improvement, outdoor living, gardening, furniture, apparel, jewelry, tools and power equipment, housewares, toys, and mattresses. Further, the company offers consumer electronics and accessories, software, video games, office supplies, appliances, and third-party gift cards. Additionally, it operates digital payment platforms; offers financial services and related products, including money transfers, bill payments, money orders, check cashing, prepaid access, co-branded credit cards, installment lending, and earned wage access; and markets lines of merchandise under private and licensed brands. The company was formerly known as Wal-Mart Stores, Inc. and changed its name to Walmart Inc. in February 2018. Walmart Inc. was founded in 1945 and is based in Bentonville, Arkansas.",
+        "sector": "Consumer Defensive",
+        "industry": "Discount Stores",
+        "country": "United States",
+        "employees": 2100000,
+        "website": "https://www.stock.walmart.com",
+        "sic": "Retail-Variety Stores",
+        "summary_short": "Walmart Inc. engages in the operation of retail and wholesale stores and clubs, ecommerce websites, and mobile applications worldwide. The company operates through three segments: Walmart U.S., Walmart International, and Sam's Club U.S.",
+        "summary_ai": false
+      },
+      "metrics": {
+        "revenue": 706413000000.0,
+        "revenue_prev": 674538000000.0,
+        "net_income": 21893000000.0,
+        "net_income_prev": 19436000000.0,
+        "rev_growth": 0.04725456534694858,
+        "ni_growth": 0.1264149001852233,
+        "gross_margin": null,
+        "op_margin": 0.04222034418958881,
+        "net_margin": 0.030991785258765055,
+        "roe": 0.23208947312625888,
+        "fcf": 14923000000.0,
+        "fcf_margin": 0.02112503592091312,
+        "debt_to_equity": 0.43234389907770593,
+        "current_ratio": 0.7714407896459335,
+        "interest_coverage": 12.86669542709232,
+        "eps": 2.73,
+        "shares": 3418000000.0,
+        "share_change": -0.007301076599430764,
+        "capex": 26642000000.0,
+        "rnd": null,
+        "market_cap": 354446600000.0,
+        "pe": 37.985347985347985,
+        "fcf_yield": 0.04210225179194835,
+        "peg": 3.004815724229643
+      },
+      "groups": {
+        "Valuation": {
+          "verdict": "\ud83d\udfe1"
+        },
+        "Quality": {
+          "verdict": "\ud83d\udfe1"
+        },
+        "Health": {
+          "verdict": "\ud83d\udd34"
+        }
+      },
+      "flags": [
+        {
+          "sev": "\ud83d\udd34",
+          "text": "Liquidity tight \u2014 current ratio 0.77"
+        }
+      ]
+    },
+    "AAPL": {
+      "ok": true,
+      "error": null,
+      "ticker": "AAPL",
+      "company": "Apple Inc.",
+      "cik": "0000320193",
+      "source": "SEC EDGAR \u2014 10-K / 10-Q filings",
+      "profile": {
+        "summary": "Apple Inc. designs, manufactures, and markets smartphones, personal computers, tablets, wearables, and accessories worldwide. The company offers iPhone, a line of smartphones; Mac, a line of personal computers; iPad, a line of multi-purpose tablets; and wearables, home, and accessories comprising AirPods, Apple Vision Pro, Apple TV, Apple Watch, Beats products, and HomePod, as well as Apple branded and third-party accessories. It also provides AppleCare support and cloud services; and operates various platforms, including the App Store that allows customers to discover and download applications and digital content, such as books, music, video, games, and podcasts, as well as advertising services include third-party licensing arrangements and its own advertising platforms. In addition, the company offers various subscription-based services, such as Apple Arcade, a game subscription service; Apple Fitness+, a personalized fitness service; Apple Music, which offers users a curated listening experience with on-demand radio stations; Apple News+, a subscription news and magazine service; Apple TV, which offers original content and live sports; Apple Card, a co-branded credit card; and Apple Pay, a cashless payment service, as well as licenses its intellectual property. The company serves consumers, and small and mid-sized businesses; and the education, enterprise, and government markets. It distributes third-party applications for its products through the App Store. The company also sells its products through its retail and online stores, and direct sales force; and third-party cellular network carriers and resellers. The company was formerly known as Apple Computer, Inc. and changed its name to Apple Inc. in January 2007. Apple Inc. was founded in 1976 and is headquartered in Cupertino, California.",
+        "sector": "Technology",
+        "industry": "Consumer Electronics",
+        "country": "United States",
+        "employees": 150000,
+        "website": "https://www.apple.com",
+        "sic": "Electronic Computers",
+        "summary_short": "Apple Inc. designs, manufactures, and markets smartphones, personal computers, tablets, wearables, and accessories worldwide. The company offers iPhone, a line of smartphones; Mac, a line of personal computers; iPad, a line of multi-purpose tablets; and wearables, home, and accessories comprising AirPods, Apple Vision Pro, Apple TV, Apple Watch, Beats products, and HomePod, as well as Apple branded and third-party accessories.",
+        "summary_ai": false
+      },
+      "metrics": {
+        "revenue": 416161000000.0,
+        "revenue_prev": 391035000000.0,
+        "net_income": 112010000000.0,
+        "net_income_prev": 93736000000.0,
+        "rev_growth": 0.0642551178283274,
+        "ni_growth": 0.19495177946573355,
+        "gross_margin": 0.4690516410716045,
+        "op_margin": 0.31970799762591884,
+        "net_margin": 0.2691506412181824,
+        "roe": 1.0417596726190477,
+        "fcf": 98767000000.0,
+        "fcf_margin": 0.23732882225869315,
+        "debt_to_equity": 0.7658761160714286,
+        "current_ratio": 1.0032948046555858,
+        "interest_coverage": 33.82913806254767,
+        "eps": 7.46,
+        "shares": 14608963000.0,
+        "share_change": -0.02618091334457634,
+        "capex": 12715000000.0,
+        "rnd": 34550000000.0,
+        "market_cap": 4519282704050.0,
+        "pe": 41.46782841823057,
+        "fcf_yield": 0.0218545743800203,
+        "peg": 2.1270812983535405
+      },
+      "groups": {
+        "Valuation": {
+          "verdict": "\ud83d\udfe1"
+        },
+        "Quality": {
+          "verdict": "\ud83d\udfe2"
+        },
+        "Health": {
+          "verdict": "\ud83d\udfe1"
+        }
+      },
+      "flags": [
+        {
+          "sev": "\ud83d\udfe1",
+          "text": "Rich valuation \u2014 P/E 41"
+        }
+      ]
+    },
+    "GOOG": {
+      "ok": true,
+      "error": null,
+      "ticker": "GOOG",
+      "company": "Alphabet Inc.",
+      "cik": "0001652044",
+      "source": "SEC EDGAR \u2014 10-K / 10-Q filings",
+      "profile": {
+        "summary": "Alphabet Inc. offers various products and platforms in the United States, Europe, the Middle East, Africa, the Asia-Pacific, Canada, and Latin America. It operates through Google Services, Google Cloud, and Other Bets segments. The Google Services segment provides products and services, including ads, Android, Chrome, devices, Gmail, Google Drive, Google Maps, Google Photos, Google Play, Search, and YouTube. It is also involved in the sale of apps and in-app purchases and digital content in Google Play and YouTube; and devices, as well as the provision of YouTube consumer subscription services, such as YouTube TV, YouTube Music and Premium, NFL Sunday Ticket, and Google One. The Google Cloud segment offers consumption-based fees and subscriptions for AI solutions, including AI infrastructure, Vertex AI platform, and Gemini enterprise. It also provides cybersecurity, and data and analytics services; Google Workspace that include cloud-based communication and collaboration tools for enterprises, such as Calendar, Gmail, Docs, Drive, and Meet; and other enterprise services. The Other Bets segment sells transportation and internet services. Alphabet Inc. was incorporated in 1998 and is headquartered in Mountain View, California.",
+        "sector": "Communication Services",
+        "industry": "Internet Content & Information",
+        "country": "United States",
+        "employees": 198933,
+        "website": "https://abc.xyz",
+        "sic": "Services-Computer Programming, Data Processing, Etc.",
+        "summary_short": "Alphabet Inc. offers various products and platforms in the United States, Europe, the Middle East, Africa, the Asia-Pacific, Canada, and Latin America. It operates through Google Services, Google Cloud, and Other Bets segments.",
+        "summary_ai": false
+      },
+      "metrics": {
+        "revenue": 350018000000.0,
+        "revenue_prev": 307394000000.0,
+        "net_income": 132170000000.0,
+        "net_income_prev": 100118000000.0,
+        "rev_growth": 0.13866243322901553,
+        "ni_growth": 0.3201422321660441,
+        "gross_margin": null,
+        "op_margin": 0.3686638972852825,
+        "net_margin": 0.37760915152934993,
+        "roe": 0.20636085435923057,
+        "fcf": 73266000000.0,
+        "fcf_margin": 0.20932066350873382,
+        "debt_to_equity": 0.15638895828128904,
+        "current_ratio": 2.723981254609035,
+        "interest_coverage": 418.9577922077922,
+        "eps": 10.81,
+        "shares": 12230000000.0,
+        "share_change": -0.017433919820036958,
+        "capex": 91447000000.0,
+        "rnd": 61087000000.0,
+        "market_cap": 4179602500000.0,
+        "pe": 31.61424606845513,
+        "fcf_yield": 0.017529418168354526,
+        "peg": 0.9875062672786693
+      },
+      "groups": {
+        "Valuation": {
+          "verdict": "\ud83d\udfe1"
+        },
+        "Quality": {
+          "verdict": "\ud83d\udfe2"
+        },
+        "Health": {
+          "verdict": "\ud83d\udfe2"
+        }
+      },
+      "flags": []
+    },
+    "AMD": {
+      "ok": true,
+      "error": null,
+      "ticker": "AMD",
+      "company": "ADVANCED MICRO DEVICES INC",
+      "cik": "0000002488",
+      "source": "SEC EDGAR \u2014 10-K / 10-Q filings",
+      "profile": {
+        "summary": "Advanced Micro Devices, Inc. operates as a semiconductor company internationally. It operates in three segments: Data Center, Client and Gaming, and Embedded. The company offers artificial intelligence (AI) accelerators, microprocessors, and graphics processing units (GPUs) as standalone devices or as incorporated into accelerated processing units, chipsets, and data center and professional GPUs; and embedded processors and semi-custom system-on-chip (SoC) products, microprocessor and SoC development services and technology, data processing units, field programmable gate arrays (FPGA), system on modules, AI network interface cards, and adaptive SoC products. It provides processors under the AMD Ryzen, AMD Ryzen AI, AMD Ryzen PRO, AMD Ryzen Threadripper, AMD Ryzen Threadripper PRO, AMD Athlon, and AMD PRO A-Series brands; graphics under the AMD Radeon graphics and AMD Embedded Radeon graphics; professional graphics under the AMD Radeon Pro graphics brand; and AI and general-purpose compute infrastructure for hyperscale providers. The company offers data center graphics under the AMD Instinct accelerators and Radeon PRO V-series brands; server microprocessors under the AMD EPYC brand; low power solutions under the AMD Athlon, AMD Geode, AMD Ryzen, AMD EPYC, and AMD R-Series and G-Series brands; FPGA products under the Virtex-6, Virtex-7, Virtex UltraScale+, Kintex-7, Kintex UltraScale, Kintex UltraScale+, Artix-7, Artix UltraScale+, Spartan-6, and Spartan-7 brands; adaptive SOCs under the Zynq-7000, Zynq UltraScale+ MPSoC, Zynq UltraScale+ RFSoCs, Versal HBM, Versal Premium, Versal Prime, Versal AI Core, Versal AI Edge, Vitis, and Vivado brands; and compute and network acceleration board products under the Alveo and Pensando brands. It serves original equipment and design manufacturers, public cloud service providers, system integrators, distributors, and add-in-board manufacturers. The company was incorporated in 1969 and is headquartered in Santa Clara, California.",
+        "sector": "Technology",
+        "industry": "Semiconductors",
+        "country": "United States",
+        "employees": 31000,
+        "website": "https://www.amd.com",
+        "sic": "Semiconductors & Related Devices",
+        "summary_short": "Advanced Micro Devices, Inc. operates as a semiconductor company internationally. It operates in three segments: Data Center, Client and Gaming, and Embedded.",
+        "summary_ai": false
+      },
+      "metrics": {
+        "revenue": 34639000000.0,
+        "revenue_prev": 25785000000.0,
+        "net_income": 4335000000.0,
+        "net_income_prev": 1641000000.0,
+        "rev_growth": 0.34337793290672874,
+        "ni_growth": 1.6416819012797075,
+        "gross_margin": 0.4951644100580271,
+        "op_margin": 0.10664280146655504,
+        "net_margin": 0.12514795461762754,
+        "roe": 0.06448589789360942,
+        "fcf": 6735000000.0,
+        "fcf_margin": 0.19443401945783653,
+        "debt_to_equity": 0.047988813518981314,
+        "current_ratio": 2.6092210909692906,
+        "interest_coverage": 28.198473282442748,
+        "eps": 2.65,
+        "shares": 1632000000.0,
+        "share_change": -0.0006108735491753207,
+        "capex": 974000000.0,
+        "rnd": 8091000000.0,
+        "market_cap": 772344000000.0,
+        "pe": 178.58490566037736,
+        "fcf_yield": 0.008720207575898822,
+        "peg": 1.0878167416060849
+      },
+      "groups": {
+        "Valuation": {
+          "verdict": "\ud83d\udd34"
+        },
+        "Quality": {
+          "verdict": "\ud83d\udfe1"
+        },
+        "Health": {
+          "verdict": "\ud83d\udfe2"
+        }
+      },
+      "flags": [
+        {
+          "sev": "\ud83d\udfe1",
+          "text": "Rich valuation \u2014 P/E 179"
+        }
+      ]
+    },
+    "ZS": {
+      "ok": true,
+      "error": null,
+      "ticker": "ZS",
+      "company": "Zscaler, Inc.",
+      "cik": "0001713683",
+      "source": "SEC EDGAR \u2014 10-K / 10-Q filings",
+      "profile": {
+        "summary": "Zscaler, Inc. operates as a cloud security company worldwide. The company offers cyberthreat protection products, including Zscaler Internet Access, which provides threat protection, cloud sandbox, and cloud browser isolation; Zscaler Private Access solution that includes cyberthreat and data protection, application discovery, secure application access, application segmentation, application protection, reduced attack surface, and browser isolation; Zero Trust Firewall; Cloud Sandbox; and Zero Trust Browser. It also provides data security products, such as web and email DLP, endpoint DLP, BYOD security, multi-mode CASB, unified SaaS security, DSPM, AI-SPM, public gen AI security, and Microsoft Copilot data protection; Zero Trust Cloud solution. In addition, the company offers Zero Trust Branch comprising Zero Trust SD-WAN; IoT/OT segmentation; privileged remote access; Zscaler Cellular; and Zscaler Digital Experience that measures end-to-end user experience across business applications, as well as provides an easy-to-understand digital experience score for each user, application, and location within an enterprise. Further, it provides security operations products, including data fabric for security; asset exposure management; Risk360; unified vulnerability management; deception; managed detection and response; and managed threat hunting. Additionally, the company offers Zero Trust Gateway, a fully managed Zscaler service. It serves the automotive, airlines and transportation, conglomerates, consumer goods and retail, energy, financial services, healthcare, insurance, manufacturing, media and communications, public sector and education, technology, and telecommunications services industries. The company was formerly known as SafeChannel, Inc., and changed its name to Zscaler, Inc. in August 2008. Zscaler, Inc. was incorporated in 2007 and is headquartered in San Jose, California.",
+        "sector": "Technology",
+        "industry": "Software - Infrastructure",
+        "country": "United States",
+        "employees": 7923,
+        "website": "https://www.zscaler.com",
+        "sic": "Services-Computer Programming Services",
+        "summary_short": "Zscaler, Inc. operates as a cloud security company worldwide.",
+        "summary_ai": false
+      },
+      "metrics": {
+        "revenue": 2673115000.0,
+        "revenue_prev": 2167771000.0,
+        "net_income": -41478000.0,
+        "net_income_prev": -57706000.0,
+        "rev_growth": 0.23311687443000206,
+        "ni_growth": 0.2812185907877864,
+        "gross_margin": 0.7687424596397835,
+        "op_margin": -0.048056293874375024,
+        "net_margin": -0.015516728610628423,
+        "roe": -0.01752644622337155,
+        "fcf": 808201000.0,
+        "fcf_margin": 0.3023442687650924,
+        "debt_to_equity": 0.4854573765261906,
+        "current_ratio": 1.8609727854544407,
+        "interest_coverage": -19.63919889925088,
+        "eps": -0.27,
+        "shares": 161710000.0,
+        "share_change": 0.03220889655449039,
+        "capex": 164252000.0,
+        "rnd": 672485000.0,
+        "market_cap": 29390792500.0,
+        "pe": null,
+        "fcf_yield": 0.02749844190149007,
+        "peg": null
+      },
+      "groups": {
+        "Valuation": {
+          "verdict": "\ud83d\udfe2"
+        },
+        "Quality": {
+          "verdict": "\ud83d\udd34"
+        },
+        "Health": {
+          "verdict": "\ud83d\udd34"
+        }
+      },
+      "flags": [
+        {
+          "sev": "\ud83d\udd34",
+          "text": "Unprofitable \u2014 negative net margin"
+        },
+        {
+          "sev": "\ud83d\udd34",
+          "text": "Thin interest coverage \u2014 -19.6\u00d7"
+        },
+        {
+          "sev": "\ud83d\udfe1",
+          "text": "Negative return on equity"
+        }
+      ]
+    },
+    "SPCX": {
+      "ok": true,
+      "error": null,
+      "ticker": "SPCX",
+      "company": "SPACE EXPLORATION TECHNOLOGIES CORP",
+      "cik": "0001181412",
+      "source": "SEC EDGAR \u2014 10-K / 10-Q filings",
+      "profile": {
+        "summary": "Space Exploration Technologies Corp. provides satellite-based broadband services in the United States, Ireland, Canada, and internationally. It operates through three operating segments: Space, Connectivity, and AI. The Space segment designs, manufactures, and launches reusable rockets to provide access to space. It also provides launch services for the deployment of payloads to intended orbits for commercial and government customers utilizing Falcon 9 and Falcon Heavy; and engages in the launch and development for the development of spacecraft and the provision of launch and mission services for government agency space programs utilizing Falcon 9, Falcon Heavy, Starship, and Dragon. Its company's Connectivity segment operates broadband data and communications network by various Starlink satellites in low-earth orbit, delivering connectivity to various consumers, enterprise, and government customers. The company's AI segment operates a vertically integrated AI platform spanning a frontier LLM Grok; AI solutions for consumer and enterprise customers; X, a real-time information, entertainment, and free speech platform; and AI computational infrastructure. Space Exploration Technologies Corp. was incorporated in 2002 and is based in Starbase, Texas.",
+        "sector": "Industrials",
+        "industry": "Aerospace & Defense",
+        "country": "United States",
+        "employees": 21000,
+        "website": "https://www.spacex.com",
+        "sic": "Services-Computer Programming, Data Processing, Etc.",
+        "summary_short": "Space Exploration Technologies Corp. provides satellite-based broadband services in the United States, Ireland, Canada, and internationally. It operates through three operating segments: Space, Connectivity, and AI.",
+        "summary_ai": false
+      },
+      "metrics": {
+        "revenue": null,
+        "revenue_prev": null,
+        "net_income": null,
+        "net_income_prev": null,
+        "rev_growth": null,
+        "ni_growth": null,
+        "gross_margin": null,
+        "op_margin": null,
+        "net_margin": null,
+        "roe": null,
+        "fcf": null,
+        "fcf_margin": null,
+        "debt_to_equity": 0.30092592592592593,
+        "current_ratio": 5.115377331692074,
+        "interest_coverage": null,
+        "eps": null,
+        "shares": null,
+        "share_change": null,
+        "capex": null,
+        "rnd": null,
+        "market_cap": null,
+        "pe": null,
+        "fcf_yield": null,
+        "peg": null
+      },
+      "groups": {
+        "Valuation": {
+          "verdict": "\u26aa"
+        },
+        "Quality": {
+          "verdict": "\u26aa"
+        },
+        "Health": {
+          "verdict": "\ud83d\udfe2"
+        }
+      },
+      "flags": []
+    },
+    "NVTS": {
+      "ok": true,
+      "error": null,
+      "ticker": "NVTS",
+      "company": "Navitas Semiconductor Corp",
+      "cik": "0001821769",
+      "source": "SEC EDGAR \u2014 10-K / 10-Q filings",
+      "profile": {
+        "summary": "Navitas Semiconductor Corporation designs, develops, and markets power semiconductors in the United States, Europe, China, rest of Asia, and internationally. The company offers gallium nitride power integrated circuits, silicon carbide power devices, silicon system controllers, and digital isolators for power conversion and charging. Its products are used in automotive, data center, mobile, consumer electronics markets, and various other applications. The company was founded in 2014 and is based in Torrance, California.",
+        "sector": "Technology",
+        "industry": "Semiconductors",
+        "country": "United States",
+        "employees": 190,
+        "website": "https://navitassemi.com",
+        "sic": "Semiconductors & Related Devices",
+        "summary_short": "Navitas Semiconductor Corporation designs, develops, and markets power semiconductors in the United States, Europe, China, rest of Asia, and internationally. The company offers gallium nitride power integrated circuits, silicon carbide power devices, silicon system controllers, and digital isolators for power conversion and charging. Its products are used in automotive, data center, mobile, consumer electronics markets, and various other applications.",
+        "summary_ai": false
+      },
+      "metrics": {
+        "revenue": 45916000.0,
+        "revenue_prev": 83302000.0,
+        "net_income": -84599000.0,
+        "net_income_prev": -145433000.0,
+        "rev_growth": -0.4488007490816547,
+        "ni_growth": 0.41829571005205146,
+        "gross_margin": 0.23272933182332955,
+        "op_margin": -2.346981444376688,
+        "net_margin": -1.8424732119522607,
+        "roe": -0.22226805423825,
+        "fcf": -44369000.0,
+        "fcf_margin": -0.9663080407701019,
+        "debt_to_equity": 0.0,
+        "current_ratio": 21.792525866435135,
+        "interest_coverage": null,
+        "eps": -0.57,
+        "shares": 183502186.0,
+        "share_change": 0.12667433958127808,
+        "capex": 1478000.0,
+        "rnd": 49830000.0,
+        "market_cap": 2380023352.42,
+        "pe": null,
+        "fcf_yield": -0.0186422540580897,
+        "peg": null
+      },
+      "groups": {
+        "Valuation": {
+          "verdict": "\ud83d\udd34"
+        },
+        "Quality": {
+          "verdict": "\ud83d\udd34"
+        },
+        "Health": {
+          "verdict": "\ud83d\udd34"
+        }
+      },
+      "flags": [
+        {
+          "sev": "\ud83d\udd34",
+          "text": "Unprofitable \u2014 negative net margin"
+        },
+        {
+          "sev": "\ud83d\udd34",
+          "text": "Burning cash \u2014 negative free cash flow"
+        },
+        {
+          "sev": "\ud83d\udfe1",
+          "text": "Revenue shrinking \u2014 -45% YoY"
+        },
+        {
+          "sev": "\ud83d\udfe1",
+          "text": "Negative return on equity"
+        },
+        {
+          "sev": "\ud83d\udfe1",
+          "text": "Dilution \u2014 shares +13% YoY"
+        }
+      ]
+    },
+    "NOW": {
+      "ok": true,
+      "error": null,
+      "ticker": "NOW",
+      "company": "ServiceNow, Inc.",
+      "cik": "0001373715",
+      "source": "SEC EDGAR \u2014 10-K / 10-Q filings",
+      "profile": {
+        "summary": "ServiceNow, Inc. provides cloud-based solution for digital workflows in the North America, Brazil, Europe, the Middle East and Africa, Asia Pacific, and internationally. The company provides asset management, integrated risk management, IT service management, Operational Technology management, Security Operations, strategic portfolio management, IT operations management products; customer service management product; field service management applications; and sales and order management services. It also offers human resources delivery; legal and contract operations; workplace service delivery products; app engine product; automation engine; platform privacy and security product; and source-to-pay operations. In addition, the company provides RaptorDB, a database built to manage workloads at scale; ServiceNow Impact that provides customers with software tools, guided plans, and AI-driven recommendations; customer support; and workflow data fabric. It serves government, financial services, healthcare and life science, manufacturing, Public Sector, retail, technology, and Telecom sectors through service providers and resale partners. The company has a strategic collaboration with Cohesity, Inc. to develop, operate, and safeguard autonomous AI agents and data with enterprise-grade reliability; and with ServiceNow to Advance Ai-Powered Solution for Mission-Critical Infrastructure Monitoring. The company was formerly known as Service-now.com and changed its name to ServiceNow, Inc. in May 2012. ServiceNow, Inc. has a strategic alliance with Accenture for integrated risk management and third-party risk management solutions. ServiceNow, Inc. was founded in 2004 and is headquartered in Santa Clara, California.",
+        "sector": "Technology",
+        "industry": "Software - Application",
+        "country": "United States",
+        "employees": 29187,
+        "website": "https://www.servicenow.com",
+        "sic": "Services-Prepackaged Software",
+        "summary_short": "ServiceNow, Inc. provides cloud-based solution for digital workflows in the North America, Brazil, Europe, the Middle East and Africa, Asia Pacific, and internationally.",
+        "summary_ai": false
+      },
+      "metrics": {
+        "revenue": 13278000000.0,
+        "revenue_prev": 10984000000.0,
+        "net_income": 1748000000.0,
+        "net_income_prev": 1425000000.0,
+        "rev_growth": 0.20884923525127458,
+        "ni_growth": 0.22666666666666666,
+        "gross_margin": 0.7753426720891701,
+        "op_margin": 0.13737008585630367,
+        "net_margin": 0.13164633227895767,
+        "roe": 0.13966123362096516,
+        "fcf": 4576000000.0,
+        "fcf_margin": 0.3446302153938846,
+        "debt_to_equity": 0.1185682326621924,
+        "current_ratio": 0.7005677610466552,
+        "interest_coverage": 67.55555555555556,
+        "eps": 1.67,
+        "shares": 1033862000.0,
+        "share_change": 0.004392997688350496,
+        "capex": 868000000.0,
+        "rnd": 2960000000.0,
+        "market_cap": 132830589759.99998,
+        "pe": 76.93413173652694,
+        "fcf_yield": 0.0344498959785391,
+        "peg": 3.3941528707291297
+      },
+      "groups": {
+        "Valuation": {
+          "verdict": "\ud83d\udd34"
+        },
+        "Quality": {
+          "verdict": "\ud83d\udfe2"
+        },
+        "Health": {
+          "verdict": "\ud83d\udd34"
+        }
+      },
+      "flags": [
+        {
+          "sev": "\ud83d\udd34",
+          "text": "Liquidity tight \u2014 current ratio 0.70"
+        },
+        {
+          "sev": "\ud83d\udfe1",
+          "text": "Rich valuation \u2014 P/E 77"
+        }
+      ]
+    },
+    "CQQQ": {
+      "ok": true,
+      "error": null,
+      "ticker": "CQQQ",
+      "company": "CQQQ",
+      "cik": null,
+      "source": "Yahoo Finance \u2014 SEC unreachable, vendor-derived",
+      "profile": {
+        "summary": "The fund generally will invest at least 90% of its total assets in securities that comprise the underlying index, as well as ADRs and GDRs that represent securities in the underlying index. Strictly in accordance with its guidelines and mandated procedures, the index provider compiles, maintains, and calculates the underlying index. The underlying index may include China A-Shares, B Shares, H Shares, N Shares, Red Chips, P Chips and S Chips. The fund is non-diversified.",
+        "summary_short": "The fund generally will invest at least 90% of its total assets in securities that comprise the underlying index, as well as ADRs and GDRs that represent securities in the underlying index. Strictly in accordance with its guidelines and mandated procedures, the index provider compiles, maintains, and calculates the underlying index. The underlying index may include China A-Shares, B Shares, H Shares, N Shares, Red Chips, P Chips and S Chips.",
+        "summary_ai": false
+      },
+      "metrics": {
+        "revenue": null,
+        "revenue_prev": null,
+        "net_income": null,
+        "net_income_prev": null,
+        "rev_growth": null,
+        "ni_growth": null,
+        "gross_margin": null,
+        "op_margin": null,
+        "net_margin": null,
+        "roe": null,
+        "fcf": null,
+        "fcf_margin": null,
+        "debt_to_equity": null,
+        "current_ratio": null,
+        "interest_coverage": null,
+        "eps": null,
+        "shares": null,
+        "share_change": null,
+        "capex": null,
+        "rnd": null,
+        "market_cap": null,
+        "pe": 19.048138,
+        "fcf_yield": null,
+        "peg": null
+      },
+      "groups": {
+        "Valuation": {
+          "verdict": "\ud83d\udfe2"
+        },
+        "Quality": {
+          "verdict": "\u26aa"
+        },
+        "Health": {
+          "verdict": "\u26aa"
+        }
+      },
+      "flags": []
+    },
+    "QANT": {
+      "ok": false,
+      "error": "No fundamentals available. SEC: QANT not in SEC's ticker list (US-listed filers only). Yahoo fallback also returned nothing (foreign/ADR names may lack coverage)."
+    },
+    "CRWV": {
+      "ok": true,
+      "error": null,
+      "ticker": "CRWV",
+      "company": "CoreWeave, Inc.",
+      "cik": "0001769628",
+      "source": "SEC EDGAR \u2014 10-K / 10-Q filings",
+      "profile": {
+        "summary": "CoreWeave, Inc. operates as a cloud infrastructure technology company in the United States. The company offers CoreWeave Cloud platform that comprises proprietary software and cloud services that deliver the automation and efficiency needed to manage complex artificial intelligence (AI) infrastructure at scale. It also offers data and storage solutions, such as Local Object Transport Accelerator; infrastructure control solutions, including CoreWeave Kubernetes service; mission control services, including node, rack, and fleet lifecycle management; model and agent development tools comprising Weights & Biases, an AI developer platform; and runtime acceleration. In addition, the company offers graphics processing unit compute, CPU compute, networking services, managed services, and virtual and bare metal servers. Its services also include visual effects rendering, machine learning, pixel streaming, and batch processing. The company was formerly known as Atlantic Crypto Corporation and changed its name to CoreWeave, Inc. in December 2019. CoreWeave, Inc. was incorporated in 2017 and is based in Livingston, New Jersey.",
+        "sector": "Technology",
+        "industry": "Software - Infrastructure",
+        "country": "United States",
+        "employees": 2189,
+        "website": "https://www.coreweave.com",
+        "sic": "Services-Prepackaged Software",
+        "summary_short": "CoreWeave, Inc. operates as a cloud infrastructure technology company in the United States. The company offers CoreWeave Cloud platform that comprises proprietary software and cloud services that deliver the automation and efficiency needed to manage complex artificial intelligence (AI) infrastructure at scale.",
+        "summary_ai": false
+      },
+      "metrics": {
+        "revenue": 5131000000.0,
+        "revenue_prev": 1915000000.0,
+        "net_income": -1167000000.0,
+        "net_income_prev": -863000000.0,
+        "rev_growth": 1.6793733681462142,
+        "ni_growth": -0.3522595596755504,
+        "gross_margin": null,
+        "op_margin": -0.00896511401286299,
+        "net_margin": -0.22744104463067627,
+        "roe": -0.23228503184713375,
+        "fcf": -7251000000.0,
+        "fcf_margin": -1.4131748197232508,
+        "debt_to_equity": 4.948049363057325,
+        "current_ratio": 0.4551321891284601,
+        "interest_coverage": -0.04006968641114982,
+        "eps": -2.81,
+        "shares": null,
+        "share_change": 1.0,
+        "capex": 10309000000.0,
+        "rnd": 352000000.0,
+        "market_cap": null,
+        "pe": null,
+        "fcf_yield": null,
+        "peg": null
+      },
+      "groups": {
+        "Valuation": {
+          "verdict": "\u26aa"
+        },
+        "Quality": {
+          "verdict": "\ud83d\udd34"
+        },
+        "Health": {
+          "verdict": "\ud83d\udd34"
+        }
+      },
+      "flags": [
+        {
+          "sev": "\ud83d\udd34",
+          "text": "Unprofitable \u2014 negative net margin"
+        },
+        {
+          "sev": "\ud83d\udd34",
+          "text": "Burning cash \u2014 negative free cash flow"
+        },
+        {
+          "sev": "\ud83d\udd34",
+          "text": "High leverage \u2014 debt/equity 4.9\u00d7"
+        },
+        {
+          "sev": "\ud83d\udd34",
+          "text": "Liquidity tight \u2014 current ratio 0.46"
+        },
+        {
+          "sev": "\ud83d\udd34",
+          "text": "Thin interest coverage \u2014 -0.0\u00d7"
+        },
+        {
+          "sev": "\ud83d\udfe1",
+          "text": "Negative return on equity"
+        },
+        {
+          "sev": "\ud83d\udfe1",
+          "text": "Dilution \u2014 shares +100% YoY"
+        }
+      ]
+    },
+    "BE": {
+      "ok": true,
+      "error": null,
+      "ticker": "BE",
+      "company": "Bloom Energy Corp",
+      "cik": "0001664703",
+      "source": "SEC EDGAR \u2014 10-K / 10-Q filings",
+      "profile": {
+        "summary": "Bloom Energy Corporation designs, manufactures, sells, and installs solid oxide fuel cell systems for on-site power generation in the United States and internationally. It offers Bloom Energy Server, an energy server platform to convert fuel, such as natural gas, biogas, hydrogen, or a blend of these fuels, into electricity through a non-combustion electrochemical process. The company also provides Bloom Electrolyzer for producing hydrogen. It sells its products through direct and indirect sales channels to utilities, data centers, retail, healthcare, education, telecom, manufacturing, and other industries. The company was formerly known as Ion America Corp. and changed its name to Bloom Energy Corporation in 2006. Bloom Energy Corporation was incorporated in 2001 and is headquartered in San Jose, California.",
+        "sector": "Industrials",
+        "industry": "Electrical Equipment & Parts",
+        "country": "United States",
+        "employees": 2214,
+        "website": "https://www.bloomenergy.com",
+        "sic": "Electrical Industrial Apparatus",
+        "summary_short": "Bloom Energy Corporation designs, manufactures, sells, and installs solid oxide fuel cell systems for on-site power generation in the United States and internationally. It offers Bloom Energy Server, an energy server platform to convert fuel, such as natural gas, biogas, hydrogen, or a blend of these fuels, into electricity through a non-combustion electrochemical process. The company also provides Bloom Electrolyzer for producing hydrogen.",
+        "summary_ai": false
+      },
+      "metrics": {
+        "revenue": 2001614000.0,
+        "revenue_prev": 1441394000.0,
+        "net_income": -302116000.0,
+        "net_income_prev": -301708000.0,
+        "rev_growth": 0.38866541695053536,
+        "ni_growth": -0.0013523009002081483,
+        "gross_margin": 0.2934631752175994,
+        "op_margin": 0.03637164807999944,
+        "net_margin": -0.15093619449104573,
+        "roe": -0.32786344413105595,
+        "fcf": 57190000.0,
+        "fcf_margin": 0.028571942442448945,
+        "debt_to_equity": 2.824441191184945,
+        "current_ratio": 5.026075108921662,
+        "interest_coverage": 1.1629712460063897,
+        "eps": -0.37,
+        "shares": 0.0,
+        "share_change": 0.05733952015481714,
+        "capex": 56759000.0,
+        "rnd": 185993000.0,
+        "market_cap": null,
+        "pe": null,
+        "fcf_yield": null,
+        "peg": null
+      },
+      "groups": {
+        "Valuation": {
+          "verdict": "\u26aa"
+        },
+        "Quality": {
+          "verdict": "\ud83d\udd34"
+        },
+        "Health": {
+          "verdict": "\ud83d\udd34"
+        }
+      },
+      "flags": [
+        {
+          "sev": "\ud83d\udd34",
+          "text": "Unprofitable \u2014 negative net margin"
+        },
+        {
+          "sev": "\ud83d\udd34",
+          "text": "High leverage \u2014 debt/equity 2.8\u00d7"
+        },
+        {
+          "sev": "\ud83d\udd34",
+          "text": "Thin interest coverage \u2014 1.2\u00d7"
+        },
+        {
+          "sev": "\ud83d\udfe1",
+          "text": "Negative return on equity"
+        },
+        {
+          "sev": "\ud83d\udfe1",
+          "text": "Dilution \u2014 shares +6% YoY"
+        }
+      ]
+    },
+    "IREN": {
+      "ok": true,
+      "error": null,
+      "ticker": "IREN",
+      "company": "IREN Ltd",
+      "cik": "0001878848",
+      "source": "SEC EDGAR \u2014 10-K / 10-Q filings",
+      "profile": {
+        "summary": "IREN Limited operates in the vertically integrated data center business in Australia and Canada. The company owns and operates computing hardware, as well as electrical infrastructure and data centers. It also mines Bitcoin, a scarce digital asset that is created and transmitted through the operation of a peer-to-peer network of computers running the Bitcoin software. The company was formerly known as Iris Energy Limited and changed its name to IREN Limited in November 2024. The company was incorporated in 2018 and is based in Sydney, Australia.",
+        "sector": "Financial Services",
+        "industry": "Capital Markets",
+        "country": "Australia",
+        "employees": 257,
+        "website": "https://iren.com",
+        "sic": "Finance Services",
+        "summary_short": "IREN Limited operates in the vertically integrated data center business in Australia and Canada. The company owns and operates computing hardware, as well as electrical infrastructure and data centers. It also mines Bitcoin, a scarce digital asset that is created and transmitted through the operation of a peer-to-peer network of computers running the Bitcoin software.",
+        "summary_ai": false
+      },
+      "metrics": {
+        "revenue": 501023000.0,
+        "revenue_prev": 187192000.0,
+        "net_income": 86941000.0,
+        "net_income_prev": -28920000.0,
+        "rev_growth": 1.6765192956963972,
+        "ni_growth": 4.006258644536653,
+        "gross_margin": null,
+        "op_margin": 0.03458324268546554,
+        "net_margin": 0.17352696383199973,
+        "roe": 0.03262904349288129,
+        "fcf": -327570000.0,
+        "fcf_margin": -0.6538023204523545,
+        "debt_to_equity": null,
+        "current_ratio": 3.722213351838319,
+        "interest_coverage": null,
+        "eps": 0.39,
+        "shares": 357378674.0,
+        "share_change": 1.2405017035169887,
+        "capex": 573456000.0,
+        "rnd": null,
+        "market_cap": 14967018867.12,
+        "pe": 107.38461538461539,
+        "fcf_yield": -0.021886121939728137,
+        "peg": 0.2680421433375404
+      },
+      "groups": {
+        "Valuation": {
+          "verdict": "\ud83d\udd34"
+        },
+        "Quality": {
+          "verdict": "\ud83d\udfe1"
+        },
+        "Health": {
+          "verdict": "\ud83d\udd34"
+        }
+      },
+      "flags": [
+        {
+          "sev": "\ud83d\udd34",
+          "text": "Burning cash \u2014 negative free cash flow"
+        },
+        {
+          "sev": "\ud83d\udfe1",
+          "text": "Dilution \u2014 shares +124% YoY"
+        },
+        {
+          "sev": "\ud83d\udfe1",
+          "text": "Rich valuation \u2014 P/E 107"
+        }
+      ]
+    },
+    "PURR": {
+      "ok": true,
+      "error": null,
+      "ticker": "PURR",
+      "company": "Hyperliquid Strategies Inc",
+      "cik": "0002078856",
+      "source": "SEC EDGAR \u2014 10-K / 10-Q filings",
+      "profile": {
+        "summary": "Hyperliquid Strategies Inc. operates as a digital asset treasury company focused on the blockchain and cryptocurrency sector. The company provides investors exposure to the HYPE token through treasury management strategies, such as token accumulation, staking, and yield optimization within the Hyperliquid ecosystem. The company was incorporated in 2025 and is based in New York, New York.",
+        "sector": "Financial Services",
+        "industry": "Capital Markets",
+        "country": "United States",
+        "website": "https://www.hypestrat.xyz",
+        "sic": "Finance Services",
+        "summary_short": "Hyperliquid Strategies Inc. operates as a digital asset treasury company focused on the blockchain and cryptocurrency sector. The company provides investors exposure to the HYPE token through treasury management strategies, such as token accumulation, staking, and yield optimization within the Hyperliquid ecosystem.",
+        "summary_ai": false
+      },
+      "metrics": {
+        "revenue": null,
+        "revenue_prev": null,
+        "net_income": null,
+        "net_income_prev": null,
+        "rev_growth": null,
+        "ni_growth": null,
+        "gross_margin": null,
+        "op_margin": null,
+        "net_margin": null,
+        "roe": null,
+        "fcf": null,
+        "fcf_margin": null,
+        "debt_to_equity": null,
+        "current_ratio": 18.224930145917416,
+        "interest_coverage": null,
+        "eps": null,
+        "shares": 124220108.0,
+        "share_change": null,
+        "capex": null,
+        "rnd": null,
+        "market_cap": 1314248742.64,
+        "pe": null,
+        "fcf_yield": null,
+        "peg": null
+      },
+      "groups": {
+        "Valuation": {
+          "verdict": "\u26aa"
+        },
+        "Quality": {
+          "verdict": "\u26aa"
+        },
+        "Health": {
+          "verdict": "\ud83d\udfe2"
+        }
+      },
+      "flags": []
+    },
+    "NBIS": {
+      "ok": true,
+      "error": null,
+      "ticker": "NBIS",
+      "company": "Nebius Group N.V.",
+      "cik": "0001513845",
+      "source": "SEC EDGAR \u2014 10-K / 10-Q filings",
+      "profile": {
+        "summary": "Nebius Group N.V., a technology company, engages in building full-stack infrastructure to service the global AI industry in the United States, the United Kingdom, and internationally. It offers Nebius builds full-stack infrastructure for AI, including large-scale GPU clusters, cloud platforms, and tools and services for developers. The company also provides TripleTen, an edtech platform for re-skilling individuals for careers in technolgy; and Avride, which develops autonomous driving technology for self-driving cars and delivery robotics. It has a strategic alliance with NVIDIA Corporation to support the expansion of the company's AI cloud infrastructure. The company was formerly known as Yandex N.V. and changed its name to Nebius Group N.V. in August 2024. Nebius Group N.V. was founded in 1989 and is based in Schiphol, the Netherlands.",
+        "sector": "Communication Services",
+        "industry": "Internet Content & Information",
+        "country": "Netherlands",
+        "employees": 1543,
+        "website": "https://nebius.com",
+        "sic": "Services-Computer Programming, Data Processing, Etc.",
+        "summary_short": "Nebius Group N.V., a technology company, engages in building full-stack infrastructure to service the global AI industry in the United States, the United Kingdom, and internationally. It offers Nebius builds full-stack infrastructure for AI, including large-scale GPU clusters, cloud platforms, and tools and services for developers.",
+        "summary_ai": false
+      },
+      "metrics": {
+        "revenue": null,
+        "revenue_prev": null,
+        "net_income": null,
+        "net_income_prev": null,
+        "rev_growth": null,
+        "ni_growth": null,
+        "gross_margin": null,
+        "op_margin": null,
+        "net_margin": null,
+        "roe": null,
+        "fcf": null,
+        "fcf_margin": null,
+        "debt_to_equity": 0.8984980409229429,
+        "current_ratio": 3.0837805995549155,
+        "interest_coverage": null,
+        "eps": null,
+        "shares": 253016971.0,
+        "share_change": null,
+        "capex": null,
+        "rnd": null,
+        "market_cap": 55443608855.229996,
+        "pe": null,
+        "fcf_yield": null,
+        "peg": null
+      },
+      "groups": {
+        "Valuation": {
+          "verdict": "\u26aa"
+        },
+        "Quality": {
+          "verdict": "\u26aa"
+        },
+        "Health": {
+          "verdict": "\ud83d\udfe2"
+        }
+      },
+      "flags": []
+    }
+  },
+  "generated_at": "2026-08-24T04:35:33+00:00",
   "universe": {
     "wheel": 16,
     "growth": 15,
