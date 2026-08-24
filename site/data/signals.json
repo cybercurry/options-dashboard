@@ -4311,7 +4311,7 @@
       "iv_vs_hv": "fair",
       "rsi": 53,
       "above_200": false,
-      "pcr": 0.29,
+      "pcr": 0.3,
       "pctb": 0.61,
       "csp_timing": "\ud83d\udd34 NO SETUP",
       "cc_timing": "\ud83d\udd34 NO SETUP",
@@ -4482,7 +4482,7 @@
       "iv_vs_hv": "cheap",
       "rsi": 42,
       "above_200": true,
-      "pcr": 0.68,
+      "pcr": 0.69,
       "pctb": 0.21,
       "csp_timing": "\ud83d\udd34 NO SETUP",
       "cc_timing": "\ud83d\udd34 NO SETUP",
@@ -4729,7 +4729,7 @@
     "three_month": 3.7,
     "curve": "flat",
     "fed_funds": 3.63,
-    "skew": 143.9,
+    "skew": 145.64,
     "vix9d": 14.07
   },
   "pulse": [
@@ -4763,29 +4763,29 @@
     },
     {
       "label": "DXY",
-      "price": 98.99099731445312,
-      "pct": 0.19331402509699114,
+      "price": 98.98400115966797,
+      "pct": 0.18623289699066792,
       "prefix": "",
       "is_yield": false
     },
     {
       "label": "Crude Oil",
-      "price": 84.94000244140625,
-      "pct": -2.4350966880750113,
+      "price": 84.9800033569336,
+      "pct": -2.3891503101183376,
       "prefix": "$",
       "is_yield": false
     },
     {
       "label": "Gold",
-      "price": 4707.0,
-      "pct": 1.7927791482232003,
+      "price": 4710.0,
+      "pct": 1.8576566365267277,
       "prefix": "$",
       "is_yield": false
     },
     {
       "label": "Bitcoin",
-      "price": 78911.796875,
-      "pct": 1.4873992657651547,
+      "price": 78935.09375,
+      "pct": 1.5173610629666046,
       "prefix": "$",
       "is_yield": false
     },
@@ -4874,8 +4874,8 @@
     {
       "label": "Digital Assets",
       "ticker": "BTC",
-      "pct": 1.4873992657651547,
-      "price": 78911.796875
+      "pct": 1.5173610629666046,
+      "price": 78935.09375
     }
   ],
   "fundamentals": {
@@ -5162,39 +5162,39 @@
       ],
       "news": [
         {
-          "title": "Tesla to launch Cybercabs in Austin starting Sept. 3",
+          "title": "What's at stake for Paramount, the Ellisons in Warner Bros. takeover bid",
           "publisher": "Yahoo Finance Video",
-          "link": "https://finance.yahoo.com/video/tesla-launch-cybercabs-austin-starting-205004873.html",
+          "link": "https://finance.yahoo.com/video/whats-stake-paramount-ellisons-warner-213000825.html",
           "when": "Aug 24"
         },
         {
-          "title": "Tech stocks today: All eyes on Nvidia as Meta trial resumes",
+          "title": "Nvidia's valuation looks surprisingly cheap heading into earnings. Could it be an issue for the stock?",
           "publisher": "Yahoo Finance",
-          "link": "https://finance.yahoo.com/technology/live/tech-stocks-today-all-eyes-on-nvidia-as-meta-trial-resumes-125406169.html",
+          "link": "https://finance.yahoo.com/markets/stocks/article/nvidias-valuation-looks-surprisingly-cheap-heading-into-earnings-could-it-be-an-issue-for-the-stock-191738544.html",
           "when": "Aug 24"
         },
         {
-          "title": "Nvidia, software giants' earnings: What to watch the week of August 24th",
+          "title": "Nvidia earnings may come down to guidance and Jensen Huang's confidence",
           "publisher": "Yahoo Finance Video",
-          "link": "https://finance.yahoo.com/video/nvidia-software-giants-earnings-watch-120000803.html",
+          "link": "https://finance.yahoo.com/video/nvidia-earnings-may-come-down-140000999.html",
           "when": "Aug 24"
         },
         {
-          "title": "Stock Market Today: Dow Up As Trump Says This On Canada; Nvidia Shares Skid Despite AI Move (Live Coverage)",
-          "publisher": "Investor's Business Daily",
-          "link": "https://www.investors.com/market-trend/stock-market-today/dow-jones-sp500-nasdaq-economic-d-day-alibaba-stock-baba/?src=A00220&yptr=yahoo",
+          "title": "Nvidia's Q2 earnings to test resurgent AI trade",
+          "publisher": "Yahoo Finance",
+          "link": "https://finance.yahoo.com/news/nvidias-q2-earnings-to-test-resurgent-ai-trade-112502189.html",
+          "when": "Aug 23"
+        },
+        {
+          "title": "How $300 a Month in This Dividend ETF Could Make You a Millionaire",
+          "publisher": "24/7 Wall St.",
+          "link": "https://247wallst.com/investing/2026/08/24/how-300-a-month-in-this-dividend-etf-could-make-you-a-millionaire/",
           "when": "Aug 24"
         },
         {
-          "title": "How to Find the Market's Long-Term Winners",
-          "publisher": "Zacks",
-          "link": "https://finance.yahoo.com/markets/stocks/articles/markets-long-term-winners-204300721.html",
-          "when": "Aug 24"
-        },
-        {
-          "title": "Update: Nasdaq, S&P 500 Fall as New Sanctions Plan Targets Iran's Trading Partners",
-          "publisher": "MT Newswires",
-          "link": "https://finance.yahoo.com/markets/stocks/articles/nasdaq-p-500-fall-sanctions-204112044.html",
+          "title": "Marvell Technology Stock More Than Tripled On A Roadmap It Had Been Publishing All Along",
+          "publisher": "Trefis",
+          "link": "https://www.trefis.com/articles/612589/marvell-technology-stock-more-than-tripled-on-a-roadmap-it-had-been-publishing-all-along/2026-08-24",
           "when": "Aug 24"
         }
       ]
@@ -5275,7 +5275,7 @@
           "when": "Aug 24"
         },
         {
-          "title": "Amazon hikes hardware prices by 60 percent, blaming memory shortage",
+          "title": "Amazon hikes hardware prices by 60%, blaming memory shortage",
           "publisher": "TechCrunch",
           "link": "https://finance.yahoo.com/technology/articles/amazon-hikes-hardware-prices-60-195450689.html",
           "when": "Aug 24"
@@ -5737,6 +5737,18 @@
       "flags": [],
       "news": [
         {
+          "title": "GLD\u2019s Gains Are Taxed at 28% as a Collectible, Not the 15% Rate Every Other ETF Gets",
+          "publisher": "24/7 Wall St.",
+          "link": "https://247wallst.com/investing/etf/2026/08/24/glds-gains-are-taxed-at-28-as-a-collectible-not-the-15-rate-every-other-etf-gets/",
+          "when": "Aug 24"
+        },
+        {
+          "title": "Daily ETF Flows: GLD  IBIT Pick Up Assets",
+          "publisher": "etf.com",
+          "link": "http://www.etf.com/sections/daily-etf-flows/daily-etf-flows-gld-ibit-pick-assets?utm_source=yahoo-financeutm_medium=rssutm_campaign=yahoo-finance-rss",
+          "when": "Aug 24"
+        },
+        {
           "title": "Treasury Yields Fall, Gold Rises On Bessent's $1 Trillion Warning",
           "publisher": "Investor's Business Daily",
           "link": "https://www.investors.com/news/10-year-treasury-yield-gold-price-bessent-general-account-federal-reserve/?src=A00220&yptr=yahoo",
@@ -5758,18 +5770,6 @@
           "title": "Daily ETF Flows: $614M Flows Into GLD",
           "publisher": "etf.com",
           "link": "http://www.etf.com/sections/daily-etf-flows/daily-etf-flows-614m-flows-gld?utm_source=yahoo-finance&utm_medium=rss&utm_campaign=yahoo-finance-rss",
-          "when": "Aug 21"
-        },
-        {
-          "title": "Morgan Stanley Doubles Down on Gold After Breakout",
-          "publisher": "GuruFocus.com",
-          "link": "https://finance.yahoo.com/markets/commodities/articles/morgan-stanley-doubles-down-gold-201259751.html",
-          "when": "Aug 21"
-        },
-        {
-          "title": "Market Minute 8-21-26- Markets Mull Bessent's Next Move",
-          "publisher": "MoneyShow",
-          "link": "https://finance.yahoo.com/markets/articles/market-minute-8-21-26-141500743.html",
           "when": "Aug 21"
         }
       ]
@@ -6042,6 +6042,18 @@
           "when": "Aug 24"
         },
         {
+          "title": "Walmart (WMT) Leans Into AI Shopping And India Delivery Race",
+          "publisher": "Simply Wall St.",
+          "link": "https://finance.yahoo.com/technology/ai/articles/walmart-wmt-leans-ai-shopping-211048633.html",
+          "when": "Aug 24"
+        },
+        {
+          "title": "Walmart Has Gone Down While Target Is Up 62%. But Only 1 of These Dividend Kings Is a Buy in August.",
+          "publisher": "Motley Fool",
+          "link": "https://www.fool.com/investing/2026/08/24/walmart-has-gone-practically-nowhere-while-target/",
+          "when": "Aug 24"
+        },
+        {
           "title": "Stock Market Today: Dow Up As Trump Says This On Canada; Nvidia Shares Skid Despite AI Move (Live Coverage)",
           "publisher": "Investor's Business Daily",
           "link": "https://www.investors.com/market-trend/stock-market-today/dow-jones-sp500-nasdaq-economic-d-day-alibaba-stock-baba/?src=A00220&yptr=yahoo",
@@ -6057,18 +6069,6 @@
           "title": "Gen Xers fret over Social Security. \"I will likely be working in retirement.\"",
           "publisher": "CBS News",
           "link": "https://www.cbsnews.com/news/gen-x-social-security-retirement-savings/",
-          "when": "Aug 24"
-        },
-        {
-          "title": "Sector Update: Consumer Stocks Rise Late Afternoon",
-          "publisher": "MT Newswires",
-          "link": "https://finance.yahoo.com/markets/stocks/articles/sector-consumer-stocks-rise-afternoon-194430140.html",
-          "when": "Aug 24"
-        },
-        {
-          "title": "Best Buy Set to Top Second-Quarter Comparable Sales Views Amid Positive Credit Card Data, Wedbush Says",
-          "publisher": "MT Newswires",
-          "link": "https://finance.yahoo.com/markets/stocks/articles/best-buy-set-top-second-193818837.html",
           "when": "Aug 24"
         }
       ]
@@ -6136,9 +6136,21 @@
       ],
       "news": [
         {
+          "title": "What's at stake for Paramount, the Ellisons in Warner Bros. takeover bid",
+          "publisher": "Yahoo Finance Video",
+          "link": "https://finance.yahoo.com/video/whats-stake-paramount-ellisons-warner-213000825.html",
+          "when": "Aug 24"
+        },
+        {
           "title": "Semiconductor stocks drag S&P 500, Nasdaq lower: AlphaCheck",
           "publisher": "Yahoo Finance",
           "link": "https://finance.yahoo.com/markets/article/semiconductor-stocks-drag-sp-500-nasdaq-lower-alphacheck-135725875.html",
+          "when": "Aug 24"
+        },
+        {
+          "title": "Q2 Earnings Season Winds Down: 3 Companies That Broke Records",
+          "publisher": "Zacks",
+          "link": "https://finance.yahoo.com/markets/stocks/articles/q2-earnings-season-winds-down-210300828.html",
           "when": "Aug 24"
         },
         {
@@ -6157,18 +6169,6 @@
           "title": "Apple (AAPL) Cut Its Europe App Store Fees. Its Own Earnings Show Why It Had To",
           "publisher": "Insider Monkey",
           "link": "https://finance.yahoo.com/technology/articles/apple-aapl-cut-europe-app-202405814.html",
-          "when": "Aug 24"
-        },
-        {
-          "title": "Coinbase Debuts Tokenized Stocks On Base Network",
-          "publisher": "CryptoProwl",
-          "link": "https://www.cryptoprowl.com/releases/coinbase-debuts-tokenized-stocks-on-base-network-6512",
-          "when": "Aug 24"
-        },
-        {
-          "title": "Warren Buffett's Favorite 'Forever' Stock Hits A Buy Point After Big Rally",
-          "publisher": "Investor's Business Daily",
-          "link": "https://www.investors.com/news/warren-buffett-coca-cola-stock-favorite-forever-holding/?src=A00220&yptr=yahoo",
           "when": "Aug 24"
         }
       ]
@@ -6337,6 +6337,18 @@
           "when": "Aug 24"
         },
         {
+          "title": "Marvell Technology Stock More Than Tripled On A Roadmap It Had Been Publishing All Along",
+          "publisher": "Trefis",
+          "link": "https://www.trefis.com/articles/612589/marvell-technology-stock-more-than-tripled-on-a-roadmap-it-had-been-publishing-all-along/2026-08-24",
+          "when": "Aug 24"
+        },
+        {
+          "title": "Tech, Media & Telecom Roundup: Market Talk",
+          "publisher": "The Wall Street Journal",
+          "link": "https://www.wsj.com/business/tech-media-telecom-roundup-market-talk-72f73701?siteid=yhoof2&yptr=yahoo",
+          "when": "Aug 24"
+        },
+        {
           "title": "Micron, Seagate, Western Digital, Semtech, and Penguin Solutions Shares Are Falling, What You Need To Know",
           "publisher": "StockStory",
           "link": "https://finance.yahoo.com/markets/stocks/articles/micron-seagate-western-digital-semtech-200936690.html",
@@ -6352,18 +6364,6 @@
           "title": "TSMC Slides 2.3% as AI-Chip Confidence Suddenly Cracks",
           "publisher": "GuruFocus.com",
           "link": "https://finance.yahoo.com/technology/ai/articles/tsmc-slides-2-3-ai-194932749.html",
-          "when": "Aug 24"
-        },
-        {
-          "title": "Advanced Micro Devices (AMD) Is Down 6.5% After $4.75 Billion Debt Raise And Taiwan AI Push",
-          "publisher": "Simply Wall St.",
-          "link": "https://finance.yahoo.com/markets/stocks/articles/advanced-micro-devices-amd-down-191037909.html",
-          "when": "Aug 24"
-        },
-        {
-          "title": "Cerebras Systems (CBRS) Revenue Surges: Why Did CBRS Stock Crash, and What About AMD?",
-          "publisher": "Insider Monkey",
-          "link": "https://finance.yahoo.com/markets/stocks/articles/cerebras-systems-cbrs-revenue-surges-185707172.html",
           "when": "Aug 24"
         }
       ]
@@ -6534,6 +6534,12 @@
       "flags": [],
       "news": [
         {
+          "title": "What's at stake for Paramount, the Ellisons in Warner Bros. takeover bid",
+          "publisher": "Yahoo Finance Video",
+          "link": "https://finance.yahoo.com/video/whats-stake-paramount-ellisons-warner-213000825.html",
+          "when": "Aug 24"
+        },
+        {
           "title": "Semiconductor stocks drag S&P 500, Nasdaq lower: AlphaCheck",
           "publisher": "Yahoo Finance",
           "link": "https://finance.yahoo.com/markets/article/semiconductor-stocks-drag-sp-500-nasdaq-lower-alphacheck-135725875.html",
@@ -6561,12 +6567,6 @@
           "title": "Nvidia Reports Earnings on Aug. 26. Here Are 3 Other Artificial Intelligence (AI) Chip Stocks I'll Be Watching Instead.",
           "publisher": "Motley Fool",
           "link": "https://www.fool.com/investing/2026/08/24/nvidia-reports-earnings-on-aug-26-here-are-3-other/",
-          "when": "Aug 24"
-        },
-        {
-          "title": "Marvell, Micron, SpaceX, XPeng, Tesla, Moderna, and More Stocks That Explain Today\u2019s Market",
-          "publisher": "Barrons.com",
-          "link": "https://www.barrons.com/articles/stock-movers-a25cb190?siteid=yhoof2&yptr=yahoo",
           "when": "Aug 24"
         }
       ]
@@ -7086,44 +7086,7 @@
           "text": "Dilution \u2014 shares +6% YoY"
         }
       ],
-      "news": [
-        {
-          "title": "Bloom Energy vs. Plug Power: 1 Stock Clearly Wins the AI Revenue Race",
-          "publisher": "Motley Fool",
-          "link": "https://www.fool.com/coverage/charts/2026/08/24/bloom-energy-vs-plug-power-1-stock-clearly-wins-the-ai-revenue-race/",
-          "when": "Aug 24"
-        },
-        {
-          "title": "Nancy Pelosi Disclosure Reveals Two Fresh AI Stock Bets",
-          "publisher": "GuruFocus.com",
-          "link": "https://finance.yahoo.com/markets/stocks/articles/nancy-pelosi-disclosure-reveals-two-183432115.html",
-          "when": "Aug 24"
-        },
-        {
-          "title": "Nancy Pelosi Takes Long Positions In BE, INTC Stock",
-          "publisher": "Stocktwits",
-          "link": "https://stocktwits.com/news-articles/markets/equity/nancy-pelosi-takes-long-positions-in-be-intc-stock/cZYKoutRJFK",
-          "when": "Aug 24"
-        },
-        {
-          "title": "Plug Power Falls 4%, Bloom Energy Moves Up as the Hydrogen Trade Divides",
-          "publisher": "24/7 Wall St.",
-          "link": "https://247wallst.com/investing/2026/08/24/plug-power-falls-4-bloom-energy-moves-up-as-the-hydrogen-trade-divides/",
-          "when": "Aug 24"
-        },
-        {
-          "title": "Nancy Pelosi Adds Intel and Bloom Energy Positions",
-          "publisher": "GuruFocus.com",
-          "link": "https://finance.yahoo.com/markets/stocks/articles/nancy-pelosi-adds-intel-bloom-172107014.html",
-          "when": "Aug 24"
-        },
-        {
-          "title": "Analysts See Nearly 40% Gains In Nancy Pelosi's Latest Stock Buys",
-          "publisher": "BeInCrypto",
-          "link": "https://beincrypto.com/pelosi-stock-buys-analyst-price-targets/",
-          "when": "Aug 24"
-        }
-      ]
+      "news": []
     },
     "IREN": {
       "ok": true,
@@ -7385,6 +7348,12 @@
       "flags": [],
       "news": [
         {
+          "title": "Nasdaq\u2019s Biggest Losers Today",
+          "publisher": "The Wall Street Journal",
+          "link": "https://www.wsj.com/livecoverage/stock-market-today-dow-sp-500-nasdaq-08-24-2026/card/the-nasdaq-s-biggest-losers-today-QgIez3jwTwA9H9qbumLC?siteid=yhoof2&yptr=yahoo",
+          "when": "Aug 24"
+        },
+        {
           "title": "Nebius Group (NBIS) Just Posted 514% Revenue Growth. Can CoreWeave (CRWV)\u2019s Numbers Compete?",
           "publisher": "Insider Monkey",
           "link": "https://finance.yahoo.com/markets/stocks/articles/nebius-group-nbis-just-posted-174505539.html",
@@ -7400,12 +7369,6 @@
           "title": "Forget CoreWeave \u2014 This Is the AI Stock You Should Instead Be Buying",
           "publisher": "24/7 Wall St.",
           "link": "https://247wallst.com/investing/2026/08/24/forget-coreweave-this-is-the-ai-stock-you-should-instead-be-buying/",
-          "when": "Aug 24"
-        },
-        {
-          "title": "Nasdaq\u2019s Biggest Losers This Morning",
-          "publisher": "The Wall Street Journal",
-          "link": "https://www.wsj.com/livecoverage/stock-market-today-dow-sp-500-nasdaq-08-24-2026/card/the-nasdaq-s-biggest-losers-today-QgIez3jwTwA9H9qbumLC?siteid=yhoof2&yptr=yahoo",
           "when": "Aug 24"
         },
         {
@@ -71059,7 +71022,7 @@
             {
               "k": 207.5,
               "d": 0.461,
-              "b": 6.7,
+              "b": 6.75,
               "a": 7.05,
               "iv": 100.6,
               "oi": 83
@@ -71277,8 +71240,8 @@
             {
               "k": 172.5,
               "d": -0.052,
-              "b": 0.45,
-              "a": 0.47,
+              "b": 0.46,
+              "a": 0.48,
               "iv": 100.0,
               "oi": 127
             },
@@ -71326,7 +71289,7 @@
               "k": 187.5,
               "d": -0.181,
               "b": 2.16,
-              "a": 2.31,
+              "a": 2.29,
               "iv": 96.3,
               "oi": 126
             },
@@ -79603,7 +79566,7 @@
       }
     ]
   },
-  "generated_at": "2026-08-24T21:00:25+00:00",
+  "generated_at": "2026-08-24T21:36:59+00:00",
   "universe": {
     "wheel": 16,
     "growth": 15,
