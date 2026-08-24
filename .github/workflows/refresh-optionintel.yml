@@ -52,7 +52,11 @@ jobs:
             git config user.name  "optionintel-bot"
             git config user.email "optionintel-bot@users.noreply.github.com"
             git add site/data/signals.json
-            git commit -m "data: refresh signals [skip ci]"
+            # NOTE: no "[skip ci]" — Cloudflare Pages SKIPS commits with that marker, which was
+            # silently stopping every data refresh from deploying to optionintel.app (the site only
+            # updated on code pushes). No GitHub workflow triggers on the site/data path, so a plain
+            # commit here causes no Actions loop — it just lets Cloudflare publish the fresh data.
+            git commit -m "data: refresh signals"
             # Race-safe push: a code-push-triggered refresh and the 30-min cron can overlap, so
             # another run may land first. On rejection, rebase our data commit onto the latest
             # main (favouring our freshly-generated file) and retry, instead of failing the run.
