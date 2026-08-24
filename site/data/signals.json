@@ -1768,29 +1768,29 @@
     },
     {
       "label": "DXY",
-      "price": 98.84400177001953,
-      "pct": 0.04453311427397022,
+      "price": 98.8239974975586,
+      "pct": 0.024285875566443238,
       "prefix": "",
       "is_yield": false
     },
     {
       "label": "Crude Oil",
-      "price": 85.58999633789062,
-      "pct": -1.6884921455617707,
+      "price": 85.61000061035156,
+      "pct": -1.6655145748956657,
       "prefix": "$",
       "is_yield": false
     },
     {
       "label": "Gold",
-      "price": 4694.2998046875,
-      "pct": 1.5181268906101497,
+      "price": 4694.39990234375,
+      "pct": 1.5202915854510168,
       "prefix": "$",
       "is_yield": false
     },
     {
       "label": "Bitcoin",
-      "price": 77213.390625,
-      "pct": 0.1686180666500059,
+      "price": 76766.7265625,
+      "pct": -0.4108374075689314,
       "prefix": "$",
       "is_yield": false
     },
@@ -1879,8 +1879,8 @@
     {
       "label": "Digital Assets",
       "ticker": "BTC",
-      "pct": 0.1686180666500059,
-      "price": 77213.390625
+      "pct": -0.4108374075689314,
+      "price": 76766.7265625
     }
   ],
   "fundamentals": {
@@ -1947,6 +1947,44 @@
         {
           "sev": "\ud83d\udfe1",
           "text": "Rich valuation \u2014 P/E 336"
+        }
+      ],
+      "news": [
+        {
+          "title": "A New SEC Filing Reveals Exactly How Many Shares of SpaceX Elon Musk Owns. Here's Why It Matters.",
+          "publisher": "Motley Fool",
+          "link": "https://www.fool.com/investing/2026/08/23/a-new-sec-filing-reveals-exactly-how-many-shares-o/",
+          "when": "Aug 24"
+        },
+        {
+          "title": "Tesla just set a date for its riskiest launch yet",
+          "publisher": "TheStreet",
+          "link": "https://www.thestreet.com/automotive/tesla-just-set-a-date-for-its-riskiest-launch-yet",
+          "when": "Aug 24"
+        },
+        {
+          "title": "Tesla Maintained Its Majority of the U.S. EV Market in Q2, but That's Not All You Need to Know",
+          "publisher": "Motley Fool",
+          "link": "https://www.fool.com/investing/2026/08/23/tesla-maintained-its-majority-of-the-us-ev-market/",
+          "when": "Aug 23"
+        },
+        {
+          "title": "The $1.7 Trillion Job Apocalypse: Why Investors Can\u2019t Ignore Humanoid Robots",
+          "publisher": "24/7 Wall St.",
+          "link": "https://247wallst.com/investing/2026/08/23/the-1-7-trillion-job-apocalypse-why-investors-cant-ignore-humanoid-robots/",
+          "when": "Aug 23"
+        },
+        {
+          "title": "500 Reasons to Buy Einride Stock Today",
+          "publisher": "Barchart",
+          "link": "https://www.barchart.com/story/news/3992216/500-reasons-to-buy-einride-stock-today",
+          "when": "Aug 23"
+        },
+        {
+          "title": "Tesla Stock in 2027: Why I Think It Still Has Room to Run",
+          "publisher": "Motley Fool",
+          "link": "https://www.fool.com/investing/2026/08/23/tesla-stock-in-2027-why-i-think-tsla-still-has-roo/",
+          "when": "Aug 23"
         }
       ]
     },
@@ -2026,6 +2064,44 @@
           "sev": "\ud83d\udfe1",
           "text": "Rich valuation \u2014 P/E 48"
         }
+      ],
+      "news": [
+        {
+          "title": "Here\u2019s What You Should Buy Over PayPal Holdings, Inc. (NASDAQ:PYPL) According To Jim Cramer",
+          "publisher": "Insider Monkey",
+          "link": "https://finance.yahoo.com/markets/stocks/articles/buy-over-paypal-holdings-inc-235243531.html",
+          "when": "Aug 22"
+        },
+        {
+          "title": "One Wall Street Analyst Thinks SoFi Stock Could Jump 20%. Here\u2019s Why.",
+          "publisher": "24/7 Wall St.",
+          "link": "https://247wallst.com/investing/2026/08/21/one-wall-street-analyst-thinks-sofi-stock-could-jump-20-heres-why/",
+          "when": "Aug 21"
+        },
+        {
+          "title": "SoFi Climbs 5% as Robinhood Spikes 13%, Affirm Ticks Up: Is There a Crypto Connection Here?",
+          "publisher": "24/7 Wall St.",
+          "link": "https://247wallst.com/investing/2026/08/21/sofi-climbs-5-as-robinhood-spikes-13-affirm-ticks-up-is-there-a-crypto-connection-here/",
+          "when": "Aug 21"
+        },
+        {
+          "title": "Dave's Marketing Push Accelerates: Can CAC Stay Flat as Members Grow?",
+          "publisher": "Zacks",
+          "link": "https://finance.yahoo.com/small-business/articles/daves-marketing-push-accelerates-cac-144900362.html",
+          "when": "Aug 21"
+        },
+        {
+          "title": "Dave's CashAI V6: Can Smarter Underwriting Lift ARPU?",
+          "publisher": "Zacks",
+          "link": "https://finance.yahoo.com/markets/stocks/articles/daves-cashai-v6-smarter-underwriting-150900028.html",
+          "when": "Aug 20"
+        },
+        {
+          "title": "Figure's Take Rate Is Shrinking By Design",
+          "publisher": "Trefis",
+          "link": "https://www.trefis.com/articles/611912/figures-take-rate-is-shrinking-by-design/2026-08-19",
+          "when": "Aug 20"
+        }
       ]
     },
     "NVDA": {
@@ -2088,6 +2164,44 @@
           "sev": "\ud83d\udfe1",
           "text": "Rich valuation \u2014 P/E 44"
         }
+      ],
+      "news": [
+        {
+          "title": "Nvidia's Q2 earnings to test resurgent AI trade",
+          "publisher": "Yahoo Finance",
+          "link": "https://finance.yahoo.com/news/nvidias-q2-earnings-to-test-resurgent-ai-trade-112502189.html",
+          "when": "Aug 23"
+        },
+        {
+          "title": "Nvidia earnings and Jackson Hole: What to watch this week",
+          "publisher": "Yahoo Finance",
+          "link": "https://finance.yahoo.com/markets/article/nvidia-earnings-and-jackson-hole-what-to-watch-this-week-100000082.html",
+          "when": "Aug 23"
+        },
+        {
+          "title": "How Farmers & Merchants Bancorp\u2019s Dividend Hike Shapes FMCB\u2019s Capital Return Strategy for Investors",
+          "publisher": "Simply Wall St.",
+          "link": "https://finance.yahoo.com/markets/stocks/articles/farmers-merchants-bancorp-dividend-hike-042949456.html",
+          "when": "Aug 24"
+        },
+        {
+          "title": "Sandisk Rode an Estimated 70% Jump in NAND Prices. TrendForce Sees 10% to 15% This Quarter.",
+          "publisher": "Motley Fool",
+          "link": "https://www.fool.com/investing/2026/08/23/sandisk-rode-an-estimated-70-jump-in-nand-prices-trendforce-sees-10-to-15-this-quarter/",
+          "when": "Aug 24"
+        },
+        {
+          "title": "$92 Billion Nvidia Earnings Could Make or Break the AI Trade",
+          "publisher": "BeInCrypto",
+          "link": "https://beincrypto.com/nvidia-earnings-92-billion-ai-trade/",
+          "when": "Aug 24"
+        },
+        {
+          "title": "How S&P 500, Nasdaq, Dow Futures Are Moving As Trump\u2019s \u2018Economic D-Day\u2019 On Iran, Nvidia Earnings Loom",
+          "publisher": "Stocktwits",
+          "link": "https://stocktwits.com/news-articles/markets/equity/how-s-and-p-500-nasdaq-dow-futures-are-moving-as-trump-s-economic-d-day-on-iran-nvidia-earnings-loom/cZYKTMXRJn2",
+          "when": "Aug 24"
+        }
       ]
     },
     "AMZN": {
@@ -2145,7 +2259,45 @@
           "verdict": "\ud83d\udfe1"
         }
       },
-      "flags": []
+      "flags": [],
+      "news": [
+        {
+          "title": "Nvidia's Q2 earnings to test resurgent AI trade",
+          "publisher": "Yahoo Finance",
+          "link": "https://finance.yahoo.com/news/nvidias-q2-earnings-to-test-resurgent-ai-trade-112502189.html",
+          "when": "Aug 23"
+        },
+        {
+          "title": "WMT Stock Heads For Fourth Month In Red: Walmart Reportedly Bets On Under-$25 Fashion Line To Take On Amazon",
+          "publisher": "Stocktwits",
+          "link": "https://stocktwits.com/news-articles/markets/equity/wmt-stock-heads-for-fourth-month-in-red-walmart-reportedly-bets-on-under-25-fashion-line-to-take-on-amazon/cZYKTyZRJnP",
+          "when": "Aug 24"
+        },
+        {
+          "title": "Elon Musk just got into another airline disagreement",
+          "publisher": "TheStreet",
+          "link": "https://www.thestreet.com/technology/elon-musk-just-got-into-another-airline-disagreement-delta-airlines-amazon",
+          "when": "Aug 24"
+        },
+        {
+          "title": "Peter Thiel\u2019s Fund Shows the Next Big AI Bet Is Power, Not Chips",
+          "publisher": "BeInCrypto",
+          "link": "https://beincrypto.com/peter-thiel-13f-ai-power-bet/",
+          "when": "Aug 24"
+        },
+        {
+          "title": "UPS Stopped Carrying 2 Million Amazon Packages a Day. Amazon Still Has to Move Them.",
+          "publisher": "Motley Fool",
+          "link": "https://www.fool.com/investing/2026/08/23/ups-stopped-carrying-2-million-amazon-packages-a-day-amazon-still-has-to-move-them/",
+          "when": "Aug 24"
+        },
+        {
+          "title": "Novo Nordisk Expands Its AI Push With AWS, But Can It Accelerate Drug Discovery?",
+          "publisher": "Insider Monkey",
+          "link": "https://finance.yahoo.com/healthcare/articles/novo-nordisk-expands-ai-push-234353024.html",
+          "when": "Aug 23"
+        }
+      ]
     },
     "MSFT": {
       "ok": true,
@@ -2202,7 +2354,45 @@
           "verdict": "\ud83d\udfe1"
         }
       },
-      "flags": []
+      "flags": [],
+      "news": [
+        {
+          "title": "Nvidia's Q2 earnings to test resurgent AI trade",
+          "publisher": "Yahoo Finance",
+          "link": "https://finance.yahoo.com/news/nvidias-q2-earnings-to-test-resurgent-ai-trade-112502189.html",
+          "when": "Aug 23"
+        },
+        {
+          "title": "How Farmers & Merchants Bancorp\u2019s Dividend Hike Shapes FMCB\u2019s Capital Return Strategy for Investors",
+          "publisher": "Simply Wall St.",
+          "link": "https://finance.yahoo.com/markets/stocks/articles/farmers-merchants-bancorp-dividend-hike-042949456.html",
+          "when": "Aug 24"
+        },
+        {
+          "title": "NVDA Stock Comes Off Rough Week: AI Darling Reportedly Plans Major Price Hike As Q2 Earnings Loom",
+          "publisher": "Stocktwits",
+          "link": "https://stocktwits.com/news-articles/markets/equity/nvda-stock-comes-off-rough-week-ai-darling-reportedly-plans-major-price-hike-as-q2-earnings-loom/cZYKTZqRJnc",
+          "when": "Aug 24"
+        },
+        {
+          "title": "Bill Gates' Foundation Holds Berkshire Hathaway as Its Top Stock, a Signal of Its Preference for Steady Compounders Over Flashy Tech",
+          "publisher": "Motley Fool",
+          "link": "https://www.fool.com/investing/2026/08/23/bill-gates-foundation-holds-berkshire-hathaway-as/",
+          "when": "Aug 24"
+        },
+        {
+          "title": "This Company Just Paid Out $6.8 Billion. Its AI Bill Was 4x That",
+          "publisher": "24/7 Wall St.",
+          "link": "https://247wallst.com/investing/2026/08/23/this-company-just-paid-out-6-8-billion-its-ai-bill-was-4x-that/",
+          "when": "Aug 23"
+        },
+        {
+          "title": "Microsoft (MSFT) Gets New Australia News Rules As AI Commerce Push Deepens",
+          "publisher": "Simply Wall St.",
+          "link": "https://finance.yahoo.com/technology/ai/articles/microsoft-msft-gets-australia-news-170738761.html",
+          "when": "Aug 23"
+        }
+      ]
     },
     "CEG": {
       "ok": true,
@@ -2259,7 +2449,45 @@
           "verdict": "\ud83d\udfe1"
         }
       },
-      "flags": []
+      "flags": [],
+      "news": [
+        {
+          "title": "The AI Debt Boom Is Helping Push Everyone\u2019s Cost of Capital Higher",
+          "publisher": "24/7 Wall St.",
+          "link": "https://247wallst.com/investing/2026/08/23/the-ai-debt-boom-is-helping-push-everyones-cost-of-capital-higher/",
+          "when": "Aug 23"
+        },
+        {
+          "title": "2 Energy Stocks Riding the Data Center Power Crunch",
+          "publisher": "Motley Fool",
+          "link": "https://www.fool.com/investing/2026/08/23/2-energy-stocks-riding-the-data-center-power-crunc/",
+          "when": "Aug 23"
+        },
+        {
+          "title": "Constellation Energy vs. Vistra: Who Leads the AI Power Revenue Race?",
+          "publisher": "Motley Fool",
+          "link": "https://www.fool.com/coverage/charts/2026/08/21/constellation-energy-vs-vistra-who-leads-the-ai-power-revenue-race/",
+          "when": "Aug 21"
+        },
+        {
+          "title": "This Week In Energy Transition - AI Powers the Rise of Green Hydrogen Investments",
+          "publisher": "Simply Wall St.",
+          "link": "https://finance.yahoo.com/energy/articles/week-energy-transition-ai-powers-113703972.html",
+          "when": "Aug 20"
+        },
+        {
+          "title": "Nuclear Stocks Plunge Tuesday: Oklo Down 5%, Constellation Energy Down 4%, NuScale Down 5%",
+          "publisher": "24/7 Wall St.",
+          "link": "https://247wallst.com/investing/2026/08/18/nuclear-stocks-plunge-tuesday-oklo-down-5-constellation-energy-down-4-nuscale-down-5/",
+          "when": "Aug 19"
+        },
+        {
+          "title": "Uranium ETFs Just Crashed 30 Percent While AI Power Demand Keeps Breaking Records",
+          "publisher": "24/7 Wall St.",
+          "link": "https://247wallst.com/investing/2026/08/18/uranium-etfs-just-crashed-30-percent-while-ai-power-demand-keeps-breaking-records/",
+          "when": "Aug 18"
+        }
+      ]
     },
     "VRT": {
       "ok": true,
@@ -2320,6 +2548,44 @@
         {
           "sev": "\ud83d\udfe1",
           "text": "Rich valuation \u2014 P/E 77"
+        }
+      ],
+      "news": [
+        {
+          "title": "The AI Debt Boom Is Helping Push Everyone\u2019s Cost of Capital Higher",
+          "publisher": "24/7 Wall St.",
+          "link": "https://247wallst.com/investing/2026/08/23/the-ai-debt-boom-is-helping-push-everyones-cost-of-capital-higher/",
+          "when": "Aug 23"
+        },
+        {
+          "title": "3 Data Center Stocks Powering the AI Buildout",
+          "publisher": "24/7 Wall St.",
+          "link": "https://247wallst.com/investing/2026/08/23/3-data-center-stocks-powering-the-ai-buildout/",
+          "when": "Aug 23"
+        },
+        {
+          "title": "The veteran Fortune 500 CEO who turned an 80-year-old AC company into an AI darling",
+          "publisher": "Fortune",
+          "link": "https://finance.yahoo.com/technology/ai/articles/veteran-fortune-500-ceo-turned-080000432.html",
+          "when": "Aug 22"
+        },
+        {
+          "title": "The AI Spending Boom Is Outrunning Wall Street Estimates",
+          "publisher": "Barrons.com",
+          "link": "https://www.barrons.com/articles/ai-spending-capex-vertiv-western-digital-coreweave-arista-8c3cf5b3?siteid=yhoof2&yptr=yahoo",
+          "when": "Aug 22"
+        },
+        {
+          "title": "Is Vertiv Holdings Co (VRT) Fairly Valued On Its OCP APAC Summit Appearance?",
+          "publisher": "Simply Wall St.",
+          "link": "https://finance.yahoo.com/markets/stocks/articles/vertiv-holdings-co-vrt-fairly-211135238.html",
+          "when": "Aug 21"
+        },
+        {
+          "title": "3 Large-Cap Stocks on Our Buy List",
+          "publisher": "StockStory",
+          "link": "https://finance.yahoo.com/markets/stocks/articles/3-large-cap-stocks-buy-153947019.html",
+          "when": "Aug 21"
         }
       ]
     },
@@ -2383,6 +2649,44 @@
           "sev": "\ud83d\udd34",
           "text": "Liquidity tight \u2014 current ratio 0.72"
         }
+      ],
+      "news": [
+        {
+          "title": "Darden Restaurants Just Hit a 52-Week High\u2013Is the Olive Garden Comeback Story Legit?",
+          "publisher": "MarketBeat",
+          "link": "https://www.marketbeat.com/articles/darden-restaurants-just-hit-a-52-week-high-is-the-olive-garden-comeback-story-legit/?utm_source=yahoofinance&utm_medium=yahoofinance",
+          "when": "Aug 22"
+        },
+        {
+          "title": "Chipotle and Yum! Look Like Bargains After Food-Safety Selloff",
+          "publisher": "Barrons.com",
+          "link": "https://www.barrons.com/articles/chipotle-taco-bell-yum-stock-cyclospora-jalapenos-f89f08e5?siteid=yhoof2&yptr=yahoo",
+          "when": "Aug 21"
+        },
+        {
+          "title": "Trump\u2019s 90-Day Inflation Band-Aid: Why His Beef Tariff Pause Won\u2019t Help Consumers",
+          "publisher": "24/7 Wall St.",
+          "link": "https://247wallst.com/investing/2026/08/21/trumps-90-day-inflation-band-aid-why-his-beef-tariff-pause-wont-help-consumers/",
+          "when": "Aug 21"
+        },
+        {
+          "title": "2 Cash-Producing Stocks to Target This Week and 1 We Turn Down",
+          "publisher": "StockStory",
+          "link": "https://finance.yahoo.com/markets/stocks/articles/2-cash-producing-stocks-target-113147184.html",
+          "when": "Aug 21"
+        },
+        {
+          "title": "Which Restaurant Stock Is Dominating in 2026: McDonald\u2019s, Chipotle, or Starbucks?",
+          "publisher": "24/7 Wall St.",
+          "link": "https://247wallst.com/investing/2026/08/20/which-restaurant-stock-has-dominated-in-2026-mcdonalds-chipotle-or-starbucks/",
+          "when": "Aug 20"
+        },
+        {
+          "title": "Can MCD's Value Reset Turn U.S. Traffic Weakness Into Sales Growth?",
+          "publisher": "Zacks",
+          "link": "https://finance.yahoo.com/markets/stocks/articles/mcds-value-reset-turn-u-161000004.html",
+          "when": "Aug 20"
+        }
       ]
     },
     "GLD": {
@@ -2435,7 +2739,45 @@
           "verdict": "\u26aa"
         }
       },
-      "flags": []
+      "flags": [],
+      "news": [
+        {
+          "title": "Daily ETF Flows: $614M Flows Into GLD",
+          "publisher": "etf.com",
+          "link": "http://www.etf.com/sections/daily-etf-flows/daily-etf-flows-614m-flows-gld?utm_source=yahoo-finance&utm_medium=rss&utm_campaign=yahoo-finance-rss",
+          "when": "Aug 21"
+        },
+        {
+          "title": "Morgan Stanley Doubles Down on Gold After Breakout",
+          "publisher": "GuruFocus.com",
+          "link": "https://finance.yahoo.com/markets/commodities/articles/morgan-stanley-doubles-down-gold-201259751.html",
+          "when": "Aug 21"
+        },
+        {
+          "title": "Market Minute 8-21-26- Markets Mull Bessent's Next Move",
+          "publisher": "MoneyShow",
+          "link": "https://finance.yahoo.com/markets/articles/market-minute-8-21-26-141500743.html",
+          "when": "Aug 21"
+        },
+        {
+          "title": "65-Year Old Retired Teacher Wants to Burn $100,000 to Delay Social Security. One Detail Means He Doesn\u2019t Need To",
+          "publisher": "24/7 Wall St.",
+          "link": "https://247wallst.com/personal-finance/social-security/2026/08/21/65-year-old-retired-teacher-wants-to-burn-100000-to-delay-social-security-one-detail-means-he-doesnt-need-to/",
+          "when": "Aug 21"
+        },
+        {
+          "title": "Exchange-Traded Funds, Equity Futures Higher Pre-Bell Friday as Bitcoin Moves Past $77,000",
+          "publisher": "MT Newswires",
+          "link": "https://finance.yahoo.com/markets/articles/exchange-traded-funds-equity-futures-131505482.html",
+          "when": "Aug 21"
+        },
+        {
+          "title": "Gold Jumps After Surprise Treasury Move",
+          "publisher": "GuruFocus.com",
+          "link": "https://finance.yahoo.com/markets/commodities/articles/gold-jumps-surprise-treasury-move-165903080.html",
+          "when": "Aug 20"
+        }
+      ]
     },
     "SLV": {
       "ok": true,
@@ -2495,6 +2837,44 @@
         {
           "sev": "\ud83d\udfe1",
           "text": "Revenue shrinking \u2014 -536% YoY"
+        }
+      ],
+      "news": [
+        {
+          "title": "Exchange-Traded Funds, Equity Futures Higher Pre-Bell Friday as Bitcoin Moves Past $77,000",
+          "publisher": "MT Newswires",
+          "link": "https://finance.yahoo.com/markets/articles/exchange-traded-funds-equity-futures-131505482.html",
+          "when": "Aug 21"
+        },
+        {
+          "title": "Exchange-Traded Funds Lower, Equity Futures Mixed Pre-Bell Thursday Amid Renewed Inflation Concerns",
+          "publisher": "MT Newswires",
+          "link": "https://finance.yahoo.com/markets/stocks/articles/exchange-traded-funds-lower-equity-131221407.html",
+          "when": "Aug 20"
+        },
+        {
+          "title": "Exchange-Traded Funds Higher, Equity Futures Mixed Pre-Bell Wednesday Ahead of Fed Meeting Minutes' Release",
+          "publisher": "MT Newswires",
+          "link": "https://finance.yahoo.com/markets/stocks/articles/exchange-traded-funds-higher-equity-131807943.html",
+          "when": "Aug 19"
+        },
+        {
+          "title": "Exchange-Traded Funds Lower, Equity Futures Mixed Pre-Bell Tuesday Amid Rising Oil Prices",
+          "publisher": "MT Newswires",
+          "link": "https://finance.yahoo.com/markets/stocks/articles/exchange-traded-funds-lower-equity-130233447.html",
+          "when": "Aug 18"
+        },
+        {
+          "title": "Exchange-Traded Funds Higher, Equity Futures Mixed Pre-Bell Monday Amid Lower Rate Hike Expectations",
+          "publisher": "MT Newswires",
+          "link": "https://finance.yahoo.com/markets/stocks/articles/exchange-traded-funds-higher-equity-131346618.html",
+          "when": "Aug 17"
+        },
+        {
+          "title": "Investors Are Betting Big on Gold Again, but Silver Is Still the Better Buy",
+          "publisher": "24/7 Wall St.",
+          "link": "https://247wallst.com/investing/2026/08/14/investors-are-betting-big-on-gold-again-but-silver-is-still-the-better-buy/",
+          "when": "Aug 14"
         }
       ]
     },
@@ -2558,6 +2938,44 @@
           "sev": "\ud83d\udfe1",
           "text": "Rich valuation \u2014 P/E 286"
         }
+      ],
+      "news": [
+        {
+          "title": "Peter Thiel\u2019s Fund Shows the Next Big AI Bet Is Power, Not Chips",
+          "publisher": "BeInCrypto",
+          "link": "https://beincrypto.com/peter-thiel-13f-ai-power-bet/",
+          "when": "Aug 24"
+        },
+        {
+          "title": "The AI Debt Boom Is Helping Push Everyone\u2019s Cost of Capital Higher",
+          "publisher": "24/7 Wall St.",
+          "link": "https://247wallst.com/investing/2026/08/23/the-ai-debt-boom-is-helping-push-everyones-cost-of-capital-higher/",
+          "when": "Aug 23"
+        },
+        {
+          "title": "Trump Continues Trading Stocks at Warp Speed: Berkshire Bought, Meta Sold",
+          "publisher": "24/7 Wall St.",
+          "link": "https://247wallst.com/investing/2026/08/23/trump-continues-trading-stocks-at-warp-speed-berkshire-bought-meta-sold/",
+          "when": "Aug 23"
+        },
+        {
+          "title": "Palantir Keeps 55 Cents of Every Revenue Dollar as Profit",
+          "publisher": "Motley Fool",
+          "link": "https://www.fool.com/investing/2026/08/22/palantir-keeps-55-cents-of-every-revenue-dollar-as-profit/",
+          "when": "Aug 23"
+        },
+        {
+          "title": "Palantir, Freeport Clear Buy Points, Lead Five Stocks To Watch",
+          "publisher": "Investor's Business Daily",
+          "link": "https://www.investors.com/news/palantir-stock-freeport-mcmoran-stocks-near-buy-points/?src=A00220&yptr=yahoo",
+          "when": "Aug 22"
+        },
+        {
+          "title": "MarketBeat Week in Review \u2013 08/17 - 08/21",
+          "publisher": "MarketBeat",
+          "link": "https://www.marketbeat.com/articles/marketbeat-week-in-review-08-17-08-21/?utm_source=yahoofinance&utm_medium=yahoofinance",
+          "when": "Aug 22"
+        }
       ]
     },
     "WMT": {
@@ -2619,6 +3037,44 @@
         {
           "sev": "\ud83d\udd34",
           "text": "Liquidity tight \u2014 current ratio 0.77"
+        }
+      ],
+      "news": [
+        {
+          "title": "Walmart isn't losing any retail war",
+          "publisher": "Yahoo Finance",
+          "link": "https://finance.yahoo.com/markets/article/walmart-isnt-losing-any-retail-war-123000472.html",
+          "when": "Aug 23"
+        },
+        {
+          "title": "WMT Stock Heads For Fourth Month In Red: Walmart Reportedly Bets On Under-$25 Fashion Line To Take On Amazon",
+          "publisher": "Stocktwits",
+          "link": "https://stocktwits.com/news-articles/markets/equity/wmt-stock-heads-for-fourth-month-in-red-walmart-reportedly-bets-on-under-25-fashion-line-to-take-on-amazon/cZYKTyZRJnP",
+          "when": "Aug 24"
+        },
+        {
+          "title": "Walmart stock price target reset by JPMorgan after earnings",
+          "publisher": "TheStreet",
+          "link": "https://www.thestreet.com/investing/stocks/jpmorgan-cuts-wmt-walmart-stock-price-target",
+          "when": "Aug 24"
+        },
+        {
+          "title": "BABA, NVDA, MRVL, WMT, SPCX: Why Retail Traders Couldn\u2019t Take Their Eyes Off These Stocks Last Week",
+          "publisher": "Stocktwits",
+          "link": "https://stocktwits.com/news-articles/markets/equity/baba-nvda-mrvl-wmt-spcx-why-retail-traders-couldn-t-take-their-eyes-off-these-stocks-last-week/cZYKGYPRJV6",
+          "when": "Aug 24"
+        },
+        {
+          "title": "Walmart Just Posted Its Biggest One-Day Drop Since 2022. History Says What Its Big Drops Have Been Worth.",
+          "publisher": "Motley Fool",
+          "link": "https://www.fool.com/investing/2026/08/23/walmart-just-posted-its-biggest-one-day-drop-since-2022-history-says-what-its-big-drops-have-been-worth/",
+          "when": "Aug 23"
+        },
+        {
+          "title": "Walmart Fell 9%. I\u2019m Not Sure This Is Just a Walmart Problem",
+          "publisher": "Barchart",
+          "link": "https://www.barchart.com/story/news/3992803/walmart-fell-9-im-not-sure-this-is-just-a-walmart-problem",
+          "when": "Aug 23"
         }
       ]
     },
@@ -2682,6 +3138,44 @@
           "sev": "\ud83d\udfe1",
           "text": "Rich valuation \u2014 P/E 41"
         }
+      ],
+      "news": [
+        {
+          "title": "A $650 smartphone takes aim at Apple and Samsung\u2019s surging repair costs",
+          "publisher": "TheStreet",
+          "link": "https://www.thestreet.com/retail/a-650-smartphone-takes-aim-at-apple-and-samsungs-surging-repair-costs",
+          "when": "Aug 24"
+        },
+        {
+          "title": "Nvidia\u2019s 15% Price Hike Reveals the Hidden Cost of the AI Boom",
+          "publisher": "24/7 Wall St.",
+          "link": "https://247wallst.com/investing/2026/08/23/nvidias-15-price-hike-reveals-the-hidden-cost-of-the-ai-boom/",
+          "when": "Aug 23"
+        },
+        {
+          "title": "Prediction: Nvidia Will Be a $6 Trillion Company Before 2026 Is Over and Its Run Kickstarts This Week",
+          "publisher": "Motley Fool",
+          "link": "https://www.fool.com/investing/2026/08/23/prediction-nvidia-will-be-a-6-trillion-company-bef/",
+          "when": "Aug 23"
+        },
+        {
+          "title": "4 Low-Cost ETFs Every Investor Should Own",
+          "publisher": "24/7 Wall St.",
+          "link": "https://247wallst.com/investing/2026/08/23/4-low-cost-etfs-every-investor-should-own/",
+          "when": "Aug 23"
+        },
+        {
+          "title": "3 Tech Compounders Fit for Warren Buffett's Portfolio",
+          "publisher": "Motley Fool",
+          "link": "https://www.fool.com/investing/2026/08/23/tech-compounders-fit-for-warren-buffett-portfolio/",
+          "when": "Aug 23"
+        },
+        {
+          "title": "Apple Cut Its Standard EU App Store Commission From 30% to 26%",
+          "publisher": "Motley Fool",
+          "link": "https://www.fool.com/investing/2026/08/22/apple-cut-its-standard-eu-app-store-commission-from-30-to-26/",
+          "when": "Aug 23"
+        }
       ]
     },
     "GOOG": {
@@ -2739,7 +3233,45 @@
           "verdict": "\ud83d\udfe2"
         }
       },
-      "flags": []
+      "flags": [],
+      "news": [
+        {
+          "title": "Nvidia's Q2 earnings to test resurgent AI trade",
+          "publisher": "Yahoo Finance",
+          "link": "https://finance.yahoo.com/news/nvidias-q2-earnings-to-test-resurgent-ai-trade-112502189.html",
+          "when": "Aug 23"
+        },
+        {
+          "title": "Broadcom Has Seen Its Biggest Customer Drop a Key Chip Before. History Says What the Stock Did Next.",
+          "publisher": "Motley Fool",
+          "link": "https://www.fool.com/investing/2026/08/23/broadcom-has-seen-its-biggest-customer-drop-a-key-chip-before-history-says-what-the-stock-did-next/",
+          "when": "Aug 24"
+        },
+        {
+          "title": "Anthropic makes quiet move Nvidia investors must consider",
+          "publisher": "TheStreet",
+          "link": "https://www.thestreet.com/technology/anthropic-silicon-team-amir-salek-hire",
+          "when": "Aug 24"
+        },
+        {
+          "title": "Alibaba shares fall 8% after $10 billion Hong Kong share sale",
+          "publisher": "Reuters",
+          "link": "https://finance.yahoo.com/technology/ai/articles/alibaba-shares-fall-8-10-015142834.html",
+          "when": "Aug 24"
+        },
+        {
+          "title": "Hugging Face exploring sale valuing it at $13 billion, Business Insider says",
+          "publisher": "Reuters",
+          "link": "https://finance.yahoo.com/technology/ai/articles/hugging-face-exploring-sale-valuing-200012818.html",
+          "when": "Aug 23"
+        },
+        {
+          "title": "Verizon Communications (VZ) Rolls Out New Wireless Plans With AI Perks And Upgrades",
+          "publisher": "Simply Wall St.",
+          "link": "https://finance.yahoo.com/technology/ai/articles/verizon-communications-vz-rolls-wireless-190709855.html",
+          "when": "Aug 23"
+        }
+      ]
     },
     "AMD": {
       "ok": true,
@@ -2800,6 +3332,44 @@
         {
           "sev": "\ud83d\udfe1",
           "text": "Rich valuation \u2014 P/E 179"
+        }
+      ],
+      "news": [
+        {
+          "title": "AMD Is Investing More Than $10 Billion in Taiwan to Build Advanced Chip Packaging With TSMC. Here's What Lisa Su Is Actually Buying With That Money.",
+          "publisher": "Motley Fool",
+          "link": "https://www.fool.com/investing/2026/08/23/amd-is-investing-more-than-xx-billion-in-taiwan-to/",
+          "when": "Aug 23"
+        },
+        {
+          "title": "Forget Broadcom: Nvidia (NVDA) Is Still the Top Semiconductor Stock for 2027 and Beyond",
+          "publisher": "Motley Fool",
+          "link": "https://www.fool.com/investing/2026/08/23/forget-broadcom-nvidia-nvda-is-still-the-top-semic/",
+          "when": "Aug 23"
+        },
+        {
+          "title": "Nvidia Stock Doesn\u2019t Look as Expensive as You Think",
+          "publisher": "24/7 Wall St.",
+          "link": "https://247wallst.com/investing/2026/08/22/nvidia-stock-doesnt-look-as-expensive-as-you-think/",
+          "when": "Aug 22"
+        },
+        {
+          "title": "These 3 AI stocks are bought by both hedge funds and mutual funds",
+          "publisher": "Investing.com",
+          "link": "https://finance.yahoo.com/technology/ai/articles/3-ai-stocks-bought-both-113113447.html",
+          "when": "Aug 22"
+        },
+        {
+          "title": "3 Semiconductor Stocks to Buy Before August Ends",
+          "publisher": "24/7 Wall St.",
+          "link": "https://247wallst.com/investing/2026/08/22/3-semiconductor-stocks-to-buy-before-august-ends/",
+          "when": "Aug 22"
+        },
+        {
+          "title": "Advanced Micro Devices (AMD) Adds Tim Ryan To Board After Director Retirement",
+          "publisher": "Simply Wall St.",
+          "link": "https://finance.yahoo.com/markets/stocks/articles/advanced-micro-devices-amd-adds-061002113.html",
+          "when": "Aug 22"
         }
       ]
     },
@@ -2871,6 +3441,44 @@
           "sev": "\ud83d\udfe1",
           "text": "Negative return on equity"
         }
+      ],
+      "news": [
+        {
+          "title": "KeyBanc Just Upgraded Its Price Target on Zscaler Stock. Here's Why.",
+          "publisher": "Barchart",
+          "link": "https://www.barchart.com/story/news/3976123/keybanc-just-upgraded-its-price-target-on-zscaler-stock-here-s-why",
+          "when": "Aug 21"
+        },
+        {
+          "title": "AI Is Now Attacking at Machine Speed, and This CEO Says That Changes the Case for Cybersecurity Stocks",
+          "publisher": "24/7 Wall St.",
+          "link": "https://247wallst.com/investing/2026/08/21/ai-is-now-attacking-at-machine-speed-and-this-ceo-says-that-changes-the-case-for-cybersecurity-stocks/",
+          "when": "Aug 21"
+        },
+        {
+          "title": "Can Rising AI Security Adoption Help CrowdStrike Challenge PANW & ZS?",
+          "publisher": "Zacks",
+          "link": "https://finance.yahoo.com/technology/ai/articles/rising-ai-security-adoption-help-141500529.html",
+          "when": "Aug 21"
+        },
+        {
+          "title": "2 Unprofitable Stocks Worth Your Attention and 1 We Question",
+          "publisher": "StockStory",
+          "link": "https://finance.yahoo.com/news/2-unprofitable-stocks-worth-attention-130747652.html",
+          "when": "Aug 21"
+        },
+        {
+          "title": "Zscaler (ZS) Falls On AI IPO Buzz, Is It Still 29% Undervalued?",
+          "publisher": "Simply Wall St.",
+          "link": "https://finance.yahoo.com/markets/stocks/articles/zscaler-zs-falls-ai-ipo-011230581.html",
+          "when": "Aug 21"
+        },
+        {
+          "title": "Can Zscaler\u2019s (ZS) Carahsoft SMB Push Quietly Redefine Its Core Zero Trust Investment Story?",
+          "publisher": "Simply Wall St.",
+          "link": "https://finance.yahoo.com/small-business/articles/zscaler-zs-carahsoft-smb-push-001935921.html",
+          "when": "Aug 21"
+        }
       ]
     },
     "SPCX": {
@@ -2928,7 +3536,45 @@
           "verdict": "\ud83d\udfe2"
         }
       },
-      "flags": []
+      "flags": [],
+      "news": [
+        {
+          "title": "BABA, NVDA, MRVL, WMT, SPCX: Why Retail Traders Couldn\u2019t Take Their Eyes Off These Stocks Last Week",
+          "publisher": "Stocktwits",
+          "link": "https://stocktwits.com/news-articles/markets/equity/baba-nvda-mrvl-wmt-spcx-why-retail-traders-couldn-t-take-their-eyes-off-these-stocks-last-week/cZYKGYPRJV6",
+          "when": "Aug 24"
+        },
+        {
+          "title": "Cathie Wood Calls Disappearance of Entry-Level Corporate Jobs a \u2018Blessing in Disguise,\u2019 Backs Elon Musk\u2019s AI-Powered One-Person Company Vision",
+          "publisher": "Benzinga",
+          "link": "https://finance.yahoo.com/technology/ai/articles/cathie-wood-calls-disappearance-entry-013113544.html",
+          "when": "Aug 24"
+        },
+        {
+          "title": "A New SEC Filing Reveals Exactly How Many Shares of SpaceX Elon Musk Owns. Here's Why It Matters.",
+          "publisher": "Motley Fool",
+          "link": "https://www.fool.com/investing/2026/08/23/a-new-sec-filing-reveals-exactly-how-many-shares-o/",
+          "when": "Aug 24"
+        },
+        {
+          "title": "Elon Musk Makes Fresh Starlink Pitch for India, Says It Could Help the \u2018Least Served\u2019 in Rural Areas",
+          "publisher": "Benzinga",
+          "link": "https://finance.yahoo.com/technology/articles/elon-musk-makes-fresh-starlink-003054167.html",
+          "when": "Aug 24"
+        },
+        {
+          "title": "Space Exploration Technologies (SPCX) Says China Is Its Top Rival In AI And Rockets",
+          "publisher": "Simply Wall St.",
+          "link": "https://finance.yahoo.com/markets/stocks/articles/space-exploration-technologies-spcx-says-170738295.html",
+          "when": "Aug 23"
+        },
+        {
+          "title": "Why Investing in IPOs Has Become a High-Stakes Coin Flip",
+          "publisher": "Barchart",
+          "link": "https://www.barchart.com/story/news/3992898/why-investing-in-ipos-has-become-a-high-stakes-coin-flip",
+          "when": "Aug 23"
+        }
+      ]
     },
     "NVTS": {
       "ok": true,
@@ -3006,6 +3652,44 @@
           "sev": "\ud83d\udfe1",
           "text": "Dilution \u2014 shares +13% YoY"
         }
+      ],
+      "news": [
+        {
+          "title": "Why Navitas Semiconductor Stock Sank This Week",
+          "publisher": "Motley Fool",
+          "link": "https://www.fool.com/investing/2026/08/22/why-navitas-semiconductor-stock-sank-this-week/",
+          "when": "Aug 22"
+        },
+        {
+          "title": "Navitas Semiconductor vs. Rezolve AI: Which Technology Stock Is a Better Buy in 2026?",
+          "publisher": "Motley Fool",
+          "link": "https://www.fool.com/coverage/better-buy/2026/08/19/navitas-semiconductor-vs-rezolve-ai-which-technology-stock-is-a-better-buy-in-2026/",
+          "when": "Aug 19"
+        },
+        {
+          "title": "3 Under-the-Radar Chip Stocks Wall Street Is Sleeping On in August",
+          "publisher": "24/7 Wall St.",
+          "link": "https://247wallst.com/investing/2026/08/15/3-under-the-radar-chip-stocks-wall-street-is-sleeping-on-in-august/",
+          "when": "Aug 15"
+        },
+        {
+          "title": "Nvidia vs. Navitas Semiconductor: Here's What Their Revenue Trends Tell Investors About These Artificial Intelligence Companies",
+          "publisher": "Motley Fool",
+          "link": "https://www.fool.com/coverage/charts/2026/08/08/nvidia-vs-navitas-semiconductor-here-s-what-their-revenue-trends-tell-investors-about-these-artificial-intelligence-companies/",
+          "when": "Aug 08"
+        },
+        {
+          "title": "Is It Too Late to Buy Navitas Semiconductor (NVTS) After a 6% Single-Day Pop?",
+          "publisher": "24/7 Wall St.",
+          "link": "https://247wallst.com/investing/2026/08/04/is-it-too-late-to-buy-navitas-semiconductor-nvts-after-a-6-single-day-pop/",
+          "when": "Aug 04"
+        },
+        {
+          "title": "Navitas Semiconductor (NVTS) Partners With Magnachip To Expand SiC Power Reach",
+          "publisher": "Simply Wall St.",
+          "link": "https://finance.yahoo.com/markets/stocks/articles/navitas-semiconductor-nvts-partners-magnachip-091223170.html",
+          "when": "Aug 01"
+        }
       ]
     },
     "NOW": {
@@ -3072,6 +3756,44 @@
           "sev": "\ud83d\udfe1",
           "text": "Rich valuation \u2014 P/E 77"
         }
+      ],
+      "news": [
+        {
+          "title": "Is UiPath's Expanding ARR Strengthening Its Long-Term Growth Story?",
+          "publisher": "Zacks",
+          "link": "https://finance.yahoo.com/markets/stocks/articles/uipaths-expanding-arr-strengthening-long-180900883.html",
+          "when": "Aug 21"
+        },
+        {
+          "title": "ServiceNow investors must consider latest alert from Bank of America",
+          "publisher": "TheStreet",
+          "link": "https://www.thestreet.com/investing/stocks/now-servicenow-stock-bank-of-america-raises-now-stock-price-target-august-2026",
+          "when": "Aug 21"
+        },
+        {
+          "title": "Palantir Climbs 4% Through $180, BigBear.ai Rises 4%, ServiceNow Holds Flat: How Are Traders Picking the Software Winners?",
+          "publisher": "24/7 Wall St.",
+          "link": "https://247wallst.com/investing/2026/08/21/palantir-climbs-4-through-180-bigbear-ai-rises-4-servicenow-holds-flat-how-are-traders-picking-the-software-winners/",
+          "when": "Aug 21"
+        },
+        {
+          "title": "ServiceNow (NOW) Up 41.1% Since Last Earnings Report: Can It Continue?",
+          "publisher": "Zacks",
+          "link": "https://finance.yahoo.com/markets/stocks/articles/servicenow-now-41-1-since-153007090.html",
+          "when": "Aug 21"
+        },
+        {
+          "title": "Salesforce Vs. ServiceNow: The Platform Play is On as AI Capital Pivots",
+          "publisher": "24/7 Wall St.",
+          "link": "https://247wallst.com/investing/2026/08/21/salesforce-vs-servicenow-the-platform-play-is-on-as-ai-capital-pivots/",
+          "when": "Aug 21"
+        },
+        {
+          "title": "An Innovation Veteran on What\u2019s Next in Enterprise AI",
+          "publisher": "The Wall Street Journal",
+          "link": "https://www.wsj.com/cio-journal/an-innovation-veteran-on-whats-next-in-enterprise-ai-1e20ead2?siteid=yhoof2&yptr=yahoo",
+          "when": "Aug 21"
+        }
       ]
     },
     "CQQQ": {
@@ -3123,11 +3845,50 @@
           "verdict": "\u26aa"
         }
       },
-      "flags": []
+      "flags": [],
+      "news": [
+        {
+          "title": "Veteran Investor: China\u2019s Full Stack AI Is \u201cOverlooked and Underpriced\u201d As $2 Billion Kling Deal Signals Repricing",
+          "publisher": "24/7 Wall St.",
+          "link": "https://247wallst.com/investing/2026/07/03/veteran-investor-chinas-full-stack-ai-is-overlooked-and-underpriced-as-2-billion-kling-deal-signals-repricing/",
+          "when": "Jul 03"
+        },
+        {
+          "title": "ETFs in Spotlight as AI Chips Power China's Factory Rebound in June",
+          "publisher": "Zacks",
+          "link": "https://finance.yahoo.com/markets/stocks/articles/etfs-spotlight-ai-chips-power-135900151.html",
+          "when": "Jun 30"
+        },
+        {
+          "title": "Why is the US more exuberant than China?",
+          "publisher": "Investing.com",
+          "link": "https://finance.yahoo.com/economy/articles/why-us-more-exuberant-china-043256170.html",
+          "when": "Jun 20"
+        },
+        {
+          "title": "CQQQ- Why Aren't Chinese Markets as Exuberant as Ours",
+          "publisher": "MoneyShow",
+          "link": "https://finance.yahoo.com/markets/stocks/articles/cqqq-why-arent-chinese-markets-050100137.html",
+          "when": "Jun 18"
+        },
+        {
+          "title": "The U.S. Is Rushing To Fix a Big Whoops in Its Chip War with China",
+          "publisher": "Moby",
+          "link": "https://app.moby.co/home/news/news-the-us-is-rushing-to-fix-a-big-whoops-in-its-chip-war-with-china?utm_source=yahoo_finance&utm_medium=rss",
+          "when": "Jun 01"
+        },
+        {
+          "title": "ETFs Under Radar as China's Retail Sales Lag Estimates at the Start of Q2",
+          "publisher": "Zacks",
+          "link": "https://finance.yahoo.com/economy/articles/etfs-under-radar-chinas-retail-165900636.html",
+          "when": "May 21"
+        }
+      ]
     },
     "QANT": {
       "ok": false,
-      "error": "No fundamentals available. SEC: QANT not in SEC's ticker list (US-listed filers only). Yahoo fallback also returned nothing (foreign/ADR names may lack coverage)."
+      "error": "No fundamentals available. SEC: QANT not in SEC's ticker list (US-listed filers only). Yahoo fallback also returned nothing (foreign/ADR names may lack coverage).",
+      "news": []
     },
     "CRWV": {
       "ok": true,
@@ -3213,6 +3974,44 @@
           "sev": "\ud83d\udfe1",
           "text": "Dilution \u2014 shares +100% YoY"
         }
+      ],
+      "news": [
+        {
+          "title": "CoreWeave CEO Michael Intrator Sold Over 13,000 Shares for $1.2 Million. What Does This Mean for Investors?",
+          "publisher": "Motley Fool",
+          "link": "https://www.fool.com/coverage/filings/2026/08/22/coreweave-ceo-michael-intrator-sold-over-13-000-shares-for-usd1-2-million-what-does-this-mean-for-investors/",
+          "when": "Aug 22"
+        },
+        {
+          "title": "Prediction: CoreWeave Stock Will Double on This Date",
+          "publisher": "24/7 Wall St.",
+          "link": "https://247wallst.com/investing/2026/08/22/prediction-coreweave-stock-will-double-on-this-date/",
+          "when": "Aug 22"
+        },
+        {
+          "title": "These 3 AI stocks are bought by both hedge funds and mutual funds",
+          "publisher": "Investing.com",
+          "link": "https://finance.yahoo.com/technology/ai/articles/3-ai-stocks-bought-both-113113447.html",
+          "when": "Aug 22"
+        },
+        {
+          "title": "The AI Spending Boom Is Outrunning Wall Street Estimates",
+          "publisher": "Barrons.com",
+          "link": "https://www.barrons.com/articles/ai-spending-capex-vertiv-western-digital-coreweave-arista-8c3cf5b3?siteid=yhoof2&yptr=yahoo",
+          "when": "Aug 22"
+        },
+        {
+          "title": "Neoclouds Shine in AI Build Out",
+          "publisher": "Motley Fool",
+          "link": "https://www.fool.com/investing/2026/08/21/neoclouds-shine-in-ai-build-out/",
+          "when": "Aug 21"
+        },
+        {
+          "title": "Billionaire David Tepper Piled Into a Debt-Laden Artificial Intelligence (AI) Neocloud Stock in Q2 While Also Increasing His Stake in Its Newest Rival",
+          "publisher": "Motley Fool",
+          "link": "https://www.fool.com/investing/2026/08/21/billionaire-david-tepper-piled-into-a-debt-laden-a/",
+          "when": "Aug 21"
+        }
       ]
     },
     "BE": {
@@ -3291,6 +4090,44 @@
           "sev": "\ud83d\udfe1",
           "text": "Dilution \u2014 shares +6% YoY"
         }
+      ],
+      "news": [
+        {
+          "title": "$5,000 in Bloom Energy at Its COVID-Era Low Would Be Worth This Much Now",
+          "publisher": "Motley Fool",
+          "link": "https://www.fool.com/investing/2026/08/22/5000-in-bloom-energy-at-its-covid-low-would-be/",
+          "when": "Aug 23"
+        },
+        {
+          "title": "Can Bloom Energy Keep Beating the Market?",
+          "publisher": "Motley Fool",
+          "link": "https://www.fool.com/investing/2026/08/22/can-bloom-energy-keep-beating-the-market/",
+          "when": "Aug 22"
+        },
+        {
+          "title": "2 Hydrogen Stocks to Buy in August if You Believe in the Turnaround",
+          "publisher": "Motley Fool",
+          "link": "https://www.fool.com/investing/2026/08/22/2-hydrogen-stocks-to-buy-in-august-if-you-believe/",
+          "when": "Aug 22"
+        },
+        {
+          "title": "These 3 AI stocks are bought by both hedge funds and mutual funds",
+          "publisher": "Investing.com",
+          "link": "https://finance.yahoo.com/technology/ai/articles/3-ai-stocks-bought-both-113113447.html",
+          "when": "Aug 22"
+        },
+        {
+          "title": "MarketBeat Week in Review \u2013 08/17 - 08/21",
+          "publisher": "MarketBeat",
+          "link": "https://www.marketbeat.com/articles/marketbeat-week-in-review-08-17-08-21/?utm_source=yahoofinance&utm_medium=yahoofinance",
+          "when": "Aug 22"
+        },
+        {
+          "title": "FuelCell Energy Jumps 5%, Plug Power Climbs 4%, Bloom Energy Slips as the Hydrogen Trade Splits",
+          "publisher": "24/7 Wall St.",
+          "link": "https://247wallst.com/investing/2026/08/21/fuelcell-energy-jumps-5-plug-power-climbs-4-bloom-energy-slips-as-the-hydrogen-trade-splits/",
+          "when": "Aug 21"
+        }
       ]
     },
     "IREN": {
@@ -3361,6 +4198,44 @@
           "sev": "\ud83d\udfe1",
           "text": "Rich valuation \u2014 P/E 107"
         }
+      ],
+      "news": [
+        {
+          "title": "IREN Clears Its Biggest AI Test With Microsoft",
+          "publisher": "GuruFocus.com",
+          "link": "https://finance.yahoo.com/technology/ai/articles/iren-clears-biggest-ai-test-162109401.html",
+          "when": "Aug 21"
+        },
+        {
+          "title": "Hut 8 Craters 11% Despite a $19.6B Beacon Point Backlog, TeraWulf Falls 5%, IREN Drops 3%: What\u2019s Pressuring These AI Miner Stocks?",
+          "publisher": "24/7 Wall St.",
+          "link": "https://247wallst.com/investing/2026/08/21/hut-8-craters-11-despite-a-19-6b-beacon-point-backlog-terawulf-falls-5-iren-drops-3-whats-pressuring-these-ai-miner-stocks/",
+          "when": "Aug 21"
+        },
+        {
+          "title": "IREN Heads Into FY2026 Results: Can Growth Momentum Continue?",
+          "publisher": "Zacks",
+          "link": "https://finance.yahoo.com/markets/stocks/articles/iren-heads-fy2026-results-growth-145500697.html",
+          "when": "Aug 21"
+        },
+        {
+          "title": "Duquesne Entered a New Position in Riot Platforms During Q2. What This Means for RIOT Stock.",
+          "publisher": "Barchart",
+          "link": "https://www.barchart.com/story/news/3971533/duquesne-entered-a-new-position-in-riot-platforms-during-q2-what-this-means-for-riot-stock",
+          "when": "Aug 21"
+        },
+        {
+          "title": "IREN Jumps 6% but Then Gives Up Gains as Microsoft Accepts Horizon 1; TeraWulf Ticks Up, Cipher Digital Drops 5%",
+          "publisher": "24/7 Wall St.",
+          "link": "https://247wallst.com/investing/2026/08/21/iren-jumps-6-but-then-gives-up-gains-as-microsoft-accepts-horizon-1-terawulf-ticks-up-cipher-digital-drops-5/",
+          "when": "Aug 21"
+        },
+        {
+          "title": "IREN Just Passed Its Biggest AI Test as Microsoft and Nvidia Bet Billions",
+          "publisher": "Barchart",
+          "link": "https://www.barchart.com/story/news/3958100/iren-just-passed-its-biggest-ai-test-as-microsoft-and-nvidia-bet-billions",
+          "when": "Aug 20"
+        }
       ]
     },
     "PURR": {
@@ -3417,7 +4292,45 @@
           "verdict": "\ud83d\udfe2"
         }
       },
-      "flags": []
+      "flags": [],
+      "news": [
+        {
+          "title": "Institutional Investors Are Buying Hyperliquid Strategies. Should You?",
+          "publisher": "Motley Fool",
+          "link": "https://www.fool.com/investing/2026/08/22/institutional-investors-are-buying-hyperliquid-str/",
+          "when": "Aug 22"
+        },
+        {
+          "title": "Why Hyperliquid Strategies (PURR) Is Up 58.4% After Trump-Backed Push For Compliant Hyperliquid Entry",
+          "publisher": "Simply Wall St.",
+          "link": "https://finance.yahoo.com/markets/crypto/articles/why-hyperliquid-strategies-purr-58-021245257.html",
+          "when": "Aug 22"
+        },
+        {
+          "title": "Hyperliquid Strategies (PURR) Stock Looks Pricey As It Jumps 193% YTD",
+          "publisher": "Simply Wall St.",
+          "link": "https://finance.yahoo.com/markets/stocks/articles/hyperliquid-strategies-purr-stock-looks-151144794.html",
+          "when": "Aug 21"
+        },
+        {
+          "title": "Hyperliquid Strategies (PURR) On Trump Backed U.S. Path But Valuation Still Hard To Read",
+          "publisher": "Simply Wall St.",
+          "link": "https://finance.yahoo.com/markets/stocks/articles/hyperliquid-strategies-purr-trump-backed-120857101.html",
+          "when": "Aug 21"
+        },
+        {
+          "title": "Crypto Stocks Continue to Surge After Upbeat White House Meeting",
+          "publisher": "The Wall Street Journal",
+          "link": "https://www.wsj.com/finance/currencies/crypto-stocks-continue-surge-premarket-after-upbeat-white-house-meeting-d344afcd?siteid=yhoof2&yptr=yahoo",
+          "when": "Aug 20"
+        },
+        {
+          "title": "HYPE Nears Record High, PURR Stock Adds To Its Biggest Single-Day Gain After Trump Signals US Path For Hyperliquid Exchange",
+          "publisher": "Stocktwits",
+          "link": "https://stocktwits.com/news-articles/markets/equity/hype-token-nears-record-high-purr-stock-extends-rally-trump-hyperliquid/cZYIZE0RJmV",
+          "when": "Aug 20"
+        }
+      ]
     },
     "NBIS": {
       "ok": true,
@@ -3474,10 +4387,48 @@
           "verdict": "\ud83d\udfe2"
         }
       },
-      "flags": []
+      "flags": [],
+      "news": [
+        {
+          "title": "Soros Fund Management Opened a New Position in Nebius During Q2. What This Means for NBIS Stock.",
+          "publisher": "Barchart",
+          "link": "https://www.barchart.com/story/news/3993204/soros-fund-management-opened-a-new-position-in-nebius-during-q2-what-this-means-for-nbis-stock",
+          "when": "Aug 23"
+        },
+        {
+          "title": "Nebius Just Raised $5 Billion in Convertible Notes Against a $1.4 Billion Revenue Base. Are We In a Bubble?",
+          "publisher": "Motley Fool",
+          "link": "https://www.fool.com/investing/2026/08/22/nebius-just-raised-usd5-billion-in-convertible-notes-against-a-usd1-4-billion-revenue-base-are-we-in-a-bubble/",
+          "when": "Aug 23"
+        },
+        {
+          "title": "Billionaire Stephen Mandel Just Loaded Up on This Incredible Artificial Intelligence (AI) Stock Up Nearly 200% in 2026",
+          "publisher": "Motley Fool",
+          "link": "https://www.fool.com/investing/2026/08/22/billionaire-stephen-mandel-just-loaded-up-on-this/",
+          "when": "Aug 22"
+        },
+        {
+          "title": "Prediction: CoreWeave Stock Will Double on This Date",
+          "publisher": "24/7 Wall St.",
+          "link": "https://247wallst.com/investing/2026/08/22/prediction-coreweave-stock-will-double-on-this-date/",
+          "when": "Aug 22"
+        },
+        {
+          "title": "Why Did Nebius Stock Plunge This Week?",
+          "publisher": "Motley Fool",
+          "link": "https://www.fool.com/investing/2026/08/22/why-did-nebius-stock-plunge-this-week/",
+          "when": "Aug 22"
+        },
+        {
+          "title": "CoreWeave vs. Nebius Group: Which Artificial Intelligence (AI) Cloud Stock Has More Upside?",
+          "publisher": "Motley Fool",
+          "link": "https://www.fool.com/investing/2026/08/21/coreweave-vs-nebius-group-which-artificial-intelli/",
+          "when": "Aug 21"
+        }
+      ]
     }
   },
-  "generated_at": "2026-08-24T04:35:33+00:00",
+  "generated_at": "2026-08-24T04:54:49+00:00",
   "universe": {
     "wheel": 16,
     "growth": 15,
