@@ -746,7 +746,10 @@ function renderChain(){
 // Tap a Bid → sell-yield calculator: premium ÷ stock price × 100 = return for that expiry's window.
 function openCalc(type,k,b){
   const cx=CALC_CTX||{}, spot=cx.spot, dte=cx.dte||0;
-  const per=(spot? b/spot*100 : null);            // premium ÷ stock price × 100 — % for the window
+  // Return on the capital actually tied up over the window: a CSP secures cash = strike,
+  // a CC is written against shares worth = price. So puts ÷ strike, calls ÷ price.
+  const den=(type==='put')? k : spot;
+  const per=(den? b/den*100 : null);
   const m=document.getElementById('calc'); if(!m) return;
   m.querySelector('.cx-body').innerHTML=`<div class="cx-min"><b>${per!=null?per.toFixed(1)+'%':'—'}</b><span>in ${dte} DTE</span></div>`;
   m.hidden=false;
