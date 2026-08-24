@@ -53,8 +53,30 @@ nav a:hover{color:var(--text); background:var(--surface-2)} nav a.on{color:var(-
 .tip .tl{font-size:10.5px; text-transform:uppercase; letter-spacing:.05em; color:var(--muted); font-weight:600; margin-top:4px}
 .tip .tks{font-family:"IBM Plex Mono"; font-size:12.5px; margin:2px 0 6px}
 .tip .foot{border-top:1px solid var(--line-soft); padding-top:8px; margin-top:6px; font-size:12px; color:var(--muted)}
-.editlink{font-size:12.5px; color:var(--accent); text-decoration:none; font-family:"IBM Plex Sans",sans-serif; font-weight:600; margin-left:6px; white-space:nowrap}
+.editlink{font-size:12.5px; color:var(--accent); text-decoration:none; font-family:"IBM Plex Sans",sans-serif; font-weight:600; margin-left:6px; white-space:nowrap; cursor:pointer}
 .editlink:hover{text-decoration:underline}
+/* fundamentals */
+.fxhero{background:linear-gradient(135deg,#0b1424 0%,#152036 55%,#1d2942 100%); border:1px solid var(--line); border-radius:16px; padding:20px 22px; margin:4px 0 14px; box-shadow:var(--shadow)}
+.fxhero-top{display:flex; justify-content:space-between; align-items:flex-start; gap:16px; flex-wrap:wrap}
+.fxhero-name{font-family:"Archivo",sans-serif; font-size:24px; font-weight:800}
+.fxhero-sub{font-size:12.5px; color:var(--muted); margin-top:6px}
+.fxhero-tk{display:inline-block; background:var(--accent); color:#111; font-weight:800; font-size:13px; letter-spacing:.5px; padding:4px 11px; border-radius:8px}
+.fxhero-price{font-size:20px; font-weight:700; margin-top:8px}
+.fxhero-verdict{margin-top:14px; display:flex; align-items:center; gap:14px; flex-wrap:wrap; padding:9px 16px; border-radius:12px}
+.fxov{font-size:18px; font-weight:800; color:#fff; letter-spacing:.5px} .fxvsub{font-size:13px; font-weight:600; color:rgba(255,255,255,.9); margin-left:auto}
+.fxsrc{font-size:12px; color:var(--faint); margin:2px 0 12px}
+.fxchips{display:flex; gap:12px; flex-wrap:wrap; margin:6px 0 2px}
+.fxchip{position:relative; padding:11px 18px; border-radius:12px; font-weight:700; font-size:15px; color:#fff; cursor:default; min-width:140px; text-align:center; outline:none}
+.fxtip{position:absolute; left:0; top:calc(100% + 8px); z-index:50; width:250px; display:none; background:var(--surface); border:1px solid var(--accent); border-radius:10px; padding:11px 13px; box-shadow:var(--glow); font-weight:400; font-size:13px; color:var(--text); text-align:left}
+.fxchip:hover .fxtip,.fxchip:focus-within .fxtip{display:block}
+.fxtip div{display:flex; justify-content:space-between; gap:12px; padding:3px 0} .fxtip span{color:var(--muted)} .fxtip b{font-family:"IBM Plex Mono"}
+.fxsec{font-family:"Archivo",sans-serif; font-size:16px; font-weight:700; margin:18px 0 8px; padding-left:11px; border-left:3px solid var(--accent)}
+.fxflags{background:color-mix(in srgb,var(--bad) 13%,transparent); border:1px solid var(--bad); border-left:4px solid var(--bad); border-radius:10px; padding:8px 14px}
+.fxflag{color:#fca5a5; font-size:14px; font-weight:600; padding:4px 0}
+.fxclean{background:color-mix(in srgb,var(--good) 13%,transparent); border:1px solid var(--good); border-left:4px solid var(--good); border-radius:10px; padding:10px 14px; color:#a7f3d0; font-size:14px; font-weight:600}
+.fxsummary{background:var(--surface); border:1px solid var(--line); border-radius:12px; padding:14px 17px; margin:12px 0; font-size:15px; line-height:1.6}
+.fxtag{display:inline-block; background:var(--accent-soft); color:var(--accent); font-size:11px; font-weight:700; padding:2px 9px; border-radius:6px; margin-right:9px}
+.fxtrend{font-size:14px; margin:10px 0}
 /* Overview: pulse tiles · gauges · sector heat · bar charts */
 .pulse10{display:grid; grid-template-columns:repeat(auto-fit,minmax(112px,1fr)); gap:8px; margin:16px 0 6px}
 .ptile{background:var(--surface); border:1px solid var(--line); border-radius:10px; padding:9px 11px}
@@ -174,8 +196,9 @@ footer b{color:var(--muted); font-weight:600}
     <a data-tab="overview" class="on">Overview</a>
     <a data-tab="signals">Signals</a>
     <a data-tab="chain">Options Chain</a>
-    <a data-tab="deep">Deep Dive</a>
+    <a data-tab="deep">TA</a>
     <a data-tab="market">Market</a>
+    <a data-tab="fund">Fundamentals</a>
     <a data-tab="rules">Rules</a>
   </nav>
   <span class="tag" id="upd">loading…</span>
@@ -233,7 +256,7 @@ footer b{color:var(--muted); font-weight:600}
 
   <!-- ══════════ DEEP DIVE ══════════ -->
   <section id="v-deep" class="view" hidden>
-    <div class="head"><h1>Deep dive</h1><div class="meta">One name, every leg — the CSP, CC and LEAP the engine found, with the full reasoning behind each verdict.</div></div>
+    <div class="head"><h1>Technical Analysis</h1><div class="meta">One name, every leg — the CSP, CC and LEAP the engine found, with the full reasoning behind each verdict.</div></div>
     <div class="picker" style="border:0;padding:14px 0"><input id="deep-in" placeholder="ticker…" aria-label="Deep dive ticker"><span id="deep-chips"></span></div>
     <div id="deep-body"></div>
     <section class="chart" aria-label="Chart" style="margin-top:150px">
@@ -248,6 +271,13 @@ footer b{color:var(--muted); font-weight:600}
     <div class="head"><h1>Market backdrop</h1><div class="meta">The macro context every wheel decision sits inside — volatility, sentiment, the curve, and policy. Keyless public sources, refreshed with each scan.</div></div>
     <div class="mkt-grid" id="mkt-grid"></div>
     <p class="note" style="margin-top:18px">Sources: VIX via Yahoo · stock Fear&amp;Greed via CNN · crypto Fear&amp;Greed via alternative.me · 2Y/10Y &amp; Fed funds via FRED. Context only — the signal rules key off each ticker's own price action, not these.</p>
+  </section>
+
+  <!-- ══════════ FUNDAMENTALS ══════════ -->
+  <section id="v-fund" class="view" hidden>
+    <div class="head"><h1>Fundamentals</h1><div class="meta">Straight from the company's SEC filings (10-K / 10-Q) — valuation, quality, balance-sheet health, red flags. No prices, no technicals. US-listed filers.</div></div>
+    <div class="picker" style="border:0;padding:14px 0"><input id="fund-in" placeholder="ticker…" aria-label="Fundamentals ticker"><span id="fund-chips"></span></div>
+    <div id="fund-body"></div>
   </section>
 
   <!-- ══════════ RULES ══════════ -->
@@ -608,10 +638,62 @@ function renderDeep(tk){
 }
 function buildChips(){
   const tks=Object.keys(BYTK).sort();
-  document.getElementById('chips').innerHTML=tks.map(t=>`<span class="tchip" data-t="${t}">${t}</span>`).join('');
-  document.getElementById('deep-chips').innerHTML=tks.map(t=>`<span class="tchip" data-t="${t}">${t}</span>`).join('');
+  const chipHtml=tks.map(t=>`<span class="tchip" data-t="${t}">${t}</span>`).join('');
+  document.getElementById('chips').innerHTML=chipHtml;
+  document.getElementById('deep-chips').innerHTML=chipHtml;
+  document.getElementById('fund-chips').innerHTML=chipHtml;
   document.querySelectorAll('#chips .tchip').forEach(c=>c.onclick=()=>setSym(c.dataset.t));
   document.querySelectorAll('#deep-chips .tchip').forEach(c=>c.onclick=()=>{setSym(c.dataset.t); renderDeep(c.dataset.t);});
+  document.querySelectorAll('#fund-chips .tchip').forEach(c=>c.onclick=()=>{CUR=c.dataset.t; renderFund(c.dataset.t);});
+}
+
+/* ---------- fundamentals (SEC filings) ---------- */
+function fxMoney(v){ if(v==null)return '—'; const a=Math.abs(v),s=v<0?'-':'';
+  if(a>=1e12)return s+'$'+(a/1e12).toFixed(2)+'T'; if(a>=1e9)return s+'$'+(a/1e9).toFixed(2)+'B';
+  if(a>=1e6)return s+'$'+(a/1e6).toFixed(1)+'M'; return s+'$'+Math.round(a).toLocaleString(); }
+function fxPct(v){ return v==null?'—':(v*100).toFixed(1)+'%'; }
+function fxX(v){ return v==null?'—':v.toFixed(2)+'×'; }
+function fxNum(v,d){ return v==null?'—':(+v).toFixed(d==null?2:d); }
+const VCOL={'🟢':'#166534','🟡':'#a16207','🔴':'#7f1d1d','⚪':'#475569'};
+function renderFund(tk){
+  const host=document.getElementById('fund-body'); const fmap=DATA.fundamentals||{};
+  if(!Object.keys(fmap).length){ host.innerHTML=`<div class="empty">Fundamentals populate on the next scan cycle — check back shortly.</div>`; return; }
+  const f=fmap[tk];
+  if(!f){ host.innerHTML=`<div class="empty">Pick a ticker to read its filings.</div>`; return; }
+  if(!f.ok){ host.innerHTML=`<div class="empty">No fundamentals for <b>${tk}</b> — ${f.error||'not a US-listed filer'}.</div>`; return; }
+  const g=f.groups||{}, m=f.metrics||{}, p=f.profile||{};
+  const V=['Valuation','Quality','Health'].map(k=>(g[k]||{}).verdict||'⚪');
+  const ov = V.includes('🔴')?['🔴','FRAGILE','#7f1d1d'] : V.includes('🟡')?['🟡','MIXED','#a16207'] : V.includes('🟢')?['🟢','SOUND','#166534'] : ['⚪','NO DATA','#475569'];
+  const cls=[p.sector,p.industry,p.country].filter(Boolean).join('  ·  ')||'US-listed filer';
+  const orow=(DATA.overview||[]).find(o=>o.ticker===tk);
+  const priceStr=(orow&&orow.price!=null)?'$'+orow.price.toFixed(2):'price n/a';
+  const dots=['Valuation','Quality','Health'].map((k,i)=>V[i]+' '+k).join('&nbsp;&nbsp;');
+  const tip=arr=>arr.map(t=>`<div><span>${t[0]}</span><b>${t[1]}</b></div>`).join('');
+  const chip=(name,verd,arr)=>`<span class="fxchip" tabindex="0" style="background:${VCOL[verd]||'#475569'}">${verd} ${name}<span class="fxtip">${tip(arr)}</span></span>`;
+  const flags=(f.flags||[]).length
+    ? `<div class="fxflags">${f.flags.map(fl=>`<div class="fxflag">${fl.sev||'🚩'} ${fl.text||''}</div>`).join('')}</div>`
+    : `<div class="fxclean">✅ No red flags on the checks we run — profitability, leverage, liquidity, coverage, cash flow, dilution, valuation.</div>`;
+  const cs=(txt,good)=>`<span style="color:${good?'var(--good)':'var(--bad)'};font-weight:700">${txt}</span>`;
+  const tr=[];
+  if(m.rev_growth!=null) tr.push(cs(`Revenue ${(m.rev_growth*100>=0?'+':'')+(m.rev_growth*100).toFixed(0)}% YoY`, m.rev_growth>=0));
+  if(m.ni_growth!=null) tr.push(cs(`Net income ${(m.ni_growth*100>=0?'+':'')+(m.ni_growth*100).toFixed(0)}% YoY`, m.ni_growth>=0));
+  if(m.fcf!=null) tr.push(cs(m.fcf>=0?'FCF positive':'FCF negative', m.fcf>=0));
+  const inv=[]; if(m.rnd)inv.push('R&D '+fxMoney(m.rnd)+'/yr'); if(m.capex)inv.push('Capex '+fxMoney(m.capex)+'/yr');
+  host.innerHTML=`
+    <div class="fxhero"><div class="fxhero-top">
+      <div><div class="fxhero-name">${f.company||tk}</div><div class="fxhero-sub">${cls}</div></div>
+      <div style="text-align:right;white-space:nowrap"><span class="fxhero-tk">${tk}</span><div class="fxhero-price">${priceStr}</div>
+        <a class="editlink" style="margin:6px 0 0;display:inline-block" onclick="CUR='${tk}';setSym('${tk}');go('deep')">→ Technical Analysis</a></div>
+    </div><div class="fxhero-verdict" style="background:${ov[2]}"><span class="fxov">${ov[0]} ${ov[1]}</span><span class="fxvsub">${dots}</span></div></div>
+    <div class="fxsrc">${f.cik?('SEC CIK '+f.cik):'Yahoo Finance'}${f.source?(' · '+f.source):''}</div>
+    <div class="fxchips">${chip('Valuation',V[0],[['P/E',fxNum(m.pe,1)],['PEG',fxNum(m.peg,2)],['FCF yield',fxPct(m.fcf_yield)],['Market cap',fxMoney(m.market_cap)]])}
+      ${chip('Quality',V[1],[['Gross margin',fxPct(m.gross_margin)],['Op margin',fxPct(m.op_margin)],['Net margin',fxPct(m.net_margin)],['ROE',fxPct(m.roe)],['Revenue YoY',fxPct(m.rev_growth)],['NI YoY',fxPct(m.ni_growth)]])}
+      ${chip('Health',V[2],[['Debt/Equity',fxX(m.debt_to_equity)],['Current ratio',fxNum(m.current_ratio)],['Int. coverage',fxX(m.interest_coverage)],['Free cash flow',fxMoney(m.fcf)],['FCF margin',fxPct(m.fcf_margin)],['Share count YoY',fxPct(m.share_change)]])}</div>
+    <div class="hint">Hover a chip for the numbers behind it.</div>
+    <div class="fxsec">🚩 Red flags</div>${flags}
+    ${p.summary_short?`<div class="fxsummary"><span class="fxtag">${p.summary_ai?'✨ AI summary':'📝 In brief'}</span>${p.summary_short}</div>`:''}
+    ${tr.length?`<div class="fxtrend">📈 <b>Trend (from filings):</b> ${tr.join(' · ')}</div>`:''}
+    ${inv.length?`<div class="fxtrend">🔧 <b>Invests in:</b> ${inv.join(' · ')}</div>`:''}`;
 }
 
 /* ---------- TradingView (two hosts: signals + deep) ---------- */
@@ -635,18 +717,30 @@ function setSym(t){t=(t||'').toUpperCase().trim(); if(!t)return; CUR=t;
   mountChart('tvchart',t); if(!document.getElementById('v-deep').hidden){document.getElementById('sym2').textContent=t; mountChart('tvchart2',t);} markSel();}
 document.getElementById('symin').addEventListener('keydown',e=>{if(e.key==='Enter'){setSym(e.target.value); e.target.value='';}});
 document.getElementById('deep-in').addEventListener('keydown',e=>{if(e.key==='Enter'){const t=e.target.value.toUpperCase().trim(); setSym(t); renderDeep(t); e.target.value='';}});
+document.getElementById('fund-in').addEventListener('keydown',e=>{if(e.key==='Enter'){const t=e.target.value.toUpperCase().trim(); CUR=t; renderFund(t); e.target.value='';}});
 document.getElementById('chain-f').addEventListener('input',e=>renderChain(e.target.value));
 
 /* ---------- tab router ---------- */
-const TABS=['overview','signals','chain','deep','market','rules'];
-function go(tab){
+const TABS=['overview','signals','chain','deep','market','fund','rules'];
+function showTab(tab){
   TABS.forEach(t=>document.getElementById('v-'+t).hidden=(t!==tab));
   document.querySelectorAll('#nav a').forEach(a=>a.classList.toggle('on',a.dataset.tab===tab));
   if(tab==='signals'&&CUR) mountChart('tvchart',CUR);
-  if(tab==='deep'){ renderDeep(CUR||Object.keys(BYTK)[0]); }
+  if(tab==='deep') renderDeep(CUR||Object.keys(BYTK)[0]);
+  if(tab==='fund') renderFund(CUR||Object.keys(DATA.fundamentals||{})[0]||Object.keys(BYTK)[0]);
   window.scrollTo(0,0);
 }
+// Tab switches become real history entries → the browser Back/Forward arrows navigate tabs
+// (and the selected ticker) instead of leaving the page and erroring.
+function go(tab){ if(!TABS.includes(tab))return; showTab(tab); history.pushState({tab,sym:CUR},'','#'+tab); }
+addEventListener('popstate',e=>{
+  const st=e.state||{}; let tab=st.tab||(location.hash?location.hash.slice(1):'overview');
+  if(!TABS.includes(tab)) tab='overview';
+  if(st.sym){ CUR=st.sym; const s=document.getElementById('sym'); if(s)s.textContent=CUR; }
+  showTab(tab);
+});
 document.querySelectorAll('[data-tab]').forEach(el=>el.addEventListener('click',e=>{e.preventDefault(); go(el.dataset.tab);}));
+history.replaceState({tab:'overview',sym:null},'','#overview');   // seed the first history entry
 </script>
 </body>
 </html>
