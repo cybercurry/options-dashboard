@@ -2566,7 +2566,7 @@
   "count": 19,
   "leap_count": 25,
   "market": {
-    "vix": 15.89,
+    "vix": 15.87,
     "vix_label": "normal",
     "fng": 55,
     "fng_label": "Greed",
@@ -2611,29 +2611,29 @@
     },
     {
       "label": "DXY",
-      "price": 98.98999786376953,
-      "pct": 0.19230243536751956,
+      "price": 98.99500274658203,
+      "pct": 0.19736810607391408,
       "prefix": "",
       "is_yield": false
     },
     {
       "label": "Crude Oil",
-      "price": 85.36000061035156,
-      "pct": -1.95267286459323,
+      "price": 84.9800033569336,
+      "pct": -2.3891503101183376,
       "prefix": "$",
       "is_yield": false
     },
     {
       "label": "Gold",
-      "price": 4696.2001953125,
-      "pct": 1.5592244141253486,
+      "price": 4697.39990234375,
+      "pct": 1.585169073754522,
       "prefix": "$",
       "is_yield": false
     },
     {
       "label": "Bitcoin",
-      "price": 77094.6875,
-      "pct": -0.8495606306405667,
+      "price": 77223.5078125,
+      "pct": -0.6838865615411471,
       "prefix": "$",
       "is_yield": false
     },
@@ -2722,8 +2722,8 @@
     {
       "label": "Digital Assets",
       "ticker": "BTC",
-      "pct": -0.8495606306405667,
-      "price": 77094.6875
+      "pct": -0.6838865615411471,
+      "price": 77223.5078125
     }
   ],
   "fundamentals": {
@@ -3010,9 +3010,21 @@
       ],
       "news": [
         {
-          "title": "Stock market today: Dow, S&P 500, Nasdaq futures mixed after US-Canada talks break down",
+          "title": "Nvidia earnings and Jackson Hole: What to watch this week",
           "publisher": "Yahoo Finance",
-          "link": "https://finance.yahoo.com/markets/live/stock-market-today-monday-august-24-dow-sp-500-nasdaq-080306047.html",
+          "link": "https://finance.yahoo.com/markets/article/nvidia-earnings-and-jackson-hole-what-to-watch-this-week-100000082.html",
+          "when": "Aug 23"
+        },
+        {
+          "title": "If a Bear Market Is Coming, History Says Investors Who Do This 1 Thing Always Win Out",
+          "publisher": "Motley Fool",
+          "link": "https://www.fool.com/investing/2026/08/24/if-a-bear-market-is-coming-history-says-investors/",
+          "when": "Aug 24"
+        },
+        {
+          "title": "Nvidia opens talks with Rebellions on potential AI chip partnership",
+          "publisher": "Verdict",
+          "link": "https://www.verdict.co.uk/nvidia-opens-talks-rebellions/",
           "when": "Aug 24"
         },
         {
@@ -3031,18 +3043,6 @@
           "title": "Anthropic Has a $65 Billion Run Rate. Buy These Stocks to Profit From It.",
           "publisher": "Motley Fool",
           "link": "https://www.fool.com/investing/2026/08/24/anthropic-has-a-65-billion-run-rate-buy-these-stoc/",
-          "when": "Aug 24"
-        },
-        {
-          "title": "BlackRock Says the Long-Term Investment Thesis for Bitcoin Remains Intact. Is Bitcoin Now a Buy?",
-          "publisher": "Motley Fool",
-          "link": "https://www.fool.com/investing/2026/08/24/blackrock-says-the-long-term-investment-thesis-for/",
-          "when": "Aug 24"
-        },
-        {
-          "title": "Shares, oil dip as US sanctions on Iran loom",
-          "publisher": "Reuters",
-          "link": "https://finance.yahoo.com/news/shares-flat-asia-iran-sanctions-004936320.html",
           "when": "Aug 24"
         }
       ]
@@ -3111,6 +3111,12 @@
           "when": "Aug 23"
         },
         {
+          "title": "From $100 billion to $27 billion: What happened to Shein?",
+          "publisher": "Reuters Videos",
+          "link": "https://finance.yahoo.com/video/100-billion-27-billion-happened-084823951.html",
+          "when": "Aug 24"
+        },
+        {
           "title": "I've Covered Semiconductors for Years. Nvidia Is My No. 1 Pick Heading Into 2027.",
           "publisher": "Motley Fool",
           "link": "https://www.fool.com/investing/2026/08/24/ive-covered-semiconductors-for-years-nvidia-is-m/",
@@ -3132,12 +3138,6 @@
           "title": "Peter Thiel\u2019s Fund Shows the Next Big AI Bet Is Power, Not Chips",
           "publisher": "BeInCrypto",
           "link": "https://beincrypto.com/peter-thiel-13f-ai-power-bet/",
-          "when": "Aug 24"
-        },
-        {
-          "title": "UPS Stopped Carrying 2 Million Amazon Packages a Day. Amazon Still Has to Move Them.",
-          "publisher": "Motley Fool",
-          "link": "https://www.fool.com/investing/2026/08/23/ups-stopped-carrying-2-million-amazon-packages-a-day-amazon-still-has-to-move-them/",
           "when": "Aug 24"
         }
       ]
@@ -5311,7 +5311,7 @@
     "pe_trailing": 25.794857,
     "pe_forward": null,
     "vix": 15.9,
-    "vix_chg": 0.77,
+    "vix_chg": 0.74,
     "vix_hi": 31.0,
     "vix_lo": 13.5,
     "vix_avg": 18.1,
@@ -5852,7 +5852,7 @@
       }
     ]
   },
-  "generated_at": "2026-08-24T08:52:50+00:00",
+  "generated_at": "2026-08-24T09:11:40+00:00",
   "universe": {
     "wheel": 16,
     "growth": 15,
