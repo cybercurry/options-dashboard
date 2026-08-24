@@ -239,8 +239,8 @@ def fetch_market_stats():
 # ── Options-chain embed ──────────────────────────────────────────────────────────
 # The static site has no live backend, so the browsable Options Chain must be baked into
 # the JSON. Bounded (expiries + strike band) to keep the file light and the scan fast.
-CHAIN_MAX_EXPIRIES = 6      # expiries per name (nearest first)
-CHAIN_DTE_MAX      = 120    # only embed expiries within ~4 months
+CHAIN_TARGET_DTES  = [7, 21, 30, 45, 60, 90]   # embed the expiry nearest each (deduped)
+CHAIN_DTE_MAX      = 120    # only consider expiries within ~4 months
 CHAIN_STRIKE_BAND  = 0.25   # strikes within ±25% of spot …
 CHAIN_STRIKES_SIDE = 28     # … and at most this many each side of ATM
 
@@ -266,18 +266,23 @@ def fetch_chains(names, prices):
         try:
             spot = _fnum(prices.get(t))
             exps = list(dict.fromkeys(tradier.get_expirations(t) or []))
-            picked = []
+            avail = []
             for e in exps:
                 try:
                     d = (_dt.date.fromisoformat(e) - today).days
                 except Exception:
                     continue
                 if 0 <= d <= CHAIN_DTE_MAX:
-                    picked.append((e, d))
-                if len(picked) >= CHAIN_MAX_EXPIRIES:
-                    break
-            if not picked:
+                    avail.append((e, d))
+            if not avail:
                 continue
+            # Spread the embedded expiries across target DTEs so the ~30-day working window
+            # (what CSP/CC actually trade) is always present, not just the front weeklies.
+            chosen = {}
+            for tgt in CHAIN_TARGET_DTES:
+                e, d = min(avail, key=lambda x: abs(x[1] - tgt))
+                chosen[e] = d
+            picked = sorted(chosen.items(), key=lambda x: x[1])
             lo = spot * (1 - CHAIN_STRIKE_BAND) if spot else None
             hi = spot * (1 + CHAIN_STRIKE_BAND) if spot else None
             exp_out = []
