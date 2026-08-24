@@ -810,8 +810,8 @@ function emptyTile(kind,msg){const k=kind.toLowerCase();
 function leapTile(l){
   const gnodes=[
     {l:'Time value ≤40%', s:l.gate_a?'ok':'no'}, {l:'Carry ≤8%/yr', s:l.gate_c?'ok':'no'},
-    {l:'Clear uptrend', s:l.trend_ok?'ok':'no'}, {l:'Price > 50 MA', s:l.above_50ma?'ok':'no'},
-    {l:'Price > 200 MA', s:l.above_200ma?'ok':'no'}, {l:'50 MA > 200 MA', s:l.ma_aligned?'ok':'no'},
+    {l:'Clear uptrend', s:l.trend_ok?'ok':'no'}, {l:'> 50 MA', s:l.above_50ma?'ok':'no'},
+    {l:'> 200 MA', s:l.above_200ma?'ok':'no'}, {l:'50 MA > 200 MA', s:l.ma_aligned?'ok':'no'},
     {l:'RSI rising', s:l.rsi_rising?'ok':'no'} ];
   const foot=`Exp ${l.expiry} · DTE ${l.dte} · cost $${l.cost} · intr $${num(l.intrinsic,0)} · ext $${num(l.extrinsic,0)}`;
   const key=`Time value = premium minus intrinsic. Carry = its cost per year, as % of the share price.`;
