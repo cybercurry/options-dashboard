@@ -772,7 +772,7 @@ function fmtDMY(iso){ if(!iso) return ''; const p=String(iso).split('-'); return
 function legTile(s){const k=s.strategy.toLowerCase();
   // Full pass/fail scorecard from the engine (every gate, passed or failed). Falls back to the
   // old timing-reasons web for data written before `gates` existed.
-  const GLBL={timing:'Entry timing'};   // clearer node label (rest already read plainly)
+  const GLBL={timing:'Timing'};   // clearer node label (rest already read plainly)
   const nodes=(s.gates&&s.gates.length)
     ? s.gates.map(g=>({l:GLBL[g.l]||g.l, s:g.s}))
     : (s.timing_reasons||[]).map(r=>({l:r.replace(/\s*\([^)]*\)/,'').replace(/⛔\s*/,'').trim().slice(0,20),
