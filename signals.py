@@ -436,15 +436,15 @@ def _build(ticker, strat, o, spot, expiry, dte, sector, iv_atm, earn_soon, earn_
         return None
     prem_pct = mid / spot          # Jay's definition: premium ÷ stock price (both CSP and CC)
     pop = (1 - abs(delta)) if delta is not None else None    # ≈ prob of expiring OTM
-    # filters
-    if prem_pct < P["min_premium"]:
-        return None
-    if oi < P["min_oi"]:
-        return None
-    if spr is not None and spr > P["max_spread_pct"]:
-        return None
-    if P["earnings_blackout"] and earn_soon:
-        return None
+    # Structural gates are no longer a drop-filter: we still build the nearest ~30Δ contract even
+    # when one fails, so the TA tile can grey the face yet disclose the full pass/fail scorecard
+    # in its popup. `qualifies` = passes ALL structural gates (used to keep it out of the
+    # shortlist / Sell-now / Options-Chain lists).
+    g_prem = prem_pct >= P["min_premium"]
+    g_oi = oi >= P["min_oi"]
+    g_spread = (spr is None) or (spr <= P["max_spread_pct"])
+    g_earn = not (P["earnings_blackout"] and earn_soon)
+    qualifies = bool(g_prem and g_oi and g_spread and g_earn)
     return {
         "ticker": ticker, "strategy": strat, "spot": round(spot, 2),
         "expiry": expiry, "dte": dte, "strike": strike,
@@ -458,6 +458,7 @@ def _build(ticker, strat, o, spot, expiry, dte, sector, iv_atm, earn_soon, earn_
         "earnings_soon": bool(earn_soon),
         "earnings_in_window": bool(earn_window),
         "strong": prem_pct >= P["strong_premium"],
+        "qualifies": qualifies,
     }
 
 
@@ -561,7 +562,8 @@ def scan_ticker(ticker):
 def _shortlist(signals):
     """Diversified shortlist: qualified (median_ok) CSPs, ranked by premium %, spread across
     sectors (≤ max_per_sector) and one per ticker."""
-    cands = [s for s in signals if s["strategy"] == "CSP" and s.get("median_ok")]
+    cands = [s for s in signals if s["strategy"] == "CSP" and s.get("median_ok")
+             and s.get("qualifies", True)]
     cands.sort(key=lambda s: (s["premium_pct"], s.get("pop") or 0), reverse=True)
     picked, per_sector, seen = [], {}, set()
     for s in cands:

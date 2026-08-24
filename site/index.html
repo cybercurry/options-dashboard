@@ -186,6 +186,10 @@ td.l{text-align:left}
 .legtile .detail{position:absolute; left:50%; transform:translateX(-50%); top:100%; margin-top:8px; z-index:70; width:min(310px,86vw); background:var(--surface); border:1px solid var(--accent); border-radius:12px; box-shadow:var(--glow); padding:10px 12px; display:none}
 @media (hover:hover){.legtile:hover .detail,.legtile:focus-within .detail{display:block}}
 .legtile.oi-open .detail{display:block}
+/* doesn't-qualify: grey the tile FACE only (never the popup, which stays fully readable) */
+.legtile.nq{border-style:dashed}
+.legtile.nq .trade,.legtile.nq .fchips{opacity:.42}
+.nqtag{font-size:11px;color:var(--faint);border:1px solid var(--line);border-radius:999px;padding:2px 8px;font-weight:600}
 .hint{font-size:12.5px; color:var(--faint); margin:2px 0 0}
 /* constellation / data-web (MNI-style hover reveal) */
 .web{position:relative; width:100%; height:150px}
@@ -429,7 +433,7 @@ function leapVerdict(l){
 fetch('data/signals.json',{cache:'no-store'}).then(r=>r.json()).then(J=>{
   DATA=J; SIGS=J.signals||[]; LEAPS=J.leaps||[]; MKT=J.market||{};
   // ready = actionable CSP/CC (right side of median + real setup)
-  READY=SIGS.filter(s=>s.median_ok===true && (s.timing_score||0)>=6)
+  READY=SIGS.filter(s=>s.qualifies!==false && s.median_ok===true && (s.timing_score||0)>=6)
             .sort((a,b)=>(b.timing_score||0)-(a.timing_score||0)||(b.premium_pct||0)-(a.premium_pct||0));
   LEAPQ=LEAPS.filter(l=>l.qualifies)
              .sort((a,b)=>(b.timing_score||0)-(a.timing_score||0)||(a.carry_pct||99)-(b.carry_pct||99));
@@ -441,9 +445,10 @@ fetch('data/signals.json',{cache:'no-store'}).then(r=>r.json()).then(J=>{
   LEAPS.forEach(l=>{const o=put(l.ticker); o.sector=(o.sector==='—'?l.sector:o.sector)||'—'; o.leap=l; o.rsi=l.rsi;});
   // chain rows = every engine-selected contract
   CHAINROWS=[];
-  SIGS.forEach(s=>CHAINROWS.push({tk:s.ticker,type:s.strategy,strike:s.strike,exp:s.expiry,dte:s.dte,
+  SIGS.forEach(s=>{ if(s.qualifies===false) return;   // Options Chain = working strikes only
+    CHAINROWS.push({tk:s.ticker,type:s.strategy,strike:s.strike,exp:s.expiry,dte:s.dte,
     delta:s.delta,mid:s.mid,iv:s.iv,oi:s.oi,spread:s.spread_pct,pop:s.pop,
-    yield:(s.premium_pct!=null?s.premium_pct.toFixed(1)+'% prem':'')}));
+    yield:(s.premium_pct!=null?s.premium_pct.toFixed(1)+'% prem':'')}); });
   LEAPS.forEach(l=>CHAINROWS.push({tk:l.ticker,type:'LEAP',strike:l.strike,exp:l.expiry,dte:l.dte,
     delta:l.delta,mid:l.mid,iv:l.iv,oi:null,spread:null,pop:null,
     yield:(l.extrinsic_pct!=null?l.extrinsic_pct+'% ext · '+num(l.carry_pct,1,'%/yr'):'')}));
@@ -707,8 +712,12 @@ function legTile(s){const k=s.strategy.toLowerCase();
     : (s.timing_reasons||[]).map(r=>({l:r.replace(/\s*\([^)]*\)/,'').replace(/⛔\s*/,'').trim().slice(0,20),
                                       s:r.indexOf('⛔')>=0?'no':'ok'}));
   const foot=`Exp ${s.expiry} · DTE ${s.dte} · POP ${num(s.pop,0,'%')} · OI ${s.oi} · spr ${num(s.spread_pct,0,'%')}`;
-  return `<div class="legtile" tabindex="0">
-    <div class="th"><span class="pill p-${k}">${s.strategy}</span> ${shortSetup(s.timing_label)}</div>
+  // Doesn't clear a structural gate → grey the tile FACE but keep the full popup (tap/hover to
+  // see exactly which gate failed). The tile still isn't a 'sell now' — the greying signals that.
+  const nq = s.qualifies===false;
+  const head = nq ? '<span class="nqtag">doesn’t qualify</span>' : shortSetup(s.timing_label);
+  return `<div class="legtile${nq?' nq':''}" tabindex="0">
+    <div class="th"><span class="pill p-${k}">${s.strategy}</span> ${head}</div>
     <div class="trade t-${k}">${fmtTrade(k,s.strike)}</div>
     <div class="fchips">${chip('Δ ',num(s.delta,2))}${chip('prem ',num(s.premium_pct,1,'%'))}${chip('IV ',num(s.iv,0,'%'))}${chip('%B ',num(s.pct_b,2))}</div>
     <div class="detail">${web(s.strategy+' $'+s.strike, nodes)}<div class="webfoot">${foot}</div></div></div>`;
