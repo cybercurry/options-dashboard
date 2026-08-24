@@ -10,8 +10,12 @@ import json
 import datetime
 import pathlib
 
+import math
+import statistics
+
 import requests
 
+import macro
 import signals
 import sheets
 
@@ -174,6 +178,64 @@ def fetch_fundamentals_all(names, prices):
     return out
 
 
+def _yf_hist(sym, period="1y"):
+    try:
+        import yfinance as yf
+        return [float(x) for x in yf.Ticker(sym).history(period=period)["Close"].dropna()]
+    except Exception:
+        return []
+
+
+def _rv20(closes):
+    """20-day annualised realised vol (%), for the S&P VRP calc."""
+    c = closes[-21:]
+    if len(c) < 21:
+        return None
+    rets = [math.log(c[i] / c[i - 1]) for i in range(1, len(c)) if c[i - 1] > 0]
+    return statistics.pstdev(rets) * math.sqrt(252) * 100 if len(rets) >= 2 else None
+
+
+def fetch_market_stats():
+    """Everything the app's 📊 Market Stats tab shows — via the pure `macro` module + yfinance."""
+    ms = {}
+    try:
+        yc = macro.yield_curve()
+        ms["yield_curve"] = yc
+        ms["fed"] = macro.fed_funds_rate()
+        ms["spread_2s10s"] = macro.curve_spread_2s10s(yc)
+    except Exception:
+        pass
+    try:
+        import yfinance as yf
+        info = yf.Ticker("SPY").info or {}
+        ms["pe_trailing"] = info.get("trailingPE")
+        ms["pe_forward"] = info.get("forwardPE")
+    except Exception:
+        pass
+    vh = _yf_hist("^VIX", "1y")
+    if vh:
+        now, prev = vh[-1], (vh[-2] if len(vh) > 1 else vh[-1])
+        ms.update({"vix": round(now, 1), "vix_chg": round(now - prev, 2),
+                   "vix_hi": round(max(vh), 1), "vix_lo": round(min(vh), 1),
+                   "vix_avg": round(sum(vh) / len(vh), 1)})
+    sh = _yf_hist("SPY", "3mo")
+    rv = _rv20(sh) if sh else None
+    if rv is not None:
+        ms["spy_realized"] = round(rv, 1)
+        if ms.get("vix") is not None:
+            ms["vrp"] = round(ms["vix"] - rv, 1)
+    for key, sym in (("ovx", "^OVX"), ("gvz", "^GVZ")):
+        h = _yf_hist(sym, "5d")
+        if h:
+            now, prev = h[-1], (h[-2] if len(h) > 1 else h[-1])
+            ms[key] = round(now, 1); ms[key + "_chg"] = round(now - prev, 2)
+    try:
+        ms["calendar"] = macro.econ_calendar()
+    except Exception:
+        ms["calendar"] = []
+    return ms
+
+
 def main():
     uni = load_universe()
     data = signals.scan(uni)                       # {"signals": [...], "leaps": [...], "params": {...}}
@@ -183,6 +245,7 @@ def main():
     _names = [o.get("ticker") for o in data.get("overview", []) if o.get("ticker")]
     _prices = {o.get("ticker"): o.get("price") for o in data.get("overview", [])}
     data["fundamentals"] = fetch_fundamentals_all(_names, _prices)
+    data["market_stats"] = fetch_market_stats()
     data["generated_at"] = datetime.datetime.now(datetime.timezone.utc).isoformat(timespec="seconds")
     data["universe"] = {"wheel": len(uni.get("wheel", [])),
                         "growth": len(uni.get("growth", [])),
