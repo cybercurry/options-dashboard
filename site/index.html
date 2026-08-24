@@ -186,10 +186,11 @@ td.l{text-align:left}
 .legtile .detail{position:absolute; left:50%; transform:translateX(-50%); top:100%; margin-top:8px; z-index:70; width:min(310px,86vw); background:var(--surface); border:1px solid var(--accent); border-radius:12px; box-shadow:var(--glow); padding:10px 12px; display:none}
 @media (hover:hover){.legtile:hover .detail,.legtile:focus-within .detail{display:block}}
 .legtile.oi-open .detail{display:block}
-/* doesn't-qualify: grey the tile FACE only (never the popup, which stays fully readable) */
-.legtile.nq{border-style:dashed}
-.legtile.nq .trade,.legtile.nq .fchips{opacity:.42}
-.nqtag{font-size:11px;color:var(--faint);border:1px solid var(--line);border-radius:999px;padding:2px 8px;font-weight:600}
+/* earnings blackout = the one hard no-no: grey the tile face + big red banner. The popup
+   (.detail) is never dimmed, so its full pass/fail scorecard stays readable. */
+.legtile.earn{border-style:dashed; border-color:color-mix(in srgb,var(--bad) 45%,var(--line))}
+.legtile.earn .th .setup{opacity:.5}
+.earnfail{font-family:"Archivo",sans-serif; font-weight:800; font-size:16px; color:var(--bad); margin:10px 0 2px; letter-spacing:.02em}
 .hint{font-size:12.5px; color:var(--faint); margin:2px 0 0}
 /* constellation / data-web (MNI-style hover reveal) */
 .web{position:relative; width:100%; height:150px}
@@ -712,14 +713,28 @@ function legTile(s){const k=s.strategy.toLowerCase();
     : (s.timing_reasons||[]).map(r=>({l:r.replace(/\s*\([^)]*\)/,'').replace(/⛔\s*/,'').trim().slice(0,20),
                                       s:r.indexOf('⛔')>=0?'no':'ok'}));
   const foot=`Exp ${s.expiry} · DTE ${s.dte} · POP ${num(s.pop,0,'%')} · OI ${s.oi} · spr ${num(s.spread_pct,0,'%')}`;
-  // Doesn't clear a structural gate → grey the tile FACE but keep the full popup (tap/hover to
-  // see exactly which gate failed). The tile still isn't a 'sell now' — the greying signals that.
-  const nq = s.qualifies===false;
-  const head = nq ? '<span class="nqtag">doesn’t qualify</span>' : shortSetup(s.timing_label);
-  return `<div class="legtile${nq?' nq':''}" tabindex="0">
+  // Face rules (popup is ALWAYS shown, red or green — it's the educational bit):
+  //  • earnings blackout (≤7d) = the one hard no-no → grey the tile + big "FAILED EARNINGS GATE".
+  //  • a setup has fired (🟢 FULL / 🟡 PARTIAL) → show the strike ("Sell $X Put").
+  //  • no setup (🟠 WAIT / 🔴 NO SETUP) → NO strike; the popup's red gates say why.
+  const earnRed = s.earnings_soon===true;
+  const setup   = /^(🟢|🟡)/.test(s.timing_label||'');
+  const chips = `<div class="fchips">${chip('Δ ',num(s.delta,2))}${chip('prem ',num(s.premium_pct,1,'%'))}${chip('IV ',num(s.iv,0,'%'))}${chip('%B ',num(s.pct_b,2))}</div>`;
+  let cls='', head, body;
+  if(earnRed){
+    cls=' earn';
+    head='<span class="setup s-no">🔴 NO SETUP</span>';
+    body='<div class="earnfail">FAILED EARNINGS GATE</div>';
+  } else if(setup){
+    head=shortSetup(s.timing_label);
+    body=`<div class="trade t-${k}">${fmtTrade(k,s.strike)}</div>${chips}`;
+  } else {
+    head=shortSetup(s.timing_label);
+    body=chips;                                   // no setup → no strike on the face
+  }
+  return `<div class="legtile${cls}" tabindex="0">
     <div class="th"><span class="pill p-${k}">${s.strategy}</span> ${head}</div>
-    <div class="trade t-${k}">${fmtTrade(k,s.strike)}</div>
-    <div class="fchips">${chip('Δ ',num(s.delta,2))}${chip('prem ',num(s.premium_pct,1,'%'))}${chip('IV ',num(s.iv,0,'%'))}${chip('%B ',num(s.pct_b,2))}</div>
+    ${body}
     <div class="detail">${web(s.strategy+' $'+s.strike, nodes)}<div class="webfoot">${foot}</div></div></div>`;
 }
 function emptyTile(kind,msg){const k=kind.toLowerCase();

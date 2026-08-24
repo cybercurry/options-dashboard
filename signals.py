@@ -478,7 +478,7 @@ def _leg_gates(s, iv_ratio):
         {"l": "prem %.1f%%" % (prem or 0), "s": "ok" if (prem or 0) >= P["min_premium"] * 100 else "no"},
         {"l": "OI %d" % oi,             "s": "ok" if oi >= P["min_oi"] else "no"},
         {"l": "spr %.0f%%" % (spr or 0), "s": "ok" if (spr is not None and spr <= P["max_spread_pct"] * 100) else "no"},
-        {"l": "earnings",               "s": "warn" if s.get("earnings_in_window") else "ok"},
+        {"l": "earnings",               "s": "no" if s.get("earnings_soon") else ("warn" if s.get("earnings_in_window") else "ok")},
         {"l": "median",                 "s": "ok" if mo else ("no" if mo is not None else "warn")},
     ]
     if iv_ratio is not None:
