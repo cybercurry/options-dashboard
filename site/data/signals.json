@@ -1768,29 +1768,29 @@
     },
     {
       "label": "DXY",
-      "price": 98.8239974975586,
-      "pct": 0.024285875566443238,
+      "price": 98.85900115966797,
+      "pct": 0.05971468227510268,
       "prefix": "",
       "is_yield": false
     },
     {
       "label": "Crude Oil",
-      "price": 85.61000061035156,
-      "pct": -1.6655145748956657,
+      "price": 85.4000015258789,
+      "pct": -1.9067264866365563,
       "prefix": "$",
       "is_yield": false
     },
     {
       "label": "Gold",
-      "price": 4694.39990234375,
-      "pct": 1.5202915854510168,
+      "price": 4704.5,
+      "pct": 1.738714574636946,
       "prefix": "$",
       "is_yield": false
     },
     {
       "label": "Bitcoin",
-      "price": 76766.7265625,
-      "pct": -0.4108374075689314,
+      "price": 77324.453125,
+      "pct": 0.3126989968355032,
       "prefix": "$",
       "is_yield": false
     },
@@ -1879,8 +1879,8 @@
     {
       "label": "Digital Assets",
       "ticker": "BTC",
-      "pct": -0.4108374075689314,
-      "price": 76766.7265625
+      "pct": 0.3126989968355032,
+      "price": 77324.453125
     }
   ],
   "fundamentals": {
@@ -1951,6 +1951,18 @@
       ],
       "news": [
         {
+          "title": "Elon Musk's Tesla Has 'Massive Advantage' Before Selling Optimus in the Market, Says This Analyst \u2014 Crypto Prediction Market Weighs 2026 Launch Odds",
+          "publisher": "Benzinga Prediction Markets",
+          "link": "https://www.benzinga.com/markets/prediction-markets/26/08/61374326/elon-musk-tesla-optimus-2026-launch-crypto-prediction-market?utm_source=yahooFinance&utm_campaign=partner_feed&utm_medium=referral",
+          "when": "Aug 24"
+        },
+        {
+          "title": "Forget the Headlines: Tesla (TSLA) Is Still a Hold Based on What the Data Shows",
+          "publisher": "Motley Fool",
+          "link": "https://www.fool.com/investing/2026/08/24/forget-the-headlines-tesla-tsla-is-still-a-hold-ba/",
+          "when": "Aug 24"
+        },
+        {
           "title": "A New SEC Filing Reveals Exactly How Many Shares of SpaceX Elon Musk Owns. Here's Why It Matters.",
           "publisher": "Motley Fool",
           "link": "https://www.fool.com/investing/2026/08/23/a-new-sec-filing-reveals-exactly-how-many-shares-o/",
@@ -1972,18 +1984,6 @@
           "title": "The $1.7 Trillion Job Apocalypse: Why Investors Can\u2019t Ignore Humanoid Robots",
           "publisher": "24/7 Wall St.",
           "link": "https://247wallst.com/investing/2026/08/23/the-1-7-trillion-job-apocalypse-why-investors-cant-ignore-humanoid-robots/",
-          "when": "Aug 23"
-        },
-        {
-          "title": "500 Reasons to Buy Einride Stock Today",
-          "publisher": "Barchart",
-          "link": "https://www.barchart.com/story/news/3992216/500-reasons-to-buy-einride-stock-today",
-          "when": "Aug 23"
-        },
-        {
-          "title": "Tesla Stock in 2027: Why I Think It Still Has Room to Run",
-          "publisher": "Motley Fool",
-          "link": "https://www.fool.com/investing/2026/08/23/tesla-stock-in-2027-why-i-think-tsla-still-has-roo/",
           "when": "Aug 23"
         }
       ]
@@ -2179,27 +2179,27 @@
           "when": "Aug 23"
         },
         {
+          "title": "Billionaire Investor Stanley Druckenmiller Sold Broadcom, Intel, and Micron and Bought Another Chip Stock That Expects to Double Data Center Sales in 2027",
+          "publisher": "Motley Fool",
+          "link": "https://www.fool.com/investing/2026/08/24/billionaire-stanley-druckenmiller-sold-micron-2027/",
+          "when": "Aug 24"
+        },
+        {
+          "title": "Shares, oil slip awaiting US details of Iran sanctions",
+          "publisher": "Reuters",
+          "link": "https://finance.yahoo.com/news/shares-flat-asia-iran-sanctions-004936320.html",
+          "when": "Aug 24"
+        },
+        {
+          "title": "This Week\u2019s Big Events Are Priced In for Stocks: Will Bitcoin Agree?",
+          "publisher": "BeInCrypto",
+          "link": "https://beincrypto.com/bitcoin-priced-in-reaction-stocks/",
+          "when": "Aug 24"
+        },
+        {
           "title": "How Farmers & Merchants Bancorp\u2019s Dividend Hike Shapes FMCB\u2019s Capital Return Strategy for Investors",
           "publisher": "Simply Wall St.",
           "link": "https://finance.yahoo.com/markets/stocks/articles/farmers-merchants-bancorp-dividend-hike-042949456.html",
-          "when": "Aug 24"
-        },
-        {
-          "title": "Sandisk Rode an Estimated 70% Jump in NAND Prices. TrendForce Sees 10% to 15% This Quarter.",
-          "publisher": "Motley Fool",
-          "link": "https://www.fool.com/investing/2026/08/23/sandisk-rode-an-estimated-70-jump-in-nand-prices-trendforce-sees-10-to-15-this-quarter/",
-          "when": "Aug 24"
-        },
-        {
-          "title": "$92 Billion Nvidia Earnings Could Make or Break the AI Trade",
-          "publisher": "BeInCrypto",
-          "link": "https://beincrypto.com/nvidia-earnings-92-billion-ai-trade/",
-          "when": "Aug 24"
-        },
-        {
-          "title": "How S&P 500, Nasdaq, Dow Futures Are Moving As Trump\u2019s \u2018Economic D-Day\u2019 On Iran, Nvidia Earnings Loom",
-          "publisher": "Stocktwits",
-          "link": "https://stocktwits.com/news-articles/markets/equity/how-s-and-p-500-nasdaq-dow-futures-are-moving-as-trump-s-economic-d-day-on-iran-nvidia-earnings-loom/cZYKTMXRJn2",
           "when": "Aug 24"
         }
       ]
@@ -3336,6 +3336,12 @@
       ],
       "news": [
         {
+          "title": "Billionaire Investor Stanley Druckenmiller Sold Broadcom, Intel, and Micron and Bought Another Chip Stock That Expects to Double Data Center Sales in 2027",
+          "publisher": "Motley Fool",
+          "link": "https://www.fool.com/investing/2026/08/24/billionaire-stanley-druckenmiller-sold-micron-2027/",
+          "when": "Aug 24"
+        },
+        {
           "title": "AMD Is Investing More Than $10 Billion in Taiwan to Build Advanced Chip Packaging With TSMC. Here's What Lisa Su Is Actually Buying With That Money.",
           "publisher": "Motley Fool",
           "link": "https://www.fool.com/investing/2026/08/23/amd-is-investing-more-than-xx-billion-in-taiwan-to/",
@@ -3363,12 +3369,6 @@
           "title": "3 Semiconductor Stocks to Buy Before August Ends",
           "publisher": "24/7 Wall St.",
           "link": "https://247wallst.com/investing/2026/08/22/3-semiconductor-stocks-to-buy-before-august-ends/",
-          "when": "Aug 22"
-        },
-        {
-          "title": "Advanced Micro Devices (AMD) Adds Tim Ryan To Board After Director Retirement",
-          "publisher": "Simply Wall St.",
-          "link": "https://finance.yahoo.com/markets/stocks/articles/advanced-micro-devices-amd-adds-061002113.html",
           "when": "Aug 22"
         }
       ]
@@ -3539,6 +3539,12 @@
       "flags": [],
       "news": [
         {
+          "title": "SPCX Stock Slides Overnight: Musk Maps Falcon Wind-Down For Starship \u2014 Rare \u2018Sell\u2019 Call Sees 27% Downside",
+          "publisher": "Stocktwits",
+          "link": "https://stocktwits.com/news-articles/markets/equity/spcx-musk-falcon-wind-down-starship-rare-sell-call-downside/cZYKd6aRJne",
+          "when": "Aug 24"
+        },
+        {
           "title": "BABA, NVDA, MRVL, WMT, SPCX: Why Retail Traders Couldn\u2019t Take Their Eyes Off These Stocks Last Week",
           "publisher": "Stocktwits",
           "link": "https://stocktwits.com/news-articles/markets/equity/baba-nvda-mrvl-wmt-spcx-why-retail-traders-couldn-t-take-their-eyes-off-these-stocks-last-week/cZYKGYPRJV6",
@@ -3566,12 +3572,6 @@
           "title": "Space Exploration Technologies (SPCX) Says China Is Its Top Rival In AI And Rockets",
           "publisher": "Simply Wall St.",
           "link": "https://finance.yahoo.com/markets/stocks/articles/space-exploration-technologies-spcx-says-170738295.html",
-          "when": "Aug 23"
-        },
-        {
-          "title": "Why Investing in IPOs Has Become a High-Stakes Coin Flip",
-          "publisher": "Barchart",
-          "link": "https://www.barchart.com/story/news/3992898/why-investing-in-ipos-has-become-a-high-stakes-coin-flip",
           "when": "Aug 23"
         }
       ]
@@ -4428,7 +4428,588 @@
       ]
     }
   },
-  "generated_at": "2026-08-24T04:54:49+00:00",
+  "market_stats": {
+    "yield_curve": [
+      [
+        "3M",
+        3.87
+      ],
+      [
+        "6M",
+        3.94
+      ],
+      [
+        "1Y",
+        3.99
+      ],
+      [
+        "2Y",
+        4.19
+      ],
+      [
+        "5Y",
+        4.39
+      ],
+      [
+        "7Y",
+        4.53
+      ],
+      [
+        "10Y",
+        4.69
+      ],
+      [
+        "30Y",
+        5.23
+      ]
+    ],
+    "fed": 3.63,
+    "spread_2s10s": 50,
+    "pe_trailing": 25.794857,
+    "pe_forward": null,
+    "vix": 15.1,
+    "vix_chg": -0.88,
+    "vix_hi": 31.0,
+    "vix_lo": 13.5,
+    "vix_avg": 18.1,
+    "spy_realized": 12.8,
+    "vrp": 2.3,
+    "ovx": 49.6,
+    "ovx_chg": -0.01,
+    "gvz": 27.3,
+    "gvz_chg": 0.01,
+    "calendar": [
+      {
+        "title": "Core Retail Sales q/q",
+        "country": "NZD",
+        "date": "2026-08-23T18:45:00-04:00",
+        "impact": "Low",
+        "forecast": "0.3%",
+        "previous": "1.0%"
+      },
+      {
+        "title": "Retail Sales q/q",
+        "country": "NZD",
+        "date": "2026-08-23T18:45:00-04:00",
+        "impact": "Low",
+        "forecast": "0.1%",
+        "previous": "0.9%"
+      },
+      {
+        "title": "Corporate Profits q/q",
+        "country": "CAD",
+        "date": "2026-08-24T08:30:00-04:00",
+        "impact": "Low",
+        "forecast": "",
+        "previous": "-2.0%"
+      },
+      {
+        "title": "Treasury Sec Bessent Speaks",
+        "country": "USD",
+        "date": "2026-08-24T14:00:00-04:00",
+        "impact": "Medium",
+        "forecast": "",
+        "previous": ""
+      },
+      {
+        "title": "Monetary Policy Meeting Minutes",
+        "country": "AUD",
+        "date": "2026-08-24T21:30:00-04:00",
+        "impact": "Low",
+        "forecast": "",
+        "previous": ""
+      },
+      {
+        "title": "BOJ Core CPI y/y",
+        "country": "JPY",
+        "date": "2026-08-25T01:00:00-04:00",
+        "impact": "Low",
+        "forecast": "1.4%",
+        "previous": "1.5%"
+      },
+      {
+        "title": "German Final GDP q/q",
+        "country": "EUR",
+        "date": "2026-08-25T02:00:00-04:00",
+        "impact": "Low",
+        "forecast": "0.2%",
+        "previous": "0.2%"
+      },
+      {
+        "title": "German ifo Business Climate",
+        "country": "EUR",
+        "date": "2026-08-25T04:00:00-04:00",
+        "impact": "Low",
+        "forecast": "87.3",
+        "previous": "86.6"
+      },
+      {
+        "title": "ADP Weekly Employment Change",
+        "country": "USD",
+        "date": "2026-08-25T08:15:00-04:00",
+        "impact": "Low",
+        "forecast": "",
+        "previous": "9.5K"
+      },
+      {
+        "title": "Belgian NBB Business Climate",
+        "country": "EUR",
+        "date": "2026-08-25T09:00:00-04:00",
+        "impact": "Low",
+        "forecast": "-11.0",
+        "previous": "-11.9"
+      },
+      {
+        "title": "HPI m/m",
+        "country": "USD",
+        "date": "2026-08-25T09:00:00-04:00",
+        "impact": "Low",
+        "forecast": "0.2%",
+        "previous": "0.3%"
+      },
+      {
+        "title": "S&P/CS Composite-20 HPI y/y",
+        "country": "USD",
+        "date": "2026-08-25T09:00:00-04:00",
+        "impact": "Low",
+        "forecast": "1.9%",
+        "previous": "1.6%"
+      },
+      {
+        "title": "CB Consumer Confidence",
+        "country": "USD",
+        "date": "2026-08-25T10:00:00-04:00",
+        "impact": "Medium",
+        "forecast": "90.3",
+        "previous": "90.8"
+      },
+      {
+        "title": "New Home Sales",
+        "country": "USD",
+        "date": "2026-08-25T10:00:00-04:00",
+        "impact": "Low",
+        "forecast": "620K",
+        "previous": "628K"
+      },
+      {
+        "title": "Richmond Manufacturing Index",
+        "country": "USD",
+        "date": "2026-08-25T10:00:00-04:00",
+        "impact": "Low",
+        "forecast": "7",
+        "previous": "5"
+      },
+      {
+        "title": "API Weekly Statistical Bulletin",
+        "country": "USD",
+        "date": "2026-08-25T16:30:00-04:00",
+        "impact": "Low",
+        "forecast": "",
+        "previous": ""
+      },
+      {
+        "title": "SPPI y/y",
+        "country": "JPY",
+        "date": "2026-08-25T19:50:00-04:00",
+        "impact": "Low",
+        "forecast": "3.2%",
+        "previous": "3.2%"
+      },
+      {
+        "title": "MI Leading Index m/m",
+        "country": "AUD",
+        "date": "2026-08-25T20:30:00-04:00",
+        "impact": "Low",
+        "forecast": "",
+        "previous": "0.0%"
+      },
+      {
+        "title": "CPI m/m",
+        "country": "AUD",
+        "date": "2026-08-25T21:30:00-04:00",
+        "impact": "High",
+        "forecast": "0.9%",
+        "previous": "-0.1%"
+      },
+      {
+        "title": "CPI y/y",
+        "country": "AUD",
+        "date": "2026-08-25T21:30:00-04:00",
+        "impact": "High",
+        "forecast": "3.3%",
+        "previous": "3.8%"
+      },
+      {
+        "title": "Trimmed Mean CPI m/m",
+        "country": "AUD",
+        "date": "2026-08-25T21:30:00-04:00",
+        "impact": "High",
+        "forecast": "0.3%",
+        "previous": "0.3%"
+      },
+      {
+        "title": "Construction Work Done q/q",
+        "country": "AUD",
+        "date": "2026-08-25T21:30:00-04:00",
+        "impact": "Low",
+        "forecast": "0.5%",
+        "previous": "3.4%"
+      },
+      {
+        "title": "UBS Economic Expectations",
+        "country": "CHF",
+        "date": "2026-08-26T04:00:00-04:00",
+        "impact": "Low",
+        "forecast": "",
+        "previous": "10.0"
+      },
+      {
+        "title": "CBI Realized Sales",
+        "country": "GBP",
+        "date": "2026-08-26T06:00:00-04:00",
+        "impact": "Low",
+        "forecast": "-34",
+        "previous": "-26"
+      },
+      {
+        "title": "Core PCE Price Index m/m",
+        "country": "USD",
+        "date": "2026-08-26T08:30:00-04:00",
+        "impact": "High",
+        "forecast": "0.2%",
+        "previous": "0.1%"
+      },
+      {
+        "title": "Prelim GDP q/q",
+        "country": "USD",
+        "date": "2026-08-26T08:30:00-04:00",
+        "impact": "High",
+        "forecast": "1.5%",
+        "previous": "1.5%"
+      },
+      {
+        "title": "Prelim GDP Price Index q/q",
+        "country": "USD",
+        "date": "2026-08-26T08:30:00-04:00",
+        "impact": "Medium",
+        "forecast": "6.2%",
+        "previous": "6.2%"
+      },
+      {
+        "title": "Core Durable Goods Orders m/m",
+        "country": "USD",
+        "date": "2026-08-26T08:30:00-04:00",
+        "impact": "Low",
+        "forecast": "0.5%",
+        "previous": "0.6%"
+      },
+      {
+        "title": "Durable Goods Orders m/m",
+        "country": "USD",
+        "date": "2026-08-26T08:30:00-04:00",
+        "impact": "Low",
+        "forecast": "0.5%",
+        "previous": "0.3%"
+      },
+      {
+        "title": "Personal Income m/m",
+        "country": "USD",
+        "date": "2026-08-26T08:30:00-04:00",
+        "impact": "Low",
+        "forecast": "0.2%",
+        "previous": "0.2%"
+      },
+      {
+        "title": "Personal Spending m/m",
+        "country": "USD",
+        "date": "2026-08-26T08:30:00-04:00",
+        "impact": "Low",
+        "forecast": "0.1%",
+        "previous": "0.3%"
+      },
+      {
+        "title": "Crude Oil Inventories",
+        "country": "USD",
+        "date": "2026-08-26T10:30:00-04:00",
+        "impact": "Low",
+        "forecast": "",
+        "previous": "4.4M"
+      },
+      {
+        "title": "Gov Board Member Martin Speaks",
+        "country": "CHF",
+        "date": "2026-08-26T12:15:00-04:00",
+        "impact": "Low",
+        "forecast": "",
+        "previous": ""
+      },
+      {
+        "title": "Household Spending m/m",
+        "country": "AUD",
+        "date": "2026-08-26T21:30:00-04:00",
+        "impact": "Low",
+        "forecast": "0.4%",
+        "previous": "0.8%"
+      },
+      {
+        "title": "Private Capital Expenditure q/q",
+        "country": "AUD",
+        "date": "2026-08-26T21:30:00-04:00",
+        "impact": "Low",
+        "forecast": "0.8%",
+        "previous": "6.5%"
+      },
+      {
+        "title": "RBA Bulletin",
+        "country": "AUD",
+        "date": "2026-08-26T21:30:00-04:00",
+        "impact": "Low",
+        "forecast": "",
+        "previous": ""
+      },
+      {
+        "title": "German GfK Consumer Climate",
+        "country": "EUR",
+        "date": "2026-08-27T02:00:00-04:00",
+        "impact": "Low",
+        "forecast": "-29.2",
+        "previous": "-29.6"
+      },
+      {
+        "title": "M3 Money Supply y/y",
+        "country": "EUR",
+        "date": "2026-08-27T04:00:00-04:00",
+        "impact": "Low",
+        "forecast": "3.4%",
+        "previous": "3.3%"
+      },
+      {
+        "title": "Private Loans y/y",
+        "country": "EUR",
+        "date": "2026-08-27T04:00:00-04:00",
+        "impact": "Low",
+        "forecast": "2.9%",
+        "previous": "3.0%"
+      },
+      {
+        "title": "ECB Monetary Policy Meeting Accounts",
+        "country": "EUR",
+        "date": "2026-08-27T07:30:00-04:00",
+        "impact": "Low",
+        "forecast": "",
+        "previous": ""
+      },
+      {
+        "title": "Current Account",
+        "country": "CAD",
+        "date": "2026-08-27T08:30:00-04:00",
+        "impact": "Low",
+        "forecast": "5.6B",
+        "previous": "-7.2B"
+      },
+      {
+        "title": "Unemployment Claims",
+        "country": "USD",
+        "date": "2026-08-27T08:30:00-04:00",
+        "impact": "Medium",
+        "forecast": "208K",
+        "previous": "206K"
+      },
+      {
+        "title": "Goods Trade Balance",
+        "country": "USD",
+        "date": "2026-08-27T08:30:00-04:00",
+        "impact": "Low",
+        "forecast": "-99.9B",
+        "previous": "-101.5B"
+      },
+      {
+        "title": "Prelim Wholesale Inventories m/m",
+        "country": "USD",
+        "date": "2026-08-27T08:30:00-04:00",
+        "impact": "Low",
+        "forecast": "0.2%",
+        "previous": "0.2%"
+      },
+      {
+        "title": "CB Leading Index m/m",
+        "country": "CNY",
+        "date": "2026-08-27T09:00:00-04:00",
+        "impact": "Low",
+        "forecast": "",
+        "previous": "0.1%"
+      },
+      {
+        "title": "Natural Gas Storage",
+        "country": "USD",
+        "date": "2026-08-27T10:30:00-04:00",
+        "impact": "Low",
+        "forecast": "",
+        "previous": "16B"
+      },
+      {
+        "title": "Jackson Hole Symposium",
+        "country": "All",
+        "date": "2026-08-27T12:15:00-04:00",
+        "impact": "Medium",
+        "forecast": "",
+        "previous": ""
+      },
+      {
+        "title": "Tokyo Core CPI y/y",
+        "country": "JPY",
+        "date": "2026-08-27T19:30:00-04:00",
+        "impact": "Medium",
+        "forecast": "1.8%",
+        "previous": "1.9%"
+      },
+      {
+        "title": "Unemployment Rate",
+        "country": "JPY",
+        "date": "2026-08-27T19:30:00-04:00",
+        "impact": "Low",
+        "forecast": "2.5%",
+        "previous": "2.5%"
+      },
+      {
+        "title": "German Import Prices m/m",
+        "country": "EUR",
+        "date": "2026-08-28T02:00:00-04:00",
+        "impact": "Low",
+        "forecast": "0.3%",
+        "previous": "-0.7%"
+      },
+      {
+        "title": "French Consumer Spending m/m",
+        "country": "EUR",
+        "date": "2026-08-28T02:45:00-04:00",
+        "impact": "Low",
+        "forecast": "0.0%",
+        "previous": "0.4%"
+      },
+      {
+        "title": "French Final Private Payrolls q/q",
+        "country": "EUR",
+        "date": "2026-08-28T02:45:00-04:00",
+        "impact": "Low",
+        "forecast": "-0.1%",
+        "previous": "-0.1%"
+      },
+      {
+        "title": "French Prelim CPI m/m",
+        "country": "EUR",
+        "date": "2026-08-28T02:45:00-04:00",
+        "impact": "Low",
+        "forecast": "0.7%",
+        "previous": "0.6%"
+      },
+      {
+        "title": "French Prelim GDP q/q",
+        "country": "EUR",
+        "date": "2026-08-28T02:45:00-04:00",
+        "impact": "Low",
+        "forecast": "0.2%",
+        "previous": "0.2%"
+      },
+      {
+        "title": "KOF Economic Barometer",
+        "country": "CHF",
+        "date": "2026-08-28T03:00:00-04:00",
+        "impact": "Low",
+        "forecast": "103.0",
+        "previous": "103.5"
+      },
+      {
+        "title": "Spanish Flash CPI y/y",
+        "country": "EUR",
+        "date": "2026-08-28T03:00:00-04:00",
+        "impact": "Low",
+        "forecast": "4.2%",
+        "previous": "3.6%"
+      },
+      {
+        "title": "German Unemployment Change",
+        "country": "EUR",
+        "date": "2026-08-28T03:55:00-04:00",
+        "impact": "Low",
+        "forecast": "4K",
+        "previous": "6K"
+      },
+      {
+        "title": "Italian 10-y Bond Auction",
+        "country": "EUR",
+        "date": "2026-08-28T05:33:00-04:00",
+        "impact": "Low",
+        "forecast": "",
+        "previous": ""
+      },
+      {
+        "title": "GDP m/m",
+        "country": "CAD",
+        "date": "2026-08-28T08:30:00-04:00",
+        "impact": "High",
+        "forecast": "0.2%",
+        "previous": "0.3%"
+      },
+      {
+        "title": "Chicago PMI",
+        "country": "USD",
+        "date": "2026-08-28T09:45:00-04:00",
+        "impact": "Low",
+        "forecast": "57.8",
+        "previous": "57.6"
+      },
+      {
+        "title": "Fed Chairman Warsh Speaks",
+        "country": "USD",
+        "date": "2026-08-28T10:00:00-04:00",
+        "impact": "High",
+        "forecast": "",
+        "previous": ""
+      },
+      {
+        "title": "Prelim Benchmark Payrolls Revision",
+        "country": "USD",
+        "date": "2026-08-28T10:00:00-04:00",
+        "impact": "High",
+        "forecast": "",
+        "previous": "-911K"
+      },
+      {
+        "title": "Revised UoM Consumer Sentiment",
+        "country": "USD",
+        "date": "2026-08-28T10:00:00-04:00",
+        "impact": "Medium",
+        "forecast": "51.0",
+        "previous": "51.0"
+      },
+      {
+        "title": "Revised UoM Inflation Expectations",
+        "country": "USD",
+        "date": "2026-08-28T10:00:00-04:00",
+        "impact": "Medium",
+        "forecast": "",
+        "previous": "4.3%"
+      },
+      {
+        "title": "Jackson Hole Symposium",
+        "country": "All",
+        "date": "2026-08-28T12:15:00-04:00",
+        "impact": "High",
+        "forecast": "",
+        "previous": ""
+      },
+      {
+        "title": "Jackson Hole Symposium",
+        "country": "All",
+        "date": "2026-08-29T12:15:00-04:00",
+        "impact": "Medium",
+        "forecast": "",
+        "previous": ""
+      }
+    ]
+  },
+  "generated_at": "2026-08-24T06:21:54+00:00",
   "universe": {
     "wheel": 16,
     "growth": 15,
