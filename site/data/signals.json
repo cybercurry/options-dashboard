@@ -4718,7 +4718,7 @@
   "count": 49,
   "leap_count": 25,
   "market": {
-    "vix": 15.86,
+    "vix": 15.85,
     "vix_label": "normal",
     "fng": 55,
     "fng_label": "Greed",
@@ -4730,7 +4730,7 @@
     "curve": "flat",
     "fed_funds": 3.63,
     "skew": 143.9,
-    "vix9d": 14.09
+    "vix9d": 14.07
   },
   "pulse": [
     {
@@ -4763,29 +4763,29 @@
     },
     {
       "label": "DXY",
-      "price": 99.00199890136719,
-      "pct": 0.2044492341802373,
+      "price": 98.99099731445312,
+      "pct": 0.19331402509699114,
       "prefix": "",
       "is_yield": false
     },
     {
       "label": "Crude Oil",
-      "price": 85.0199966430664,
-      "pct": -2.3432126955372,
+      "price": 84.94000244140625,
+      "pct": -2.4350966880750113,
       "prefix": "$",
       "is_yield": false
     },
     {
       "label": "Gold",
-      "price": 4709.7001953125,
-      "pct": 1.851173111491189,
+      "price": 4707.0,
+      "pct": 1.7927791482232003,
       "prefix": "$",
       "is_yield": false
     },
     {
       "label": "Bitcoin",
-      "price": 78639.9609375,
-      "pct": 1.1377947273265354,
+      "price": 78911.796875,
+      "pct": 1.4873992657651547,
       "prefix": "$",
       "is_yield": false
     },
@@ -4874,8 +4874,8 @@
     {
       "label": "Digital Assets",
       "ticker": "BTC",
-      "pct": 1.1377947273265354,
-      "price": 78639.9609375
+      "pct": 1.4873992657651547,
+      "price": 78911.796875
     }
   ],
   "fundamentals": {
@@ -4946,9 +4946,21 @@
       ],
       "news": [
         {
+          "title": "Tesla to launch Cybercabs in Austin starting Sept. 3",
+          "publisher": "Yahoo Finance Video",
+          "link": "https://finance.yahoo.com/video/tesla-launch-cybercabs-austin-starting-205004873.html",
+          "when": "Aug 24"
+        },
+        {
           "title": "Tesla Cybercab to launch Sept. 3 as robotaxi bet ramps up",
           "publisher": "Yahoo Finance",
           "link": "https://finance.yahoo.com/markets/stocks/article/tesla-cybercab-to-launch-sept-3-as-robotaxi-bet-ramps-up-135557945.html",
+          "when": "Aug 24"
+        },
+        {
+          "title": "How to Find the Market's Long-Term Winners",
+          "publisher": "Zacks",
+          "link": "https://finance.yahoo.com/markets/stocks/articles/markets-long-term-winners-204300721.html",
           "when": "Aug 24"
         },
         {
@@ -4967,18 +4979,6 @@
           "title": "Why Tesla (TSLA) Is Up 6.9% After Robotaxi Approvals And 500 Semi Deal News - And What's Next",
           "publisher": "Simply Wall St.",
           "link": "https://finance.yahoo.com/markets/stocks/articles/why-tesla-tsla-6-9-181537600.html",
-          "when": "Aug 24"
-        },
-        {
-          "title": "Marvell, Micron, SpaceX, XPeng, Tesla, Moderna, and More Stocks That Explain Today\u2019s Market",
-          "publisher": "Barrons.com",
-          "link": "https://www.barrons.com/articles/stock-movers-a25cb190?siteid=yhoof2&yptr=yahoo",
-          "when": "Aug 24"
-        },
-        {
-          "title": "Tesla's Biggest Robotaxi Test Arrives Sept. 3",
-          "publisher": "GuruFocus.com",
-          "link": "https://finance.yahoo.com/technology/articles/teslas-biggest-robotaxi-test-arrives-173435290.html",
           "when": "Aug 24"
         }
       ]
@@ -5162,39 +5162,39 @@
       ],
       "news": [
         {
-          "title": "Stock market today: S&P 500, Nasdaq fall as chip stocks sink, US unveils new Iran sanctions",
-          "publisher": "Yahoo Finance",
-          "link": "https://finance.yahoo.com/markets/live/stock-market-today-monday-august-24-dow-sp-500-nasdaq-080306047.html",
-          "when": "Aug 24"
-        },
-        {
-          "title": "How investors should approach Nvidia\u2019s earnings",
+          "title": "Tesla to launch Cybercabs in Austin starting Sept. 3",
           "publisher": "Yahoo Finance Video",
-          "link": "https://finance.yahoo.com/video/investors-approach-nvidia-earnings-145600454.html",
+          "link": "https://finance.yahoo.com/video/tesla-launch-cybercabs-austin-starting-205004873.html",
           "when": "Aug 24"
         },
         {
-          "title": "Nvidia earnings and Jackson Hole: What to watch this week",
+          "title": "Tech stocks today: All eyes on Nvidia as Meta trial resumes",
           "publisher": "Yahoo Finance",
-          "link": "https://finance.yahoo.com/markets/article/nvidia-earnings-and-jackson-hole-what-to-watch-this-week-100000082.html",
-          "when": "Aug 23"
-        },
-        {
-          "title": "Nvidia's Q2 earnings to test resurgent AI trade",
-          "publisher": "Yahoo Finance",
-          "link": "https://finance.yahoo.com/news/nvidias-q2-earnings-to-test-resurgent-ai-trade-112502189.html",
-          "when": "Aug 23"
-        },
-        {
-          "title": "Coinbase Debuts Tokenized Stocks On Base Network",
-          "publisher": "CryptoProwl",
-          "link": "https://www.cryptoprowl.com/releases/coinbase-debuts-tokenized-stocks-on-base-network-6512",
+          "link": "https://finance.yahoo.com/technology/live/tech-stocks-today-all-eyes-on-nvidia-as-meta-trial-resumes-125406169.html",
           "when": "Aug 24"
         },
         {
-          "title": "Top Strategist Warns Nvidia\u2019s Earnings on Wednesday Could Hit the Entire Market",
-          "publisher": "24/7 Wall St.",
-          "link": "https://247wallst.com/investing/2026/08/24/top-strategist-warns-nvidias-earnings-on-wednesday-could-hit-the-entire-market/",
+          "title": "Nvidia, software giants' earnings: What to watch the week of August 24th",
+          "publisher": "Yahoo Finance Video",
+          "link": "https://finance.yahoo.com/video/nvidia-software-giants-earnings-watch-120000803.html",
+          "when": "Aug 24"
+        },
+        {
+          "title": "Stock Market Today: Dow Up As Trump Says This On Canada; Nvidia Shares Skid Despite AI Move (Live Coverage)",
+          "publisher": "Investor's Business Daily",
+          "link": "https://www.investors.com/market-trend/stock-market-today/dow-jones-sp500-nasdaq-economic-d-day-alibaba-stock-baba/?src=A00220&yptr=yahoo",
+          "when": "Aug 24"
+        },
+        {
+          "title": "How to Find the Market's Long-Term Winners",
+          "publisher": "Zacks",
+          "link": "https://finance.yahoo.com/markets/stocks/articles/markets-long-term-winners-204300721.html",
+          "when": "Aug 24"
+        },
+        {
+          "title": "Update: Nasdaq, S&P 500 Fall as New Sanctions Plan Targets Iran's Trading Partners",
+          "publisher": "MT Newswires",
+          "link": "https://finance.yahoo.com/markets/stocks/articles/nasdaq-p-500-fall-sanctions-204112044.html",
           "when": "Aug 24"
         }
       ]
@@ -5257,9 +5257,21 @@
       "flags": [],
       "news": [
         {
-          "title": "Tesla Cybercab to launch Sept. 3 as robotaxi bet ramps up",
+          "title": "The luxury retail categories that consumers continue to spend the most on",
+          "publisher": "Yahoo Finance Video",
+          "link": "https://finance.yahoo.com/video/luxury-retail-categories-consumers-continue-204500137.html",
+          "when": "Aug 24"
+        },
+        {
+          "title": "Nvidia's Q2 earnings to test resurgent AI trade",
           "publisher": "Yahoo Finance",
-          "link": "https://finance.yahoo.com/markets/stocks/article/tesla-cybercab-to-launch-sept-3-as-robotaxi-bet-ramps-up-135557945.html",
+          "link": "https://finance.yahoo.com/news/nvidias-q2-earnings-to-test-resurgent-ai-trade-112502189.html",
+          "when": "Aug 23"
+        },
+        {
+          "title": "Amazon Has Been Lagging the S&P 500 in 2026. This Is the Only Reason I'd Need to Buy the Stock in August Without Hesitation.",
+          "publisher": "Motley Fool",
+          "link": "https://www.fool.com/investing/2026/08/24/amazon-is-lagging-the-sp-500-in-2026-this-is-the-o/",
           "when": "Aug 24"
         },
         {
@@ -5278,18 +5290,6 @@
           "title": "Amazon Jumps 1.8% as AWS Growth Overpowers Tech Anxiety",
           "publisher": "GuruFocus.com",
           "link": "https://finance.yahoo.com/markets/stocks/articles/amazon-jumps-1-8-aws-194722757.html",
-          "when": "Aug 24"
-        },
-        {
-          "title": "Amazon Drone Delivery Expansion: What Changes Now",
-          "publisher": "FreightWaves",
-          "link": "https://finance.yahoo.com/technology/articles/amazon-drone-delivery-expansion-changes-194313101.html",
-          "when": "Aug 24"
-        },
-        {
-          "title": "Stanley Druckenmiller and Cathie Wood agree on 2 tech giant stocks",
-          "publisher": "TheStreet",
-          "link": "https://www.thestreet.com/investing/stocks/stanley-druckenmiller-cathie-wood-agree-on-two-tech-giant-stocks-google-amazon",
           "when": "Aug 24"
         }
       ]
@@ -5936,6 +5936,12 @@
       ],
       "news": [
         {
+          "title": "How to Find the Market's Long-Term Winners",
+          "publisher": "Zacks",
+          "link": "https://finance.yahoo.com/markets/stocks/articles/markets-long-term-winners-204300721.html",
+          "when": "Aug 24"
+        },
+        {
           "title": "EXCLUSIVE: How AI's $220 Billion Bond Boom Competes With the Treasury",
           "publisher": "Benzinga Prediction Markets",
           "link": "https://www.benzinga.com/markets/prediction-markets/26/08/61392587/ai-bond-boom-treasury-220-billion?utm_source=yahooFinance&utm_campaign=partner_feed&utm_medium=referral",
@@ -5963,12 +5969,6 @@
           "title": "Prediction: Palantir Stock Will Hit $250 on This Date",
           "publisher": "24/7 Wall St.",
           "link": "https://247wallst.com/investing/2026/08/24/prediction-palantir-stock-will-hit-250-on-this-date/",
-          "when": "Aug 24"
-        },
-        {
-          "title": "Cathie Wood Dumps $27.2 Million of Palantir Stock After 43% Rally",
-          "publisher": "GuruFocus.com",
-          "link": "https://finance.yahoo.com/markets/stocks/articles/cathie-wood-dumps-27-2-121440407.html",
           "when": "Aug 24"
         }
       ]
@@ -6042,6 +6042,12 @@
           "when": "Aug 24"
         },
         {
+          "title": "Stock Market Today: Dow Up As Trump Says This On Canada; Nvidia Shares Skid Despite AI Move (Live Coverage)",
+          "publisher": "Investor's Business Daily",
+          "link": "https://www.investors.com/market-trend/stock-market-today/dow-jones-sp500-nasdaq-economic-d-day-alibaba-stock-baba/?src=A00220&yptr=yahoo",
+          "when": "Aug 24"
+        },
+        {
           "title": "Walmart Rebounds After Its $100 Billion Wipeout",
           "publisher": "GuruFocus.com",
           "link": "https://finance.yahoo.com/markets/stocks/articles/walmart-rebounds-100-billion-wipeout-195642755.html",
@@ -6063,12 +6069,6 @@
           "title": "Best Buy Set to Top Second-Quarter Comparable Sales Views Amid Positive Credit Card Data, Wedbush Says",
           "publisher": "MT Newswires",
           "link": "https://finance.yahoo.com/markets/stocks/articles/best-buy-set-top-second-193818837.html",
-          "when": "Aug 24"
-        },
-        {
-          "title": "Why shunning Apple Pay no longer works for Walmart",
-          "publisher": "American Banker",
-          "link": "https://www.americanbanker.com/payments/news/walmart-accepts-apple-pay",
           "when": "Aug 24"
         }
       ]
@@ -6142,6 +6142,24 @@
           "when": "Aug 24"
         },
         {
+          "title": "How to Find the Market's Long-Term Winners",
+          "publisher": "Zacks",
+          "link": "https://finance.yahoo.com/markets/stocks/articles/markets-long-term-winners-204300721.html",
+          "when": "Aug 24"
+        },
+        {
+          "title": "Coinbase Enters the Tokenized Stock Wars",
+          "publisher": "Bankless",
+          "link": "https://www.bankless.com/read/coinbase-enters-the-tokenized-stock-wars",
+          "when": "Aug 24"
+        },
+        {
+          "title": "Apple (AAPL) Cut Its Europe App Store Fees. Its Own Earnings Show Why It Had To",
+          "publisher": "Insider Monkey",
+          "link": "https://finance.yahoo.com/technology/articles/apple-aapl-cut-europe-app-202405814.html",
+          "when": "Aug 24"
+        },
+        {
           "title": "Coinbase Debuts Tokenized Stocks On Base Network",
           "publisher": "CryptoProwl",
           "link": "https://www.cryptoprowl.com/releases/coinbase-debuts-tokenized-stocks-on-base-network-6512",
@@ -6151,24 +6169,6 @@
           "title": "Warren Buffett's Favorite 'Forever' Stock Hits A Buy Point After Big Rally",
           "publisher": "Investor's Business Daily",
           "link": "https://www.investors.com/news/warren-buffett-coca-cola-stock-favorite-forever-holding/?src=A00220&yptr=yahoo",
-          "when": "Aug 24"
-        },
-        {
-          "title": "TSMC Slides 2.3% as AI-Chip Confidence Suddenly Cracks",
-          "publisher": "GuruFocus.com",
-          "link": "https://finance.yahoo.com/technology/ai/articles/tsmc-slides-2-3-ai-194932749.html",
-          "when": "Aug 24"
-        },
-        {
-          "title": "Coinbase Brings Tokenized Stocks to Ethereum L2 Base",
-          "publisher": "decrypt",
-          "link": "https://decrypt.co/376393/coinbase-tokenized-stocks-base-ethereum",
-          "when": "Aug 24"
-        },
-        {
-          "title": "Best Buy Set to Top Second-Quarter Comparable Sales Views Amid Positive Credit Card Data, Wedbush Says",
-          "publisher": "MT Newswires",
-          "link": "https://finance.yahoo.com/markets/stocks/articles/best-buy-set-top-second-193818837.html",
           "when": "Aug 24"
         }
       ]
@@ -6231,16 +6231,16 @@
       "flags": [],
       "news": [
         {
-          "title": "Tesla Cybercab to launch Sept. 3 as robotaxi bet ramps up",
-          "publisher": "Yahoo Finance",
-          "link": "https://finance.yahoo.com/markets/stocks/article/tesla-cybercab-to-launch-sept-3-as-robotaxi-bet-ramps-up-135557945.html",
+          "title": "Tesla to launch Cybercabs in Austin starting Sept. 3",
+          "publisher": "Yahoo Finance Video",
+          "link": "https://finance.yahoo.com/video/tesla-launch-cybercabs-austin-starting-205004873.html",
           "when": "Aug 24"
         },
         {
-          "title": "Nvidia's Q2 earnings to test resurgent AI trade",
-          "publisher": "Yahoo Finance",
-          "link": "https://finance.yahoo.com/news/nvidias-q2-earnings-to-test-resurgent-ai-trade-112502189.html",
-          "when": "Aug 23"
+          "title": "Coinbase Enters the Tokenized Stock Wars",
+          "publisher": "Bankless",
+          "link": "https://www.bankless.com/read/coinbase-enters-the-tokenized-stock-wars",
+          "when": "Aug 24"
         },
         {
           "title": "Coinbase Debuts Tokenized Stocks On Base Network",
@@ -6540,9 +6540,21 @@
           "when": "Aug 24"
         },
         {
+          "title": "How to Find the Market's Long-Term Winners",
+          "publisher": "Zacks",
+          "link": "https://finance.yahoo.com/markets/stocks/articles/markets-long-term-winners-204300721.html",
+          "when": "Aug 24"
+        },
+        {
           "title": "Elon Musk Says SpaceX Needs More Power Than New York City in a Heatwave. These 2 Nuclear Stocks Should Benefit.",
           "publisher": "Motley Fool",
           "link": "https://www.fool.com/investing/2026/08/24/spacex-needs-more-power-than-nyc-in-heatwave/",
+          "when": "Aug 24"
+        },
+        {
+          "title": "xAI Just Did in 2.3 Years What Took SpaceX Nearly Two Decades",
+          "publisher": "Benzinga",
+          "link": "https://finance.yahoo.com/technology/ai/articles/xai-just-did-2-3-193104863.html",
           "when": "Aug 24"
         },
         {
@@ -6555,18 +6567,6 @@
           "title": "Marvell, Micron, SpaceX, XPeng, Tesla, Moderna, and More Stocks That Explain Today\u2019s Market",
           "publisher": "Barrons.com",
           "link": "https://www.barrons.com/articles/stock-movers-a25cb190?siteid=yhoof2&yptr=yahoo",
-          "when": "Aug 24"
-        },
-        {
-          "title": "Trump bought some SpaceX shares in June",
-          "publisher": "Investing.com",
-          "link": "https://finance.yahoo.com/markets/stocks/articles/trump-bought-spacex-shares-june-180121280.html",
-          "when": "Aug 24"
-        },
-        {
-          "title": "Anthropic Is Worth Much Less Than SpaceX",
-          "publisher": "24/7 Wall St.",
-          "link": "https://247wallst.com/investing/2026/08/24/anthropic-is-worth-much-less-than-spacex/",
           "when": "Aug 24"
         }
       ]
@@ -68894,7 +68894,7 @@
             {
               "k": 99.0,
               "d": 0.245,
-              "b": 1.92,
+              "b": 1.9,
               "a": 2.01,
               "iv": 78.1,
               "oi": 103
@@ -71059,7 +71059,7 @@
             {
               "k": 207.5,
               "d": 0.461,
-              "b": 6.75,
+              "b": 6.7,
               "a": 7.05,
               "iv": 100.6,
               "oi": 83
@@ -71277,8 +71277,8 @@
             {
               "k": 172.5,
               "d": -0.052,
-              "b": 0.46,
-              "a": 0.48,
+              "b": 0.45,
+              "a": 0.47,
               "iv": 100.0,
               "oi": 127
             },
@@ -71326,7 +71326,7 @@
               "k": 187.5,
               "d": -0.181,
               "b": 2.16,
-              "a": 2.29,
+              "a": 2.31,
               "iv": 96.3,
               "oi": 126
             },
@@ -79038,7 +79038,7 @@
     "pe_trailing": 25.71906,
     "pe_forward": null,
     "vix": 15.9,
-    "vix_chg": 0.73,
+    "vix_chg": 0.72,
     "vix_hi": 31.0,
     "vix_lo": 13.5,
     "vix_avg": 18.1,
@@ -79603,7 +79603,7 @@
       }
     ]
   },
-  "generated_at": "2026-08-24T20:27:59+00:00",
+  "generated_at": "2026-08-24T21:00:25+00:00",
   "universe": {
     "wheel": 16,
     "growth": 15,
