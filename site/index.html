@@ -236,6 +236,13 @@ td.l{text-align:left}
   font-size:10.5px; font-family:"IBM Plex Mono"}
 .wn-ok{border-color:color-mix(in srgb,var(--good) 55%,var(--line)); color:var(--good)}
 .wn-no{border-color:color-mix(in srgb,var(--bad) 55%,var(--line)); color:var(--bad)}
+.wn-warn{border-color:color-mix(in srgb,var(--warn) 55%,var(--line)); color:var(--warn)}
+/* aggregate traffic light — the scorecard verdict, shown on tiles + watchlist */
+.ltlight{font-size:12px; font-weight:700; white-space:nowrap; display:inline-flex; align-items:center; gap:5px}
+.lt-go{color:var(--good)} .lt-caution{color:var(--warn)} .lt-avoid{color:var(--bad)}
+.ltdot{width:9px; height:9px; border-radius:50%; display:inline-block; background:currentColor; box-shadow:0 0 0 3px color-mix(in srgb,currentColor 20%,transparent)}
+.verdict{font-family:"Archivo",sans-serif; font-weight:800; font-size:13px; margin-bottom:9px; letter-spacing:.02em; display:flex; align-items:center; gap:7px}
+.verdict .vwhy{font-family:"IBM Plex Sans"; font-weight:500; font-size:12px; color:var(--muted)}
 .webfoot{text-align:center; font-size:11px; color:var(--faint); font-family:"IBM Plex Mono"; border-top:1px solid var(--line-soft); padding-top:9px; margin-top:2px}
 .webkey{font-size:11.5px; color:var(--muted); line-height:1.5; margin-top:8px; padding-top:8px; border-top:1px solid var(--line-soft)}
 .mkt-grid{display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:14px; margin-top:18px}
@@ -459,6 +466,51 @@ function fmtTrade(strat,strike){return strat==='cc'?`Sell $${strike} Call`:strat
 function setupClass(lbl){lbl=lbl||'';return lbl[0]==='🟢'?'s-full':lbl[0]==='🟡'?'s-part':lbl[0]==='🟠'?'s-early':'s-no';}
 function shortSetup(lbl){if(!lbl)return '<span class="dim">—</span>';const c=setupClass(lbl);
   const t=lbl.replace(/—.*/,'').trim();return `<span class="setup ${c}">${t}</span>`;}
+
+/* ---- Traffic-light verdict (the scorecard rollup) — computed once in the engine (signals.py)
+   and read here, so every tab shows the SAME light. Fallback recomputes from gates+timing for
+   data written before `verdict` existed, using the identical rule. amber = "analyze carefully". */
+const VMETA={go:{c:'lt-go',t:'STRONG'},caution:{c:'lt-caution',t:'ANALYZE'},avoid:{c:'lt-avoid',t:'WEAK'}};
+function verdictOf(s){
+  if(!s) return null;
+  if(s.verdict) return s.verdict;                       // engine-computed (authoritative)
+  // Fallback mirrors signals.py _leg_verdict from raw fields, so it's correct even on data
+  // written before `verdict` existed (thresholds = the Rules tab). Ignored once verdict lands.
+  if(s.strategy==='LEAP') return !s.qualifies ? 'avoid' : ((s.timing_score||0)>=7?'go':'caution');
+  const d=Math.abs(s.delta||0), dte=s.dte||0, prem=s.premium_pct||0, oi=s.oi||0, spr=s.spread_pct;
+  if(!(d>=0.20&&d<=0.45)) return 'avoid';
+  if(!(dte>=21&&dte<=45)) return 'avoid';
+  if(prem<1.2||oi<100) return 'avoid';
+  if(!(spr==null||spr<=15)) return 'avoid';
+  if(s.earnings_soon===true) return 'avoid';
+  if(s.median_ok===false) return 'avoid';
+  const ts=s.timing_score;
+  if(s.median_ok==null||ts==null) return 'caution';
+  return ts>=10?'go':ts>=6?'caution':'avoid';
+}
+// Normalize a CSP/CC scorecard to exactly the light-driving gates (drop IV — folded into timing;
+// grade the timing node by points) so the popup never contradicts the light, on any data version.
+function legScorecard(s){
+  let nodes=(s.gates&&s.gates.length)
+    ? s.gates.map(g=>({l:g.l,s:g.s})).filter(n=>!/^IV/i.test(n.l))
+    : (s.timing_reasons||[]).map(r=>({l:r.replace(/\s*\([^)]*\)/,'').replace(/⛔\s*/,'').trim().slice(0,20), s:r.indexOf('⛔')>=0?'no':'ok'}));
+  const tn=nodes.find(n=>/timing/i.test(n.l)); const ts=s.timing_score;
+  if(tn){ tn.l = ts!=null?('Timing '+ts+'/14'):'Timing'; tn.s = ts==null?'warn':(ts>=10?'ok':ts>=6?'warn':'no'); }
+  return nodes;
+}
+function lightBadge(v,blocked){ const m=VMETA[v]||VMETA.avoid;
+  const t=(v==='avoid'&&blocked)?'BLOCKED':m.t;
+  return `<span class="ltlight ${m.c}"><span class="ltdot"></span>${t}</span>`; }
+function lightDot(v){ const m=VMETA[v]; return v?`<span class="ltlight ${m.c}"><span class="ltdot"></span>${m.t}</span>`:'<span class="dim">—</span>'; }
+// Watchlist cell: prefer the engine verdict on the row, else compute from the per-leg signal in
+// BYTK (so the light shows immediately, pre-scan), else fall back to the old timing label.
+function wlLight(o,key){
+  const ov = o[key+'_verdict'];
+  if(ov) return lightDot(ov);
+  const leg = (BYTK[o.ticker]||{})[key];
+  if(leg) return lightDot(verdictOf(leg));
+  return shortSetup(o[key+'_timing']);
+}
 /* LEAP qualification verdict — qualifies, or the exact blocking gate(s). Never the timing dot
    alone (a "strong" timing read that fails a cost gate is NOT a buy — keep it honest). */
 function leapVerdict(l){
@@ -679,7 +731,7 @@ function renderReady(){
     <td class="l"><span class="tk">${s.ticker}</span></td>
     <td class="l"><span class="pill p-${k}">${s.strategy}</span></td>
     <td class="l trade t-${k}">${fmtTrade(k,s.strike)}</td>
-    <td class="l">${shortSetup(s.timing_label)}</td>
+    <td class="l">${lightDot(verdictOf(s))}</td>
     <td class="mono">${s.dte}</td><td class="mono">${abs(s.delta).toFixed(2)}</td>
     <td class="mono">${num(s.premium_pct,1,'%')}</td><td class="mono">${num(s.pop,0,'%')}</td>
     <td class="mono">${num(s.iv,0,'%')}</td><td class="l">${noteFlags(s)||'<span class="dim">—</span>'}</td></tr>`;}).join('');
@@ -698,7 +750,7 @@ function renderLeaps(){
   const rows=LEAPQ.map(l=>`<tr class="clk" data-tk="${l.ticker}">
     <td class="l"><span class="tk">${l.ticker}</span></td>
     <td class="l trade t-leap">${fmtTrade('leap',l.strike)}</td>
-    <td class="l">${shortSetup(l.timing_label)}</td>
+    <td class="l">${lightDot(verdictOf(l))}</td>
     <td class="mono">${num(l.delta,2)}</td><td class="mono">${num(l.extrinsic_pct,0,'%')}</td>
     <td class="mono">${num(l.carry_pct,1,'%/yr')}</td><td class="mono">${l.dte}d</td><td class="mono">${num(l.iv,0,'%')}</td></tr>`).join('');
   document.getElementById('leap-wrap').innerHTML=`<div class="tablewrap"><table><thead><tr>
@@ -823,9 +875,9 @@ function renderWatchTable(){
     <td>${o.above_200?'<span class="ok">✅</span>':'<span class="no">❌</span>'}</td>
     <td class="mono">${o.pcr==null?'—':o.pcr.toFixed(2)}</td>
     <td class="l">${o.pctb==null?'—':(o.pctb>=0.5?'🔼 Above':'🔽 Below')}</td>
-    <td class="l">${shortSetup(o.leap_timing)}</td>
-    <td class="l">${shortSetup(o.cc_timing)}</td>
-    <td class="l">${shortSetup(o.csp_timing)}</td></tr>`).join('');
+    <td class="l">${wlLight(o,'leap')}</td>
+    <td class="l">${wlLight(o,'cc')}</td>
+    <td class="l">${wlLight(o,'csp')}</td></tr>`).join('');
   const TH=(cls,lbl,tip)=>`<th class="${cls} thelp" data-tip="${tip.replace(/"/g,'&quot;')}">${lbl}<i class="thi">i</i></th>`;
   document.getElementById('ov-watch').innerHTML=`<div class="tablewrap"><table><thead><tr>
     ${TH('l','Ticker','The underlying symbol. Click any row to open it in the TA tab.')}
@@ -839,9 +891,9 @@ function renderWatchTable(){
     ${TH('','200MA','Is price above its 200-day moving average? A simple long-term uptrend check (a LEAP prerequisite).')}
     ${TH('','PCR','Put/Call ratio of open interest — a positioning tell. &gt;1 = more puts (defensive) · &lt;1 = more calls (bullish).')}
     ${TH('l','Median','Side of the 20-day Bollinger median (%B). Above = sell calls into strength (CC) · Below = sell puts into weakness (CSP).')}
-    ${TH('l','LEAP','Mean-reversion entry-timing read for a long-dated call. 🟢 full · 🟡 partial · 🟠 building · 🔴 none. (Informational for LEAPs — not a gate.)')}
-    ${TH('l','CC','Entry-timing read for a covered call — is now a good moment to fade a top? 🟢 full · 🟡 partial · 🟠 building · 🔴 none.')}
-    ${TH('l','CSP','Entry-timing read for a cash-secured put — is now a good moment to fade a bottom? 🟢 full · 🟡 partial · 🟠 building · 🔴 none.')}
+    ${TH('l','LEAP','Overall traffic light for a long-dated call (scorecard rollup). 🟢 STRONG = qualifies + well-timed · 🟡 ANALYZE = qualifies, timing not full — your call · 🔴 WEAK = fails a gate.')}
+    ${TH('l','CC','Overall traffic light for a covered call. 🟢 STRONG = all gates + full setup · 🟡 ANALYZE = valid, partial setup — your call · 🔴 WEAK/BLOCKED = a veto fails or no edge now.')}
+    ${TH('l','CSP','Overall traffic light for a cash-secured put. 🟢 STRONG = all gates + full setup · 🟡 ANALYZE = valid, partial setup — your call · 🔴 WEAK/BLOCKED = a veto fails or no edge now.')}
   </tr></thead><tbody>${rows}</tbody></table></div>`;
   document.querySelectorAll('#ov-watch tr.clk').forEach(tr=>tr.onclick=()=>{setSym(tr.dataset.tk); go('deep');});
   wireTips(document.getElementById('ov-watch'));
@@ -925,65 +977,60 @@ function web(center, nodes){
     const a=-Math.PI/2 + i*2*Math.PI/n;
     const x=+(cx+rx*Math.cos(a)).toFixed(1), y=+(cy+ry*Math.sin(a)).toFixed(1);
     lines+=`<line x1="${cx}" y1="${cy}" x2="${x}" y2="${y}"/>`;
-    pills+=`<span class="wnode ${nd.s==='ok'?'wn-ok':nd.s==='no'?'wn-no':''}" style="left:${x}%;top:${y}%">${nd.l}</span>`;
+    pills+=`<span class="wnode ${nd.s==='ok'?'wn-ok':nd.s==='no'?'wn-no':nd.s==='warn'?'wn-warn':''}" style="left:${x}%;top:${y}%">${nd.l}</span>`;
   });
   return `<div class="web"><svg class="weblines" viewBox="0 0 100 100" preserveAspectRatio="none">${lines}</svg><span class="wcenter">${center}</span>${pills}</div>`;
 }
 function fmtDMY(iso){ if(!iso) return ''; const p=String(iso).split('-'); return p.length===3?`${p[2]}/${p[1]}`:''; }
 function legTile(s){const k=s.strategy.toLowerCase();
-  // Full pass/fail scorecard from the engine (every gate, passed or failed). Falls back to the
-  // old timing-reasons web for data written before `gates` existed.
-  const GLBL={timing:'Timing'};   // clearer node label (rest already read plainly)
-  const nodes=(s.gates&&s.gates.length)
-    ? s.gates.map(g=>({l:GLBL[g.l]||g.l, s:g.s}))
-    : (s.timing_reasons||[]).map(r=>({l:r.replace(/\s*\([^)]*\)/,'').replace(/⛔\s*/,'').trim().slice(0,20),
-                                      s:r.indexOf('⛔')>=0?'no':'ok'}));
+  // The scorecard the LIGHT rolls up from — every node here drives the verdict (weakest-link),
+  // so the popup can never contradict the header. Falls back to timing-reasons for legacy data.
+  const nodes=legScorecard(s);
   const foot=`Exp ${s.expiry} · DTE ${s.dte} · POP ${num(s.pop,0,'%')} · OI ${s.oi} · spr ${num(s.spread_pct,0,'%')}`;
-  const key=`Entry timing = a mean-reversion setup: buy an oversold bounce (put) / fade an overbought top (call) while IV is richer than realized. median = the right side of the 20-day midline.`;
-  // Face rules (popup is ALWAYS shown, red or green — it's the educational bit):
-  //  • earnings blackout (≤7d) = the one hard no-no → grey the tile + big "FAILED EARNINGS GATE".
-  //  • a setup has fired (🟢 FULL / 🟡 PARTIAL) → show the strike ("Sell $X Put").
-  //  • no setup (🟠 WAIT / 🔴 NO SETUP) → NO strike; the popup's red gates say why.
+  const key=`The traffic light = a scorecard rollup: any veto (liquidity, premium, earnings, wrong side of median) → red; otherwise the mean-reversion setup score sets it (🟢 ≥10 · 🟡 6–9 analyze · 🔴 <10 too thin). Amber means analyze — it's your call, not a command.`;
+  const v = verdictOf(s);
   const earnRed = s.earnings_soon===true;
-  const setup   = /^(🟢|🟡)/.test(s.timing_label||'');
+  const why = s.verdict_why || '';
   const chips = `<div class="fchips">${chip('Δ ',num(s.delta,2))}${chip('prem ',num(s.premium_pct,1,'%'))}${chip('IV ',num(s.iv,0,'%'))}${chip('%B ',num(s.pct_b,2))}</div>`;
-  let cls='', head, body;
+  const head = lightBadge(v, earnRed);
+  const verdictLine = `<div class="verdict ${VMETA[v].c}"><span class="ltdot"></span>${VMETA[v].t}${why?`<span class="vwhy">— ${why}</span>`:''}</div>`;
+  let cls='', body;
   if(earnRed){
     cls=' earn';
-    head='<span class="setup s-no">🔴 NO SETUP</span>';
     const ed=fmtDMY(s.earnings_date);
-    body=`<div class="earnfail">Failed due high VOL.</div><div class="earndate">Earnings date${ed?': '+ed:''}</div>`;
-  } else if(setup){
-    head=shortSetup(s.timing_label);
-    body=`<div class="trade t-${k}">${fmtTrade(k,s.strike)}</div>${chips}`;
+    body=`<div class="earnfail">Blocked — earnings within 7 days.</div><div class="earndate">Earnings${ed?': '+ed:''}</div>`;
+  } else if(v!=='avoid'){
+    body=`<div class="trade t-${k}">${fmtTrade(k,s.strike)}</div>${chips}`;   // GO / ANALYZE → show the trade
   } else {
-    head=shortSetup(s.timing_label);
-    body=chips;                                   // no setup → no strike on the face
+    body=chips;                                                              // WEAK → no strike on the face
   }
   return `<div class="legtile${cls}" tabindex="0">
     <div class="th"><span class="pill p-${k}">${s.strategy}</span> ${head}</div>
     ${body}
-    <div class="detail">${web(s.strategy+' $'+s.strike, nodes)}<div class="webfoot">${foot}</div><div class="webkey">${key}</div></div></div>`;
+    <div class="detail">${verdictLine}${web(s.strategy+' $'+s.strike, nodes)}<div class="webfoot">${foot}</div><div class="webkey">${key}</div></div></div>`;
 }
 function emptyTile(kind,msg){const k=kind.toLowerCase();
   return `<div class="legtile" style="opacity:.65"><div class="th"><span class="pill p-${k}">${kind}</span> <span class="dim">— none</span></div>
     <div class="dim" style="font-size:13px;margin-top:10px">${msg}</div></div>`;}
 function leapTile(l){
+  const v=verdictOf(l), ts=l.timing_score;
+  // Only the light-driving gates are nodes (qualify = A + C + trend); timing is a graded quality
+  // node that can amber but never red. MA breakdown is informational → foot, not a gate.
   const gnodes=[
-    {l:'Time value ≤40%', s:l.gate_a?'ok':'no'}, {l:'Carry ≤8%/yr', s:l.gate_c?'ok':'no'},
-    {l:'Clear uptrend', s:l.trend_ok?'ok':'no'}, {l:'> 50 MA', s:l.above_50ma?'ok':'no'},
-    {l:'> 200 MA', s:l.above_200ma?'ok':'no'}, {l:'50 MA > 200 MA', s:l.ma_aligned?'ok':'no'},
-    {l:'RSI rising', s:l.rsi_rising?'ok':'no'} ];
-  const foot=`Exp ${l.expiry} · DTE ${l.dte} · cost $${l.cost} · intr $${num(l.intrinsic,0)} · ext $${num(l.extrinsic,0)}`;
-  const key=`Time value = premium minus intrinsic. Carry = its cost per year, as % of the share price.`;
-  const tt=(l.timing_label||'').replace(/[^\x20-\x7E]/g,'').replace(/ENTRY/i,'').trim().toLowerCase();
-  const verdict=l.qualifies?'<span class="ok">✓ qualifies</span>'
-    :'<span class="no">✗ no</span> <span class="dim" style="font-weight:400;font-size:11px">timing '+tt+'</span>';
+    {l:'Time value ≤40%', s:l.gate_a?'ok':'no'},
+    {l:'Carry ≤8%/yr', s:l.gate_c?'ok':'no'},
+    {l:'Clear uptrend', s:l.trend_ok?'ok':'no'},
+    {l:'Entry timing'+(ts!=null?' '+ts+'/9':''), s: ts==null?'warn':(ts>=7?'ok':'warn')} ];
+  const ma=`${l.above_50ma?'✓':'✗'}>50MA · ${l.above_200ma?'✓':'✗'}>200MA · ${l.ma_aligned?'✓':'✗'}50>200`;
+  const foot=`Exp ${l.expiry} · DTE ${l.dte} · cost $${l.cost} · ext $${num(l.extrinsic,0)} · ${ma}`;
+  const key=`LEAP light: qualifies on Time-value ≤40% + Carry ≤8%/yr + a clear uptrend, or it's red. Entry timing only splits a qualifier 🟢 strong / 🟡 analyze — it never reds a LEAP (timing is informational here).`;
+  const verdictLine=`<div class="verdict ${VMETA[v].c}"><span class="ltdot"></span>${VMETA[v].t}</div>`;
+  const chips=`<div class="fchips">${chip('Δ ',num(l.delta,2))}${chip('ext ',num(l.extrinsic_pct,0,'%'))}${chip('carry ',num(l.carry_pct,1,'%/yr'))}</div>`;
+  const body = v!=='avoid' ? `<div class="trade t-leap">${fmtTrade('leap',l.strike)}</div>${chips}` : chips;
   return `<div class="legtile" tabindex="0">
-    <div class="th"><span class="pill p-leap">LEAP</span> ${verdict}</div>
-    <div class="trade t-leap">${fmtTrade('leap',l.strike)}</div>
-    <div class="fchips">${chip('Δ ',num(l.delta,2))}${chip('ext ',num(l.extrinsic_pct,0,'%'))}${chip('carry ',num(l.carry_pct,1,'%/yr'))}</div>
-    <div class="detail">${web('LEAP $'+l.strike, gnodes)}<div class="webfoot">${foot}</div><div class="webkey">${key}</div></div></div>`;
+    <div class="th"><span class="pill p-leap">LEAP</span> ${lightBadge(v,false)}</div>
+    ${body}
+    <div class="detail">${verdictLine}${web('LEAP $'+l.strike, gnodes)}<div class="webfoot">${foot}</div><div class="webkey">${key}</div></div></div>`;
 }
 function renderDeep(tk){
   const o=BYTK[tk]; const host=document.getElementById('deep-body');

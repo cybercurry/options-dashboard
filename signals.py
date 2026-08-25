@@ -481,12 +481,47 @@ def _leg_gates(s, iv_ratio):
         {"l": "earnings",               "s": "no" if s.get("earnings_soon") else ("warn" if s.get("earnings_in_window") else "ok")},
         {"l": "median",                 "s": "ok" if mo else ("no" if mo is not None else "warn")},
     ]
-    if iv_ratio is not None:
-        g.append({"l": "IV rich" if iv_ratio >= 1.0 else "IV thin", "s": "ok" if iv_ratio >= 1.0 else "no"})
+    # Timing is the graded QUALITY gate (IV richness is already baked into its points, so IV is
+    # not a separate gate — that would double-count and let the scorecard disagree with the light).
+    # FULL (≥10) → green · PARTIAL (6–9) → amber · none (<6) → red.
+    if ts is None:
+        g.append({"l": "timing", "s": "warn"})
     else:
-        g.append({"l": "IV vs real", "s": "warn"})
-    g.append({"l": "timing", "s": "ok" if (ts or 0) > 0 else ("no" if ts is not None else "warn")})
+        g.append({"l": "timing %d/14" % ts, "s": "ok" if ts >= 10 else ("warn" if ts >= 6 else "no")})
     return g
+
+
+def _leg_verdict(s):
+    """Aggregate traffic light for a CSP/CC leg — the scorecard rollup.
+    Layer 1 VETOES (validity/safety/direction) → 'avoid'. Layer 2 the setup score bands the
+    survivors: ≥10 'go' · 6–9 'caution' · <6 'avoid'. Unknown median/timing → 'caution' (analyze).
+    Returns (verdict, why). Mirrors _leg_gates so weakest-link(gates) == verdict."""
+    d = abs(s.get("delta") or 0)
+    dte = s.get("dte") or 0
+    prem = s.get("premium_pct") or 0          # already ×100
+    oi = s.get("oi") or 0
+    spr = s.get("spread_pct")                  # already ×100
+    for ok, why in (
+        (P["delta_lo"] <= d <= P["delta_hi"], "delta out of band"),
+        (P["dte_lo"] <= dte <= P["dte_hi"], "DTE out of band"),
+        (prem >= P["min_premium"] * 100, "premium thin"),
+        (oi >= P["min_oi"], "low open interest"),
+        (spr is None or spr <= P["max_spread_pct"] * 100, "spread too wide"),
+        (not s.get("earnings_soon"), "earnings within 7 days"),
+    ):
+        if not ok:
+            return "avoid", why
+    mo = s.get("median_ok")
+    if mo is False:
+        return "avoid", "wrong side of median"
+    ts = s.get("timing_score")
+    if mo is None or ts is None:
+        return "caution", "setup unconfirmed"
+    if ts >= 10:
+        return "go", "setup %d/14" % ts
+    if ts >= 6:
+        return "caution", "setup %d/14" % ts
+    return "avoid", "no setup (%d/14)" % ts
 
 
 def scan_ticker(ticker):
@@ -541,6 +576,7 @@ def scan_ticker(ticker):
                     s["timing_label"], s["timing_score"], s["timing_reasons"] = lbl, sc, rs
                 s["earnings_date"] = edate.isoformat() if edate else None
                 s["gates"] = _leg_gates(s, iv_ratio)
+                s["verdict"], s["verdict_why"] = _leg_verdict(s)
                 out.append(s)
         # CC — needs price ABOVE the median
         call = _nearest_delta(chain, "call", P["delta_opt"])
@@ -555,6 +591,7 @@ def scan_ticker(ticker):
                     s["timing_label"], s["timing_score"], s["timing_reasons"] = lbl, sc, rs
                 s["earnings_date"] = edate.isoformat() if edate else None
                 s["gates"] = _leg_gates(s, iv_ratio)
+                s["verdict"], s["verdict_why"] = _leg_verdict(s)
                 out.append(s)
     except Exception:
         return out
@@ -676,6 +713,9 @@ def scan_leap_ticker(ticker):
             "rsi_rising": rsi_rising,
             "gate_a": gate_a, "gate_c": gate_c, "trend_ok": trend_ok,
             "qualifies": qualifies,
+            # Traffic light: must qualify (A+C+trend) or it's a hard 'avoid'; timing only splits
+            # a qualifier green/amber (never red — timing is informational for LEAPs per the Rules).
+            "verdict": ("avoid" if not qualifies else ("go" if tscore >= 7 else "caution")),
             "timing_label": tlabel, "timing_score": tscore,
             "sector": _sector(ticker),
             "good_pmcc": qualifies,   # back-compat alias for any UI still reading good_pmcc
@@ -781,11 +821,19 @@ def scan(universe):
     for t in all_names:
         overview_row(t)
     leap_tl = {lp["ticker"]: lp.get("timing_label") for lp in leaps}
+    # Per-leg verdicts computed once (on the leg signals) → copied onto the overview rows, so the
+    # watchlist shows the SAME traffic light as the TA/Signals tabs. One engine, one light.
+    csp_v = {s["ticker"]: s.get("verdict") for s in all_sigs if s["strategy"] == "CSP"}
+    cc_v = {s["ticker"]: s.get("verdict") for s in all_sigs if s["strategy"] == "CC"}
+    leap_v = {lp["ticker"]: lp.get("verdict") for lp in leaps}
     overview = []
     for t in all_names:
         row = _OVERVIEW.get(t)
         if row:
             row["leap_timing"] = leap_tl.get(t)
+            row["csp_verdict"] = csp_v.get(t)
+            row["cc_verdict"] = cc_v.get(t)
+            row["leap_verdict"] = leap_v.get(t)
             row["is_wheel"] = t in wheel
             overview.append(row)
 
