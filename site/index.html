@@ -320,7 +320,7 @@ footer b{color:var(--muted); font-weight:600}
     <div class="gauges" id="ov-gauges"></div>
     <div class="subhead">Sector Heatmap <span class="n">SPDR sectors + BTC · colour = move strength</span></div>
     <div class="heat" id="ov-heat"></div>
-    <div class="subhead">Watchlist Overview <span class="n" id="ov-count"></span> <a class="editlink" id="ov-edit" target="_blank" rel="noopener" title="Add or remove tickers in your Google Sheet (col C = wheel, col H = growth) — the next 30-min scan picks up changes automatically">✎ edit list ↗</a></div>
+    <div class="subhead">Watchlist Overview <span class="n" id="ov-count"></span></div>
     <div id="ov-watch"></div>
     <div class="twocol">
       <div><div class="subhead">ATM Implied Volatility</div><div class="barbox" id="ov-ivbar"></div></div>
@@ -428,7 +428,6 @@ footer b{color:var(--muted); font-weight:600}
 
 <script>
 const KIND={csp:"CSP",cc:"CC",leap:"LEAP"};
-const SHEET_EDIT_URL="https://docs.google.com/spreadsheets/d/1GiZjtMLkATMKtvWnl40xCK4Tlgbg8b2aJCQp5sXMcjk/edit";   // watchlist: col C = WHEEL, col H = GROWTH
 let DATA=null, SIGS=[], LEAPS=[], MKT={}, BYTK={}, READY=[], LEAPQ=[], CHAINROWS=[];
 let CHAIN_TK=null, CHAIN_EXP=null, CALC_CTX=null;
 const num=(v,d=1,s='')=>v==null?'<span class="dim">—</span>':(typeof v==='number'?v.toFixed(d):v)+s;
@@ -663,8 +662,6 @@ function renderOverview(){
     `<div class="hcell" style="background:${heatColor(s.pct)}"><div class="hl">${s.label}</div>
       <div class="hp mono">${s.pct==null?'—':(s.pct>=0?'+':'')+s.pct.toFixed(2)+'%'}</div></div>`).join('');
   renderWatchTable();
-  const el=document.getElementById('ov-edit');
-  if(el){ if(SHEET_EDIT_URL) el.href=SHEET_EDIT_URL; else el.style.display='none'; }
   const ov=DATA.overview||[];
   barChart('ov-ivbar', ov.filter(o=>o.c_iv!=null&&o.p_iv!=null).map(o=>({t:o.ticker,v:(o.c_iv+o.p_iv)/2})),'%',ivColor);
   barChart('ov-rsibar', ov.filter(o=>o.rsi!=null).map(o=>({t:o.ticker,v:o.rsi})),'',rsiColor,115);
