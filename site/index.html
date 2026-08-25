@@ -126,12 +126,15 @@ nav a:hover{color:var(--text); background:var(--surface-2)} nav a.on{color:var(-
 .hcell .hl{font-size:13.5px; font-weight:600} .hcell .hp{font-size:16px; margin-top:4px; font-weight:600}
 .twocol{display:grid; grid-template-columns:1fr; gap:8px; margin-top:4px}
 .barbox{border:1px solid var(--line); border-radius:12px; background:var(--surface); padding:16px 14px 10px; margin-top:12px; overflow-x:auto}
-.bars{display:flex; align-items:flex-end; gap:6px; height:300px; min-width:min-content}
-.bcol{display:flex; flex-direction:column; align-items:center; justify-content:flex-end; flex:1 0 24px; height:100%}
+.bplot{position:relative; display:flex; align-items:flex-end; gap:6px; height:270px; min-width:min-content}
+.bcol{position:relative; z-index:2; display:flex; flex-direction:column; align-items:center; justify-content:flex-end; flex:1 0 26px; height:100%}
 .bval{font-size:11px; color:var(--muted); margin-bottom:4px}
-.bwrap{width:100%; flex:1; display:flex; align-items:flex-end}
-.bar{width:100%; border-radius:3px 3px 0 0; min-height:3px}
-.btk{font-size:11px; color:var(--muted); margin-top:6px; writing-mode:vertical-rl; transform:rotate(180deg); white-space:nowrap}
+.bar{width:100%; border-radius:3px 3px 0 0; min-height:2px}
+/* dashed gate reference line across the plot — colour is set inline and drives both rule + label */
+.bref{position:absolute; left:0; right:0; border-top:1px dashed currentColor; opacity:.6; z-index:1; pointer-events:none}
+.brefl{position:absolute; right:0; top:-8px; font-size:9.5px; font-family:"IBM Plex Mono"; letter-spacing:.02em; background:var(--surface); padding:0 5px; border-radius:5px; white-space:nowrap}
+.baxis{display:flex; gap:6px; min-width:min-content; margin-top:6px}
+.baxis .btk{flex:1 0 26px; text-align:center; font-size:11px; color:var(--muted); font-family:"IBM Plex Mono"; writing-mode:vertical-rl; transform:rotate(180deg); white-space:nowrap; height:46px; margin:0 auto}
 .tablewrap{overflow-x:auto; border:1px solid var(--line); border-radius:14px; box-shadow:var(--shadow); margin-top:14px; background:var(--surface)}
 table{width:100%; border-collapse:collapse; min-width:760px}
 thead th{position:sticky; top:0; text-align:right; font-size:11px; letter-spacing:.05em; text-transform:uppercase; color:var(--faint); font-weight:600; padding:12px 14px; background:var(--surface-2); border-bottom:1px solid var(--line); white-space:nowrap}
@@ -631,14 +634,19 @@ function ivvsTag(v){ return v==='rich'?'<span class="ok">🟢 Rich</span>':v==='
   :v==='fair'?'<span class="dim">⚪ Fair</span>':'<span class="dim">—</span>'; }
 function ivColor(v){ return v>=60?'#dc2626':v>=40?'#f97316':v>=25?'#eab308':'#84cc16'; }
 function rsiColor(v){ return (33<=v&&v<=52)?'#22c55e':(52<v&&v<=65)?'#eab308':v>65?'#f97316':'#94a3b8'; }
-function barChart(id,data,suffix,colorFn,maxY){
+// Bars with a value label on top + dashed gate reference lines (the wheel-engine zones).
+// lines: [{v, label, color}] — drawn across the plot at their value on the same scale as the bars.
+function barChart(id,data,suffix,colorFn,maxY,lines){
   const host=document.getElementById(id); if(!host)return;
   if(!data.length){host.innerHTML='<div class="dim" style="padding:24px;text-align:center">no data</div>';return;}
   const max=maxY||Math.max(...data.map(d=>d.v))*1.15||1;
-  host.innerHTML='<div class="bars">'+data.map(d=>{const h=Math.max(3,d.v/max*100);
-    return `<div class="bcol" title="${d.t} ${Math.round(d.v)}${suffix}"><div class="bval mono">${Math.round(d.v)}</div>
-      <div class="bwrap"><div class="bar" style="height:${h}%;background:${colorFn(d.v)}"></div></div>
-      <div class="btk mono">${d.t}</div></div>`;}).join('')+'</div>'; }
+  const refs=(lines||[]).filter(L=>L.v>0&&L.v<max).map(L=>
+    `<div class="bref" style="bottom:${(L.v/max*100).toFixed(1)}%;color:${L.color}"><span class="brefl">${L.label}</span></div>`).join('');
+  const cols=data.map(d=>{const h=Math.max(2,Math.min(100,d.v/max*100));
+    return `<div class="bcol" title="${d.t} ${Math.round(d.v)}${suffix}"><div class="bval mono">${Math.round(d.v)}${suffix}</div>
+      <div class="bar" style="height:${h.toFixed(1)}%;background:${colorFn(d.v)}"></div></div>`;}).join('');
+  const axis=data.map(d=>`<span class="btk mono">${d.t}</span>`).join('');
+  host.innerHTML=`<div class="bplot">${refs}${cols}</div><div class="baxis">${axis}</div>`; }
 
 function renderOverview(){
   const m=DATA.market||{};
@@ -663,8 +671,14 @@ function renderOverview(){
       <div class="hp mono">${s.pct==null?'—':(s.pct>=0?'+':'')+s.pct.toFixed(2)+'%'}</div></div>`).join('');
   renderWatchTable();
   const ov=DATA.overview||[];
-  barChart('ov-ivbar', ov.filter(o=>o.c_iv!=null&&o.p_iv!=null).map(o=>({t:o.ticker,v:(o.c_iv+o.p_iv)/2})),'%',ivColor);
-  barChart('ov-rsibar', ov.filter(o=>o.rsi!=null).map(o=>({t:o.ticker,v:o.rsi})),'',rsiColor,115);
+  // IV zones (the wheel-engine "The Wheel Machine" scale): LOW 15–25 · MID 25–45 · HIGH 45+.
+  const IV_LINES=[{v:15,label:'LOW · 15',color:'#22c55e'},{v:25,label:'MID · 25',color:'#eab308'},{v:45,label:'HIGH · 45',color:'#ef4444'}];
+  // RSI gates: 30 = oversold (CSP) · 50 = trend midline (LEAP) · 70 = overbought (CC).
+  const RSI_LINES=[{v:30,label:'CSP · 30',color:'#22c55e'},{v:50,label:'LEAP · 50',color:'#94a3b8'},{v:70,label:'CC · 70',color:'#ef4444'}];
+  const ivData=ov.filter(o=>o.c_iv!=null&&o.p_iv!=null).map(o=>({t:o.ticker,v:(o.c_iv+o.p_iv)/2}));
+  const ivMax=Math.max(50, ...ivData.map(d=>d.v))*1.12;   // keep the HIGH·45 line on-scale
+  barChart('ov-ivbar', ivData,'%',ivColor,ivMax,IV_LINES);
+  barChart('ov-rsibar', ov.filter(o=>o.rsi!=null).map(o=>({t:o.ticker,v:o.rsi})),'',rsiColor,115,RSI_LINES);
 }
 function renderWatchTable(){
   const ov=(DATA.overview||[]).slice().sort((a,b)=>a.ticker<b.ticker?-1:1);
