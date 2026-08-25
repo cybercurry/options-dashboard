@@ -456,14 +456,23 @@ th.thelp:hover{color:var(--text)} th.thelp:hover .thi{border-color:var(--accent)
 
     <div class="rules-sec">
       <h2>3 · Entry timing — the mean-reversion setup score</h2>
-      <p><b>Entry timing</b> = is now a good moment to sell? A turnaround off an extreme (in your favour) with premium richer than the stock's actual moves — not just the right side of the median. Points accrue (max ~14); the score then drives the traffic light in <b>§5</b> — <b>≥10 strong · 6–9 analyze · &lt;10 too thin</b>.</p>
-      <table class="rtable"><thead><tr><th>CSP (fade a bottom)</th><th>CC (fade a top)</th></tr></thead><tbody>
-        <tr><td>Dropped to lower band then bounced (3-session)</td><td>Spiked to upper band then rolled over (3-session)</td></tr>
-        <tr><td>RSI dipped &lt;30 and turned up (5-session)</td><td>RSI ran &gt;70 and turned down (5-session)</td></tr>
-        <tr><td>Bullish candle reversal (3-session)</td><td>Bearish candle reversal (3-session)</td></tr>
-        <tr><td>IV rich vs realized (fatter premium)</td><td>IV rich vs realized (fatter premium)</td></tr>
-        <tr><td>Veto: still walking the lower band = breakdown</td><td>—</td></tr>
+      <p><b>Entry timing</b> = is now a good moment to sell? A turn off an extreme <b>in your favour</b>, with premium richer than the stock's actual moves — not just the right side of the median. Every point below has its own trigger; they add up (<b>max 12</b>) and drive the traffic light in <b>§5</b> — <b>🟢 ≥8 strong · 🟡 4–7 analyze · 🔴 &lt;4 too thin</b>.</p>
+      <table class="rtable"><thead><tr><th>Signal</th><th>Pts</th><th>CC — fade a top</th><th>CSP — fade a bottom</th></tr></thead><tbody>
+        <tr><td rowspan="3"><b>A · Stretch</b><br>price vs the bands (%B)</td><td class="mono">+3</td><td>%B ≥ 0.90 (through the upper band)</td><td>%B ≤ 0.10 (through the lower band)</td></tr>
+        <tr><td class="mono">+2</td><td>%B ≥ 0.80</td><td>%B ≤ 0.20</td></tr>
+        <tr><td class="mono">+1</td><td>%B ≥ 0.70 (upper third)</td><td>%B ≤ 0.30 (lower third)</td></tr>
+        <tr><td rowspan="2"><b>B · Rolling over</b><br>is the extreme turning?</td><td class="mono">+2</td><td>3-day high (%B ≥ 0.95) &amp; down today</td><td>3-day low (%B ≤ 0.05) &amp; up today</td></tr>
+        <tr><td class="mono">+1</td><td>turning down from elevated (%B &gt; 0.60)</td><td>turning up from depressed (%B &lt; 0.40)</td></tr>
+        <tr><td rowspan="3"><b>C · RSI exhaustion</b></td><td class="mono">+3</td><td>RSI ≥ 70 &amp; turning down</td><td>RSI ≤ 30 &amp; turning up</td></tr>
+        <tr><td class="mono">+2</td><td>RSI ≥ 63 &amp; turning down</td><td>RSI ≤ 37 &amp; turning up</td></tr>
+        <tr><td class="mono">+1</td><td>RSI ≥ 58 (elevated)</td><td>RSI ≤ 42 (depressed)</td></tr>
+        <tr><td rowspan="2"><b>D · Candle</b></td><td class="mono">+2</td><td>bearish reversal pattern</td><td>bullish reversal pattern</td></tr>
+        <tr><td class="mono">+1</td><td>down-day off a higher high</td><td>up-day off a lower low</td></tr>
+        <tr><td rowspan="2"><b>E · Premium edge</b><br>IV vs realized (HV20)</td><td class="mono">+2</td><td colspan="2">IV ≥ 1.25 × HV — rich premium</td></tr>
+        <tr><td class="mono">+1</td><td colspan="2">IV ≥ 1.00 × HV — fair premium</td></tr>
+        <tr><td><b>Veto</b></td><td class="mono">−4</td><td>still walking the upper band (runaway uptrend)</td><td>still walking the lower band (breakdown)</td></tr>
       </tbody></table>
+      <p class="rnote">Max 12 = Stretch 3 + Rolling-over 2 + RSI 3 + Candle 2 + Premium 2. Within each block only the highest bracket that applies is counted. The median side (§2) is a hard gate — not scored here.</p>
     </div>
 
     <div class="rules-sec">
@@ -484,13 +493,13 @@ th.thelp:hover{color:var(--text)} th.thelp:hover .thi{border-color:var(--accent)
       <p>Every suggestion carries <b>one colour</b> — a scorecard rollup of the rules above, not a single gate. It's information for your own decision, <b>not a command</b>: amber means <b>analyze</b>.</p>
       <table class="rtable"><thead><tr><th>Light</th><th>CSP / CC</th><th>LEAP</th></tr></thead><tbody>
         <tr><td><span class="ltlight lt-go"><span class="ltdot"></span>STRONG</span></td>
-            <td>every gate passes (§1 + §2) <b>and</b> setup score ≥ 10 (§3)</td>
+            <td>every gate passes (§1 + §2) <b>and</b> setup score ≥ 8 (§3)</td>
             <td>qualifies (§4) <b>and</b> entry-timing score ≥ 7</td></tr>
         <tr><td><span class="ltlight lt-caution"><span class="ltdot"></span>ANALYZE</span></td>
-            <td>gates pass but the setup is partial (score 6–9) — your call</td>
+            <td>gates pass but the setup is partial (score 4–7) — your call</td>
             <td>qualifies, but entry timing is partial — your call</td></tr>
         <tr><td><span class="ltlight lt-avoid"><span class="ltdot"></span>WEAK</span></td>
-            <td>a gate fails (§1/§2) <b>or</b> no edge yet (score &lt; 10)</td>
+            <td>a gate fails (§1/§2) <b>or</b> no edge yet (score &lt; 4)</td>
             <td>fails Gate A, Gate C, or the trend (§4)</td></tr>
       </tbody></table>
       <p class="rnote">A hard veto — earnings within 7 days, the wrong side of the median, or no liquidity — reads <b>BLOCKED</b> (red) however good the timing. The light never contradicts the scorecard behind it: every gate in a tile's hover is exactly what the colour rolls up. Timing never reds a LEAP (it's informational there).</p>
@@ -542,7 +551,7 @@ function verdictOf(s){
   if(s.median_ok===false) return 'avoid';
   const ts=s.timing_score;
   if(s.median_ok==null||ts==null) return 'caution';
-  return ts>=10?'go':ts>=6?'caution':'avoid';
+  return ts>=8?'go':ts>=4?'caution':'avoid';
 }
 // Normalize a CSP/CC scorecard to exactly the light-driving gates (drop IV — folded into timing;
 // grade the timing node by points) so the popup never contradicts the light, on any data version.
@@ -551,7 +560,7 @@ function legScorecard(s){
     ? s.gates.map(g=>({l:g.l,s:g.s})).filter(n=>!/^IV/i.test(n.l))
     : (s.timing_reasons||[]).map(r=>({l:r.replace(/\s*\([^)]*\)/,'').replace(/⛔\s*/,'').trim().slice(0,20), s:r.indexOf('⛔')>=0?'no':'ok'}));
   const tn=nodes.find(n=>/timing/i.test(n.l)); const ts=s.timing_score;
-  if(tn){ tn.l = ts!=null?('Timing '+ts+'/14'):'Timing'; tn.s = ts==null?'warn':(ts>=10?'ok':ts>=6?'warn':'no'); }
+  if(tn){ tn.l = ts!=null?('Timing '+ts+'/12'):'Timing'; tn.s = ts==null?'warn':(ts>=8?'ok':ts>=4?'warn':'no'); }
   const mn=nodes.find(n=>/^median/i.test(n.l));
   if(mn) mn.l = s.strategy==='CC'?'above mid':'below mid';   // CSP wants below, CC wants above
   return nodes;
@@ -636,7 +645,7 @@ function sparkPopup(key){
 fetch('data/signals.json',{cache:'no-store'}).then(r=>r.json()).then(J=>{
   DATA=J; SIGS=J.signals||[]; LEAPS=J.leaps||[]; MKT=J.market||{};
   // ready = actionable CSP/CC (right side of median + real setup)
-  READY=SIGS.filter(s=>s.qualifies!==false && s.median_ok===true && (s.timing_score||0)>=6)
+  READY=SIGS.filter(s=>s.qualifies!==false && s.median_ok===true && (s.timing_score||0)>=4)
             .sort((a,b)=>(b.timing_score||0)-(a.timing_score||0)||(b.premium_pct||0)-(a.premium_pct||0));
   LEAPQ=LEAPS.filter(l=>l.qualifies)
              .sort((a,b)=>(b.timing_score||0)-(a.timing_score||0)||(a.carry_pct||99)-(b.carry_pct||99));
@@ -1061,7 +1070,7 @@ function legTile(s){const k=s.strategy.toLowerCase();
     kdot('warn')+'ANALYZE — valid, partial setup · your call',
     kdot('bad')+'WEAK / BLOCKED — a gate fails or no edge yet',
     'median = '+(k==='cc'?'ABOVE':'BELOW')+' midline',
-    'timing = mean-reversion setup score (0–14)',
+    'timing = mean-reversion setup score (0–12)',
   ].map(l=>`<div>${l}</div>`).join('');
   const v = verdictOf(s);
   const earnRed = s.earnings_soon===true;

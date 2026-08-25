@@ -306,6 +306,7 @@ def _indicators(ticker):
             "hvpct": _hv_percentile(closes),
             "pct_chg": ((closes[-1] / closes[-2]) - 1) * 100 if (len(closes) >= 2 and closes[-2]) else None,
             "walking_lower": bool(len(pctb_c) >= 2 and pctb_c[-1] <= 0.2 and pctb_c[-2] <= 0.2),
+            "walking_upper": bool(len(pctb_c) >= 2 and pctb_c[-1] >= 0.8 and pctb_c[-2] >= 0.8),
             "above_50": bool(ma50 is not None and spot > ma50),
             "above_200": bool(ma200 is not None and spot > ma200),
         }
@@ -315,57 +316,87 @@ def _indicators(ticker):
     return bundle
 
 
+def _weak_candle(ohlc, direction, lb):
+    """Softer than a full reversal pattern (worth +1): a down-day off a fresh higher high
+    (bearish) / an up-day off a fresh lower low (bullish) over the lookback window."""
+    if len(ohlc) < lb + 1:
+        return False
+    last = ohlc[-1]
+    prior = ohlc[-lb - 1:-1] or ohlc[:-1]
+    if direction == "bearish":
+        return last["c"] < last["o"] and last["h"] >= max(r["h"] for r in prior)
+    return last["c"] > last["o"] and last["l"] <= min(r["l"] for r in prior)
+
+
 def _mr_score(ind, direction):
-    """§10.1/10.2 mean-reversion score — fade a bottom (csp) or a top (cc). (score, reasons, pattern)."""
-    pctb_today = ind.get("pctb"); pctb_prev = ind.get("pctb_prev")
+    """Laddered mean-reversion score (max 12 before the IV add-on) — fade a top (cc) / fade a
+    bottom (csp). Every point has its own trigger; see the Rules tab §3. (score, reasons, pattern)."""
+    pctb = ind.get("pctb"); pctb_prev = ind.get("pctb_prev")
     pctb_3 = ind.get("pctb_3") or []
-    rsi_today = ind.get("rsi"); rsi_prev = ind.get("rsi_prev")
+    rsi = ind.get("rsi"); rsi_prev = ind.get("rsi_prev")
     rsi_5 = ind.get("rsi_5") or []
-    if (pctb_today is None or pctb_prev is None or len(pctb_3) < 3
-            or rsi_today is None or rsi_prev is None or len(rsi_5) < 5):
+    if (pctb is None or pctb_prev is None or len(pctb_3) < 3
+            or rsi is None or rsi_prev is None or len(rsi_5) < 5):
         return 0, ["Insufficient history for mean-reversion read"], None
     score = 0; reasons = []
     lb = P["mr_candle_lookback"]
     if direction == "cc":
         fired, pattern = _candle_reversal(ind["ohlc"], "bearish", lb)
-        if pctb_today >= 0.85: score += 2; reasons.append("Near/touching upper BB (%.2f)" % pctb_today)
-        if max(pctb_3) >= 0.95 and pctb_today < pctb_prev: score += 3; reasons.append("Spiked then rolled over")
-        if pctb_today > 0.5: score += 1; reasons.append("Above midline")
-        if max(rsi_5) > 70 and rsi_today < rsi_prev: score += 3; reasons.append("RSI exceeded 70, turning down (%.0f)" % rsi_today)
-        if fired: score += 3; reasons.append(pattern)
+        # A · stretch to the upper band (%B)
+        if pctb >= 0.90:   score += 3; reasons.append("At/through the upper band (%%B %.2f) +3" % pctb)
+        elif pctb >= 0.80: score += 2; reasons.append("Near the upper band (%%B %.2f) +2" % pctb)
+        elif pctb >= 0.70: score += 1; reasons.append("Upper third (%%B %.2f) +1" % pctb)
+        # B · rolling over
+        if max(pctb_3) >= 0.95 and pctb < pctb_prev: score += 2; reasons.append("Spiked to a 3-day high then turned down +2")
+        elif pctb > 0.60 and pctb < pctb_prev:       score += 1; reasons.append("Turning down from elevated +1")
+        # C · RSI exhaustion
+        if rsi >= 70 and rsi < rsi_prev:   score += 3; reasons.append("RSI %.0f >70 and turning down +3" % rsi)
+        elif rsi >= 63 and rsi < rsi_prev: score += 2; reasons.append("RSI %.0f >63 and turning down +2" % rsi)
+        elif rsi >= 58:                    score += 1; reasons.append("RSI %.0f elevated +1" % rsi)
+        # D · bearish candle
+        if fired:                                      score += 2; reasons.append(pattern + " +2")
+        elif _weak_candle(ind["ohlc"], "bearish", lb): score += 1; reasons.append("Down-day off a higher high +1")
     else:
         fired, pattern = _candle_reversal(ind["ohlc"], "bullish", lb)
-        if pctb_today <= 0.15: score += 2; reasons.append("Near/touching lower BB (%.2f)" % pctb_today)
-        if min(pctb_3) <= 0.05 and pctb_today > pctb_prev: score += 3; reasons.append("Dropped then bounced")
-        if pctb_today < 0.5: score += 1; reasons.append("Below midline")
-        if min(rsi_5) < 30 and rsi_today > rsi_prev: score += 3; reasons.append("RSI dropped below 30, turning up (%.0f)" % rsi_today)
-        if fired: score += 3; reasons.append(pattern)
+        if pctb <= 0.10:   score += 3; reasons.append("At/through the lower band (%%B %.2f) +3" % pctb)
+        elif pctb <= 0.20: score += 2; reasons.append("Near the lower band (%%B %.2f) +2" % pctb)
+        elif pctb <= 0.30: score += 1; reasons.append("Lower third (%%B %.2f) +1" % pctb)
+        if min(pctb_3) <= 0.05 and pctb > pctb_prev: score += 2; reasons.append("Dropped to a 3-day low then bounced +2")
+        elif pctb < 0.40 and pctb > pctb_prev:       score += 1; reasons.append("Turning up from depressed +1")
+        if rsi <= 30 and rsi > rsi_prev:   score += 3; reasons.append("RSI %.0f <30 and turning up +3" % rsi)
+        elif rsi <= 37 and rsi > rsi_prev: score += 2; reasons.append("RSI %.0f <37 and turning up +2" % rsi)
+        elif rsi <= 42:                    score += 1; reasons.append("RSI %.0f depressed +1" % rsi)
+        if fired:                                      score += 2; reasons.append(pattern + " +2")
+        elif _weak_candle(ind["ohlc"], "bullish", lb): score += 1; reasons.append("Up-day off a lower low +1")
     return score, reasons, (pattern if fired else None)
 
 
 def _setup_label(score, kind, blocked=False):
-    tier = "full" if score >= 10 else "partial" if score >= 6 else "early" if score >= 3 else "none"
+    # bands on the 0–12 laddered score: full ≥8 · partial ≥4 · none <4
+    tier = "full" if score >= 8 else "partial" if score >= 4 else "none"
     if blocked and tier in ("full", "partial"):
         return "🟡 Timing ok — wrong side of median"
     verb = "write now" if kind == "cc" else "sell put"
     return {"full": "🟢 FULL SETUP — " + verb, "partial": "🟡 PARTIAL SETUP",
-            "early": "🟠 BUILDING UP / WAIT", "none": "🔴 NO SETUP"}[tier]
+            "none": "🔴 NO SETUP"}[tier]
 
 
 def _timing(ind, iv_ratio, direction):
-    """Wrap _mr_score with the IV-richness add-on + the G4 median block (§10.3/§10.5)."""
+    """Wrap _mr_score with the IV-richness add-on (E) + the band-walking veto + G4 median block."""
     score, reasons, _ = _mr_score(ind, direction)
-    if iv_ratio is not None:            # premium seller wants RICH premium (IV > realized)
-        if iv_ratio >= 1.25: score += 2; reasons.append("IV rich vs realized — premium fat")
-        elif iv_ratio >= 1.0: score += 1; reasons.append("IV fair vs realized")
-        else: reasons.append("IV below realized — thin premium")
+    if iv_ratio is not None:            # E · premium edge — seller wants RICH premium (IV > realized)
+        if iv_ratio >= 1.25: score += 2; reasons.append("IV rich vs realized — premium fat +2")
+        elif iv_ratio >= 1.0: score += 1; reasons.append("IV fair vs realized +1")
+        else: reasons.append("IV below realized — thin premium +0")
     pctb = ind.get("pctb")
     if direction == "csp":
         if ind.get("walking_lower"):
-            score = max(0, score - 4); reasons.append("Still walking the lower band — breakdown, veto")
+            score = max(0, score - 4); reasons.append("Still walking the lower band — breakdown, veto −4")
         blocked = pctb is not None and pctb > 0.5      # CSP needs BELOW median
         if blocked: reasons.append("⛔ Above median (%%B %.2f) — CSP needs below" % pctb)
         return _setup_label(score, "csp", blocked), score, reasons
+    if ind.get("walking_upper"):
+        score = max(0, score - 4); reasons.append("Still walking the upper band — runaway uptrend, veto −4")
     blocked = pctb is not None and pctb < 0.5          # CC needs ABOVE median
     if blocked: reasons.append("⛔ Below median (%%B %.2f) — CC needs above" % pctb)
     return _setup_label(score, "cc", blocked), score, reasons
@@ -483,18 +514,18 @@ def _leg_gates(s, iv_ratio):
     ]
     # Timing is the graded QUALITY gate (IV richness is already baked into its points, so IV is
     # not a separate gate — that would double-count and let the scorecard disagree with the light).
-    # FULL (≥10) → green · PARTIAL (6–9) → amber · none (<6) → red.
+    # FULL (≥8) → green · PARTIAL (4–7) → amber · none (<4) → red.  Max score 12.
     if ts is None:
         g.append({"l": "timing", "s": "warn"})
     else:
-        g.append({"l": "timing %d/14" % ts, "s": "ok" if ts >= 10 else ("warn" if ts >= 6 else "no")})
+        g.append({"l": "timing %d/12" % ts, "s": "ok" if ts >= 8 else ("warn" if ts >= 4 else "no")})
     return g
 
 
 def _leg_verdict(s):
     """Aggregate traffic light for a CSP/CC leg — the scorecard rollup.
     Layer 1 VETOES (validity/safety/direction) → 'avoid'. Layer 2 the setup score bands the
-    survivors: ≥10 'go' · 6–9 'caution' · <6 'avoid'. Unknown median/timing → 'caution' (analyze).
+    survivors: ≥8 'go' · 4–7 'caution' · <4 'avoid'. Unknown median/timing → 'caution' (analyze).
     Returns (verdict, why). Mirrors _leg_gates so weakest-link(gates) == verdict."""
     d = abs(s.get("delta") or 0)
     dte = s.get("dte") or 0
@@ -517,11 +548,11 @@ def _leg_verdict(s):
     ts = s.get("timing_score")
     if mo is None or ts is None:
         return "caution", "setup unconfirmed"
-    if ts >= 10:
-        return "go", "setup %d/14" % ts
-    if ts >= 6:
-        return "caution", "setup %d/14" % ts
-    return "avoid", "no setup (%d/14)" % ts
+    if ts >= 8:
+        return "go", "setup %d/12" % ts
+    if ts >= 4:
+        return "caution", "setup %d/12" % ts
+    return "avoid", "no setup (%d/12)" % ts
 
 
 def scan_ticker(ticker):
