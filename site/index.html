@@ -950,11 +950,7 @@ function renderWatchTable(){
     <td class="l">${ivvsTag(o.iv_vs_hv)}</td>
     <td class="mono">${o.rsi==null?'—':o.rsi}</td>
     <td>${o.above_200?'<span class="ok">✅</span>':'<span class="no">❌</span>'}</td>
-    <td class="mono">${o.pcr==null?'—':o.pcr.toFixed(2)}</td>
-    <td class="l">${o.pctb==null?'—':(o.pctb>=0.5?'🔼 Above':'🔽 Below')}</td>
-    <td class="l">${wlLight(o,'leap')}</td>
-    <td class="l">${wlLight(o,'cc')}</td>
-    <td class="l">${wlLight(o,'csp')}</td></tr>`).join('');
+    <td class="mono">${o.pcr==null?'—':o.pcr.toFixed(2)}</td></tr>`).join('');
   const TH=(cls,lbl,tip)=>`<th class="${cls} thelp" data-tip="${tip.replace(/"/g,'&quot;')}">${lbl}<i class="thi">i</i></th>`;
   document.getElementById('ov-watch').innerHTML=`<div class="tablewrap"><table><thead><tr>
     ${TH('l','Ticker','The underlying symbol. Click any row to open it in the TA tab.')}
@@ -967,10 +963,6 @@ function renderWatchTable(){
     ${TH('','RSI','14-day Relative Strength Index. &lt;30 oversold (CSP setup) · ~50 neutral · &gt;70 overbought (CC setup).')}
     ${TH('','200MA','Is price above its 200-day moving average? A simple long-term uptrend check (a LEAP prerequisite).')}
     ${TH('','PCR','Put/Call ratio of open interest — a positioning tell. &gt;1 = more puts (defensive) · &lt;1 = more calls (bullish).')}
-    ${TH('l','Median','Side of the 20-day Bollinger median (%B). Above = sell calls into strength (CC) · Below = sell puts into weakness (CSP).')}
-    ${TH('l','LEAP','Overall traffic light for a long-dated call (scorecard rollup). 🟢 STRONG = qualifies + well-timed · 🟡 ANALYZE = qualifies, timing not full — your call · 🔴 WEAK = fails a gate.')}
-    ${TH('l','CC','Overall traffic light for a covered call. 🟢 STRONG = all gates + full setup · 🟡 ANALYZE = valid, partial setup — your call · 🔴 WEAK/BLOCKED = a veto fails or no edge now.')}
-    ${TH('l','CSP','Overall traffic light for a cash-secured put. 🟢 STRONG = all gates + full setup · 🟡 ANALYZE = valid, partial setup — your call · 🔴 WEAK/BLOCKED = a veto fails or no edge now.')}
   </tr></thead><tbody>${rows}</tbody></table></div>`;
   document.querySelectorAll('#ov-watch tr.clk').forEach(tr=>tr.onclick=()=>{setSym(tr.dataset.tk); go('deep');});
   wireTips(document.getElementById('ov-watch'));
