@@ -327,6 +327,11 @@ th.thelp:hover{color:var(--text)} th.thelp:hover .thi{border-color:var(--accent)
   .bar{height:auto; min-height:60px; flex-wrap:wrap; padding:8px 0; gap:6px 16px}
   #nav{order:3; width:100%; margin-left:0}
   .tag{order:2}
+  /* Options Chain ticker + expiry lists: one row that slides inside itself (like the
+     watchlist), instead of wrapping to many rows — swiping scrolls the strip, not the page. */
+  #chain-chips, #chain-exps{flex-wrap:nowrap; overflow-x:auto; -webkit-overflow-scrolling:touch; scrollbar-width:none; padding-bottom:6px}
+  #chain-chips::-webkit-scrollbar, #chain-exps::-webkit-scrollbar{display:none}
+  #chain-chips>*, #chain-exps>*{flex:0 0 auto}
 }
 @media (prefers-reduced-motion:reduce){ *{transition:none!important} }
 </style>
