@@ -122,8 +122,10 @@ nav a:hover{color:var(--text); background:var(--surface-2)} nav a.on{color:var(-
 .gcard svg.dial{width:100%; height:auto; display:block; margin:4px 0 2px}
 .macro .mrow{display:flex; justify-content:space-between; gap:10px; font-size:14px; padding:7px 0; border-bottom:1px solid var(--line-soft)}
 .macro .mrow:last-child{border-bottom:0} .macro .mrow span{color:var(--muted)} .macro .mrow b{text-align:right; font-weight:600; color:var(--text)}
-.heat{display:grid; grid-template-columns:repeat(auto-fit,minmax(118px,1fr)); gap:6px; margin:14px 0}
-.hcell{border-radius:9px; padding:12px 13px; color:#fff; position:relative; overflow:hidden}
+.heat{display:grid; grid-template-columns:repeat(6,1fr); gap:6px; margin:14px 0}
+@media (max-width:760px){.heat{grid-template-columns:repeat(3,1fr)}}
+@media (max-width:440px){.heat{grid-template-columns:repeat(2,1fr)}}
+.hcell{border-radius:9px; padding:12px 13px; color:#fff; position:relative; overflow:hidden; min-height:96px; display:flex; flex-direction:column; justify-content:center}
 .hcell .hl{font-size:13.5px; font-weight:600; padding-right:30px} .hcell .hp{font-size:16px; margin-top:4px; font-weight:600}
 .hcell .hicon{position:absolute; top:9px; right:9px; width:26px; height:26px; opacity:.5; fill:#fff}
 .twocol{display:grid; grid-template-columns:1fr; gap:8px; margin-top:4px}
