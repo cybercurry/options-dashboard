@@ -245,6 +245,7 @@ td.l{text-align:left}
 .verdict .vwhy{font-family:"IBM Plex Sans"; font-weight:500; font-size:12px; color:var(--muted)}
 .webfoot{text-align:center; font-size:11px; color:var(--faint); font-family:"IBM Plex Mono"; border-top:1px solid var(--line-soft); padding-top:9px; margin-top:2px}
 .webkey{font-size:11.5px; color:var(--muted); line-height:1.5; margin-top:8px; padding-top:8px; border-top:1px solid var(--line-soft)}
+.webkey>div{padding:2px 0}
 .mkt-grid{display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:14px; margin-top:18px}
 .mkt{border:1px solid var(--line); border-radius:14px; background:var(--surface); box-shadow:var(--shadow); padding:16px 18px}
 .mkt .kk{font-size:11px; letter-spacing:.06em; text-transform:uppercase; color:var(--faint); font-weight:600; display:flex; align-items:center; gap:7px}
@@ -496,6 +497,8 @@ function legScorecard(s){
     : (s.timing_reasons||[]).map(r=>({l:r.replace(/\s*\([^)]*\)/,'').replace(/⛔\s*/,'').trim().slice(0,20), s:r.indexOf('⛔')>=0?'no':'ok'}));
   const tn=nodes.find(n=>/timing/i.test(n.l)); const ts=s.timing_score;
   if(tn){ tn.l = ts!=null?('Timing '+ts+'/14'):'Timing'; tn.s = ts==null?'warn':(ts>=10?'ok':ts>=6?'warn':'no'); }
+  const mn=nodes.find(n=>/^median/i.test(n.l));
+  if(mn) mn.l = s.strategy==='CC'?'above mid':'below mid';   // CSP wants below, CC wants above
   return nodes;
 }
 function lightBadge(v,blocked){ const m=VMETA[v]||VMETA.avoid;
@@ -735,11 +738,20 @@ function renderReady(){
     <td class="mono">${s.dte}</td><td class="mono">${abs(s.delta).toFixed(2)}</td>
     <td class="mono">${num(s.premium_pct,1,'%')}</td><td class="mono">${num(s.pop,0,'%')}</td>
     <td class="mono">${num(s.iv,0,'%')}</td><td class="l">${noteFlags(s)||'<span class="dim">—</span>'}</td></tr>`;}).join('');
+  const TH=(cls,lbl,tip)=>`<th class="${cls} thelp" data-tip="${tip.replace(/"/g,'&quot;')}">${lbl}<i class="thi">i</i></th>`;
   document.getElementById('ready-wrap').innerHTML=`<div class="tablewrap"><table><thead><tr>
-    <th class="l">Ticker</th><th class="l">Strategy</th><th class="l">Suggested trade</th><th class="l">Setup</th>
-    <th>DTE</th><th>Δ</th><th>Prem %</th><th>POP</th><th>IV</th><th class="l">Notes</th>
+    ${TH('l','Ticker','The underlying. Click any row to open it in the TA tab.')}
+    ${TH('l','Strategy','CSP = cash-secured put (sell a put into weakness) · CC = covered call (sell a call into strength).')}
+    ${TH('l','Suggested trade','The exact contract the engine picked — the ≈30Δ strike at ~30 DTE.')}
+    ${TH('l','Setup','Overall traffic light (scorecard rollup): 🟢 STRONG · 🟡 ANALYZE (valid, partial setup — your call) · 🔴 WEAK/BLOCKED.')}
+    ${TH('','DTE','Days to expiry — target 30, band 21–45.')}
+    ${TH('','Δ','Delta — approx. probability of finishing in-the-money / share-equivalent exposure. ~0.30 is the target.')}
+    ${TH('','Prem %','Premium as a % of the share price — what you collect. Gate ≥1.2%; ≥1.5% = 🔥 strong.')}
+    ${TH('','POP','Probability of profit ≈ 1 − |delta| — the odds the option expires worthless and you keep the premium.')}
+    ${TH('','IV','Implied volatility of the contract — the movement the market is pricing in. Higher = fatter premium.')}
+    ${TH('l','Notes','Flags: 🔥 = strong premium (≥1.5%) · ⚠ = earnings land before expiry.')}
   </tr></thead><tbody>${rows}</tbody></table></div>`;
-  wireRows('#ready-wrap');
+  wireRows('#ready-wrap'); wireTips(document.getElementById('ready-wrap'));
 }
 /* ---------- signals: qualifying LEAPs ---------- */
 function renderLeaps(){
@@ -753,11 +765,18 @@ function renderLeaps(){
     <td class="l">${lightDot(verdictOf(l))}</td>
     <td class="mono">${num(l.delta,2)}</td><td class="mono">${num(l.extrinsic_pct,0,'%')}</td>
     <td class="mono">${num(l.carry_pct,1,'%/yr')}</td><td class="mono">${l.dte}d</td><td class="mono">${num(l.iv,0,'%')}</td></tr>`).join('');
+  const TH=(cls,lbl,tip)=>`<th class="${cls} thelp" data-tip="${tip.replace(/"/g,'&quot;')}">${lbl}<i class="thi">i</i></th>`;
   document.getElementById('leap-wrap').innerHTML=`<div class="tablewrap"><table><thead><tr>
-    <th class="l">Ticker</th><th class="l">Suggested trade</th><th class="l">Entry</th>
-    <th>Δ</th><th>Extrinsic</th><th>Carry</th><th>DTE</th><th>IV</th>
+    ${TH('l','Ticker','The underlying. Click any row to open it in the TA tab.')}
+    ${TH('l','Suggested trade','The deep-ITM long call the engine picked (Δ 0.75–0.80) — a stock substitute, not premium income.')}
+    ${TH('l','Entry','Overall traffic light: 🟢 STRONG (qualifies + well-timed) · 🟡 ANALYZE (qualifies, timing partial). Only qualifiers are listed here.')}
+    ${TH('','Δ','Delta 0.75–0.80 — deep in-the-money, so the call moves almost like the stock (intrinsic-led).')}
+    ${TH('','Extrinsic','Time value = premium − intrinsic, as a % of premium. Gate A: ≤40%.')}
+    ${TH('','Carry','Time-value cost per year, as a % of the share price. Gate C: ≤8%/yr.')}
+    ${TH('','DTE','Days to expiry — target ~542 (Jan-2027+), band 180–900.')}
+    ${TH('','IV','Implied volatility — for a LEAP this is the timing input (cheap IV = better entry), not the cost gate.')}
   </tr></thead><tbody>${rows}</tbody></table></div>`;
-  wireRows('#leap-wrap');
+  wireRows('#leap-wrap'); wireTips(document.getElementById('leap-wrap'));
 }
 function wireRows(sel){document.querySelectorAll(sel+' tr.clk').forEach(tr=>tr.onclick=()=>{setSym(tr.dataset.tk); go('deep');});}
 
@@ -987,7 +1006,13 @@ function legTile(s){const k=s.strategy.toLowerCase();
   // so the popup can never contradict the header. Falls back to timing-reasons for legacy data.
   const nodes=legScorecard(s);
   const foot=`Exp ${s.expiry} · DTE ${s.dte} · POP ${num(s.pop,0,'%')} · OI ${s.oi} · spr ${num(s.spread_pct,0,'%')}`;
-  const key=`The traffic light = a scorecard rollup: any veto (liquidity, premium, earnings, wrong side of median) → red; otherwise the mean-reversion setup score sets it (🟢 ≥10 · 🟡 6–9 analyze · 🔴 <10 too thin). Amber means analyze — it's your call, not a command.`;
+  const key=[
+    '🟢 STRONG — all gates pass + full setup',
+    '🟡 ANALYZE — valid, partial setup · your call',
+    '🔴 WEAK / BLOCKED — a gate fails or no edge yet',
+    'median = '+(k==='cc'?'ABOVE':'BELOW')+' midline',
+    'timing = mean-reversion setup score (0–14)',
+  ].map(l=>`<div>${l}</div>`).join('');
   const v = verdictOf(s);
   const earnRed = s.earnings_soon===true;
   const why = s.verdict_why || '';
@@ -1023,7 +1048,14 @@ function leapTile(l){
     {l:'Entry timing'+(ts!=null?' '+ts+'/9':''), s: ts==null?'warn':(ts>=7?'ok':'warn')} ];
   const ma=`${l.above_50ma?'✓':'✗'}>50MA · ${l.above_200ma?'✓':'✗'}>200MA · ${l.ma_aligned?'✓':'✗'}50>200`;
   const foot=`Exp ${l.expiry} · DTE ${l.dte} · cost $${l.cost} · ext $${num(l.extrinsic,0)} · ${ma}`;
-  const key=`LEAP light: qualifies on Time-value ≤40% + Carry ≤8%/yr + a clear uptrend, or it's red. Entry timing only splits a qualifier 🟢 strong / 🟡 analyze — it never reds a LEAP (timing is informational here).`;
+  const key=[
+    '🟢 STRONG — qualifies + well-timed',
+    '🟡 ANALYZE — qualifies, timing partial · your call',
+    '🔴 WEAK — fails Gate A / Gate C / uptrend',
+    'Time value = premium − intrinsic (Gate A ≤40%)',
+    'Carry = time-value cost / yr (Gate C ≤8%/yr)',
+    'timing is informational — it never reds a LEAP',
+  ].map(l=>`<div>${l}</div>`).join('');
   const verdictLine=`<div class="verdict ${VMETA[v].c}"><span class="ltdot"></span>${VMETA[v].t}</div>`;
   const chips=`<div class="fchips">${chip('Δ ',num(l.delta,2))}${chip('ext ',num(l.extrinsic_pct,0,'%'))}${chip('carry ',num(l.carry_pct,1,'%/yr'))}</div>`;
   const body = v!=='avoid' ? `<div class="trade t-leap">${fmtTrade('leap',l.strike)}</div>${chips}` : chips;
