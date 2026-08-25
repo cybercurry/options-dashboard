@@ -63,6 +63,7 @@ def _vix():
 
 
 def _cnn_fng():
+    """(current score, rating, ~90-day daily history) — history comes free in the same response."""
     try:
         r = requests.get(
             "https://production.dataviz.cnn.io/index/fearandgreed/graphdata",
@@ -71,20 +72,37 @@ def _cnn_fng():
                      "Referer": "https://www.cnn.com/markets/fear-and-greed",
                      "Origin": "https://www.cnn.com"}, timeout=15)
         r.raise_for_status()
-        fg = r.json().get("fear_and_greed", {})
-        return round(float(fg.get("score"))), (fg.get("rating") or "").title()
+        j = r.json()
+        fg = j.get("fear_and_greed", {})
+        hist = []
+        for pt in ((j.get("fear_and_greed_historical", {}) or {}).get("data") or []):
+            try:
+                hist.append(round(float(pt.get("y"))))
+            except Exception:
+                pass
+        return round(float(fg.get("score"))), (fg.get("rating") or "").title(), hist[-90:]
     except Exception:
-        return None, None
+        return None, None, []
 
 
 def _btc_fng():
+    """(current value, classification, ~90-day daily history). API is newest-first → reversed."""
     try:
-        r = requests.get("https://api.alternative.me/fng/?limit=1", timeout=15)
+        r = requests.get("https://api.alternative.me/fng/?limit=90", timeout=15)
         r.raise_for_status()
-        d = (r.json().get("data") or [{}])[0]
-        return int(d.get("value")), d.get("value_classification")
+        data = r.json().get("data") or []
+        if not data:
+            return None, None, []
+        hist = []
+        for d in reversed(data):
+            try:
+                hist.append(int(d.get("value")))
+            except Exception:
+                pass
+        cur = data[0]
+        return int(cur.get("value")), cur.get("value_classification"), hist[-90:]
     except Exception:
-        return None, None
+        return None, None, []
 
 
 def _yf_quote(sym):
@@ -118,11 +136,20 @@ SECTORS = [("XLK", "Technology"), ("XLF", "Financials"), ("XLV", "Health Care"),
            ("XLB", "Materials"), ("BTC-USD", "Digital Assets")]
 
 
+def _spark(vals, n=90):
+    """Compact a close series into a small ~n-point array for the hover mini-chart."""
+    out = []
+    for v in vals[-n:]:
+        out.append(round(v) if abs(v) >= 100 else round(v, 2))
+    return out
+
+
 def fetch_pulse():
     out = []
     for sym, label, prefix, is_yield in PULSE:
         p, pct = _yf_quote(sym)
-        out.append({"label": label, "price": p, "pct": pct, "prefix": prefix, "is_yield": is_yield})
+        out.append({"label": label, "price": p, "pct": pct, "prefix": prefix,
+                    "is_yield": is_yield, "hist": _spark(_yf_hist(sym, "3mo"))})
     return out
 
 
@@ -138,8 +165,9 @@ def fetch_market():
     """Keyless market snapshot — VIX + F&G + curve + Fed + the Overview's macro-signal extras.
     Each source degrades to None independently; never aborts the build."""
     vix = _vix()
-    fng, fng_lbl = _cnn_fng()
-    btc, btc_lbl = _btc_fng()
+    fng, fng_lbl, fng_hist = _cnn_fng()
+    btc, btc_lbl, btc_hist = _btc_fng()
+    vix_hist = [round(v, 1) for v in _yf_hist("^VIX", "3mo")][-90:]
     t10, t2, fed = _fred_last("DGS10"), _fred_last("DGS2"), _fred_last("DFF")
     three_m = _yf_last("^IRX")               # 3M yield (for the 10Y−3M curve on Overview)
     skew = _yf_last("^SKEW")                  # CBOE SKEW (tail risk)
@@ -153,6 +181,7 @@ def fetch_market():
         vix_lbl = "calm" if vix < 15 else "normal" if vix < 20 else "elevated" if vix < 30 else "high"
     return {"vix": vix, "vix_label": vix_lbl, "fng": fng, "fng_label": fng_lbl,
             "btc_fng": btc, "btc_fng_label": btc_lbl,
+            "fng_hist": fng_hist, "btc_fng_hist": btc_hist, "vix_hist": vix_hist,
             "ten_year": t10, "two_year": t2, "three_month": three_m, "curve": curve, "fed_funds": fed,
             "skew": skew, "vix9d": vix9d}
 

@@ -291,6 +291,14 @@ td.l{text-align:left}
 .src b{color:var(--text); font-weight:600}
 footer{color:var(--faint); font-size:12.5px; text-align:center; padding:30px 0 40px; margin-top:22px; border-top:1px solid var(--line)}
 footer b{color:var(--muted); font-weight:600}
+/* hover-popup engine: floating explainer / mini-chart, header cues, spark affordances */
+.floatip{position:fixed; z-index:200; max-width:300px; background:var(--surface); border:1px solid var(--accent); border-radius:11px; box-shadow:var(--glow); padding:11px 13px; font-size:13px; line-height:1.55; color:var(--text); pointer-events:none}
+th.thelp{cursor:help} th.thelp .thi{display:inline-flex; align-items:center; justify-content:center; width:13px; height:13px; margin-left:4px; border-radius:50%; border:1px solid var(--faint); color:var(--faint); font-size:9px; font-style:normal; font-weight:700; vertical-align:1px; line-height:1}
+th.thelp:hover{color:var(--text)} th.thelp:hover .thi{border-color:var(--accent); color:var(--accent)}
+.gcard.spk,.ptile.spk{cursor:help} .gcard.spk:hover,.ptile.spk:hover{border-color:var(--accent)} .ptile.spk{transition:border-color .15s}
+.floatip .sptitle{font-family:"Archivo",sans-serif; font-weight:700; font-size:13px; margin-bottom:6px}
+.floatip .spark{display:block; width:100%; height:76px; margin:2px 0 4px}
+.floatip .spcap{font-size:12px; color:var(--muted); margin-top:2px} .floatip .spcap b{color:var(--text); font-family:"IBM Plex Mono"}
 [hidden]{display:none!important}
 @media (max-width:640px){ .tag{display:none} }
 @media (prefers-reduced-motion:reduce){ *{transition:none!important} }
@@ -461,6 +469,57 @@ function leapVerdict(l){
   if(!l.gate_c) r.push('carry '+(l.carry_pct)+'%');
   if(!l.trend_ok) r.push('no trend');
   return '<span class="dim">'+(r.join(' · ')||'—')+'</span>';
+}
+
+/* ---------- hover-popup engine: column-header explainers + mini trend charts ----------
+   One floating element (position:fixed, appended to body) so popups are never clipped by
+   a table's overflow:auto. [data-tip]=plain text; [data-spark]=a 90-day mini line chart. */
+let TIPEL=null, TIPFOR=null;
+function _tipEl(){ if(!TIPEL){TIPEL=document.createElement('div'); TIPEL.className='floatip'; TIPEL.hidden=true; document.body.appendChild(TIPEL);} return TIPEL; }
+function showTip(a,html){ if(!html) return; const el=_tipEl(); el.style.visibility='hidden'; el.hidden=false; el.innerHTML=html; TIPFOR=a;
+  const r=a.getBoundingClientRect(), tw=el.offsetWidth, thh=el.offsetHeight;
+  let left=Math.max(8,Math.min(r.left+r.width/2-tw/2, innerWidth-tw-8));
+  let top=r.bottom+8; if(top+thh>innerHeight-8) top=Math.max(8,r.top-thh-8);
+  el.style.left=left+'px'; el.style.top=top+'px'; el.style.visibility='visible'; }
+function hideTip(){ if(TIPEL){TIPEL.hidden=true;} TIPFOR=null; }
+function wireTips(root){ (root||document).querySelectorAll('[data-tip]:not([data-tw]),[data-spark]:not([data-tw])').forEach(a=>{
+  a.setAttribute('data-tw','1');
+  const get=()=> a.hasAttribute('data-spark') ? sparkPopup(a.getAttribute('data-spark')) : a.getAttribute('data-tip');
+  a.addEventListener('mouseenter',()=>showTip(a,get()));
+  a.addEventListener('mouseleave',hideTip);
+  a.addEventListener('focus',()=>showTip(a,get()));
+  a.addEventListener('blur',hideTip);
+  a.addEventListener('click',e=>{e.stopPropagation(); (TIPFOR===a&&TIPEL&&!TIPEL.hidden)?hideTip():showTip(a,get());});
+}); }
+addEventListener('scroll',hideTip,true); addEventListener('resize',hideTip);
+
+/* mini 90-day trend chart — auto-scaled to fill the box (shape, not precise scale) */
+function miniChart(vals){
+  const W=260,H=76,pad=7;
+  const mn=Math.min(...vals), mx=Math.max(...vals), rng=(mx-mn)||1;
+  const X=i=>pad+i*(W-2*pad)/(vals.length-1), Y=v=>pad+(mx-v)/rng*(H-2*pad);
+  const line=vals.map((v,i)=>`${X(i).toFixed(1)},${Y(v).toFixed(1)}`).join(' ');
+  const area=`M ${vals.map((v,i)=>`${X(i).toFixed(1)} ${Y(v).toFixed(1)}`).join(' L ')} L ${X(vals.length-1).toFixed(1)} ${H-pad} L ${X(0).toFixed(1)} ${H-pad} Z`;
+  const lx=X(vals.length-1).toFixed(1), ly=Y(vals[vals.length-1]).toFixed(1);
+  return `<svg class="spark" viewBox="0 0 ${W} ${H}" preserveAspectRatio="none" aria-hidden="true">
+    <defs><linearGradient id="spg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#F5A524" stop-opacity="0.30"/><stop offset="1" stop-color="#F5A524" stop-opacity="0"/></linearGradient></defs>
+    <path d="${area}" fill="url(#spg)"/>
+    <polyline points="${line}" fill="none" stroke="var(--accent)" stroke-width="2" stroke-linejoin="round" stroke-linecap="round" vector-effect="non-scaling-stroke"/>
+    <circle cx="${lx}" cy="${ly}" r="3.2" fill="var(--accent)" stroke="var(--surface)" stroke-width="1.4"/></svg>`;
+}
+function sparkPopup(key){
+  const m=DATA.market||{};
+  let title,hist,now,dp=0,suffix='';
+  if(key.slice(0,3)==='px:'){ const p=(DATA.pulse||[])[+key.slice(3)]||{}; title=p.label||'Index'; hist=p.hist; now=p.price; dp=(p.is_yield||p.price<10)?2:0; suffix=p.is_yield?'%':''; }
+  else { const C={fng:['Stocks Fear & Greed',m.fng_hist,m.fng,0],btc:['Crypto Fear & Greed',m.btc_fng_hist,m.btc_fng,0],vix:['VIX',m.vix_hist,m.vix,1]}[key];
+    if(!C) return ''; title=C[0]; hist=C[1]; now=C[2]; dp=C[3]; }
+  const head=`<div class="sptitle">${title} · <span class="dim">90-day trend</span></div>`;
+  if(!hist||hist.length<2) return head+`<div class="spcap dim">Trend populates on the next scan.</div>`;
+  const first=hist[0], last=hist[hist.length-1], d=last-first;
+  const lo=Math.min(...hist), hi=Math.max(...hist);
+  const fmt=v=>v==null?'—':(+v).toFixed(dp)+suffix;
+  const arrow=d>0?'<span class="up">▲':d<0?'<span class="down">▼':'<span class="dim">•';
+  return head+miniChart(hist)+`<div class="spcap">Now <b>${fmt(now!=null?now:last)}</b> · range ${fmt(lo)}–${fmt(hi)} · ${arrow} ${fmt(Math.abs(d))}</span> over 90d</div>`;
 }
 
 fetch('data/signals.json',{cache:'no-store'}).then(r=>r.json()).then(J=>{
@@ -661,11 +720,11 @@ function fmtPrice(p,prefix,isYield){ if(p==null)return '—';
 function heatColor(pct){ if(pct==null)return 'var(--surface-2)';
   if(pct>=3)return '#12532e'; if(pct>=1)return '#176a3a'; if(pct>=0)return '#245b41';
   if(pct>-1)return '#6e3a34'; if(pct>-3)return '#9a3325'; return '#611c15'; }
-function gauge(label,value,rating,source){
-  return `<div class="gcard"><div class="gl">${label}</div>${dialGauge(value,100,rating||fngZone(value),50)}
+function gauge(label,value,rating,source,spark){
+  return `<div class="gcard${spark?' spk':''}"${spark?` data-spark="${spark}" tabindex="0"`:''}><div class="gl">${label}</div>${dialGauge(value,100,rating||fngZone(value),50)}
     <div class="gr" style="text-align:center;color:var(--faint)">${source}</div></div>`; }
 function vixGaugeCard(vix,label){
-  return `<div class="gcard"><div class="gl">VIX</div>${dialGauge(vix,50,label||vixZone(vix),25)}
+  return `<div class="gcard spk" data-spark="vix" tabindex="0"><div class="gl">VIX</div>${dialGauge(vix,50,label||vixZone(vix),25)}
     <div class="gr" style="text-align:center;color:var(--faint)">30-day expected move</div></div>`; }
 /* CNN-style semicircle dial (monochrome): grey track, amber value arc + rim marker,
    big number, zone label. f = fraction 0..1 mapped left(0)→right(max) across 180°. */
@@ -728,14 +787,16 @@ const SECICON={
 function secIcon(l){return SECICON[l]||'';}
 function renderOverview(){
   const m=DATA.market||{};
-  document.getElementById('ov-pulse').innerHTML=(DATA.pulse||[]).map(p=>{
+  document.getElementById('ov-pulse').innerHTML=(DATA.pulse||[]).map((p,i)=>{
     const up=p.pct==null?'':(p.pct>=0?'up':'down');
-    return `<div class="ptile"><div class="pl">${p.label}</div><div class="pv mono">${fmtPrice(p.price,p.prefix,p.is_yield)}</div>
+    const spk=(p.hist&&p.hist.length>1)?` spk" data-spark="px:${i}" tabindex="0`:'';
+    return `<div class="ptile${spk}"><div class="pl">${p.label}</div><div class="pv mono">${fmtPrice(p.price,p.prefix,p.is_yield)}</div>
       <div class="pc mono ${up}">${p.pct==null?'—':(p.pct>=0?'+':'')+p.pct.toFixed(2)+'%'}</div></div>`;}).join('');
   document.getElementById('ov-gauges').innerHTML=
-    gauge('Stocks Fear &amp; Greed',m.fng,m.fng_label,'CNN')+
-    gauge('Crypto Fear &amp; Greed',m.btc_fng,m.btc_fng_label,'Alternative.me')+
+    gauge('Stocks Fear &amp; Greed',m.fng,m.fng_label,'CNN','fng')+
+    gauge('Crypto Fear &amp; Greed',m.btc_fng,m.btc_fng_label,'Alternative.me','btc')+
     vixGaugeCard(m.vix,m.vix_label);
+  wireTips(document.getElementById('ov-gauges')); wireTips(document.getElementById('ov-pulse'));
   document.getElementById('ov-heat').innerHTML=(DATA.sectors||[]).map(s=>
     `<div class="hcell" style="background:${heatColor(s.pct)}">${secIcon(s.label)}<div class="hl">${s.label}</div>
       <div class="hp mono">${s.pct==null?'—':(s.pct>=0?'+':'')+s.pct.toFixed(2)+'%'}</div></div>`).join('');
@@ -768,12 +829,25 @@ function renderWatchTable(){
     <td class="l">${shortSetup(o.leap_timing)}</td>
     <td class="l">${shortSetup(o.cc_timing)}</td>
     <td class="l">${shortSetup(o.csp_timing)}</td></tr>`).join('');
+  const TH=(cls,lbl,tip)=>`<th class="${cls} thelp" data-tip="${tip.replace(/"/g,'&quot;')}">${lbl}<i class="thi">i</i></th>`;
   document.getElementById('ov-watch').innerHTML=`<div class="tablewrap"><table><thead><tr>
-    <th class="l">Ticker</th><th>Price</th><th>Chg %</th><th>HV%ile</th><th>HV20</th><th>ATM IV C/P</th>
-    <th class="l">IV vs HV</th><th>RSI</th><th>200MA</th><th>PCR</th><th class="l">Median</th>
-    <th class="l">LEAP</th><th class="l">CC</th><th class="l">CSP</th>
+    ${TH('l','Ticker','The underlying symbol. Click any row to open it in the TA tab.')}
+    ${TH('','Price','Latest price for the underlying.')}
+    ${TH('','Chg %','Percent change on the session.')}
+    ${TH('','HV%ile','Where current 20-day historical (realized) volatility sits in its own 1-year range. High = the stock is moving more than usual; richer option premium.')}
+    ${TH('','HV20','20-day historical (realized) volatility, annualized — how much the stock ACTUALLY moved recently.')}
+    ${TH('','ATM IV C/P','At-the-money implied volatility, call / put. What options are PRICING IN for future movement.')}
+    ${TH('l','IV vs HV','Is implied vol rich or cheap versus realized? Rich = the market is overpaying for movement (good to sell); Cheap = underpaying.')}
+    ${TH('','RSI','14-day Relative Strength Index. &lt;30 oversold (CSP setup) · ~50 neutral · &gt;70 overbought (CC setup).')}
+    ${TH('','200MA','Is price above its 200-day moving average? A simple long-term uptrend check (a LEAP prerequisite).')}
+    ${TH('','PCR','Put/Call ratio of open interest — a positioning tell. &gt;1 = more puts (defensive) · &lt;1 = more calls (bullish).')}
+    ${TH('l','Median','Side of the 20-day Bollinger median (%B). Above = sell calls into strength (CC) · Below = sell puts into weakness (CSP).')}
+    ${TH('l','LEAP','Mean-reversion entry-timing read for a long-dated call. 🟢 full · 🟡 partial · 🟠 building · 🔴 none. (Informational for LEAPs — not a gate.)')}
+    ${TH('l','CC','Entry-timing read for a covered call — is now a good moment to fade a top? 🟢 full · 🟡 partial · 🟠 building · 🔴 none.')}
+    ${TH('l','CSP','Entry-timing read for a cash-secured put — is now a good moment to fade a bottom? 🟢 full · 🟡 partial · 🟠 building · 🔴 none.')}
   </tr></thead><tbody>${rows}</tbody></table></div>`;
   document.querySelectorAll('#ov-watch tr.clk').forEach(tr=>tr.onclick=()=>{setSym(tr.dataset.tk); go('deep');});
+  wireTips(document.getElementById('ov-watch'));
 }
 
 /* ---------- options chain ---------- */
@@ -788,8 +862,16 @@ function _ladder(rows, title, type, spot){
     <td class="mono">${r.a==null?'—':'$'+r.a.toFixed(2)}</td>
     <td class="mono">${r.iv==null?'—':r.iv.toFixed(0)+'%'}</td>
     <td class="mono">${r.oi==null?'—':r.oi.toLocaleString()}</td></tr>`).join('');
+  const TH=(cls,lbl,tip)=>`<th class="${cls} thelp" data-tip="${tip.replace(/"/g,'&quot;')}">${lbl}<i class="thi">i</i></th>`;
   return `<div><div class="subhead">${title}</div>
-    <div class="tablewrap"><table><thead><tr><th class="l">Strike</th><th>Δ</th><th>Bid</th><th>Ask</th><th>IV</th><th>OI</th></tr></thead>
+    <div class="tablewrap"><table><thead><tr>
+    ${TH('l','Strike','The contract strike price. ▸ marks the strike nearest the live price (ATM); 🎯 marks the ≈30Δ strike — the usual CSP/CC sell target.')}
+    ${TH('','Δ','Delta — approximate probability the option finishes in-the-money, and its share-equivalent exposure (0–1). ~0.30 is the wheel sweet spot.')}
+    ${TH('','Bid','Highest price a buyer will pay — what you RECEIVE if you sell at market. Tap a bid to size the trade.')}
+    ${TH('','Ask','Lowest price a seller will accept — what you PAY to buy. The bid/ask gap is the spread (tighter = more liquid).')}
+    ${TH('','IV','Implied volatility for this contract — the market&#39;s expected movement priced into it. Higher IV = fatter premium.')}
+    ${TH('','OI','Open interest — number of contracts outstanding at this strike. A liquidity proxy; the engine wants ≥100.')}
+    </tr></thead>
     <tbody>${body}</tbody></table></div></div>`;
 }
 function renderChainExp(tk, exp){
@@ -802,6 +884,7 @@ function renderChainExp(tk, exp){
   if(!ex){ host.innerHTML='<div class="empty">No chain for this expiry.</div>'; return; }
   const pxline=`<div class="chainpx">${tk} <b>$${spot!=null?(+spot).toFixed(2):'—'}</b> <span class="dim">· ${fmtDMY(exp)} · ${ex.dte}d · tap a Bid to size the trade</span></div>`;
   host.innerHTML=`${pxline}<div class="ch2">${_ladder(ex.calls,'Calls','call',spot)}${_ladder(ex.puts,'Puts','put',spot)}</div>`;
+  wireTips(host);
 }
 function renderChainTk(tk){
   CHAIN_TK=tk;
