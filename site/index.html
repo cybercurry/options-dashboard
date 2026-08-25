@@ -32,6 +32,10 @@ nav{display:flex; gap:4px; margin-left:6px; flex-wrap:wrap}
 nav a{color:var(--muted); text-decoration:none; font-weight:500; font-size:14px; padding:7px 12px; border-radius:8px; cursor:pointer}
 nav a:hover{color:var(--text); background:var(--surface-2)} nav a.on{color:var(--accent); background:var(--accent-soft)}
 .tag{margin-left:auto; font-size:11px; font-weight:600; letter-spacing:.08em; text-transform:uppercase; color:var(--faint); white-space:nowrap}
+.logo{flex:0 0 auto; display:flex; align-items:center; color:var(--text); cursor:pointer; margin-left:14px; transition:color .15s}
+.logo svg{width:38px; height:38px; display:block}
+.logo:hover{color:var(--accent)}
+@media (max-width:640px){ .logo{margin-left:auto} }
 .pulse{display:flex; gap:10px; flex-wrap:wrap; padding:18px 0 4px}
 .chip{flex:1 1 150px; background:var(--surface); border:1px solid var(--line); border-radius:12px; padding:11px 14px; box-shadow:var(--shadow)}
 .chip .k{display:flex; align-items:center; gap:7px; font-size:11px; letter-spacing:.06em; text-transform:uppercase; color:var(--faint); font-weight:600}
@@ -318,14 +322,20 @@ th.thelp:hover{color:var(--text)} th.thelp:hover .thi{border-color:var(--accent)
   <div class="brand" data-tab="overview"><span class="dot"></span><b>OptionIntel</b><span>.app</span></div>
   <nav id="nav">
     <a data-tab="overview" class="on">Overview</a>
-    <a data-tab="signals">Signals</a>
-    <a data-tab="chain">Options Chain</a>
-    <a data-tab="deep">TA</a>
     <a data-tab="market">Market</a>
+    <a data-tab="chain">Options Chain</a>
+    <a data-tab="signals">Signals</a>
+    <a data-tab="deep">TA</a>
     <a data-tab="fund">Fundamentals</a>
     <a data-tab="rules">Rules</a>
   </nav>
   <span class="tag" id="upd">loading…</span>
+  <a class="logo" data-tab="overview" aria-label="OptionIntel — home">
+    <svg viewBox="0 0 100 100" aria-hidden="true">
+      <circle cx="50" cy="50" r="45" fill="none" stroke="currentColor" stroke-width="5"/>
+      <polyline points="27,74 43,37 54,57 66,29 81,74" fill="none" stroke="currentColor" stroke-width="7" stroke-linejoin="miter" stroke-linecap="butt"/>
+    </svg>
+  </a>
 </div></header>
 
 <main class="wrap">
