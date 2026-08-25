@@ -5281,8 +5281,8 @@
     },
     {
       "label": "DXY",
-      "price": 98.87999725341797,
-      "pct": -0.12121489553740261,
+      "price": 98.90599822998047,
+      "pct": -0.09495128284801035,
       "prefix": "",
       "is_yield": false,
       "hist": [
@@ -5349,13 +5349,13 @@
         98.9,
         98.8,
         99.0,
-        98.88
+        98.91
       ]
     },
     {
       "label": "Crude Oil",
-      "price": 80.38999938964844,
-      "pct": -5.434657840824864,
+      "price": 80.9000015258789,
+      "pct": -4.834725922915739,
       "prefix": "$",
       "is_yield": false,
       "hist": [
@@ -5422,13 +5422,13 @@
         87.83,
         87.06,
         85.01,
-        80.38
+        80.89
       ]
     },
     {
       "label": "Gold",
-      "price": 4723.10009765625,
-      "pct": 1.7734075252636705,
+      "price": 4718.39990234375,
+      "pct": 1.6721276702750476,
       "prefix": "$",
       "is_yield": false,
       "hist": [
@@ -5495,13 +5495,13 @@
         4516,
         4624,
         4641,
-        4723
+        4718
       ]
     },
     {
       "label": "Bitcoin",
-      "price": 78772.3203125,
-      "pct": -0.24335505261759982,
+      "price": 78232.8125,
+      "pct": -0.9265834897690395,
       "prefix": "$",
       "is_yield": false,
       "hist": [
@@ -5594,7 +5594,7 @@
         77083,
         77755,
         78964,
-        78772
+        78233
       ]
     },
     {
@@ -5748,8 +5748,8 @@
     {
       "label": "Technology",
       "ticker": "XLK",
-      "pct": 0.960841820725622,
-      "price": 181.77999877929688
+      "pct": 0.9386294988956045,
+      "price": 181.74000549316406
     },
     {
       "label": "Financials",
@@ -5766,8 +5766,8 @@
     {
       "label": "Energy",
       "ticker": "XLE",
-      "pct": -1.647917771302887,
-      "price": 62.06999969482422
+      "pct": -1.6637604609503365,
+      "price": 62.060001373291016
     },
     {
       "label": "Industrials",
@@ -5814,8 +5814,8 @@
     {
       "label": "Digital Assets",
       "ticker": "BTC",
-      "pct": -0.24335505261759982,
-      "price": 78772.3203125
+      "pct": -0.9265834897690395,
+      "price": 78232.8125
     }
   ],
   "fundamentals": {
@@ -5892,6 +5892,12 @@
           "when": "Aug 25"
         },
         {
+          "title": "Coca-Cola's new CEO can boast about something that 'Magnificent 7' members Elon Musk and Mark Zuckerberg can't",
+          "publisher": "Yahoo Finance",
+          "link": "https://finance.yahoo.com/markets/stocks/article/coca-colas-new-ceo-can-boast-about-something-that-magnificent-7-members-elon-musk-and-mark-zuckerberg-cant-094242694.html",
+          "when": "Aug 25"
+        },
+        {
           "title": "Nevada Just Raised Tesla's Las Vegas Robotaxi Cap From 10 Vehicles to 5,000",
           "publisher": "Motley Fool",
           "link": "https://www.fool.com/investing/2026/08/25/nevada-just-raised-tesla-s-las-vegas-robotaxi-cap-from-10-vehicles-to-5-000/",
@@ -5913,12 +5919,6 @@
           "title": "Cathie Wood Keeps Buying SpaceX Stock. Here's Why I Wouldn't Buy It Above a $1.8 Trillion Valuation.",
           "publisher": "Motley Fool",
           "link": "https://www.fool.com/investing/2026/08/25/cathie-wood-keeps-buying-spacex-on-the-way-down-is/",
-          "when": "Aug 25"
-        },
-        {
-          "title": "Oppenheimer initiates Kodiak AI stock with outperform rating",
-          "publisher": "Quartz",
-          "link": "https://qz.com/oppenheimer-kodiak-ai-stock-outperform-rating-082526",
           "when": "Aug 25"
         }
       ]
@@ -6102,9 +6102,9 @@
       ],
       "news": [
         {
-          "title": "Stock market today: Dow, S&P 500, Nasdaq rise as US-Canada trade tensions heat up, investors await Nvidia earnings",
+          "title": "Earnings live updates: Intuit stock drops on soft guidance, Dick's Sporting Goods stock plummets 30%",
           "publisher": "Yahoo Finance",
-          "link": "https://finance.yahoo.com/markets/live/stock-market-today-tuesday-august-25-dow-sp-500-nasdaq-tariffs-oil-080527092.html",
+          "link": "https://finance.yahoo.com/markets/live/earnings-live-updates-q2-nvidia-115314802.html",
           "when": "Aug 25"
         },
         {
@@ -6114,28 +6114,28 @@
           "when": "Aug 25"
         },
         {
-          "title": "The real question investors should be asking ahead of Nvidia earnings",
+          "title": "Elon Musk says SpaceX's Nvidia-powered orbital data center could be ready next year",
           "publisher": "Yahoo Finance Video",
-          "link": "https://finance.yahoo.com/video/real-investors-asking-ahead-nvidia-160432776.html",
+          "link": "https://finance.yahoo.com/video/elon-musk-says-spacexs-nvidia-135333519.html",
           "when": "Aug 25"
         },
         {
-          "title": "Nvidia stock hopes to snap seven-day losing streak ahead of earnings",
-          "publisher": "Yahoo Finance Video",
-          "link": "https://finance.yahoo.com/video/nvidia-stock-hopes-snap-seven-135037753.html",
+          "title": "Software is crushing chips by a record margin: Chart of the Day",
+          "publisher": "Yahoo Finance",
+          "link": "https://finance.yahoo.com/markets/article/software-is-crushing-chips-by-a-record-margin-chart-of-the-day-100000109.html",
           "when": "Aug 25"
         },
         {
-          "title": "What's at stake for Paramount, the Ellisons in Warner Bros. takeover bid",
-          "publisher": "Yahoo Finance Video",
-          "link": "https://finance.yahoo.com/video/whats-stake-paramount-ellisons-warner-213000825.html",
-          "when": "Aug 24"
+          "title": "Dow Jones Futures: Stocks Rise Cautiously Into Fed Inflation Data, Nvidia Earnings; Robinhood In Buy Area",
+          "publisher": "Investor's Business Daily",
+          "link": "https://www.investors.com/market-trend/stock-market-today/dow-jones-futures-fed-inflation-data-nvidia-earning-srobinhood-oil-prices-yields/?src=A00220&yptr=yahoo",
+          "when": "Aug 25"
         },
         {
-          "title": "Tesla to launch Cybercabs in Austin starting Sept. 3",
-          "publisher": "Yahoo Finance Video",
-          "link": "https://finance.yahoo.com/video/tesla-launch-cybercabs-austin-starting-205004873.html",
-          "when": "Aug 24"
+          "title": "Cathie Wood's Biggest Buy Last Week Was SpaceX. She Sold Almost Exactly That Much Palantir the Same Day.",
+          "publisher": "Motley Fool",
+          "link": "https://www.fool.com/investing/2026/08/25/cathie-wood-s-biggest-buy-last-week-was-spacex-she-sold-almost-exactly-that-much-palantir-the-same-day/",
+          "when": "Aug 25"
         }
       ]
     },
@@ -6197,16 +6197,22 @@
       "flags": [],
       "news": [
         {
-          "title": "Nvidia's Q2 earnings to test resurgent AI trade",
-          "publisher": "Yahoo Finance",
-          "link": "https://finance.yahoo.com/markets/stocks/article/nvidias-q2-earnings-to-test-resurgent-ai-trade-112502189.html",
-          "when": "Aug 23"
+          "title": "The real question investors should be asking ahead of Nvidia earnings",
+          "publisher": "Yahoo Finance Video",
+          "link": "https://finance.yahoo.com/video/real-investors-asking-ahead-nvidia-160432776.html",
+          "when": "Aug 25"
         },
         {
-          "title": "The luxury retail categories that consumers continue to spend the most on",
+          "title": "New disclosure: Trump owns SpaceX, Disney shares \u2014 and is reaping profits from oil & gas stocks",
           "publisher": "Yahoo Finance Video",
-          "link": "https://finance.yahoo.com/video/luxury-retail-categories-consumers-continue-204500137.html",
-          "when": "Aug 24"
+          "link": "https://finance.yahoo.com/video/disclosure-trump-owns-spacex-disney-151222555.html",
+          "when": "Aug 25"
+        },
+        {
+          "title": "The Questions That Defined WMT's Earnings Call",
+          "publisher": "Trefis",
+          "link": "https://www.trefis.com/articles/612812/the-questions-that-defined-wmts-earnings-call/2026-08-25",
+          "when": "Aug 25"
         },
         {
           "title": "FedEx, Stock Of The Day, Eyes Buy Point \u2014 And A High-Margin Pivot",
@@ -6224,12 +6230,6 @@
           "title": "S&P 100 Is Quietly Sending a Powerful Signal",
           "publisher": "GuruFocus.com",
           "link": "https://finance.yahoo.com/markets/stocks/articles/p-100-quietly-sending-powerful-195321128.html",
-          "when": "Aug 25"
-        },
-        {
-          "title": "Sector Update: Tech Stocks Rise Late Afternoon",
-          "publisher": "MT Newswires",
-          "link": "https://finance.yahoo.com/technology/articles/sector-tech-stocks-rise-afternoon-194708780.html",
           "when": "Aug 25"
         }
       ]
@@ -6292,12 +6292,6 @@
       "flags": [],
       "news": [
         {
-          "title": "Nvidia's Q2 earnings to test resurgent AI trade",
-          "publisher": "Yahoo Finance",
-          "link": "https://finance.yahoo.com/markets/stocks/article/nvidias-q2-earnings-to-test-resurgent-ai-trade-112502189.html",
-          "when": "Aug 23"
-        },
-        {
           "title": "The real question investors should be asking ahead of Nvidia earnings",
           "publisher": "Yahoo Finance Video",
           "link": "https://finance.yahoo.com/video/real-investors-asking-ahead-nvidia-160432776.html",
@@ -6325,6 +6319,12 @@
           "title": "Microsoft Just Ripped 28% in a Month. What Would It Take to Get MSFT Stock Up to $600?",
           "publisher": "24/7 Wall St.",
           "link": "https://247wallst.com/investing/2026/08/25/microsoft-just-ripped-28-in-a-month-what-would-it-take-to-get-msft-stock-up-to-600/",
+          "when": "Aug 25"
+        },
+        {
+          "title": "Microsoft Stalls as $678 Billion Backlog Meets Falling Yields",
+          "publisher": "GuruFocus.com",
+          "link": "https://finance.yahoo.com/markets/stocks/articles/microsoft-stalls-678-billion-backlog-194052410.html",
           "when": "Aug 25"
         }
       ]
@@ -6882,6 +6882,12 @@
           "when": "Aug 25"
         },
         {
+          "title": "Cathie Wood's Biggest Buy Last Week Was SpaceX. She Sold Almost Exactly That Much Palantir the Same Day.",
+          "publisher": "Motley Fool",
+          "link": "https://www.fool.com/investing/2026/08/25/cathie-wood-s-biggest-buy-last-week-was-spacex-she-sold-almost-exactly-that-much-palantir-the-same-day/",
+          "when": "Aug 25"
+        },
+        {
           "title": "Palantir's Maven Is Now an Official Pentagon Program of Record. Here's What Guaranteed Budget Dollars Are Worth.",
           "publisher": "Motley Fool",
           "link": "https://www.fool.com/investing/2026/08/25/palantirs-maven-is-now-an-official-pentagon-progra/",
@@ -6903,12 +6909,6 @@
           "title": "Palantir highlighted as Zacks Bull and GoPro Bear of the Day",
           "publisher": "Zacks",
           "link": "https://finance.yahoo.com/markets/stocks/articles/palantir-highlighted-zacks-bull-gopro-125000763.html",
-          "when": "Aug 25"
-        },
-        {
-          "title": "5 Billionaire Money Managers Dumped Palantir in the Second Quarter. This Is the AI Applications Stock They're Buying Hand Over Fist Instead.",
-          "publisher": "Motley Fool",
-          "link": "https://www.fool.com/investing/2026/08/25/5-billionaires-dump-pltr-buy-ai-applications-googl/",
           "when": "Aug 25"
         }
       ]
@@ -6982,6 +6982,12 @@
           "when": "Aug 25"
         },
         {
+          "title": "The Questions That Defined WMT's Earnings Call",
+          "publisher": "Trefis",
+          "link": "https://www.trefis.com/articles/612812/the-questions-that-defined-wmts-earnings-call/2026-08-25",
+          "when": "Aug 25"
+        },
+        {
           "title": "Walmart Falls as 37-Times Valuation Meets Weak Traffic",
           "publisher": "GuruFocus.com",
           "link": "https://finance.yahoo.com/markets/stocks/articles/walmart-falls-37-times-valuation-194414845.html",
@@ -7003,12 +7009,6 @@
           "title": "Best Blue Chip Stocks: 21 Hedge Fund Top Picks",
           "publisher": "Kiplinger",
           "link": "https://www.kiplinger.com/investing/stocks/blue-chip-stocks/605147/hedge-funds-top-blue-chip-stocks-to-buy-now",
-          "when": "Aug 25"
-        },
-        {
-          "title": "Visa's Record Run Pauses as Services Outgrow Swipes",
-          "publisher": "GuruFocus.com",
-          "link": "https://finance.yahoo.com/markets/stocks/articles/visas-record-run-pauses-services-171942955.html",
           "when": "Aug 25"
         }
       ]
@@ -7082,6 +7082,12 @@
           "when": "Aug 24"
         },
         {
+          "title": "Dell Stock's Massive Guidance Raise Has A Catch",
+          "publisher": "Trefis",
+          "link": "https://www.trefis.com/articles/612811/dell-stocks-massive-guidance-raise-has-a-catch/2026-08-25",
+          "when": "Aug 25"
+        },
+        {
           "title": "Cramer Warns iPhone Prices Will Rise Without Chinese Memory \u2014 Here\u2019s Why Apple Can\u2019t Wait for U.S. Production",
           "publisher": "24/7 Wall St.",
           "link": "https://247wallst.com/investing/2026/08/25/cramer-warns-iphone-prices-will-rise-without-chinese-memory-heres-why-apple-cant-wait-for-u-s-production/",
@@ -7103,12 +7109,6 @@
           "title": "Clark Howard Warned Apple Traps You in Forever Leases and Now Three New Macs Just Landed",
           "publisher": "24/7 Wall St.",
           "link": "https://247wallst.com/personal-finance/2026/08/25/clark-howard-warned-apple-traps-you-in-forever-leases-and-now-three-new-macs-just-landed/",
-          "when": "Aug 25"
-        },
-        {
-          "title": "Apple Launches Mac Studio Featuring New Chips Built for AI Workloads. Here\u2019s What Apple\u2019s Capital-Light AI Strategy Means for Investors.",
-          "publisher": "Motley Fool",
-          "link": "https://www.fool.com/investing/2026/08/25/apple-launches-mac-studio-featuring-new-chips-built-for-ai-workloads-heres-what-apples-capital-light-ai-strategy-means-for-investors/",
           "when": "Aug 25"
         }
       ]
@@ -7177,12 +7177,6 @@
           "when": "Aug 23"
         },
         {
-          "title": "Tesla to launch Cybercabs in Austin starting Sept. 3",
-          "publisher": "Yahoo Finance Video",
-          "link": "https://finance.yahoo.com/video/tesla-launch-cybercabs-austin-starting-205004873.html",
-          "when": "Aug 24"
-        },
-        {
           "title": "Why Rezolve AI Stock Rocketed Higher Today",
           "publisher": "Motley Fool",
           "link": "https://www.fool.com/investing/2026/08/25/why-rezolve-ai-stock-rocketed-higher-today/",
@@ -7204,6 +7198,12 @@
           "title": "Google's Gemini Push Just Got Much Bigger",
           "publisher": "GuruFocus.com",
           "link": "https://finance.yahoo.com/technology/ai/articles/googles-gemini-push-just-got-195646133.html",
+          "when": "Aug 25"
+        },
+        {
+          "title": "S&P 100 Is Quietly Sending a Powerful Signal",
+          "publisher": "GuruFocus.com",
+          "link": "https://finance.yahoo.com/markets/stocks/articles/p-100-quietly-sending-powerful-195321128.html",
           "when": "Aug 25"
         }
       ]
@@ -7277,6 +7277,12 @@
           "when": "Aug 25"
         },
         {
+          "title": "AMD Stock Upgraded To Strong Buy. Here's Why.",
+          "publisher": "Investor's Business Daily",
+          "link": "https://www.investors.com/news/technology/amd-stock-upgraded-strong-buy-server-cpus-agentic-ai/?src=A00220&yptr=yahoo",
+          "when": "Aug 25"
+        },
+        {
           "title": "AMD Just Got a Major AI Vote of Confidence",
           "publisher": "GuruFocus.com",
           "link": "https://finance.yahoo.com/technology/ai/articles/amd-just-got-major-ai-195827847.html",
@@ -7298,12 +7304,6 @@
           "title": "AMD Jumps 3.9% as $641 Target Reprices Server CPUs",
           "publisher": "GuruFocus.com",
           "link": "https://finance.yahoo.com/technology/articles/amd-jumps-3-9-641-192702008.html",
-          "when": "Aug 25"
-        },
-        {
-          "title": "AMD Stock Gets a \u2018Strong Buy\u2019 Upgrade: Why It Could Outperform Nvidia",
-          "publisher": "Barrons.com",
-          "link": "https://www.barrons.com/articles/amd-stock-price-upgrade-strong-buy-nvidia-3636f478?siteid=yhoof2&yptr=yahoo",
           "when": "Aug 25"
         }
       ]
@@ -7486,6 +7486,12 @@
           "when": "Aug 24"
         },
         {
+          "title": "Cathie Wood's Biggest Buy Last Week Was SpaceX. She Sold Almost Exactly That Much Palantir the Same Day.",
+          "publisher": "Motley Fool",
+          "link": "https://www.fool.com/investing/2026/08/25/cathie-wood-s-biggest-buy-last-week-was-spacex-she-sold-almost-exactly-that-much-palantir-the-same-day/",
+          "when": "Aug 25"
+        },
+        {
           "title": "2 Million Kids Got Free SpaceX Shares in Their Trump Accounts, So What Are They Worth Now?",
           "publisher": "24/7 Wall St.",
           "link": "https://247wallst.com/investing/2026/08/25/2-million-kids-got-free-spacex-shares-in-their-trump-accounts-so-what-are-they-worth-now/",
@@ -7501,12 +7507,6 @@
           "title": "Sector Update: Tech Stocks Rise Late Afternoon",
           "publisher": "MT Newswires",
           "link": "https://finance.yahoo.com/technology/articles/sector-tech-stocks-rise-afternoon-194708780.html",
-          "when": "Aug 25"
-        },
-        {
-          "title": "Redditors Are Skeptical of SpaceX\u2019s Orbital Data Centers. Are They Right?",
-          "publisher": "Insider Monkey",
-          "link": "https://finance.yahoo.com/technology/ai/articles/redditors-skeptical-spacex-orbital-data-191140732.html",
           "when": "Aug 25"
         }
       ]
@@ -80030,7 +80030,7 @@
       }
     ]
   },
-  "generated_at": "2026-08-25T20:30:52+00:00",
+  "generated_at": "2026-08-25T20:58:58+00:00",
   "universe": {
     "wheel": 16,
     "growth": 15,
