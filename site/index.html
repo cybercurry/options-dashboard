@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>OptionIntel — Wheel Signals</title>
-<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='44' fill='none' stroke='%23F5A524' stroke-width='7'/><polyline points='27,74 43,37 54,57 66,29 81,74' fill='none' stroke='%23F5A524' stroke-width='9' stroke-linejoin='miter' stroke-linecap='butt'/></svg>">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='44' fill='none' stroke='%23000000' stroke-width='7'/><polyline points='27,74 43,37 54,57 66,29 81,74' fill='none' stroke='%23000000' stroke-width='9' stroke-linejoin='miter' stroke-linecap='butt'/></svg>">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;700;800&family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
@@ -24,7 +24,7 @@ body{margin:0; background:var(--ink); color:var(--text); font-family:"IBM Plex S
 .mono{font-family:"IBM Plex Mono",ui-monospace,monospace; font-variant-numeric:tabular-nums}
 .wrap{max-width:1200px; margin:0 auto; padding:0 22px}
 header{position:sticky; top:0; z-index:10; background:color-mix(in srgb,var(--ink) 90%,transparent); backdrop-filter:blur(10px); border-bottom:1px solid var(--line)}
-.bar{display:flex; align-items:center; gap:22px; height:58px}
+.bar{display:flex; align-items:center; gap:22px; height:66px}
 .brand{display:flex; align-items:center; gap:10px; font-family:"Archivo",sans-serif; font-weight:800; letter-spacing:-.02em; font-size:20px; cursor:pointer}
 .brand .dot{width:11px;height:11px;border-radius:50%;background:var(--accent); box-shadow:0 0 0 4px color-mix(in srgb,var(--accent) 22%,transparent)}
 .brand b{color:var(--text)} .brand span{color:var(--faint); font-weight:600}
@@ -32,12 +32,12 @@ nav{display:flex; gap:4px; margin-left:6px; flex-wrap:wrap}
 nav a{color:var(--muted); text-decoration:none; font-weight:500; font-size:14px; padding:7px 12px; border-radius:8px; cursor:pointer}
 nav a:hover{color:var(--text); background:var(--surface-2)} nav a.on{color:var(--accent); background:var(--accent-soft)}
 .tag{margin-left:auto; font-size:11px; font-weight:600; letter-spacing:.08em; text-transform:uppercase; color:var(--faint); white-space:nowrap}
-.logo{flex:0 0 auto; display:flex; flex-direction:column; align-items:center; gap:1px; color:var(--text); cursor:pointer; margin-left:16px; line-height:1; text-decoration:none; transition:color .15s}
-.logo .logomark{width:26px; height:26px; display:block}
-.logo .logotype{font-family:"Archivo",sans-serif; font-weight:800; font-size:12.5px; letter-spacing:-.01em}
-.logo .logosub{font-family:"Archivo",sans-serif; font-weight:600; font-size:6px; letter-spacing:.16em; text-transform:uppercase; color:var(--faint)}
+.logo{flex:0 0 auto; display:flex; flex-direction:column; align-items:center; gap:2px; color:var(--text); cursor:pointer; line-height:1; text-decoration:none; transition:color .15s}
+.logo .logomark{width:33px; height:33px; display:block}
+.logo .logotype{font-family:"Archivo",sans-serif; font-weight:800; font-size:15px; letter-spacing:-.01em}
+.logo .logosub{font-family:"Archivo",sans-serif; font-weight:600; font-size:7px; letter-spacing:.15em; text-transform:uppercase; color:var(--faint)}
 .logo:hover{color:var(--accent)}
-@media (max-width:640px){ .logo{margin-left:auto} .logo .logotype,.logo .logosub{display:none} }
+@media (max-width:640px){ .logo .logosub{display:none} }
 .pulse{display:flex; gap:10px; flex-wrap:wrap; padding:18px 0 4px}
 .chip{flex:1 1 150px; background:var(--surface); border:1px solid var(--line); border-radius:12px; padding:11px 14px; box-shadow:var(--shadow)}
 .chip .k{display:flex; align-items:center; gap:7px; font-size:11px; letter-spacing:.06em; text-transform:uppercase; color:var(--faint); font-weight:600}
@@ -321,7 +321,14 @@ th.thelp:hover{color:var(--text)} th.thelp:hover .thi{border-color:var(--accent)
 </head>
 <body>
 <header><div class="wrap bar">
-  <div class="brand" data-tab="overview"><span class="dot"></span><b>OptionIntel</b><span>.app</span></div>
+  <a class="logo" data-tab="overview" aria-label="OptionIntel — Wheel Strategy Signals — home">
+    <svg class="logomark" viewBox="0 0 100 100" aria-hidden="true">
+      <circle cx="50" cy="50" r="45" fill="none" stroke="currentColor" stroke-width="5"/>
+      <polyline points="27,74 43,37 54,57 66,29 81,74" fill="none" stroke="currentColor" stroke-width="7" stroke-linejoin="miter" stroke-linecap="butt"/>
+    </svg>
+    <span class="logotype">OptionIntel</span>
+    <span class="logosub">Wheel Strategy Signals</span>
+  </a>
   <nav id="nav">
     <a data-tab="overview" class="on">Overview</a>
     <a data-tab="market">Market</a>
@@ -332,14 +339,6 @@ th.thelp:hover{color:var(--text)} th.thelp:hover .thi{border-color:var(--accent)
     <a data-tab="rules">Rules</a>
   </nav>
   <span class="tag" id="upd">loading…</span>
-  <a class="logo" data-tab="overview" aria-label="OptionIntel — Wheel Strategy Signals — home">
-    <svg class="logomark" viewBox="0 0 100 100" aria-hidden="true">
-      <circle cx="50" cy="50" r="45" fill="none" stroke="currentColor" stroke-width="5"/>
-      <polyline points="27,74 43,37 54,57 66,29 81,74" fill="none" stroke="currentColor" stroke-width="7" stroke-linejoin="miter" stroke-linecap="butt"/>
-    </svg>
-    <span class="logotype">OptionIntel</span>
-    <span class="logosub">Wheel Strategy Signals</span>
-  </a>
 </div></header>
 
 <main class="wrap">
