@@ -4983,7 +4983,7 @@
     "three_month": 3.7,
     "curve": "flat",
     "fed_funds": 3.63,
-    "skew": 145.64,
+    "skew": 143.27,
     "vix9d": 13.45
   },
   "pulse": [
@@ -5281,8 +5281,8 @@
     },
     {
       "label": "DXY",
-      "price": 98.90599822998047,
-      "pct": -0.09495128284801035,
+      "price": 98.91600036621094,
+      "pct": -0.08484811493845168,
       "prefix": "",
       "is_yield": false,
       "hist": [
@@ -5349,13 +5349,13 @@
         98.9,
         98.8,
         99.0,
-        98.91
+        98.92
       ]
     },
     {
       "label": "Crude Oil",
-      "price": 80.9000015258789,
-      "pct": -4.834725922915739,
+      "price": 81.11000061035156,
+      "pct": -4.587697244883094,
       "prefix": "$",
       "is_yield": false,
       "hist": [
@@ -5422,13 +5422,13 @@
         87.83,
         87.06,
         85.01,
-        80.89
+        81.11
       ]
     },
     {
       "label": "Gold",
-      "price": 4718.39990234375,
-      "pct": 1.6721276702750476,
+      "price": 4715.89990234375,
+      "pct": 1.6182576455979536,
       "prefix": "$",
       "is_yield": false,
       "hist": [
@@ -5495,13 +5495,13 @@
         4516,
         4624,
         4641,
-        4718
+        4716
       ]
     },
     {
       "label": "Bitcoin",
-      "price": 78232.8125,
-      "pct": -0.9265834897690395,
+      "price": 78459.90625,
+      "pct": -0.6389937564890258,
       "prefix": "$",
       "is_yield": false,
       "hist": [
@@ -5594,7 +5594,7 @@
         77083,
         77755,
         78964,
-        78233
+        78460
       ]
     },
     {
@@ -5814,8 +5814,8 @@
     {
       "label": "Digital Assets",
       "ticker": "BTC",
-      "pct": -0.9265834897690395,
-      "price": 78232.8125
+      "pct": -0.6389937564890258,
+      "price": 78459.90625
     }
   ],
   "fundamentals": {
@@ -5898,6 +5898,18 @@
           "when": "Aug 25"
         },
         {
+          "title": "Tesla\u2019s Cybertruck Base Version Hits $74,990 \u2014 Nearly 2X Its 2019 Promised Price",
+          "publisher": "Stocktwits",
+          "link": "https://stocktwits.com/news-articles/markets/equity/tesla-s-cybertruck-base-version-hits-74-990-nearly-2-x-its-2019-promised-price/cZYkCspRJoL",
+          "when": "Aug 25"
+        },
+        {
+          "title": "The Real Engine That Could Power Tesla Stock Higher",
+          "publisher": "Trefis",
+          "link": "https://www.trefis.com/articles/612780/the-real-engine-that-could-power-tesla-stock-higher/2026-08-25",
+          "when": "Aug 25"
+        },
+        {
           "title": "Nevada Just Raised Tesla's Las Vegas Robotaxi Cap From 10 Vehicles to 5,000",
           "publisher": "Motley Fool",
           "link": "https://www.fool.com/investing/2026/08/25/nevada-just-raised-tesla-s-las-vegas-robotaxi-cap-from-10-vehicles-to-5-000/",
@@ -5907,18 +5919,6 @@
           "title": "Tesla Rises as 2.98 Million-Car Recall Tests China",
           "publisher": "GuruFocus.com",
           "link": "https://finance.yahoo.com/markets/stocks/articles/tesla-rises-2-98-million-194544517.html",
-          "when": "Aug 25"
-        },
-        {
-          "title": "Google\u2019s Wins Make Founders Brin And Page $50 Billion Richer",
-          "publisher": "24/7 Wall St.",
-          "link": "https://247wallst.com/investing/2026/08/25/googles-wins-make-founders-brin-and-page-50-billion-richer/",
-          "when": "Aug 25"
-        },
-        {
-          "title": "Cathie Wood Keeps Buying SpaceX Stock. Here's Why I Wouldn't Buy It Above a $1.8 Trillion Valuation.",
-          "publisher": "Motley Fool",
-          "link": "https://www.fool.com/investing/2026/08/25/cathie-wood-keeps-buying-spacex-on-the-way-down-is/",
           "when": "Aug 25"
         }
       ]
@@ -6126,15 +6126,15 @@
           "when": "Aug 25"
         },
         {
-          "title": "Dow Jones Futures: Stocks Rise Cautiously Into Fed Inflation Data, Nvidia Earnings; Robinhood In Buy Area",
-          "publisher": "Investor's Business Daily",
-          "link": "https://www.investors.com/market-trend/stock-market-today/dow-jones-futures-fed-inflation-data-nvidia-earning-srobinhood-oil-prices-yields/?src=A00220&yptr=yahoo",
-          "when": "Aug 25"
+          "title": "Nvidia's valuation looks surprisingly cheap heading into earnings. Could it be an issue for the stock?",
+          "publisher": "Yahoo Finance",
+          "link": "https://finance.yahoo.com/markets/stocks/article/nvidias-valuation-looks-surprisingly-cheap-heading-into-earnings-could-it-be-an-issue-for-the-stock-191738544.html",
+          "when": "Aug 24"
         },
         {
-          "title": "Cathie Wood's Biggest Buy Last Week Was SpaceX. She Sold Almost Exactly That Much Palantir the Same Day.",
+          "title": "Prediction: This Memory Stock Will Soar 165% in 3 Years (Hint: It's not Micron or Sandisk)",
           "publisher": "Motley Fool",
-          "link": "https://www.fool.com/investing/2026/08/25/cathie-wood-s-biggest-buy-last-week-was-spacex-she-sold-almost-exactly-that-much-palantir-the-same-day/",
+          "link": "https://www.fool.com/investing/2026/08/25/prediction-this-memory-stock-will-soar-165-in-3-years-hint-it-s-not-micron-or-sandisk/",
           "when": "Aug 25"
         }
       ]
@@ -6209,6 +6209,18 @@
           "when": "Aug 25"
         },
         {
+          "title": "Amazon (AMZN) Stock Still Looks Undervalued On Cash Flow And Earnings",
+          "publisher": "Simply Wall St.",
+          "link": "https://finance.yahoo.com/markets/stocks/articles/amazon-amzn-stock-still-looks-210712633.html",
+          "when": "Aug 25"
+        },
+        {
+          "title": "Zoom Reports Solid Earnings. The Stock Drops Anyway.",
+          "publisher": "Barrons.com",
+          "link": "https://www.barrons.com/articles/zoom-earnings-stock-price-ac38a544?siteid=yhoof2&yptr=yahoo",
+          "when": "Aug 25"
+        },
+        {
           "title": "The Questions That Defined WMT's Earnings Call",
           "publisher": "Trefis",
           "link": "https://www.trefis.com/articles/612812/the-questions-that-defined-wmts-earnings-call/2026-08-25",
@@ -6218,18 +6230,6 @@
           "title": "FedEx, Stock Of The Day, Eyes Buy Point \u2014 And A High-Margin Pivot",
           "publisher": "Investor's Business Daily",
           "link": "https://www.investors.com/research/ibd-stock-of-the-day/fedex-stock-fdx-stock-buy-point-pivot-high-margin-businesses/?src=A00220&yptr=yahoo",
-          "when": "Aug 25"
-        },
-        {
-          "title": "Is Kohl's (KSS) DoorDash Push And Martha Stewart Tie-Up Reframing Its Retail Investment Story?",
-          "publisher": "Simply Wall St.",
-          "link": "https://finance.yahoo.com/markets/stocks/articles/kohls-kss-doordash-push-martha-201406341.html",
-          "when": "Aug 25"
-        },
-        {
-          "title": "S&P 100 Is Quietly Sending a Powerful Signal",
-          "publisher": "GuruFocus.com",
-          "link": "https://finance.yahoo.com/markets/stocks/articles/p-100-quietly-sending-powerful-195321128.html",
           "when": "Aug 25"
         }
       ]
@@ -6298,6 +6298,18 @@
           "when": "Aug 25"
         },
         {
+          "title": "Why Is IREN (IREN) Drawing Attention After Its AI Cloud Milestones?",
+          "publisher": "Simply Wall St.",
+          "link": "https://finance.yahoo.com/technology/ai/articles/why-iren-iren-drawing-attention-210642708.html",
+          "when": "Aug 25"
+        },
+        {
+          "title": "Did Starbucks' Limited-Time Drink Surge and New Fiber Bar Partnership Just Shift Its (SBUX) Turnaround Story?",
+          "publisher": "Simply Wall St.",
+          "link": "https://finance.yahoo.com/markets/stocks/articles/did-starbucks-limited-time-drink-210616230.html",
+          "when": "Aug 25"
+        },
+        {
           "title": "Reddit (RDDT) Stock Is Up, What You Need To Know",
           "publisher": "StockStory",
           "link": "https://finance.yahoo.com/markets/stocks/articles/reddit-rddt-stock-know-202244215.html",
@@ -6313,18 +6325,6 @@
           "title": "S&P 100 Is Quietly Sending a Powerful Signal",
           "publisher": "GuruFocus.com",
           "link": "https://finance.yahoo.com/markets/stocks/articles/p-100-quietly-sending-powerful-195321128.html",
-          "when": "Aug 25"
-        },
-        {
-          "title": "Microsoft Just Ripped 28% in a Month. What Would It Take to Get MSFT Stock Up to $600?",
-          "publisher": "24/7 Wall St.",
-          "link": "https://247wallst.com/investing/2026/08/25/microsoft-just-ripped-28-in-a-month-what-would-it-take-to-get-msft-stock-up-to-600/",
-          "when": "Aug 25"
-        },
-        {
-          "title": "Microsoft Stalls as $678 Billion Backlog Meets Falling Yields",
-          "publisher": "GuruFocus.com",
-          "link": "https://finance.yahoo.com/markets/stocks/articles/microsoft-stalls-678-billion-backlog-194052410.html",
           "when": "Aug 25"
         }
       ]
@@ -6894,6 +6894,12 @@
           "when": "Aug 25"
         },
         {
+          "title": "Palantir Stock Has Surged Over 40% in a Month. What\u2019s Fueling the Rally \u2014 and What Comes Next.",
+          "publisher": "Barchart",
+          "link": "https://www.barchart.com/story/news/4024825/palantir-stock-has-surged-over-40-in-a-month-whats-fueling-the-rally-and-what-comes-next",
+          "when": "Aug 25"
+        },
+        {
           "title": "The Real Question Behind Palantir Stock's High Price",
           "publisher": "Trefis",
           "link": "https://www.trefis.com/articles/612770/the-real-question-behind-palantir-stocks-high-price/2026-08-25",
@@ -6903,12 +6909,6 @@
           "title": "Gorilla Sinks 11% Despite Guiding 2027 Revenue Up to 29% Above Consensus, Evolv Technologies and Ambarella Tick Up",
           "publisher": "24/7 Wall St.",
           "link": "https://247wallst.com/investing/2026/08/25/gorilla-sinks-11-despite-guiding-2027-revenue-up-to-29-above-consensus-evolv-technologies-and-ambarella-tick-up/",
-          "when": "Aug 25"
-        },
-        {
-          "title": "Palantir highlighted as Zacks Bull and GoPro Bear of the Day",
-          "publisher": "Zacks",
-          "link": "https://finance.yahoo.com/markets/stocks/articles/palantir-highlighted-zacks-bull-gopro-125000763.html",
           "when": "Aug 25"
         }
       ]
@@ -7082,9 +7082,21 @@
           "when": "Aug 24"
         },
         {
+          "title": "New disclosure: Trump owns SpaceX, Disney shares \u2014 and is reaping profits from oil & gas stocks",
+          "publisher": "Yahoo Finance Video",
+          "link": "https://finance.yahoo.com/video/disclosure-trump-owns-spacex-disney-151222555.html",
+          "when": "Aug 25"
+        },
+        {
           "title": "Dell Stock's Massive Guidance Raise Has A Catch",
           "publisher": "Trefis",
           "link": "https://www.trefis.com/articles/612811/dell-stocks-massive-guidance-raise-has-a-catch/2026-08-25",
+          "when": "Aug 25"
+        },
+        {
+          "title": "Moderna, Nvidia, Apple, Dick\u2019s, Robinhood, AMD, and More Stocks That Explain Today\u2019s Market",
+          "publisher": "Barrons.com",
+          "link": "https://www.barrons.com/articles/stock-movers-5e855b81?siteid=yhoof2&yptr=yahoo",
           "when": "Aug 25"
         },
         {
@@ -7097,18 +7109,6 @@
           "title": "S&P 100 Is Quietly Sending a Powerful Signal",
           "publisher": "GuruFocus.com",
           "link": "https://finance.yahoo.com/markets/stocks/articles/p-100-quietly-sending-powerful-195321128.html",
-          "when": "Aug 25"
-        },
-        {
-          "title": "Google\u2019s Wins Make Founders Brin And Page $50 Billion Richer",
-          "publisher": "24/7 Wall St.",
-          "link": "https://247wallst.com/investing/2026/08/25/googles-wins-make-founders-brin-and-page-50-billion-richer/",
-          "when": "Aug 25"
-        },
-        {
-          "title": "Clark Howard Warned Apple Traps You in Forever Leases and Now Three New Macs Just Landed",
-          "publisher": "24/7 Wall St.",
-          "link": "https://247wallst.com/personal-finance/2026/08/25/clark-howard-warned-apple-traps-you-in-forever-leases-and-now-three-new-macs-just-landed/",
           "when": "Aug 25"
         }
       ]
@@ -7177,6 +7177,12 @@
           "when": "Aug 23"
         },
         {
+          "title": "Zoom Reports Solid Earnings. The Stock Drops Anyway.",
+          "publisher": "Barrons.com",
+          "link": "https://www.barrons.com/articles/zoom-earnings-stock-price-ac38a544?siteid=yhoof2&yptr=yahoo",
+          "when": "Aug 25"
+        },
+        {
           "title": "Why Rezolve AI Stock Rocketed Higher Today",
           "publisher": "Motley Fool",
           "link": "https://www.fool.com/investing/2026/08/25/why-rezolve-ai-stock-rocketed-higher-today/",
@@ -7198,12 +7204,6 @@
           "title": "Google's Gemini Push Just Got Much Bigger",
           "publisher": "GuruFocus.com",
           "link": "https://finance.yahoo.com/technology/ai/articles/googles-gemini-push-just-got-195646133.html",
-          "when": "Aug 25"
-        },
-        {
-          "title": "S&P 100 Is Quietly Sending a Powerful Signal",
-          "publisher": "GuruFocus.com",
-          "link": "https://finance.yahoo.com/markets/stocks/articles/p-100-quietly-sending-powerful-195321128.html",
           "when": "Aug 25"
         }
       ]
@@ -7283,6 +7283,12 @@
           "when": "Aug 25"
         },
         {
+          "title": "Moderna, Nvidia, Apple, Dick\u2019s, Robinhood, AMD, and More Stocks That Explain Today\u2019s Market",
+          "publisher": "Barrons.com",
+          "link": "https://www.barrons.com/articles/stock-movers-5e855b81?siteid=yhoof2&yptr=yahoo",
+          "when": "Aug 25"
+        },
+        {
           "title": "AMD Just Got a Major AI Vote of Confidence",
           "publisher": "GuruFocus.com",
           "link": "https://finance.yahoo.com/technology/ai/articles/amd-just-got-major-ai-195827847.html",
@@ -7298,12 +7304,6 @@
           "title": "AMD May Have Found Its Next Big AI Growth Engine",
           "publisher": "GuruFocus.com",
           "link": "https://finance.yahoo.com/technology/ai/articles/amd-may-found-next-big-193300082.html",
-          "when": "Aug 25"
-        },
-        {
-          "title": "AMD Jumps 3.9% as $641 Target Reprices Server CPUs",
-          "publisher": "GuruFocus.com",
-          "link": "https://finance.yahoo.com/technology/articles/amd-jumps-3-9-641-192702008.html",
           "when": "Aug 25"
         }
       ]
@@ -7480,12 +7480,6 @@
           "when": "Aug 25"
         },
         {
-          "title": "What's at stake for Paramount, the Ellisons in Warner Bros. takeover bid",
-          "publisher": "Yahoo Finance Video",
-          "link": "https://finance.yahoo.com/video/whats-stake-paramount-ellisons-warner-213000825.html",
-          "when": "Aug 24"
-        },
-        {
           "title": "Cathie Wood's Biggest Buy Last Week Was SpaceX. She Sold Almost Exactly That Much Palantir the Same Day.",
           "publisher": "Motley Fool",
           "link": "https://www.fool.com/investing/2026/08/25/cathie-wood-s-biggest-buy-last-week-was-spacex-she-sold-almost-exactly-that-much-palantir-the-same-day/",
@@ -7507,6 +7501,12 @@
           "title": "Sector Update: Tech Stocks Rise Late Afternoon",
           "publisher": "MT Newswires",
           "link": "https://finance.yahoo.com/technology/articles/sector-tech-stocks-rise-afternoon-194708780.html",
+          "when": "Aug 25"
+        },
+        {
+          "title": "Redditors Are Skeptical of SpaceX\u2019s Orbital Data Centers. Are They Right?",
+          "publisher": "Insider Monkey",
+          "link": "https://finance.yahoo.com/technology/ai/articles/redditors-skeptical-spacex-orbital-data-191140732.html",
           "when": "Aug 25"
         }
       ]
@@ -8136,6 +8136,12 @@
       ],
       "news": [
         {
+          "title": "Why Is IREN (IREN) Drawing Attention After Its AI Cloud Milestones?",
+          "publisher": "Simply Wall St.",
+          "link": "https://finance.yahoo.com/technology/ai/articles/why-iren-iren-drawing-attention-210642708.html",
+          "when": "Aug 25"
+        },
+        {
           "title": "Wall Street Just Invented the \u2018Neocloud\u2019 ETF. It Owns the Companies Renting AI Compute to Everyone Else",
           "publisher": "24/7 Wall St.",
           "link": "https://247wallst.com/investing/2026/08/25/wall-street-just-invented-the-neocloud-etf-it-owns-the-companies-renting-ai-compute-to-everyone-else/",
@@ -8163,12 +8169,6 @@
           "title": "CoreWeave\u2019s AI Data Center Capacity Is Exploding \u2014 Its $35 Billion Debt Load Still Makes the Stock Untouchable",
           "publisher": "24/7 Wall St.",
           "link": "https://247wallst.com/investing/2026/08/25/coreweaves-ai-data-center-capacity-is-exploding-its-35-billion-debt-load-still-makes-the-stock-untouchable/",
-          "when": "Aug 25"
-        },
-        {
-          "title": "NBIS Stock Gains Premarket: Neocloud Operator Raises $5.8B in Debt, Beating Initial Target; Investors Await IREN Report",
-          "publisher": "Stocktwits",
-          "link": "https://stocktwits.com/news-articles/markets/equity/nbis-stock-gains-premarket-neocloud-operator-raises-5-8-b-in-debt-beating-initial-target-investors-await-iren-report/cZYkKPeRJ8X",
           "when": "Aug 25"
         }
       ]
@@ -80030,7 +80030,7 @@
       }
     ]
   },
-  "generated_at": "2026-08-25T20:58:58+00:00",
+  "generated_at": "2026-08-25T21:31:29+00:00",
   "universe": {
     "wheel": 16,
     "growth": 15,
