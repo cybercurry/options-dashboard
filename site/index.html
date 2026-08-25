@@ -515,11 +515,9 @@ function sparkPopup(key){
     if(!C) return ''; title=C[0]; hist=C[1]; now=C[2]; dp=C[3]; }
   const head=`<div class="sptitle">${title} · <span class="dim">90-day trend</span></div>`;
   if(!hist||hist.length<2) return head+`<div class="spcap dim">Trend populates on the next scan.</div>`;
-  const first=hist[0], last=hist[hist.length-1], d=last-first;
-  const lo=Math.min(...hist), hi=Math.max(...hist);
-  const fmt=v=>v==null?'—':(+v).toFixed(dp)+suffix;
-  const arrow=d>0?'<span class="up">▲':d<0?'<span class="down">▼':'<span class="dim">•';
-  return head+miniChart(hist)+`<div class="spcap">Now <b>${fmt(now!=null?now:last)}</b> · range ${fmt(lo)}–${fmt(hi)} · ${arrow} ${fmt(Math.abs(d))}</span> over 90d</div>`;
+  const first=hist[0], last=hist[hist.length-1], pct=first?((last-first)/first*100):0;
+  const arrow=pct>0?'<span class="up">▲':pct<0?'<span class="down">▼':'<span class="dim">•';
+  return head+miniChart(hist)+`<div class="spcap">${arrow} ${Math.abs(pct).toFixed(1)}%</span> <span class="dim">over 90d</span></div>`;
 }
 
 fetch('data/signals.json',{cache:'no-store'}).then(r=>r.json()).then(J=>{
