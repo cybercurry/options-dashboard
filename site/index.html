@@ -241,6 +241,7 @@ td.l{text-align:left}
 .ltlight{font-size:12px; font-weight:700; white-space:nowrap; display:inline-flex; align-items:center; gap:5px}
 .lt-go{color:var(--good)} .lt-caution{color:var(--warn)} .lt-avoid{color:var(--bad)}
 .ltdot{width:9px; height:9px; border-radius:50%; display:inline-block; background:currentColor; box-shadow:0 0 0 3px color-mix(in srgb,currentColor 20%,transparent)}
+.kdot{width:8px; height:8px; border-radius:50%; display:inline-block; vertical-align:1px; margin-right:5px}
 .verdict{font-family:"Archivo",sans-serif; font-weight:800; font-size:13px; margin-bottom:9px; letter-spacing:.02em; display:flex; align-items:center; gap:7px}
 .verdict .vwhy{font-family:"IBM Plex Sans"; font-weight:500; font-size:12px; color:var(--muted)}
 .webfoot{text-align:center; font-size:11px; color:var(--faint); font-family:"IBM Plex Mono"; border-top:1px solid var(--line-soft); padding-top:9px; margin-top:2px}
@@ -418,7 +419,7 @@ th.thelp:hover{color:var(--text)} th.thelp:hover .thi{border-color:var(--accent)
 
     <div class="rules-sec">
       <h2>3 · Entry timing — the mean-reversion setup score</h2>
-      <p><b>Entry timing</b> = is now a good moment to sell? A turnaround off an extreme (in your favour) with premium richer than the stock's actual moves — not just the right side of the median. Points accrue; <b>🟢 FULL ≥10 · 🟡 PARTIAL ≥6 · 🟠 building ≥3 · 🔴 none</b>. Only ≥6 is listed as a suggestion.</p>
+      <p><b>Entry timing</b> = is now a good moment to sell? A turnaround off an extreme (in your favour) with premium richer than the stock's actual moves — not just the right side of the median. Points accrue (max ~14); the score then drives the traffic light in <b>§5</b> — <b>≥10 strong · 6–9 analyze · &lt;10 too thin</b>.</p>
       <table class="rtable"><thead><tr><th>CSP (fade a bottom)</th><th>CC (fade a top)</th></tr></thead><tbody>
         <tr><td>Dropped to lower band then bounced (3-session)</td><td>Spiked to upper band then rolled over (3-session)</td></tr>
         <tr><td>RSI dipped &lt;30 and turned up (5-session)</td><td>RSI ran &gt;70 and turned down (5-session)</td></tr>
@@ -439,6 +440,23 @@ th.thelp:hover{color:var(--text)} th.thelp:hover .thi{border-color:var(--accent)
         <tr><td><b>Clear uptrend</b></td><td class="mono">price &gt; 50-MA · price &gt; 200-MA · 50-MA &gt; 200-MA</td></tr>
       </tbody></table>
       <p class="rnote">Entry timing (the mean-reversion setup) is <b>informational only</b> on a LEAP — it is not a gate. A LEAP qualifies on <b>Gate A + Gate C + a clear uptrend</b>; RSI-rising is shown as extra colour, not a pass/fail.</p>
+    </div>
+
+    <div class="rules-sec">
+      <h2>5 · The traffic light — how it all rolls up</h2>
+      <p>Every suggestion carries <b>one colour</b> — a scorecard rollup of the rules above, not a single gate. It's information for your own decision, <b>not a command</b>: amber means <b>analyze</b>.</p>
+      <table class="rtable"><thead><tr><th>Light</th><th>CSP / CC</th><th>LEAP</th></tr></thead><tbody>
+        <tr><td><span class="ltlight lt-go"><span class="ltdot"></span>STRONG</span></td>
+            <td>every gate passes (§1 + §2) <b>and</b> setup score ≥ 10 (§3)</td>
+            <td>qualifies (§4) <b>and</b> entry-timing score ≥ 7</td></tr>
+        <tr><td><span class="ltlight lt-caution"><span class="ltdot"></span>ANALYZE</span></td>
+            <td>gates pass but the setup is partial (score 6–9) — your call</td>
+            <td>qualifies, but entry timing is partial — your call</td></tr>
+        <tr><td><span class="ltlight lt-avoid"><span class="ltdot"></span>WEAK</span></td>
+            <td>a gate fails (§1/§2) <b>or</b> no edge yet (score &lt; 10)</td>
+            <td>fails Gate A, Gate C, or the trend (§4)</td></tr>
+      </tbody></table>
+      <p class="rnote">A hard veto — earnings within 7 days, the wrong side of the median, or no liquidity — reads <b>BLOCKED</b> (red) however good the timing. The light never contradicts the scorecard behind it: every gate in a tile's hover is exactly what the colour rolls up. Timing never reds a LEAP (it's informational there).</p>
     </div>
 
     <div class="rules-sec">
@@ -505,6 +523,9 @@ function lightBadge(v,blocked){ const m=VMETA[v]||VMETA.avoid;
   const t=(v==='avoid'&&blocked)?'BLOCKED':m.t;
   return `<span class="ltlight ${m.c}"><span class="ltdot"></span>${t}</span>`; }
 function lightDot(v){ const m=VMETA[v]; return v?`<span class="ltlight ${m.c}"><span class="ltdot"></span>${m.t}</span>`:'<span class="dim">—</span>'; }
+// token-coloured legend bullet — same --good/--warn/--bad as every other light (no emoji, which
+// would render a different fixed yellow/green/red than the CSS traffic light).
+function kdot(tone){ return `<span class="kdot" style="background:var(--${tone})"></span>`; }
 // Watchlist cell: prefer the engine verdict on the row, else compute from the per-leg signal in
 // BYTK (so the light shows immediately, pre-scan), else fall back to the old timing label.
 function wlLight(o,key){
@@ -1007,9 +1028,9 @@ function legTile(s){const k=s.strategy.toLowerCase();
   const nodes=legScorecard(s);
   const foot=`Exp ${s.expiry} · DTE ${s.dte} · POP ${num(s.pop,0,'%')} · OI ${s.oi} · spr ${num(s.spread_pct,0,'%')}`;
   const key=[
-    '🟢 STRONG — all gates pass + full setup',
-    '🟡 ANALYZE — valid, partial setup · your call',
-    '🔴 WEAK / BLOCKED — a gate fails or no edge yet',
+    kdot('good')+'STRONG — all gates pass + full setup',
+    kdot('warn')+'ANALYZE — valid, partial setup · your call',
+    kdot('bad')+'WEAK / BLOCKED — a gate fails or no edge yet',
     'median = '+(k==='cc'?'ABOVE':'BELOW')+' midline',
     'timing = mean-reversion setup score (0–14)',
   ].map(l=>`<div>${l}</div>`).join('');
@@ -1049,11 +1070,9 @@ function leapTile(l){
   const ma=`${l.above_50ma?'✓':'✗'}>50MA · ${l.above_200ma?'✓':'✗'}>200MA · ${l.ma_aligned?'✓':'✗'}50>200`;
   const foot=`Exp ${l.expiry} · DTE ${l.dte} · cost $${l.cost} · ext $${num(l.extrinsic,0)} · ${ma}`;
   const key=[
-    '🟢 STRONG — qualifies + well-timed',
-    '🟡 ANALYZE — qualifies, timing partial · your call',
-    '🔴 WEAK — fails Gate A / Gate C / uptrend',
-    'Time value = premium − intrinsic (Gate A ≤40%)',
-    'Carry = time-value cost / yr (Gate C ≤8%/yr)',
+    kdot('good')+'STRONG — qualifies + well-timed',
+    kdot('warn')+'ANALYZE — qualifies, timing partial · your call',
+    kdot('bad')+'WEAK — fails Gate A / Gate C / uptrend',
     'timing is informational — it never reds a LEAP',
   ].map(l=>`<div>${l}</div>`).join('');
   const verdictLine=`<div class="verdict ${VMETA[v].c}"><span class="ltdot"></span>${VMETA[v].t}</div>`;
