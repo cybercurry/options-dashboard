@@ -421,7 +421,7 @@ footer b{color:var(--muted); font-weight:600}
       <h2>Data inputs — open by design</h2>
       <div class="src">
         <span><b>Tradier</b> — option chains, vendor greeks (Δ/IV), daily price history</span>
-        <span><b>FRED</b> — 2Y / 10Y Treasury, Fed funds</span>
+        <span><b>FRED</b> — 2Y / 10Y / 30Y Treasury, Fed funds</span>
         <span><b>CNN</b> — stock Fear &amp; Greed</span>
         <span><b>alternative.me</b> — crypto Fear &amp; Greed</span>
         <span><b>Yahoo</b> — VIX, sector, earnings date</span>
@@ -545,6 +545,7 @@ function renderMarket(){
     mtile('Fed funds',ms.fed!=null?ms.fed.toFixed(2)+'%':'—','effective',"The Fed's policy rate — the floor under all other rates. Hiking = tightening (headwind for stocks, vol up); cutting = easing."),
     mtile('2Y Treasury',ycMap['2Y']!=null?ycMap['2Y'].toFixed(2)+'%':'—','short end',"Tracks where the market expects the Fed to be in ~2 years."),
     mtile('10Y Treasury',ycMap['10Y']!=null?ycMap['10Y'].toFixed(2)+'%':'—','benchmark',"The benchmark long rate — growth & inflation expectations, and the discount rate equities are valued against. A rising 10Y pressures high-multiple stocks."),
+    mtile('30Y Treasury',ycMap['30Y']!=null?ycMap['30Y'].toFixed(2)+'%':'—','long end',"The long bond — 30-year borrowing cost. Driven more by long-run inflation and term premium than by Fed policy. When the 30Y sells off faster than the short end (a 'bear steepener'), the market is demanding more to hold duration — usually on fiscal or inflation worries."),
     mtile('2s10s spread',spread!=null?((spread>=0?'+':'')+spread+' bps'):'—',sRead,"10-year minus 2-year yield. Positive/steep = normal growth expectations. NEGATIVE = inverted — the bond market pricing rate cuts / recession, historically leading downturns by 6–18 months, with vol spikes tending to follow.")
   ].join('');
   const val=[
