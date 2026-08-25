@@ -789,8 +789,7 @@ function renderOverview(){
   const m=DATA.market||{};
   document.getElementById('ov-pulse').innerHTML=(DATA.pulse||[]).map((p,i)=>{
     const up=p.pct==null?'':(p.pct>=0?'up':'down');
-    const spk=(p.hist&&p.hist.length>1)?` spk" data-spark="px:${i}" tabindex="0`:'';
-    return `<div class="ptile${spk}"><div class="pl">${p.label}</div><div class="pv mono">${fmtPrice(p.price,p.prefix,p.is_yield)}</div>
+    return `<div class="ptile spk" data-spark="px:${i}" tabindex="0"><div class="pl">${p.label}</div><div class="pv mono">${fmtPrice(p.price,p.prefix,p.is_yield)}</div>
       <div class="pc mono ${up}">${p.pct==null?'—':(p.pct>=0?'+':'')+p.pct.toFixed(2)+'%'}</div></div>`;}).join('');
   document.getElementById('ov-gauges').innerHTML=
     gauge('Stocks Fear &amp; Greed',m.fng,m.fng_label,'CNN','fng')+
