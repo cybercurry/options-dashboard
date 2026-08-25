@@ -207,9 +207,20 @@ def fetch_market_stats():
         pass
     try:
         import yfinance as yf
-        info = yf.Ticker("SPY").info or {}
-        ms["pe_trailing"] = info.get("trailingPE")
-        ms["pe_forward"] = info.get("forwardPE")
+        # Yahoo drops trailingPE/forwardPE for an S&P ETF intermittently (esp. forwardPE),
+        # so walk the big S&P trackers until both are filled — one usually carries the field
+        # when another doesn't. Same source, just more reliable.
+        for _sym in ("SPY", "IVV", "VOO"):
+            if ms.get("pe_trailing") is not None and ms.get("pe_forward") is not None:
+                break
+            try:
+                info = yf.Ticker(_sym).info or {}
+            except Exception:
+                continue
+            if ms.get("pe_trailing") is None and info.get("trailingPE") is not None:
+                ms["pe_trailing"] = info.get("trailingPE")
+            if ms.get("pe_forward") is None and info.get("forwardPE") is not None:
+                ms["pe_forward"] = info.get("forwardPE")
     except Exception:
         pass
     vh = _yf_hist("^VIX", "1y")
