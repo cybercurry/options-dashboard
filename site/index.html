@@ -146,7 +146,12 @@ nav a:hover{color:var(--text); background:var(--surface-2)} nav a.on{color:var(-
 .baxis{display:flex; gap:6px; min-width:min-content; margin-top:6px}
 .baxis .btk{flex:1 0 26px; text-align:center; font-size:12.5px; font-weight:600; color:var(--text); font-family:"IBM Plex Mono"; writing-mode:vertical-rl; transform:rotate(180deg); white-space:nowrap; height:46px; margin:0 auto}
 .tablewrap{overflow-x:auto; border:1px solid var(--line); border-radius:14px; box-shadow:var(--shadow); margin-top:14px; background:var(--surface)}
-table{width:100%; border-collapse:collapse; min-width:760px}
+/* grid/flex items must be allowed to shrink below content (min-width:auto) so their inner
+   overflow-x:auto scroll containers work instead of blowing the page wide on mobile. */
+.twocol>div, .barbox, .ch2>div{min-width:0}
+#deep-chips, #fund-chips{display:flex; flex-wrap:wrap; gap:7px; min-width:0}
+table{width:100%; border-collapse:collapse}
+.tablewrap table{min-width:760px}   /* only scrollable tables are forced wide; popups/regime/rules stay fluid */
 thead th{position:sticky; top:0; text-align:right; font-size:11px; letter-spacing:.05em; text-transform:uppercase; color:var(--faint); font-weight:600; padding:12px 14px; background:var(--surface-2); border-bottom:1px solid var(--line); white-space:nowrap}
 thead th.l{text-align:left} thead th.sortable{cursor:pointer; user-select:none} thead th.sortable:hover{color:var(--text)} thead th .ar{opacity:.5; font-size:9px}
 tbody td{text-align:right; padding:12px 14px; border-bottom:1px solid var(--line-soft); white-space:nowrap; vertical-align:middle}
@@ -282,7 +287,7 @@ td.l{text-align:left}
 .ycpts{display:flex; justify-content:space-between; margin-top:8px}
 .ycpt{display:flex; flex-direction:column; align-items:center; gap:1px; font-size:13px} .ycpt span:first-child{font-weight:700} .ycpt span:last-child{color:var(--faint)}
 .ycpt.key span:first-child{color:var(--accent)} .ycpt.key span:last-child{color:var(--muted); font-weight:600}
-.regime{width:100%; border-collapse:collapse; font-size:13px; margin-top:12px; border:1px solid var(--line); border-radius:12px; overflow:hidden}
+.regime{width:100%; border-collapse:collapse; font-size:13px}
 .regime th{background:var(--surface-2); color:var(--muted); text-align:left; padding:9px 12px; font-size:11px; text-transform:uppercase; letter-spacing:.04em}
 .regime td{padding:8px 12px; border-top:1px solid var(--line-soft); color:var(--muted)} .regime td:first-child,.regime td:nth-child(2){color:var(--text)}
 .regime tr.reg-good td{background:color-mix(in srgb,var(--good) 9%,transparent)}
@@ -316,6 +321,13 @@ th.thelp:hover{color:var(--text)} th.thelp:hover .thi{border-color:var(--accent)
 .floatip .spcap{font-size:12px; color:var(--muted); margin-top:2px} .floatip .spcap b{color:var(--text); font-family:"IBM Plex Mono"}
 [hidden]{display:none!important}
 @media (max-width:640px){ .tag{display:none} }
+/* mobile header: let the bar grow and give the nav its own full-width row below the logo,
+   instead of the nav wrapping up into the logo inside a fixed-height bar. */
+@media (max-width:760px){
+  .bar{height:auto; min-height:60px; flex-wrap:wrap; padding:8px 0; gap:6px 16px}
+  #nav{order:3; width:100%; margin-left:0}
+  .tag{order:2}
+}
 @media (prefers-reduced-motion:reduce){ *{transition:none!important} }
 </style>
 </head>
@@ -746,9 +758,9 @@ function renderMarket(){
     ['15–20','Normal','Decent','Moderate','OK',''],
     ['20–30','Elevated','Expensive — selective','Rich','Rich','warn'],
     ['&gt;30','Fear','Very expensive — wait','Maximum','High risk','bad']];
-  const regime=vixLead+`<table class="regime"><thead><tr><th>VIX</th><th>Regime</th><th>LEAP</th><th>CC</th><th>CSP</th></tr></thead><tbody>`
+  const regime=vixLead+`<div class="tablewrap"><table class="regime"><thead><tr><th>VIX</th><th>Regime</th><th>LEAP</th><th>CC</th><th>CSP</th></tr></thead><tbody>`
     +rrows.map(r=>`<tr class="${r[5]?'reg-'+r[5]:''}${r[1]===vzone?' reg-on':''}"><td class="mono">${r[0]}</td><td>${r[1]}</td><td>${r[2]}</td><td>${r[3]}</td><td>${r[4]}</td></tr>`).join('')
-    +`</tbody></table>`;
+    +`</tbody></table></div>`;
   host.innerHTML=`
     ${msec('rates','Rates &amp; the Yield Curve')}<div class="mrow">${rates}</div>${yieldCurveSvg(yc,spread!=null&&spread<0)}
     ${msec('val',"Valuation &amp; the Seller's Edge")}<div class="mrow">${val}</div>
