@@ -556,6 +556,8 @@ function legScorecard(s){
   if(tn){ tn.l = ts!=null?('Timing '+ts+'/12'):'Timing'; tn.s = ts==null?'warn':(ts>=8?'ok':ts>=4?'warn':'no'); }
   const mn=nodes.find(n=>/^median/i.test(n.l));
   if(mn) mn.l = s.strategy==='CC'?'above mid':'below mid';   // CSP wants below, CC wants above
+  const sp=nodes.find(n=>/^spr/i.test(n.l));
+  if(sp) sp.l = sp.l.replace(/^spr/i,'bid/ask');             // clearer than "spr"
   return nodes;
 }
 function lightBadge(v,blocked){ const m=VMETA[v]||VMETA.avoid;
@@ -1057,7 +1059,7 @@ function legTile(s){const k=s.strategy.toLowerCase();
   // The scorecard the LIGHT rolls up from — every node here drives the verdict (weakest-link),
   // so the popup can never contradict the header. Falls back to timing-reasons for legacy data.
   const nodes=legScorecard(s);
-  const foot=`Exp ${s.expiry} · DTE ${s.dte} · POP ${num(s.pop,0,'%')} · OI ${s.oi} · spr ${num(s.spread_pct,0,'%')}`;
+  const foot=`Exp ${s.expiry} · DTE ${s.dte} · POP ${num(s.pop,0,'%')} · OI ${s.oi} · bid/ask ${num(s.spread_pct,0,'%')}`;
   const key=[
     kdot('good')+'STRONG — all gates pass + full setup',
     kdot('warn')+'ANALYZE — valid, partial setup · your call',
