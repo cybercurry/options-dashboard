@@ -158,6 +158,15 @@ tbody td{text-align:right; padding:12px 14px; border-bottom:1px solid var(--line
 tbody tr.clk{cursor:pointer} tbody tr:last-child td{border-bottom:0} tbody tr:hover{background:var(--surface-2)} tbody tr.sel{background:var(--accent-soft)}
 td.l{text-align:left}
 .tk{font-family:"Archivo",sans-serif; font-weight:700; font-size:15px}
+/* Phase-0 personal watchlist — star + filter, saved per browser (localStorage) */
+.wlseg{display:inline-flex; border:1px solid var(--line); border-radius:9px; overflow:hidden; margin:2px 0 10px}
+.wlseg button{background:var(--surface); color:var(--muted); border:0; padding:6px 14px; font-family:inherit; font-size:13px; font-weight:600; cursor:pointer}
+.wlseg button+button{border-left:1px solid var(--line)}
+.wlseg button.on{background:var(--accent-soft); color:var(--accent)}
+.wlseg .c{font-family:"IBM Plex Mono"; font-size:11.5px; opacity:.85; margin-left:5px}
+.star{cursor:pointer; color:var(--faint); font-size:16px; line-height:1; user-select:none; transition:color .12s}
+.star.on,.star:hover{color:var(--accent)}
+td.star-c,th.star-c{width:1%; text-align:center; padding-left:12px; padding-right:2px}
 .pill{display:inline-block; font-size:11px; font-weight:700; letter-spacing:.03em; padding:3px 9px; border-radius:999px; color:#fff}
 .p-csp{background:var(--csp)} .p-cc{background:var(--cc)} .p-leap{background:var(--leap)}
 .trade{font-family:"IBM Plex Mono"; font-weight:600; font-size:14px} .t-csp{color:var(--csp)} .t-cc{color:var(--cc)} .t-leap{color:var(--leap)}
@@ -941,10 +950,27 @@ function renderOverview(){
   barChart('ov-ivbar', ivData,'%',ivColor,ivMax,IV_LINES);
   barChart('ov-rsibar', ov.filter(o=>o.rsi!=null).map(o=>({t:o.ticker,v:o.rsi})),'',rsiColor,115,RSI_LINES);
 }
+/* ---- Phase-0 personal watchlist: pick from the scanned universe, saved per browser.
+   No login, no backend — Phase 1 later wires this same UI to an account. ---- */
+const WL_KEY='oi_mywatch';
+let MYWL=(function(){ try{const j=JSON.parse(localStorage.getItem(WL_KEY)||'{}');
+  return {picks:new Set(Array.isArray(j.picks)?j.picks:[]), view:(j.view==='mine'?'mine':'all')};}
+  catch(e){ return {picks:new Set(), view:'all'}; } })();
+function wlSave(){ try{localStorage.setItem(WL_KEY, JSON.stringify({picks:[...MYWL.picks], view:MYWL.view}));}catch(e){} }
+function wlToggle(tk){ MYWL.picks.has(tk)?MYWL.picks.delete(tk):MYWL.picks.add(tk); wlSave(); renderWatchTable(); }
+function wlView(v){ MYWL.view=v; wlSave(); renderWatchTable(); }
+
 function renderWatchTable(){
-  const ov=(DATA.overview||[]).slice().sort((a,b)=>a.ticker<b.ticker?-1:1);
-  document.getElementById('ov-count').textContent=ov.length+' names';
+  const all=(DATA.overview||[]).slice().sort((a,b)=>a.ticker<b.ticker?-1:1);
+  const mine=MYWL.view==='mine';
+  const ov = mine ? all.filter(o=>MYWL.picks.has(o.ticker)) : all;
+  document.getElementById('ov-count').textContent = mine ? (ov.length+' starred') : (all.length+' names');
+  const seg=`<div class="wlseg">
+    <button class="${mine?'':'on'}" data-v="all">All <span class="c mono">${all.length}</span></button>
+    <button class="${mine?'on':''}" data-v="mine">★ My list <span class="c mono">${MYWL.picks.size}</span></button></div>`;
+  const star=tk=>`<span class="star${MYWL.picks.has(tk)?' on':''}" data-star="${tk}" role="button" tabindex="0" aria-label="star ${tk}">${MYWL.picks.has(tk)?'★':'☆'}</span>`;
   const rows=ov.map(o=>`<tr class="clk" data-tk="${o.ticker}">
+    <td class="l star-c">${star(o.ticker)}</td>
     <td class="l"><span class="tk">${o.ticker}</span></td>
     <td class="mono">${o.price==null?'—':'$'+o.price.toFixed(2)}</td>
     <td class="mono ${o.pct==null?'':o.pct>=0?'up':'down'}">${o.pct==null?'—':(o.pct>=0?'+':'')+o.pct.toFixed(1)+'%'}</td>
@@ -956,18 +982,26 @@ function renderWatchTable(){
     <td>${o.above_200?'<span class="ok">✅</span>':'<span class="no">❌</span>'}</td>
     <td class="mono">${o.pcr==null?'—':o.pcr.toFixed(2)}</td></tr>`).join('');
   const TH=(cls,lbl,tip)=>`<th class="${cls} thelp" data-tip="${tip.replace(/"/g,'&quot;')}">${lbl}<i class="thi">i</i></th>`;
-  document.getElementById('ov-watch').innerHTML=`<div class="tablewrap"><table><thead><tr>
-    ${TH('l','Ticker','The underlying symbol. Click any row to open it in the TA tab.')}
-    ${TH('','Price','Latest price for the underlying.')}
-    ${TH('','Chg %','Percent change on the session.')}
-    ${TH('','HV%ile','Where current 20-day historical (realized) volatility sits in its own 1-year range. High = the stock is moving more than usual; richer option premium.')}
-    ${TH('','HV20','20-day historical (realized) volatility, annualized — how much the stock ACTUALLY moved recently.')}
-    ${TH('','ATM IV C/P','At-the-money implied volatility, call / put. What options are PRICING IN for future movement.')}
-    ${TH('l','IV vs HV','Is implied vol rich or cheap versus realized? Rich = the market is overpaying for movement (good to sell); Cheap = underpaying.')}
-    ${TH('','RSI','14-day Relative Strength Index. &lt;30 oversold (CSP setup) · ~50 neutral · &gt;70 overbought (CC setup).')}
-    ${TH('','200MA','Is price above its 200-day moving average? A simple long-term uptrend check (a LEAP prerequisite).')}
-    ${TH('','PCR','Put/Call ratio of open interest — a positioning tell. &gt;1 = more puts (defensive) · &lt;1 = more calls (bullish).')}
-  </tr></thead><tbody>${rows}</tbody></table></div>`;
+  const table = (mine && ov.length===0)
+    ? `<div class="empty">No starred names yet — tap the <b>☆</b> on any ticker (switch to <b>All</b>) to build your list. It's saved in this browser.</div>`
+    : `<div class="tablewrap"><table><thead><tr>
+        <th class="l star-c" aria-label="favourite"></th>
+        ${TH('l','Ticker','The underlying symbol. Click any row to open it in the TA tab. Tap the star to add it to your personal list (saved in this browser).')}
+        ${TH('','Price','Latest price for the underlying.')}
+        ${TH('','Chg %','Percent change on the session.')}
+        ${TH('','HV%ile','Where current 20-day historical (realized) volatility sits in its own 1-year range. High = the stock is moving more than usual; richer option premium.')}
+        ${TH('','HV20','20-day historical (realized) volatility, annualized — how much the stock ACTUALLY moved recently.')}
+        ${TH('','ATM IV C/P','At-the-money implied volatility, call / put. What options are PRICING IN for future movement.')}
+        ${TH('l','IV vs HV','Is implied vol rich or cheap versus realized? Rich = the market is overpaying for movement (good to sell); Cheap = underpaying.')}
+        ${TH('','RSI','14-day Relative Strength Index. &lt;30 oversold (CSP setup) · ~50 neutral · &gt;70 overbought (CC setup).')}
+        ${TH('','200MA','Is price above its 200-day moving average? A simple long-term uptrend check (a LEAP prerequisite).')}
+        ${TH('','PCR','Put/Call ratio of open interest — a positioning tell. &gt;1 = more puts (defensive) · &lt;1 = more calls (bullish).')}
+      </tr></thead><tbody>${rows}</tbody></table></div>`;
+  document.getElementById('ov-watch').innerHTML = seg + table;
+  document.querySelectorAll('#ov-watch .wlseg button').forEach(b=>b.onclick=()=>wlView(b.dataset.v));
+  document.querySelectorAll('#ov-watch .star').forEach(s=>{
+    const go=e=>{e.stopPropagation(); wlToggle(s.dataset.star);};
+    s.onclick=go; s.onkeydown=e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();go(e);}};});
   document.querySelectorAll('#ov-watch tr.clk').forEach(tr=>tr.onclick=()=>{setSym(tr.dataset.tk); go('deep');});
   wireTips(document.getElementById('ov-watch'));
 }
