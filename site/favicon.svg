@@ -1,5 +1,5 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
-  <style>circle,polyline{stroke:#111}@media(prefers-color-scheme:dark){circle,polyline{stroke:#fff}}</style>
-  <circle cx="50" cy="50" r="44" fill="none" stroke-width="4"/>
-  <polyline points="30,64 41,37 51,58 65,33 73,47 82,39" fill="none" stroke-width="8" stroke-linejoin="miter" stroke-linecap="round"/>
+  <circle cx="50" cy="50" r="50" fill="#ffffff"/>
+  <circle cx="50" cy="50" r="44" fill="none" stroke="#111111" stroke-width="4"/>
+  <polyline points="30,64 41,37 51,58 65,33 73,47 82,39" fill="none" stroke="#111111" stroke-width="8" stroke-linejoin="miter" stroke-linecap="round"/>
 </svg>
