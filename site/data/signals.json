@@ -58,15 +58,15 @@
         },
         {
           "l": "median",
-          "s": "no"
+          "s": "warn"
         },
         {
           "l": "timing 3/12",
-          "s": "no"
+          "s": "warn"
         }
       ],
       "verdict": "avoid",
-      "verdict_why": "low open interest",
+      "verdict_why": "earnings within 7 days",
       "shortlist": false
     },
     {
@@ -129,7 +129,7 @@
         },
         {
           "l": "timing 0/12",
-          "s": "no"
+          "s": "warn"
         }
       ],
       "verdict": "avoid",
@@ -194,15 +194,15 @@
         },
         {
           "l": "median",
-          "s": "no"
+          "s": "warn"
         },
         {
           "l": "timing 2/12",
-          "s": "no"
+          "s": "warn"
         }
       ],
-      "verdict": "avoid",
-      "verdict_why": "wrong side of median",
+      "verdict": "caution",
+      "verdict_why": "wrong side of median \u2014 analyze",
       "shortlist": false
     },
     {
@@ -265,7 +265,7 @@
         },
         {
           "l": "timing 0/12",
-          "s": "no"
+          "s": "warn"
         }
       ],
       "verdict": "avoid",
@@ -332,7 +332,7 @@
         },
         {
           "l": "timing 0/12",
-          "s": "no"
+          "s": "warn"
         }
       ],
       "verdict": "avoid",
@@ -400,11 +400,11 @@
         },
         {
           "l": "timing 3/12",
-          "s": "no"
+          "s": "warn"
         }
       ],
       "verdict": "avoid",
-      "verdict_why": "low open interest",
+      "verdict_why": "earnings within 7 days",
       "shortlist": false
     },
     {
@@ -467,11 +467,11 @@
         },
         {
           "l": "timing 0/12",
-          "s": "no"
+          "s": "warn"
         }
       ],
-      "verdict": "avoid",
-      "verdict_why": "no setup (0/12)",
+      "verdict": "caution",
+      "verdict_why": "no setup yet (0/12) \u2014 analyze",
       "shortlist": true
     },
     {
@@ -534,11 +534,11 @@
         },
         {
           "l": "timing 0/12",
-          "s": "no"
+          "s": "warn"
         }
       ],
-      "verdict": "avoid",
-      "verdict_why": "no setup (0/12)",
+      "verdict": "caution",
+      "verdict_why": "no setup yet (0/12) \u2014 analyze",
       "shortlist": true
     },
     {
@@ -562,8 +562,13 @@
       "earnings_in_window": false,
       "strong": true,
       "qualifies": false,
-      "median_ok": null,
-      "pct_b": null,
+      "median_ok": true,
+      "pct_b": 0.42,
+      "timing_label": "\ud83d\udd34 NO SETUP",
+      "timing_score": 1,
+      "timing_reasons": [
+        "IV fair vs realized +1"
+      ],
       "earnings_date": "2026-10-21",
       "gates": [
         {
@@ -592,10 +597,10 @@
         },
         {
           "l": "median",
-          "s": "warn"
+          "s": "ok"
         },
         {
-          "l": "timing",
+          "l": "timing 1/12",
           "s": "warn"
         }
       ],
@@ -661,11 +666,11 @@
         },
         {
           "l": "median",
-          "s": "no"
+          "s": "warn"
         },
         {
           "l": "timing 2/12",
-          "s": "no"
+          "s": "warn"
         }
       ],
       "verdict": "avoid",
@@ -729,15 +734,15 @@
         },
         {
           "l": "median",
-          "s": "no"
+          "s": "warn"
         },
         {
           "l": "timing 0/12",
-          "s": "no"
+          "s": "warn"
         }
       ],
-      "verdict": "avoid",
-      "verdict_why": "wrong side of median",
+      "verdict": "caution",
+      "verdict_why": "wrong side of median \u2014 analyze",
       "shortlist": false
     },
     {
@@ -798,11 +803,11 @@
         },
         {
           "l": "median",
-          "s": "no"
+          "s": "warn"
         },
         {
           "l": "timing 2/12",
-          "s": "no"
+          "s": "warn"
         }
       ],
       "verdict": "avoid",
@@ -866,15 +871,15 @@
         },
         {
           "l": "median",
-          "s": "no"
+          "s": "warn"
         },
         {
           "l": "timing 0/12",
-          "s": "no"
+          "s": "warn"
         }
       ],
-      "verdict": "avoid",
-      "verdict_why": "wrong side of median",
+      "verdict": "caution",
+      "verdict_why": "wrong side of median \u2014 analyze",
       "shortlist": false
     },
     {
@@ -937,11 +942,11 @@
         },
         {
           "l": "timing 2/12",
-          "s": "no"
+          "s": "warn"
         }
       ],
-      "verdict": "avoid",
-      "verdict_why": "no setup (2/12)",
+      "verdict": "caution",
+      "verdict_why": "no setup yet (2/12) \u2014 analyze",
       "shortlist": false
     },
     {
@@ -1001,11 +1006,11 @@
         },
         {
           "l": "median",
-          "s": "no"
+          "s": "warn"
         },
         {
           "l": "timing 2/12",
-          "s": "no"
+          "s": "warn"
         }
       ],
       "verdict": "avoid",
@@ -1069,11 +1074,11 @@
         },
         {
           "l": "median",
-          "s": "no"
+          "s": "warn"
         },
         {
           "l": "timing 1/12",
-          "s": "no"
+          "s": "warn"
         }
       ],
       "verdict": "avoid",
@@ -1138,15 +1143,15 @@
         },
         {
           "l": "median",
-          "s": "no"
+          "s": "warn"
         },
         {
           "l": "timing 2/12",
-          "s": "no"
+          "s": "warn"
         }
       ],
-      "verdict": "avoid",
-      "verdict_why": "wrong side of median",
+      "verdict": "caution",
+      "verdict_why": "wrong side of median \u2014 analyze",
       "shortlist": false
     },
     {
@@ -1206,11 +1211,11 @@
         },
         {
           "l": "median",
-          "s": "no"
+          "s": "warn"
         },
         {
           "l": "timing 0/12",
-          "s": "no"
+          "s": "warn"
         }
       ],
       "verdict": "avoid",
@@ -1274,15 +1279,15 @@
         },
         {
           "l": "median",
-          "s": "no"
+          "s": "warn"
         },
         {
           "l": "timing 0/12",
-          "s": "no"
+          "s": "warn"
         }
       ],
-      "verdict": "avoid",
-      "verdict_why": "wrong side of median",
+      "verdict": "caution",
+      "verdict_why": "wrong side of median \u2014 analyze",
       "shortlist": false
     },
     {
@@ -1345,11 +1350,11 @@
         },
         {
           "l": "timing 0/12",
-          "s": "no"
+          "s": "warn"
         }
       ],
-      "verdict": "avoid",
-      "verdict_why": "no setup (0/12)",
+      "verdict": "caution",
+      "verdict_why": "no setup yet (0/12) \u2014 analyze",
       "shortlist": true
     },
     {
@@ -1373,8 +1378,14 @@
       "earnings_in_window": false,
       "strong": false,
       "qualifies": true,
-      "median_ok": null,
-      "pct_b": null,
+      "median_ok": true,
+      "pct_b": 0.29,
+      "timing_label": "\ud83d\udd34 NO SETUP",
+      "timing_score": 1,
+      "timing_reasons": [
+        "Lower third (%B 0.29) +1",
+        "IV below realized \u2014 thin premium +0"
+      ],
       "earnings_date": "2026-10-28",
       "gates": [
         {
@@ -1403,16 +1414,16 @@
         },
         {
           "l": "median",
-          "s": "warn"
+          "s": "ok"
         },
         {
-          "l": "timing",
+          "l": "timing 1/12",
           "s": "warn"
         }
       ],
       "verdict": "caution",
-      "verdict_why": "setup unconfirmed",
-      "shortlist": false
+      "verdict_why": "no setup yet (1/12) \u2014 analyze",
+      "shortlist": true
     },
     {
       "ticker": "MSFT",
@@ -1471,15 +1482,15 @@
         },
         {
           "l": "median",
-          "s": "no"
+          "s": "warn"
         },
         {
           "l": "timing 0/12",
-          "s": "no"
+          "s": "warn"
         }
       ],
-      "verdict": "avoid",
-      "verdict_why": "wrong side of median",
+      "verdict": "caution",
+      "verdict_why": "wrong side of median \u2014 analyze",
       "shortlist": false
     },
     {
@@ -1540,11 +1551,11 @@
         },
         {
           "l": "median",
-          "s": "no"
+          "s": "warn"
         },
         {
           "l": "timing 2/12",
-          "s": "no"
+          "s": "warn"
         }
       ],
       "verdict": "avoid",
@@ -1615,7 +1626,7 @@
         },
         {
           "l": "timing 2/12",
-          "s": "no"
+          "s": "warn"
         }
       ],
       "verdict": "avoid",
@@ -1690,7 +1701,7 @@
         }
       ],
       "verdict": "avoid",
-      "verdict_why": "spread too wide",
+      "verdict_why": "earnings within 7 days",
       "shortlist": false
     },
     {
@@ -1750,11 +1761,11 @@
         },
         {
           "l": "median",
-          "s": "no"
+          "s": "warn"
         },
         {
           "l": "timing 0/12",
-          "s": "no"
+          "s": "warn"
         }
       ],
       "verdict": "avoid",
@@ -1818,15 +1829,15 @@
         },
         {
           "l": "median",
-          "s": "no"
+          "s": "warn"
         },
         {
           "l": "timing 0/12",
-          "s": "no"
+          "s": "warn"
         }
       ],
       "verdict": "avoid",
-      "verdict_why": "spread too wide",
+      "verdict_why": "earnings within 7 days",
       "shortlist": false
     },
     {
@@ -1886,11 +1897,11 @@
         },
         {
           "l": "median",
-          "s": "no"
+          "s": "warn"
         },
         {
           "l": "timing 0/12",
-          "s": "no"
+          "s": "warn"
         }
       ],
       "verdict": "avoid",
@@ -1957,7 +1968,7 @@
         },
         {
           "l": "timing 0/12",
-          "s": "no"
+          "s": "warn"
         }
       ],
       "verdict": "avoid",
@@ -2021,15 +2032,15 @@
         },
         {
           "l": "median",
-          "s": "no"
+          "s": "warn"
         },
         {
           "l": "timing 0/12",
-          "s": "no"
+          "s": "warn"
         }
       ],
-      "verdict": "avoid",
-      "verdict_why": "wrong side of median",
+      "verdict": "caution",
+      "verdict_why": "wrong side of median \u2014 analyze",
       "shortlist": false
     },
     {
@@ -2089,15 +2100,15 @@
         },
         {
           "l": "median",
-          "s": "no"
+          "s": "warn"
         },
         {
           "l": "timing 2/12",
-          "s": "no"
+          "s": "warn"
         }
       ],
       "verdict": "avoid",
-      "verdict_why": "low open interest",
+      "verdict_why": "earnings within 7 days",
       "shortlist": false
     },
     {
@@ -2121,8 +2132,14 @@
       "earnings_in_window": false,
       "strong": true,
       "qualifies": false,
-      "median_ok": null,
-      "pct_b": null,
+      "median_ok": false,
+      "pct_b": 0.42,
+      "timing_label": "\ud83d\udd34 NO SETUP",
+      "timing_score": 1,
+      "timing_reasons": [
+        "IV fair vs realized +1",
+        "\u26d4 Below median (%B 0.42) \u2014 CC needs above"
+      ],
       "earnings_date": "2026-10-21",
       "gates": [
         {
@@ -2154,7 +2171,7 @@
           "s": "warn"
         },
         {
-          "l": "timing",
+          "l": "timing 1/12",
           "s": "warn"
         }
       ],
@@ -2225,7 +2242,7 @@
         },
         {
           "l": "timing 3/12",
-          "s": "no"
+          "s": "warn"
         }
       ],
       "verdict": "avoid",
@@ -2289,11 +2306,11 @@
         },
         {
           "l": "median",
-          "s": "no"
+          "s": "warn"
         },
         {
           "l": "timing 0/12",
-          "s": "no"
+          "s": "warn"
         }
       ],
       "verdict": "avoid",
@@ -2362,7 +2379,7 @@
         },
         {
           "l": "timing 3/12",
-          "s": "no"
+          "s": "warn"
         }
       ],
       "verdict": "avoid",
@@ -2429,11 +2446,11 @@
         },
         {
           "l": "timing 0/12",
-          "s": "no"
+          "s": "warn"
         }
       ],
-      "verdict": "avoid",
-      "verdict_why": "no setup (0/12)",
+      "verdict": "caution",
+      "verdict_why": "no setup yet (0/12) \u2014 analyze",
       "shortlist": false
     },
     {
@@ -2498,11 +2515,11 @@
         },
         {
           "l": "timing 3/12",
-          "s": "no"
+          "s": "warn"
         }
       ],
-      "verdict": "avoid",
-      "verdict_why": "no setup (3/12)",
+      "verdict": "caution",
+      "verdict_why": "no setup yet (3/12) \u2014 analyze",
       "shortlist": false
     },
     {
@@ -2632,15 +2649,15 @@
         },
         {
           "l": "median",
-          "s": "no"
+          "s": "warn"
         },
         {
           "l": "timing 2/12",
-          "s": "no"
+          "s": "warn"
         }
       ],
-      "verdict": "avoid",
-      "verdict_why": "wrong side of median",
+      "verdict": "caution",
+      "verdict_why": "wrong side of median \u2014 analyze",
       "shortlist": false
     },
     {
@@ -2705,11 +2722,11 @@
         },
         {
           "l": "timing 3/12",
-          "s": "no"
+          "s": "warn"
         }
       ],
-      "verdict": "avoid",
-      "verdict_why": "no setup (3/12)",
+      "verdict": "caution",
+      "verdict_why": "no setup yet (3/12) \u2014 analyze",
       "shortlist": false
     },
     {
@@ -2838,11 +2855,11 @@
         },
         {
           "l": "median",
-          "s": "no"
+          "s": "warn"
         },
         {
           "l": "timing 1/12",
-          "s": "no"
+          "s": "warn"
         }
       ],
       "verdict": "avoid",
@@ -2870,8 +2887,14 @@
       "earnings_in_window": false,
       "strong": true,
       "qualifies": true,
-      "median_ok": null,
-      "pct_b": null,
+      "median_ok": false,
+      "pct_b": 0.29,
+      "timing_label": "\ud83d\udd34 NO SETUP",
+      "timing_score": 0,
+      "timing_reasons": [
+        "IV below realized \u2014 thin premium +0",
+        "\u26d4 Below median (%B 0.29) \u2014 CC needs above"
+      ],
       "earnings_date": "2026-10-28",
       "gates": [
         {
@@ -2903,12 +2926,12 @@
           "s": "warn"
         },
         {
-          "l": "timing",
+          "l": "timing 0/12",
           "s": "warn"
         }
       ],
       "verdict": "caution",
-      "verdict_why": "setup unconfirmed",
+      "verdict_why": "wrong side of median \u2014 analyze",
       "shortlist": false
     },
     {
@@ -2974,7 +2997,7 @@
         },
         {
           "l": "timing 3/12",
-          "s": "no"
+          "s": "warn"
         }
       ],
       "verdict": "avoid",
@@ -3041,11 +3064,11 @@
         },
         {
           "l": "timing 0/12",
-          "s": "no"
+          "s": "warn"
         }
       ],
-      "verdict": "avoid",
-      "verdict_why": "no setup (0/12)",
+      "verdict": "caution",
+      "verdict_why": "no setup yet (0/12) \u2014 analyze",
       "shortlist": false
     },
     {
@@ -3115,7 +3138,7 @@
         }
       ],
       "verdict": "caution",
-      "verdict_why": "setup 5/12",
+      "verdict_why": "setup 5/12 \u2014 analyze",
       "shortlist": false
     },
     {
@@ -3175,15 +3198,15 @@
         },
         {
           "l": "median",
-          "s": "no"
+          "s": "warn"
         },
         {
           "l": "timing 0/12",
-          "s": "no"
+          "s": "warn"
         }
       ],
-      "verdict": "avoid",
-      "verdict_why": "wrong side of median",
+      "verdict": "caution",
+      "verdict_why": "wrong side of median \u2014 analyze",
       "shortlist": false
     },
     {
@@ -3247,7 +3270,7 @@
         },
         {
           "l": "timing 1/12",
-          "s": "no"
+          "s": "warn"
         }
       ],
       "verdict": "avoid",
@@ -3312,11 +3335,11 @@
         },
         {
           "l": "median",
-          "s": "no"
+          "s": "warn"
         },
         {
           "l": "timing 2/12",
-          "s": "no"
+          "s": "warn"
         }
       ],
       "verdict": "avoid",
@@ -3354,6 +3377,37 @@
       "timing_score": 8,
       "score_max": 11,
       "sector": "Technology",
+      "good_pmcc": true
+    },
+    {
+      "ticker": "GOOG",
+      "strategy": "LEAP",
+      "spot": 339.1,
+      "expiry": "2028-01-21",
+      "dte": 512,
+      "strike": 280.0,
+      "delta": 0.788,
+      "mid": 97.17,
+      "cost": 9718.0,
+      "intrinsic": 59.1,
+      "extrinsic": 38.07,
+      "extrinsic_pct": 39.2,
+      "carry_pct": 8.0,
+      "iv": 35.8,
+      "iv_ratio": 1.0,
+      "above_200ma": true,
+      "above_50ma": false,
+      "ma_aligned": true,
+      "rsi": 44.2,
+      "rsi_rising": false,
+      "ext_ok": true,
+      "trend_ok": true,
+      "qualifies": true,
+      "verdict": "caution",
+      "timing_label": "\ud83d\udfe1 DECENT ENTRY",
+      "timing_score": 7,
+      "score_max": 11,
+      "sector": "Communication Services",
       "good_pmcc": true
     },
     {
@@ -3447,6 +3501,37 @@
       "timing_score": 7,
       "score_max": 11,
       "sector": "Technology",
+      "good_pmcc": true
+    },
+    {
+      "ticker": "VRT",
+      "strategy": "LEAP",
+      "spot": 263.81,
+      "expiry": "2028-01-21",
+      "dte": 512,
+      "strike": 210.0,
+      "delta": 0.778,
+      "mid": 106.88,
+      "cost": 10688.0,
+      "intrinsic": 53.81,
+      "extrinsic": 53.06,
+      "extrinsic_pct": 49.7,
+      "carry_pct": 14.34,
+      "iv": 64.3,
+      "iv_ratio": 1.18,
+      "above_200ma": true,
+      "above_50ma": false,
+      "ma_aligned": true,
+      "rsi": 44.4,
+      "rsi_rising": true,
+      "ext_ok": true,
+      "trend_ok": true,
+      "qualifies": true,
+      "verdict": "caution",
+      "timing_label": "\ud83d\udfe1 DECENT ENTRY",
+      "timing_score": 5,
+      "score_max": 11,
+      "sector": "Industrials",
       "good_pmcc": true
     },
     {
@@ -3571,37 +3656,6 @@
       "timing_score": 4,
       "score_max": 11,
       "sector": "Technology",
-      "good_pmcc": false
-    },
-    {
-      "ticker": "GOOG",
-      "strategy": "LEAP",
-      "spot": 339.1,
-      "expiry": "2028-01-21",
-      "dte": 512,
-      "strike": 280.0,
-      "delta": 0.788,
-      "mid": 97.17,
-      "cost": 9718.0,
-      "intrinsic": 59.1,
-      "extrinsic": 38.07,
-      "extrinsic_pct": 39.2,
-      "carry_pct": 8.0,
-      "iv": 35.8,
-      "iv_ratio": null,
-      "above_200ma": false,
-      "above_50ma": false,
-      "ma_aligned": false,
-      "rsi": null,
-      "rsi_rising": false,
-      "ext_ok": true,
-      "trend_ok": false,
-      "qualifies": false,
-      "verdict": "neutral",
-      "timing_label": "\u26aa NEUTRAL",
-      "timing_score": 1,
-      "score_max": 11,
-      "sector": "Communication Services",
       "good_pmcc": false
     },
     {
@@ -3884,37 +3938,6 @@
       "good_pmcc": false
     },
     {
-      "ticker": "VRT",
-      "strategy": "LEAP",
-      "spot": 263.81,
-      "expiry": "2028-01-21",
-      "dte": 512,
-      "strike": 210.0,
-      "delta": 0.778,
-      "mid": 106.88,
-      "cost": 10688.0,
-      "intrinsic": 53.81,
-      "extrinsic": 53.06,
-      "extrinsic_pct": 49.7,
-      "carry_pct": 14.34,
-      "iv": 64.3,
-      "iv_ratio": null,
-      "above_200ma": false,
-      "above_50ma": false,
-      "ma_aligned": false,
-      "rsi": null,
-      "rsi_rising": false,
-      "ext_ok": true,
-      "trend_ok": false,
-      "qualifies": false,
-      "verdict": "neutral",
-      "timing_label": "\u26aa NEUTRAL",
-      "timing_score": 0,
-      "score_max": 11,
-      "sector": "Industrials",
-      "good_pmcc": false
-    },
-    {
       "ticker": "CRWV",
       "strategy": "LEAP",
       "spot": 88.01,
@@ -4119,8 +4142,8 @@
       "csp_timing": "\ud83d\udd34 NO SETUP",
       "cc_timing": "\ud83d\udd34 NO SETUP",
       "leap_timing": "\ud83d\udfe0 MARGINAL",
-      "csp_verdict": "avoid",
-      "cc_verdict": "avoid",
+      "csp_verdict": "caution",
+      "cc_verdict": "caution",
       "leap_verdict": "neutral",
       "is_wheel": true
     },
@@ -4141,7 +4164,7 @@
       "csp_timing": "\ud83d\udd34 NO SETUP",
       "cc_timing": "\ud83d\udd34 NO SETUP",
       "leap_timing": "\ud83d\udfe0 MARGINAL",
-      "csp_verdict": "avoid",
+      "csp_verdict": "caution",
       "cc_verdict": "avoid",
       "leap_verdict": "neutral",
       "is_wheel": true
@@ -4163,8 +4186,8 @@
       "csp_timing": "\ud83d\udd34 NO SETUP",
       "cc_timing": "\ud83d\udd34 NO SETUP",
       "leap_timing": "\ud83d\udfe0 MARGINAL",
-      "csp_verdict": "avoid",
-      "cc_verdict": "avoid",
+      "csp_verdict": "caution",
+      "cc_verdict": "caution",
       "leap_verdict": "caution",
       "is_wheel": true
     },
@@ -4185,8 +4208,8 @@
       "csp_timing": "\ud83d\udd34 NO SETUP",
       "cc_timing": "\ud83d\udd34 NO SETUP",
       "leap_timing": "\ud83d\udfe1 DECENT ENTRY",
-      "csp_verdict": "avoid",
-      "cc_verdict": "avoid",
+      "csp_verdict": "caution",
+      "cc_verdict": "caution",
       "leap_verdict": "caution",
       "is_wheel": true
     },
@@ -4207,7 +4230,7 @@
       "csp_timing": "\ud83d\udd34 NO SETUP",
       "cc_timing": "\ud83d\udd34 NO SETUP",
       "leap_timing": "\ud83d\udfe0 MARGINAL",
-      "csp_verdict": "avoid",
+      "csp_verdict": "caution",
       "cc_verdict": "avoid",
       "leap_verdict": "neutral",
       "is_wheel": true
@@ -4238,22 +4261,22 @@
       "ticker": "VRT",
       "sector": "Industrials",
       "price": 263.81,
-      "pct": null,
-      "hv20": null,
-      "hvpct": null,
+      "pct": 3.2,
+      "hv20": 54.3,
+      "hvpct": 41,
       "c_iv": 58,
       "p_iv": 57,
-      "iv_vs_hv": "\u2014",
-      "rsi": null,
-      "above_200": false,
+      "iv_vs_hv": "fair",
+      "rsi": 44,
+      "above_200": true,
       "pcr": null,
-      "pctb": null,
-      "csp_timing": null,
-      "cc_timing": null,
-      "leap_timing": "\u26aa NEUTRAL",
+      "pctb": 0.42,
+      "csp_timing": "\ud83d\udd34 NO SETUP",
+      "cc_timing": "\ud83d\udd34 NO SETUP",
+      "leap_timing": "\ud83d\udfe1 DECENT ENTRY",
       "csp_verdict": "avoid",
       "cc_verdict": "avoid",
-      "leap_verdict": "neutral",
+      "leap_verdict": "caution",
       "is_wheel": true
     },
     {
@@ -4340,7 +4363,7 @@
       "cc_timing": "\ud83d\udd34 NO SETUP",
       "leap_timing": "\ud83d\udfe0 MARGINAL",
       "csp_verdict": "avoid",
-      "cc_verdict": "avoid",
+      "cc_verdict": "caution",
       "leap_verdict": "neutral",
       "is_wheel": true
     },
@@ -4383,8 +4406,8 @@
       "csp_timing": "\ud83d\udd34 NO SETUP",
       "cc_timing": "\ud83d\udd34 NO SETUP",
       "leap_timing": "\ud83d\udfe2 STRONG ENTRY",
-      "csp_verdict": "avoid",
-      "cc_verdict": "avoid",
+      "csp_verdict": "caution",
+      "cc_verdict": "caution",
       "leap_verdict": "go",
       "is_wheel": true
     },
@@ -4392,22 +4415,22 @@
       "ticker": "GOOG",
       "sector": "Communication Services",
       "price": 339.1,
-      "pct": null,
-      "hv20": null,
-      "hvpct": null,
+      "pct": -1.2,
+      "hv20": 35.9,
+      "hvpct": 79,
       "c_iv": 28,
       "p_iv": 28,
-      "iv_vs_hv": "\u2014",
-      "rsi": null,
-      "above_200": false,
+      "iv_vs_hv": "cheap",
+      "rsi": 44,
+      "above_200": true,
       "pcr": null,
-      "pctb": null,
-      "csp_timing": null,
-      "cc_timing": null,
-      "leap_timing": "\u26aa NEUTRAL",
+      "pctb": 0.29,
+      "csp_timing": "\ud83d\udd34 NO SETUP",
+      "cc_timing": "\ud83d\udd34 NO SETUP",
+      "leap_timing": "\ud83d\udfe1 DECENT ENTRY",
       "csp_verdict": "caution",
       "cc_verdict": "caution",
-      "leap_verdict": "neutral",
+      "leap_verdict": "caution",
       "is_wheel": true
     },
     {
@@ -4427,7 +4450,7 @@
       "csp_timing": "\ud83d\udd34 NO SETUP",
       "cc_timing": "\ud83d\udd34 NO SETUP",
       "leap_timing": "\ud83d\udfe1 DECENT ENTRY",
-      "csp_verdict": "avoid",
+      "csp_verdict": "caution",
       "cc_verdict": "avoid",
       "leap_verdict": "caution",
       "is_wheel": true
@@ -4471,8 +4494,8 @@
       "csp_timing": "\ud83d\udd34 NO SETUP",
       "cc_timing": "\ud83d\udd34 NO SETUP",
       "leap_timing": "\ud83d\udfe1 DECENT ENTRY",
-      "csp_verdict": "avoid",
-      "cc_verdict": "avoid",
+      "csp_verdict": "caution",
+      "cc_verdict": "caution",
       "leap_verdict": "neutral",
       "is_wheel": false
     },
@@ -4581,8 +4604,8 @@
       "csp_timing": "\ud83d\udd34 NO SETUP",
       "cc_timing": "\ud83d\udd34 NO SETUP",
       "leap_timing": "\ud83d\udfe1 DECENT ENTRY",
-      "csp_verdict": "avoid",
-      "cc_verdict": "avoid",
+      "csp_verdict": "caution",
+      "cc_verdict": "caution",
       "leap_verdict": "neutral",
       "is_wheel": false
     },
@@ -4603,7 +4626,7 @@
       "csp_timing": "\ud83d\udd34 NO SETUP",
       "cc_timing": "\ud83d\udd34 NO SETUP",
       "leap_timing": "\ud83d\udfe1 DECENT ENTRY",
-      "csp_verdict": "avoid",
+      "csp_verdict": "caution",
       "cc_verdict": "avoid",
       "leap_verdict": "neutral",
       "is_wheel": false
@@ -4694,7 +4717,7 @@
   "count": 49,
   "leap_count": 25,
   "market": {
-    "vix": 14.86,
+    "vix": 14.96,
     "vix_label": "calm",
     "fng": 55,
     "fng_label": "Greed",
@@ -4949,7 +4972,7 @@
       15.9,
       15.4,
       15.2,
-      14.9
+      15.0
     ],
     "ten_year": 4.64,
     "two_year": 4.17,
@@ -5254,8 +5277,8 @@
     },
     {
       "label": "DXY",
-      "price": 99.1780014038086,
-      "pct": 0.008070217818945125,
+      "price": 99.21099853515625,
+      "pct": 0.04134351816875714,
       "prefix": "",
       "is_yield": false,
       "hist": [
@@ -5323,13 +5346,13 @@
         99.0,
         98.92,
         99.17,
-        99.18
+        99.21
       ]
     },
     {
       "label": "Crude Oil",
-      "price": 81.73999786376953,
-      "pct": -0.5958962339294938,
+      "price": 82.16999816894531,
+      "pct": -0.07297237691675784,
       "prefix": "$",
       "is_yield": false,
       "hist": [
@@ -5397,13 +5420,13 @@
         85.01,
         82.36,
         82.23,
-        81.74
+        82.17
       ]
     },
     {
       "label": "Gold",
-      "price": 4653.7998046875,
-      "pct": 1.2091602586524974,
+      "price": 4648.7001953125,
+      "pct": 1.0982557925920844,
       "prefix": "$",
       "is_yield": false,
       "hist": [
@@ -5471,13 +5494,13 @@
         4641,
         4638,
         4598,
-        4654
+        4649
       ]
     },
     {
       "label": "Bitcoin",
-      "price": 79843.0625,
-      "pct": 1.0320982333070772,
+      "price": 80360.9765625,
+      "pct": 1.687458170670575,
       "prefix": "$",
       "is_yield": false,
       "hist": [
@@ -5570,7 +5593,7 @@
         78964,
         78565,
         79027,
-        79843
+        80361
       ]
     },
     {
@@ -5792,8 +5815,8 @@
     {
       "label": "Digital Assets",
       "ticker": "BTC",
-      "pct": 1.0320982333070772,
-      "price": 79843.0625
+      "pct": 1.687458170670575,
+      "price": 80360.9765625
     }
   ],
   "fundamentals": {
@@ -6098,21 +6121,21 @@
           "when": "Aug 26"
         },
         {
-          "title": "AI's next big bottleneck isn't infrastructure. It's regulatory red tape.",
+          "title": "Robots are the 'next gen' of AI: Why ETF investors are flocking back to tech",
           "publisher": "Yahoo Finance Video",
-          "link": "https://finance.yahoo.com/video/ais-next-big-bottleneck-isnt-195939357.html",
+          "link": "https://finance.yahoo.com/video/robots-next-gen-ai-why-153614762.html",
           "when": "Aug 26"
         },
         {
-          "title": "Why investors should consider taking profits in AI stocks now",
+          "title": "Is Meta a buy after its $16.68 billion social media case settlement?",
           "publisher": "Yahoo Finance Video",
-          "link": "https://finance.yahoo.com/video/why-investors-consider-taking-profits-143643526.html",
+          "link": "https://finance.yahoo.com/video/meta-buy-16-68-billion-141935353.html",
           "when": "Aug 26"
         },
         {
-          "title": "Why the sustainability of the AI boom could be in focus after Nvidia's earnings call",
+          "title": "Nvidia earnings, PCE data: What investors need to watch Wednesday",
           "publisher": "Yahoo Finance Video",
-          "link": "https://finance.yahoo.com/video/why-sustainability-ai-boom-could-135959475.html",
+          "link": "https://finance.yahoo.com/video/nvidia-earnings-pce-data-investors-120000582.html",
           "when": "Aug 26"
         }
       ]
@@ -6181,6 +6204,18 @@
           "when": "Aug 26"
         },
         {
+          "title": "44% of Billionaire Bill Ackman's Portfolio at Pershing Square Is Concentrated in Just 4 AI Stocks",
+          "publisher": "Motley Fool",
+          "link": "https://www.fool.com/investing/2026/08/27/44-billionaire-bill-ackman-portfolio-4-ai-stocks/",
+          "when": "Aug 27"
+        },
+        {
+          "title": "Amazon deepens quick commerce play in fashion \u2013 report",
+          "publisher": "Retail Insight Network",
+          "link": "https://www.retail-insight-network.com/news/amazon-deepens-fashion-quick-commerce/",
+          "when": "Aug 27"
+        },
+        {
           "title": "Nvidia Stock Usually Gets a Post-Earnings Hangover. This Time It Could Be an Afterparty.",
           "publisher": "The Wall Street Journal",
           "link": "https://www.wsj.com/livecoverage/stock-market-today-dow-sp-500-nasdaq-08-27-2026/card/nvidia-stock-usually-gets-a-post-earnings-hangover-this-time-it-could-be-an-afterparty--OU6M7f6jJmUAcGQIkjPJ?siteid=yhoof2&yptr=yahoo",
@@ -6197,18 +6232,6 @@
           "publisher": "Motley Fool",
           "link": "https://www.fool.com/investing/2026/08/27/if-i-were-in-my-20s-id-buy-these-2-trillion-dollar/",
           "when": "Aug 27"
-        },
-        {
-          "title": "X-Energy (XE) Ties Xe-100 Reactor Push To Rising AI Power Demand",
-          "publisher": "Simply Wall St.",
-          "link": "https://finance.yahoo.com/energy/articles/x-energy-xe-ties-xe-021227805.html",
-          "when": "Aug 27"
-        },
-        {
-          "title": "Amazon just tripled its order of Nvidia chips over \u2018surging demand\u2019",
-          "publisher": "TechCrunch",
-          "link": "https://finance.yahoo.com/technology/ai/articles/amazon-just-tripled-order-nvidia-234718526.html",
-          "when": "Aug 26"
         }
       ]
     },
@@ -7464,6 +7487,12 @@
           "when": "Aug 27"
         },
         {
+          "title": "SpaceX says it\u2019s building its largest spaceport yet, committing $100 billion for a Louisiana site\u2014adding to its list of billion-dollar expansion plans",
+          "publisher": "Fortune",
+          "link": "https://finance.yahoo.com/real-estate/articles/spacex-says-building-largest-spaceport-070000092.html",
+          "when": "Aug 27"
+        },
+        {
           "title": "Russell, MSCI And Morningstar Set To Load Up On SpaceX Stock \u2014 Analyst Warns \u2018True Value\u2019 May Be Hard To Pin",
           "publisher": "Stocktwits",
           "link": "https://stocktwits.com/news-articles/markets/equity/russell-msci-morningstar-spacex-analyst-true-value-hard-to-pin/cZY8qCCRJpN",
@@ -7480,12 +7509,6 @@
           "publisher": "Barchart",
           "link": "https://www.barchart.com/story/news/4157368/nvidia-reports-7-8-billion-in-q2-gains-on-equity-portfolio-that-includes-spacex-intel-coreweave-and-more",
           "when": "Aug 27"
-        },
-        {
-          "title": "OpenAI Is the Sole Investor in Its Latest Venture Fund",
-          "publisher": "The Wall Street Journal",
-          "link": "https://www.wsj.com/pro/venture-capital/openai-is-the-sole-investor-in-its-latest-venture-fund-ed1dd447?siteid=yhoof2&yptr=yahoo",
-          "when": "Aug 26"
         }
       ]
     },
@@ -67954,13 +67977,13 @@
     "fed": 3.63,
     "spread_2s10s": 47,
     "pe_trailing": 25.806986,
-    "vix": 14.9,
-    "vix_chg": -0.34,
+    "vix": 15.0,
+    "vix_chg": -0.25,
     "vix_hi": 31.0,
     "vix_lo": 13.5,
     "vix_avg": 18.1,
     "spy_realized": 11.3,
-    "vrp": 3.6,
+    "vrp": 3.7,
     "ovx": 46.8,
     "ovx_chg": 0.67,
     "gvz": 27.0,
@@ -68522,7 +68545,7 @@
       }
     ]
   },
-  "generated_at": "2026-08-27T09:09:50+00:00",
+  "generated_at": "2026-08-27T09:31:21+00:00",
   "universe": {
     "wheel": 16,
     "growth": 15,
