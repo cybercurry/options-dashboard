@@ -212,7 +212,7 @@ td.star-c,th.star-c{width:1%; text-align:center; padding-left:12px; padding-righ
 .cx-min{text-align:center; white-space:nowrap}
 .cx-min b{display:block; font-family:"Archivo",sans-serif; font-weight:800; font-size:32px; color:var(--good); line-height:1.05}
 .cx-min span{font-size:12.5px; color:var(--muted); letter-spacing:.02em}
-.tvhost{width:100%; height:460px}
+.tvhost{width:100%; height:720px}
 .tvnote{margin-top:14px; font-size:12.5px; color:var(--faint); text-align:center}
 .cards{display:grid; grid-template-columns:repeat(auto-fit,minmax(250px,1fr)); gap:14px; margin-top:16px}
 .card{border:1px solid var(--line); border-radius:14px; background:var(--surface); box-shadow:var(--shadow); padding:16px 18px}
@@ -375,8 +375,6 @@ th.thelp:hover{color:var(--text)} th.thelp:hover .thi{border-color:var(--accent)
 
   <!-- ══════════ SIGNALS ══════════ -->
   <section id="v-signals" class="view" hidden>
-    <section class="pulse" id="pulse" aria-label="Market pulse"></section>
-
     <div class="head"><h1>Suggested entries</h1><div class="meta" id="meta">scanning…</div></div>
 
     <div class="subhead">Sell now — CSP / CC <span class="n" id="n-ready"></span></div>
@@ -694,6 +692,7 @@ function ledFor(kind,v){ if(v==null)return '';
   if(kind==='fng'||kind==='btc')return v<25?'r':v<45?'a':v<=55?'a':'g';
   return 'g'; }
 function renderPulse(){
+  const host=document.getElementById('pulse'); if(!host) return;   // strip removed from Signals — Market/Overview carry it
   const m=MKT, cells=[
     ['vix','VIX',num(m.vix,1),m.vix_label||''],
     ['fng','Fear & Greed',num(m.fng,0),m.fng_label||''],
