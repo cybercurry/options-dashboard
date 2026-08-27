@@ -382,25 +382,63 @@ def _setup_label(score, kind, blocked=False):
             "none": "🔴 NO SETUP"}[tier]
 
 
+def _cc_income_score(ind, iv_ratio):
+    """CC is the wheel's INCOME leg — you write calls on shares you already hold, so it must fire
+    OFTEN, not only at rare overbought tops (revised 27 Aug, Jay). Income-first ladder (max 12):
+    A premium (IV vs realized — the income), B write-safety (a short call is comfortable when the
+    stock isn't running up through the strike), C top-fade bonus (the A+ write into an exhausted
+    top), D strike quality (at/above the median). Returns (score, reasons, pattern)."""
+    pctb = ind.get("pctb"); pctb_prev = ind.get("pctb_prev"); rsi = ind.get("rsi"); rsi_prev = ind.get("rsi_prev")
+    if pctb is None or rsi is None:
+        return 0, ["Insufficient history for the income read"], None
+    score = 0; reasons = []
+    # A · Premium — the income driver (IV vs realized HV20)
+    if iv_ratio is not None:
+        if iv_ratio >= 1.25:   score += 4; reasons.append("IV rich vs realized — fat premium +4")
+        elif iv_ratio >= 1.10: score += 3; reasons.append("IV above realized — good premium +3")
+        elif iv_ratio >= 1.00: score += 2; reasons.append("IV fair vs realized +2")
+        elif iv_ratio >= 0.85: score += 1; reasons.append("IV a touch below realized +1")
+        else:                  reasons.append("IV below realized — thin premium +0")
+    # B · Write safety — a short call is safe when the stock isn't running away up through the
+    # strike. The one thing to avoid: a runaway uptrend that hasn't turned (conditional veto).
+    turning_down = (pctb_prev is not None and pctb < pctb_prev) or (rsi_prev is not None and rsi < rsi_prev)
+    if ind.get("walking_upper") and not turning_down:
+        reasons.append("Runaway uptrend (walking the band, no turn) — unsafe to write +0")
+    elif rsi <= 45: score += 4; reasons.append("RSI %.0f weak/neutral — safe to write +4" % rsi)
+    elif rsi <= 55: score += 3; reasons.append("RSI %.0f neutral — safe to write +3" % rsi)
+    elif rsi <= 65: score += 2; reasons.append("RSI %.0f mildly up +2" % rsi)
+    elif rsi <= 70: score += 1; reasons.append("RSI %.0f extended +1" % rsi)
+    else:           reasons.append("RSI %.0f hot — risky to write +0" % rsi)
+    # C · Top-fade bonus — the A+ income moment: writing into an exhausted top
+    fired, pattern = _candle_reversal(ind["ohlc"], "bearish", P["mr_candle_lookback"])
+    turning = turning_down or (rsi >= 70 and rsi_prev is not None and rsi < rsi_prev) or fired
+    if pctb >= 0.80 and turning:   score += 3; reasons.append("Exhausted top (%%B %.2f, turning) +3" % pctb)
+    elif pctb >= 0.65 and turning: score += 2; reasons.append("Upper range, turning (%%B %.2f) +2" % pctb)
+    elif pctb >= 0.70:             score += 1; reasons.append("Stretched to the upper band (%%B %.2f) +1" % pctb)
+    # D · Strike quality — at/above the 20-day median is a better call to write
+    if pctb >= 0.5: score += 1; reasons.append("At/above the 20-day median — good strike +1")
+    return score, reasons, (pattern if fired else None)
+
+
 def _timing(ind, iv_ratio, direction):
-    """Wrap _mr_score with the IV-richness add-on (E) + the band-walking veto + G4 median block."""
+    """CC → income-first score (write income on held shares). CSP → fade-a-bottom (enter cheap)
+    with the IV add-on + a CONDITIONAL band-walking veto (only a breakdown that hasn't bounced)."""
+    if direction == "cc":
+        score, reasons, _ = _cc_income_score(ind, iv_ratio)   # median is a bonus, not a block; no −4 veto
+        return _setup_label(score, "cc", False), score, reasons
     score, reasons, _ = _mr_score(ind, direction)
     if iv_ratio is not None:            # E · premium edge — seller wants RICH premium (IV > realized)
         if iv_ratio >= 1.25: score += 2; reasons.append("IV rich vs realized — premium fat +2")
         elif iv_ratio >= 1.0: score += 1; reasons.append("IV fair vs realized +1")
         else: reasons.append("IV below realized — thin premium +0")
-    pctb = ind.get("pctb")
-    if direction == "csp":
-        if ind.get("walking_lower"):
-            score = max(0, score - 4); reasons.append("Still walking the lower band — breakdown, veto −4")
-        blocked = pctb is not None and pctb > 0.5      # CSP needs BELOW median
-        if blocked: reasons.append("⛔ Above median (%%B %.2f) — CSP needs below" % pctb)
-        return _setup_label(score, "csp", blocked), score, reasons
-    if ind.get("walking_upper"):
-        score = max(0, score - 4); reasons.append("Still walking the upper band — runaway uptrend, veto −4")
-    blocked = pctb is not None and pctb < 0.5          # CC needs ABOVE median
-    if blocked: reasons.append("⛔ Below median (%%B %.2f) — CC needs above" % pctb)
-    return _setup_label(score, "cc", blocked), score, reasons
+    pctb = ind.get("pctb"); pctb_prev = ind.get("pctb_prev")
+    # Conditional veto (Jay 27 Aug): only a true breakdown — still walking the lower band AND not
+    # bouncing — vetoes. A band-walk that's turning up keeps its score (it's the setup, not a veto).
+    if ind.get("walking_lower") and not (pctb_prev is not None and pctb > pctb_prev):
+        score = max(0, score - 4); reasons.append("Still walking the lower band, no bounce — breakdown, veto −4")
+    blocked = pctb is not None and pctb > 0.5      # CSP needs BELOW median
+    if blocked: reasons.append("⛔ Above median (%%B %.2f) — CSP needs below" % pctb)
+    return _setup_label(score, "csp", blocked), score, reasons
 
 
 def _sector(ticker):
@@ -549,13 +587,15 @@ def _leg_verdict(s):
     # right side of the median, everything else is 'analyze' (amber) — never red.
     mo = s.get("median_ok")
     ts = s.get("timing_score")
+    is_cc = s.get("strategy") == "CC"
     d_ok = P["delta_lo"] <= d <= P["delta_hi"]
     dte_ok = P["dte_lo"] <= dte <= P["dte_hi"]
-    if mo is None or ts is None:
+    if ts is None or (mo is None and not is_cc):
         return "caution", "setup unconfirmed"
-    if ts >= 8 and mo and d_ok and dte_ok:
+    green_side = True if is_cc else bool(mo)    # CC income-first: median is a strike bonus, not a gate
+    if ts >= 8 and green_side and d_ok and dte_ok:
         return "go", "setup %d/12" % ts
-    if not mo:
+    if not is_cc and not mo:
         return "caution", "wrong side of median — analyze"
     if ts < 4:
         return "caution", "no setup yet (%d/12) — analyze" % ts
@@ -609,6 +649,8 @@ def scan_ticker(ticker):
             if s:
                 s["median_ok"] = bool(below_median) if below_median is not None else None
                 s["pct_b"] = round(pctb, 2) if pctb is not None else None
+                s["rsi"] = round(ind["rsi"], 1) if ind.get("rsi") is not None else None
+                s["above_200ma"] = bool(ind.get("above_200"))
                 if ind.get("ok"):
                     lbl, sc, rs = _timing(ind, iv_ratio, "csp")
                     s["timing_label"], s["timing_score"], s["timing_reasons"] = lbl, sc, rs
@@ -624,6 +666,8 @@ def scan_ticker(ticker):
                 above_median = (not below_median) if below_median is not None else None
                 s["median_ok"] = bool(above_median) if above_median is not None else None
                 s["pct_b"] = round(pctb, 2) if pctb is not None else None
+                s["rsi"] = round(ind["rsi"], 1) if ind.get("rsi") is not None else None
+                s["above_200ma"] = bool(ind.get("above_200"))
                 if ind.get("ok"):
                     lbl, sc, rs = _timing(ind, iv_ratio, "cc")
                     s["timing_label"], s["timing_score"], s["timing_reasons"] = lbl, sc, rs

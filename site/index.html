@@ -452,32 +452,51 @@ th.thelp:hover{color:var(--text)} th.thelp:hover .thi{border-color:var(--accent)
     </div>
 
     <div class="rules-sec">
-      <h2>2 · Bollinger median — the directional gate</h2>
+      <h2>2 · Bollinger median — the directional read</h2>
       <table class="rtable"><thead><tr><th>Strategy</th><th>Rule</th><th>Meaning</th></tr></thead><tbody>
-        <tr><td><span class="pill p-csp">CSP</span></td><td class="mono">%B &lt; 0.5 (below 20-day median)</td><td>sell puts into weakness</td></tr>
-        <tr><td><span class="pill p-cc">CC</span></td><td class="mono">%B ≥ 0.5 (above median)</td><td>sell calls into strength</td></tr>
+        <tr><td><span class="pill p-csp">CSP</span></td><td class="mono">%B &lt; 0.5 (below 20-day median)</td><td>enter into weakness — <b>required</b> for a green (§5)</td></tr>
+        <tr><td><span class="pill p-cc">CC</span></td><td class="mono">%B ≥ 0.5 (above median)</td><td>a better strike to write — a <b>bonus</b> (§3 D), <b>not</b> required: income can be written below the median too</td></tr>
       </tbody></table>
     </div>
 
     <div class="rules-sec">
-      <h2>3 · Entry timing — the mean-reversion setup score</h2>
-      <p><b>Entry timing</b> = is now a good moment to sell? A turn off an extreme <b>in your favour</b>, with premium richer than the stock's actual moves — not just the right side of the median. Every point below has its own trigger; they add up (<b>max 12</b>) and drive the traffic light in <b>§5</b> — <b>🟢 ≥8 strong · 🟡 4–7 analyze · 🔴 &lt;4 too thin</b>.</p>
-      <table class="rtable"><thead><tr><th>Signal</th><th>Pts</th><th>CC — fade a top</th><th>CSP — fade a bottom</th></tr></thead><tbody>
-        <tr><td rowspan="3"><b>A · Stretch</b><br>price vs the bands (%B)</td><td class="mono">+3</td><td>%B ≥ 0.90 (through the upper band)</td><td>%B ≤ 0.10 (through the lower band)</td></tr>
-        <tr><td class="mono">+2</td><td>%B ≥ 0.80</td><td>%B ≤ 0.20</td></tr>
-        <tr><td class="mono">+1</td><td>%B ≥ 0.70 (upper third)</td><td>%B ≤ 0.30 (lower third)</td></tr>
-        <tr><td rowspan="2"><b>B · Rolling over</b><br>is the extreme turning?</td><td class="mono">+2</td><td>3-day high (%B ≥ 0.95) &amp; down today</td><td>3-day low (%B ≤ 0.05) &amp; up today</td></tr>
-        <tr><td class="mono">+1</td><td>turning down from elevated (%B &gt; 0.60)</td><td>turning up from depressed (%B &lt; 0.40)</td></tr>
-        <tr><td rowspan="3"><b>C · RSI exhaustion</b></td><td class="mono">+3</td><td>RSI ≥ 70 &amp; turning down</td><td>RSI ≤ 30 &amp; turning up</td></tr>
-        <tr><td class="mono">+2</td><td>RSI ≥ 63 &amp; turning down</td><td>RSI ≤ 37 &amp; turning up</td></tr>
-        <tr><td class="mono">+1</td><td>RSI ≥ 58 (elevated)</td><td>RSI ≤ 42 (depressed)</td></tr>
-        <tr><td rowspan="2"><b>D · Candle</b></td><td class="mono">+2</td><td>bearish reversal pattern</td><td>bullish reversal pattern</td></tr>
-        <tr><td class="mono">+1</td><td>down-day off a higher high</td><td>up-day off a lower low</td></tr>
-        <tr><td rowspan="2"><b>E · Premium edge</b><br>IV vs realized (HV20)</td><td class="mono">+2</td><td colspan="2">IV ≥ 1.25 × HV — rich premium</td></tr>
-        <tr><td class="mono">+1</td><td colspan="2">IV ≥ 1.00 × HV — fair premium</td></tr>
-        <tr><td><b>Veto</b></td><td class="mono">−4</td><td>still walking the upper band (runaway uptrend)</td><td>still walking the lower band (breakdown)</td></tr>
+      <h2>3 · Entry timing — when to write / sell</h2>
+      <p>Two different jobs, so two ladders. <b>CSP</b> is an <b>entry</b> — catch a bounce off a bottom to get assigned cheap. <b>CC</b> is <b>income</b> — write calls on shares you already hold, so it should fire whenever the premium is worth it and the stock won't run away, not only at rare tops. Both score <b>0–12</b> and drive the light in §5 (a low timing score never reds a leg on its own — see §5).</p>
+
+      <h3 style="font-family:'Archivo',sans-serif;font-size:14px;margin:16px 0 6px;color:var(--muted)">CC — write income (on shares you hold)</h3>
+      <table class="rtable"><thead><tr><th>Block</th><th>Pts</th><th>Trigger</th></tr></thead><tbody>
+        <tr><td rowspan="4"><b>A · Premium</b><br>the income (IV vs HV20)</td><td class="mono">+4</td><td>IV ≥ 1.25 × HV — fat premium</td></tr>
+        <tr><td class="mono">+3</td><td>IV ≥ 1.10 × HV</td></tr>
+        <tr><td class="mono">+2</td><td>IV ≥ 1.00 × HV — fair</td></tr>
+        <tr><td class="mono">+1</td><td>IV ≥ 0.85 × HV</td></tr>
+        <tr><td rowspan="4"><b>B · Write safety</b><br>won't run through the strike</td><td class="mono">+4</td><td>RSI ≤ 45 — weak/neutral, safest to write</td></tr>
+        <tr><td class="mono">+3</td><td>RSI ≤ 55 — neutral</td></tr>
+        <tr><td class="mono">+2</td><td>RSI ≤ 65 — mildly up</td></tr>
+        <tr><td class="mono">+1 / 0</td><td>RSI ≤ 70 → +1 · RSI &gt; 70, or a runaway band-walk with no turn → 0</td></tr>
+        <tr><td rowspan="3"><b>C · Top-fade bonus</b><br>the A+ write</td><td class="mono">+3</td><td>%B ≥ 0.80 &amp; turning down</td></tr>
+        <tr><td class="mono">+2</td><td>%B ≥ 0.65 &amp; turning down</td></tr>
+        <tr><td class="mono">+1</td><td>%B ≥ 0.70 (stretched)</td></tr>
+        <tr><td><b>D · Strike</b></td><td class="mono">+1</td><td>%B ≥ 0.50 — writing at/above the median</td></tr>
       </tbody></table>
-      <p class="rnote">Max 12 = Stretch 3 + Rolling-over 2 + RSI 3 + Candle 2 + Premium 2. Within each block only the highest bracket that applies is counted. The median side (§2) is a <b>timing</b> read — the right side is needed for a green, but the wrong side reads <b>ANALYZE</b>, not a block (§5).</p>
+      <p class="rnote">Max 12. Income-first: fat premium on a stock that isn't running up scores well <b>even with no overbought top</b> — because that's exactly when you hold assigned shares and want the income. The median is a <b>strike bonus</b> (D), not a gate. <b>Note:</b> this app is anonymous — it can't know your cost basis, so it never checks "above <i>my</i> basis" (that lives in the private tracker); it only reads whether now is a reasonable moment to write.</p>
+
+      <h3 style="font-family:'Archivo',sans-serif;font-size:14px;margin:18px 0 6px;color:var(--muted)">CSP — fade a bottom (enter cheap)</h3>
+      <table class="rtable"><thead><tr><th>Signal</th><th>Pts</th><th>Trigger</th></tr></thead><tbody>
+        <tr><td rowspan="3"><b>A · Stretch</b> (%B)</td><td class="mono">+3</td><td>%B ≤ 0.10 (through the lower band)</td></tr>
+        <tr><td class="mono">+2</td><td>%B ≤ 0.20</td></tr>
+        <tr><td class="mono">+1</td><td>%B ≤ 0.30 (lower third)</td></tr>
+        <tr><td rowspan="2"><b>B · Rolling up</b></td><td class="mono">+2</td><td>3-day low (%B ≤ 0.05) &amp; up today</td></tr>
+        <tr><td class="mono">+1</td><td>turning up from depressed (%B &lt; 0.40)</td></tr>
+        <tr><td rowspan="3"><b>C · RSI</b></td><td class="mono">+3</td><td>RSI ≤ 30 &amp; turning up</td></tr>
+        <tr><td class="mono">+2</td><td>RSI ≤ 37 &amp; turning up</td></tr>
+        <tr><td class="mono">+1</td><td>RSI ≤ 42 (depressed)</td></tr>
+        <tr><td rowspan="2"><b>D · Candle</b></td><td class="mono">+2</td><td>bullish reversal pattern</td></tr>
+        <tr><td class="mono">+1</td><td>up-day off a lower low</td></tr>
+        <tr><td rowspan="2"><b>E · Premium</b> (IV/HV)</td><td class="mono">+2</td><td>IV ≥ 1.25 × HV</td></tr>
+        <tr><td class="mono">+1</td><td>IV ≥ 1.00 × HV</td></tr>
+        <tr><td><b>Veto</b></td><td class="mono">−4</td><td>still walking the lower band with no bounce (breakdown)</td></tr>
+      </tbody></table>
+      <p class="rnote">Max 12. CSP wants price on the <b>below-median</b> side (§2) for a green — you're entering into weakness. The veto only fires on a genuine breakdown that hasn't turned up.</p>
     </div>
 
     <div class="rules-sec">
@@ -556,9 +575,9 @@ function verdictOf(s){
   if(prem<1.2) return 'avoid';
   if(oi<100) return 'avoid';
   if(!(spr==null||spr<=15)) return 'avoid';
-  const ts=s.timing_score, mo=s.median_ok, dOk=(d>=0.20&&d<=0.45), dteOk=(dte>=21&&dte<=45);
-  if(mo==null||ts==null) return 'caution';
-  return (ts>=8&&mo&&dOk&&dteOk) ? 'go' : 'caution';
+  const ts=s.timing_score, mo=s.median_ok, dOk=(d>=0.20&&d<=0.45), dteOk=(dte>=21&&dte<=45), isCC=s.strategy==='CC';
+  if(ts==null||(mo==null&&!isCC)) return 'caution';   // CC income-first: median is a strike bonus, not a gate
+  return (ts>=8&&(isCC||mo)&&dOk&&dteOk) ? 'go' : 'caution';
 }
 // Normalize a CSP/CC scorecard to exactly the light-driving gates (drop IV — folded into timing;
 // grade the timing node by points) so the popup never contradicts the light, on any data version.
@@ -1108,8 +1127,8 @@ function legTile(s){const k=s.strategy.toLowerCase();
     kdot('good')+'STRONG — tradeable + full setup',
     kdot('warn')+'ANALYZE — tradeable, setup/timing partial · your call',
     kdot('bad')+'BLOCKED — earnings, thin premium, or no liquidity',
-    'median = '+(k==='cc'?'ABOVE':'BELOW')+' midline (timing, not a blocker)',
-    'timing = mean-reversion setup score (0–12)',
+    (k==='cc' ? 'median = a strike bonus (above = better) — not required' : 'median = BELOW midline — enter into weakness'),
+    (k==='cc' ? 'timing = income-write score (0–12): premium + safe tape + top bonus' : 'timing = mean-reversion setup score (0–12)'),
   ].map(l=>`<div>${l}</div>`).join('');
   const v = verdictOf(s);
   const earnRed = s.earnings_soon===true;
