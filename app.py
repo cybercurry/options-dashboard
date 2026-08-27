@@ -2471,9 +2471,12 @@ with tab_vix:
     else:
         _show_med=st.toggle("Include medium-impact",value=False,key="cal_med")
         _want={"High"} | ({"Medium"} if _show_med else set())
+        _curs={"USD","CAD","EUR"}          # only the currencies Jay trades around
         _cal=[]
         for e in _events:
             if e.get("impact") not in _want:
+                continue
+            if e.get("country") not in _curs:
                 continue
             _dt=None
             try:
@@ -2496,8 +2499,8 @@ with tab_vix:
                     "Forecast":e.get("forecast","") or "—",
                     "Previous":e.get("previous","") or "—"})
             st.dataframe(pd.DataFrame(_calrows),use_container_width=True,hide_index=True)
-            st.caption("Times as provided by ForexFactory (US Eastern). 🔴 high · 🟠 medium impact. "
-                       "Refreshes hourly.")
+            st.caption("USD · CAD · EUR only. Times as provided by ForexFactory (US Eastern). "
+                       "🔴 high · 🟠 medium impact. Refreshes hourly.")
 
 # ══════════════════════════════════════════════════════════════════════════════
 # TAB — FUNDAMENTALS (SEC EDGAR: real filings, no prices/technicals)
