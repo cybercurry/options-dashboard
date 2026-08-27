@@ -46,9 +46,10 @@ P = {
     # LEAP (growth + PMCC basis) — long-dated deep-ITM call, Δ75-80 (criteria doc §2/§10.5)
     "leap_dte_lo": 180, "leap_dte_hi": 900, "leap_dte_opt": 542,
     "leap_delta_opt": 0.78, "leap_delta_lo": 0.70, "leap_delta_hi": 0.85,
-    "leap_max_ext_share": 0.40,  # Gate A: extrinsic ≤40% of premium (pay for value, not rented time)
-    "leap_max_carry": 0.08,      # Gate C: annualised carry (extrinsic/spot × 365/DTE) ≤ 8%/yr
-    "leap_trend_lookback": 5,    # 5-session trend confirmation (Jay: longer-term, clear trend)
+    "leap_backstop_ext_share": 0.55,  # hard backstop: extrinsic ≤55% of premium (reject rented-time buys)
+    # Below the backstop, extrinsic (≤25%→2, ≤40%→1) and carry (≤5%→2, ≤8%→1) are SCORE points,
+    # not gates (Jay 27 Aug). Trend gate = price>200MA AND 50>200 only — below the 50-MA is fine
+    # (a pullback inside the uptrend, criteria §2). Score is graded 0-11; a LEAP never reads red.
 }
 
 
@@ -697,38 +698,46 @@ def scan_leap_ticker(ticker):
         extrinsic = max(0.0, mid - intrinsic)
         ext_share = (extrinsic / mid) if mid else None                          # Gate A basis
         carry = (extrinsic / spot) * (365.0 / dte) if (spot and dte) else None  # Gate C: annualised carry
-        gate_a = bool(ext_share is not None and ext_share <= P["leap_max_ext_share"])
-        gate_c = bool(carry is not None and carry <= P["leap_max_carry"])
-        # CLEAR-TREND confirmation (revised 23 Aug — Jay: "we want a clear trend", after AAPL
-        # slipped through a too-weak gate: it was below the 50-MA with a bearish candle, yet the
-        # old `above_200 + RSI-rising` gate passed it). A LEAP buy now needs an ESTABLISHED
-        # uptrend, not a dip: above BOTH 50 & 200 MA, 50≥200 (aligned), RSI≥50 & rising over
-        # 5 sessions, and NO bearish reversal candle in the last 5 sessions.
+        # ── Trend gate (hard) — revised 27 Aug (Jay). A LEAP is an accumulation buy inside a
+        # confirmed long-term uptrend, and its ONE structural requirement is: price above the
+        # 200-MA AND the 50-MA above the 200-MA (a golden alignment). Being BELOW the 50-MA is
+        # explicitly fine — that's buying a pullback within the uptrend (criteria §2), not a
+        # disqualifier. (The prior "above 50 + RSI≥50 & rising + no bearish candle" gate was too
+        # tight — it red-flagged the entire watchlist, GOOG included, and contradicted §2's own
+        # "RSI rising through 33–52" dip-accumulation rule.)
         ind = _indicators(ticker)
         above_200 = bool(ind.get("above_200")); above_50 = bool(ind.get("above_50"))
         ma50 = ind.get("ma50"); ma200 = ind.get("ma200")
         aligned = bool(ma50 is not None and ma200 is not None and ma50 >= ma200)
+        trend_ok = bool(above_200 and aligned)
+        # ── Contract backstop (hard, reject-only) — extrinsic ≤55% of premium. A LEAP whose
+        # premium is mostly rented time isn't a stock substitute. Carry is no longer a gate — it
+        # only costs score points below. 55% is the compromise between the old strict 40% and
+        # the Streamlit-era 60%.
+        ext_ok = bool(ext_share is not None and ext_share <= P["leap_backstop_ext_share"])
+        qualifies = bool(trend_ok and ext_ok)
         rsi_now = ind.get("rsi"); rsi_5ago = ind.get("rsi_5ago")
         rsi_rising = bool(rsi_now is not None and rsi_5ago is not None and rsi_now > rsi_5ago)
-        rsi_bullish = bool(rsi_now is not None and rsi_now >= 50 and rsi_rising)
-        bearish_recent = False
-        if ind.get("ok"):
-            bearish_recent, _bpat = _candle_reversal(ind["ohlc"], "bearish", P["leap_trend_lookback"])
-        trend_ok = bool(above_50 and above_200 and aligned and rsi_bullish and not bearish_recent)
         hv20 = ind.get("hv20")
-        iv_ratio = (iv / hv20) if (iv and hv20) else None       # IV cheap-vs-realized = timing, NOT cost
-        qualifies = bool(gate_a and gate_c and trend_ok)
-        # entry-timing score (green dot among qualifiers): cheap IV + healthy-bullish RSI + aligned trend
+        iv_ratio = (iv / hv20) if (iv and hv20) else None       # IV cheap-vs-realized = buy timing
+        # ── Entry-quality score (0-11 laddered, every point has a criterion; nothing scores
+        # negative, so a LEAP never reads red). Cheap IV + §2 RSI accumulation zone + contract
+        # quality (extrinsic/carry) + long-trend confirmed.
         tscore = 0
-        if iv_ratio is not None:
-            tscore += 3 if iv_ratio < 1.0 else 2 if iv_ratio < 1.25 else -1
-        if rsi_now is not None:
-            tscore += 2 if 50 <= rsi_now <= 65 else 1 if 65 < rsi_now <= 72 else -1 if rsi_now > 72 else 0
-        tscore += 2 if above_200 else -1
-        if above_50: tscore += 1
-        if aligned: tscore += 1
-        tlabel = ("🟢 STRONG ENTRY" if tscore >= 7 else "🟡 DECENT ENTRY" if tscore >= 4
-                  else "🟠 MARGINAL" if tscore >= 2 else "🔴 AVOID")
+        if iv_ratio is not None:                                     # cheap premium = better buy
+            tscore += 3 if iv_ratio < 1.0 else 2 if iv_ratio < 1.25 else 0
+        if rsi_now is not None:                                      # §2 dip-accumulation zone
+            tscore += (3 if 45 <= rsi_now <= 55 else 2 if 33 <= rsi_now < 45
+                       else 1 if 55 < rsi_now <= 65 else 0)
+        if ext_share is not None:                                    # contract quality (time value)
+            tscore += 2 if ext_share <= 0.25 else 1 if ext_share <= 0.40 else 0
+        if carry is not None:                                        # cost of the rented time
+            tscore += 2 if carry <= 0.05 else 1 if carry <= 0.08 else 0
+        if trend_ok:                                                 # long-term trend confirmed
+            tscore += 1
+        # bands out of 11 — no red: worst is ⚪ neutral / 🟠 marginal
+        tlabel = ("🟢 STRONG ENTRY" if tscore >= 8 else "🟡 DECENT ENTRY" if tscore >= 5
+                  else "🟠 MARGINAL" if tscore >= 2 else "⚪ NEUTRAL")
         return {
             "ticker": ticker, "strategy": "LEAP", "spot": round(spot, 2),
             "expiry": expiry, "dte": dte, "strike": strike,
@@ -742,12 +751,12 @@ def scan_leap_ticker(ticker):
             "above_200ma": bool(above_200), "above_50ma": bool(above_50), "ma_aligned": aligned,
             "rsi": round(rsi_now, 1) if rsi_now is not None else None,
             "rsi_rising": rsi_rising,
-            "gate_a": gate_a, "gate_c": gate_c, "trend_ok": trend_ok,
+            "ext_ok": ext_ok, "trend_ok": trend_ok,
             "qualifies": qualifies,
-            # Traffic light: must qualify (A+C+trend) or it's a hard 'avoid'; timing only splits
-            # a qualifier green/amber (never red — timing is informational for LEAPs per the Rules).
-            "verdict": ("avoid" if not qualifies else ("go" if tscore >= 7 else "caution")),
-            "timing_label": tlabel, "timing_score": tscore,
+            # Traffic light: qualify (uptrend + contract backstop) then the graded score splits
+            # green/amber; a non-qualifier is 'neutral' (grey, OFF-TREND), never red.
+            "verdict": ("neutral" if not qualifies else ("go" if tscore >= 8 else "caution")),
+            "timing_label": tlabel, "timing_score": tscore, "score_max": 11,
             "sector": _sector(ticker),
             "good_pmcc": qualifies,   # back-compat alias for any UI still reading good_pmcc
         }

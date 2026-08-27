@@ -259,7 +259,8 @@ td.star-c,th.star-c{width:1%; text-align:center; padding-left:12px; padding-righ
 .wn-warn{border-color:color-mix(in srgb,var(--warn) 55%,var(--line)); color:var(--warn)}
 /* aggregate traffic light — the scorecard verdict, shown on tiles + watchlist */
 .ltlight{font-size:12px; font-weight:700; white-space:nowrap; display:inline-flex; align-items:center; gap:5px}
-.lt-go{color:var(--good)} .lt-caution{color:var(--warn)} .lt-avoid{color:var(--bad)}
+.lt-go{color:var(--good)} .lt-caution{color:var(--warn)} .lt-avoid{color:var(--bad)} .lt-neutral{color:var(--faint)}
+.ltsc{font-family:"IBM Plex Mono"; font-weight:600; opacity:.85; margin-left:1px}
 .ltdot{width:9px; height:9px; border-radius:50%; display:inline-block; background:currentColor; box-shadow:0 0 0 3px color-mix(in srgb,currentColor 20%,transparent)}
 .kdot{width:8px; height:8px; border-radius:50%; display:inline-block; vertical-align:1px; margin-right:5px}
 .verdict{font-family:"Archivo",sans-serif; font-weight:800; font-size:13px; margin-bottom:9px; letter-spacing:.02em; display:flex; align-items:center; gap:7px}
@@ -383,7 +384,7 @@ th.thelp:hover{color:var(--text)} th.thelp:hover .thi{border-color:var(--accent)
     <div id="ready-wrap"></div>
 
     <div class="subhead">LEAP ideas — a buy, not premium <span class="n" id="n-leap"></span></div>
-    <p class="note">Δ75–80 long-dated calls that pass <b>Gate A</b> (extrinsic ≤40%) <b>and Gate C</b> (carry ≤8%/yr) <b>and</b> a clear 5-day uptrend.</p>
+    <p class="note">Δ75–80 long-dated calls in an <b>uptrend</b> (price &gt; 200-MA · 50 &gt; 200) with a workable contract (extrinsic ≤ 55%), graded by a transparent <b>0–11 entry score</b> — buying a pullback inside the trend is fine.</p>
     <div id="leap-wrap"></div>
   </section>
 
@@ -482,15 +483,14 @@ th.thelp:hover{color:var(--text)} th.thelp:hover .thi{border-color:var(--accent)
 
     <div class="rules-sec">
       <h2>4 · LEAP — a buy, not premium income</h2>
-      <p>Cost is judged in <b>extrinsic value</b> (the dollars you pay for time), not IV — IV is only the input that inflates it. A LEAP <b>qualifies only if it passes A and C and the trend</b>.</p>
+      <p>A LEAP is <b>accumulation in a confirmed uptrend</b> — often on a pullback. It <b>qualifies</b> on just two hard checks (an uptrend and a workable contract); everything else is a <b>graded 0–11 score</b>, never a hard reject. A LEAP is <b>never shown red</b>.</p>
       <table class="rtable"><thead><tr><th>Element</th><th>Rule</th></tr></thead><tbody>
         <tr><td>Delta</td><td class="mono">0.75–0.80 (deep ITM = intrinsic-led)</td></tr>
         <tr><td>DTE</td><td class="mono">180–900 · target ~542 (Jan-2027+)</td></tr>
-        <tr><td><b>Gate A</b> — Time value ≤ 40%</td><td class="mono">extrinsic (premium − intrinsic) ≤ 40% of premium</td></tr>
-        <tr><td><b>Gate C</b> — Carry ≤ 8%/yr</td><td class="mono">carry = (extrinsic ÷ spot) × 365/DTE — the time-value you pay per year, as % of the share price</td></tr>
-        <tr><td><b>Clear uptrend</b></td><td class="mono">price &gt; 50-MA · price &gt; 200-MA · 50-MA &gt; 200-MA</td></tr>
+        <tr><td><b>Gate 1</b> — Uptrend</td><td class="mono">price &gt; 200-MA <b>and</b> 50-MA &gt; 200-MA. Below the 50-MA is fine — a pullback inside the uptrend (§2).</td></tr>
+        <tr><td><b>Gate 2</b> — Contract backstop</td><td class="mono">extrinsic (premium − intrinsic) ≤ 55% of premium — reject a mostly-rented-time call</td></tr>
       </tbody></table>
-      <p class="rnote">Entry timing (the mean-reversion setup) is <b>informational only</b> on a LEAP — it is not a gate. A LEAP qualifies on <b>Gate A + Gate C + a clear uptrend</b>; RSI-rising is shown as extra colour, not a pass/fail.</p>
+      <p class="rnote"><b>Score (0–11), all transparent:</b> IV vs realized (&lt;1.0 → 3 · &lt;1.25 → 2) · RSI §2 zone (45–55 → 3 · 33–45 → 2 · 55–65 → 1) · extrinsic (≤25% → 2 · ≤40% → 1) · carry = (extrinsic ÷ spot)×365/DTE (≤5% → 2 · ≤8% → 1) · uptrend confirmed → 1. Carry and extrinsic <b>cost points but no longer gate</b> — only the 55% backstop can reject a contract.</p>
     </div>
 
     <div class="rules-sec">
@@ -499,15 +499,18 @@ th.thelp:hover{color:var(--text)} th.thelp:hover .thi{border-color:var(--accent)
       <table class="rtable"><thead><tr><th>Light</th><th>CSP / CC</th><th>LEAP</th></tr></thead><tbody>
         <tr><td><span class="ltlight lt-go"><span class="ltdot"></span>STRONG</span></td>
             <td>every gate passes (§1 + §2) <b>and</b> setup score ≥ 8 (§3)</td>
-            <td>qualifies (§4) <b>and</b> entry-timing score ≥ 7</td></tr>
+            <td>qualifies (§4) <b>and</b> entry score ≥ 8/11</td></tr>
         <tr><td><span class="ltlight lt-caution"><span class="ltdot"></span>ANALYZE</span></td>
             <td>gates pass but the setup is partial (score 4–7) — your call</td>
-            <td>qualifies, but entry timing is partial — your call</td></tr>
+            <td>qualifies, entry score 5–7/11 — your call</td></tr>
         <tr><td><span class="ltlight lt-avoid"><span class="ltdot"></span>WEAK</span></td>
             <td>a gate fails (§1/§2) <b>or</b> no edge yet (score &lt; 4)</td>
-            <td>fails Gate A, Gate C, or the trend (§4)</td></tr>
+            <td class="mono">— (a LEAP is never red)</td></tr>
+        <tr><td><span class="ltlight lt-neutral"><span class="ltdot"></span>OFF-TREND</span></td>
+            <td class="mono">—</td>
+            <td>not in an uptrend, or no workable contract — grey, not a buy zone (§4)</td></tr>
       </tbody></table>
-      <p class="rnote">A hard veto — earnings within 7 days, the wrong side of the median, or no liquidity — reads <b>BLOCKED</b> (red) however good the timing. The light never contradicts the scorecard behind it: every gate in a tile's hover is exactly what the colour rolls up. Timing never reds a LEAP (it's informational there).</p>
+      <p class="rnote">The LEAP light carries its <b>score /11 beside the dot</b> so candidates compare at a glance. A CSP/CC hard veto — earnings within 7 days, the wrong side of the median, or no liquidity — reads <b>BLOCKED</b> (red). A LEAP is never red: it either qualifies (green/amber by score) or reads <b>OFF-TREND</b> (grey). Every node in a tile's hover is exactly what the colour rolls up.</p>
     </div>
 
     <div class="rules-sec">
@@ -540,13 +543,13 @@ function shortSetup(lbl){if(!lbl)return '<span class="dim">—</span>';const c=s
 /* ---- Traffic-light verdict (the scorecard rollup) — computed once in the engine (signals.py)
    and read here, so every tab shows the SAME light. Fallback recomputes from gates+timing for
    data written before `verdict` existed, using the identical rule. amber = "analyze carefully". */
-const VMETA={go:{c:'lt-go',t:'STRONG'},caution:{c:'lt-caution',t:'ANALYZE'},avoid:{c:'lt-avoid',t:'WEAK'}};
+const VMETA={go:{c:'lt-go',t:'STRONG'},caution:{c:'lt-caution',t:'ANALYZE'},neutral:{c:'lt-neutral',t:'OFF-TREND'},avoid:{c:'lt-avoid',t:'WEAK'}};
 function verdictOf(s){
   if(!s) return null;
   if(s.verdict) return s.verdict;                       // engine-computed (authoritative)
   // Fallback mirrors signals.py _leg_verdict from raw fields, so it's correct even on data
   // written before `verdict` existed (thresholds = the Rules tab). Ignored once verdict lands.
-  if(s.strategy==='LEAP') return !s.qualifies ? 'avoid' : ((s.timing_score||0)>=7?'go':'caution');
+  if(s.strategy==='LEAP') return !s.qualifies ? 'neutral' : ((s.timing_score||0)>=8?'go':'caution');
   const d=Math.abs(s.delta||0), dte=s.dte||0, prem=s.premium_pct||0, oi=s.oi||0, spr=s.spread_pct;
   if(!(d>=0.20&&d<=0.45)) return 'avoid';
   if(!(dte>=21&&dte<=45)) return 'avoid';
@@ -576,6 +579,10 @@ function lightBadge(v,blocked){ const m=VMETA[v]||VMETA.avoid;
   const t=(v==='avoid'&&blocked)?'BLOCKED':m.t;
   return `<span class="ltlight ${m.c}"><span class="ltdot"></span>${t}</span>`; }
 function lightDot(v){ const m=VMETA[v]; return v?`<span class="ltlight ${m.c}"><span class="ltdot"></span>${m.t}</span>`:'<span class="dim">—</span>'; }
+// Same light, with the numeric score beside the dot (LEAP — helps compare candidates at a glance).
+function lightDotN(v,score,max){ const m=VMETA[v]; if(!v||!m) return '<span class="dim">—</span>';
+  const sc=(score!=null)?` <span class="ltsc">${score}/${max||11}</span>`:'';
+  return `<span class="ltlight ${m.c}"><span class="ltdot"></span>${m.t}${sc}</span>`; }
 // token-coloured legend bullet — same --good/--warn/--bad as every other light (no emoji, which
 // would render a different fixed yellow/green/red than the CSS traffic light).
 function kdot(tone){ return `<span class="kdot" style="background:var(--${tone})"></span>`; }
@@ -592,11 +599,10 @@ function wlLight(o,key){
    alone (a "strong" timing read that fails a cost gate is NOT a buy — keep it honest). */
 function leapVerdict(l){
   if(!l) return '<span class="dim">—</span>';
-  if(l.qualifies) return '<span class="ok">✓ qualifies</span>';
+  if(l.qualifies) return '<span class="ok">✓ qualifies'+(l.timing_score!=null?' '+l.timing_score+'/'+(l.score_max||11):'')+'</span>';
   const r=[];
-  if(!l.gate_a) r.push('ext '+(l.extrinsic_pct)+'%');
-  if(!l.gate_c) r.push('carry '+(l.carry_pct)+'%');
-  if(!l.trend_ok) r.push('no trend');
+  if(!l.trend_ok) r.push('not in uptrend');
+  if(l.ext_ok===false) r.push('time value '+(l.extrinsic_pct)+'%');
   return '<span class="dim">'+(r.join(' · ')||'—')+'</span>';
 }
 
@@ -832,22 +838,22 @@ function renderReady(){
 function renderLeaps(){
   document.getElementById('n-leap').textContent=LEAPQ.length?LEAPQ.length+' qualify':'';
   if(!LEAPQ.length){ document.getElementById('leap-wrap').innerHTML=
-    `<div class="empty">No LEAP qualifies today — none clears Gate A + Gate C on a clear uptrend at once. Near-misses are in <a data-tab="overview" style="color:var(--accent);cursor:pointer">Overview</a>.</div>`;
+    `<div class="empty">No LEAP qualifies today — none is in an uptrend (price &gt; 200-MA, 50 &gt; 200) with a workable contract. Near-misses are in <a data-tab="overview" style="color:var(--accent);cursor:pointer">Overview</a>.</div>`;
     document.querySelector('#leap-wrap [data-tab]')?.addEventListener('click',()=>go('overview')); return; }
   const rows=LEAPQ.map(l=>`<tr class="clk" data-tk="${l.ticker}">
     <td class="l"><span class="tk">${l.ticker}</span></td>
     <td class="l trade t-leap">${fmtTrade('leap',l.strike)}</td>
-    <td class="l">${lightDot(verdictOf(l))}</td>
+    <td class="l">${lightDotN(verdictOf(l),l.timing_score,l.score_max||11)}</td>
     <td class="mono">${num(l.delta,2)}</td><td class="mono">${num(l.extrinsic_pct,0,'%')}</td>
     <td class="mono">${num(l.carry_pct,1,'%/yr')}</td><td class="mono">${l.dte}d</td><td class="mono">${num(l.iv,0,'%')}</td></tr>`).join('');
   const TH=(cls,lbl,tip)=>`<th class="${cls} thelp" data-tip="${tip.replace(/"/g,'&quot;')}">${lbl}<i class="thi">i</i></th>`;
   document.getElementById('leap-wrap').innerHTML=`<div class="tablewrap"><table><thead><tr>
     ${TH('l','Ticker','The underlying. Click any row to open it in the TA tab.')}
     ${TH('l','Suggested trade','The deep-ITM long call the engine picked (Δ 0.75–0.80) — a stock substitute, not premium income.')}
-    ${TH('l','Entry','Overall traffic light: 🟢 STRONG (qualifies + well-timed) · 🟡 ANALYZE (qualifies, timing partial). Only qualifiers are listed here.')}
+    ${TH('l','Entry','Graded entry light + score /11: 🟢 STRONG (≥8) · 🟡 ANALYZE (5–7) · 🟠 MARGINAL (2–4). Only names in an uptrend with a workable contract are listed. Score compares candidates at a glance.')}
     ${TH('','Δ','Delta 0.75–0.80 — deep in-the-money, so the call moves almost like the stock (intrinsic-led).')}
-    ${TH('','Extrinsic','Time value = premium − intrinsic, as a % of premium. Gate A: ≤40%.')}
-    ${TH('','Carry','Time-value cost per year, as a % of the share price. Gate C: ≤8%/yr.')}
+    ${TH('','Extrinsic','Time value = premium − intrinsic, as a % of premium. Backstop rejects &gt;55%; ≤25%→2pts, ≤40%→1pt in the score.')}
+    ${TH('','Carry','Time-value cost per year, as a % of the share price. Scores ≤5%→2pts, ≤8%→1pt (no longer a gate).')}
     ${TH('','DTE','Days to expiry — target ~542 (Jan-2027+), band 180–900.')}
     ${TH('','IV','Implied volatility — for a LEAP this is the timing input (cheap IV = better entry), not the cost gate.')}
   </tr></thead><tbody>${rows}</tbody></table></div>`;
@@ -1134,23 +1140,22 @@ function leapTile(l){
   // Only the light-driving gates are nodes (qualify = A + C + trend); timing is a graded quality
   // node that can amber but never red. MA breakdown is informational → foot, not a gate.
   const gnodes=[
-    {l:'Time value ≤40%', s:l.gate_a?'ok':'no'},
-    {l:'Carry ≤8%/yr', s:l.gate_c?'ok':'no'},
-    {l:'Clear uptrend', s:l.trend_ok?'ok':'no'},
-    {l:'Entry timing'+(ts!=null?' '+ts+'/9':''), s: ts==null?'warn':(ts>=7?'ok':'warn')} ];
+    {l:'Uptrend (50>200 & >200MA)', s:l.trend_ok?'ok':'no'},
+    {l:'Time value ≤55%', s:(l.ext_ok!==false)?'ok':'no'},
+    {l:'Entry score'+(ts!=null?' '+ts+'/'+(l.score_max||11):''), s: ts==null?'warn':(ts>=8?'ok':'warn')} ];
   const ma=`${l.above_50ma?'✓':'✗'}>50MA · ${l.above_200ma?'✓':'✗'}>200MA · ${l.ma_aligned?'✓':'✗'}50>200`;
-  const foot=`Exp ${l.expiry} · DTE ${l.dte} · cost $${l.cost} · ext $${num(l.extrinsic,0)} · ${ma}`;
+  const foot=`Exp ${l.expiry} · DTE ${l.dte} · cost $${l.cost} · ext $${num(l.extrinsic,0)} · carry ${num(l.carry_pct,1,'%/yr')} · ${ma}`;
   const key=[
-    kdot('good')+'STRONG — qualifies + well-timed',
-    kdot('warn')+'ANALYZE — qualifies, timing partial · your call',
-    kdot('bad')+'WEAK — fails Gate A / Gate C / uptrend',
-    'timing is informational — it never reds a LEAP',
+    kdot('good')+'STRONG — in uptrend, score ≥ 8',
+    kdot('warn')+'ANALYZE — in uptrend, score 5–7 · your call',
+    '<span class="kdot" style="background:var(--faint)"></span>OFF-TREND — below 200-MA or 50<200 · not a buy zone',
+    'below the 50-MA is fine — a pullback inside the uptrend still qualifies',
   ].map(l=>`<div>${l}</div>`).join('');
-  const verdictLine=`<div class="verdict ${VMETA[v].c}"><span class="ltdot"></span>${VMETA[v].t}</div>`;
+  const verdictLine=`<div class="verdict ${VMETA[v].c}"><span class="ltdot"></span>${VMETA[v].t}${ts!=null?' · '+ts+'/'+(l.score_max||11):''}</div>`;
   const chips=`<div class="fchips">${chip('Δ ',num(l.delta,2))}${chip('ext ',num(l.extrinsic_pct,0,'%'))}${chip('carry ',num(l.carry_pct,1,'%/yr'))}</div>`;
-  const body = v!=='avoid' ? `<div class="trade t-leap">${fmtTrade('leap',l.strike)}</div>${chips}` : chips;
+  const body = v!=='neutral' ? `<div class="trade t-leap">${fmtTrade('leap',l.strike)}</div>${chips}` : chips;
   return `<div class="legtile" tabindex="0">
-    <div class="th"><span class="pill p-leap">LEAP</span> ${lightBadge(v,false)}</div>
+    <div class="th"><span class="pill p-leap">LEAP</span> ${lightDotN(v,ts,l.score_max||11)}</div>
     ${body}
     <div class="detail">${verdictLine}${web('LEAP $'+l.strike, gnodes)}<div class="webfoot">${foot}</div><div class="webkey">${key}</div></div></div>`;
 }
