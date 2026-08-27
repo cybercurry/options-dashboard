@@ -562,13 +562,8 @@
       "earnings_in_window": false,
       "strong": true,
       "qualifies": false,
-      "median_ok": true,
-      "pct_b": 0.42,
-      "timing_label": "\ud83d\udd34 NO SETUP",
-      "timing_score": 1,
-      "timing_reasons": [
-        "IV fair vs realized +1"
-      ],
+      "median_ok": null,
+      "pct_b": null,
       "earnings_date": "2026-10-21",
       "gates": [
         {
@@ -597,11 +592,11 @@
         },
         {
           "l": "median",
-          "s": "ok"
+          "s": "warn"
         },
         {
-          "l": "timing 1/12",
-          "s": "no"
+          "l": "timing",
+          "s": "warn"
         }
       ],
       "verdict": "avoid",
@@ -1378,14 +1373,8 @@
       "earnings_in_window": false,
       "strong": false,
       "qualifies": true,
-      "median_ok": true,
-      "pct_b": 0.29,
-      "timing_label": "\ud83d\udd34 NO SETUP",
-      "timing_score": 1,
-      "timing_reasons": [
-        "Lower third (%B 0.29) +1",
-        "IV below realized \u2014 thin premium +0"
-      ],
+      "median_ok": null,
+      "pct_b": null,
       "earnings_date": "2026-10-28",
       "gates": [
         {
@@ -1414,16 +1403,16 @@
         },
         {
           "l": "median",
-          "s": "ok"
+          "s": "warn"
         },
         {
-          "l": "timing 1/12",
-          "s": "no"
+          "l": "timing",
+          "s": "warn"
         }
       ],
-      "verdict": "avoid",
-      "verdict_why": "no setup (1/12)",
-      "shortlist": true
+      "verdict": "caution",
+      "verdict_why": "setup unconfirmed",
+      "shortlist": false
     },
     {
       "ticker": "MSFT",
@@ -2132,14 +2121,8 @@
       "earnings_in_window": false,
       "strong": true,
       "qualifies": false,
-      "median_ok": false,
-      "pct_b": 0.42,
-      "timing_label": "\ud83d\udd34 NO SETUP",
-      "timing_score": 1,
-      "timing_reasons": [
-        "IV fair vs realized +1",
-        "\u26d4 Below median (%B 0.42) \u2014 CC needs above"
-      ],
+      "median_ok": null,
+      "pct_b": null,
       "earnings_date": "2026-10-21",
       "gates": [
         {
@@ -2168,11 +2151,11 @@
         },
         {
           "l": "median",
-          "s": "no"
+          "s": "warn"
         },
         {
-          "l": "timing 1/12",
-          "s": "no"
+          "l": "timing",
+          "s": "warn"
         }
       ],
       "verdict": "avoid",
@@ -2887,14 +2870,8 @@
       "earnings_in_window": false,
       "strong": true,
       "qualifies": true,
-      "median_ok": false,
-      "pct_b": 0.29,
-      "timing_label": "\ud83d\udd34 NO SETUP",
-      "timing_score": 0,
-      "timing_reasons": [
-        "IV below realized \u2014 thin premium +0",
-        "\u26d4 Below median (%B 0.29) \u2014 CC needs above"
-      ],
+      "median_ok": null,
+      "pct_b": null,
       "earnings_date": "2026-10-28",
       "gates": [
         {
@@ -2923,15 +2900,15 @@
         },
         {
           "l": "median",
-          "s": "no"
+          "s": "warn"
         },
         {
-          "l": "timing 0/12",
-          "s": "no"
+          "l": "timing",
+          "s": "warn"
         }
       ],
-      "verdict": "avoid",
-      "verdict_why": "wrong side of median",
+      "verdict": "caution",
+      "verdict_why": "setup unconfirmed",
       "shortlist": false
     },
     {
@@ -3349,6 +3326,130 @@
   ],
   "leaps": [
     {
+      "ticker": "AAPL",
+      "strategy": "LEAP",
+      "spot": 313.45,
+      "expiry": "2028-03-17",
+      "dte": 568,
+      "strike": 270.0,
+      "delta": 0.775,
+      "mid": 79.33,
+      "cost": 7932.0,
+      "intrinsic": 43.45,
+      "extrinsic": 35.88,
+      "extrinsic_pct": 45.2,
+      "carry_pct": 7.35,
+      "iv": 29.8,
+      "iv_ratio": 0.93,
+      "above_200ma": true,
+      "above_50ma": true,
+      "ma_aligned": true,
+      "rsi": 51.4,
+      "rsi_rising": false,
+      "ext_ok": true,
+      "trend_ok": true,
+      "qualifies": true,
+      "verdict": "go",
+      "timing_label": "\ud83d\udfe2 STRONG ENTRY",
+      "timing_score": 8,
+      "score_max": 11,
+      "sector": "Technology",
+      "good_pmcc": true
+    },
+    {
+      "ticker": "AMZN",
+      "strategy": "LEAP",
+      "spot": 260.28,
+      "expiry": "2028-01-21",
+      "dte": 512,
+      "strike": 220.0,
+      "delta": 0.777,
+      "mid": 73.42,
+      "cost": 7342.0,
+      "intrinsic": 40.28,
+      "extrinsic": 33.15,
+      "extrinsic_pct": 45.1,
+      "carry_pct": 9.08,
+      "iv": 36.9,
+      "iv_ratio": 0.64,
+      "above_200ma": true,
+      "above_50ma": true,
+      "ma_aligned": true,
+      "rsi": 50.9,
+      "rsi_rising": false,
+      "ext_ok": true,
+      "trend_ok": true,
+      "qualifies": true,
+      "verdict": "caution",
+      "timing_label": "\ud83d\udfe1 DECENT ENTRY",
+      "timing_score": 7,
+      "score_max": 11,
+      "sector": "Consumer Cyclical",
+      "good_pmcc": true
+    },
+    {
+      "ticker": "NVDA",
+      "strategy": "LEAP",
+      "spot": 209.66,
+      "expiry": "2028-01-21",
+      "dte": 512,
+      "strike": 175.0,
+      "delta": 0.772,
+      "mid": 63.0,
+      "cost": 6300.0,
+      "intrinsic": 34.66,
+      "extrinsic": 28.34,
+      "extrinsic_pct": 45.0,
+      "carry_pct": 9.64,
+      "iv": 40.6,
+      "iv_ratio": 1.26,
+      "above_200ma": true,
+      "above_50ma": true,
+      "ma_aligned": true,
+      "rsi": 46.3,
+      "rsi_rising": false,
+      "ext_ok": true,
+      "trend_ok": true,
+      "qualifies": true,
+      "verdict": "caution",
+      "timing_label": "\ud83d\udfe0 MARGINAL",
+      "timing_score": 4,
+      "score_max": 11,
+      "sector": "Technology",
+      "good_pmcc": true
+    },
+    {
+      "ticker": "AMD",
+      "strategy": "LEAP",
+      "spot": 480.93,
+      "expiry": "2028-01-21",
+      "dte": 512,
+      "strike": 380.0,
+      "delta": 0.782,
+      "mid": 186.65,
+      "cost": 18665.0,
+      "intrinsic": 100.93,
+      "extrinsic": 85.72,
+      "extrinsic_pct": 45.9,
+      "carry_pct": 12.71,
+      "iv": 59.0,
+      "iv_ratio": 0.86,
+      "above_200ma": true,
+      "above_50ma": false,
+      "ma_aligned": true,
+      "rsi": 48.4,
+      "rsi_rising": true,
+      "ext_ok": true,
+      "trend_ok": true,
+      "qualifies": true,
+      "verdict": "caution",
+      "timing_label": "\ud83d\udfe1 DECENT ENTRY",
+      "timing_score": 7,
+      "score_max": 11,
+      "sector": "Technology",
+      "good_pmcc": true
+    },
+    {
       "ticker": "CQQQ",
       "strategy": "LEAP",
       "spot": 48.1,
@@ -3369,13 +3470,13 @@
       "ma_aligned": true,
       "rsi": 36.2,
       "rsi_rising": false,
-      "gate_a": true,
-      "gate_c": true,
+      "ext_ok": true,
       "trend_ok": false,
       "qualifies": false,
-      "verdict": "avoid",
-      "timing_label": "\ud83d\udd34 AVOID",
-      "timing_score": -1,
+      "verdict": "neutral",
+      "timing_label": "\ud83d\udfe1 DECENT ENTRY",
+      "timing_score": 5,
+      "score_max": 11,
       "sector": "\u2014",
       "good_pmcc": false
     },
@@ -3400,13 +3501,13 @@
       "ma_aligned": false,
       "rsi": 34.4,
       "rsi_rising": false,
-      "gate_a": false,
-      "gate_c": true,
+      "ext_ok": true,
       "trend_ok": false,
       "qualifies": false,
-      "verdict": "avoid",
-      "timing_label": "\ud83d\udfe0 MARGINAL",
-      "timing_score": 2,
+      "verdict": "neutral",
+      "timing_label": "\ud83d\udfe1 DECENT ENTRY",
+      "timing_score": 6,
+      "score_max": 11,
       "sector": "Consumer Defensive",
       "good_pmcc": false
     },
@@ -3431,45 +3532,14 @@
       "ma_aligned": false,
       "rsi": 66.0,
       "rsi_rising": false,
-      "gate_a": false,
-      "gate_c": true,
+      "ext_ok": true,
       "trend_ok": false,
       "qualifies": false,
-      "verdict": "avoid",
-      "timing_label": "\ud83d\udfe1 DECENT ENTRY",
-      "timing_score": 6,
+      "verdict": "neutral",
+      "timing_label": "\ud83d\udfe0 MARGINAL",
+      "timing_score": 3,
+      "score_max": 11,
       "sector": "\u2014",
-      "good_pmcc": false
-    },
-    {
-      "ticker": "AAPL",
-      "strategy": "LEAP",
-      "spot": 313.45,
-      "expiry": "2028-03-17",
-      "dte": 568,
-      "strike": 270.0,
-      "delta": 0.775,
-      "mid": 79.33,
-      "cost": 7932.0,
-      "intrinsic": 43.45,
-      "extrinsic": 35.88,
-      "extrinsic_pct": 45.2,
-      "carry_pct": 7.35,
-      "iv": 29.8,
-      "iv_ratio": 0.93,
-      "above_200ma": true,
-      "above_50ma": true,
-      "ma_aligned": true,
-      "rsi": 51.4,
-      "rsi_rising": false,
-      "gate_a": false,
-      "gate_c": true,
-      "trend_ok": false,
-      "qualifies": false,
-      "verdict": "avoid",
-      "timing_label": "\ud83d\udfe2 STRONG ENTRY",
-      "timing_score": 9,
-      "sector": "Technology",
       "good_pmcc": false
     },
     {
@@ -3493,13 +3563,13 @@
       "ma_aligned": false,
       "rsi": 67.4,
       "rsi_rising": true,
-      "gate_a": false,
-      "gate_c": true,
+      "ext_ok": true,
       "trend_ok": false,
       "qualifies": false,
-      "verdict": "avoid",
-      "timing_label": "\ud83d\udfe2 STRONG ENTRY",
-      "timing_score": 7,
+      "verdict": "neutral",
+      "timing_label": "\ud83d\udfe0 MARGINAL",
+      "timing_score": 4,
+      "score_max": 11,
       "sector": "Technology",
       "good_pmcc": false
     },
@@ -3518,19 +3588,19 @@
       "extrinsic_pct": 39.2,
       "carry_pct": 8.0,
       "iv": 35.8,
-      "iv_ratio": 1.0,
-      "above_200ma": true,
+      "iv_ratio": null,
+      "above_200ma": false,
       "above_50ma": false,
-      "ma_aligned": true,
-      "rsi": 44.2,
+      "ma_aligned": false,
+      "rsi": null,
       "rsi_rising": false,
-      "gate_a": true,
-      "gate_c": false,
+      "ext_ok": true,
       "trend_ok": false,
       "qualifies": false,
-      "verdict": "avoid",
-      "timing_label": "\ud83d\udfe1 DECENT ENTRY",
-      "timing_score": 6,
+      "verdict": "neutral",
+      "timing_label": "\u26aa NEUTRAL",
+      "timing_score": 1,
+      "score_max": 11,
       "sector": "Communication Services",
       "good_pmcc": false
     },
@@ -3555,13 +3625,13 @@
       "ma_aligned": false,
       "rsi": 61.9,
       "rsi_rising": true,
-      "gate_a": true,
-      "gate_c": false,
+      "ext_ok": true,
       "trend_ok": false,
       "qualifies": false,
-      "verdict": "avoid",
-      "timing_label": "\ud83d\udfe1 DECENT ENTRY",
+      "verdict": "neutral",
+      "timing_label": "\ud83d\udfe0 MARGINAL",
       "timing_score": 4,
+      "score_max": 11,
       "sector": "\u2014",
       "good_pmcc": false
     },
@@ -3586,44 +3656,13 @@
       "ma_aligned": false,
       "rsi": 62.1,
       "rsi_rising": true,
-      "gate_a": true,
-      "gate_c": false,
+      "ext_ok": true,
       "trend_ok": false,
       "qualifies": false,
-      "verdict": "avoid",
-      "timing_label": "\ud83d\udfe2 STRONG ENTRY",
-      "timing_score": 8,
-      "sector": "Consumer Cyclical",
-      "good_pmcc": false
-    },
-    {
-      "ticker": "AMZN",
-      "strategy": "LEAP",
-      "spot": 260.28,
-      "expiry": "2028-01-21",
-      "dte": 512,
-      "strike": 220.0,
-      "delta": 0.777,
-      "mid": 73.42,
-      "cost": 7342.0,
-      "intrinsic": 40.28,
-      "extrinsic": 33.15,
-      "extrinsic_pct": 45.1,
-      "carry_pct": 9.08,
-      "iv": 36.9,
-      "iv_ratio": 0.64,
-      "above_200ma": true,
-      "above_50ma": true,
-      "ma_aligned": true,
-      "rsi": 50.9,
-      "rsi_rising": false,
-      "gate_a": false,
-      "gate_c": false,
-      "trend_ok": false,
-      "qualifies": false,
-      "verdict": "avoid",
-      "timing_label": "\ud83d\udfe2 STRONG ENTRY",
-      "timing_score": 9,
+      "verdict": "neutral",
+      "timing_label": "\ud83d\udfe1 DECENT ENTRY",
+      "timing_score": 5,
+      "score_max": 11,
       "sector": "Consumer Cyclical",
       "good_pmcc": false
     },
@@ -3648,45 +3687,14 @@
       "ma_aligned": false,
       "rsi": 58.2,
       "rsi_rising": true,
-      "gate_a": true,
-      "gate_c": false,
+      "ext_ok": true,
       "trend_ok": false,
       "qualifies": false,
-      "verdict": "avoid",
-      "timing_label": "\ud83d\udd34 AVOID",
-      "timing_score": 1,
-      "sector": "Utilities",
-      "good_pmcc": false
-    },
-    {
-      "ticker": "NVDA",
-      "strategy": "LEAP",
-      "spot": 209.66,
-      "expiry": "2028-01-21",
-      "dte": 512,
-      "strike": 175.0,
-      "delta": 0.772,
-      "mid": 63.0,
-      "cost": 6300.0,
-      "intrinsic": 34.66,
-      "extrinsic": 28.34,
-      "extrinsic_pct": 45.0,
-      "carry_pct": 9.64,
-      "iv": 40.6,
-      "iv_ratio": 1.26,
-      "above_200ma": true,
-      "above_50ma": true,
-      "ma_aligned": true,
-      "rsi": 46.3,
-      "rsi_rising": false,
-      "gate_a": false,
-      "gate_c": false,
-      "trend_ok": false,
-      "qualifies": false,
-      "verdict": "avoid",
+      "verdict": "neutral",
       "timing_label": "\ud83d\udfe0 MARGINAL",
-      "timing_score": 3,
-      "sector": "Technology",
+      "timing_score": 2,
+      "score_max": 11,
+      "sector": "Utilities",
       "good_pmcc": false
     },
     {
@@ -3710,13 +3718,13 @@
       "ma_aligned": false,
       "rsi": 49.8,
       "rsi_rising": false,
-      "gate_a": false,
-      "gate_c": false,
+      "ext_ok": true,
       "trend_ok": false,
       "qualifies": false,
-      "verdict": "avoid",
-      "timing_label": "\ud83d\udd34 AVOID",
-      "timing_score": -2,
+      "verdict": "neutral",
+      "timing_label": "\ud83d\udfe0 MARGINAL",
+      "timing_score": 3,
+      "score_max": 11,
       "sector": "Consumer Cyclical",
       "good_pmcc": false
     },
@@ -3741,13 +3749,13 @@
       "ma_aligned": false,
       "rsi": 54.5,
       "rsi_rising": false,
-      "gate_a": false,
-      "gate_c": false,
+      "ext_ok": true,
       "trend_ok": false,
       "qualifies": false,
-      "verdict": "avoid",
+      "verdict": "neutral",
       "timing_label": "\ud83d\udfe1 DECENT ENTRY",
-      "timing_score": 4,
+      "timing_score": 6,
+      "score_max": 11,
       "sector": "Industrials",
       "good_pmcc": false
     },
@@ -3772,44 +3780,13 @@
       "ma_aligned": false,
       "rsi": 58.4,
       "rsi_rising": false,
-      "gate_a": false,
-      "gate_c": false,
+      "ext_ok": true,
       "trend_ok": false,
       "qualifies": false,
-      "verdict": "avoid",
-      "timing_label": "\ud83d\udfe2 STRONG ENTRY",
-      "timing_score": 7,
-      "sector": "Technology",
-      "good_pmcc": false
-    },
-    {
-      "ticker": "AMD",
-      "strategy": "LEAP",
-      "spot": 480.93,
-      "expiry": "2028-01-21",
-      "dte": 512,
-      "strike": 380.0,
-      "delta": 0.782,
-      "mid": 186.65,
-      "cost": 18665.0,
-      "intrinsic": 100.93,
-      "extrinsic": 85.72,
-      "extrinsic_pct": 45.9,
-      "carry_pct": 12.71,
-      "iv": 59.0,
-      "iv_ratio": 0.86,
-      "above_200ma": true,
-      "above_50ma": false,
-      "ma_aligned": true,
-      "rsi": 48.4,
-      "rsi_rising": true,
-      "gate_a": false,
-      "gate_c": false,
-      "trend_ok": false,
-      "qualifies": false,
-      "verdict": "avoid",
-      "timing_label": "\ud83d\udfe1 DECENT ENTRY",
-      "timing_score": 6,
+      "verdict": "neutral",
+      "timing_label": "\ud83d\udfe0 MARGINAL",
+      "timing_score": 3,
+      "score_max": 11,
       "sector": "Technology",
       "good_pmcc": false
     },
@@ -3834,13 +3811,13 @@
       "ma_aligned": false,
       "rsi": 64.7,
       "rsi_rising": false,
-      "gate_a": false,
-      "gate_c": false,
+      "ext_ok": true,
       "trend_ok": false,
       "qualifies": false,
-      "verdict": "avoid",
-      "timing_label": "\ud83d\udfe2 STRONG ENTRY",
-      "timing_score": 8,
+      "verdict": "neutral",
+      "timing_label": "\ud83d\udfe0 MARGINAL",
+      "timing_score": 4,
+      "score_max": 11,
       "sector": "Technology",
       "good_pmcc": false
     },
@@ -3865,13 +3842,13 @@
       "ma_aligned": false,
       "rsi": 56.3,
       "rsi_rising": true,
-      "gate_a": false,
-      "gate_c": false,
+      "ext_ok": true,
       "trend_ok": false,
       "qualifies": false,
-      "verdict": "avoid",
-      "timing_label": "\ud83d\udfe1 DECENT ENTRY",
-      "timing_score": 4,
+      "verdict": "neutral",
+      "timing_label": "\ud83d\udfe0 MARGINAL",
+      "timing_score": 3,
+      "score_max": 11,
       "sector": "Financial Services",
       "good_pmcc": false
     },
@@ -3896,13 +3873,13 @@
       "ma_aligned": false,
       "rsi": 52.2,
       "rsi_rising": false,
-      "gate_a": false,
-      "gate_c": false,
+      "ext_ok": true,
       "trend_ok": false,
       "qualifies": false,
-      "verdict": "avoid",
+      "verdict": "neutral",
       "timing_label": "\ud83d\udfe1 DECENT ENTRY",
-      "timing_score": 4,
+      "timing_score": 5,
+      "score_max": 11,
       "sector": "Technology",
       "good_pmcc": false
     },
@@ -3921,19 +3898,19 @@
       "extrinsic_pct": 49.7,
       "carry_pct": 14.34,
       "iv": 64.3,
-      "iv_ratio": 1.18,
-      "above_200ma": true,
+      "iv_ratio": null,
+      "above_200ma": false,
       "above_50ma": false,
-      "ma_aligned": true,
-      "rsi": 44.4,
-      "rsi_rising": true,
-      "gate_a": false,
-      "gate_c": false,
+      "ma_aligned": false,
+      "rsi": null,
+      "rsi_rising": false,
+      "ext_ok": true,
       "trend_ok": false,
       "qualifies": false,
-      "verdict": "avoid",
-      "timing_label": "\ud83d\udfe1 DECENT ENTRY",
-      "timing_score": 5,
+      "verdict": "neutral",
+      "timing_label": "\u26aa NEUTRAL",
+      "timing_score": 0,
+      "score_max": 11,
       "sector": "Industrials",
       "good_pmcc": false
     },
@@ -3958,13 +3935,13 @@
       "ma_aligned": false,
       "rsi": 48.4,
       "rsi_rising": false,
-      "gate_a": false,
-      "gate_c": false,
+      "ext_ok": false,
       "trend_ok": false,
       "qualifies": false,
-      "verdict": "avoid",
-      "timing_label": "\ud83d\udfe0 MARGINAL",
-      "timing_score": 2,
+      "verdict": "neutral",
+      "timing_label": "\ud83d\udfe1 DECENT ENTRY",
+      "timing_score": 6,
+      "score_max": 11,
       "sector": "Technology",
       "good_pmcc": false
     },
@@ -3989,13 +3966,13 @@
       "ma_aligned": true,
       "rsi": 46.1,
       "rsi_rising": false,
-      "gate_a": false,
-      "gate_c": false,
+      "ext_ok": false,
       "trend_ok": false,
       "qualifies": false,
-      "verdict": "avoid",
-      "timing_label": "\ud83d\udfe0 MARGINAL",
-      "timing_score": 2,
+      "verdict": "neutral",
+      "timing_label": "\ud83d\udfe1 DECENT ENTRY",
+      "timing_score": 5,
+      "score_max": 11,
       "sector": "Technology",
       "good_pmcc": false
     },
@@ -4020,13 +3997,13 @@
       "ma_aligned": true,
       "rsi": 49.4,
       "rsi_rising": true,
-      "gate_a": false,
-      "gate_c": false,
-      "trend_ok": false,
+      "ext_ok": false,
+      "trend_ok": true,
       "qualifies": false,
-      "verdict": "avoid",
+      "verdict": "neutral",
       "timing_label": "\ud83d\udfe1 DECENT ENTRY",
-      "timing_score": 6,
+      "timing_score": 7,
+      "score_max": 11,
       "sector": "Industrials",
       "good_pmcc": false
     },
@@ -4051,13 +4028,13 @@
       "ma_aligned": true,
       "rsi": 48.5,
       "rsi_rising": false,
-      "gate_a": false,
-      "gate_c": false,
-      "trend_ok": false,
+      "ext_ok": false,
+      "trend_ok": true,
       "qualifies": false,
-      "verdict": "avoid",
+      "verdict": "neutral",
       "timing_label": "\ud83d\udfe1 DECENT ENTRY",
-      "timing_score": 6,
+      "timing_score": 7,
+      "score_max": 11,
       "sector": "Communication Services",
       "good_pmcc": false
     },
@@ -4082,13 +4059,13 @@
       "ma_aligned": false,
       "rsi": 46.5,
       "rsi_rising": false,
-      "gate_a": false,
-      "gate_c": false,
+      "ext_ok": false,
       "trend_ok": false,
       "qualifies": false,
-      "verdict": "avoid",
-      "timing_label": "\ud83d\udfe0 MARGINAL",
-      "timing_score": 2,
+      "verdict": "neutral",
+      "timing_label": "\ud83d\udfe1 DECENT ENTRY",
+      "timing_score": 6,
+      "score_max": 11,
       "sector": "Financial Services",
       "good_pmcc": false
     },
@@ -4113,13 +4090,13 @@
       "ma_aligned": false,
       "rsi": 79.2,
       "rsi_rising": true,
-      "gate_a": false,
-      "gate_c": false,
+      "ext_ok": false,
       "trend_ok": false,
       "qualifies": false,
-      "verdict": "avoid",
+      "verdict": "neutral",
       "timing_label": "\ud83d\udfe0 MARGINAL",
-      "timing_score": 2,
+      "timing_score": 3,
+      "score_max": 11,
       "sector": "Financial Services",
       "good_pmcc": false
     }
@@ -4141,10 +4118,10 @@
       "pctb": 0.7,
       "csp_timing": "\ud83d\udd34 NO SETUP",
       "cc_timing": "\ud83d\udd34 NO SETUP",
-      "leap_timing": "\ud83d\udd34 AVOID",
+      "leap_timing": "\ud83d\udfe0 MARGINAL",
       "csp_verdict": "avoid",
       "cc_verdict": "avoid",
-      "leap_verdict": "avoid",
+      "leap_verdict": "neutral",
       "is_wheel": true
     },
     {
@@ -4163,10 +4140,10 @@
       "pctb": 0.77,
       "csp_timing": "\ud83d\udd34 NO SETUP",
       "cc_timing": "\ud83d\udd34 NO SETUP",
-      "leap_timing": "\ud83d\udfe1 DECENT ENTRY",
+      "leap_timing": "\ud83d\udfe0 MARGINAL",
       "csp_verdict": "avoid",
       "cc_verdict": "avoid",
-      "leap_verdict": "avoid",
+      "leap_verdict": "neutral",
       "is_wheel": true
     },
     {
@@ -4188,7 +4165,7 @@
       "leap_timing": "\ud83d\udfe0 MARGINAL",
       "csp_verdict": "avoid",
       "cc_verdict": "avoid",
-      "leap_verdict": "avoid",
+      "leap_verdict": "caution",
       "is_wheel": true
     },
     {
@@ -4207,10 +4184,10 @@
       "pctb": 0.35,
       "csp_timing": "\ud83d\udd34 NO SETUP",
       "cc_timing": "\ud83d\udd34 NO SETUP",
-      "leap_timing": "\ud83d\udfe2 STRONG ENTRY",
+      "leap_timing": "\ud83d\udfe1 DECENT ENTRY",
       "csp_verdict": "avoid",
       "cc_verdict": "avoid",
-      "leap_verdict": "avoid",
+      "leap_verdict": "caution",
       "is_wheel": true
     },
     {
@@ -4229,10 +4206,10 @@
       "pctb": 0.66,
       "csp_timing": "\ud83d\udd34 NO SETUP",
       "cc_timing": "\ud83d\udd34 NO SETUP",
-      "leap_timing": "\ud83d\udfe2 STRONG ENTRY",
+      "leap_timing": "\ud83d\udfe0 MARGINAL",
       "csp_verdict": "avoid",
       "cc_verdict": "avoid",
-      "leap_verdict": "avoid",
+      "leap_verdict": "neutral",
       "is_wheel": true
     },
     {
@@ -4251,32 +4228,32 @@
       "pctb": 0.79,
       "csp_timing": "\ud83d\udd34 NO SETUP",
       "cc_timing": "\ud83d\udfe1 PARTIAL SETUP",
-      "leap_timing": "\ud83d\udd34 AVOID",
+      "leap_timing": "\ud83d\udfe0 MARGINAL",
       "csp_verdict": "avoid",
       "cc_verdict": "avoid",
-      "leap_verdict": "avoid",
+      "leap_verdict": "neutral",
       "is_wheel": true
     },
     {
       "ticker": "VRT",
       "sector": "Industrials",
       "price": 263.81,
-      "pct": 3.2,
-      "hv20": 54.3,
-      "hvpct": 41,
+      "pct": null,
+      "hv20": null,
+      "hvpct": null,
       "c_iv": 58,
       "p_iv": 57,
-      "iv_vs_hv": "fair",
-      "rsi": 44,
-      "above_200": true,
+      "iv_vs_hv": "\u2014",
+      "rsi": null,
+      "above_200": false,
       "pcr": null,
-      "pctb": 0.42,
-      "csp_timing": "\ud83d\udd34 NO SETUP",
-      "cc_timing": "\ud83d\udd34 NO SETUP",
-      "leap_timing": "\ud83d\udfe1 DECENT ENTRY",
+      "pctb": null,
+      "csp_timing": null,
+      "cc_timing": null,
+      "leap_timing": "\u26aa NEUTRAL",
       "csp_verdict": "avoid",
       "cc_verdict": "avoid",
-      "leap_verdict": "avoid",
+      "leap_verdict": "neutral",
       "is_wheel": true
     },
     {
@@ -4295,10 +4272,10 @@
       "pctb": 0.79,
       "csp_timing": "\ud83d\udd34 NO SETUP",
       "cc_timing": "\ud83d\udd34 NO SETUP",
-      "leap_timing": "\ud83d\udfe2 STRONG ENTRY",
+      "leap_timing": "\ud83d\udfe1 DECENT ENTRY",
       "csp_verdict": "avoid",
       "cc_verdict": "avoid",
-      "leap_verdict": "avoid",
+      "leap_verdict": "neutral",
       "is_wheel": true
     },
     {
@@ -4317,10 +4294,10 @@
       "pctb": 0.8,
       "csp_timing": "\ud83d\udd34 NO SETUP",
       "cc_timing": "\ud83d\udfe1 PARTIAL SETUP",
-      "leap_timing": "\ud83d\udfe1 DECENT ENTRY",
+      "leap_timing": "\ud83d\udfe0 MARGINAL",
       "csp_verdict": "avoid",
       "cc_verdict": "caution",
-      "leap_verdict": "avoid",
+      "leap_verdict": "neutral",
       "is_wheel": true
     },
     {
@@ -4339,10 +4316,10 @@
       "pctb": 0.77,
       "csp_timing": "\ud83d\udd34 NO SETUP",
       "cc_timing": "\ud83d\udfe1 PARTIAL SETUP",
-      "leap_timing": "\ud83d\udfe1 DECENT ENTRY",
+      "leap_timing": "\ud83d\udfe0 MARGINAL",
       "csp_verdict": "avoid",
       "cc_verdict": "avoid",
-      "leap_verdict": "avoid",
+      "leap_verdict": "neutral",
       "is_wheel": true
     },
     {
@@ -4361,10 +4338,10 @@
       "pctb": 0.68,
       "csp_timing": "\ud83d\udd34 NO SETUP",
       "cc_timing": "\ud83d\udd34 NO SETUP",
-      "leap_timing": "\ud83d\udfe2 STRONG ENTRY",
+      "leap_timing": "\ud83d\udfe0 MARGINAL",
       "csp_verdict": "avoid",
       "cc_verdict": "avoid",
-      "leap_verdict": "avoid",
+      "leap_verdict": "neutral",
       "is_wheel": true
     },
     {
@@ -4383,10 +4360,10 @@
       "pctb": 0.08,
       "csp_timing": "\ud83d\udd34 NO SETUP",
       "cc_timing": "\ud83d\udd34 NO SETUP",
-      "leap_timing": "\ud83d\udfe0 MARGINAL",
+      "leap_timing": "\ud83d\udfe1 DECENT ENTRY",
       "csp_verdict": "avoid",
       "cc_verdict": "avoid",
-      "leap_verdict": "avoid",
+      "leap_verdict": "neutral",
       "is_wheel": true
     },
     {
@@ -4408,29 +4385,29 @@
       "leap_timing": "\ud83d\udfe2 STRONG ENTRY",
       "csp_verdict": "avoid",
       "cc_verdict": "avoid",
-      "leap_verdict": "avoid",
+      "leap_verdict": "go",
       "is_wheel": true
     },
     {
       "ticker": "GOOG",
       "sector": "Communication Services",
       "price": 339.1,
-      "pct": -1.2,
-      "hv20": 35.9,
-      "hvpct": 79,
+      "pct": null,
+      "hv20": null,
+      "hvpct": null,
       "c_iv": 28,
       "p_iv": 28,
-      "iv_vs_hv": "cheap",
-      "rsi": 44,
-      "above_200": true,
+      "iv_vs_hv": "\u2014",
+      "rsi": null,
+      "above_200": false,
       "pcr": null,
-      "pctb": 0.29,
-      "csp_timing": "\ud83d\udd34 NO SETUP",
-      "cc_timing": "\ud83d\udd34 NO SETUP",
-      "leap_timing": "\ud83d\udfe1 DECENT ENTRY",
-      "csp_verdict": "avoid",
-      "cc_verdict": "avoid",
-      "leap_verdict": "avoid",
+      "pctb": null,
+      "csp_timing": null,
+      "cc_timing": null,
+      "leap_timing": "\u26aa NEUTRAL",
+      "csp_verdict": "caution",
+      "cc_verdict": "caution",
+      "leap_verdict": "neutral",
       "is_wheel": true
     },
     {
@@ -4452,7 +4429,7 @@
       "leap_timing": "\ud83d\udfe1 DECENT ENTRY",
       "csp_verdict": "avoid",
       "cc_verdict": "avoid",
-      "leap_verdict": "avoid",
+      "leap_verdict": "caution",
       "is_wheel": true
     },
     {
@@ -4474,7 +4451,7 @@
       "leap_timing": "\ud83d\udfe1 DECENT ENTRY",
       "csp_verdict": "avoid",
       "cc_verdict": "avoid",
-      "leap_verdict": "avoid",
+      "leap_verdict": "neutral",
       "is_wheel": true
     },
     {
@@ -4496,7 +4473,7 @@
       "leap_timing": "\ud83d\udfe1 DECENT ENTRY",
       "csp_verdict": "avoid",
       "cc_verdict": "avoid",
-      "leap_verdict": "avoid",
+      "leap_verdict": "neutral",
       "is_wheel": false
     },
     {
@@ -4515,10 +4492,10 @@
       "pctb": 0.45,
       "csp_timing": "\ud83d\udd34 NO SETUP",
       "cc_timing": "\ud83d\udd34 NO SETUP",
-      "leap_timing": "\ud83d\udfe0 MARGINAL",
+      "leap_timing": "\ud83d\udfe1 DECENT ENTRY",
       "csp_verdict": "avoid",
       "cc_verdict": "avoid",
-      "leap_verdict": "avoid",
+      "leap_verdict": "neutral",
       "is_wheel": false
     },
     {
@@ -4537,10 +4514,10 @@
       "pctb": 0.64,
       "csp_timing": "\ud83d\udd34 NO SETUP",
       "cc_timing": "\ud83d\udd34 NO SETUP",
-      "leap_timing": "\ud83d\udfe2 STRONG ENTRY",
+      "leap_timing": "\ud83d\udfe0 MARGINAL",
       "csp_verdict": "avoid",
       "cc_verdict": "avoid",
-      "leap_verdict": "avoid",
+      "leap_verdict": "neutral",
       "is_wheel": false
     },
     {
@@ -4559,10 +4536,10 @@
       "pctb": 0.1,
       "csp_timing": "\ud83d\udfe1 PARTIAL SETUP",
       "cc_timing": "\ud83d\udd34 NO SETUP",
-      "leap_timing": "\ud83d\udd34 AVOID",
+      "leap_timing": "\ud83d\udfe1 DECENT ENTRY",
       "csp_verdict": null,
       "cc_verdict": "avoid",
-      "leap_verdict": "avoid",
+      "leap_verdict": "neutral",
       "is_wheel": false
     },
     {
@@ -4603,10 +4580,10 @@
       "pctb": 0.42,
       "csp_timing": "\ud83d\udd34 NO SETUP",
       "cc_timing": "\ud83d\udd34 NO SETUP",
-      "leap_timing": "\ud83d\udfe0 MARGINAL",
+      "leap_timing": "\ud83d\udfe1 DECENT ENTRY",
       "csp_verdict": "avoid",
       "cc_verdict": "avoid",
-      "leap_verdict": "avoid",
+      "leap_verdict": "neutral",
       "is_wheel": false
     },
     {
@@ -4628,7 +4605,7 @@
       "leap_timing": "\ud83d\udfe1 DECENT ENTRY",
       "csp_verdict": "avoid",
       "cc_verdict": "avoid",
-      "leap_verdict": "avoid",
+      "leap_verdict": "neutral",
       "is_wheel": false
     },
     {
@@ -4647,10 +4624,10 @@
       "pctb": 0.34,
       "csp_timing": "\ud83d\udd34 NO SETUP",
       "cc_timing": "\ud83d\udd34 NO SETUP",
-      "leap_timing": "\ud83d\udfe0 MARGINAL",
+      "leap_timing": "\ud83d\udfe1 DECENT ENTRY",
       "csp_verdict": "avoid",
       "cc_verdict": "avoid",
-      "leap_verdict": "avoid",
+      "leap_verdict": "neutral",
       "is_wheel": false
     },
     {
@@ -4672,7 +4649,7 @@
       "leap_timing": "\ud83d\udfe0 MARGINAL",
       "csp_verdict": "avoid",
       "cc_verdict": "avoid",
-      "leap_verdict": "avoid",
+      "leap_verdict": "neutral",
       "is_wheel": false
     },
     {
@@ -4694,7 +4671,7 @@
       "leap_timing": "\ud83d\udfe1 DECENT ENTRY",
       "csp_verdict": "avoid",
       "cc_verdict": "avoid",
-      "leap_verdict": "avoid",
+      "leap_verdict": "neutral",
       "is_wheel": false
     }
   ],
@@ -4717,8 +4694,8 @@
   "count": 49,
   "leap_count": 25,
   "market": {
-    "vix": 15.21,
-    "vix_label": "normal",
+    "vix": 14.86,
+    "vix_label": "calm",
     "fng": 55,
     "fng_label": "Greed",
     "btc_fng": 71,
@@ -4971,7 +4948,8 @@
       15.1,
       15.9,
       15.4,
-      15.2
+      15.2,
+      14.9
     ],
     "ten_year": 4.64,
     "two_year": 4.17,
@@ -5276,8 +5254,8 @@
     },
     {
       "label": "DXY",
-      "price": 99.16100311279297,
-      "pct": -0.009070340141603683,
+      "price": 99.1780014038086,
+      "pct": 0.008070217818945125,
       "prefix": "",
       "is_yield": false,
       "hist": [
@@ -5345,13 +5323,13 @@
         99.0,
         98.92,
         99.17,
-        99.16
+        99.18
       ]
     },
     {
       "label": "Crude Oil",
-      "price": 81.22000122070312,
-      "pct": -1.2282647391443913,
+      "price": 81.73999786376953,
+      "pct": -0.5958962339294938,
       "prefix": "$",
       "is_yield": false,
       "hist": [
@@ -5419,13 +5397,13 @@
         85.01,
         82.36,
         82.23,
-        81.22
+        81.74
       ]
     },
     {
       "label": "Gold",
-      "price": 4658.7001953125,
-      "pct": 1.3157321871647643,
+      "price": 4653.7998046875,
+      "pct": 1.2091602586524974,
       "prefix": "$",
       "is_yield": false,
       "hist": [
@@ -5493,17 +5471,16 @@
         4641,
         4638,
         4598,
-        4659
+        4654
       ]
     },
     {
       "label": "Bitcoin",
-      "price": 78770.90625,
-      "pct": 0.26211385341174953,
+      "price": 79843.0625,
+      "pct": 1.0320982333070772,
       "prefix": "$",
       "is_yield": false,
       "hist": [
-        73373,
         73755,
         73580,
         71320,
@@ -5592,7 +5569,8 @@
         77755,
         78964,
         78565,
-        78771
+        79027,
+        79843
       ]
     },
     {
@@ -5814,8 +5792,8 @@
     {
       "label": "Digital Assets",
       "ticker": "BTC",
-      "pct": 0.26211385341174953,
-      "price": 78770.90625
+      "pct": 1.0320982333070772,
+      "price": 79843.0625
     }
   ],
   "fundamentals": {
@@ -5886,6 +5864,18 @@
       ],
       "news": [
         {
+          "title": "Despite Its Flaws, Tesla Still Dominates the World in This Index. Is the Stock a Buy Now?",
+          "publisher": "Motley Fool",
+          "link": "https://www.fool.com/investing/2026/08/27/despite-its-flaws-tesla-still-dominates-the-world/",
+          "when": "Aug 27"
+        },
+        {
+          "title": "10% of Cathie Wood\u2019s Portfolio Is Invested in Elon Musk-Led Companies",
+          "publisher": "Motley Fool",
+          "link": "https://www.fool.com/investing/2026/08/27/10-of-cathie-wood-s-portfolio-is-invested-in-elon-musk-led-companies/",
+          "when": "Aug 27"
+        },
+        {
           "title": "Tesla (TSLA) Stock Looks Overvalued Following Its 41% Five Year Gain",
           "publisher": "Simply Wall St.",
           "link": "https://finance.yahoo.com/markets/stocks/articles/tesla-tsla-stock-looks-overvalued-010918703.html",
@@ -5908,18 +5898,6 @@
           "publisher": "TheStreet",
           "link": "https://www.thestreet.com/investing/tesla-tsla-discontinues-solar-roof-tiles",
           "when": "Aug 27"
-        },
-        {
-          "title": "Elon Musk Reveals Why SpaceX Launched Tesla\u2019s Roadster Into Orbit: \u2018We Didn\u2019t Want to Risk Anything Valuable\u2019",
-          "publisher": "Benzinga",
-          "link": "https://finance.yahoo.com/technology/articles/elon-musk-reveals-why-spacex-233044265.html",
-          "when": "Aug 26"
-        },
-        {
-          "title": "Elon Musk Grok Bot Promise: We Will Make You Whole if AI Loses Your Money",
-          "publisher": "BeInCrypto",
-          "link": "https://beincrypto.com/elon-musk-grok-bot-promise/",
-          "when": "Aug 26"
         }
       ]
     },
@@ -6102,39 +6080,39 @@
       ],
       "news": [
         {
-          "title": "Stock market today: Dow, S&P 500, Nasdaq close lower, Nvidia stock jumps after earnings",
+          "title": "Nvidia is looking more like the central bank of AI",
           "publisher": "Yahoo Finance",
-          "link": "https://finance.yahoo.com/markets/live/stock-market-today-wednesday-august-26-dow-sp-500-nasdaq-081834782.html",
+          "link": "https://finance.yahoo.com/markets/article/nvidia-is-looking-more-like-the-central-bank-of-ai-213156835.html",
           "when": "Aug 26"
         },
         {
-          "title": "It's 'hard' to argue that Nvidia's financing is circular, analyst says",
+          "title": "Why Nvidia says its AI partnerships aren't 'circular financing'",
           "publisher": "Yahoo Finance Video",
-          "link": "https://finance.yahoo.com/video/hard-argue-nvidias-financing-circular-210803102.html",
+          "link": "https://finance.yahoo.com/video/why-nvidia-says-its-ai-partnerships-arent-circular-financing-222400222.html",
           "when": "Aug 26"
         },
         {
-          "title": "Earnings live updates: Salesforce, CrowdStrike, Okta stocks surge as AI boom helps lift Q2 results",
-          "publisher": "Yahoo Finance",
-          "link": "https://finance.yahoo.com/markets/live/earnings-live-updates-q2-nvidia-115314802.html",
-          "when": "Aug 25"
-        },
-        {
-          "title": "Robots are the 'next gen' of AI: Why ETF investors are flocking back to tech",
+          "title": "Nvidia crushed earnings but one analyst is rating it a \"sell\"",
           "publisher": "Yahoo Finance Video",
-          "link": "https://finance.yahoo.com/video/robots-next-gen-ai-why-153614762.html",
+          "link": "https://finance.yahoo.com/video/nvidia-crushed-earnings-one-analyst-210118074.html",
           "when": "Aug 26"
         },
         {
-          "title": "Is Meta a buy after its $16.68 billion social media case settlement?",
+          "title": "AI's next big bottleneck isn't infrastructure. It's regulatory red tape.",
           "publisher": "Yahoo Finance Video",
-          "link": "https://finance.yahoo.com/video/meta-buy-16-68-billion-141935353.html",
+          "link": "https://finance.yahoo.com/video/ais-next-big-bottleneck-isnt-195939357.html",
           "when": "Aug 26"
         },
         {
-          "title": "Nvidia earnings, PCE data: What investors need to watch Wednesday",
+          "title": "Why investors should consider taking profits in AI stocks now",
           "publisher": "Yahoo Finance Video",
-          "link": "https://finance.yahoo.com/video/nvidia-earnings-pce-data-investors-120000582.html",
+          "link": "https://finance.yahoo.com/video/why-investors-consider-taking-profits-143643526.html",
+          "when": "Aug 26"
+        },
+        {
+          "title": "Why the sustainability of the AI boom could be in focus after Nvidia's earnings call",
+          "publisher": "Yahoo Finance Video",
+          "link": "https://finance.yahoo.com/video/why-sustainability-ai-boom-could-135959475.html",
           "when": "Aug 26"
         }
       ]
@@ -6203,15 +6181,21 @@
           "when": "Aug 26"
         },
         {
-          "title": "If I Were in My 20s, I'd Buy These 2 Trillion-Dollar Stocks and Hold Them Until Retirement",
-          "publisher": "Motley Fool",
-          "link": "https://www.fool.com/investing/2026/08/27/if-i-were-in-my-20s-id-buy-these-2-trillion-dollar/",
+          "title": "Nvidia Stock Usually Gets a Post-Earnings Hangover. This Time It Could Be an Afterparty.",
+          "publisher": "The Wall Street Journal",
+          "link": "https://www.wsj.com/livecoverage/stock-market-today-dow-sp-500-nasdaq-08-27-2026/card/nvidia-stock-usually-gets-a-post-earnings-hangover-this-time-it-could-be-an-afterparty--OU6M7f6jJmUAcGQIkjPJ?siteid=yhoof2&yptr=yahoo",
           "when": "Aug 27"
         },
         {
           "title": "Asian chip firms lifted by Nvidia forecast but broader markets struggle",
           "publisher": "AFP",
           "link": "https://finance.yahoo.com/markets/stocks/articles/asian-chip-firms-lifted-nvidia-024234685.html",
+          "when": "Aug 27"
+        },
+        {
+          "title": "If I Were in My 20s, I'd Buy These 2 Trillion-Dollar Stocks and Hold Them Until Retirement",
+          "publisher": "Motley Fool",
+          "link": "https://www.fool.com/investing/2026/08/27/if-i-were-in-my-20s-id-buy-these-2-trillion-dollar/",
           "when": "Aug 27"
         },
         {
@@ -6224,12 +6208,6 @@
           "title": "Amazon just tripled its order of Nvidia chips over \u2018surging demand\u2019",
           "publisher": "TechCrunch",
           "link": "https://finance.yahoo.com/technology/ai/articles/amazon-just-tripled-order-nvidia-234718526.html",
-          "when": "Aug 26"
-        },
-        {
-          "title": "Autonomous Trucks Are Here: Einride\u2019s 27% Revenue Jump",
-          "publisher": "FreightWaves",
-          "link": "https://finance.yahoo.com/technology/articles/autonomous-trucks-einride-27-revenue-224018722.html",
           "when": "Aug 26"
         }
       ]
@@ -6304,15 +6282,15 @@
           "when": "Aug 26"
         },
         {
-          "title": "Is BlackRock\u2019s Crypto ETF and AI Push Rewiring The Investment Case For BlackRock (BLK)?",
-          "publisher": "Simply Wall St.",
-          "link": "https://finance.yahoo.com/markets/crypto/articles/blackrock-crypto-etf-ai-push-031548640.html",
-          "when": "Aug 27"
-        },
-        {
           "title": "Asian chip firms lifted by Nvidia forecast but broader markets struggle",
           "publisher": "AFP",
           "link": "https://finance.yahoo.com/markets/stocks/articles/asian-chip-firms-lifted-nvidia-024234685.html",
+          "when": "Aug 27"
+        },
+        {
+          "title": "Is BlackRock\u2019s Crypto ETF and AI Push Rewiring The Investment Case For BlackRock (BLK)?",
+          "publisher": "Simply Wall St.",
+          "link": "https://finance.yahoo.com/markets/crypto/articles/blackrock-crypto-etf-ai-push-031548640.html",
           "when": "Aug 27"
         },
         {
@@ -6587,6 +6565,12 @@
       ],
       "news": [
         {
+          "title": "This Market Strategist Sees Trouble Ahead for AI Stocks. What to Buy Instead.",
+          "publisher": "Barrons.com",
+          "link": "https://www.barrons.com/articles/market-ai-consumer-staples-pharma-stocks-c2b6395c?siteid=yhoof2&yptr=yahoo",
+          "when": "Aug 27"
+        },
+        {
           "title": "Chipotle CFO Adam Rymer Sells $327,000 in Stock -- Should Investors Sell Too?",
           "publisher": "Motley Fool",
           "link": "https://www.fool.com/coverage/filings/2026/08/26/chipotle-cfo-adam-rymer-sells-usd327-000-in-stock-should-investors-sell-too/",
@@ -6614,12 +6598,6 @@
           "title": "Yum Brands Stock Zigs When The Market Zags",
           "publisher": "Trefis",
           "link": "https://www.trefis.com/articles/612769/yum-brands-stock-zigs-when-the-market-zags/2026-08-25",
-          "when": "Aug 25"
-        },
-        {
-          "title": "CMG Stock Rises 15% in a Month: Should You Buy Now or Hold Steady?",
-          "publisher": "Zacks",
-          "link": "https://finance.yahoo.com/markets/stocks/articles/cmg-stock-rises-15-month-144800211.html",
           "when": "Aug 25"
         }
       ]
@@ -6982,6 +6960,12 @@
           "when": "Aug 26"
         },
         {
+          "title": "5 Must-Read Analyst Questions From Walmart\u2019s Q2 Earnings Call",
+          "publisher": "StockStory",
+          "link": "https://finance.yahoo.com/markets/stocks/articles/5-must-read-analyst-questions-073111129.html",
+          "when": "Aug 27"
+        },
+        {
           "title": "Key Walmart and grocery chain supplier files Chapter 7 bankruptcy",
           "publisher": "TheStreet",
           "link": "https://www.thestreet.com/restaurants/key-walmart-and-grocery-chain-supplier-80-acres-files-chapter-7-bankruptcy",
@@ -7003,12 +6987,6 @@
           "title": "Dollar General Stock Has Struggled This Year. Can Earnings Turn Things Around?",
           "publisher": "Barrons.com",
           "link": "https://www.barrons.com/articles/dollar-general-earnings-stock-price-e224bd17?siteid=yhoof2&yptr=yahoo",
-          "when": "Aug 26"
-        },
-        {
-          "title": "Gatik Raises $200 Million as It Ramps Up Driverless Truck Fleet",
-          "publisher": "Sourcing Journal",
-          "link": "https://wwd.com/sourcing-journal/logistics/gatik-200-million-series-d-funding-ai-driverless-autonomous-trucks-trucking-1239164645/",
           "when": "Aug 26"
         }
       ]
@@ -7076,6 +7054,12 @@
       ],
       "news": [
         {
+          "title": "Tim Cook Warned of a \"100-Year Flood\" in Memory Chip Pricing on His Last Earnings Call. Should Apple Investors Be Worried About Margins?",
+          "publisher": "Motley Fool",
+          "link": "https://www.fool.com/investing/2026/08/27/tim-cook-warn-memory-chip-pricing-apple-margins/",
+          "when": "Aug 27"
+        },
+        {
           "title": "Apple's 'Surprise and Shine' iPhone 18 Teaser Has This Analyst Seeing a Big Camera Upgrade and New Color",
           "publisher": "Benzinga",
           "link": "https://tech.yahoo.com/ai/apple-intelligence/articles/apples-surprise-shine-iphone-18-035208282.html",
@@ -7103,12 +7087,6 @@
           "title": "Apple Is One of the Most Profitable Businesses in the World. Here's Why the Stock Will Be Worth $366 a Share in 1 Year.",
           "publisher": "Motley Fool",
           "link": "https://www.fool.com/investing/2026/08/26/apple-profitable-business-stock-price-366-1-year/",
-          "when": "Aug 26"
-        },
-        {
-          "title": "Warren Buffett \u201cBlew It\u201d on Alphabet (GOOGL) And Made It Berkshire\u2019s Third-Biggest Bet",
-          "publisher": "Insider Monkey",
-          "link": "https://finance.yahoo.com/markets/stocks/articles/warren-buffett-blew-alphabet-googl-202343918.html",
           "when": "Aug 26"
         }
       ]
@@ -7189,22 +7167,22 @@
           "when": "Aug 26"
         },
         {
+          "title": "Zacks Earnings Trends Highlights: Alphabet, Micron and  Nvidia",
+          "publisher": "Zacks",
+          "link": "https://finance.yahoo.com/markets/stocks/articles/zacks-earnings-trends-highlights-alphabet-080800952.html",
+          "when": "Aug 27"
+        },
+        {
+          "title": "Alphabet Is Paying a Dividend While Selling $85 Billion of New Stock",
+          "publisher": "Motley Fool",
+          "link": "https://www.fool.com/investing/2026/08/27/alphabet-is-paying-a-dividend-while-selling-usd85-billion-of-new-stock/",
+          "when": "Aug 27"
+        },
+        {
           "title": "Has Rezolve AI (RZLV) Fallen Far Enough To Look Undervalued?",
           "publisher": "Simply Wall St.",
           "link": "https://finance.yahoo.com/markets/stocks/articles/rezolve-ai-rzlv-fallen-far-051019919.html",
           "when": "Aug 27"
-        },
-        {
-          "title": "Thinking Machines Lab Co-Founder Barret Zoph Joins Google",
-          "publisher": "The Wall Street Journal",
-          "link": "https://www.wsj.com/tech/ai/thinking-machines-lab-co-founder-barret-zoph-joins-google-49f594e6?siteid=yhoof2&yptr=yahoo",
-          "when": "Aug 27"
-        },
-        {
-          "title": "Google Moves AI-Responsibility Team Out of DeepMind Lab in Latest Shake-Up",
-          "publisher": "The Wall Street Journal",
-          "link": "https://www.wsj.com/tech/ai/google-moves-ai-responsibility-team-out-of-deepmind-lab-in-latest-shake-up-ed01e40c?siteid=yhoof2&yptr=yahoo",
-          "when": "Aug 26"
         }
       ]
     },
@@ -7480,6 +7458,12 @@
           "when": "Aug 26"
         },
         {
+          "title": "10% of Cathie Wood\u2019s Portfolio Is Invested in Elon Musk-Led Companies",
+          "publisher": "Motley Fool",
+          "link": "https://www.fool.com/investing/2026/08/27/10-of-cathie-wood-s-portfolio-is-invested-in-elon-musk-led-companies/",
+          "when": "Aug 27"
+        },
+        {
           "title": "Russell, MSCI And Morningstar Set To Load Up On SpaceX Stock \u2014 Analyst Warns \u2018True Value\u2019 May Be Hard To Pin",
           "publisher": "Stocktwits",
           "link": "https://stocktwits.com/news-articles/markets/equity/russell-msci-morningstar-spacex-analyst-true-value-hard-to-pin/cZY8qCCRJpN",
@@ -7492,21 +7476,15 @@
           "when": "Aug 27"
         },
         {
+          "title": "Nvidia Reports $7.8 Billion in Q2 Gains on Equity Portfolio That Includes SpaceX, Intel, CoreWeave, and More",
+          "publisher": "Barchart",
+          "link": "https://www.barchart.com/story/news/4157368/nvidia-reports-7-8-billion-in-q2-gains-on-equity-portfolio-that-includes-spacex-intel-coreweave-and-more",
+          "when": "Aug 27"
+        },
+        {
           "title": "OpenAI Is the Sole Investor in Its Latest Venture Fund",
           "publisher": "The Wall Street Journal",
           "link": "https://www.wsj.com/pro/venture-capital/openai-is-the-sole-investor-in-its-latest-venture-fund-ed1dd447?siteid=yhoof2&yptr=yahoo",
-          "when": "Aug 26"
-        },
-        {
-          "title": "Elon Musk Reveals Why SpaceX Launched Tesla\u2019s Roadster Into Orbit: \u2018We Didn\u2019t Want to Risk Anything Valuable\u2019",
-          "publisher": "Benzinga",
-          "link": "https://finance.yahoo.com/technology/articles/elon-musk-reveals-why-spacex-233044265.html",
-          "when": "Aug 26"
-        },
-        {
-          "title": "Cerebras vs. SpaceX: Which 2026 IPO Is the Better AI Stock to Own for the Next 5 Years?",
-          "publisher": "Motley Fool",
-          "link": "https://www.fool.com/investing/2026/08/26/cerebras-vs-spacex-which-2026-ipo-is-the-better-ai/",
           "when": "Aug 26"
         }
       ]
@@ -7924,6 +7902,12 @@
           "when": "Aug 27"
         },
         {
+          "title": "Nvidia Reports $7.8 Billion in Q2 Gains on Equity Portfolio That Includes SpaceX, Intel, CoreWeave, and More",
+          "publisher": "Barchart",
+          "link": "https://www.barchart.com/story/news/4157368/nvidia-reports-7-8-billion-in-q2-gains-on-equity-portfolio-that-includes-spacex-intel-coreweave-and-more",
+          "when": "Aug 27"
+        },
+        {
           "title": "Truist sees investment doubling potential in tumbling tech stock",
           "publisher": "TheStreet",
           "link": "https://www.thestreet.com/investing/stocks/truist-crwv-coreweave-stock-price-target-165-usd",
@@ -7939,12 +7923,6 @@
           "title": "Prediction: These 3 AI Stocks Could Be the Next Big Winners",
           "publisher": "24/7 Wall St.",
           "link": "https://247wallst.com/investing/2026/08/26/these-3-ai-stocks-could-be-the-next-big-winners/",
-          "when": "Aug 26"
-        },
-        {
-          "title": "CRWV vs. APLD: Which AI Data Center Stock Has More Upside Potential?",
-          "publisher": "Zacks",
-          "link": "https://finance.yahoo.com/technology/ai/articles/crwv-vs-apld-ai-data-145400212.html",
           "when": "Aug 26"
         }
       ]
@@ -67976,13 +67954,13 @@
     "fed": 3.63,
     "spread_2s10s": 47,
     "pe_trailing": 25.806986,
-    "vix": 15.2,
-    "vix_chg": -0.24,
+    "vix": 14.9,
+    "vix_chg": -0.34,
     "vix_hi": 31.0,
     "vix_lo": 13.5,
     "vix_avg": 18.1,
     "spy_realized": 11.3,
-    "vrp": 3.9,
+    "vrp": 3.6,
     "ovx": 46.8,
     "ovx_chg": 0.67,
     "gvz": 27.0,
@@ -68544,7 +68522,7 @@
       }
     ]
   },
-  "generated_at": "2026-08-27T07:04:13+00:00",
+  "generated_at": "2026-08-27T09:09:50+00:00",
   "universe": {
     "wheel": 16,
     "growth": 15,
