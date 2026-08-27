@@ -266,6 +266,7 @@ td.star-c,th.star-c{width:1%; text-align:center; padding-left:12px; padding-righ
 .verdict{font-family:"Archivo",sans-serif; font-weight:800; font-size:13px; margin-bottom:9px; letter-spacing:.02em; display:flex; align-items:center; gap:7px}
 .verdict .vwhy{font-family:"IBM Plex Sans"; font-weight:500; font-size:12px; color:var(--muted)}
 .webfoot{text-align:center; font-size:11px; color:var(--faint); font-family:"IBM Plex Mono"; border-top:1px solid var(--line-soft); padding-top:9px; margin-top:2px}
+.webfoot .pre{color:var(--cc); font-weight:600}   /* DTE etc. — a pre-selection parameter, not a market reading */
 .webkey{font-size:11.5px; color:var(--muted); line-height:1.5; margin-top:8px; padding-top:8px; border-top:1px solid var(--line-soft)}
 .webkey>div{padding:2px 0}
 .mkt-grid{display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:14px; margin-top:18px}
@@ -1102,7 +1103,7 @@ function legTile(s){const k=s.strategy.toLowerCase();
   // The scorecard the LIGHT rolls up from — every node here drives the verdict (weakest-link),
   // so the popup can never contradict the header. Falls back to timing-reasons for legacy data.
   const nodes=legScorecard(s);
-  const foot=`Exp ${s.expiry} · DTE ${s.dte} · POP ${num(s.pop,0,'%')} · OI ${s.oi} · bid/ask ${num(s.spread_pct,0,'%')}`;
+  const foot=`Exp ${s.expiry} · <span class="pre">DTE ${s.dte}</span> · POP ${num(s.pop,0,'%')} · OI ${s.oi} · bid/ask ${num(s.spread_pct,0,'%')}`;
   const key=[
     kdot('good')+'STRONG — tradeable + full setup',
     kdot('warn')+'ANALYZE — tradeable, setup/timing partial · your call',
@@ -1145,7 +1146,7 @@ function leapTile(l){
     {l:'Time value ≤55%', s:(l.ext_ok!==false)?'ok':'no'},
     {l:'Entry score'+(ts!=null?' '+ts+'/'+(l.score_max||11):''), s: ts==null?'warn':(ts>=8?'ok':'warn')} ];
   const ma=`${l.above_50ma?'✓':'✗'}>50MA · ${l.above_200ma?'✓':'✗'}>200MA · ${l.ma_aligned?'✓':'✗'}50>200`;
-  const foot=`Exp ${l.expiry} · DTE ${l.dte} · cost $${l.cost} · time value $${num(l.extrinsic,0)} · carry ${num(l.carry_pct,1,'%/yr')} · ${ma}`;
+  const foot=`Exp ${l.expiry} · <span class="pre">DTE ${l.dte}</span> · cost $${l.cost} · time value $${num(l.extrinsic,0)} · carry ${num(l.carry_pct,1,'%/yr')} · ${ma}`;
   const key=[
     kdot('good')+'STRONG — in uptrend, score ≥ 8',
     kdot('warn')+'ANALYZE — in uptrend, score 5–7 · your call',
