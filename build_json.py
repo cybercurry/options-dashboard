@@ -264,7 +264,7 @@ def fetch_market_stats():
         ms["spy_realized"] = round(rv, 1)
         if ms.get("vix") is not None:
             ms["vrp"] = round(ms["vix"] - rv, 1)
-    for key, sym in (("ovx", "^OVX"), ("gvz", "^GVZ")):
+    for key, sym in (("ovx", "^OVX"), ("gvz", "^GVZ"), ("move", "^MOVE")):
         h = _yf_hist(sym, "5d")
         if h:
             now, prev = h[-1], (h[-2] if len(h) > 1 else h[-1])
