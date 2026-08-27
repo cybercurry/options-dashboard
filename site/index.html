@@ -308,6 +308,9 @@ td.star-c,th.star-c{width:1%; text-align:center; padding-left:12px; padding-righ
 .cal{width:100%; border-collapse:collapse; min-width:640px; font-size:13.5px}
 .cal th{background:var(--surface-2); color:var(--faint); text-align:left; padding:9px 12px; font-size:11px; text-transform:uppercase; letter-spacing:.04em; white-space:nowrap}
 .cal td{padding:8px 12px; border-bottom:1px solid var(--line-soft); white-space:nowrap} .cal tr:last-child td{border-bottom:0}
+.cal tr.cal-usd td{background:color-mix(in srgb,var(--accent) 9%,transparent)} .cal tr.cal-usd td:first-child{box-shadow:inset 3px 0 0 var(--accent)} .cal tr.cal-usd .cur{color:var(--accent); font-weight:700}
+.cal tr.cal-eur td{background:color-mix(in srgb,var(--cc) 10%,transparent)} .cal tr.cal-eur td:first-child{box-shadow:inset 3px 0 0 var(--cc)} .cal tr.cal-eur .cur{color:var(--cc); font-weight:700}
+.cal tr.cal-cad td{background:color-mix(in srgb,var(--good) 10%,transparent)} .cal tr.cal-cad td:first-child{box-shadow:inset 3px 0 0 var(--good)} .cal tr.cal-cad .cur{color:var(--good); font-weight:700}
 .rules-sec{margin-top:26px} .rules-sec h2{font-family:"Archivo",sans-serif; font-size:18px; margin:0 0 4px}
 .rules-sec p{color:var(--muted); font-size:13px; margin:2px 0 10px}
 .rtable{width:100%; border-collapse:collapse; border:1px solid var(--line); border-radius:12px; overflow:hidden; font-size:13.5px; margin-top:6px}
@@ -729,17 +732,18 @@ function yieldCurveSvg(pts,inverted){
 }
 function calendarTable(events){
   const want=MKT_MED?['High','Medium']:['High'];
-  const evs=(events||[]).filter(e=>want.includes(e.impact)).map(e=>({d:e.date?new Date(e.date):null,e:e}))
+  const CUR={USD:'cal-usd',EUR:'cal-eur',CAD:'cal-cad'};
+  const evs=(events||[]).filter(e=>want.includes(e.impact)&&CUR[e.country]).map(e=>({d:e.date?new Date(e.date):null,e:e}))
     .sort((a,b)=>(a.d?a.d.getTime():9e18)-(b.d?b.d.getTime():9e18));
   const tz={timeZone:'America/New_York'};
   const toggle=`<label class="caltoggle"><input type="checkbox" ${MKT_MED?'checked':''} onchange="MKT_MED=this.checked;renderMarket()"> include medium-impact</label>`;
-  if(!evs.length) return toggle+'<div class="empty">No high-impact events match this week.</div>';
-  const rows=evs.map(({d,e})=>`<tr><td>${d?d.toLocaleDateString('en-US',{...tz,weekday:'short',day:'2-digit'}):'—'}</td>
+  if(!evs.length) return toggle+'<div class="empty">No high-impact USD / EUR / CAD events match this week.</div>';
+  const rows=evs.map(({d,e})=>`<tr class="${CUR[e.country]}"><td>${d?d.toLocaleDateString('en-US',{...tz,weekday:'short',day:'2-digit'}):'—'}</td>
     <td class="mono">${d?d.toLocaleTimeString('en-US',{...tz,hour:'2-digit',minute:'2-digit'}):''}</td>
-    <td>${e.country||''}</td><td>${e.impact==='High'?'🔴':'🟠'}</td><td>${e.title||''}</td>
+    <td class="cur">${e.country||''}</td><td>${e.impact==='High'?'🔴':'🟠'}</td><td>${e.title||''}</td>
     <td class="mono">${e.forecast||'—'}</td><td class="mono">${e.previous||'—'}</td></tr>`).join('');
   return toggle+`<div class="tablewrap"><table class="cal"><thead><tr><th class="l">Day</th><th class="l">Time</th><th class="l">Cur</th><th class="l">Impact</th><th class="l">Event</th><th class="l">Forecast</th><th class="l">Previous</th></tr></thead><tbody>${rows}</tbody></table></div>
-    <div class="fxdd-cap">Times US Eastern (via ForexFactory). 🔴 high · 🟠 medium impact.</div>`;
+    <div class="fxdd-cap">US / Euro-area / Canada only. Times US Eastern (via ForexFactory). 🔴 high · 🟠 medium impact.</div>`;
 }
 /* section-header icons (Phosphor regular, accent) — same icon language as the sector heatmap */
 const _MSI={
