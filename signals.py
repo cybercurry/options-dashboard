@@ -504,56 +504,62 @@ def _leg_gates(s, iv_ratio):
     spr = s.get("spread_pct")             # already ×100 (percent)
     mo = s.get("median_ok")
     ts = s.get("timing_score")
+    # Only the three HARD NOs can show a red node (earnings / thin premium / no liquidity), so the
+    # scorecard's weakest link still equals the light. Fit and side (delta/DTE/median) cap at amber.
     g = [
-        {"l": "Δ %.2f" % d,        "s": "ok" if P["delta_lo"] <= d <= P["delta_hi"] else "no"},
-        {"l": "DTE %d" % dte,           "s": "ok" if P["dte_lo"] <= dte <= P["dte_hi"] else "no"},
+        {"l": "Δ %.2f" % d,        "s": "ok" if P["delta_lo"] <= d <= P["delta_hi"] else "warn"},
+        {"l": "DTE %d" % dte,           "s": "ok" if P["dte_lo"] <= dte <= P["dte_hi"] else "warn"},
         {"l": "prem %.1f%%" % (prem or 0), "s": "ok" if (prem or 0) >= P["min_premium"] * 100 else "no"},
         {"l": "OI %d" % oi,             "s": "ok" if oi >= P["min_oi"] else "no"},
         {"l": "bid/ask %.0f%%" % (spr or 0), "s": "ok" if (spr is not None and spr <= P["max_spread_pct"] * 100) else "no"},
         {"l": "earnings",               "s": "no" if s.get("earnings_soon") else ("warn" if s.get("earnings_in_window") else "ok")},
-        {"l": "median",                 "s": "ok" if mo else ("no" if mo is not None else "warn")},
+        {"l": "median",                 "s": "ok" if mo else ("warn" if mo is not None else "warn")},
     ]
     # Timing is the graded QUALITY gate (IV richness is already baked into its points, so IV is
-    # not a separate gate — that would double-count and let the scorecard disagree with the light).
-    # FULL (≥8) → green · PARTIAL (4–7) → amber · none (<4) → red.  Max score 12.
+    # not a separate gate). It never reds the light any more — FULL (≥8) → green · else amber.
     if ts is None:
         g.append({"l": "timing", "s": "warn"})
     else:
-        g.append({"l": "timing %d/12" % ts, "s": "ok" if ts >= 8 else ("warn" if ts >= 4 else "no")})
+        g.append({"l": "timing %d/12" % ts, "s": "ok" if ts >= 8 else "warn"})
     return g
 
 
 def _leg_verdict(s):
     """Aggregate traffic light for a CSP/CC leg — the scorecard rollup.
-    Layer 1 VETOES (validity/safety/direction) → 'avoid'. Layer 2 the setup score bands the
-    survivors: ≥8 'go' · 4–7 'caution' · <4 'avoid'. Unknown median/timing → 'caution' (analyze).
-    Returns (verdict, why). Mirrors _leg_gates so weakest-link(gates) == verdict."""
+    HARD NO (red) only on a reason not to place THIS trade at all (Jay 27 Aug): earnings inside
+    the trade (event risk), thin premium (< min — not worth writing), or no liquidity (OI/spread
+    — can't get a fair fill). Everything else — delta/DTE fit, the median side, a weak timing
+    score — caps at 'caution' (analyze), never red. Green ('go') still needs a clean, well-timed
+    setup on the right side of the median. Returns (verdict, why). Mirrors _leg_gates."""
     d = abs(s.get("delta") or 0)
     dte = s.get("dte") or 0
     prem = s.get("premium_pct") or 0          # already ×100
     oi = s.get("oi") or 0
     spr = s.get("spread_pct")                  # already ×100
+    # Layer 1 — hard NOs (untradeable / not worth it / event risk) → red
     for ok, why in (
-        (P["delta_lo"] <= d <= P["delta_hi"], "delta out of band"),
-        (P["dte_lo"] <= dte <= P["dte_hi"], "DTE out of band"),
+        (not s.get("earnings_soon"), "earnings within 7 days"),
         (prem >= P["min_premium"] * 100, "premium thin"),
         (oi >= P["min_oi"], "low open interest"),
         (spr is None or spr <= P["max_spread_pct"] * 100, "spread too wide"),
-        (not s.get("earnings_soon"), "earnings within 7 days"),
     ):
         if not ok:
             return "avoid", why
+    # Layer 2 — the survivors are all tradeable; green only for a clean, well-timed setup on the
+    # right side of the median, everything else is 'analyze' (amber) — never red.
     mo = s.get("median_ok")
-    if mo is False:
-        return "avoid", "wrong side of median"
     ts = s.get("timing_score")
+    d_ok = P["delta_lo"] <= d <= P["delta_hi"]
+    dte_ok = P["dte_lo"] <= dte <= P["dte_hi"]
     if mo is None or ts is None:
         return "caution", "setup unconfirmed"
-    if ts >= 8:
+    if ts >= 8 and mo and d_ok and dte_ok:
         return "go", "setup %d/12" % ts
-    if ts >= 4:
-        return "caution", "setup %d/12" % ts
-    return "avoid", "no setup (%d/12)" % ts
+    if not mo:
+        return "caution", "wrong side of median — analyze"
+    if ts < 4:
+        return "caution", "no setup yet (%d/12) — analyze" % ts
+    return "caution", "setup %d/12 — analyze" % ts
 
 
 def scan_ticker(ticker):
