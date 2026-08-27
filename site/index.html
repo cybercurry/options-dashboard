@@ -257,6 +257,8 @@ td.star-c,th.star-c{width:1%; text-align:center; padding-left:12px; padding-righ
 .wn-ok{border-color:color-mix(in srgb,var(--good) 55%,var(--line)); color:var(--good)}
 .wn-no{border-color:color-mix(in srgb,var(--bad) 55%,var(--line)); color:var(--bad)}
 .wn-warn{border-color:color-mix(in srgb,var(--warn) 55%,var(--line)); color:var(--warn)}
+.wn-pre{border-color:color-mix(in srgb,var(--cc) 55%,var(--line)); color:var(--cc)}   /* Δ / DTE — pre-selection, not a market gate */
+.lchip.cpre, .lchip.cpre b{color:var(--cc)}   /* Δ chip — pre-selection param */
 /* aggregate traffic light — the scorecard verdict, shown on tiles + watchlist */
 .ltlight{font-size:12px; font-weight:700; white-space:nowrap; display:inline-flex; align-items:center; gap:5px}
 .lt-go{color:var(--good)} .lt-caution{color:var(--warn)} .lt-avoid{color:var(--bad)} .lt-neutral{color:var(--faint)}
@@ -1104,7 +1106,7 @@ function openCalc(type,k,b){
 
 /* ---------- deep dive ---------- */
 function gateRow(ok,label){return `<span class="gate">${ok?'<span class="ok">✓</span>':'<span class="no">✗</span>'} ${label}</span>`;}
-function chip(l,v){return `<span class="lchip">${l}<b>${v==null?'—':v}</b></span>`;}
+function chip(l,v,pre){return `<span class="lchip${pre?' cpre':''}">${l}<b>${v==null?'—':v}</b></span>`;}
 /* constellation: a center node with satellite nodes on an ellipse, connected by lines.
    nodes: [{l:label, s:'ok'|'no'|''}] — the MNI "hover unfurls a web of connected data" reveal. */
 function web(center, nodes){
@@ -1113,7 +1115,8 @@ function web(center, nodes){
     const a=-Math.PI/2 + i*2*Math.PI/n;
     const x=+(cx+rx*Math.cos(a)).toFixed(1), y=+(cy+ry*Math.sin(a)).toFixed(1);
     lines+=`<line x1="${cx}" y1="${cy}" x2="${x}" y2="${y}"/>`;
-    pills+=`<span class="wnode ${nd.s==='ok'?'wn-ok':nd.s==='no'?'wn-no':nd.s==='warn'?'wn-warn':''}" style="left:${x}%;top:${y}%">${nd.l}</span>`;
+    const pre=/^(Δ|DTE)\s/.test(nd.l);   // pre-selection params (engine picked the contract) — blue, not a gate colour
+    pills+=`<span class="wnode ${pre?'wn-pre':nd.s==='ok'?'wn-ok':nd.s==='no'?'wn-no':nd.s==='warn'?'wn-warn':''}" style="left:${x}%;top:${y}%">${nd.l}</span>`;
   });
   return `<div class="web"><svg class="weblines" viewBox="0 0 100 100" preserveAspectRatio="none">${lines}</svg><span class="wcenter">${center}</span>${pills}</div>`;
 }
@@ -1122,7 +1125,7 @@ function legTile(s){const k=s.strategy.toLowerCase();
   // The scorecard the LIGHT rolls up from — every node here drives the verdict (weakest-link),
   // so the popup can never contradict the header. Falls back to timing-reasons for legacy data.
   const nodes=legScorecard(s);
-  const foot=`Exp ${s.expiry} · <span class="pre">DTE ${s.dte}</span> · POP ${num(s.pop,0,'%')} · OI ${s.oi} · bid/ask ${num(s.spread_pct,0,'%')}`;
+  const foot=`<span class="pre">Exp ${s.expiry}</span> · <span class="pre">DTE ${s.dte}</span> · POP ${num(s.pop,0,'%')} · OI ${s.oi} · bid/ask ${num(s.spread_pct,0,'%')}`;
   const key=[
     kdot('good')+'STRONG — tradeable + full setup',
     kdot('warn')+'ANALYZE — tradeable, setup/timing partial · your call',
@@ -1134,7 +1137,7 @@ function legTile(s){const k=s.strategy.toLowerCase();
   const earnRed = s.earnings_soon===true;
   const why = s.verdict_why || '';
   const medside = s.pct_b==null?'—':(s.pct_b>=0.5?'above':'below');
-  const chips = `<div class="fchips">${chip('Δ ',num(s.delta,2))}${chip('prem ',num(s.premium_pct,1,'%'))}</div>`
+  const chips = `<div class="fchips">${chip('Δ ',num(s.delta,2),true)}${chip('prem ',num(s.premium_pct,1,'%'))}</div>`
               + `<div class="fchips">${chip('IV ',num(s.iv,0,'%'))}${chip('median ',medside)}</div>`;
   const head = lightBadge(v, earnRed);
   const verdictLine = `<div class="verdict ${VMETA[v].c}"><span class="ltdot"></span>${VMETA[v].t}${why?`<span class="vwhy">— ${why}</span>`:''}</div>`;
@@ -1165,7 +1168,7 @@ function leapTile(l){
     {l:'Time value ≤55%', s:(l.ext_ok!==false)?'ok':'no'},
     {l:'Entry score'+(ts!=null?' '+ts+'/'+(l.score_max||11):''), s: ts==null?'warn':(ts>=8?'ok':'warn')} ];
   const ma=`${l.above_50ma?'✓':'✗'}>50MA · ${l.above_200ma?'✓':'✗'}>200MA · ${l.ma_aligned?'✓':'✗'}50>200`;
-  const foot=`Exp ${l.expiry} · <span class="pre">DTE ${l.dte}</span> · cost $${l.cost} · time value $${num(l.extrinsic,0)} · carry ${num(l.carry_pct,1,'%/yr')} · ${ma}`;
+  const foot=`<span class="pre">Exp ${l.expiry}</span> · <span class="pre">DTE ${l.dte}</span> · cost $${l.cost} · time value $${num(l.extrinsic,0)} · carry ${num(l.carry_pct,1,'%/yr')} · ${ma}`;
   const key=[
     kdot('good')+'STRONG — in uptrend, score ≥ 8',
     kdot('warn')+'ANALYZE — in uptrend, score 5–7 · your call',
@@ -1173,7 +1176,7 @@ function leapTile(l){
     'below the 50-MA is fine — a pullback inside the uptrend still qualifies',
   ].map(l=>`<div>${l}</div>`).join('');
   const verdictLine=`<div class="verdict ${VMETA[v].c}"><span class="ltdot"></span>${VMETA[v].t}${ts!=null?' · '+ts+'/'+(l.score_max||11):''}</div>`;
-  const chips=`<div class="fchips">${chip('Δ ',num(l.delta,2))}${chip('time value ',num(l.extrinsic_pct,0,'%'))}</div>`
+  const chips=`<div class="fchips">${chip('Δ ',num(l.delta,2),true)}${chip('time value ',num(l.extrinsic_pct,0,'%'))}</div>`
             + `<div class="fchips">${chip('carry ',num(l.carry_pct,1,'%/yr'))}</div>`;
   const body = v!=='neutral' ? `<div class="trade t-leap">${fmtTrade('leap',l.strike)}</div>${chips}` : chips;
   return `<div class="legtile" tabindex="0">
