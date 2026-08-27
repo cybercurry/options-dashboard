@@ -5,7 +5,7 @@
       "strategy": "CSP",
       "spot": 11.56,
       "expiry": "2026-09-25",
-      "dte": 30,
+      "dte": 29,
       "strike": 10.5,
       "delta": -0.32,
       "mid": 0.9,
@@ -37,7 +37,7 @@
           "s": "ok"
         },
         {
-          "l": "DTE 30",
+          "l": "DTE 29",
           "s": "ok"
         },
         {
@@ -74,7 +74,7 @@
       "strategy": "CSP",
       "spot": 39.58,
       "expiry": "2026-09-25",
-      "dte": 30,
+      "dte": 29,
       "strike": 36.0,
       "delta": -0.312,
       "mid": 2.48,
@@ -104,7 +104,7 @@
           "s": "ok"
         },
         {
-          "l": "DTE 30",
+          "l": "DTE 29",
           "s": "ok"
         },
         {
@@ -141,7 +141,7 @@
       "strategy": "CSP",
       "spot": 218.21,
       "expiry": "2026-09-25",
-      "dte": 30,
+      "dte": 29,
       "strike": 200.0,
       "delta": -0.313,
       "mid": 12.6,
@@ -173,7 +173,7 @@
           "s": "ok"
         },
         {
-          "l": "DTE 30",
+          "l": "DTE 29",
           "s": "ok"
         },
         {
@@ -210,7 +210,7 @@
       "strategy": "CSP",
       "spot": 12.67,
       "expiry": "2026-09-25",
-      "dte": 30,
+      "dte": 29,
       "strike": 11.5,
       "delta": -0.301,
       "mid": 0.72,
@@ -240,7 +240,7 @@
           "s": "ok"
         },
         {
-          "l": "DTE 30",
+          "l": "DTE 29",
           "s": "ok"
         },
         {
@@ -277,7 +277,7 @@
       "strategy": "CSP",
       "spot": 213.93,
       "expiry": "2026-09-25",
-      "dte": 30,
+      "dte": 29,
       "strike": 195.0,
       "delta": -0.309,
       "mid": 11.88,
@@ -307,7 +307,7 @@
           "s": "ok"
         },
         {
-          "l": "DTE 30",
+          "l": "DTE 29",
           "s": "ok"
         },
         {
@@ -344,7 +344,7 @@
       "strategy": "CSP",
       "spot": 170.31,
       "expiry": "2026-09-25",
-      "dte": 30,
+      "dte": 29,
       "strike": 157.5,
       "delta": -0.31,
       "mid": 8.43,
@@ -356,7 +356,7 @@
       "vol_bucket": "high",
       "oi": 4,
       "spread_pct": 20.8,
-      "earnings_soon": false,
+      "earnings_soon": true,
       "earnings_in_window": true,
       "strong": true,
       "qualifies": false,
@@ -375,7 +375,7 @@
           "s": "ok"
         },
         {
-          "l": "DTE 30",
+          "l": "DTE 29",
           "s": "ok"
         },
         {
@@ -392,7 +392,7 @@
         },
         {
           "l": "earnings",
-          "s": "warn"
+          "s": "no"
         },
         {
           "l": "median",
@@ -412,7 +412,7 @@
       "strategy": "CSP",
       "spot": 88.01,
       "expiry": "2026-09-25",
-      "dte": 30,
+      "dte": 29,
       "strike": 81.0,
       "delta": -0.305,
       "mid": 4.25,
@@ -442,7 +442,7 @@
           "s": "ok"
         },
         {
-          "l": "DTE 30",
+          "l": "DTE 29",
           "s": "ok"
         },
         {
@@ -479,7 +479,7 @@
       "strategy": "CSP",
       "spot": 480.93,
       "expiry": "2026-09-25",
-      "dte": 30,
+      "dte": 29,
       "strike": 450.0,
       "delta": -0.3,
       "mid": 15.57,
@@ -509,7 +509,7 @@
           "s": "ok"
         },
         {
-          "l": "DTE 30",
+          "l": "DTE 29",
           "s": "ok"
         },
         {
@@ -546,7 +546,7 @@
       "strategy": "CSP",
       "spot": 263.81,
       "expiry": "2026-09-25",
-      "dte": 30,
+      "dte": 29,
       "strike": 245.0,
       "delta": -0.287,
       "mid": 8.43,
@@ -576,7 +576,7 @@
           "s": "ok"
         },
         {
-          "l": "DTE 30",
+          "l": "DTE 29",
           "s": "ok"
         },
         {
@@ -613,7 +613,7 @@
       "strategy": "CSP",
       "spot": 125.8,
       "expiry": "2026-09-25",
-      "dte": 30,
+      "dte": 29,
       "strike": 118.0,
       "delta": -0.298,
       "mid": 3.98,
@@ -645,7 +645,7 @@
           "s": "ok"
         },
         {
-          "l": "DTE 30",
+          "l": "DTE 29",
           "s": "ok"
         },
         {
@@ -682,7 +682,7 @@
       "strategy": "CSP",
       "spot": 139.63,
       "expiry": "2026-09-25",
-      "dte": 30,
+      "dte": 29,
       "strike": 130.0,
       "delta": -0.293,
       "mid": 4.4,
@@ -713,7 +713,7 @@
           "s": "ok"
         },
         {
-          "l": "DTE 30",
+          "l": "DTE 29",
           "s": "ok"
         },
         {
@@ -750,7 +750,7 @@
       "strategy": "CSP",
       "spot": 177.5,
       "expiry": "2026-09-25",
-      "dte": 30,
+      "dte": 29,
       "strike": 167.5,
       "delta": -0.304,
       "mid": 5.17,
@@ -782,7 +782,7 @@
           "s": "ok"
         },
         {
-          "l": "DTE 30",
+          "l": "DTE 29",
           "s": "ok"
         },
         {
@@ -819,7 +819,7 @@
       "strategy": "CSP",
       "spot": 18.84,
       "expiry": "2026-09-25",
-      "dte": 30,
+      "dte": 29,
       "strike": 17.5,
       "delta": -0.274,
       "mid": 0.49,
@@ -850,7 +850,7 @@
           "s": "ok"
         },
         {
-          "l": "DTE 30",
+          "l": "DTE 29",
           "s": "ok"
         },
         {
@@ -887,7 +887,7 @@
       "strategy": "CSP",
       "spot": 209.66,
       "expiry": "2026-09-25",
-      "dte": 30,
+      "dte": 29,
       "strike": 200.0,
       "delta": -0.315,
       "mid": 5.42,
@@ -899,10 +899,10 @@
       "vol_bucket": "med",
       "oi": 2623,
       "spread_pct": 4.6,
-      "earnings_soon": true,
-      "earnings_in_window": true,
+      "earnings_soon": false,
+      "earnings_in_window": false,
       "strong": true,
-      "qualifies": false,
+      "qualifies": true,
       "median_ok": true,
       "pct_b": 0.32,
       "timing_label": "\ud83d\udd34 NO SETUP",
@@ -917,7 +917,7 @@
           "s": "ok"
         },
         {
-          "l": "DTE 30",
+          "l": "DTE 29",
           "s": "ok"
         },
         {
@@ -934,7 +934,7 @@
         },
         {
           "l": "earnings",
-          "s": "no"
+          "s": "ok"
         },
         {
           "l": "median",
@@ -946,7 +946,7 @@
         }
       ],
       "verdict": "avoid",
-      "verdict_why": "earnings within 7 days",
+      "verdict_why": "no setup (2/12)",
       "shortlist": false
     },
     {
@@ -954,7 +954,7 @@
       "strategy": "CSP",
       "spot": 279.52,
       "expiry": "2026-09-25",
-      "dte": 30,
+      "dte": 29,
       "strike": 265.0,
       "delta": -0.306,
       "mid": 7.2,
@@ -985,7 +985,7 @@
           "s": "ok"
         },
         {
-          "l": "DTE 30",
+          "l": "DTE 29",
           "s": "ok"
         },
         {
@@ -1022,7 +1022,7 @@
       "strategy": "CSP",
       "spot": 61.59,
       "expiry": "2026-09-25",
-      "dte": 30,
+      "dte": 29,
       "strike": 58.5,
       "delta": -0.304,
       "mid": 1.58,
@@ -1053,7 +1053,7 @@
           "s": "ok"
         },
         {
-          "l": "DTE 30",
+          "l": "DTE 29",
           "s": "ok"
         },
         {
@@ -1090,7 +1090,7 @@
       "strategy": "CSP",
       "spot": 345.82,
       "expiry": "2026-09-25",
-      "dte": 30,
+      "dte": 29,
       "strike": 330.0,
       "delta": -0.308,
       "mid": 8.52,
@@ -1122,7 +1122,7 @@
           "s": "ok"
         },
         {
-          "l": "DTE 30",
+          "l": "DTE 29",
           "s": "ok"
         },
         {
@@ -1159,7 +1159,7 @@
       "strategy": "CSP",
       "spot": 37.34,
       "expiry": "2026-09-25",
-      "dte": 30,
+      "dte": 29,
       "strike": 36.0,
       "delta": -0.315,
       "mid": 0.83,
@@ -1190,7 +1190,7 @@
           "s": "ok"
         },
         {
-          "l": "DTE 30",
+          "l": "DTE 29",
           "s": "ok"
         },
         {
@@ -1227,7 +1227,7 @@
       "strategy": "CSP",
       "spot": 313.45,
       "expiry": "2026-09-25",
-      "dte": 30,
+      "dte": 29,
       "strike": 305.0,
       "delta": -0.318,
       "mid": 4.95,
@@ -1258,7 +1258,7 @@
           "s": "ok"
         },
         {
-          "l": "DTE 30",
+          "l": "DTE 29",
           "s": "ok"
         },
         {
@@ -1295,7 +1295,7 @@
       "strategy": "CSP",
       "spot": 260.28,
       "expiry": "2026-09-25",
-      "dte": 30,
+      "dte": 29,
       "strike": 250.0,
       "delta": -0.28,
       "mid": 4.08,
@@ -1325,7 +1325,7 @@
           "s": "ok"
         },
         {
-          "l": "DTE 30",
+          "l": "DTE 29",
           "s": "ok"
         },
         {
@@ -1362,7 +1362,7 @@
       "strategy": "CSP",
       "spot": 339.1,
       "expiry": "2026-09-25",
-      "dte": 30,
+      "dte": 29,
       "strike": 325.0,
       "delta": -0.276,
       "mid": 4.82,
@@ -1393,7 +1393,7 @@
           "s": "ok"
         },
         {
-          "l": "DTE 30",
+          "l": "DTE 29",
           "s": "ok"
         },
         {
@@ -1430,7 +1430,7 @@
       "strategy": "CSP",
       "spot": 496.37,
       "expiry": "2026-09-25",
-      "dte": 30,
+      "dte": 29,
       "strike": 480.0,
       "delta": -0.29,
       "mid": 6.92,
@@ -1461,7 +1461,7 @@
           "s": "ok"
         },
         {
-          "l": "DTE 30",
+          "l": "DTE 29",
           "s": "ok"
         },
         {
@@ -1498,7 +1498,7 @@
       "strategy": "CSP",
       "spot": 421.32,
       "expiry": "2026-09-25",
-      "dte": 30,
+      "dte": 29,
       "strike": 408.0,
       "delta": -0.295,
       "mid": 5.72,
@@ -1530,7 +1530,7 @@
           "s": "ok"
         },
         {
-          "l": "DTE 30",
+          "l": "DTE 29",
           "s": "ok"
         },
         {
@@ -1567,7 +1567,7 @@
       "strategy": "CSP",
       "spot": 104.34,
       "expiry": "2026-09-25",
-      "dte": 30,
+      "dte": 29,
       "strike": 102.0,
       "delta": -0.315,
       "mid": 1.38,
@@ -1601,7 +1601,7 @@
           "s": "ok"
         },
         {
-          "l": "DTE 30",
+          "l": "DTE 29",
           "s": "ok"
         },
         {
@@ -1638,7 +1638,7 @@
       "strategy": "CC",
       "spot": 11.56,
       "expiry": "2026-09-25",
-      "dte": 30,
+      "dte": 29,
       "strike": 15.0,
       "delta": 0.283,
       "mid": 0.55,
@@ -1672,7 +1672,7 @@
           "s": "ok"
         },
         {
-          "l": "DTE 30",
+          "l": "DTE 29",
           "s": "ok"
         },
         {
@@ -1709,7 +1709,7 @@
       "strategy": "CC",
       "spot": 12.67,
       "expiry": "2026-09-25",
-      "dte": 30,
+      "dte": 29,
       "strike": 15.0,
       "delta": 0.3,
       "mid": 0.58,
@@ -1740,7 +1740,7 @@
           "s": "ok"
         },
         {
-          "l": "DTE 30",
+          "l": "DTE 29",
           "s": "ok"
         },
         {
@@ -1777,7 +1777,7 @@
       "strategy": "CC",
       "spot": 39.58,
       "expiry": "2026-09-25",
-      "dte": 30,
+      "dte": 29,
       "strike": 48.0,
       "delta": 0.295,
       "mid": 1.75,
@@ -1808,7 +1808,7 @@
           "s": "ok"
         },
         {
-          "l": "DTE 30",
+          "l": "DTE 29",
           "s": "ok"
         },
         {
@@ -1845,7 +1845,7 @@
       "strategy": "CC",
       "spot": 213.93,
       "expiry": "2026-09-25",
-      "dte": 30,
+      "dte": 29,
       "strike": 255.0,
       "delta": 0.295,
       "mid": 9.15,
@@ -1876,7 +1876,7 @@
           "s": "ok"
         },
         {
-          "l": "DTE 30",
+          "l": "DTE 29",
           "s": "ok"
         },
         {
@@ -1913,7 +1913,7 @@
       "strategy": "CC",
       "spot": 218.21,
       "expiry": "2026-09-25",
-      "dte": 30,
+      "dte": 29,
       "strike": 260.0,
       "delta": 0.299,
       "mid": 9.2,
@@ -1943,7 +1943,7 @@
           "s": "ok"
         },
         {
-          "l": "DTE 30",
+          "l": "DTE 29",
           "s": "ok"
         },
         {
@@ -1980,7 +1980,7 @@
       "strategy": "CC",
       "spot": 88.01,
       "expiry": "2026-09-25",
-      "dte": 30,
+      "dte": 29,
       "strike": 102.0,
       "delta": 0.299,
       "mid": 3.38,
@@ -2011,7 +2011,7 @@
           "s": "ok"
         },
         {
-          "l": "DTE 30",
+          "l": "DTE 29",
           "s": "ok"
         },
         {
@@ -2048,7 +2048,7 @@
       "strategy": "CC",
       "spot": 170.31,
       "expiry": "2026-09-25",
-      "dte": 30,
+      "dte": 29,
       "strike": 197.5,
       "delta": 0.292,
       "mid": 5.95,
@@ -2060,7 +2060,7 @@
       "vol_bucket": "high",
       "oi": 1,
       "spread_pct": 35.3,
-      "earnings_soon": false,
+      "earnings_soon": true,
       "earnings_in_window": true,
       "strong": true,
       "qualifies": false,
@@ -2079,7 +2079,7 @@
           "s": "ok"
         },
         {
-          "l": "DTE 30",
+          "l": "DTE 29",
           "s": "ok"
         },
         {
@@ -2096,7 +2096,7 @@
         },
         {
           "l": "earnings",
-          "s": "warn"
+          "s": "no"
         },
         {
           "l": "median",
@@ -2116,7 +2116,7 @@
       "strategy": "CC",
       "spot": 263.81,
       "expiry": "2026-09-25",
-      "dte": 30,
+      "dte": 29,
       "strike": 290.0,
       "delta": 0.317,
       "mid": 8.2,
@@ -2147,7 +2147,7 @@
           "s": "ok"
         },
         {
-          "l": "DTE 30",
+          "l": "DTE 29",
           "s": "ok"
         },
         {
@@ -2184,7 +2184,7 @@
       "strategy": "CC",
       "spot": 18.84,
       "expiry": "2026-09-25",
-      "dte": 30,
+      "dte": 29,
       "strike": 20.5,
       "delta": 0.325,
       "mid": 0.53,
@@ -2217,7 +2217,7 @@
           "s": "ok"
         },
         {
-          "l": "DTE 30",
+          "l": "DTE 29",
           "s": "ok"
         },
         {
@@ -2254,7 +2254,7 @@
       "strategy": "CC",
       "spot": 480.93,
       "expiry": "2026-09-25",
-      "dte": 30,
+      "dte": 29,
       "strike": 530.0,
       "delta": 0.298,
       "mid": 13.45,
@@ -2285,7 +2285,7 @@
           "s": "ok"
         },
         {
-          "l": "DTE 30",
+          "l": "DTE 29",
           "s": "ok"
         },
         {
@@ -2322,7 +2322,7 @@
       "strategy": "CC",
       "spot": 125.8,
       "expiry": "2026-09-25",
-      "dte": 30,
+      "dte": 29,
       "strike": 138.0,
       "delta": 0.306,
       "mid": 3.4,
@@ -2354,7 +2354,7 @@
           "s": "ok"
         },
         {
-          "l": "DTE 30",
+          "l": "DTE 29",
           "s": "ok"
         },
         {
@@ -2391,7 +2391,7 @@
       "strategy": "CC",
       "spot": 139.63,
       "expiry": "2026-09-25",
-      "dte": 30,
+      "dte": 29,
       "strike": 155.0,
       "delta": 0.287,
       "mid": 3.67,
@@ -2421,7 +2421,7 @@
           "s": "ok"
         },
         {
-          "l": "DTE 30",
+          "l": "DTE 29",
           "s": "ok"
         },
         {
@@ -2458,7 +2458,7 @@
       "strategy": "CC",
       "spot": 177.5,
       "expiry": "2026-09-25",
-      "dte": 30,
+      "dte": 29,
       "strike": 192.5,
       "delta": 0.306,
       "mid": 4.4,
@@ -2490,7 +2490,7 @@
           "s": "ok"
         },
         {
-          "l": "DTE 30",
+          "l": "DTE 29",
           "s": "ok"
         },
         {
@@ -2527,7 +2527,7 @@
       "strategy": "CC",
       "spot": 61.59,
       "expiry": "2026-09-25",
-      "dte": 30,
+      "dte": 29,
       "strike": 67.0,
       "delta": 0.295,
       "mid": 1.46,
@@ -2560,7 +2560,7 @@
           "s": "ok"
         },
         {
-          "l": "DTE 30",
+          "l": "DTE 29",
           "s": "ok"
         },
         {
@@ -2597,7 +2597,7 @@
       "strategy": "CC",
       "spot": 209.66,
       "expiry": "2026-09-25",
-      "dte": 30,
+      "dte": 29,
       "strike": 225.0,
       "delta": 0.305,
       "mid": 4.72,
@@ -2609,10 +2609,10 @@
       "vol_bucket": "med",
       "oi": 2901,
       "spread_pct": 5.3,
-      "earnings_soon": true,
-      "earnings_in_window": true,
+      "earnings_soon": false,
+      "earnings_in_window": false,
       "strong": true,
-      "qualifies": false,
+      "qualifies": true,
       "median_ok": false,
       "pct_b": 0.32,
       "timing_label": "\ud83d\udd34 NO SETUP",
@@ -2628,7 +2628,7 @@
           "s": "ok"
         },
         {
-          "l": "DTE 30",
+          "l": "DTE 29",
           "s": "ok"
         },
         {
@@ -2645,7 +2645,7 @@
         },
         {
           "l": "earnings",
-          "s": "no"
+          "s": "ok"
         },
         {
           "l": "median",
@@ -2657,7 +2657,7 @@
         }
       ],
       "verdict": "avoid",
-      "verdict_why": "earnings within 7 days",
+      "verdict_why": "wrong side of median",
       "shortlist": false
     },
     {
@@ -2665,7 +2665,7 @@
       "strategy": "CC",
       "spot": 345.82,
       "expiry": "2026-09-25",
-      "dte": 30,
+      "dte": 29,
       "strike": 370.0,
       "delta": 0.315,
       "mid": 7.62,
@@ -2697,7 +2697,7 @@
           "s": "ok"
         },
         {
-          "l": "DTE 30",
+          "l": "DTE 29",
           "s": "ok"
         },
         {
@@ -2734,7 +2734,7 @@
       "strategy": "CC",
       "spot": 279.52,
       "expiry": "2026-09-25",
-      "dte": 30,
+      "dte": 29,
       "strike": 300.0,
       "delta": 0.299,
       "mid": 5.85,
@@ -2766,7 +2766,7 @@
           "s": "ok"
         },
         {
-          "l": "DTE 30",
+          "l": "DTE 29",
           "s": "ok"
         },
         {
@@ -2803,7 +2803,7 @@
       "strategy": "CC",
       "spot": 48.1,
       "expiry": "2026-09-18",
-      "dte": 23,
+      "dte": 22,
       "strike": 50.0,
       "delta": 0.269,
       "mid": 1.0,
@@ -2834,7 +2834,7 @@
           "s": "ok"
         },
         {
-          "l": "DTE 23",
+          "l": "DTE 22",
           "s": "ok"
         },
         {
@@ -2871,7 +2871,7 @@
       "strategy": "CC",
       "spot": 339.1,
       "expiry": "2026-09-25",
-      "dte": 30,
+      "dte": 29,
       "strike": 355.0,
       "delta": 0.308,
       "mid": 5.15,
@@ -2902,7 +2902,7 @@
           "s": "ok"
         },
         {
-          "l": "DTE 30",
+          "l": "DTE 29",
           "s": "ok"
         },
         {
@@ -2939,7 +2939,7 @@
       "strategy": "CC",
       "spot": 37.34,
       "expiry": "2026-09-25",
-      "dte": 30,
+      "dte": 29,
       "strike": 40.0,
       "delta": 0.282,
       "mid": 0.56,
@@ -2972,7 +2972,7 @@
           "s": "ok"
         },
         {
-          "l": "DTE 30",
+          "l": "DTE 29",
           "s": "ok"
         },
         {
@@ -3009,7 +3009,7 @@
       "strategy": "CC",
       "spot": 313.45,
       "expiry": "2026-09-25",
-      "dte": 30,
+      "dte": 29,
       "strike": 325.0,
       "delta": 0.332,
       "mid": 4.65,
@@ -3039,7 +3039,7 @@
           "s": "ok"
         },
         {
-          "l": "DTE 30",
+          "l": "DTE 29",
           "s": "ok"
         },
         {
@@ -3076,7 +3076,7 @@
       "strategy": "CC",
       "spot": 421.32,
       "expiry": "2026-09-25",
-      "dte": 30,
+      "dte": 29,
       "strike": 440.0,
       "delta": 0.303,
       "mid": 5.83,
@@ -3109,7 +3109,7 @@
           "s": "ok"
         },
         {
-          "l": "DTE 30",
+          "l": "DTE 29",
           "s": "ok"
         },
         {
@@ -3146,7 +3146,7 @@
       "strategy": "CC",
       "spot": 260.28,
       "expiry": "2026-09-25",
-      "dte": 30,
+      "dte": 29,
       "strike": 275.0,
       "delta": 0.276,
       "mid": 3.5,
@@ -3177,7 +3177,7 @@
           "s": "ok"
         },
         {
-          "l": "DTE 30",
+          "l": "DTE 29",
           "s": "ok"
         },
         {
@@ -3214,7 +3214,7 @@
       "strategy": "CC",
       "spot": 496.37,
       "expiry": "2026-09-25",
-      "dte": 30,
+      "dte": 29,
       "strike": 520.0,
       "delta": 0.279,
       "mid": 5.9,
@@ -3245,7 +3245,7 @@
           "s": "ok"
         },
         {
-          "l": "DTE 30",
+          "l": "DTE 29",
           "s": "ok"
         },
         {
@@ -3282,7 +3282,7 @@
       "strategy": "CC",
       "spot": 104.34,
       "expiry": "2026-09-25",
-      "dte": 30,
+      "dte": 29,
       "strike": 109.0,
       "delta": 0.287,
       "mid": 1.12,
@@ -3314,7 +3314,7 @@
           "s": "ok"
         },
         {
-          "l": "DTE 30",
+          "l": "DTE 29",
           "s": "ok"
         },
         {
@@ -3353,7 +3353,7 @@
       "strategy": "LEAP",
       "spot": 48.1,
       "expiry": "2027-03-19",
-      "dte": 205,
+      "dte": 204,
       "strike": 40.0,
       "delta": 0.787,
       "mid": 9.85,
@@ -3361,7 +3361,7 @@
       "intrinsic": 8.1,
       "extrinsic": 1.75,
       "extrinsic_pct": 17.8,
-      "carry_pct": 6.48,
+      "carry_pct": 6.51,
       "iv": 54.1,
       "iv_ratio": 2.29,
       "above_200ma": false,
@@ -3384,7 +3384,7 @@
       "strategy": "LEAP",
       "spot": 104.34,
       "expiry": "2028-01-21",
-      "dte": 513,
+      "dte": 512,
       "strike": 90.0,
       "delta": 0.771,
       "mid": 24.65,
@@ -3392,7 +3392,7 @@
       "intrinsic": 14.34,
       "extrinsic": 10.31,
       "extrinsic_pct": 41.8,
-      "carry_pct": 7.03,
+      "carry_pct": 7.04,
       "iv": 29.4,
       "iv_ratio": 0.77,
       "above_200ma": false,
@@ -3415,7 +3415,7 @@
       "strategy": "LEAP",
       "spot": 421.32,
       "expiry": "2028-01-21",
-      "dte": 513,
+      "dte": 512,
       "strike": 375.0,
       "delta": 0.779,
       "mid": 88.35,
@@ -3423,7 +3423,7 @@
       "intrinsic": 46.32,
       "extrinsic": 42.03,
       "extrinsic_pct": 47.6,
-      "carry_pct": 7.1,
+      "carry_pct": 7.11,
       "iv": 25.4,
       "iv_ratio": 1.02,
       "above_200ma": true,
@@ -3446,7 +3446,7 @@
       "strategy": "LEAP",
       "spot": 313.45,
       "expiry": "2028-03-17",
-      "dte": 569,
+      "dte": 568,
       "strike": 270.0,
       "delta": 0.775,
       "mid": 79.33,
@@ -3454,7 +3454,7 @@
       "intrinsic": 43.45,
       "extrinsic": 35.88,
       "extrinsic_pct": 45.2,
-      "carry_pct": 7.34,
+      "carry_pct": 7.35,
       "iv": 29.8,
       "iv_ratio": 0.93,
       "above_200ma": true,
@@ -3477,7 +3477,7 @@
       "strategy": "LEAP",
       "spot": 496.37,
       "expiry": "2028-01-21",
-      "dte": 513,
+      "dte": 512,
       "strike": 420.0,
       "delta": 0.772,
       "mid": 129.75,
@@ -3485,7 +3485,7 @@
       "intrinsic": 76.37,
       "extrinsic": 53.38,
       "extrinsic_pct": 41.1,
-      "carry_pct": 7.65,
+      "carry_pct": 7.67,
       "iv": 33.5,
       "iv_ratio": 0.61,
       "above_200ma": true,
@@ -3508,7 +3508,7 @@
       "strategy": "LEAP",
       "spot": 339.1,
       "expiry": "2028-01-21",
-      "dte": 513,
+      "dte": 512,
       "strike": 280.0,
       "delta": 0.788,
       "mid": 97.17,
@@ -3516,7 +3516,7 @@
       "intrinsic": 59.1,
       "extrinsic": 38.07,
       "extrinsic_pct": 39.2,
-      "carry_pct": 7.99,
+      "carry_pct": 8.0,
       "iv": 35.8,
       "iv_ratio": 1.0,
       "above_200ma": true,
@@ -3525,7 +3525,7 @@
       "rsi": 44.2,
       "rsi_rising": false,
       "gate_a": true,
-      "gate_c": true,
+      "gate_c": false,
       "trend_ok": false,
       "qualifies": false,
       "verdict": "avoid",
@@ -3539,7 +3539,7 @@
       "strategy": "LEAP",
       "spot": 61.59,
       "expiry": "2028-01-21",
-      "dte": 513,
+      "dte": 512,
       "strike": 49.0,
       "delta": 0.778,
       "mid": 19.67,
@@ -3547,7 +3547,7 @@
       "intrinsic": 12.59,
       "extrinsic": 7.08,
       "extrinsic_pct": 36.0,
-      "carry_pct": 8.18,
+      "carry_pct": 8.2,
       "iv": 43.2,
       "iv_ratio": 1.24,
       "above_200ma": false,
@@ -3570,7 +3570,7 @@
       "strategy": "LEAP",
       "spot": 37.34,
       "expiry": "2028-01-21",
-      "dte": 513,
+      "dte": 512,
       "strike": 30.0,
       "delta": 0.8,
       "mid": 11.95,
@@ -3578,7 +3578,7 @@
       "intrinsic": 7.34,
       "extrinsic": 4.61,
       "extrinsic_pct": 38.6,
-      "carry_pct": 8.78,
+      "carry_pct": 8.8,
       "iv": 40.4,
       "iv_ratio": 0.62,
       "above_200ma": true,
@@ -3601,7 +3601,7 @@
       "strategy": "LEAP",
       "spot": 260.28,
       "expiry": "2028-01-21",
-      "dte": 513,
+      "dte": 512,
       "strike": 220.0,
       "delta": 0.777,
       "mid": 73.42,
@@ -3609,7 +3609,7 @@
       "intrinsic": 40.28,
       "extrinsic": 33.15,
       "extrinsic_pct": 45.1,
-      "carry_pct": 9.06,
+      "carry_pct": 9.08,
       "iv": 36.9,
       "iv_ratio": 0.64,
       "above_200ma": true,
@@ -3632,7 +3632,7 @@
       "strategy": "LEAP",
       "spot": 279.52,
       "expiry": "2028-01-21",
-      "dte": 513,
+      "dte": 512,
       "strike": 220.0,
       "delta": 0.789,
       "mid": 96.0,
@@ -3640,7 +3640,7 @@
       "intrinsic": 59.52,
       "extrinsic": 36.48,
       "extrinsic_pct": 38.0,
-      "carry_pct": 9.29,
+      "carry_pct": 9.3,
       "iv": 46.7,
       "iv_ratio": 1.48,
       "above_200ma": false,
@@ -3663,7 +3663,7 @@
       "strategy": "LEAP",
       "spot": 209.66,
       "expiry": "2028-01-21",
-      "dte": 513,
+      "dte": 512,
       "strike": 175.0,
       "delta": 0.772,
       "mid": 63.0,
@@ -3671,7 +3671,7 @@
       "intrinsic": 34.66,
       "extrinsic": 28.34,
       "extrinsic_pct": 45.0,
-      "carry_pct": 9.62,
+      "carry_pct": 9.64,
       "iv": 40.6,
       "iv_ratio": 1.26,
       "above_200ma": true,
@@ -3694,7 +3694,7 @@
       "strategy": "LEAP",
       "spot": 345.82,
       "expiry": "2028-01-21",
-      "dte": 513,
+      "dte": 512,
       "strike": 280.0,
       "delta": 0.782,
       "mid": 119.2,
@@ -3702,7 +3702,7 @@
       "intrinsic": 65.82,
       "extrinsic": 53.38,
       "extrinsic_pct": 44.8,
-      "carry_pct": 10.98,
+      "carry_pct": 11.0,
       "iv": 48.7,
       "iv_ratio": 1.31,
       "above_200ma": false,
@@ -3725,7 +3725,7 @@
       "strategy": "LEAP",
       "spot": 139.63,
       "expiry": "2028-01-21",
-      "dte": 513,
+      "dte": 512,
       "strike": 110.0,
       "delta": 0.775,
       "mid": 54.3,
@@ -3733,7 +3733,7 @@
       "intrinsic": 29.63,
       "extrinsic": 24.67,
       "extrinsic_pct": 45.4,
-      "carry_pct": 12.57,
+      "carry_pct": 12.6,
       "iv": 59.8,
       "iv_ratio": 0.61,
       "above_200ma": false,
@@ -3756,7 +3756,7 @@
       "strategy": "LEAP",
       "spot": 125.8,
       "expiry": "2028-01-21",
-      "dte": 513,
+      "dte": 512,
       "strike": 100.0,
       "delta": 0.784,
       "mid": 48.08,
@@ -3764,7 +3764,7 @@
       "intrinsic": 25.8,
       "extrinsic": 22.28,
       "extrinsic_pct": 46.3,
-      "carry_pct": 12.6,
+      "carry_pct": 12.62,
       "iv": 56.7,
       "iv_ratio": 1.21,
       "above_200ma": true,
@@ -3787,7 +3787,7 @@
       "strategy": "LEAP",
       "spot": 480.93,
       "expiry": "2028-01-21",
-      "dte": 513,
+      "dte": 512,
       "strike": 380.0,
       "delta": 0.782,
       "mid": 186.65,
@@ -3795,7 +3795,7 @@
       "intrinsic": 100.93,
       "extrinsic": 85.72,
       "extrinsic_pct": 45.9,
-      "carry_pct": 12.68,
+      "carry_pct": 12.71,
       "iv": 59.0,
       "iv_ratio": 0.86,
       "above_200ma": true,
@@ -3818,7 +3818,7 @@
       "strategy": "LEAP",
       "spot": 177.5,
       "expiry": "2028-01-21",
-      "dte": 513,
+      "dte": 512,
       "strike": 140.0,
       "delta": 0.786,
       "mid": 69.25,
@@ -3826,7 +3826,7 @@
       "intrinsic": 37.5,
       "extrinsic": 31.75,
       "extrinsic_pct": 45.8,
-      "carry_pct": 12.73,
+      "carry_pct": 12.75,
       "iv": 58.7,
       "iv_ratio": 0.59,
       "above_200ma": true,
@@ -3849,7 +3849,7 @@
       "strategy": "LEAP",
       "spot": 18.84,
       "expiry": "2028-01-21",
-      "dte": 513,
+      "dte": 512,
       "strike": 15.0,
       "delta": 0.782,
       "mid": 7.4,
@@ -3857,7 +3857,7 @@
       "intrinsic": 3.84,
       "extrinsic": 3.56,
       "extrinsic_pct": 48.1,
-      "carry_pct": 13.44,
+      "carry_pct": 13.47,
       "iv": 60.1,
       "iv_ratio": 1.03,
       "above_200ma": false,
@@ -3880,7 +3880,7 @@
       "strategy": "LEAP",
       "spot": 170.31,
       "expiry": "2028-01-21",
-      "dte": 513,
+      "dte": 512,
       "strike": 135.0,
       "delta": 0.782,
       "mid": 68.5,
@@ -3888,7 +3888,7 @@
       "intrinsic": 35.31,
       "extrinsic": 33.19,
       "extrinsic_pct": 48.5,
-      "carry_pct": 13.87,
+      "carry_pct": 13.89,
       "iv": 62.6,
       "iv_ratio": 1.24,
       "above_200ma": false,
@@ -3911,7 +3911,7 @@
       "strategy": "LEAP",
       "spot": 263.81,
       "expiry": "2028-01-21",
-      "dte": 513,
+      "dte": 512,
       "strike": 210.0,
       "delta": 0.778,
       "mid": 106.88,
@@ -3919,7 +3919,7 @@
       "intrinsic": 53.81,
       "extrinsic": 53.06,
       "extrinsic_pct": 49.7,
-      "carry_pct": 14.31,
+      "carry_pct": 14.34,
       "iv": 64.3,
       "iv_ratio": 1.18,
       "above_200ma": true,
@@ -3942,7 +3942,7 @@
       "strategy": "LEAP",
       "spot": 88.01,
       "expiry": "2028-01-21",
-      "dte": 513,
+      "dte": 512,
       "strike": 72.5,
       "delta": 0.776,
       "mid": 39.5,
@@ -3950,7 +3950,7 @@
       "intrinsic": 15.51,
       "extrinsic": 23.99,
       "extrinsic_pct": 60.7,
-      "carry_pct": 19.39,
+      "carry_pct": 19.43,
       "iv": 79.7,
       "iv_ratio": 0.63,
       "above_200ma": false,
@@ -3973,7 +3973,7 @@
       "strategy": "LEAP",
       "spot": 12.67,
       "expiry": "2028-01-21",
-      "dte": 513,
+      "dte": 512,
       "strike": 10.0,
       "delta": 0.797,
       "mid": 6.85,
@@ -3981,7 +3981,7 @@
       "intrinsic": 2.67,
       "extrinsic": 4.18,
       "extrinsic_pct": 61.0,
-      "carry_pct": 23.47,
+      "carry_pct": 23.52,
       "iv": 104.0,
       "iv_ratio": 1.18,
       "above_200ma": false,
@@ -4004,7 +4004,7 @@
       "strategy": "LEAP",
       "spot": 218.21,
       "expiry": "2028-03-17",
-      "dte": 569,
+      "dte": 568,
       "strike": 190.0,
       "delta": 0.779,
       "mid": 109.55,
@@ -4012,7 +4012,7 @@
       "intrinsic": 28.21,
       "extrinsic": 81.34,
       "extrinsic_pct": 74.2,
-      "carry_pct": 23.91,
+      "carry_pct": 23.95,
       "iv": 94.1,
       "iv_ratio": 0.88,
       "above_200ma": true,
@@ -4035,7 +4035,7 @@
       "strategy": "LEAP",
       "spot": 213.93,
       "expiry": "2028-01-21",
-      "dte": 513,
+      "dte": 512,
       "strike": 180.0,
       "delta": 0.781,
       "mid": 107.5,
@@ -4043,7 +4043,7 @@
       "intrinsic": 33.93,
       "extrinsic": 73.57,
       "extrinsic_pct": 68.4,
-      "carry_pct": 24.47,
+      "carry_pct": 24.52,
       "iv": 97.4,
       "iv_ratio": 0.6,
       "above_200ma": true,
@@ -4066,7 +4066,7 @@
       "strategy": "LEAP",
       "spot": 39.58,
       "expiry": "2028-03-17",
-      "dte": 569,
+      "dte": 568,
       "strike": 35.0,
       "delta": 0.775,
       "mid": 19.8,
@@ -4074,7 +4074,7 @@
       "intrinsic": 4.58,
       "extrinsic": 15.22,
       "extrinsic_pct": 76.9,
-      "carry_pct": 24.67,
+      "carry_pct": 24.71,
       "iv": 94.8,
       "iv_ratio": 0.79,
       "above_200ma": false,
@@ -4097,7 +4097,7 @@
       "strategy": "LEAP",
       "spot": 11.56,
       "expiry": "2028-01-21",
-      "dte": 513,
+      "dte": 512,
       "strike": 10.0,
       "delta": 0.771,
       "mid": 5.7,
@@ -4105,7 +4105,7 @@
       "intrinsic": 1.56,
       "extrinsic": 4.14,
       "extrinsic_pct": 72.6,
-      "carry_pct": 25.48,
+      "carry_pct": 25.53,
       "iv": 97.5,
       "iv_ratio": 0.95,
       "above_200ma": false,
@@ -4721,7 +4721,7 @@
     "vix_label": "normal",
     "fng": 55,
     "fng_label": "Greed",
-    "btc_fng": 65,
+    "btc_fng": 71,
     "btc_fng_label": "Greed",
     "fng_hist": [
       70,
@@ -4817,7 +4817,6 @@
     ],
     "btc_fng_hist": [
       23,
-      23,
       28,
       29,
       23,
@@ -4905,7 +4904,8 @@
       66,
       73,
       74,
-      65
+      65,
+      71
     ],
     "vix_hist": [
       17.0,
@@ -4979,7 +4979,7 @@
     "three_month": 3.69,
     "curve": "flat",
     "fed_funds": 3.63,
-    "skew": 143.27,
+    "skew": 142.96,
     "vix9d": 13.33
   },
   "pulse": [
@@ -5277,8 +5277,8 @@
     },
     {
       "label": "DXY",
-      "price": 99.15399932861328,
-      "pct": 0.2365559684587959,
+      "price": 99.12200164794922,
+      "pct": 0.20420893928738693,
       "prefix": "",
       "is_yield": false,
       "hist": [
@@ -5346,13 +5346,13 @@
         98.8,
         99.0,
         98.92,
-        99.15
+        99.12
       ]
     },
     {
       "label": "Crude Oil",
-      "price": 81.83999633789062,
-      "pct": -0.6313796364828872,
+      "price": 81.66999816894531,
+      "pct": -0.8377882907877554,
       "prefix": "$",
       "is_yield": false,
       "hist": [
@@ -5420,13 +5420,13 @@
         87.06,
         85.01,
         82.36,
-        81.84
+        81.67
       ]
     },
     {
       "label": "Gold",
-      "price": 4641.0,
-      "pct": 0.06252349631727938,
+      "price": 4669.2998046875,
+      "pct": 0.6726829170206061,
       "prefix": "$",
       "is_yield": false,
       "hist": [
@@ -5494,13 +5494,13 @@
         4624,
         4641,
         4638,
-        4641
+        4669
       ]
     },
     {
       "label": "Bitcoin",
-      "price": 78391.2734375,
-      "pct": -0.22109486007650947,
+      "price": 78840.5234375,
+      "pct": 0.3507248230142368,
       "prefix": "$",
       "is_yield": false,
       "hist": [
@@ -5593,7 +5593,7 @@
         77755,
         78964,
         78565,
-        78391
+        78843
       ]
     },
     {
@@ -5815,8 +5815,8 @@
     {
       "label": "Digital Assets",
       "ticker": "BTC",
-      "pct": -0.22109486007650947,
-      "price": 78391.2734375
+      "pct": 0.3507248230142368,
+      "price": 78840.5234375
     }
   ],
   "fundamentals": {
@@ -5887,6 +5887,30 @@
       ],
       "news": [
         {
+          "title": "Tesla quietly kills a product homeowners once paid a premium for",
+          "publisher": "TheStreet",
+          "link": "https://www.thestreet.com/investing/tesla-tsla-discontinues-solar-roof-tiles",
+          "when": "Aug 27"
+        },
+        {
+          "title": "Elon Musk Grok Bot Promise: We Will Make You Whole if AI Loses Your Money",
+          "publisher": "BeInCrypto",
+          "link": "https://beincrypto.com/elon-musk-grok-bot-promise/",
+          "when": "Aug 26"
+        },
+        {
+          "title": "Autonomous Trucks Are Here: Einride\u2019s 27% Revenue Jump",
+          "publisher": "FreightWaves",
+          "link": "https://finance.yahoo.com/technology/articles/autonomous-trucks-einride-27-revenue-224018722.html",
+          "when": "Aug 26"
+        },
+        {
+          "title": "Rivian Automotive vs. Tesla: Which Electric Vehicle Stock Is a Better Investment in 2026?",
+          "publisher": "Motley Fool",
+          "link": "https://www.fool.com/coverage/better-buy/2026/08/26/rivian-automotive-vs-tesla-which-electric-vehicle-stock-is-a-better-investment-in-2026/",
+          "when": "Aug 26"
+        },
+        {
           "title": "Tesla Reportedly Says China FSD Work Continues After Website Omission Sparks Shutdown Claims \u2014 TSLA Stock Slips",
           "publisher": "Stocktwits",
           "link": "https://stocktwits.com/news-articles/markets/equity/tesla-reportedly-says-china-fsd-work-continues-after-website-omission-sparks-shutdown-claims-tsla-stock-slips/cZYV2uARJpR",
@@ -5896,30 +5920,6 @@
           "title": "Tesla's Cybertruck Hike Shrinks Its Own Upgrade Ladder",
           "publisher": "GuruFocus.com",
           "link": "https://finance.yahoo.com/markets/stocks/articles/teslas-cybertruck-hike-shrinks-own-181744706.html",
-          "when": "Aug 26"
-        },
-        {
-          "title": "Rivian Automotive (RIVN) Is Catching Up to Tesla (TSLA)\u2019s Self-Driving Tech, But Tesla Still Leads",
-          "publisher": "Insider Monkey",
-          "link": "https://finance.yahoo.com/technology/articles/rivian-automotive-rivn-catching-tesla-171802515.html",
-          "when": "Aug 26"
-        },
-        {
-          "title": "Waymo Heads to Germany as the Global Robo-Taxi War with Tesla Heats Up",
-          "publisher": "Barrons.com",
-          "link": "https://www.barrons.com/articles/tesla-stock-price-robotaxi-waymo-alphabet-germany-5a816df6?siteid=yhoof2&yptr=yahoo",
-          "when": "Aug 26"
-        },
-        {
-          "title": "Ferrari (RACE) vs. Tesla (TSLA): Ferrari\u2019s $40M EV Record Shows How Luxury Scarcity Beats Tesla\u2019s Mass-Market Volume",
-          "publisher": "Insider Monkey",
-          "link": "https://finance.yahoo.com/markets/stocks/articles/ferrari-race-vs-tesla-tsla-170001732.html",
-          "when": "Aug 26"
-        },
-        {
-          "title": "Lucid Sinks 6% Despite Major Vehicle Reveal, Rivian Drops 5%",
-          "publisher": "24/7 Wall St.",
-          "link": "https://247wallst.com/investing/2026/08/26/lucid-sinks-6-despite-major-vehicle-reveal-rivian-drops-5/",
           "when": "Aug 26"
         }
       ]
@@ -6068,11 +6068,11 @@
         "gross_margin": 5.701976666418964,
         "op_margin": 4.844579029501375,
         "net_margin": 4.46113546852939,
-        "roe": 0.6142351412464062,
+        "roe": 0.5243466792439646,
         "fcf": 102579265000.0,
         "fcf_margin": 3.811371962547373,
-        "debt_to_equity": 0.04333057081760234,
-        "current_ratio": 3.440775681341719,
+        "debt_to_equity": 0.14571323760612095,
+        "current_ratio": 4.588949069016016,
         "interest_coverage": 507.3424124513619,
         "eps": 4.9,
         "shares": 24304000000.0,
@@ -6103,10 +6103,22 @@
       ],
       "news": [
         {
-          "title": "Nvidia tops Q2 expectations, offers strong outlook, but stock falls",
+          "title": "Why Nvidia says its AI partnerships aren't 'circular financing'",
+          "publisher": "Yahoo Finance Video",
+          "link": "https://finance.yahoo.com/video/why-nvidia-says-its-ai-partnerships-arent-circular-financing-222400222.html",
+          "when": "Aug 26"
+        },
+        {
+          "title": "Tech stocks today: Meta agrees to settle social media case for $16.68 billion; Nvidia tops Q2 expectations",
           "publisher": "Yahoo Finance",
-          "link": "https://finance.yahoo.com/markets/stocks/article/nvidia-tops-q2-expectations-offers-strong-outlook-but-stock-falls-112502189.html",
-          "when": "Aug 23"
+          "link": "https://finance.yahoo.com/technology/live/tech-stocks-today-meta-agrees-to-settle-social-media-case-for-1668-billion-nvidia-tops-q2-expectations-125406169.html",
+          "when": "Aug 24"
+        },
+        {
+          "title": "Nvidia reports impressive Q2 earnings as AI boom rolls on",
+          "publisher": "Yahoo Finance Video",
+          "link": "https://finance.yahoo.com/video/nvidia-reports-impressive-q2-earnings-as-ai-boom-rolls-on-203300281.html",
+          "when": "Aug 26"
         },
         {
           "title": "Nvidia earnings countdown: 2 things investors need to see for the stock to climb higher",
@@ -6124,18 +6136,6 @@
           "title": "Is Nvidia's AI data center dominance slipping as the market expands?",
           "publisher": "Yahoo Finance Video",
           "link": "https://finance.yahoo.com/video/nvidias-ai-data-center-dominance-120000341.html",
-          "when": "Aug 26"
-        },
-        {
-          "title": "Constellation's New Power Deals Are Piling Up. Here's Why the Stock Isn't Reflecting It Yet.",
-          "publisher": "Motley Fool",
-          "link": "https://www.fool.com/investing/2026/08/26/constellations-new-power-deals-are-piling-up-heres/",
-          "when": "Aug 26"
-        },
-        {
-          "title": "What Traders Are Watching for Bitcoin's Next Move",
-          "publisher": "decrypt",
-          "link": "https://decrypt.co/376649/what-traders-watching-bitcoin-next-move",
           "when": "Aug 26"
         }
       ]
@@ -6198,39 +6198,39 @@
       "flags": [],
       "news": [
         {
-          "title": "Nvidia tops Q2 expectations, offers strong outlook, but stock falls",
-          "publisher": "Yahoo Finance",
-          "link": "https://finance.yahoo.com/markets/stocks/article/nvidia-tops-q2-expectations-offers-strong-outlook-but-stock-falls-112502189.html",
-          "when": "Aug 23"
+          "title": "Nvidia reports impressive Q2 earnings as AI boom rolls on",
+          "publisher": "Yahoo Finance Video",
+          "link": "https://finance.yahoo.com/video/nvidia-reports-impressive-q2-earnings-as-ai-boom-rolls-on-203300281.html",
+          "when": "Aug 26"
         },
         {
-          "title": "Peter Thiel and David Tepper Are Buying Amazon Stock Hand Over Fist: Should You Follow the Smart Money?",
+          "title": "Amazon just tripled its order of Nvidia chips over \u2018surging demand\u2019",
+          "publisher": "TechCrunch",
+          "link": "https://finance.yahoo.com/technology/ai/articles/amazon-just-tripled-order-nvidia-234718526.html",
+          "when": "Aug 26"
+        },
+        {
+          "title": "Autonomous Trucks Are Here: Einride\u2019s 27% Revenue Jump",
+          "publisher": "FreightWaves",
+          "link": "https://finance.yahoo.com/technology/articles/autonomous-trucks-einride-27-revenue-224018722.html",
+          "when": "Aug 26"
+        },
+        {
+          "title": "Rivian Automotive vs. Tesla: Which Electric Vehicle Stock Is a Better Investment in 2026?",
           "publisher": "Motley Fool",
-          "link": "https://www.fool.com/investing/2026/08/26/peter-thiel-and-david-tepper-are-buying-amazon-sto/",
+          "link": "https://www.fool.com/coverage/better-buy/2026/08/26/rivian-automotive-vs-tesla-which-electric-vehicle-stock-is-a-better-investment-in-2026/",
           "when": "Aug 26"
         },
         {
-          "title": "Amazon Lands a Major Deal That Could Change AWS Analytics",
-          "publisher": "GuruFocus.com",
-          "link": "https://finance.yahoo.com/technology/articles/amazon-lands-major-deal-could-192309971.html",
+          "title": "Nvidia doubles revenue, forecasts even more AI spending",
+          "publisher": "AFP",
+          "link": "https://finance.yahoo.com/technology/ai/articles/nvidia-doubles-revenue-forecasts-even-220638927.html",
           "when": "Aug 26"
         },
         {
-          "title": "Musk Says Nvidia Data Centers Hit Orbit in 2027. SpaceX\u2019s Own IPO Filing Said 2028 at the Earliest",
-          "publisher": "24/7 Wall St.",
-          "link": "https://247wallst.com/investing/2026/08/26/musk-says-nvidia-data-centers-hit-orbit-in-2027-spacexs-own-ipo-filing-said-2028-at-the-earliest/",
-          "when": "Aug 26"
-        },
-        {
-          "title": "Why Has Meta Stock Underperformed Despite Huge Payouts?",
-          "publisher": "Trefis",
-          "link": "https://www.trefis.com/articles/612936/why-has-meta-stock-underperformed-despite-huge-payouts/2026-08-26",
-          "when": "Aug 26"
-        },
-        {
-          "title": "Amazon's 37% AWS Boom Still Burns Through Free Cash Flow",
-          "publisher": "GuruFocus.com",
-          "link": "https://finance.yahoo.com/markets/stocks/articles/amazons-37-aws-boom-still-190514659.html",
+          "title": "Nvidia Rallies On Major Amazon Contract, Fiscal Q2 Beat-And-Raise Report",
+          "publisher": "Investor's Business Daily",
+          "link": "https://www.investors.com/news/technology/nvidia-stock-nvda-fiscal-q2-2027-earnings/?src=A00220&yptr=yahoo",
           "when": "Aug 26"
         }
       ]
@@ -6293,39 +6293,39 @@
       "flags": [],
       "news": [
         {
-          "title": "Nvidia tops Q2 expectations, offers strong outlook, but stock falls",
+          "title": "Stocks in holding pattern ahead of Nvidia earnings: AlphaCheck",
           "publisher": "Yahoo Finance",
-          "link": "https://finance.yahoo.com/markets/stocks/article/nvidia-tops-q2-expectations-offers-strong-outlook-but-stock-falls-112502189.html",
-          "when": "Aug 23"
+          "link": "https://finance.yahoo.com/markets/article/stocks-in-holding-pattern-ahead-of-nvidia-earnings-alphacheck-141558586.html",
+          "when": "Aug 26"
         },
         {
-          "title": "Has Wall Street Given Up On Oracle Stock Too Soon?",
+          "title": "Nvidia earnings could reveal its fastest-growing business isn't chips: Chart of the Day",
+          "publisher": "Yahoo Finance",
+          "link": "https://finance.yahoo.com/markets/article/nvidia-earnings-could-reveal-its-fastest-growing-business-isnt-chips-chart-of-the-day-100000332.html",
+          "when": "Aug 26"
+        },
+        {
+          "title": "OpenAI Is the Sole Investor in Its Latest Venture Fund",
+          "publisher": "The Wall Street Journal",
+          "link": "https://www.wsj.com/pro/venture-capital/openai-is-the-sole-investor-in-its-latest-venture-fund-ed1dd447?siteid=yhoof2&yptr=yahoo",
+          "when": "Aug 26"
+        },
+        {
+          "title": "Nvidia doubles revenue, forecasts even more AI spending",
+          "publisher": "AFP",
+          "link": "https://finance.yahoo.com/technology/ai/articles/nvidia-doubles-revenue-forecasts-even-220638927.html",
+          "when": "Aug 26"
+        },
+        {
+          "title": "Anthropic continues compute-gobbling streak in $45B deal with Nscale",
+          "publisher": "TechCrunch",
+          "link": "https://finance.yahoo.com/technology/ai/articles/anthropic-continues-compute-gobbling-streak-213739548.html",
+          "when": "Aug 26"
+        },
+        {
+          "title": "Decoding ANET Stock's Premium Valuation",
           "publisher": "Trefis",
-          "link": "https://www.trefis.com/articles/612956/has-wall-street-given-up-on-oracle-stock-too-soon/2026-08-26",
-          "when": "Aug 26"
-        },
-        {
-          "title": "Anthropic Ramps Up Infrastructure Spending Ahead Of IPO, Says Report \u2014 Plans $45B Computing Push",
-          "publisher": "Stocktwits",
-          "link": "https://stocktwits.com/news-articles/markets/equity/anthropic-ramps-up-infrastructure-spending-ahead-of-ipo-says-report-plans-45-b-computing-push/cZYV3ofRJp5",
-          "when": "Aug 26"
-        },
-        {
-          "title": "Boston Scientific Hammered After Cyberattack Tampers With Shipments",
-          "publisher": "Investor's Business Daily",
-          "link": "https://www.investors.com/news/technology/boston-scientific-stock-cybersecurity-incident/?src=A00220&yptr=yahoo",
-          "when": "Aug 26"
-        },
-        {
-          "title": "OpenAI's New AI Chip Could Be Good News for Broadcom",
-          "publisher": "GuruFocus.com",
-          "link": "https://finance.yahoo.com/technology/ai/articles/openais-ai-chip-could-good-194049805.html",
-          "when": "Aug 26"
-        },
-        {
-          "title": "Is It Time To Buy The Dip In Cash-Rich Adobe Stock?",
-          "publisher": "Trefis",
-          "link": "https://www.trefis.com/articles/612946/is-it-time-to-buy-the-dip-in-cash-rich-adobe-stock/2026-08-26",
+          "link": "https://www.trefis.com/articles/612945/decoding-anet-stocks-premium-valuation/2026-08-26",
           "when": "Aug 26"
         }
       ]
@@ -6488,6 +6488,12 @@
       ],
       "news": [
         {
+          "title": "How Vertiv\u2019s Strong Interest Coverage and Analyst Praise Will Impact Vertiv Holdings Co (VRT) Investors",
+          "publisher": "Simply Wall St.",
+          "link": "https://finance.yahoo.com/markets/stocks/articles/vertiv-strong-interest-coverage-analyst-221840521.html",
+          "when": "Aug 26"
+        },
+        {
           "title": "Strong Datacenter Growth Boosts TER's Prospects Against CSCO & VRT",
           "publisher": "Zacks",
           "link": "https://finance.yahoo.com/technology/articles/strong-datacenter-growth-boosts-ters-162600424.html",
@@ -6516,12 +6522,6 @@
           "publisher": "Zacks",
           "link": "https://finance.yahoo.com/markets/stocks/articles/4-stocks-solid-interest-coverage-133000050.html",
           "when": "Aug 25"
-        },
-        {
-          "title": "Boeing and 9 More Stocks for Manufacturing\u2019s Revival, From Our Roundtable Pros",
-          "publisher": "Barrons.com",
-          "link": "https://www.barrons.com/articles/manufacturing-stocks-picks-roundtable-7c264514?siteid=yhoof2&yptr=yahoo",
-          "when": "Aug 24"
         }
       ]
     },
@@ -6678,6 +6678,12 @@
       "flags": [],
       "news": [
         {
+          "title": "Record ETF flows show the \u2018debasement trade\u2019 is overtaking AI, analyst says",
+          "publisher": "TheStreet",
+          "link": "https://www.thestreet.com/crypto/markets/record-etf-flows-show-the-debasement-trade-is-overtaking-ai-analyst-says",
+          "when": "Aug 26"
+        },
+        {
           "title": "Gold Sends Powerful New Market Signal",
           "publisher": "GuruFocus.com",
           "link": "https://finance.yahoo.com/markets/commodities/articles/gold-sends-powerful-market-signal-195108715.html",
@@ -6705,12 +6711,6 @@
           "title": "GLD, IBIT and Other ETFs to Play Debasement Trade",
           "publisher": "Zacks",
           "link": "https://finance.yahoo.com/markets/commodities/articles/gld-ibit-other-etfs-play-122900313.html",
-          "when": "Aug 26"
-        },
-        {
-          "title": "Tether CEO Paolo Ardoino Says to Avoid Disaster, Hold Bitcoin and Gold. Is He Right?",
-          "publisher": "Motley Fool",
-          "link": "https://www.fool.com/investing/2026/08/26/tether-ceo-paolo-ardoino-says-to-avoid-disaster-ho/",
           "when": "Aug 26"
         }
       ]
@@ -6977,39 +6977,39 @@
       ],
       "news": [
         {
-          "title": "Dollar Stores In Earnings Spotlight With 2 Stocks In Buy Zones",
+          "title": "It's 'hard' to argue that Nvidia's financing is circular, analyst says",
+          "publisher": "Yahoo Finance Video",
+          "link": "https://finance.yahoo.com/video/hard-argue-nvidias-financing-circular-210803102.html",
+          "when": "Aug 26"
+        },
+        {
+          "title": "Key Walmart and grocery chain supplier files Chapter 7 bankruptcy",
+          "publisher": "TheStreet",
+          "link": "https://www.thestreet.com/restaurants/key-walmart-and-grocery-chain-supplier-80-acres-files-chapter-7-bankruptcy",
+          "when": "Aug 27"
+        },
+        {
+          "title": "Dollar Stores In Earnings Spotlight, With 2 Stocks In Buy Zones",
           "publisher": "Investor's Business Daily",
           "link": "https://www.investors.com/news/dltr-stock-bg-stock-dollar-tree-earnings-dollar-general-earnings/?src=A00220&yptr=yahoo",
+          "when": "Aug 26"
+        },
+        {
+          "title": "Dollar Tree Stock Has Gained, But Earnings Will Test the Retailer\u2019s Strategy",
+          "publisher": "Barrons.com",
+          "link": "https://www.barrons.com/articles/dollar-tree-earnings-stock-price-3f9c8818?siteid=yhoof2&yptr=yahoo",
+          "when": "Aug 26"
+        },
+        {
+          "title": "Dollar General Stock Has Struggled This Year. Can Earnings Turn Things Around?",
+          "publisher": "Barrons.com",
+          "link": "https://www.barrons.com/articles/dollar-general-earnings-stock-price-e224bd17?siteid=yhoof2&yptr=yahoo",
           "when": "Aug 26"
         },
         {
           "title": "Gatik Raises $200 Million as It Ramps Up Driverless Truck Fleet",
           "publisher": "Sourcing Journal",
           "link": "https://wwd.com/sourcing-journal/logistics/gatik-200-million-series-d-funding-ai-driverless-autonomous-trucks-trucking-1239164645/",
-          "when": "Aug 26"
-        },
-        {
-          "title": "Home Depot Stock's Upside Case Now Runs Through A Business It Bought",
-          "publisher": "Trefis",
-          "link": "https://www.trefis.com/articles/613004/home-depot-stocks-upside-case-now-runs-through-a-business-it-bought/2026-08-26",
-          "when": "Aug 26"
-        },
-        {
-          "title": "Costco Has a Secret Growth Engine. Wall Street May Be Underestimating It.",
-          "publisher": "24/7 Wall St.",
-          "link": "https://247wallst.com/investing/2026/08/26/costco-has-a-secret-growth-engine-wall-street-may-be-underestimating-it/",
-          "when": "Aug 26"
-        },
-        {
-          "title": "Retail's Big Q2 Beats Came From Washington, Not the Consumer",
-          "publisher": "Zacks",
-          "link": "https://finance.yahoo.com/markets/stocks/articles/retails-big-q2-beats-came-154800177.html",
-          "when": "Aug 26"
-        },
-        {
-          "title": "WMT vs. MELI: Which Stock Offers the Stronger Growth Story Now?",
-          "publisher": "Zacks",
-          "link": "https://finance.yahoo.com/markets/stocks/articles/wmt-vs-meli-stock-offers-141700062.html",
           "when": "Aug 26"
         }
       ]
@@ -7077,6 +7077,18 @@
       ],
       "news": [
         {
+          "title": "Nvidia, Meta, Revolution Medicines, Abercrombie, Intuit, Salesforce, Moderna, and More Stocks That Explain Today\u2019s Market",
+          "publisher": "Barrons.com",
+          "link": "https://www.barrons.com/articles/stock-movers-6a7eb3fe?siteid=yhoof2&yptr=yahoo",
+          "when": "Aug 26"
+        },
+        {
+          "title": "Apple Is One of the Most Profitable Businesses in the World. Here's Why the Stock Will Be Worth $366 a Share in 1 Year.",
+          "publisher": "Motley Fool",
+          "link": "https://www.fool.com/investing/2026/08/26/apple-profitable-business-stock-price-366-1-year/",
+          "when": "Aug 26"
+        },
+        {
           "title": "Warren Buffett \u201cBlew It\u201d on Alphabet (GOOGL) And Made It Berkshire\u2019s Third-Biggest Bet",
           "publisher": "Insider Monkey",
           "link": "https://finance.yahoo.com/markets/stocks/articles/warren-buffett-blew-alphabet-googl-202343918.html",
@@ -7095,21 +7107,9 @@
           "when": "Aug 26"
         },
         {
-          "title": "Nvidia, Meta, Revolution Medicines, Abercrombie, Intuit, Salesforce, Moderna, and More Stocks That Explain Today\u2019s Market",
-          "publisher": "Barrons.com",
-          "link": "https://www.barrons.com/articles/stock-movers-6a7eb3fe?siteid=yhoof2&yptr=yahoo",
-          "when": "Aug 26"
-        },
-        {
           "title": "Apple Seen to Ship Over 17 Million Foldable iPhones by 2027, IDC Says",
           "publisher": "MT Newswires",
           "link": "https://finance.yahoo.com/technology/articles/apple-seen-ship-over-17-175939666.html",
-          "when": "Aug 26"
-        },
-        {
-          "title": "Qualcomm's Costs Are Inside The Guidance And Its Replacement Growth Is Not",
-          "publisher": "Trefis",
-          "link": "https://www.trefis.com/articles/613012/qualcomms-costs-are-inside-the-guidance-and-its-replacement-growth-is-not/2026-08-26",
           "when": "Aug 26"
         }
       ]
@@ -7172,10 +7172,16 @@
       "flags": [],
       "news": [
         {
-          "title": "Nvidia tops Q2 expectations, offers strong outlook, but stock falls",
+          "title": "Nvidia tops Q2 expectations on revenue of $96.2 billion, offers strong Q3 outlook",
           "publisher": "Yahoo Finance",
-          "link": "https://finance.yahoo.com/markets/stocks/article/nvidia-tops-q2-expectations-offers-strong-outlook-but-stock-falls-112502189.html",
+          "link": "https://finance.yahoo.com/markets/stocks/article/nvidia-tops-q2-expectations-offers-strong-q3-outlook-revenue-96-billion-112502189.html",
           "when": "Aug 23"
+        },
+        {
+          "title": "Nvidia reports impressive Q2 earnings as AI boom rolls on",
+          "publisher": "Yahoo Finance Video",
+          "link": "https://finance.yahoo.com/video/nvidia-reports-impressive-q2-earnings-as-ai-boom-rolls-on-203300281.html",
+          "when": "Aug 26"
         },
         {
           "title": "Is Meta a buy after its $16.68 billion social media case settlement?",
@@ -7184,27 +7190,21 @@
           "when": "Aug 26"
         },
         {
-          "title": "Warren Buffett \u201cBlew It\u201d on Alphabet (GOOGL) And Made It Berkshire\u2019s Third-Biggest Bet",
-          "publisher": "Insider Monkey",
-          "link": "https://finance.yahoo.com/markets/stocks/articles/warren-buffett-blew-alphabet-googl-202343918.html",
+          "title": "Google Moves AI-Responsibility Team Out of DeepMind Lab in Latest Shake-Up",
+          "publisher": "The Wall Street Journal",
+          "link": "https://www.wsj.com/tech/ai/google-moves-ai-responsibility-team-out-of-deepmind-lab-in-latest-shake-up-ed01e40c?siteid=yhoof2&yptr=yahoo",
           "when": "Aug 26"
         },
         {
-          "title": "OpenAI's New AI Chip Could Be Good News for Broadcom",
-          "publisher": "GuruFocus.com",
-          "link": "https://finance.yahoo.com/technology/ai/articles/openais-ai-chip-could-good-194049805.html",
+          "title": "Morgan Stanley sees big change coming for Alphabet stock",
+          "publisher": "TheStreet",
+          "link": "https://www.thestreet.com/investing/alphabet-google-tpu-opportunity",
           "when": "Aug 26"
         },
         {
-          "title": "Ethereum Developers Take Steps To Fend Off Quantum Attacks",
-          "publisher": "CryptoProwl",
-          "link": "https://www.cryptoprowl.com/releases/ethereum-developers-take-steps-to-fend-off-quantum-attacks-6547",
-          "when": "Aug 26"
-        },
-        {
-          "title": "Is It Time To Buy The Dip In Cash-Rich Adobe Stock?",
-          "publisher": "Trefis",
-          "link": "https://www.trefis.com/articles/612946/is-it-time-to-buy-the-dip-in-cash-rich-adobe-stock/2026-08-26",
+          "title": "Marvell Reports Thursday. Here's Where the Google Contract Would Actually Show Up in the Numbers.",
+          "publisher": "Motley Fool",
+          "link": "https://www.fool.com/investing/2026/08/26/marvell-reports-thursday-here-s-where-the-google-contract-would-actually-show-up-in-the-numbers/",
           "when": "Aug 26"
         }
       ]
@@ -7272,15 +7272,27 @@
       ],
       "news": [
         {
-          "title": "Is Nvidia's AI data center dominance slipping as the market expands?",
+          "title": "Nvidia crushed earnings but one analyst is rating it a \"sell\"",
           "publisher": "Yahoo Finance Video",
-          "link": "https://finance.yahoo.com/video/nvidias-ai-data-center-dominance-120000341.html",
+          "link": "https://finance.yahoo.com/video/nvidia-crushed-earnings-one-analyst-210118074.html",
           "when": "Aug 26"
         },
         {
-          "title": "4 reasons Nvidia stock is lagging",
-          "publisher": "Yahoo Finance",
-          "link": "https://finance.yahoo.com/markets/stocks/article/4-reasons-nvidia-stock-is-lagging-093542775.html",
+          "title": "Dow Jones Futures Rise; Nvidia, CrowdStrike, Okta, Salesforce Lead Earnings Movers",
+          "publisher": "Investor's Business Daily",
+          "link": "https://www.investors.com/market-trend/stock-market-today/dow-jones-futures-nvidia-crowdstrike-okta-salesforce-earnings-movers/?src=A00220&yptr=yahoo",
+          "when": "Aug 27"
+        },
+        {
+          "title": "Top analyst resets AMD stock price target for rest of 2026",
+          "publisher": "TheStreet",
+          "link": "https://www.thestreet.com/investing/stocks/top-analyst-raises-amd-stock-price-target-for-rest-of-2026",
+          "when": "Aug 26"
+        },
+        {
+          "title": "Nvidia's Second-Quarter Results More Than Double Amid Record Data Center Sales",
+          "publisher": "MT Newswires",
+          "link": "https://finance.yahoo.com/technology/ai/articles/nvidia-apos-second-quarter-results-210351793.html",
           "when": "Aug 26"
         },
         {
@@ -7293,18 +7305,6 @@
           "title": "Qualcomm's Costs Are Inside The Guidance And Its Replacement Growth Is Not",
           "publisher": "Trefis",
           "link": "https://www.trefis.com/articles/613012/qualcomms-costs-are-inside-the-guidance-and-its-replacement-growth-is-not/2026-08-26",
-          "when": "Aug 26"
-        },
-        {
-          "title": "Prediction: AMD\u2019s Next Move Could Be HUGE and Here\u2019s Where The Stock is Going",
-          "publisher": "24/7 Wall St.",
-          "link": "https://247wallst.com/investing/2026/08/26/prediction-amds-next-move-could-be-huge-and-heres-where-the-stock-is-going/",
-          "when": "Aug 26"
-        },
-        {
-          "title": "Advanced Micro Devices (AMD) and Intel (INTC) Both Just Raised Billions for AI. Here\u2019s How Their Strategies Differ",
-          "publisher": "Insider Monkey",
-          "link": "https://finance.yahoo.com/technology/ai/articles/advanced-micro-devices-amd-intel-170203392.html",
           "when": "Aug 26"
         }
       ]
@@ -7386,6 +7386,24 @@
           "when": "Aug 26"
         },
         {
+          "title": "Zscaler (ZS) Ascends While Market Falls: Some Facts to Note",
+          "publisher": "Zacks",
+          "link": "https://finance.yahoo.com/markets/stocks/articles/zscaler-zs-ascends-while-market-214503554.html",
+          "when": "Aug 26"
+        },
+        {
+          "title": "CrowdStrike Holdings (CRWD) Q2 Earnings and Revenues Top Estimates",
+          "publisher": "Zacks",
+          "link": "https://finance.yahoo.com/markets/stocks/articles/crowdstrike-holdings-crwd-q2-earnings-212002343.html",
+          "when": "Aug 26"
+        },
+        {
+          "title": "CrowdStrike, Okta Stocks Jump. AI Adoption Is Boosting Security Demand.",
+          "publisher": "Barrons.com",
+          "link": "https://www.barrons.com/articles/crowdstrike-okta-earnings-stock-price-04474da3?siteid=yhoof2&yptr=yahoo",
+          "when": "Aug 26"
+        },
+        {
           "title": "Palo Alto Stock Is Riding A Wave Of AI Fear, But What Happens Next?",
           "publisher": "Trefis",
           "link": "https://www.trefis.com/articles/612949/palo-alto-stock-is-riding-a-wave-of-ai-fear-but-what-happens-next/2026-08-26",
@@ -7396,24 +7414,6 @@
           "publisher": "The Wall Street Journal",
           "link": "https://www.wsj.com/cio-journal/deep-cogito-aims-to-put-companies-in-control-of-their-own-ai-50ddf44b?siteid=yhoof2&yptr=yahoo",
           "when": "Aug 26"
-        },
-        {
-          "title": "Cybersecurity Stocks Are Priced For Big AI Growth. Why Earnings Could Bring Fireworks.",
-          "publisher": "Investor's Business Daily",
-          "link": "https://www.investors.com/news/technology/cybersecurity-stocks-earnings-artificial-intelligence-high-expectations/?src=A00220&yptr=yahoo",
-          "when": "Aug 26"
-        },
-        {
-          "title": "Can Rising Network Security Demand Boost PANW's Long-Term Growth?",
-          "publisher": "Zacks",
-          "link": "https://finance.yahoo.com/technology/articles/rising-network-security-demand-boost-135100682.html",
-          "when": "Aug 25"
-        },
-        {
-          "title": "KeyBanc Just Upgraded Its Price Target on Zscaler Stock. Here's Why.",
-          "publisher": "Barchart",
-          "link": "https://www.barchart.com/story/news/3976123/keybanc-just-upgraded-its-price-target-on-zscaler-stock-here-s-why",
-          "when": "Aug 21"
         }
       ]
     },
@@ -7481,33 +7481,33 @@
           "when": "Aug 26"
         },
         {
-          "title": "Musk Says Nvidia Data Centers Hit Orbit in 2027. SpaceX\u2019s Own IPO Filing Said 2028 at the Earliest",
-          "publisher": "24/7 Wall St.",
-          "link": "https://247wallst.com/investing/2026/08/26/musk-says-nvidia-data-centers-hit-orbit-in-2027-spacexs-own-ipo-filing-said-2028-at-the-earliest/",
+          "title": "OpenAI Is the Sole Investor in Its Latest Venture Fund",
+          "publisher": "The Wall Street Journal",
+          "link": "https://www.wsj.com/pro/venture-capital/openai-is-the-sole-investor-in-its-latest-venture-fund-ed1dd447?siteid=yhoof2&yptr=yahoo",
           "when": "Aug 26"
         },
         {
-          "title": "This Hedge Fund Has Billions Invested in SpaceX",
+          "title": "Cerebras vs. SpaceX: Which 2026 IPO Is the Better AI Stock to Own for the Next 5 Years?",
           "publisher": "Motley Fool",
-          "link": "https://www.fool.com/investing/2026/08/26/this-hedge-fund-has-billions-invested-in-spacex/",
+          "link": "https://www.fool.com/investing/2026/08/26/cerebras-vs-spacex-which-2026-ipo-is-the-better-ai/",
           "when": "Aug 26"
         },
         {
-          "title": "SpaceX's $100 Billion Louisiana Bet Raises the Stakes for Starship",
-          "publisher": "GuruFocus.com",
-          "link": "https://finance.yahoo.com/technology/articles/spacexs-100-billion-louisiana-bet-171838175.html",
+          "title": "If I Had $5,000 to Invest Today, Here's the Growth Stock I'd Buy Instead of SpaceX",
+          "publisher": "Motley Fool",
+          "link": "https://www.fool.com/investing/2026/08/26/if-i-had-5000-to-invest-today-heres-the-growth-sto/",
           "when": "Aug 26"
         },
         {
-          "title": "JPMorgan doubles down on SpaceX verdict on key update",
-          "publisher": "TheStreet",
-          "link": "https://www.thestreet.com/investing/stocks/jpmorgan-reiterates-overweight-spacex-on-grok-cursor-ai-news",
+          "title": "Elon Musk Says Grok Is Taking Over Starlink Support: 15,000+ Calls a Day, 3,000+ Orders a Week",
+          "publisher": "Benzinga",
+          "link": "https://finance.yahoo.com/technology/ai/articles/elon-musk-says-grok-taking-220058142.html",
           "when": "Aug 26"
         },
         {
-          "title": "Aerospace and defense PE exit value already beat last year's total",
-          "publisher": "Pitchbook",
-          "link": "https://pitchbook.com/news/articles/aerospace-and-defense-pe-exit-value-already-beat-last-years-total",
+          "title": "SpaceX Is Adding 500,000-Plus Starlink Subscribers Every Month. Here's Why That's Critical for the Stock.",
+          "publisher": "Motley Fool",
+          "link": "https://www.fool.com/investing/2026/08/26/spacex-is-adding-500000-plus-starlink-subscribers/",
           "when": "Aug 26"
         }
       ]
@@ -7695,6 +7695,12 @@
       ],
       "news": [
         {
+          "title": "ServiceNow (NOW) In Focus Following Tech Mahindra AI Deal As Fair Value Debate Builds",
+          "publisher": "Simply Wall St.",
+          "link": "https://finance.yahoo.com/technology/ai/articles/servicenow-now-focus-following-tech-210941599.html",
+          "when": "Aug 26"
+        },
+        {
           "title": "Palantir Just Ripped 43% in a Month. Is It Time to Sell?",
           "publisher": "24/7 Wall St.",
           "link": "https://247wallst.com/investing/2026/08/26/palantir-just-ripped-43-in-a-month-is-it-time-to-sell/",
@@ -7722,12 +7728,6 @@
           "title": "The Paid-To-Hold Play On WDAY Stock: An 8.6% Annualized Income",
           "publisher": "Trefis",
           "link": "https://www.trefis.com/articles/612804/the-paid-to-hold-play-on-wday-stock-an-8-6-annualized-income/2026-08-25",
-          "when": "Aug 25"
-        },
-        {
-          "title": "DDOG vs. NOW: Which Cloud Software Stock Has an Edge Right Now?",
-          "publisher": "Zacks",
-          "link": "https://finance.yahoo.com/markets/stocks/articles/ddog-vs-now-cloud-software-153500822.html",
           "when": "Aug 25"
         }
       ]
@@ -7913,6 +7913,24 @@
       ],
       "news": [
         {
+          "title": "Nvidia is looking more like the central bank of AI",
+          "publisher": "Yahoo Finance",
+          "link": "https://finance.yahoo.com/markets/article/nvidia-is-looking-more-like-the-central-bank-of-ai-213156835.html",
+          "when": "Aug 26"
+        },
+        {
+          "title": "Truist sees investment doubling potential in tumbling tech stock",
+          "publisher": "TheStreet",
+          "link": "https://www.thestreet.com/investing/stocks/truist-crwv-coreweave-stock-price-target-165-usd",
+          "when": "Aug 26"
+        },
+        {
+          "title": "Nvidia Eyes Perplexity AI as Earnings Approach. How NVDA Stock Investors Should Prepare.",
+          "publisher": "Barchart",
+          "link": "https://www.barchart.com/story/news/4125243/nvidia-eyes-perplexity-ai-as-earnings-approach-how-nvda-stock-investors-should-prepare",
+          "when": "Aug 26"
+        },
+        {
           "title": "Prediction: These 3 AI Stocks Could Be the Next Big Winners",
           "publisher": "24/7 Wall St.",
           "link": "https://247wallst.com/investing/2026/08/26/these-3-ai-stocks-could-be-the-next-big-winners/",
@@ -7929,24 +7947,6 @@
           "publisher": "Motley Fool",
           "link": "https://www.fool.com/investing/2026/08/26/history-has-changed-my-mind-on-these-millionaire-m/",
           "when": "Aug 26"
-        },
-        {
-          "title": "Wall Street Just Invented the \u2018Neocloud\u2019 ETF. It Owns the Companies Renting AI Compute to Everyone Else",
-          "publisher": "24/7 Wall St.",
-          "link": "https://247wallst.com/investing/2026/08/25/wall-street-just-invented-the-neocloud-etf-it-owns-the-companies-renting-ai-compute-to-everyone-else/",
-          "when": "Aug 25"
-        },
-        {
-          "title": "Applied Digital and IREN Climb 6% as the Digital Infrastructure Bid Broadens Past Bitcoin, Core Scientific Gains 4%",
-          "publisher": "24/7 Wall St.",
-          "link": "https://247wallst.com/investing/2026/08/25/applied-digital-and-iren-climb-6-as-the-digital-infrastructure-bid-broadens-past-bitcoin-core-scientific-gains-4/",
-          "when": "Aug 25"
-        },
-        {
-          "title": "Dell's AI Rally Is About to Face Its Next Big Test",
-          "publisher": "GuruFocus.com",
-          "link": "https://finance.yahoo.com/technology/ai/articles/dells-ai-rally-face-next-181822598.html",
-          "when": "Aug 25"
         }
       ]
     },
@@ -8029,6 +8029,12 @@
       ],
       "news": [
         {
+          "title": "I'd Rather Own Bloom Energy Than Nvidia Right Now. Here's My Case.",
+          "publisher": "Motley Fool",
+          "link": "https://www.fool.com/investing/2026/08/26/id-rather-own-bloom-energy-than-nvidia-right-now-h/",
+          "when": "Aug 26"
+        },
+        {
           "title": "Will Bloom Energy Be the Next SpaceX? What the Numbers Actually Say.",
           "publisher": "Motley Fool",
           "link": "https://www.fool.com/investing/2026/08/26/will-bloom-energy-be-the-next-spacex/",
@@ -8056,12 +8062,6 @@
           "title": "Nancy Pelosi makes intriguing first-ever bet on AI power stock",
           "publisher": "TheStreet",
           "link": "https://www.thestreet.com/investing/stocks/nancy-pelosi-buys-intc-intel-stock-be-bloom-energy-stock",
-          "when": "Aug 25"
-        },
-        {
-          "title": "The Peer-Group Mispricing Sitting On BE Stock",
-          "publisher": "Trefis",
-          "link": "https://www.trefis.com/articles/612785/the-peer-group-mispricing-sitting-on-be-stock/2026-08-25",
           "when": "Aug 25"
         }
       ]
@@ -8149,6 +8149,12 @@
           "when": "Aug 26"
         },
         {
+          "title": "Nvidia Eyes Perplexity AI as Earnings Approach. How NVDA Stock Investors Should Prepare.",
+          "publisher": "Barchart",
+          "link": "https://www.barchart.com/story/news/4125243/nvidia-eyes-perplexity-ai-as-earnings-approach-how-nvda-stock-investors-should-prepare",
+          "when": "Aug 26"
+        },
+        {
           "title": "IREN to Report Q4 Earnings: Should You Buy, Sell or Hold the Stock?",
           "publisher": "Zacks",
           "link": "https://finance.yahoo.com/markets/stocks/articles/iren-report-q4-earnings-buy-153500923.html",
@@ -8164,12 +8170,6 @@
           "title": "Qfin Holdings Inc. - Sponsored ADR (QFIN) Misses Q2 Earnings Estimates",
           "publisher": "Zacks",
           "link": "https://finance.yahoo.com/markets/stocks/articles/qfin-holdings-inc-sponsored-adr-230501662.html",
-          "when": "Aug 25"
-        },
-        {
-          "title": "Why Is IREN (IREN) Drawing Attention After Its AI Cloud Milestones?",
-          "publisher": "Simply Wall St.",
-          "link": "https://finance.yahoo.com/technology/ai/articles/why-iren-iren-drawing-attention-210642708.html",
           "when": "Aug 25"
         }
       ]
@@ -8326,9 +8326,21 @@
       "flags": [],
       "news": [
         {
+          "title": "Nvidia is looking more like the central bank of AI",
+          "publisher": "Yahoo Finance",
+          "link": "https://finance.yahoo.com/markets/article/nvidia-is-looking-more-like-the-central-bank-of-ai-213156835.html",
+          "when": "Aug 26"
+        },
+        {
           "title": "Michael Burry Buys NVDA Calls As A \u2018Hedge,\u2019 Adds To ORCL, PLTR, NBIS Shorts \u2014 Why He Thinks \u2018Nvidia Will Not Distribute Enough To Shareholders\u2019",
           "publisher": "Stocktwits",
           "link": "https://stocktwits.com/news-articles/markets/equity/michael-burry-buys-nvda-calls-as-a-hedge-adds-to-orcl-pltr-nbis-shorts-why-he-thinks-nvidia-will-not-distribute-enough-to-shareholders/cZYVdSURJpP",
+          "when": "Aug 26"
+        },
+        {
+          "title": "Nvidia Eyes Perplexity AI as Earnings Approach. How NVDA Stock Investors Should Prepare.",
+          "publisher": "Barchart",
+          "link": "https://www.barchart.com/story/news/4125243/nvidia-eyes-perplexity-ai-as-earnings-approach-how-nvda-stock-investors-should-prepare",
           "when": "Aug 26"
         },
         {
@@ -8348,18 +8360,6 @@
           "publisher": "24/7 Wall St.",
           "link": "https://247wallst.com/investing/2026/08/25/rum-group-surges-11-as-ceo-vows-to-take-on-coreweave-and-nebius-trump-media-holds-flat/",
           "when": "Aug 25"
-        },
-        {
-          "title": "Nebius Is Raising Money Through a Debt Offering After a Major Run-Up. What This Means for NBIS Stock.",
-          "publisher": "Barchart",
-          "link": "https://www.barchart.com/story/news/4026878/nebius-is-raising-money-through-a-debt-offering-after-a-major-run-up-what-this-means-for-nbis-stock",
-          "when": "Aug 25"
-        },
-        {
-          "title": "Nebius Group N.V. vs. SoundHound AI: Which AI Stock Will Bring You Profits in 2026 and Beyond?",
-          "publisher": "Motley Fool",
-          "link": "https://www.fool.com/coverage/better-buy/2026/08/25/nebius-group-n-v-vs-soundhound-ai-which-ai-stock-will-bring-you-profits-in-2026-and-beyond/",
-          "when": "Aug 25"
         }
       ]
     }
@@ -8370,7 +8370,7 @@
       "expiries": [
         {
           "exp": "2026-09-02",
-          "dte": 7,
+          "dte": 6,
           "calls": [
             {
               "k": 260.0,
@@ -9274,7 +9274,7 @@
         },
         {
           "exp": "2026-09-18",
-          "dte": 23,
+          "dte": 22,
           "calls": [
             {
               "k": 260.0,
@@ -10002,7 +10002,7 @@
         },
         {
           "exp": "2026-09-25",
-          "dte": 30,
+          "dte": 29,
           "calls": [
             {
               "k": 260.0,
@@ -10570,7 +10570,7 @@
         },
         {
           "exp": "2026-10-16",
-          "dte": 51,
+          "dte": 50,
           "calls": [
             {
               "k": 260.0,
@@ -11138,7 +11138,7 @@
         },
         {
           "exp": "2026-11-20",
-          "dte": 86,
+          "dte": 85,
           "calls": [
             {
               "k": 260.0,
@@ -11711,7 +11711,7 @@
       "expiries": [
         {
           "exp": "2026-09-04",
-          "dte": 9,
+          "dte": 8,
           "calls": [
             {
               "k": 14.5,
@@ -12023,7 +12023,7 @@
         },
         {
           "exp": "2026-09-18",
-          "dte": 23,
+          "dte": 22,
           "calls": [
             {
               "k": 14.5,
@@ -12335,7 +12335,7 @@
         },
         {
           "exp": "2026-09-25",
-          "dte": 30,
+          "dte": 29,
           "calls": [
             {
               "k": 14.5,
@@ -12647,7 +12647,7 @@
         },
         {
           "exp": "2026-10-16",
-          "dte": 51,
+          "dte": 50,
           "calls": [
             {
               "k": 15.0,
@@ -12799,7 +12799,7 @@
         },
         {
           "exp": "2026-11-20",
-          "dte": 86,
+          "dte": 85,
           "calls": [
             {
               "k": 15.0,
@@ -12956,7 +12956,7 @@
       "expiries": [
         {
           "exp": "2026-09-02",
-          "dte": 7,
+          "dte": 6,
           "calls": [
             {
               "k": 160.0,
@@ -13556,7 +13556,7 @@
         },
         {
           "exp": "2026-09-18",
-          "dte": 23,
+          "dte": 22,
           "calls": [
             {
               "k": 160.0,
@@ -14060,7 +14060,7 @@
         },
         {
           "exp": "2026-09-25",
-          "dte": 30,
+          "dte": 29,
           "calls": [
             {
               "k": 160.0,
@@ -14404,7 +14404,7 @@
         },
         {
           "exp": "2026-10-16",
-          "dte": 51,
+          "dte": 50,
           "calls": [
             {
               "k": 160.0,
@@ -14748,7 +14748,7 @@
         },
         {
           "exp": "2026-11-20",
-          "dte": 86,
+          "dte": 85,
           "calls": [
             {
               "k": 160.0,
@@ -15097,7 +15097,7 @@
       "expiries": [
         {
           "exp": "2026-09-02",
-          "dte": 7,
+          "dte": 6,
           "calls": [
             {
               "k": 200.0,
@@ -15745,7 +15745,7 @@
         },
         {
           "exp": "2026-09-18",
-          "dte": 23,
+          "dte": 22,
           "calls": [
             {
               "k": 200.0,
@@ -16329,7 +16329,7 @@
         },
         {
           "exp": "2026-09-25",
-          "dte": 30,
+          "dte": 29,
           "calls": [
             {
               "k": 200.0,
@@ -16753,7 +16753,7 @@
         },
         {
           "exp": "2026-10-16",
-          "dte": 51,
+          "dte": 50,
           "calls": [
             {
               "k": 200.0,
@@ -17177,7 +17177,7 @@
         },
         {
           "exp": "2026-11-20",
-          "dte": 86,
+          "dte": 85,
           "calls": [
             {
               "k": 200.0,
@@ -17606,7 +17606,7 @@
       "expiries": [
         {
           "exp": "2026-09-02",
-          "dte": 7,
+          "dte": 6,
           "calls": [
             {
               "k": 425.0,
@@ -18430,7 +18430,7 @@
         },
         {
           "exp": "2026-09-18",
-          "dte": 23,
+          "dte": 22,
           "calls": [
             {
               "k": 395.0,
@@ -19318,7 +19318,7 @@
         },
         {
           "exp": "2026-09-25",
-          "dte": 30,
+          "dte": 29,
           "calls": [
             {
               "k": 375.0,
@@ -20030,7 +20030,7 @@
         },
         {
           "exp": "2026-10-16",
-          "dte": 51,
+          "dte": 50,
           "calls": [
             {
               "k": 375.0,
@@ -20838,7 +20838,7 @@
         },
         {
           "exp": "2026-11-20",
-          "dte": 86,
+          "dte": 85,
           "calls": [
             {
               "k": 375.0,
@@ -21651,7 +21651,7 @@
       "expiries": [
         {
           "exp": "2026-09-04",
-          "dte": 9,
+          "dte": 8,
           "calls": [
             {
               "k": 210.0,
@@ -22427,7 +22427,7 @@
         },
         {
           "exp": "2026-09-18",
-          "dte": 23,
+          "dte": 22,
           "calls": [
             {
               "k": 210.0,
@@ -22979,7 +22979,7 @@
         },
         {
           "exp": "2026-09-25",
-          "dte": 30,
+          "dte": 29,
           "calls": [
             {
               "k": 210.0,
@@ -23435,7 +23435,7 @@
         },
         {
           "exp": "2026-10-16",
-          "dte": 51,
+          "dte": 50,
           "calls": [
             {
               "k": 210.0,
@@ -23667,7 +23667,7 @@
         },
         {
           "exp": "2026-11-20",
-          "dte": 86,
+          "dte": 85,
           "calls": [
             {
               "k": 210.0,
@@ -23904,7 +23904,7 @@
       "expiries": [
         {
           "exp": "2026-09-04",
-          "dte": 9,
+          "dte": 8,
           "calls": [
             {
               "k": 200.0,
@@ -24728,7 +24728,7 @@
         },
         {
           "exp": "2026-09-18",
-          "dte": 23,
+          "dte": 22,
           "calls": [
             {
               "k": 200.0,
@@ -25264,7 +25264,7 @@
         },
         {
           "exp": "2026-09-25",
-          "dte": 30,
+          "dte": 29,
           "calls": [
             {
               "k": 200.0,
@@ -25688,7 +25688,7 @@
         },
         {
           "exp": "2026-10-16",
-          "dte": 51,
+          "dte": 50,
           "calls": [
             {
               "k": 200.0,
@@ -25904,7 +25904,7 @@
         },
         {
           "exp": "2026-11-20",
-          "dte": 86,
+          "dte": 85,
           "calls": [
             {
               "k": 200.0,
@@ -26125,7 +26125,7 @@
       "expiries": [
         {
           "exp": "2026-09-04",
-          "dte": 9,
+          "dte": 8,
           "calls": [
             {
               "k": 28.5,
@@ -26597,7 +26597,7 @@
         },
         {
           "exp": "2026-09-18",
-          "dte": 23,
+          "dte": 22,
           "calls": [
             {
               "k": 29.0,
@@ -27037,7 +27037,7 @@
         },
         {
           "exp": "2026-09-25",
-          "dte": 30,
+          "dte": 29,
           "calls": [
             {
               "k": 29.0,
@@ -27317,7 +27317,7 @@
         },
         {
           "exp": "2026-10-16",
-          "dte": 51,
+          "dte": 50,
           "calls": [
             {
               "k": 30.0,
@@ -27437,7 +27437,7 @@
         },
         {
           "exp": "2026-12-18",
-          "dte": 114,
+          "dte": 113,
           "calls": [
             {
               "k": 30.8,
@@ -27897,832 +27897,832 @@
       "spot": 421.32,
       "expiries": [
         {
-          "exp": "2026-09-02",
+          "exp": "2026-09-03",
           "dte": 7,
           "calls": [
             {
               "k": 394.0,
-              "d": 0.954,
-              "b": 26.15,
-              "a": 29.2,
-              "iv": 42.9,
+              "d": 0.942,
+              "b": 27.1,
+              "a": 29.45,
+              "iv": 41.8,
               "oi": 0
             },
             {
               "k": 395.0,
-              "d": 0.95,
-              "b": 25.2,
-              "a": 28.2,
+              "d": 0.936,
+              "b": 26.45,
+              "a": 28.6,
               "iv": 41.8,
               "oi": 0
             },
             {
               "k": 396.0,
-              "d": 0.945,
-              "b": 25.0,
-              "a": 27.25,
-              "iv": 41.1,
+              "d": 0.93,
+              "b": 24.9,
+              "a": 27.9,
+              "iv": 40.0,
               "oi": 0
             },
             {
               "k": 397.0,
-              "d": 0.939,
-              "b": 23.2,
-              "a": 26.3,
-              "iv": 40.3,
+              "d": 0.924,
+              "b": 23.9,
+              "a": 26.55,
+              "iv": 39.2,
               "oi": 1
             },
             {
               "k": 398.0,
-              "d": 0.934,
-              "b": 22.25,
-              "a": 25.75,
-              "iv": 39.5,
-              "oi": 6
-            },
-            {
-              "k": 399.0,
-              "d": 0.928,
-              "b": 21.3,
-              "a": 24.4,
-              "iv": 38.7,
+              "d": 0.917,
+              "b": 23.55,
+              "a": 25.7,
+              "iv": 31.9,
               "oi": 1
             },
             {
+              "k": 399.0,
+              "d": 0.91,
+              "b": 22.8,
+              "a": 23.75,
+              "iv": 24.5,
+              "oi": 0
+            },
+            {
               "k": 400.0,
-              "d": 0.921,
-              "b": 21.1,
-              "a": 22.3,
-              "iv": 19.6,
+              "d": 0.902,
+              "b": 21.9,
+              "a": 22.8,
+              "iv": 25.1,
               "oi": 1
             },
             {
               "k": 401.0,
-              "d": 0.914,
-              "b": 20.25,
-              "a": 21.35,
-              "iv": 20.9,
+              "d": 0.893,
+              "b": 20.95,
+              "a": 21.9,
+              "iv": 25.7,
               "oi": 0
             },
             {
               "k": 402.0,
-              "d": 0.906,
-              "b": 19.3,
-              "a": 20.4,
-              "iv": 21.5,
+              "d": 0.884,
+              "b": 20.0,
+              "a": 20.95,
+              "iv": 25.4,
               "oi": 0
             },
             {
               "k": 403.0,
-              "d": 0.897,
-              "b": 18.35,
-              "a": 19.5,
-              "iv": 21.0,
+              "d": 0.875,
+              "b": 19.1,
+              "a": 20.05,
+              "iv": 25.6,
               "oi": 0
             },
             {
               "k": 404.0,
-              "d": 0.888,
-              "b": 18.0,
-              "a": 18.6,
-              "iv": 23.8,
-              "oi": 2
+              "d": 0.864,
+              "b": 18.2,
+              "a": 19.15,
+              "iv": 25.4,
+              "oi": 0
             },
             {
               "k": 405.0,
-              "d": 0.877,
-              "b": 17.1,
-              "a": 17.65,
-              "iv": 24.0,
-              "oi": 3
+              "d": 0.853,
+              "b": 17.3,
+              "a": 18.25,
+              "iv": 25.4,
+              "oi": 0
             },
             {
               "k": 406.0,
-              "d": 0.866,
-              "b": 15.65,
-              "a": 16.8,
-              "iv": 22.1,
+              "d": 0.841,
+              "b": 16.45,
+              "a": 17.4,
+              "iv": 25.5,
               "oi": 0
             },
             {
               "k": 407.0,
-              "d": 0.853,
-              "b": 15.35,
-              "a": 15.9,
-              "iv": 21.9,
-              "oi": 6
+              "d": 0.827,
+              "b": 15.6,
+              "a": 16.55,
+              "iv": 25.3,
+              "oi": 0
             },
             {
               "k": 408.0,
-              "d": 0.839,
-              "b": 13.9,
-              "a": 15.05,
-              "iv": 22.0,
+              "d": 0.813,
+              "b": 14.8,
+              "a": 15.7,
+              "iv": 25.4,
               "oi": 0
             },
             {
               "k": 409.0,
-              "d": 0.823,
-              "b": 13.65,
-              "a": 14.05,
-              "iv": 23.8,
-              "oi": 12
+              "d": 0.797,
+              "b": 13.95,
+              "a": 14.85,
+              "iv": 24.8,
+              "oi": 0
             },
             {
               "k": 410.0,
-              "d": 0.806,
-              "b": 12.85,
-              "a": 13.3,
-              "iv": 23.9,
-              "oi": 2
+              "d": 0.78,
+              "b": 13.15,
+              "a": 14.05,
+              "iv": 24.8,
+              "oi": 6
             },
             {
               "k": 411.0,
-              "d": 0.787,
-              "b": 12.0,
-              "a": 12.45,
-              "iv": 23.7,
-              "oi": 24
+              "d": 0.762,
+              "b": 12.4,
+              "a": 13.3,
+              "iv": 24.7,
+              "oi": 0
             },
             {
               "k": 412.0,
-              "d": 0.766,
-              "b": 11.25,
-              "a": 11.75,
-              "iv": 23.4,
+              "d": 0.743,
+              "b": 11.65,
+              "a": 12.5,
+              "iv": 24.6,
               "oi": 8
             },
             {
               "k": 413.0,
-              "d": 0.744,
-              "b": 10.5,
-              "a": 10.9,
-              "iv": 23.5,
-              "oi": 14
+              "d": 0.722,
+              "b": 10.9,
+              "a": 11.8,
+              "iv": 24.6,
+              "oi": 24
             },
             {
               "k": 414.0,
-              "d": 0.72,
-              "b": 9.8,
-              "a": 10.15,
-              "iv": 23.4,
-              "oi": 95
+              "d": 0.7,
+              "b": 10.2,
+              "a": 11.05,
+              "iv": 24.6,
+              "oi": 2
             },
             {
               "k": 415.0,
-              "d": 0.694,
-              "b": 9.1,
-              "a": 9.45,
-              "iv": 23.5,
-              "oi": 47
+              "d": 0.677,
+              "b": 9.55,
+              "a": 10.1,
+              "iv": 24.1,
+              "oi": 25
             },
             {
               "k": 416.0,
-              "d": 0.668,
-              "b": 8.45,
-              "a": 8.9,
-              "iv": 23.4,
-              "oi": 7
+              "d": 0.653,
+              "b": 8.9,
+              "a": 9.7,
+              "iv": 24.6,
+              "oi": 2
             },
             {
               "k": 417.0,
-              "d": 0.64,
-              "b": 7.65,
-              "a": 8.2,
-              "iv": 23.3,
-              "oi": 3
+              "d": 0.628,
+              "b": 8.35,
+              "a": 8.9,
+              "iv": 24.5,
+              "oi": 1
             },
             {
               "k": 418.0,
-              "d": 0.611,
-              "b": 7.2,
-              "a": 7.6,
-              "iv": 23.2,
-              "oi": 7
+              "d": 0.602,
+              "b": 7.75,
+              "a": 8.3,
+              "iv": 24.3,
+              "oi": 3
             },
             {
               "k": 419.0,
-              "d": 0.582,
-              "b": 6.35,
-              "a": 7.0,
-              "iv": 22.7,
-              "oi": 0
+              "d": 0.576,
+              "b": 6.45,
+              "a": 7.7,
+              "iv": 24.4,
+              "oi": 5
             },
             {
               "k": 420.0,
-              "d": 0.552,
-              "b": 6.1,
-              "a": 6.3,
-              "iv": 23.4,
-              "oi": 62
+              "d": 0.55,
+              "b": 6.5,
+              "a": 7.15,
+              "iv": 24.6,
+              "oi": 28
             },
             {
               "k": 421.0,
               "d": 0.523,
-              "b": 5.5,
-              "a": 5.8,
-              "iv": 23.5,
-              "oi": 40
+              "b": 5.35,
+              "a": 6.65,
+              "iv": 24.6,
+              "oi": 12
             },
             {
               "k": 422.0,
-              "d": 0.494,
-              "b": 5.1,
-              "a": 5.3,
-              "iv": 23.4,
-              "oi": 38
+              "d": 0.497,
+              "b": 5.5,
+              "a": 6.15,
+              "iv": 24.5,
+              "oi": 8
             },
             {
               "k": 423.0,
-              "d": 0.465,
-              "b": 4.65,
-              "a": 4.85,
-              "iv": 23.5,
-              "oi": 13
+              "d": 0.471,
+              "b": 5.2,
+              "a": 5.7,
+              "iv": 24.5,
+              "oi": 14
             },
             {
               "k": 424.0,
-              "d": 0.437,
-              "b": 4.2,
-              "a": 4.45,
-              "iv": 23.5,
-              "oi": 39
+              "d": 0.445,
+              "b": 4.8,
+              "a": 5.25,
+              "iv": 24.8,
+              "oi": 35
             },
             {
               "k": 425.0,
-              "d": 0.41,
-              "b": 3.85,
-              "a": 4.05,
-              "iv": 23.5,
-              "oi": 25
+              "d": 0.42,
+              "b": 4.4,
+              "a": 4.85,
+              "iv": 24.7,
+              "oi": 75
             },
             {
               "k": 426.0,
-              "d": 0.383,
-              "b": 3.45,
-              "a": 3.65,
-              "iv": 23.6,
-              "oi": 19
+              "d": 0.396,
+              "b": 4.05,
+              "a": 4.5,
+              "iv": 25.2,
+              "oi": 14
             },
             {
               "k": 427.0,
-              "d": 0.357,
-              "b": 3.15,
-              "a": 3.35,
-              "iv": 23.8,
-              "oi": 18
+              "d": 0.372,
+              "b": 3.7,
+              "a": 4.1,
+              "iv": 25.2,
+              "oi": 14
             },
             {
               "k": 428.0,
-              "d": 0.333,
-              "b": 2.85,
-              "a": 3.0,
-              "iv": 23.8,
-              "oi": 50
+              "d": 0.349,
+              "b": 3.4,
+              "a": 3.8,
+              "iv": 25.3,
+              "oi": 20
             },
             {
               "k": 429.0,
-              "d": 0.309,
-              "b": 2.58,
-              "a": 2.72,
-              "iv": 23.8,
-              "oi": 33
+              "d": 0.328,
+              "b": 3.1,
+              "a": 3.5,
+              "iv": 25.3,
+              "oi": 75
             },
             {
               "k": 430.0,
-              "d": 0.286,
-              "b": 2.32,
-              "a": 2.46,
-              "iv": 24.1,
-              "oi": 602
+              "d": 0.307,
+              "b": 2.83,
+              "a": 3.2,
+              "iv": 25.5,
+              "oi": 585
             },
             {
               "k": 435.0,
-              "d": 0.19,
-              "b": 1.37,
-              "a": 1.48,
-              "iv": 24.6,
-              "oi": 205
+              "d": 0.216,
+              "b": 1.7,
+              "a": 2.07,
+              "iv": 25.8,
+              "oi": 800
             },
             {
               "k": 440.0,
-              "d": 0.12,
-              "b": 0.8,
-              "a": 0.87,
-              "iv": 25.4,
-              "oi": 1192
+              "d": 0.149,
+              "b": 1.03,
+              "a": 1.3,
+              "iv": 26.6,
+              "oi": 166
             },
             {
               "k": 445.0,
-              "d": 0.074,
-              "b": 0.47,
-              "a": 0.56,
-              "iv": 26.7,
-              "oi": 80
+              "d": 0.101,
+              "b": 0.64,
+              "a": 0.91,
+              "iv": 27.7,
+              "oi": 25
             },
             {
               "k": 450.0,
-              "d": 0.046,
-              "b": 0.29,
-              "a": 0.37,
-              "iv": 27.8,
-              "oi": 100
+              "d": 0.067,
+              "b": 0.4,
+              "a": 0.65,
+              "iv": 29.0,
+              "oi": 150
             },
             {
               "k": 455.0,
-              "d": 0.028,
-              "b": 0.19,
-              "a": 0.26,
-              "iv": 29.4,
-              "oi": 83
+              "d": 0.044,
+              "b": 0.23,
+              "a": 0.49,
+              "iv": 30.2,
+              "oi": 229
             },
             {
               "k": 460.0,
-              "d": 0.017,
-              "b": 0.12,
-              "a": 0.19,
-              "iv": 30.9,
-              "oi": 117
+              "d": 0.029,
+              "b": 0.13,
+              "a": 0.36,
+              "iv": 31.2,
+              "oi": 1
             },
             {
               "k": 465.0,
-              "d": 0.01,
-              "b": 0.09,
-              "a": 0.15,
-              "iv": 31.9,
-              "oi": 71
+              "d": 0.018,
+              "b": 0.08,
+              "a": 0.41,
+              "iv": 33.8,
+              "oi": 59
             },
             {
               "k": 470.0,
-              "d": 0.006,
-              "b": 0.06,
-              "a": 0.13,
-              "iv": 34.9,
-              "oi": 122
+              "d": 0.013,
+              "b": 0.05,
+              "a": 0.21,
+              "iv": 33.9,
+              "oi": 250
             },
             {
               "k": 475.0,
-              "d": 0.003,
-              "b": 0.04,
-              "a": 0.16,
-              "iv": 36.5,
-              "oi": 69
+              "d": 0.008,
+              "b": 0.03,
+              "a": 0.21,
+              "iv": 36.3,
+              "oi": 0
             },
             {
               "k": 480.0,
-              "d": 0.002,
+              "d": 0.005,
               "b": 0.02,
-              "a": 0.15,
-              "iv": 38.2,
-              "oi": 143
+              "a": 0.14,
+              "iv": 37.4,
+              "oi": 0
             },
             {
               "k": 485.0,
-              "d": 0.001,
-              "b": 0.01,
-              "a": 0.14,
-              "iv": 41.2,
-              "oi": 218
+              "d": 0.003,
+              "b": 0.03,
+              "a": 0.15,
+              "iv": 39.6,
+              "oi": 4
             },
             {
               "k": 490.0,
-              "d": 0.0,
-              "b": 0.01,
-              "a": 0.14,
-              "iv": 41.5,
-              "oi": 101
+              "d": 0.001,
+              "b": 0.03,
+              "a": 0.13,
+              "iv": 41.0,
+              "oi": 4
             },
             {
               "k": 495.0,
-              "d": 0.0,
-              "b": 0.0,
-              "a": 0.07,
-              "iv": 47.4,
+              "d": 0.001,
+              "b": 0.02,
+              "a": 0.13,
+              "iv": 42.2,
               "oi": 0
             },
             {
               "k": 500.0,
               "d": 0.0,
-              "b": 0.0,
-              "a": 0.15,
-              "iv": 55.0,
-              "oi": 65
+              "b": 0.01,
+              "a": 0.14,
+              "iv": 44.8,
+              "oi": 1
             }
           ],
           "puts": [
             {
               "k": 394.0,
-              "d": -0.046,
-              "b": 0.14,
-              "a": 0.28,
-              "iv": 27.0,
-              "oi": 22
+              "d": -0.058,
+              "b": 0.23,
+              "a": 0.59,
+              "iv": 28.6,
+              "oi": 0
             },
             {
               "k": 395.0,
-              "d": -0.05,
-              "b": 0.17,
-              "a": 0.3,
-              "iv": 26.6,
-              "oi": 36
+              "d": -0.064,
+              "b": 0.28,
+              "a": 0.45,
+              "iv": 27.3,
+              "oi": 3
             },
             {
               "k": 396.0,
-              "d": -0.055,
-              "b": 0.2,
-              "a": 0.34,
-              "iv": 26.6,
-              "oi": 18
+              "d": -0.07,
+              "b": 0.31,
+              "a": 0.49,
+              "iv": 26.9,
+              "oi": 1
             },
             {
               "k": 397.0,
-              "d": -0.061,
-              "b": 0.23,
-              "a": 0.37,
-              "iv": 26.1,
-              "oi": 23
+              "d": -0.076,
+              "b": 0.36,
+              "a": 0.53,
+              "iv": 26.8,
+              "oi": 21
             },
             {
               "k": 398.0,
-              "d": -0.066,
-              "b": 0.28,
-              "a": 0.41,
-              "iv": 26.0,
-              "oi": 34
+              "d": -0.083,
+              "b": 0.41,
+              "a": 0.71,
+              "iv": 27.1,
+              "oi": 1
             },
             {
               "k": 399.0,
-              "d": -0.072,
-              "b": 0.33,
-              "a": 0.46,
-              "iv": 25.7,
-              "oi": 21
+              "d": -0.09,
+              "b": 0.46,
+              "a": 0.65,
+              "iv": 26.2,
+              "oi": 5
             },
             {
               "k": 400.0,
-              "d": -0.079,
-              "b": 0.38,
-              "a": 0.51,
-              "iv": 25.6,
-              "oi": 91
+              "d": -0.098,
+              "b": 0.53,
+              "a": 0.7,
+              "iv": 26.0,
+              "oi": 171
             },
             {
               "k": 401.0,
-              "d": -0.086,
-              "b": 0.44,
-              "a": 0.56,
-              "iv": 25.2,
-              "oi": 24
+              "d": -0.107,
+              "b": 0.6,
+              "a": 0.81,
+              "iv": 25.9,
+              "oi": 0
             },
             {
               "k": 402.0,
-              "d": -0.094,
-              "b": 0.51,
-              "a": 0.63,
-              "iv": 25.1,
-              "oi": 54
+              "d": -0.116,
+              "b": 0.67,
+              "a": 0.88,
+              "iv": 25.6,
+              "oi": 15
             },
             {
               "k": 403.0,
-              "d": -0.103,
-              "b": 0.58,
-              "a": 0.69,
-              "iv": 24.8,
-              "oi": 25
+              "d": -0.125,
+              "b": 0.77,
+              "a": 1.06,
+              "iv": 25.8,
+              "oi": 392
             },
             {
               "k": 404.0,
-              "d": -0.112,
-              "b": 0.68,
-              "a": 0.79,
-              "iv": 24.7,
-              "oi": 26
+              "d": -0.136,
+              "b": 0.87,
+              "a": 1.13,
+              "iv": 25.4,
+              "oi": 4
             },
             {
               "k": 405.0,
-              "d": -0.123,
-              "b": 0.78,
-              "a": 0.89,
-              "iv": 24.4,
-              "oi": 44
+              "d": -0.147,
+              "b": 0.99,
+              "a": 1.29,
+              "iv": 25.4,
+              "oi": 279
             },
             {
               "k": 406.0,
-              "d": -0.134,
-              "b": 0.88,
-              "a": 0.99,
-              "iv": 24.3,
-              "oi": 18
+              "d": -0.159,
+              "b": 1.12,
+              "a": 1.43,
+              "iv": 25.3,
+              "oi": 34
             },
             {
               "k": 407.0,
-              "d": -0.147,
-              "b": 1.01,
-              "a": 1.12,
-              "iv": 24.1,
-              "oi": 30
+              "d": -0.173,
+              "b": 1.23,
+              "a": 1.57,
+              "iv": 25.0,
+              "oi": 20
             },
             {
               "k": 408.0,
-              "d": -0.161,
-              "b": 1.16,
-              "a": 1.27,
-              "iv": 24.0,
-              "oi": 23
+              "d": -0.187,
+              "b": 1.4,
+              "a": 1.73,
+              "iv": 24.9,
+              "oi": 75
             },
             {
               "k": 409.0,
-              "d": -0.177,
-              "b": 1.31,
-              "a": 1.44,
-              "iv": 23.8,
-              "oi": 25
+              "d": -0.203,
+              "b": 1.57,
+              "a": 1.9,
+              "iv": 24.7,
+              "oi": 15
             },
             {
               "k": 410.0,
-              "d": -0.194,
-              "b": 1.5,
-              "a": 1.64,
-              "iv": 23.8,
-              "oi": 60
+              "d": -0.22,
+              "b": 1.77,
+              "a": 2.1,
+              "iv": 24.6,
+              "oi": 93
             },
             {
               "k": 411.0,
-              "d": -0.213,
-              "b": 1.7,
-              "a": 1.84,
-              "iv": 23.7,
-              "oi": 24
+              "d": -0.238,
+              "b": 1.98,
+              "a": 2.33,
+              "iv": 24.5,
+              "oi": 7
             },
             {
               "k": 412.0,
-              "d": -0.234,
-              "b": 1.92,
-              "a": 2.07,
-              "iv": 23.6,
-              "oi": 22
+              "d": -0.257,
+              "b": 2.22,
+              "a": 2.58,
+              "iv": 24.4,
+              "oi": 24
             },
             {
               "k": 413.0,
-              "d": -0.256,
-              "b": 2.17,
-              "a": 2.35,
-              "iv": 23.6,
-              "oi": 21
+              "d": -0.278,
+              "b": 2.49,
+              "a": 2.84,
+              "iv": 24.4,
+              "oi": 4
             },
             {
               "k": 414.0,
-              "d": -0.28,
-              "b": 2.45,
-              "a": 2.61,
-              "iv": 23.5,
-              "oi": 24
+              "d": -0.3,
+              "b": 2.77,
+              "a": 3.15,
+              "iv": 24.3,
+              "oi": 16
             },
             {
               "k": 415.0,
-              "d": -0.306,
-              "b": 2.74,
-              "a": 2.9,
-              "iv": 23.4,
-              "oi": 22
+              "d": -0.323,
+              "b": 3.1,
+              "a": 3.45,
+              "iv": 24.3,
+              "oi": 16
             },
             {
               "k": 416.0,
-              "d": -0.332,
-              "b": 3.05,
-              "a": 3.25,
-              "iv": 23.3,
-              "oi": 18
+              "d": -0.347,
+              "b": 3.4,
+              "a": 3.8,
+              "iv": 24.4,
+              "oi": 4
             },
             {
               "k": 417.0,
-              "d": -0.36,
-              "b": 3.4,
-              "a": 3.6,
-              "iv": 23.3,
-              "oi": 24
+              "d": -0.372,
+              "b": 3.75,
+              "a": 4.2,
+              "iv": 24.3,
+              "oi": 12
             },
             {
               "k": 418.0,
-              "d": -0.389,
-              "b": 3.8,
-              "a": 4.0,
-              "iv": 23.3,
-              "oi": 23
+              "d": -0.398,
+              "b": 4.15,
+              "a": 4.6,
+              "iv": 24.3,
+              "oi": 7
             },
             {
               "k": 419.0,
-              "d": -0.418,
-              "b": 4.2,
-              "a": 4.4,
-              "iv": 23.3,
-              "oi": 56
+              "d": -0.424,
+              "b": 4.55,
+              "a": 5.05,
+              "iv": 24.3,
+              "oi": 41
             },
             {
               "k": 420.0,
-              "d": -0.448,
-              "b": 4.65,
-              "a": 4.9,
-              "iv": 23.4,
-              "oi": 92
+              "d": -0.45,
+              "b": 5.0,
+              "a": 5.5,
+              "iv": 24.4,
+              "oi": 6
             },
             {
               "k": 421.0,
               "d": -0.477,
-              "b": 5.1,
-              "a": 5.35,
-              "iv": 23.2,
-              "oi": 6
+              "b": 5.45,
+              "a": 6.0,
+              "iv": 24.3,
+              "oi": 17
             },
             {
               "k": 422.0,
-              "d": -0.506,
-              "b": 5.55,
-              "a": 6.0,
-              "iv": 23.4,
-              "oi": 3
-            },
-            {
-              "k": 423.0,
-              "d": -0.535,
-              "b": 6.2,
-              "a": 6.4,
-              "iv": 23.4,
-              "oi": 60
-            },
-            {
-              "k": 424.0,
-              "d": -0.563,
-              "b": 6.75,
-              "a": 7.0,
-              "iv": 23.4,
-              "oi": 26
-            },
-            {
-              "k": 425.0,
-              "d": -0.59,
-              "b": 7.35,
-              "a": 7.6,
-              "iv": 23.4,
+              "d": -0.503,
+              "b": 5.95,
+              "a": 6.55,
+              "iv": 24.4,
               "oi": 10
             },
             {
-              "k": 426.0,
-              "d": -0.617,
-              "b": 7.9,
+              "k": 423.0,
+              "d": -0.529,
+              "b": 6.5,
+              "a": 7.15,
+              "iv": 24.5,
+              "oi": 18
+            },
+            {
+              "k": 424.0,
+              "d": -0.555,
+              "b": 7.1,
+              "a": 7.7,
+              "iv": 24.5,
+              "oi": 46
+            },
+            {
+              "k": 425.0,
+              "d": -0.58,
+              "b": 7.7,
               "a": 8.3,
-              "iv": 23.6,
-              "oi": 14
+              "iv": 24.8,
+              "oi": 17
+            },
+            {
+              "k": 426.0,
+              "d": -0.604,
+              "b": 8.3,
+              "a": 8.95,
+              "iv": 24.8,
+              "oi": 2
             },
             {
               "k": 427.0,
-              "d": -0.642,
-              "b": 8.6,
-              "a": 8.95,
-              "iv": 23.7,
-              "oi": 49
+              "d": -0.628,
+              "b": 8.9,
+              "a": 9.75,
+              "iv": 25.0,
+              "oi": 23
             },
             {
               "k": 428.0,
-              "d": -0.667,
-              "b": 9.3,
-              "a": 9.7,
-              "iv": 23.7,
-              "oi": 27
+              "d": -0.651,
+              "b": 9.6,
+              "a": 10.3,
+              "iv": 25.1,
+              "oi": 0
             },
             {
               "k": 429.0,
-              "d": -0.691,
-              "b": 10.0,
-              "a": 10.35,
-              "iv": 23.8,
-              "oi": 56
+              "d": -0.672,
+              "b": 10.3,
+              "a": 11.0,
+              "iv": 25.3,
+              "oi": 0
             },
             {
               "k": 430.0,
-              "d": -0.714,
-              "b": 10.65,
-              "a": 11.15,
-              "iv": 24.0,
-              "oi": 3
+              "d": -0.693,
+              "b": 11.05,
+              "a": 11.95,
+              "iv": 25.2,
+              "oi": 18
             },
             {
               "k": 435.0,
-              "d": -0.81,
-              "b": 14.5,
-              "a": 15.25,
-              "iv": 24.7,
-              "oi": 0
+              "d": -0.784,
+              "b": 14.95,
+              "a": 15.65,
+              "iv": 25.9,
+              "oi": 1
             },
             {
               "k": 440.0,
-              "d": -0.88,
-              "b": 18.7,
-              "a": 19.6,
-              "iv": 23.8,
-              "oi": 0
+              "d": -0.851,
+              "b": 19.25,
+              "a": 20.0,
+              "iv": 26.5,
+              "oi": 8
             },
             {
               "k": 445.0,
-              "d": -0.926,
-              "b": 23.4,
-              "a": 24.45,
-              "iv": 23.5,
+              "d": -0.899,
+              "b": 23.85,
+              "a": 24.8,
+              "iv": 26.0,
               "oi": 0
             },
             {
               "k": 450.0,
-              "d": -0.954,
-              "b": 27.0,
-              "a": 30.55,
-              "iv": 34.8,
+              "d": -0.933,
+              "b": 27.65,
+              "a": 29.6,
+              "iv": 36.0,
               "oi": 0
             },
             {
               "k": 455.0,
-              "d": -0.972,
-              "b": 31.95,
+              "d": -0.956,
+              "b": 32.7,
               "a": 34.6,
-              "iv": 40.2,
+              "iv": 40.3,
               "oi": 0
             },
             {
               "k": 460.0,
-              "d": -0.983,
-              "b": 37.6,
-              "a": 40.5,
-              "iv": 50.1,
+              "d": -0.971,
+              "b": 37.5,
+              "a": 39.5,
+              "iv": 43.4,
               "oi": 0
             },
             {
               "k": 465.0,
-              "d": -0.99,
-              "b": 41.9,
-              "a": 45.55,
-              "iv": 55.0,
+              "d": -0.982,
+              "b": 42.4,
+              "a": 44.5,
+              "iv": 47.3,
               "oi": 0
             },
             {
               "k": 470.0,
-              "d": -0.994,
-              "b": 46.9,
-              "a": 50.45,
-              "iv": 48.9,
+              "d": -0.988,
+              "b": 47.4,
+              "a": 50.5,
+              "iv": 60.4,
               "oi": 0
             },
             {
               "k": 475.0,
-              "d": -0.997,
-              "b": 53.0,
+              "d": -0.992,
+              "b": 51.8,
               "a": 55.5,
-              "iv": 58.3,
+              "iv": 54.9,
               "oi": 0
             },
             {
               "k": 480.0,
-              "d": -0.998,
+              "d": -0.995,
               "b": 57.4,
-              "a": 60.45,
-              "iv": 61.5,
+              "a": 60.5,
+              "iv": 58.5,
               "oi": 0
             },
             {
               "k": 485.0,
-              "d": -0.999,
-              "b": 62.45,
-              "a": 65.45,
-              "iv": 59.8,
+              "d": -0.997,
+              "b": 61.8,
+              "a": 64.75,
+              "iv": 64.9,
               "oi": 0
             },
             {
               "k": 490.0,
-              "d": -1.0,
+              "d": -0.999,
               "b": 67.4,
-              "a": 70.45,
-              "iv": 68.9,
+              "a": 69.8,
+              "iv": 69.1,
               "oi": 0
             },
             {
               "k": 495.0,
-              "d": -1.0,
+              "d": -0.999,
               "b": 72.4,
-              "a": 75.45,
-              "iv": 72.5,
+              "a": 74.5,
+              "iv": 68.8,
               "oi": 0
             },
             {
               "k": 500.0,
               "d": -1.0,
-              "b": 77.55,
-              "a": 80.45,
-              "iv": 76.0,
+              "b": 77.4,
+              "a": 79.5,
+              "iv": 72.2,
               "oi": 0
             }
           ]
         },
         {
           "exp": "2026-09-18",
-          "dte": 23,
+          "dte": 22,
           "calls": [
             {
               "k": 394.0,
@@ -29626,7 +29626,7 @@
         },
         {
           "exp": "2026-09-25",
-          "dte": 30,
+          "dte": 29,
           "calls": [
             {
               "k": 394.0,
@@ -30530,7 +30530,7 @@
         },
         {
           "exp": "2026-10-16",
-          "dte": 51,
+          "dte": 50,
           "calls": [
             {
               "k": 394.0,
@@ -31434,7 +31434,7 @@
         },
         {
           "exp": "2026-11-20",
-          "dte": 86,
+          "dte": 85,
           "calls": [
             {
               "k": 320.0,
@@ -32119,7 +32119,7 @@
       "expiries": [
         {
           "exp": "2026-09-02",
-          "dte": 7,
+          "dte": 6,
           "calls": [
             {
               "k": 47.0,
@@ -32975,7 +32975,7 @@
         },
         {
           "exp": "2026-09-18",
-          "dte": 23,
+          "dte": 22,
           "calls": [
             {
               "k": 48.0,
@@ -33879,7 +33879,7 @@
         },
         {
           "exp": "2026-09-25",
-          "dte": 30,
+          "dte": 29,
           "calls": [
             {
               "k": 47.0,
@@ -34607,7 +34607,7 @@
         },
         {
           "exp": "2026-10-16",
-          "dte": 51,
+          "dte": 50,
           "calls": [
             {
               "k": 47.0,
@@ -35095,7 +35095,7 @@
         },
         {
           "exp": "2026-11-20",
-          "dte": 86,
+          "dte": 85,
           "calls": [
             {
               "k": 47.0,
@@ -35588,7 +35588,7 @@
       "expiries": [
         {
           "exp": "2026-09-04",
-          "dte": 9,
+          "dte": 8,
           "calls": [
             {
               "k": 134.0,
@@ -36284,7 +36284,7 @@
         },
         {
           "exp": "2026-09-18",
-          "dte": 23,
+          "dte": 22,
           "calls": [
             {
               "k": 135.0,
@@ -36740,7 +36740,7 @@
         },
         {
           "exp": "2026-09-25",
-          "dte": 30,
+          "dte": 29,
           "calls": [
             {
               "k": 135.0,
@@ -37260,7 +37260,7 @@
         },
         {
           "exp": "2026-10-16",
-          "dte": 51,
+          "dte": 50,
           "calls": [
             {
               "k": 135.0,
@@ -37524,7 +37524,7 @@
         },
         {
           "exp": "2026-11-20",
-          "dte": 86,
+          "dte": 85,
           "calls": [
             {
               "k": 135.0,
@@ -37793,7 +37793,7 @@
       "expiries": [
         {
           "exp": "2026-09-04",
-          "dte": 9,
+          "dte": 8,
           "calls": [
             {
               "k": 80.0,
@@ -38457,7 +38457,7 @@
         },
         {
           "exp": "2026-09-18",
-          "dte": 23,
+          "dte": 22,
           "calls": [
             {
               "k": 80.0,
@@ -38961,7 +38961,7 @@
         },
         {
           "exp": "2026-09-25",
-          "dte": 30,
+          "dte": 29,
           "calls": [
             {
               "k": 80.0,
@@ -39561,7 +39561,7 @@
         },
         {
           "exp": "2026-10-16",
-          "dte": 51,
+          "dte": 50,
           "calls": [
             {
               "k": 80.0,
@@ -39745,7 +39745,7 @@
         },
         {
           "exp": "2026-11-20",
-          "dte": 86,
+          "dte": 85,
           "calls": [
             {
               "k": 80.0,
@@ -39934,7 +39934,7 @@
       "expiries": [
         {
           "exp": "2026-09-02",
-          "dte": 7,
+          "dte": 6,
           "calls": [
             {
               "k": 240.0,
@@ -40678,7 +40678,7 @@
         },
         {
           "exp": "2026-09-18",
-          "dte": 23,
+          "dte": 22,
           "calls": [
             {
               "k": 240.0,
@@ -41342,7 +41342,7 @@
         },
         {
           "exp": "2026-09-25",
-          "dte": 30,
+          "dte": 29,
           "calls": [
             {
               "k": 240.0,
@@ -41846,7 +41846,7 @@
         },
         {
           "exp": "2026-10-16",
-          "dte": 51,
+          "dte": 50,
           "calls": [
             {
               "k": 240.0,
@@ -42350,7 +42350,7 @@
         },
         {
           "exp": "2026-11-20",
-          "dte": 86,
+          "dte": 85,
           "calls": [
             {
               "k": 240.0,
@@ -42843,7 +42843,7 @@
       "expiries": [
         {
           "exp": "2026-09-04",
-          "dte": 9,
+          "dte": 8,
           "calls": [
             {
               "k": 255.0,
@@ -43571,7 +43571,7 @@
         },
         {
           "exp": "2026-09-18",
-          "dte": 23,
+          "dte": 22,
           "calls": [
             {
               "k": 255.0,
@@ -44283,7 +44283,7 @@
         },
         {
           "exp": "2026-09-25",
-          "dte": 30,
+          "dte": 29,
           "calls": [
             {
               "k": 255.0,
@@ -44835,7 +44835,7 @@
         },
         {
           "exp": "2026-10-16",
-          "dte": 51,
+          "dte": 50,
           "calls": [
             {
               "k": 255.0,
@@ -45387,7 +45387,7 @@
         },
         {
           "exp": "2026-11-20",
-          "dte": 86,
+          "dte": 85,
           "calls": [
             {
               "k": 260.0,
@@ -45832,7 +45832,7 @@
       "expiries": [
         {
           "exp": "2026-09-02",
-          "dte": 7,
+          "dte": 6,
           "calls": [
             {
               "k": 412.5,
@@ -46736,7 +46736,7 @@
         },
         {
           "exp": "2026-09-18",
-          "dte": 23,
+          "dte": 22,
           "calls": [
             {
               "k": 370.0,
@@ -47448,7 +47448,7 @@
         },
         {
           "exp": "2026-09-25",
-          "dte": 30,
+          "dte": 29,
           "calls": [
             {
               "k": 365.0,
@@ -48224,7 +48224,7 @@
         },
         {
           "exp": "2026-10-16",
-          "dte": 51,
+          "dte": 50,
           "calls": [
             {
               "k": 370.0,
@@ -48616,7 +48616,7 @@
         },
         {
           "exp": "2026-11-20",
-          "dte": 86,
+          "dte": 85,
           "calls": [
             {
               "k": 370.0,
@@ -49013,7 +49013,7 @@
       "expiries": [
         {
           "exp": "2026-09-04",
-          "dte": 9,
+          "dte": 8,
           "calls": [
             {
               "k": 128.0,
@@ -49789,7 +49789,7 @@
         },
         {
           "exp": "2026-09-18",
-          "dte": 23,
+          "dte": 22,
           "calls": [
             {
               "k": 130.0,
@@ -50229,7 +50229,7 @@
         },
         {
           "exp": "2026-09-25",
-          "dte": 30,
+          "dte": 29,
           "calls": [
             {
               "k": 130.0,
@@ -50733,7 +50733,7 @@
         },
         {
           "exp": "2026-10-16",
-          "dte": 51,
+          "dte": 50,
           "calls": [
             {
               "k": 130.0,
@@ -50997,7 +50997,7 @@
         },
         {
           "exp": "2026-11-20",
-          "dte": 86,
+          "dte": 85,
           "calls": [
             {
               "k": 130.0,
@@ -51266,7 +51266,7 @@
       "expiries": [
         {
           "exp": "2026-09-04",
-          "dte": 9,
+          "dte": 8,
           "calls": [
             {
               "k": 105.0,
@@ -52138,7 +52138,7 @@
         },
         {
           "exp": "2026-09-18",
-          "dte": 23,
+          "dte": 22,
           "calls": [
             {
               "k": 105.0,
@@ -52754,7 +52754,7 @@
         },
         {
           "exp": "2026-09-25",
-          "dte": 30,
+          "dte": 29,
           "calls": [
             {
               "k": 105.0,
@@ -53626,7 +53626,7 @@
         },
         {
           "exp": "2026-10-16",
-          "dte": 51,
+          "dte": 50,
           "calls": [
             {
               "k": 105.0,
@@ -53858,7 +53858,7 @@
         },
         {
           "exp": "2026-11-20",
-          "dte": 86,
+          "dte": 85,
           "calls": [
             {
               "k": 105.0,
@@ -54095,7 +54095,7 @@
       "expiries": [
         {
           "exp": "2026-09-04",
-          "dte": 9,
+          "dte": 8,
           "calls": [
             {
               "k": 10.0,
@@ -54295,7 +54295,7 @@
         },
         {
           "exp": "2026-09-18",
-          "dte": 23,
+          "dte": 22,
           "calls": [
             {
               "k": 10.0,
@@ -54495,7 +54495,7 @@
         },
         {
           "exp": "2026-09-25",
-          "dte": 30,
+          "dte": 29,
           "calls": [
             {
               "k": 10.0,
@@ -54695,7 +54695,7 @@
         },
         {
           "exp": "2026-10-16",
-          "dte": 51,
+          "dte": 50,
           "calls": [
             {
               "k": 10.0,
@@ -54799,7 +54799,7 @@
         },
         {
           "exp": "2026-12-18",
-          "dte": 114,
+          "dte": 113,
           "calls": [
             {
               "k": 10.0,
@@ -54908,7 +54908,7 @@
       "expiries": [
         {
           "exp": "2026-09-04",
-          "dte": 9,
+          "dte": 8,
           "calls": [
             {
               "k": 98.0,
@@ -55796,7 +55796,7 @@
         },
         {
           "exp": "2026-09-18",
-          "dte": 23,
+          "dte": 22,
           "calls": [
             {
               "k": 95.0,
@@ -56556,7 +56556,7 @@
         },
         {
           "exp": "2026-09-25",
-          "dte": 30,
+          "dte": 29,
           "calls": [
             {
               "k": 95.0,
@@ -57316,7 +57316,7 @@
         },
         {
           "exp": "2026-10-16",
-          "dte": 51,
+          "dte": 50,
           "calls": [
             {
               "k": 95.0,
@@ -57532,7 +57532,7 @@
         },
         {
           "exp": "2026-11-20",
-          "dte": 86,
+          "dte": 85,
           "calls": [
             {
               "k": 95.0,
@@ -57753,7 +57753,7 @@
       "expiries": [
         {
           "exp": "2026-09-18",
-          "dte": 23,
+          "dte": 22,
           "calls": [
             {
               "k": 40.0,
@@ -57985,7 +57985,7 @@
         },
         {
           "exp": "2026-10-16",
-          "dte": 51,
+          "dte": 50,
           "calls": [
             {
               "k": 40.0,
@@ -58297,7 +58297,7 @@
         },
         {
           "exp": "2026-12-18",
-          "dte": 114,
+          "dte": 113,
           "calls": [
             {
               "k": 40.0,
@@ -58614,7 +58614,7 @@
       "expiries": [
         {
           "exp": "2026-09-04",
-          "dte": 9,
+          "dte": 8,
           "calls": [
             {
               "k": 67.0,
@@ -59326,7 +59326,7 @@
         },
         {
           "exp": "2026-09-18",
-          "dte": 23,
+          "dte": 22,
           "calls": [
             {
               "k": 67.5,
@@ -59910,7 +59910,7 @@
         },
         {
           "exp": "2026-09-25",
-          "dte": 30,
+          "dte": 29,
           "calls": [
             {
               "k": 70.0,
@@ -60510,7 +60510,7 @@
         },
         {
           "exp": "2026-10-16",
-          "dte": 51,
+          "dte": 50,
           "calls": [
             {
               "k": 67.5,
@@ -60774,7 +60774,7 @@
         },
         {
           "exp": "2026-11-20",
-          "dte": 86,
+          "dte": 85,
           "calls": [
             {
               "k": 70.0,
@@ -61011,7 +61011,7 @@
       "expiries": [
         {
           "exp": "2026-09-04",
-          "dte": 9,
+          "dte": 8,
           "calls": [
             {
               "k": 165.0,
@@ -61723,7 +61723,7 @@
         },
         {
           "exp": "2026-09-18",
-          "dte": 23,
+          "dte": 22,
           "calls": [
             {
               "k": 165.0,
@@ -62211,7 +62211,7 @@
         },
         {
           "exp": "2026-09-25",
-          "dte": 30,
+          "dte": 29,
           "calls": [
             {
               "k": 165.0,
@@ -62571,7 +62571,7 @@
         },
         {
           "exp": "2026-10-16",
-          "dte": 51,
+          "dte": 50,
           "calls": [
             {
               "k": 165.0,
@@ -62819,7 +62819,7 @@
         },
         {
           "exp": "2026-11-20",
-          "dte": 86,
+          "dte": 85,
           "calls": [
             {
               "k": 165.0,
@@ -63072,7 +63072,7 @@
       "expiries": [
         {
           "exp": "2026-09-04",
-          "dte": 9,
+          "dte": 8,
           "calls": [
             {
               "k": 30.0,
@@ -63704,7 +63704,7 @@
         },
         {
           "exp": "2026-09-18",
-          "dte": 23,
+          "dte": 22,
           "calls": [
             {
               "k": 30.0,
@@ -64224,7 +64224,7 @@
         },
         {
           "exp": "2026-09-25",
-          "dte": 30,
+          "dte": 29,
           "calls": [
             {
               "k": 30.0,
@@ -64552,7 +64552,7 @@
         },
         {
           "exp": "2026-10-16",
-          "dte": 51,
+          "dte": 50,
           "calls": [
             {
               "k": 30.0,
@@ -64880,7 +64880,7 @@
         },
         {
           "exp": "2026-11-20",
-          "dte": 86,
+          "dte": 85,
           "calls": [
             {
               "k": 30.0,
@@ -65213,7 +65213,7 @@
       "expiries": [
         {
           "exp": "2026-09-04",
-          "dte": 9,
+          "dte": 8,
           "calls": [
             {
               "k": 9.0,
@@ -65397,7 +65397,7 @@
         },
         {
           "exp": "2026-09-18",
-          "dte": 23,
+          "dte": 22,
           "calls": [
             {
               "k": 9.0,
@@ -65581,7 +65581,7 @@
         },
         {
           "exp": "2026-09-25",
-          "dte": 30,
+          "dte": 29,
           "calls": [
             {
               "k": 9.0,
@@ -65733,7 +65733,7 @@
         },
         {
           "exp": "2026-10-16",
-          "dte": 51,
+          "dte": 50,
           "calls": [
             {
               "k": 9.0,
@@ -65837,7 +65837,7 @@
         },
         {
           "exp": "2026-11-20",
-          "dte": 86,
+          "dte": 85,
           "calls": [
             {
               "k": 9.0,
@@ -65946,7 +65946,7 @@
       "expiries": [
         {
           "exp": "2026-09-04",
-          "dte": 9,
+          "dte": 8,
           "calls": [
             {
               "k": 162.5,
@@ -66626,7 +66626,7 @@
         },
         {
           "exp": "2026-09-18",
-          "dte": 23,
+          "dte": 22,
           "calls": [
             {
               "k": 165.0,
@@ -67130,7 +67130,7 @@
         },
         {
           "exp": "2026-09-25",
-          "dte": 30,
+          "dte": 29,
           "calls": [
             {
               "k": 165.0,
@@ -67474,7 +67474,7 @@
         },
         {
           "exp": "2026-10-16",
-          "dte": 51,
+          "dte": 50,
           "calls": [
             {
               "k": 165.0,
@@ -67706,7 +67706,7 @@
         },
         {
           "exp": "2026-11-20",
-          "dte": 86,
+          "dte": 85,
           "calls": [
             {
               "k": 165.0,
@@ -68543,7 +68543,7 @@
       }
     ]
   },
-  "generated_at": "2026-08-26T20:33:03+00:00",
+  "generated_at": "2026-08-27T00:26:35+00:00",
   "universe": {
     "wheel": 16,
     "growth": 15,
