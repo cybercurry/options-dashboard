@@ -2324,11 +2324,16 @@ with tab_vix:
     rc3.metric("10Y Treasury", f"{_cd['10Y']:.2f}%" if '10Y' in _cd else "—",
                help="The benchmark long rate — growth & inflation expectations, and the discount "
                     "rate equities are valued against. Rising 10Y pressures high-multiple stocks.")
-    rc4.metric("2s10s spread", f"{_spread:+d} bps" if _spread is not None else "—",
-               help="10-year minus 2-year yield. Positive/steep = normal growth expectations. "
-                    "NEGATIVE = inverted: the bond market pricing rate cuts / recession ahead — "
-                    "historically leads recessions by 6–18 months, and vol spikes tend to follow. "
-                    "This is the single most-watched sentiment gauge in the bond market.")
+    _move=fetch_quote("^MOVE")
+    _move_v=_move.get("price") if _move else None
+    _move_c=_move.get("pct") if _move else None
+    rc4.metric("MOVE (bond VIX)", f"{_move_v:.0f}" if _move_v else "—",
+               f"{_move_c:+.1f}%" if _move_c is not None else None,
+               help="The MOVE index — implied volatility of US Treasury options, i.e. the bond "
+                    "market's VIX. Rising = rate/bond-market stress, and it often LEADS equity vol "
+                    "(VIX), so a climbing MOVE is an early warning for premium sellers. Rough bands: "
+                    "calm <90 · normal 90–120 · elevated 120–150 · stress >150. (The 2s10s curve "
+                    "read is still shown below the chart.)")
     if len(_curve)>=3:
         _xs=[t for t,_ in _curve]; _ys=[y for _,y in _curve]
         _line="#ef4444" if (_spread is not None and _spread<0) else "#3b82f6"
