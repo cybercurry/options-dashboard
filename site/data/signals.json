@@ -4137,7 +4137,7 @@
       "iv_vs_hv": "fair",
       "rsi": 50,
       "above_200": false,
-      "pcr": 0.34,
+      "pcr": null,
       "pctb": 0.7,
       "csp_timing": "\ud83d\udd34 NO SETUP",
       "cc_timing": "\ud83d\udd34 NO SETUP",
@@ -4159,7 +4159,7 @@
       "iv_vs_hv": "cheap",
       "rsi": 56,
       "above_200": false,
-      "pcr": 0.47,
+      "pcr": null,
       "pctb": 0.77,
       "csp_timing": "\ud83d\udd34 NO SETUP",
       "cc_timing": "\ud83d\udd34 NO SETUP",
@@ -4181,7 +4181,7 @@
       "iv_vs_hv": "rich",
       "rsi": 46,
       "above_200": true,
-      "pcr": 0.82,
+      "pcr": null,
       "pctb": 0.32,
       "csp_timing": "\ud83d\udd34 NO SETUP",
       "cc_timing": "\ud83d\udd34 NO SETUP",
@@ -4203,7 +4203,7 @@
       "iv_vs_hv": "cheap",
       "rsi": 51,
       "above_200": true,
-      "pcr": 0.49,
+      "pcr": null,
       "pctb": 0.35,
       "csp_timing": "\ud83d\udd34 NO SETUP",
       "cc_timing": "\ud83d\udd34 NO SETUP",
@@ -4225,7 +4225,7 @@
       "iv_vs_hv": "cheap",
       "rsi": 67,
       "above_200": true,
-      "pcr": 1.4,
+      "pcr": null,
       "pctb": 0.66,
       "csp_timing": "\ud83d\udd34 NO SETUP",
       "cc_timing": "\ud83d\udd34 NO SETUP",
@@ -4247,7 +4247,7 @@
       "iv_vs_hv": "rich",
       "rsi": 58,
       "above_200": false,
-      "pcr": 0.77,
+      "pcr": null,
       "pctb": 0.79,
       "csp_timing": "\ud83d\udd34 NO SETUP",
       "cc_timing": "\ud83d\udfe1 PARTIAL SETUP",
@@ -4269,7 +4269,7 @@
       "iv_vs_hv": "fair",
       "rsi": 44,
       "above_200": true,
-      "pcr": 0.92,
+      "pcr": null,
       "pctb": 0.42,
       "csp_timing": "\ud83d\udd34 NO SETUP",
       "cc_timing": "\ud83d\udd34 NO SETUP",
@@ -4291,7 +4291,7 @@
       "iv_vs_hv": "cheap",
       "rsi": 62,
       "above_200": true,
-      "pcr": 0.52,
+      "pcr": null,
       "pctb": 0.79,
       "csp_timing": "\ud83d\udd34 NO SETUP",
       "cc_timing": "\ud83d\udd34 NO SETUP",
@@ -4313,7 +4313,7 @@
       "iv_vs_hv": "cheap",
       "rsi": 66,
       "above_200": true,
-      "pcr": 2.27,
+      "pcr": null,
       "pctb": 0.8,
       "csp_timing": "\ud83d\udd34 NO SETUP",
       "cc_timing": "\ud83d\udfe1 PARTIAL SETUP",
@@ -4335,7 +4335,7 @@
       "iv_vs_hv": "fair",
       "rsi": 62,
       "above_200": false,
-      "pcr": 0.2,
+      "pcr": null,
       "pctb": 0.77,
       "csp_timing": "\ud83d\udd34 NO SETUP",
       "cc_timing": "\ud83d\udfe1 PARTIAL SETUP",
@@ -4357,7 +4357,7 @@
       "iv_vs_hv": "cheap",
       "rsi": 65,
       "above_200": true,
-      "pcr": 0.53,
+      "pcr": null,
       "pctb": 0.68,
       "csp_timing": "\ud83d\udd34 NO SETUP",
       "cc_timing": "\ud83d\udd34 NO SETUP",
@@ -4379,7 +4379,7 @@
       "iv_vs_hv": "cheap",
       "rsi": 34,
       "above_200": false,
-      "pcr": 0.6,
+      "pcr": null,
       "pctb": 0.08,
       "csp_timing": "\ud83d\udd34 NO SETUP",
       "cc_timing": "\ud83d\udd34 NO SETUP",
@@ -4401,7 +4401,7 @@
       "iv_vs_hv": "cheap",
       "rsi": 51,
       "above_200": true,
-      "pcr": 0.35,
+      "pcr": null,
       "pctb": 0.62,
       "csp_timing": "\ud83d\udd34 NO SETUP",
       "cc_timing": "\ud83d\udd34 NO SETUP",
@@ -4423,7 +4423,7 @@
       "iv_vs_hv": "cheap",
       "rsi": 44,
       "above_200": true,
-      "pcr": 0.61,
+      "pcr": null,
       "pctb": 0.29,
       "csp_timing": "\ud83d\udd34 NO SETUP",
       "cc_timing": "\ud83d\udd34 NO SETUP",
@@ -4445,7 +4445,7 @@
       "iv_vs_hv": "cheap",
       "rsi": 48,
       "above_200": true,
-      "pcr": 1.26,
+      "pcr": null,
       "pctb": 0.47,
       "csp_timing": "\ud83d\udd34 NO SETUP",
       "cc_timing": "\ud83d\udd34 NO SETUP",
@@ -4467,7 +4467,7 @@
       "iv_vs_hv": "rich",
       "rsi": 52,
       "above_200": false,
-      "pcr": 0.44,
+      "pcr": null,
       "pctb": 0.46,
       "csp_timing": "\ud83d\udd34 NO SETUP",
       "cc_timing": "\ud83d\udd34 NO SETUP",
@@ -4489,7 +4489,7 @@
       "iv_vs_hv": "cheap",
       "rsi": 55,
       "above_200": false,
-      "pcr": 1.19,
+      "pcr": null,
       "pctb": 0.67,
       "csp_timing": "\ud83d\udd34 NO SETUP",
       "cc_timing": "\ud83d\udd34 NO SETUP",
@@ -4511,7 +4511,7 @@
       "iv_vs_hv": "cheap",
       "rsi": 46,
       "above_200": false,
-      "pcr": 0.48,
+      "pcr": null,
       "pctb": 0.45,
       "csp_timing": "\ud83d\udd34 NO SETUP",
       "cc_timing": "\ud83d\udd34 NO SETUP",
@@ -4533,7 +4533,7 @@
       "iv_vs_hv": "fair",
       "rsi": 58,
       "above_200": true,
-      "pcr": 1.36,
+      "pcr": null,
       "pctb": 0.64,
       "csp_timing": "\ud83d\udd34 NO SETUP",
       "cc_timing": "\ud83d\udd34 NO SETUP",
@@ -4555,7 +4555,7 @@
       "iv_vs_hv": "fair",
       "rsi": 36,
       "above_200": false,
-      "pcr": 0.0,
+      "pcr": null,
       "pctb": 0.1,
       "csp_timing": "\ud83d\udfe1 PARTIAL SETUP",
       "cc_timing": "\ud83d\udd34 NO SETUP",
@@ -4599,7 +4599,7 @@
       "iv_vs_hv": "cheap",
       "rsi": 48,
       "above_200": false,
-      "pcr": 1.3,
+      "pcr": null,
       "pctb": 0.42,
       "csp_timing": "\ud83d\udd34 NO SETUP",
       "cc_timing": "\ud83d\udd34 NO SETUP",
@@ -4621,7 +4621,7 @@
       "iv_vs_hv": "cheap",
       "rsi": 49,
       "above_200": true,
-      "pcr": 1.28,
+      "pcr": null,
       "pctb": 0.51,
       "csp_timing": "\ud83d\udd34 NO SETUP",
       "cc_timing": "\ud83d\udd34 NO SETUP",
@@ -4643,7 +4643,7 @@
       "iv_vs_hv": "cheap",
       "rsi": 46,
       "above_200": false,
-      "pcr": 0.81,
+      "pcr": null,
       "pctb": 0.34,
       "csp_timing": "\ud83d\udd34 NO SETUP",
       "cc_timing": "\ud83d\udd34 NO SETUP",
@@ -4665,7 +4665,7 @@
       "iv_vs_hv": "fair",
       "rsi": 79,
       "above_200": false,
-      "pcr": 1.49,
+      "pcr": null,
       "pctb": 0.98,
       "csp_timing": "\ud83d\udd34 NO SETUP",
       "cc_timing": "\ud83d\udfe1 PARTIAL SETUP",
@@ -4687,7 +4687,7 @@
       "iv_vs_hv": "cheap",
       "rsi": 48,
       "above_200": true,
-      "pcr": 1.69,
+      "pcr": null,
       "pctb": 0.44,
       "csp_timing": "\ud83d\udd34 NO SETUP",
       "cc_timing": "\ud83d\udd34 NO SETUP",
@@ -4724,7 +4724,6 @@
     "btc_fng": 71,
     "btc_fng_label": "Greed",
     "fng_hist": [
-      70,
       68,
       68,
       66,
@@ -4812,6 +4811,7 @@
       55,
       56,
       57,
+      55,
       55,
       55
     ],
@@ -4908,7 +4908,6 @@
       71
     ],
     "vix_hist": [
-      17.0,
       16.3,
       15.7,
       15.3,
@@ -5058,8 +5057,8 @@
     },
     {
       "label": "Nasdaq 100",
-      "price": 29224.521484375,
-      "pct": 0.052349943424090384,
+      "price": 29224.51953125,
+      "pct": 0.052343256753561995,
       "prefix": "",
       "is_yield": false,
       "hist": [
@@ -5204,8 +5203,8 @@
     },
     {
       "label": "R2000",
-      "price": 3005.900146484375,
-      "pct": -0.1368719483638703,
+      "price": 3005.89990234375,
+      "pct": -0.13688005929414215,
       "prefix": "",
       "is_yield": false,
       "hist": [
@@ -5277,12 +5276,11 @@
     },
     {
       "label": "DXY",
-      "price": 99.12200164794922,
-      "pct": 0.20420893928738693,
+      "price": 99.16100311279297,
+      "pct": -0.009070340141603683,
       "prefix": "",
       "is_yield": false,
       "hist": [
-        99.17,
         99.21,
         99.02,
         98.91,
@@ -5346,17 +5344,17 @@
         98.8,
         99.0,
         98.92,
-        99.12
+        99.17,
+        99.16
       ]
     },
     {
       "label": "Crude Oil",
-      "price": 81.66999816894531,
-      "pct": -0.8377882907877554,
+      "price": 81.22000122070312,
+      "pct": -1.2282647391443913,
       "prefix": "$",
       "is_yield": false,
       "hist": [
-        93.89,
         88.68,
         88.9,
         87.36,
@@ -5420,17 +5418,17 @@
         87.06,
         85.01,
         82.36,
-        81.67
+        82.23,
+        81.22
       ]
     },
     {
       "label": "Gold",
-      "price": 4669.2998046875,
-      "pct": 0.6726829170206061,
+      "price": 4658.7001953125,
+      "pct": 1.3157321871647643,
       "prefix": "$",
       "is_yield": false,
       "hist": [
-        4500,
         4448,
         4499,
         4560,
@@ -5494,13 +5492,14 @@
         4624,
         4641,
         4638,
-        4669
+        4598,
+        4659
       ]
     },
     {
       "label": "Bitcoin",
-      "price": 78840.5234375,
-      "pct": 0.3507248230142368,
+      "price": 78770.90625,
+      "pct": 0.26211385341174953,
       "prefix": "$",
       "is_yield": false,
       "hist": [
@@ -5593,7 +5592,7 @@
         77755,
         78964,
         78565,
-        78843
+        78771
       ]
     },
     {
@@ -5815,8 +5814,8 @@
     {
       "label": "Digital Assets",
       "ticker": "BTC",
-      "pct": 0.3507248230142368,
-      "price": 78840.5234375
+      "pct": 0.26211385341174953,
+      "price": 78770.90625
     }
   ],
   "fundamentals": {
@@ -5887,39 +5886,39 @@
       ],
       "news": [
         {
+          "title": "Tesla (TSLA) Stock Looks Overvalued Following Its 41% Five Year Gain",
+          "publisher": "Simply Wall St.",
+          "link": "https://finance.yahoo.com/markets/stocks/articles/tesla-tsla-stock-looks-overvalued-010918703.html",
+          "when": "Aug 27"
+        },
+        {
+          "title": "Elon Musk's Tesla Hikes Cybertruck Prices by More Than 7% Despite Sluggish Sales",
+          "publisher": "Benzinga",
+          "link": "https://finance.yahoo.com/markets/stocks/articles/elon-musks-tesla-hikes-cybertruck-003108332.html",
+          "when": "Aug 27"
+        },
+        {
+          "title": "Forget Tesla: 2 AI Robotics Stocks to Buy and Hold Instead",
+          "publisher": "Motley Fool",
+          "link": "https://www.fool.com/investing/2026/08/26/forget-tesla-2-ai-robotics-stocks-to-buy-and-hold/",
+          "when": "Aug 27"
+        },
+        {
           "title": "Tesla quietly kills a product homeowners once paid a premium for",
           "publisher": "TheStreet",
           "link": "https://www.thestreet.com/investing/tesla-tsla-discontinues-solar-roof-tiles",
           "when": "Aug 27"
         },
         {
+          "title": "Elon Musk Reveals Why SpaceX Launched Tesla\u2019s Roadster Into Orbit: \u2018We Didn\u2019t Want to Risk Anything Valuable\u2019",
+          "publisher": "Benzinga",
+          "link": "https://finance.yahoo.com/technology/articles/elon-musk-reveals-why-spacex-233044265.html",
+          "when": "Aug 26"
+        },
+        {
           "title": "Elon Musk Grok Bot Promise: We Will Make You Whole if AI Loses Your Money",
           "publisher": "BeInCrypto",
           "link": "https://beincrypto.com/elon-musk-grok-bot-promise/",
-          "when": "Aug 26"
-        },
-        {
-          "title": "Autonomous Trucks Are Here: Einride\u2019s 27% Revenue Jump",
-          "publisher": "FreightWaves",
-          "link": "https://finance.yahoo.com/technology/articles/autonomous-trucks-einride-27-revenue-224018722.html",
-          "when": "Aug 26"
-        },
-        {
-          "title": "Rivian Automotive vs. Tesla: Which Electric Vehicle Stock Is a Better Investment in 2026?",
-          "publisher": "Motley Fool",
-          "link": "https://www.fool.com/coverage/better-buy/2026/08/26/rivian-automotive-vs-tesla-which-electric-vehicle-stock-is-a-better-investment-in-2026/",
-          "when": "Aug 26"
-        },
-        {
-          "title": "Tesla Reportedly Says China FSD Work Continues After Website Omission Sparks Shutdown Claims \u2014 TSLA Stock Slips",
-          "publisher": "Stocktwits",
-          "link": "https://stocktwits.com/news-articles/markets/equity/tesla-reportedly-says-china-fsd-work-continues-after-website-omission-sparks-shutdown-claims-tsla-stock-slips/cZYV2uARJpR",
-          "when": "Aug 26"
-        },
-        {
-          "title": "Tesla's Cybertruck Hike Shrinks Its Own Upgrade Ladder",
-          "publisher": "GuruFocus.com",
-          "link": "https://finance.yahoo.com/markets/stocks/articles/teslas-cybertruck-hike-shrinks-own-181744706.html",
           "when": "Aug 26"
         }
       ]
@@ -6103,39 +6102,39 @@
       ],
       "news": [
         {
-          "title": "Why Nvidia says its AI partnerships aren't 'circular financing'",
-          "publisher": "Yahoo Finance Video",
-          "link": "https://finance.yahoo.com/video/why-nvidia-says-its-ai-partnerships-arent-circular-financing-222400222.html",
-          "when": "Aug 26"
-        },
-        {
-          "title": "Tech stocks today: Meta agrees to settle social media case for $16.68 billion; Nvidia tops Q2 expectations",
+          "title": "Stock market today: Dow, S&P 500, Nasdaq close lower, Nvidia stock jumps after earnings",
           "publisher": "Yahoo Finance",
-          "link": "https://finance.yahoo.com/technology/live/tech-stocks-today-meta-agrees-to-settle-social-media-case-for-1668-billion-nvidia-tops-q2-expectations-125406169.html",
-          "when": "Aug 24"
-        },
-        {
-          "title": "Nvidia reports impressive Q2 earnings as AI boom rolls on",
-          "publisher": "Yahoo Finance Video",
-          "link": "https://finance.yahoo.com/video/nvidia-reports-impressive-q2-earnings-as-ai-boom-rolls-on-203300281.html",
+          "link": "https://finance.yahoo.com/markets/live/stock-market-today-wednesday-august-26-dow-sp-500-nasdaq-081834782.html",
           "when": "Aug 26"
         },
         {
-          "title": "Nvidia earnings countdown: 2 things investors need to see for the stock to climb higher",
+          "title": "It's 'hard' to argue that Nvidia's financing is circular, analyst says",
           "publisher": "Yahoo Finance Video",
-          "link": "https://finance.yahoo.com/video/nvidia-earnings-countdown-2-things-150246651.html",
+          "link": "https://finance.yahoo.com/video/hard-argue-nvidias-financing-circular-210803102.html",
           "when": "Aug 26"
         },
         {
-          "title": "Stocks in holding pattern ahead of Nvidia earnings: AlphaCheck",
+          "title": "Earnings live updates: Salesforce, CrowdStrike, Okta stocks surge as AI boom helps lift Q2 results",
           "publisher": "Yahoo Finance",
-          "link": "https://finance.yahoo.com/markets/article/stocks-in-holding-pattern-ahead-of-nvidia-earnings-alphacheck-141558586.html",
+          "link": "https://finance.yahoo.com/markets/live/earnings-live-updates-q2-nvidia-115314802.html",
+          "when": "Aug 25"
+        },
+        {
+          "title": "Robots are the 'next gen' of AI: Why ETF investors are flocking back to tech",
+          "publisher": "Yahoo Finance Video",
+          "link": "https://finance.yahoo.com/video/robots-next-gen-ai-why-153614762.html",
           "when": "Aug 26"
         },
         {
-          "title": "Is Nvidia's AI data center dominance slipping as the market expands?",
+          "title": "Is Meta a buy after its $16.68 billion social media case settlement?",
           "publisher": "Yahoo Finance Video",
-          "link": "https://finance.yahoo.com/video/nvidias-ai-data-center-dominance-120000341.html",
+          "link": "https://finance.yahoo.com/video/meta-buy-16-68-billion-141935353.html",
+          "when": "Aug 26"
+        },
+        {
+          "title": "Nvidia earnings, PCE data: What investors need to watch Wednesday",
+          "publisher": "Yahoo Finance Video",
+          "link": "https://finance.yahoo.com/video/nvidia-earnings-pce-data-investors-120000582.html",
           "when": "Aug 26"
         }
       ]
@@ -6204,6 +6203,24 @@
           "when": "Aug 26"
         },
         {
+          "title": "If I Were in My 20s, I'd Buy These 2 Trillion-Dollar Stocks and Hold Them Until Retirement",
+          "publisher": "Motley Fool",
+          "link": "https://www.fool.com/investing/2026/08/27/if-i-were-in-my-20s-id-buy-these-2-trillion-dollar/",
+          "when": "Aug 27"
+        },
+        {
+          "title": "Asian chip firms lifted by Nvidia forecast but broader markets struggle",
+          "publisher": "AFP",
+          "link": "https://finance.yahoo.com/markets/stocks/articles/asian-chip-firms-lifted-nvidia-024234685.html",
+          "when": "Aug 27"
+        },
+        {
+          "title": "X-Energy (XE) Ties Xe-100 Reactor Push To Rising AI Power Demand",
+          "publisher": "Simply Wall St.",
+          "link": "https://finance.yahoo.com/energy/articles/x-energy-xe-ties-xe-021227805.html",
+          "when": "Aug 27"
+        },
+        {
           "title": "Amazon just tripled its order of Nvidia chips over \u2018surging demand\u2019",
           "publisher": "TechCrunch",
           "link": "https://finance.yahoo.com/technology/ai/articles/amazon-just-tripled-order-nvidia-234718526.html",
@@ -6213,24 +6230,6 @@
           "title": "Autonomous Trucks Are Here: Einride\u2019s 27% Revenue Jump",
           "publisher": "FreightWaves",
           "link": "https://finance.yahoo.com/technology/articles/autonomous-trucks-einride-27-revenue-224018722.html",
-          "when": "Aug 26"
-        },
-        {
-          "title": "Rivian Automotive vs. Tesla: Which Electric Vehicle Stock Is a Better Investment in 2026?",
-          "publisher": "Motley Fool",
-          "link": "https://www.fool.com/coverage/better-buy/2026/08/26/rivian-automotive-vs-tesla-which-electric-vehicle-stock-is-a-better-investment-in-2026/",
-          "when": "Aug 26"
-        },
-        {
-          "title": "Nvidia doubles revenue, forecasts even more AI spending",
-          "publisher": "AFP",
-          "link": "https://finance.yahoo.com/technology/ai/articles/nvidia-doubles-revenue-forecasts-even-220638927.html",
-          "when": "Aug 26"
-        },
-        {
-          "title": "Nvidia Rallies On Major Amazon Contract, Fiscal Q2 Beat-And-Raise Report",
-          "publisher": "Investor's Business Daily",
-          "link": "https://www.investors.com/news/technology/nvidia-stock-nvda-fiscal-q2-2027-earnings/?src=A00220&yptr=yahoo",
           "when": "Aug 26"
         }
       ]
@@ -6305,6 +6304,18 @@
           "when": "Aug 26"
         },
         {
+          "title": "Is BlackRock\u2019s Crypto ETF and AI Push Rewiring The Investment Case For BlackRock (BLK)?",
+          "publisher": "Simply Wall St.",
+          "link": "https://finance.yahoo.com/markets/crypto/articles/blackrock-crypto-etf-ai-push-031548640.html",
+          "when": "Aug 27"
+        },
+        {
+          "title": "Asian chip firms lifted by Nvidia forecast but broader markets struggle",
+          "publisher": "AFP",
+          "link": "https://finance.yahoo.com/markets/stocks/articles/asian-chip-firms-lifted-nvidia-024234685.html",
+          "when": "Aug 27"
+        },
+        {
           "title": "OpenAI Is the Sole Investor in Its Latest Venture Fund",
           "publisher": "The Wall Street Journal",
           "link": "https://www.wsj.com/pro/venture-capital/openai-is-the-sole-investor-in-its-latest-venture-fund-ed1dd447?siteid=yhoof2&yptr=yahoo",
@@ -6314,18 +6325,6 @@
           "title": "Nvidia doubles revenue, forecasts even more AI spending",
           "publisher": "AFP",
           "link": "https://finance.yahoo.com/technology/ai/articles/nvidia-doubles-revenue-forecasts-even-220638927.html",
-          "when": "Aug 26"
-        },
-        {
-          "title": "Anthropic continues compute-gobbling streak in $45B deal with Nscale",
-          "publisher": "TechCrunch",
-          "link": "https://finance.yahoo.com/technology/ai/articles/anthropic-continues-compute-gobbling-streak-213739548.html",
-          "when": "Aug 26"
-        },
-        {
-          "title": "Decoding ANET Stock's Premium Valuation",
-          "publisher": "Trefis",
-          "link": "https://www.trefis.com/articles/612945/decoding-anet-stocks-premium-valuation/2026-08-26",
           "when": "Aug 26"
         }
       ]
@@ -6678,6 +6677,12 @@
       "flags": [],
       "news": [
         {
+          "title": "Gold Is on a Roll. How Much Is Too Much for Retirees?",
+          "publisher": "Barrons.com",
+          "link": "https://www.barrons.com/articles/gold-is-on-a-roll-how-much-is-too-much-for-retirees-7ef20769?siteid=yhoof2&yptr=yahoo",
+          "when": "Aug 27"
+        },
+        {
           "title": "Record ETF flows show the \u2018debasement trade\u2019 is overtaking AI, analyst says",
           "publisher": "TheStreet",
           "link": "https://www.thestreet.com/crypto/markets/record-etf-flows-show-the-debasement-trade-is-overtaking-ai-analyst-says",
@@ -6705,12 +6710,6 @@
           "title": "Exchange-Traded Funds Lower, Equity Futures Mixed Pre-Bell Wednesday Amid Inflation Data Release",
           "publisher": "MT Newswires",
           "link": "https://finance.yahoo.com/markets/stocks/articles/exchange-traded-funds-lower-equity-131226701.html",
-          "when": "Aug 26"
-        },
-        {
-          "title": "GLD, IBIT and Other ETFs to Play Debasement Trade",
-          "publisher": "Zacks",
-          "link": "https://finance.yahoo.com/markets/commodities/articles/gld-ibit-other-etfs-play-122900313.html",
           "when": "Aug 26"
         }
       ]
@@ -6877,6 +6876,18 @@
       ],
       "news": [
         {
+          "title": "How Pentagon Maven Deal And Raised Guidance At Palantir Technologies (PLTR) Has Changed Its Investment Story",
+          "publisher": "Simply Wall St.",
+          "link": "https://finance.yahoo.com/markets/stocks/articles/pentagon-maven-deal-raised-guidance-050916209.html",
+          "when": "Aug 27"
+        },
+        {
+          "title": "Michael Burry Shorts This AI Giant, Then Buys Calls as a Hedge: Why?",
+          "publisher": "BeInCrypto",
+          "link": "https://beincrypto.com/burry-nvidia-short-hedge-calls/",
+          "when": "Aug 27"
+        },
+        {
           "title": "Michael Burry Buys NVDA Calls As A \u2018Hedge,\u2019 Adds To ORCL, PLTR, NBIS Shorts \u2014 Why He Thinks \u2018Nvidia Will Not Distribute Enough To Shareholders\u2019",
           "publisher": "Stocktwits",
           "link": "https://stocktwits.com/news-articles/markets/equity/michael-burry-buys-nvda-calls-as-a-hedge-adds-to-orcl-pltr-nbis-shorts-why-he-thinks-nvidia-will-not-distribute-enough-to-shareholders/cZYVdSURJpP",
@@ -6898,18 +6909,6 @@
           "title": "Palantir Just Ripped 43% in a Month. Is It Time to Sell?",
           "publisher": "24/7 Wall St.",
           "link": "https://247wallst.com/investing/2026/08/26/palantir-just-ripped-43-in-a-month-is-it-time-to-sell/",
-          "when": "Aug 26"
-        },
-        {
-          "title": "PLTR Stock Gains Nearly 2% After William Blair Flags Palantir\u2019s Maven System To Hit $1B ARR",
-          "publisher": "Stocktwits",
-          "link": "https://stocktwits.com/news-articles/markets/equity/pltr-stock-gains-nearly-2-after-william-blair-flags-palantir-s-maven-system-to-hit-1-b-arr/cZYVcA1RJY6",
-          "when": "Aug 26"
-        },
-        {
-          "title": "Gorilla Surges 14% as Traders Reverse the Earnings Selloff, Evolv Eases",
-          "publisher": "24/7 Wall St.",
-          "link": "https://247wallst.com/investing/2026/08/26/gorilla-surges-14-as-traders-reverse-the-earnings-selloff-evolv-eases/",
           "when": "Aug 26"
         }
       ]
@@ -7077,6 +7076,24 @@
       ],
       "news": [
         {
+          "title": "Apple's 'Surprise and Shine' iPhone 18 Teaser Has This Analyst Seeing a Big Camera Upgrade and New Color",
+          "publisher": "Benzinga",
+          "link": "https://tech.yahoo.com/ai/apple-intelligence/articles/apples-surprise-shine-iphone-18-035208282.html",
+          "when": "Aug 27"
+        },
+        {
+          "title": "Apple\u2019s latest move could change how you use AI every day",
+          "publisher": "TheStreet",
+          "link": "https://www.thestreet.com/investing/apple-m6-m5-ultra-cpus-mac-mini-studio-could-change-how-you-use-ai-every-day",
+          "when": "Aug 27"
+        },
+        {
+          "title": "Apple (AAPL) Stock Could Trade At A Premium Following New AI Mac Launches",
+          "publisher": "Simply Wall St.",
+          "link": "https://finance.yahoo.com/markets/stocks/articles/apple-aapl-stock-could-trade-002328933.html",
+          "when": "Aug 27"
+        },
+        {
           "title": "Nvidia, Meta, Revolution Medicines, Abercrombie, Intuit, Salesforce, Moderna, and More Stocks That Explain Today\u2019s Market",
           "publisher": "Barrons.com",
           "link": "https://www.barrons.com/articles/stock-movers-6a7eb3fe?siteid=yhoof2&yptr=yahoo",
@@ -7092,24 +7109,6 @@
           "title": "Warren Buffett \u201cBlew It\u201d on Alphabet (GOOGL) And Made It Berkshire\u2019s Third-Biggest Bet",
           "publisher": "Insider Monkey",
           "link": "https://finance.yahoo.com/markets/stocks/articles/warren-buffett-blew-alphabet-googl-202343918.html",
-          "when": "Aug 26"
-        },
-        {
-          "title": "AAPL Stock Gains 1%; Apple Is Expected To Ship 10M Foldable iPhones In The First Year, IDC Predicts",
-          "publisher": "Stocktwits",
-          "link": "https://stocktwits.com/news-articles/markets/equity/apple-is-expected-to-ship-10-m-foldable-i-phones-in-the-first-year-idc-predicts/cZYVd98RJpc",
-          "when": "Aug 26"
-        },
-        {
-          "title": "Jim Cramer Highlights Sandisk\u2019s (SNDK) Massive Buybacks After Stock Surge",
-          "publisher": "Insider Monkey",
-          "link": "https://finance.yahoo.com/markets/stocks/articles/jim-cramer-highlights-sandisk-sndk-190403019.html",
-          "when": "Aug 26"
-        },
-        {
-          "title": "Apple Seen to Ship Over 17 Million Foldable iPhones by 2027, IDC Says",
-          "publisher": "MT Newswires",
-          "link": "https://finance.yahoo.com/technology/articles/apple-seen-ship-over-17-175939666.html",
           "when": "Aug 26"
         }
       ]
@@ -7190,21 +7189,21 @@
           "when": "Aug 26"
         },
         {
+          "title": "Has Rezolve AI (RZLV) Fallen Far Enough To Look Undervalued?",
+          "publisher": "Simply Wall St.",
+          "link": "https://finance.yahoo.com/markets/stocks/articles/rezolve-ai-rzlv-fallen-far-051019919.html",
+          "when": "Aug 27"
+        },
+        {
+          "title": "Thinking Machines Lab Co-Founder Barret Zoph Joins Google",
+          "publisher": "The Wall Street Journal",
+          "link": "https://www.wsj.com/tech/ai/thinking-machines-lab-co-founder-barret-zoph-joins-google-49f594e6?siteid=yhoof2&yptr=yahoo",
+          "when": "Aug 27"
+        },
+        {
           "title": "Google Moves AI-Responsibility Team Out of DeepMind Lab in Latest Shake-Up",
           "publisher": "The Wall Street Journal",
           "link": "https://www.wsj.com/tech/ai/google-moves-ai-responsibility-team-out-of-deepmind-lab-in-latest-shake-up-ed01e40c?siteid=yhoof2&yptr=yahoo",
-          "when": "Aug 26"
-        },
-        {
-          "title": "Morgan Stanley sees big change coming for Alphabet stock",
-          "publisher": "TheStreet",
-          "link": "https://www.thestreet.com/investing/alphabet-google-tpu-opportunity",
-          "when": "Aug 26"
-        },
-        {
-          "title": "Marvell Reports Thursday. Here's Where the Google Contract Would Actually Show Up in the Numbers.",
-          "publisher": "Motley Fool",
-          "link": "https://www.fool.com/investing/2026/08/26/marvell-reports-thursday-here-s-where-the-google-contract-would-actually-show-up-in-the-numbers/",
           "when": "Aug 26"
         }
       ]
@@ -7278,6 +7277,12 @@
           "when": "Aug 26"
         },
         {
+          "title": "On Nvidia Earnings Day, Cathie Wood\u2019s ARK Loaded Up $20M On Rival Chip Stock",
+          "publisher": "Stocktwits",
+          "link": "https://stocktwits.com/news-articles/markets/equity/on-nvidia-earnings-day-cathie-wood-s-ark-loaded-up-20-m-on-rival-chip-stock/cZY8YJSRJpk",
+          "when": "Aug 27"
+        },
+        {
           "title": "Dow Jones Futures Rise; Nvidia, CrowdStrike, Okta, Salesforce Lead Earnings Movers",
           "publisher": "Investor's Business Daily",
           "link": "https://www.investors.com/market-trend/stock-market-today/dow-jones-futures-nvidia-crowdstrike-okta-salesforce-earnings-movers/?src=A00220&yptr=yahoo",
@@ -7299,12 +7304,6 @@
           "title": "Investors Don\u2019t Seem to Believe Nvidia\u2019s Earnings Story",
           "publisher": "The Wall Street Journal",
           "link": "https://www.wsj.com/livecoverage/nvidia-earnings-stock-market-today-08-26-2026/card/investors-don-t-seem-to-believe-nvidia-s-earnings-story-tV5qvjFRcJFLGuVPSItn?siteid=yhoof2&yptr=yahoo",
-          "when": "Aug 26"
-        },
-        {
-          "title": "Qualcomm's Costs Are Inside The Guidance And Its Replacement Growth Is Not",
-          "publisher": "Trefis",
-          "link": "https://www.trefis.com/articles/613012/qualcomms-costs-are-inside-the-guidance-and-its-replacement-growth-is-not/2026-08-26",
           "when": "Aug 26"
         }
       ]
@@ -7481,33 +7480,33 @@
           "when": "Aug 26"
         },
         {
+          "title": "Russell, MSCI And Morningstar Set To Load Up On SpaceX Stock \u2014 Analyst Warns \u2018True Value\u2019 May Be Hard To Pin",
+          "publisher": "Stocktwits",
+          "link": "https://stocktwits.com/news-articles/markets/equity/russell-msci-morningstar-spacex-analyst-true-value-hard-to-pin/cZY8qCCRJpN",
+          "when": "Aug 27"
+        },
+        {
+          "title": "SPCX Stock Rises Overnight: Analyst Says Nvidia\u2019s Results Reveal SpaceX\u2019s Growing Hyperscaler Status",
+          "publisher": "Stocktwits",
+          "link": "https://stocktwits.com/news-articles/markets/equity/spcx-analyst-nvidia-results-hyperscaler-status/cZY8nDkRJpi",
+          "when": "Aug 27"
+        },
+        {
           "title": "OpenAI Is the Sole Investor in Its Latest Venture Fund",
           "publisher": "The Wall Street Journal",
           "link": "https://www.wsj.com/pro/venture-capital/openai-is-the-sole-investor-in-its-latest-venture-fund-ed1dd447?siteid=yhoof2&yptr=yahoo",
           "when": "Aug 26"
         },
         {
+          "title": "Elon Musk Reveals Why SpaceX Launched Tesla\u2019s Roadster Into Orbit: \u2018We Didn\u2019t Want to Risk Anything Valuable\u2019",
+          "publisher": "Benzinga",
+          "link": "https://finance.yahoo.com/technology/articles/elon-musk-reveals-why-spacex-233044265.html",
+          "when": "Aug 26"
+        },
+        {
           "title": "Cerebras vs. SpaceX: Which 2026 IPO Is the Better AI Stock to Own for the Next 5 Years?",
           "publisher": "Motley Fool",
           "link": "https://www.fool.com/investing/2026/08/26/cerebras-vs-spacex-which-2026-ipo-is-the-better-ai/",
-          "when": "Aug 26"
-        },
-        {
-          "title": "If I Had $5,000 to Invest Today, Here's the Growth Stock I'd Buy Instead of SpaceX",
-          "publisher": "Motley Fool",
-          "link": "https://www.fool.com/investing/2026/08/26/if-i-had-5000-to-invest-today-heres-the-growth-sto/",
-          "when": "Aug 26"
-        },
-        {
-          "title": "Elon Musk Says Grok Is Taking Over Starlink Support: 15,000+ Calls a Day, 3,000+ Orders a Week",
-          "publisher": "Benzinga",
-          "link": "https://finance.yahoo.com/technology/ai/articles/elon-musk-says-grok-taking-220058142.html",
-          "when": "Aug 26"
-        },
-        {
-          "title": "SpaceX Is Adding 500,000-Plus Starlink Subscribers Every Month. Here's Why That's Critical for the Stock.",
-          "publisher": "Motley Fool",
-          "link": "https://www.fool.com/investing/2026/08/26/spacex-is-adding-500000-plus-starlink-subscribers/",
           "when": "Aug 26"
         }
       ]
@@ -7591,6 +7590,12 @@
       ],
       "news": [
         {
+          "title": "As Navitas Semiconductor Buys Claros, Here\u2019s How to Play NVTS Stock",
+          "publisher": "Barchart",
+          "link": "https://www.barchart.com/story/news/4133191/as-navitas-semiconductor-buys-claros-heres-how-to-play-nvts-stock",
+          "when": "Aug 26"
+        },
+        {
           "title": "Navitas Semiconductor (NVDA) Tests Its Claros Deal Against An Undervalued Narrative",
           "publisher": "Simply Wall St.",
           "link": "https://finance.yahoo.com/markets/stocks/articles/navitas-semiconductor-nvda-tests-claros-182056463.html",
@@ -7618,12 +7623,6 @@
           "title": "What Could Navitas Semiconductor (NVTS) Gain From Its Claros Deal?",
           "publisher": "Simply Wall St.",
           "link": "https://finance.yahoo.com/technology/ai/articles/could-navitas-semiconductor-nvts-gain-081554173.html",
-          "when": "Aug 26"
-        },
-        {
-          "title": "Why Navitas Semiconductor Stock Is Up Today",
-          "publisher": "Motley Fool",
-          "link": "https://www.fool.com/investing/2026/08/25/why-navitas-semiconductor-stock-is-up-today/",
           "when": "Aug 26"
         }
       ]
@@ -7919,6 +7918,12 @@
           "when": "Aug 26"
         },
         {
+          "title": "CRWV, NBIS, IREN Stocks Jump Overnight On Nvidia\u2019s Blowout Q2 \u2014 But Palo Alto CEO Predicts Neocloud Price Crash Is Coming",
+          "publisher": "Stocktwits",
+          "link": "https://stocktwits.com/news-articles/markets/equity/crwv-nbis-iren-nvidia-q2-palo-alto-ceo-neocloud-crash/cZY8NVHRJpX",
+          "when": "Aug 27"
+        },
+        {
           "title": "Truist sees investment doubling potential in tumbling tech stock",
           "publisher": "TheStreet",
           "link": "https://www.thestreet.com/investing/stocks/truist-crwv-coreweave-stock-price-target-165-usd",
@@ -7940,12 +7945,6 @@
           "title": "CRWV vs. APLD: Which AI Data Center Stock Has More Upside Potential?",
           "publisher": "Zacks",
           "link": "https://finance.yahoo.com/technology/ai/articles/crwv-vs-apld-ai-data-145400212.html",
-          "when": "Aug 26"
-        },
-        {
-          "title": "History Has Changed My Mind on These Millionaire-Maker AI Stocks (At Least for Now). Why I Have Suspended My Earlier Call.",
-          "publisher": "Motley Fool",
-          "link": "https://www.fool.com/investing/2026/08/26/history-has-changed-my-mind-on-these-millionaire-m/",
           "when": "Aug 26"
         }
       ]
@@ -8029,6 +8028,12 @@
       ],
       "news": [
         {
+          "title": "Prediction: Bloom Energy's Backlog Will Top $50 Billion Before Year's End",
+          "publisher": "Motley Fool",
+          "link": "https://www.fool.com/investing/2026/08/27/prediction-bloom-energys-backlog-tops-50-billion-b/",
+          "when": "Aug 27"
+        },
+        {
           "title": "I'd Rather Own Bloom Energy Than Nvidia Right Now. Here's My Case.",
           "publisher": "Motley Fool",
           "link": "https://www.fool.com/investing/2026/08/26/id-rather-own-bloom-energy-than-nvidia-right-now-h/",
@@ -8056,12 +8061,6 @@
           "title": "Nancy Pelosi Discloses Big Investment in This AI Energy Play",
           "publisher": "Barrons.com",
           "link": "https://www.barrons.com/articles/bloom-energy-stock-nancy-pelosi-72bd90d5?siteid=yhoof2&yptr=yahoo",
-          "when": "Aug 25"
-        },
-        {
-          "title": "Nancy Pelosi makes intriguing first-ever bet on AI power stock",
-          "publisher": "TheStreet",
-          "link": "https://www.thestreet.com/investing/stocks/nancy-pelosi-buys-intc-intel-stock-be-bloom-energy-stock",
           "when": "Aug 25"
         }
       ]
@@ -8137,6 +8136,12 @@
       ],
       "news": [
         {
+          "title": "CRWV, NBIS, IREN Stocks Jump Overnight On Nvidia\u2019s Blowout Q2 \u2014 But Palo Alto CEO Predicts Neocloud Price Crash Is Coming",
+          "publisher": "Stocktwits",
+          "link": "https://stocktwits.com/news-articles/markets/equity/crwv-nbis-iren-nvidia-q2-palo-alto-ceo-neocloud-crash/cZY8NVHRJpX",
+          "when": "Aug 27"
+        },
+        {
           "title": "IREN Stock Plunges 5% Ahead of Earnings as AI Growth Takes Center Stage",
           "publisher": "GuruFocus.com",
           "link": "https://finance.yahoo.com/markets/stocks/articles/iren-stock-plunges-5-ahead-194353256.html",
@@ -8165,12 +8170,6 @@
           "publisher": "Motley Fool",
           "link": "https://www.fool.com/investing/2026/08/26/history-has-changed-my-mind-on-these-millionaire-m/",
           "when": "Aug 26"
-        },
-        {
-          "title": "Qfin Holdings Inc. - Sponsored ADR (QFIN) Misses Q2 Earnings Estimates",
-          "publisher": "Zacks",
-          "link": "https://finance.yahoo.com/markets/stocks/articles/qfin-holdings-inc-sponsored-adr-230501662.html",
-          "when": "Aug 25"
         }
       ]
     },
@@ -8332,6 +8331,12 @@
           "when": "Aug 26"
         },
         {
+          "title": "Michael Burry Shorts This AI Giant, Then Buys Calls as a Hedge: Why?",
+          "publisher": "BeInCrypto",
+          "link": "https://beincrypto.com/burry-nvidia-short-hedge-calls/",
+          "when": "Aug 27"
+        },
+        {
           "title": "Michael Burry Buys NVDA Calls As A \u2018Hedge,\u2019 Adds To ORCL, PLTR, NBIS Shorts \u2014 Why He Thinks \u2018Nvidia Will Not Distribute Enough To Shareholders\u2019",
           "publisher": "Stocktwits",
           "link": "https://stocktwits.com/news-articles/markets/equity/michael-burry-buys-nvda-calls-as-a-hedge-adds-to-orcl-pltr-nbis-shorts-why-he-thinks-nvidia-will-not-distribute-enough-to-shareholders/cZYVdSURJpP",
@@ -8353,12 +8358,6 @@
           "title": "Nebius Rises 4% Despite Adding $5.75B in Convertible Debt, Snapping a Six-Session Slide",
           "publisher": "24/7 Wall St.",
           "link": "https://247wallst.com/investing/2026/08/25/nebius-rises-4-despite-adding-5-75b-in-convertible-debt-snapping-a-six-session-slide/",
-          "when": "Aug 25"
-        },
-        {
-          "title": "RUM Group Surges 11% as CEO Vows to Take On CoreWeave and Nebius, Trump Media Holds Flat",
-          "publisher": "24/7 Wall St.",
-          "link": "https://247wallst.com/investing/2026/08/25/rum-group-surges-11-as-ceo-vows-to-take-on-coreweave-and-nebius-trump-media-holds-flat/",
           "when": "Aug 25"
         }
       ]
@@ -67988,6 +67987,8 @@
     "ovx_chg": 0.67,
     "gvz": 27.0,
     "gvz_chg": -0.73,
+    "move": 69.4,
+    "move_chg": -2.48,
     "calendar": [
       {
         "title": "Core Retail Sales q/q",
@@ -68543,7 +68544,7 @@
       }
     ]
   },
-  "generated_at": "2026-08-27T00:26:35+00:00",
+  "generated_at": "2026-08-27T07:04:13+00:00",
   "universe": {
     "wheel": 16,
     "growth": 15,
