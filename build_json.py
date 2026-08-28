@@ -224,6 +224,34 @@ def _rv20(closes):
     return statistics.pstdev(rets) * math.sqrt(252) * 100 if len(rets) >= 2 else None
 
 
+_BROWSER_UA = {"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 "
+                             "(KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36",
+               "Accept": "text/html,application/xhtml+xml", "Accept-Language": "en-US,en;q=0.9"}
+
+
+def _forward_pe_scrape():
+    """S&P 500 forward P/E — Yahoo omits forwardPE for index ETFs (it's a per-stock analyst
+    field), so scrape Finviz's quote snapshot, which publishes a holdings-weighted Forward P/E
+    for the big S&P trackers. Tries SPY → IVV → VOO; first parseable value wins. Never raises."""
+    import re
+    for sym in ("SPY", "IVV", "VOO"):
+        try:
+            r = requests.get("https://finviz.com/quote.ashx?t=%s&p=d" % sym,
+                             headers=_BROWSER_UA, timeout=15)
+            if r.status_code != 200:
+                continue
+            # snapshot cell: <td ...>Forward P/E</td><td ...><b>22.34</b></td>  ('-' when absent)
+            m = re.search(r"Forward P/E\s*</td>\s*<td[^>]*>\s*(?:<b[^>]*>)?\s*(-|[0-9]+(?:\.[0-9]+)?)",
+                          r.text, re.IGNORECASE)
+            if m and m.group(1) != "-":
+                v = float(m.group(1))
+                if 3.0 < v < 100.0:   # sanity band for an index forward P/E
+                    return v
+        except Exception:
+            continue
+    return None
+
+
 def fetch_market_stats():
     """Everything the app's 📊 Market Stats tab shows — via the pure `macro` module + yfinance."""
     ms = {}
@@ -252,6 +280,12 @@ def fetch_market_stats():
                 ms["pe_forward"] = info.get("forwardPE")
     except Exception:
         pass
+    # Yahoo almost never carries forwardPE for the ETFs — scrape the real holdings-weighted
+    # figure (Finviz) so the tile isn't perpetually empty.
+    if ms.get("pe_forward") is None:
+        fp = _forward_pe_scrape()
+        if fp is not None:
+            ms["pe_forward"] = fp
     vh = _yf_hist("^VIX", "1y")
     if vh:
         now, prev = vh[-1], (vh[-2] if len(vh) > 1 else vh[-1])
