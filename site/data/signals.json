@@ -560,6 +560,76 @@
       "shortlist": false
     },
     {
+      "ticker": "HIMS",
+      "strategy": "CSP",
+      "spot": 28.84,
+      "expiry": "2026-09-25",
+      "dte": 27,
+      "strike": 27.0,
+      "delta": -0.319,
+      "mid": 1.2,
+      "premium_pct": 4.16,
+      "pop": 68.1,
+      "iv": 65.3,
+      "iv_atm": 64.0,
+      "sector": "Healthcare",
+      "vol_bucket": "high",
+      "oi": 514,
+      "spread_pct": 16.7,
+      "earnings_soon": false,
+      "earnings_in_window": false,
+      "strong": true,
+      "qualifies": false,
+      "median_ok": true,
+      "pct_b": 0.23,
+      "rsi": 45.6,
+      "above_200ma": true,
+      "timing_label": "\ud83d\udd34 NO SETUP",
+      "timing_score": 1,
+      "timing_reasons": [
+        "Lower third (%B 0.23) +1",
+        "IV below realized \u2014 thin premium +0"
+      ],
+      "earnings_date": "2026-11-09",
+      "gates": [
+        {
+          "l": "\u0394 0.32",
+          "s": "ok"
+        },
+        {
+          "l": "DTE 27",
+          "s": "ok"
+        },
+        {
+          "l": "prem 4.2%",
+          "s": "ok"
+        },
+        {
+          "l": "OI 514",
+          "s": "ok"
+        },
+        {
+          "l": "bid/ask 17%",
+          "s": "no"
+        },
+        {
+          "l": "earnings",
+          "s": "ok"
+        },
+        {
+          "l": "median",
+          "s": "ok"
+        },
+        {
+          "l": "timing 1/12",
+          "s": "warn"
+        }
+      ],
+      "verdict": "avoid",
+      "verdict_why": "spread too wide",
+      "shortlist": false
+    },
+    {
       "ticker": "CRWV",
       "strategy": "CSP",
       "spot": 84.23,
@@ -2658,6 +2728,76 @@
         },
         {
           "l": "timing 5/12",
+          "s": "warn"
+        }
+      ],
+      "verdict": "avoid",
+      "verdict_why": "spread too wide",
+      "shortlist": false
+    },
+    {
+      "ticker": "HIMS",
+      "strategy": "CC",
+      "spot": 28.84,
+      "expiry": "2026-09-25",
+      "dte": 27,
+      "strike": 33.0,
+      "delta": 0.274,
+      "mid": 0.89,
+      "premium_pct": 3.09,
+      "pop": 72.6,
+      "iv": 70.3,
+      "iv_atm": 64.0,
+      "sector": "Healthcare",
+      "vol_bucket": "high",
+      "oi": 325,
+      "spread_pct": 36.0,
+      "earnings_soon": false,
+      "earnings_in_window": false,
+      "strong": true,
+      "qualifies": false,
+      "median_ok": false,
+      "pct_b": 0.23,
+      "rsi": 45.6,
+      "above_200ma": true,
+      "timing_label": "\ud83d\udd34 NO SETUP",
+      "timing_score": 3,
+      "timing_reasons": [
+        "IV below realized \u2014 thin premium +0",
+        "RSI 46 neutral \u2014 safe to write +3"
+      ],
+      "earnings_date": "2026-11-09",
+      "gates": [
+        {
+          "l": "\u0394 0.27",
+          "s": "ok"
+        },
+        {
+          "l": "DTE 27",
+          "s": "ok"
+        },
+        {
+          "l": "prem 3.1%",
+          "s": "ok"
+        },
+        {
+          "l": "OI 325",
+          "s": "ok"
+        },
+        {
+          "l": "bid/ask 36%",
+          "s": "no"
+        },
+        {
+          "l": "earnings",
+          "s": "ok"
+        },
+        {
+          "l": "median",
+          "s": "warn"
+        },
+        {
+          "l": "timing 3/12",
           "s": "warn"
         }
       ],
@@ -4901,6 +5041,37 @@
       "good_pmcc": false
     },
     {
+      "ticker": "HIMS",
+      "strategy": "LEAP",
+      "spot": 28.84,
+      "expiry": "2028-01-21",
+      "dte": 510,
+      "strike": 23.0,
+      "delta": 0.788,
+      "mid": 13.47,
+      "cost": 1348.0,
+      "intrinsic": 5.84,
+      "extrinsic": 7.63,
+      "extrinsic_pct": 56.7,
+      "carry_pct": 18.95,
+      "iv": 81.4,
+      "iv_ratio": 0.86,
+      "above_200ma": true,
+      "above_50ma": false,
+      "ma_aligned": true,
+      "rsi": 45.6,
+      "rsi_rising": false,
+      "ext_ok": false,
+      "trend_ok": true,
+      "qualifies": false,
+      "verdict": "neutral",
+      "timing_label": "\ud83d\udfe1 DECENT ENTRY",
+      "timing_score": 7,
+      "score_max": 11,
+      "sector": "Healthcare",
+      "good_pmcc": false
+    },
+    {
       "ticker": "CRDO",
       "strategy": "LEAP",
       "spot": 232.75,
@@ -5529,6 +5700,50 @@
       "is_wheel": true
     },
     {
+      "ticker": "HIMS",
+      "sector": "Healthcare",
+      "price": 28.84,
+      "pct": -8.9,
+      "hv20": 94.6,
+      "hvpct": 77,
+      "c_iv": 66,
+      "p_iv": 62,
+      "iv_vs_hv": "cheap",
+      "rsi": 46,
+      "above_200": true,
+      "pcr": 0.65,
+      "pctb": 0.23,
+      "csp_timing": "\ud83d\udd34 NO SETUP",
+      "cc_timing": "\ud83d\udd34 NO SETUP",
+      "leap_timing": "\ud83d\udfe1 DECENT ENTRY",
+      "csp_verdict": "avoid",
+      "cc_verdict": "avoid",
+      "leap_verdict": "neutral",
+      "is_wheel": true
+    },
+    {
+      "ticker": "NWBO",
+      "sector": "Healthcare",
+      "price": 0.19,
+      "pct": 5.8,
+      "hv20": 47.8,
+      "hvpct": 40,
+      "c_iv": null,
+      "p_iv": null,
+      "iv_vs_hv": "\u2014",
+      "rsi": 60,
+      "above_200": false,
+      "pcr": null,
+      "pctb": 0.8,
+      "csp_timing": "\ud83d\udd34 NO SETUP",
+      "cc_timing": "\ud83d\udfe1 PARTIAL SETUP",
+      "leap_timing": null,
+      "csp_verdict": null,
+      "cc_verdict": null,
+      "leap_verdict": null,
+      "is_wheel": true
+    },
+    {
       "ticker": "SPCX",
       "sector": "Industrials",
       "price": 141.5,
@@ -5787,8 +6002,8 @@
     "earnings_blackout": true,
     "earnings_blackout_days": 7
   },
-  "count": 59,
-  "leap_count": 30,
+  "count": 61,
+  "leap_count": 31,
   "market": {
     "vix": 14.43,
     "vix_label": "calm",
@@ -6423,8 +6638,8 @@
     },
     {
       "label": "Crude Oil",
-      "price": 83.4000015258789,
-      "pct": -0.15562942094785592,
+      "price": 83.52999877929688,
+      "pct": 1.5809259020949096,
       "prefix": "$",
       "is_yield": false,
       "hist": [
@@ -6490,14 +6705,13 @@
         85.01,
         82.36,
         82.23,
-        83.53,
-        83.4
+        83.53
       ]
     },
     {
       "label": "Gold",
-      "price": 4478.10009765625,
-      "pct": -2.854851553905202,
+      "price": 4609.7001953125,
+      "pct": 0.25009785375860183,
       "prefix": "$",
       "is_yield": false,
       "hist": [
@@ -6563,14 +6777,13 @@
         4641,
         4638,
         4598,
-        4610,
-        4478
+        4610
       ]
     },
     {
       "label": "Bitcoin",
-      "price": 78032.9296875,
-      "pct": -2.771838510108815,
+      "price": 78223.5625,
+      "pct": -2.53431214844011,
       "prefix": "$",
       "is_yield": false,
       "hist": [
@@ -6663,7 +6876,7 @@
         78565,
         79027,
         80258,
-        78033
+        78224
       ]
     },
     {
@@ -6885,8 +7098,8 @@
     {
       "label": "Digital Assets",
       "ticker": "BTC",
-      "pct": -2.771838510108815,
-      "price": 78032.9296875
+      "pct": -2.53431214844011,
+      "price": 78223.5625
     }
   ],
   "fundamentals": {
@@ -6957,6 +7170,12 @@
       ],
       "news": [
         {
+          "title": "Optimus Just Entered Production at Fremont. Here's What Changes for Tesla Investors",
+          "publisher": "Motley Fool",
+          "link": "https://www.fool.com/investing/2026/08/29/optimus-just-entered-production-at-fremont-heres-w/",
+          "when": "Aug 29"
+        },
+        {
           "title": "Meta Continues to Trade Jobs for AI: Robots Are \u201cComing For Us All\u201d",
           "publisher": "24/7 Wall St.",
           "link": "https://247wallst.com/investing/2026/08/29/meta-continues-to-trade-jobs-for-ai-robots-are-coming-for-us-all/",
@@ -6985,12 +7204,6 @@
           "publisher": "Motley Fool",
           "link": "https://www.fool.com/investing/2026/08/29/predict-tesla-stock-plummet-sp-500-bear-market/",
           "when": "Aug 29"
-        },
-        {
-          "title": "Elon Musk Calls Gavin Newsom's California High-Speed Rail Project a 'Big Scam' as Ron DeSantis Says Cost Is 'Mind Blowing'",
-          "publisher": "Benzinga",
-          "link": "https://www.yahoo.com/news/politics/articles/elon-musk-calls-gavin-newsoms-203121554.html",
-          "when": "Aug 28"
         }
       ]
     },
@@ -7185,27 +7398,27 @@
           "when": "Aug 28"
         },
         {
-          "title": "Thinking of Buying Alibaba Stock Now? Here's 1 Green Flag and 1 Red Flag.",
-          "publisher": "Motley Fool",
-          "link": "https://www.fool.com/investing/2026/08/29/thinking-of-buying-alibaba-stock-now-heres-one-gre/",
+          "title": "Why JEPQ\u2019s 10.7% Yield Looked Irresistible Until Nvidia Rallied",
+          "publisher": "24/7 Wall St.",
+          "link": "https://247wallst.com/investing/etf/2026/08/29/why-jepqs-10-7-yield-looked-irresistible-until-nvidia-rallied/",
           "when": "Aug 29"
         },
         {
-          "title": "Is D-Wave Quantum a Buy?",
+          "title": "Sam Altman Told Time Magazine, \"I Think It Is a Good Time to Slow Down\" on AI Model Development After Recent Safety Failures. What Would a Pace Change Mean for OpenAI's Growth Story Heading Into an IPO?",
           "publisher": "Motley Fool",
-          "link": "https://www.fool.com/investing/2026/08/29/is-d-wave-quantum-a-buy/",
+          "link": "https://www.fool.com/investing/2026/08/29/sam-altman-told-time-magazine-i-think-it-is-a-good/",
           "when": "Aug 29"
         },
         {
-          "title": "Novavax (NVDA) Following Updated Nuvaxovid Approval Faces A Wide Fair Value Debate",
-          "publisher": "Simply Wall St.",
-          "link": "https://finance.yahoo.com/healthcare/articles/novavax-nvda-following-updated-nuvaxovid-170451700.html",
+          "title": "Netflix's Profit Is at a Record and Its Stock Sits 35% Below Its High. Time to Buy the Stock?",
+          "publisher": "Motley Fool",
+          "link": "https://www.fool.com/investing/2026/08/29/netflix-s-profit-is-at-a-record-and-its-stock-sits-35-below-its-high-time-to-buy-the-stock/",
           "when": "Aug 29"
         },
         {
-          "title": "If a Stock Market Crash Is on the Way, History Says This Is the Smartest Thing Investors Can Do",
+          "title": "If You'd Invested $1,000 in McDonald's 25 Years Ago, Here's How Much You'd Have Today",
           "publisher": "Motley Fool",
-          "link": "https://www.fool.com/investing/2026/08/29/if-stock-market-crash-history-smart-investor/",
+          "link": "https://www.fool.com/investing/2026/08/29/if-youd-invested-1000-in-mcdonalds-25-years-ago/",
           "when": "Aug 29"
         }
       ]
@@ -7268,6 +7481,12 @@
       "flags": [],
       "news": [
         {
+          "title": "Amazon.com (AMZN) Triples AI Chip Orders As Robotaxi Supplier Network Expands",
+          "publisher": "Simply Wall St.",
+          "link": "https://finance.yahoo.com/technology/ai/articles/amazon-com-amzn-triples-ai-180950072.html",
+          "when": "Aug 29"
+        },
+        {
           "title": "Meta Continues to Trade Jobs for AI: Robots Are \u201cComing For Us All\u201d",
           "publisher": "24/7 Wall St.",
           "link": "https://247wallst.com/investing/2026/08/29/meta-continues-to-trade-jobs-for-ai-robots-are-coming-for-us-all/",
@@ -7286,22 +7505,16 @@
           "when": "Aug 29"
         },
         {
+          "title": "Project Tetromino Likely to Drive Operational Efficiency and Margin Expansion for Amazon Stock",
+          "publisher": "Barchart",
+          "link": "https://www.barchart.com/story/news/4336752/project-tetromino-likely-to-drive-operational-efficiency-and-margin-expansion-for-amazon-stock",
+          "when": "Aug 29"
+        },
+        {
           "title": "These 7 Stocks Are Analyst Favorites For Magnificent Earnings Growth; Amazon Holds Key Level",
           "publisher": "Investor's Business Daily",
           "link": "https://www.investors.com/research/best-stocks-seven-magnificent-stocks-earnings-growth/?src=A00220&yptr=yahoo",
           "when": "Aug 29"
-        },
-        {
-          "title": "Has Microsoft Stock Run Ahead Of Its AI Payoff?",
-          "publisher": "Trefis",
-          "link": "https://www.trefis.com/articles/613494/has-microsoft-stock-run-ahead-of-its-ai-payoff/2026-08-28",
-          "when": "Aug 28"
-        },
-        {
-          "title": "How Much Upside Can AAPL Stock's Growth Deliver?",
-          "publisher": "Trefis",
-          "link": "https://www.trefis.com/articles/613496/how-much-upside-can-aapl-stocks-growth-deliver/2026-08-28",
-          "when": "Aug 28"
         }
       ]
     },
@@ -8065,6 +8278,12 @@
           "when": "Aug 29"
         },
         {
+          "title": "Is Walmart Stock Underperforming the Nasdaq?",
+          "publisher": "Barchart",
+          "link": "https://www.barchart.com/story/news/4336742/is-walmart-stock-underperforming-the-nasdaq",
+          "when": "Aug 29"
+        },
+        {
           "title": "A Costco Special Dividend Could Be Coming, but Walmart Has Raised Its Dividend for 53 Consecutive Years. Here's the Better Buy Now.",
           "publisher": "Motley Fool",
           "link": "https://www.fool.com/investing/2026/08/28/a-costco-special-dividend-could-be-coming-but-walm/",
@@ -8074,12 +8293,6 @@
           "title": "Gap Inc. (GAP) Soars 12.9% on Q2 Profits, New Old Navy CEO; More Hedge Funds Buy In",
           "publisher": "Insider Monkey",
           "link": "https://finance.yahoo.com/markets/stocks/articles/gap-inc-gap-soars-12-005356416.html",
-          "when": "Aug 29"
-        },
-        {
-          "title": "Walmart To Pay $50M To Settle DOJ Lawsuit Over Invalid Opioid Prescriptions \u2014 WMT Stock In Focus",
-          "publisher": "Stocktwits",
-          "link": "https://stocktwits.com/news-articles/markets/equity/walmart-to-pay-50-m-to-settle-doj-lawsuit-over-invalid-opioid-prescriptions-wmt-stock-in-focus/cZYtxRmRJrR",
           "when": "Aug 29"
         }
       ]
@@ -8165,6 +8378,12 @@
           "when": "Aug 29"
         },
         {
+          "title": "Dear Apple Stock Fans, Mark Your Calendars for September 9",
+          "publisher": "Barchart",
+          "link": "https://www.barchart.com/story/news/4337040/dear-apple-stock-fans-mark-your-calendars-for-september-9",
+          "when": "Aug 29"
+        },
+        {
           "title": "Apple implements price hikes for its TV streaming service and 'One' subscription bundle",
           "publisher": "Fox Business",
           "link": "https://www.foxbusiness.com/technology/apple-implements-price-hikes-tv-streaming-service-one-subscription-bundle",
@@ -8174,12 +8393,6 @@
           "title": "Apple CEO Tim Cook Pays Tribute to Yayoi Kusama, the Legendary Artist Behind Iconic Pumpkin Sculptures and Polka-Dots",
           "publisher": "Benzinga",
           "link": "https://www.yahoo.com/entertainment/celebrity/articles/apple-ceo-tim-cook-pays-233105418.html",
-          "when": "Aug 28"
-        },
-        {
-          "title": "Apple Makes Costly Move Subscribers Won't Miss",
-          "publisher": "GuruFocus.com",
-          "link": "https://finance.yahoo.com/media-advertising/articles/apple-makes-costly-move-subscribers-222454691.html",
           "when": "Aug 28"
         }
       ]
@@ -8887,6 +9100,204 @@
         }
       ]
     },
+    "HIMS": {
+      "ok": true,
+      "error": null,
+      "ticker": "HIMS",
+      "company": "Hims & Hers Health, Inc.",
+      "cik": "0001773751",
+      "source": "SEC EDGAR \u2014 10-K / 10-Q filings",
+      "profile": {
+        "summary": "Hims & Hers Health, Inc. operates as a consumer-first health and wellness platform that connects consumers to licensed healthcare professionals in the United States, the United Kingdom, Canada, Germany, the Republic of Ireland, France, Spain, and internationally. The company offers a range of curated prescription and non-prescription health and wellness products and services available to purchase on its websites and mobile application directly by customers. It also provides personalized health and wellness products; over-the-counter drug and device products, cosmetics, and supplement products primarily focusing on general wellness, skincare, sexual health and wellness, and hair care under the Hims & Hers brand name; and laboratory testing services to measure a set of biomarkers. Additionally, it offers medical consultation, post-consultation support services, and delivery of laboratory testing results services. Further, the company provides treatments and products for various chronic conditions related to hormone health, weight loss, dermatology, and mental health. The company offers its products through retail partnerships, in stores, and online. Hims & Hers Health, Inc. is based in San Francisco, California.",
+        "sector": "Healthcare",
+        "industry": "Drug Manufacturers - Specialty & Generic",
+        "country": "United States",
+        "employees": 2442,
+        "website": "https://www.hims.com",
+        "sic": "Services-Offices & Clinics of  Doctors of  Medicine",
+        "summary_short": "Hims & Hers Health, Inc. operates as a consumer-first health and wellness platform that connects consumers to licensed healthcare professionals in the United States, the United Kingdom, Canada, Germany, the Republic of Ireland, France, Spain, and internationally. The company offers a range of curated prescription and non-prescription health and wellness products and services available to purchase on its websites and mobile application directly by customers.",
+        "summary_ai": false
+      },
+      "metrics": {
+        "revenue": 2347637000.0,
+        "revenue_prev": 1476514000.0,
+        "net_income": 128365000.0,
+        "net_income_prev": 126038000.0,
+        "rev_growth": 0.5899862784910945,
+        "ni_growth": 0.01846268585664641,
+        "gross_margin": 0.7383500941585092,
+        "op_margin": 0.04498693792950103,
+        "net_margin": 0.054678385116608746,
+        "roe": 0.39610024932731,
+        "fcf": 57406000.0,
+        "fcf_margin": 0.02445267304953875,
+        "debt_to_equity": 0.0,
+        "current_ratio": 0.9335107387111389,
+        "interest_coverage": null,
+        "eps": 0.51,
+        "shares": 0.0,
+        "share_change": 0.09045974695644432,
+        "capex": 242600000.0,
+        "rnd": null,
+        "market_cap": null,
+        "pe": 56.549019607843135,
+        "fcf_yield": null,
+        "peg": 30.62881535596619
+      },
+      "groups": {
+        "Valuation": {
+          "verdict": "\ud83d\udfe1"
+        },
+        "Quality": {
+          "verdict": "\ud83d\udfe2"
+        },
+        "Health": {
+          "verdict": "\ud83d\udd34"
+        }
+      },
+      "flags": [
+        {
+          "sev": "\ud83d\udd34",
+          "text": "Liquidity tight \u2014 current ratio 0.93"
+        },
+        {
+          "sev": "\ud83d\udfe1",
+          "text": "Dilution \u2014 shares +9% YoY"
+        },
+        {
+          "sev": "\ud83d\udfe1",
+          "text": "Rich valuation \u2014 P/E 57"
+        }
+      ],
+      "news": [
+        {
+          "title": "Hims & Hers Health (HIMS) Stock Looks Like A Bargain On Sales But Mixed On Broader Checks",
+          "publisher": "Simply Wall St.",
+          "link": "https://finance.yahoo.com/healthcare/articles/hims-hers-health-hims-stock-141503974.html",
+          "when": "Aug 29"
+        },
+        {
+          "title": "Hims & Hers Health (HIMS) Is Down 14.6% After Raising Guidance Amid Privacy Scrutiny - What's Changed",
+          "publisher": "Simply Wall St.",
+          "link": "https://finance.yahoo.com/healthcare/articles/hims-hers-health-hims-down-090725133.html",
+          "when": "Aug 29"
+        },
+        {
+          "title": "Hims & Hers (HIMS) CEO Says the FTC Doesn\u2019t Understand His Own Company",
+          "publisher": "Insider Monkey",
+          "link": "https://finance.yahoo.com/healthcare/articles/hims-hers-hims-ceo-says-174726738.html",
+          "when": "Aug 28"
+        },
+        {
+          "title": "Hims & Hers\u00a0(HIMS)\u2019 Weight-Loss Plans Results Penalties Over Visa (V) Credit Card Disputes",
+          "publisher": "Insider Monkey",
+          "link": "https://finance.yahoo.com/healthcare/articles/hims-hers-hims-weight-loss-150019404.html",
+          "when": "Aug 28"
+        },
+        {
+          "title": "Unpacking Q2 Earnings: Hims & Hers Health (NYSE:HIMS) In The Context Of Other Healthcare Technology Stocks",
+          "publisher": "StockStory",
+          "link": "https://finance.yahoo.com/healthcare/articles/unpacking-q2-earnings-hims-hers-181707978.html",
+          "when": "Aug 27"
+        },
+        {
+          "title": "How GLP-1 Sales Could Play Out for Hims & Hers",
+          "publisher": "Barrons.com",
+          "link": "https://www.barrons.com/articles/hims-hers-stock-glp-1-obesity-drugs-8c2b9569?siteid=yhoof2&yptr=yahoo",
+          "when": "Aug 25"
+        }
+      ]
+    },
+    "NWBO": {
+      "ok": true,
+      "error": null,
+      "ticker": "NWBO",
+      "company": "NORTHWEST BIOTHERAPEUTICS INC",
+      "cik": "0001072379",
+      "source": "SEC EDGAR \u2014 10-K / 10-Q filings",
+      "profile": {
+        "summary": "Northwest Biotherapeutics, Inc., a biotechnology company, engages in the development of personalized immune therapies for cancer. The company develops DCVax, a platform technology which uses activated dendritic cells to mobilize a patient's own immune system to attack cancer. It also engages in the development of its lead product candidate DCVax-L in Phase III trials for glioblastoma multiforme brain cancer. In addition, the company develops DCVax-Direct in Phase I trials to treat inoperable solid tumors. Northwest Biotherapeutics, Inc. was founded in 1996 and is headquartered in Bethesda, Maryland.",
+        "sector": "Healthcare",
+        "industry": "Biotechnology",
+        "country": "United States",
+        "employees": 105,
+        "website": "https://www.nwbio.com",
+        "sic": "Pharmaceutical Preparations",
+        "summary_short": "Northwest Biotherapeutics, Inc., a biotechnology company, engages in the development of personalized immune therapies for cancer. The company develops DCVax, a platform technology which uses activated dendritic cells to mobilize a patient's own immune system to attack cancer. It also engages in the development of its lead product candidate DCVax-L in Phase III trials for glioblastoma multiforme brain cancer.",
+        "summary_ai": false
+      },
+      "metrics": {
+        "revenue": 1378000.0,
+        "revenue_prev": 1382000.0,
+        "net_income": -60162000.0,
+        "net_income_prev": -83778000.0,
+        "rev_growth": -0.002894356005788712,
+        "ni_growth": 0.2818878464513357,
+        "gross_margin": null,
+        "op_margin": -43.47895500725689,
+        "net_margin": -43.658925979680696,
+        "roe": 1.3317837694248904,
+        "fcf": -46267000.0,
+        "fcf_margin": -33.575471698113205,
+        "debt_to_equity": -1.1969938460176208,
+        "current_ratio": 0.03509106772821464,
+        "interest_coverage": -11.43178782675062,
+        "eps": -0.04,
+        "shares": 1669300000.0,
+        "share_change": 0.1726127944989563,
+        "capex": 1504000.0,
+        "rnd": 28785000.0,
+        "market_cap": 317167000.0,
+        "pe": null,
+        "fcf_yield": -0.14587583197495327,
+        "peg": null
+      },
+      "groups": {
+        "Valuation": {
+          "verdict": "\ud83d\udd34"
+        },
+        "Quality": {
+          "verdict": "\ud83d\udd34"
+        },
+        "Health": {
+          "verdict": "\ud83d\udd34"
+        }
+      },
+      "flags": [
+        {
+          "sev": "\ud83d\udd34",
+          "text": "Unprofitable \u2014 negative net margin"
+        },
+        {
+          "sev": "\ud83d\udd34",
+          "text": "Burning cash \u2014 negative free cash flow"
+        },
+        {
+          "sev": "\ud83d\udd34",
+          "text": "Liquidity tight \u2014 current ratio 0.04"
+        },
+        {
+          "sev": "\ud83d\udd34",
+          "text": "Thin interest coverage \u2014 -11.4\u00d7"
+        },
+        {
+          "sev": "\ud83d\udfe1",
+          "text": "Revenue shrinking \u2014 -0% YoY"
+        },
+        {
+          "sev": "\ud83d\udfe1",
+          "text": "Dilution \u2014 shares +17% YoY"
+        }
+      ],
+      "news": [
+        {
+          "title": "Northwest Biotherapeutics: Q3 Earnings Snapshot",
+          "publisher": "Associated Press Finance",
+          "link": "https://finance.yahoo.com/news/northwest-biotherapeutics-q3-earnings-snapshot-224708416.html",
+          "when": "Nov 14"
+        }
+      ]
+    },
     "SPCX": {
       "ok": true,
       "error": null,
@@ -8945,12 +9356,6 @@
       "flags": [],
       "news": [
         {
-          "title": "Some major IPOs may be coming, but does that make the market healthy?",
-          "publisher": "Yahoo Finance Video",
-          "link": "https://finance.yahoo.com/video/major-ipos-may-coming-does-195944831.html",
-          "when": "Aug 28"
-        },
-        {
           "title": "Anthropic Is Chasing a $2T Valuation \u2014 A Wall Street Veteran Says Its Biggest IPO Risk Isn't What Investors Think",
           "publisher": "Benzinga",
           "link": "https://finance.yahoo.com/technology/ai/articles/anthropic-chasing-2t-valuation-wall-163112726.html",
@@ -8978,6 +9383,12 @@
           "title": "SpaceX Stock has a buyer that can't say no",
           "publisher": "TheStreet",
           "link": "https://www.thestreet.com/investing/spacex-lockup-unlock-index-funds-401k-forced-buying",
+          "when": "Aug 29"
+        },
+        {
+          "title": "EXCLUSIVE: SpaceX May Lead the Launch Market, but Firefly CEO Says There's Still a Rocket Shortage",
+          "publisher": "Benzinga",
+          "link": "https://finance.yahoo.com/technology/articles/exclusive-spacex-may-lead-launch-151533490.html",
           "when": "Aug 29"
         }
       ]
@@ -62981,6 +63392,1603 @@
         }
       ]
     },
+    "HIMS": {
+      "spot": 28.84,
+      "expiries": [
+        {
+          "exp": "2026-09-04",
+          "dte": 6,
+          "calls": [
+            {
+              "k": 22.0,
+              "d": 0.999,
+              "b": 6.4,
+              "a": 8.1,
+              "iv": 267.4,
+              "oi": 21
+            },
+            {
+              "k": 23.0,
+              "d": 0.993,
+              "b": 5.4,
+              "a": 6.1,
+              "iv": 116.6,
+              "oi": 143
+            },
+            {
+              "k": 23.5,
+              "d": 0.991,
+              "b": 4.95,
+              "a": 6.6,
+              "iv": 226.2,
+              "oi": 2
+            },
+            {
+              "k": 24.0,
+              "d": 0.979,
+              "b": 4.45,
+              "a": 5.9,
+              "iv": 195.7,
+              "oi": 134
+            },
+            {
+              "k": 24.5,
+              "d": 0.97,
+              "b": 3.95,
+              "a": 5.05,
+              "iv": 152.0,
+              "oi": 5
+            },
+            {
+              "k": 25.0,
+              "d": 0.948,
+              "b": 3.5,
+              "a": 4.15,
+              "iv": 88.8,
+              "oi": 74
+            },
+            {
+              "k": 25.5,
+              "d": 0.922,
+              "b": 3.05,
+              "a": 4.05,
+              "iv": 128.8,
+              "oi": 7
+            },
+            {
+              "k": 26.0,
+              "d": 0.89,
+              "b": 2.59,
+              "a": 3.3,
+              "iv": 95.8,
+              "oi": 29
+            },
+            {
+              "k": 26.5,
+              "d": 0.844,
+              "b": 2.19,
+              "a": 3.15,
+              "iv": 112.9,
+              "oi": 3
+            },
+            {
+              "k": 27.0,
+              "d": 0.791,
+              "b": 1.96,
+              "a": 2.34,
+              "iv": 59.2,
+              "oi": 63
+            },
+            {
+              "k": 27.5,
+              "d": 0.726,
+              "b": 1.7,
+              "a": 1.95,
+              "iv": 65.2,
+              "oi": 135
+            },
+            {
+              "k": 28.0,
+              "d": 0.652,
+              "b": 1.37,
+              "a": 1.6,
+              "iv": 64.0,
+              "oi": 168
+            },
+            {
+              "k": 28.5,
+              "d": 0.573,
+              "b": 1.14,
+              "a": 1.21,
+              "iv": 64.6,
+              "oi": 77
+            },
+            {
+              "k": 29.0,
+              "d": 0.491,
+              "b": 0.88,
+              "a": 0.96,
+              "iv": 63.6,
+              "oi": 274
+            },
+            {
+              "k": 29.5,
+              "d": 0.412,
+              "b": 0.69,
+              "a": 0.79,
+              "iv": 64.2,
+              "oi": 162
+            },
+            {
+              "k": 30.0,
+              "d": 0.337,
+              "b": 0.53,
+              "a": 0.59,
+              "iv": 63.8,
+              "oi": 1909
+            },
+            {
+              "k": 30.5,
+              "d": 0.271,
+              "b": 0.4,
+              "a": 0.46,
+              "iv": 64.5,
+              "oi": 578
+            },
+            {
+              "k": 31.0,
+              "d": 0.213,
+              "b": 0.3,
+              "a": 0.38,
+              "iv": 66.1,
+              "oi": 620
+            },
+            {
+              "k": 31.5,
+              "d": 0.167,
+              "b": 0.18,
+              "a": 0.27,
+              "iv": 64.0,
+              "oi": 2427
+            },
+            {
+              "k": 32.0,
+              "d": 0.129,
+              "b": 0.15,
+              "a": 0.2,
+              "iv": 65.7,
+              "oi": 1675
+            },
+            {
+              "k": 32.5,
+              "d": 0.1,
+              "b": 0.12,
+              "a": 0.15,
+              "iv": 67.3,
+              "oi": 220
+            },
+            {
+              "k": 33.0,
+              "d": 0.076,
+              "b": 0.1,
+              "a": 0.11,
+              "iv": 68.8,
+              "oi": 677
+            },
+            {
+              "k": 33.5,
+              "d": 0.059,
+              "b": 0.07,
+              "a": 0.1,
+              "iv": 71.2,
+              "oi": 2391
+            },
+            {
+              "k": 34.0,
+              "d": 0.042,
+              "b": 0.04,
+              "a": 0.16,
+              "iv": 76.0,
+              "oi": 1553
+            },
+            {
+              "k": 34.5,
+              "d": 0.026,
+              "b": 0.0,
+              "a": 0.12,
+              "iv": 87.8,
+              "oi": 248
+            },
+            {
+              "k": 35.0,
+              "d": 0.022,
+              "b": 0.04,
+              "a": 0.05,
+              "iv": 75.6,
+              "oi": 1541
+            },
+            {
+              "k": 35.5,
+              "d": 0.011,
+              "b": 0.0,
+              "a": 0.25,
+              "iv": 117.6,
+              "oi": 81
+            },
+            {
+              "k": 36.0,
+              "d": 0.009,
+              "b": 0.03,
+              "a": 0.09,
+              "iv": 81.9,
+              "oi": 1001
+            }
+          ],
+          "puts": [
+            {
+              "k": 22.0,
+              "d": -0.001,
+              "b": 0.0,
+              "a": 0.14,
+              "iv": 132.2,
+              "oi": 366
+            },
+            {
+              "k": 23.0,
+              "d": -0.007,
+              "b": 0.01,
+              "a": 0.02,
+              "iv": 75.8,
+              "oi": 674
+            },
+            {
+              "k": 23.5,
+              "d": -0.009,
+              "b": 0.0,
+              "a": 0.11,
+              "iv": 100.1,
+              "oi": 83
+            },
+            {
+              "k": 24.0,
+              "d": -0.021,
+              "b": 0.01,
+              "a": 0.07,
+              "iv": 71.5,
+              "oi": 432
+            },
+            {
+              "k": 24.5,
+              "d": -0.03,
+              "b": 0.0,
+              "a": 0.07,
+              "iv": 75.5,
+              "oi": 132
+            },
+            {
+              "k": 25.0,
+              "d": -0.052,
+              "b": 0.05,
+              "a": 0.07,
+              "iv": 65.5,
+              "oi": 932
+            },
+            {
+              "k": 25.5,
+              "d": -0.078,
+              "b": 0.05,
+              "a": 0.11,
+              "iv": 61.7,
+              "oi": 123
+            },
+            {
+              "k": 26.0,
+              "d": -0.11,
+              "b": 0.13,
+              "a": 0.17,
+              "iv": 64.7,
+              "oi": 498
+            },
+            {
+              "k": 26.5,
+              "d": -0.156,
+              "b": 0.05,
+              "a": 0.25,
+              "iv": 54.3,
+              "oi": 85
+            },
+            {
+              "k": 27.0,
+              "d": -0.209,
+              "b": 0.28,
+              "a": 0.34,
+              "iv": 61.6,
+              "oi": 1036
+            },
+            {
+              "k": 27.5,
+              "d": -0.274,
+              "b": 0.41,
+              "a": 0.52,
+              "iv": 61.4,
+              "oi": 377
+            },
+            {
+              "k": 28.0,
+              "d": -0.348,
+              "b": 0.57,
+              "a": 0.65,
+              "iv": 62.0,
+              "oi": 941
+            },
+            {
+              "k": 28.5,
+              "d": -0.427,
+              "b": 0.75,
+              "a": 0.88,
+              "iv": 61.7,
+              "oi": 338
+            },
+            {
+              "k": 29.0,
+              "d": -0.508,
+              "b": 1.01,
+              "a": 1.13,
+              "iv": 61.9,
+              "oi": 1596
+            },
+            {
+              "k": 29.5,
+              "d": -0.588,
+              "b": 1.3,
+              "a": 1.43,
+              "iv": 62.2,
+              "oi": 176
+            },
+            {
+              "k": 30.0,
+              "d": -0.663,
+              "b": 1.62,
+              "a": 1.8,
+              "iv": 63.3,
+              "oi": 596
+            },
+            {
+              "k": 30.5,
+              "d": -0.73,
+              "b": 1.94,
+              "a": 2.3,
+              "iv": 66.6,
+              "oi": 125
+            },
+            {
+              "k": 31.0,
+              "d": -0.787,
+              "b": 2.37,
+              "a": 2.78,
+              "iv": 71.4,
+              "oi": 215
+            },
+            {
+              "k": 31.5,
+              "d": -0.833,
+              "b": 2.72,
+              "a": 3.3,
+              "iv": 71.5,
+              "oi": 283
+            },
+            {
+              "k": 32.0,
+              "d": -0.871,
+              "b": 3.15,
+              "a": 3.7,
+              "iv": 70.0,
+              "oi": 483
+            },
+            {
+              "k": 32.5,
+              "d": -0.9,
+              "b": 3.6,
+              "a": 4.2,
+              "iv": 108.1,
+              "oi": 142
+            },
+            {
+              "k": 33.0,
+              "d": -0.924,
+              "b": 4.05,
+              "a": 4.65,
+              "iv": 111.5,
+              "oi": 157
+            },
+            {
+              "k": 33.5,
+              "d": -0.941,
+              "b": 4.55,
+              "a": 5.15,
+              "iv": 118.7,
+              "oi": 70
+            },
+            {
+              "k": 34.0,
+              "d": -0.958,
+              "b": 5.0,
+              "a": 5.65,
+              "iv": 125.6,
+              "oi": 52
+            },
+            {
+              "k": 34.5,
+              "d": -0.974,
+              "b": 4.8,
+              "a": 6.25,
+              "iv": 141.5,
+              "oi": 28
+            },
+            {
+              "k": 35.0,
+              "d": -0.978,
+              "b": 5.55,
+              "a": 6.7,
+              "iv": 143.7,
+              "oi": 97
+            },
+            {
+              "k": 35.5,
+              "d": -0.989,
+              "b": 5.85,
+              "a": 7.2,
+              "iv": 150.2,
+              "oi": 30
+            },
+            {
+              "k": 36.0,
+              "d": -0.991,
+              "b": 6.55,
+              "a": 7.6,
+              "iv": 146.6,
+              "oi": 17
+            }
+          ]
+        },
+        {
+          "exp": "2026-09-18",
+          "dte": 20,
+          "calls": [
+            {
+              "k": 22.0,
+              "d": 0.954,
+              "b": 6.5,
+              "a": 8.15,
+              "iv": 154.3,
+              "oi": 270
+            },
+            {
+              "k": 23.0,
+              "d": 0.925,
+              "b": 5.6,
+              "a": 6.45,
+              "iv": 98.2,
+              "oi": 325
+            },
+            {
+              "k": 24.0,
+              "d": 0.887,
+              "b": 4.7,
+              "a": 5.6,
+              "iv": 94.0,
+              "oi": 350
+            },
+            {
+              "k": 25.0,
+              "d": 0.839,
+              "b": 3.9,
+              "a": 4.6,
+              "iv": 80.5,
+              "oi": 5791
+            },
+            {
+              "k": 26.0,
+              "d": 0.778,
+              "b": 3.35,
+              "a": 3.85,
+              "iv": 66.6,
+              "oi": 634
+            },
+            {
+              "k": 27.0,
+              "d": 0.703,
+              "b": 2.69,
+              "a": 3.0,
+              "iv": 64.2,
+              "oi": 1342
+            },
+            {
+              "k": 27.5,
+              "d": 0.661,
+              "b": 2.07,
+              "a": 2.66,
+              "iv": 57.3,
+              "oi": 0
+            },
+            {
+              "k": 28.0,
+              "d": 0.616,
+              "b": 2.15,
+              "a": 2.32,
+              "iv": 63.7,
+              "oi": 1100
+            },
+            {
+              "k": 28.5,
+              "d": 0.57,
+              "b": 1.89,
+              "a": 2.07,
+              "iv": 64.1,
+              "oi": 16
+            },
+            {
+              "k": 29.0,
+              "d": 0.524,
+              "b": 1.66,
+              "a": 1.85,
+              "iv": 64.7,
+              "oi": 706
+            },
+            {
+              "k": 29.5,
+              "d": 0.479,
+              "b": 1.46,
+              "a": 1.58,
+              "iv": 64.1,
+              "oi": 73
+            },
+            {
+              "k": 30.0,
+              "d": 0.435,
+              "b": 1.3,
+              "a": 1.39,
+              "iv": 65.0,
+              "oi": 2679
+            },
+            {
+              "k": 30.5,
+              "d": 0.395,
+              "b": 1.08,
+              "a": 1.24,
+              "iv": 64.8,
+              "oi": 51
+            },
+            {
+              "k": 31.0,
+              "d": 0.357,
+              "b": 0.94,
+              "a": 1.05,
+              "iv": 65.9,
+              "oi": 841
+            },
+            {
+              "k": 31.5,
+              "d": 0.323,
+              "b": 0.82,
+              "a": 1.11,
+              "iv": 69.0,
+              "oi": 197
+            },
+            {
+              "k": 32.0,
+              "d": 0.292,
+              "b": 0.71,
+              "a": 0.85,
+              "iv": 67.3,
+              "oi": 1415
+            },
+            {
+              "k": 32.5,
+              "d": 0.262,
+              "b": 0.61,
+              "a": 0.9,
+              "iv": 70.4,
+              "oi": 122
+            },
+            {
+              "k": 33.0,
+              "d": 0.239,
+              "b": 0.54,
+              "a": 0.62,
+              "iv": 67.2,
+              "oi": 4674
+            },
+            {
+              "k": 33.5,
+              "d": 0.215,
+              "b": 0.36,
+              "a": 0.72,
+              "iv": 69.1,
+              "oi": 51
+            },
+            {
+              "k": 34.0,
+              "d": 0.197,
+              "b": 0.26,
+              "a": 0.58,
+              "iv": 66.7,
+              "oi": 3573
+            },
+            {
+              "k": 34.5,
+              "d": 0.174,
+              "b": 0.34,
+              "a": 0.6,
+              "iv": 73.4,
+              "oi": 641
+            },
+            {
+              "k": 35.0,
+              "d": 0.159,
+              "b": 0.34,
+              "a": 0.36,
+              "iv": 70.5,
+              "oi": 6731
+            },
+            {
+              "k": 35.5,
+              "d": 0.14,
+              "b": 0.25,
+              "a": 0.51,
+              "iv": 75.3,
+              "oi": 754
+            },
+            {
+              "k": 36.0,
+              "d": 0.13,
+              "b": 0.24,
+              "a": 0.28,
+              "iv": 71.2,
+              "oi": 1230
+            }
+          ],
+          "puts": [
+            {
+              "k": 22.0,
+              "d": -0.046,
+              "b": 0.07,
+              "a": 0.11,
+              "iv": 69.8,
+              "oi": 1528
+            },
+            {
+              "k": 23.0,
+              "d": -0.075,
+              "b": 0.07,
+              "a": 0.17,
+              "iv": 63.7,
+              "oi": 2366
+            },
+            {
+              "k": 24.0,
+              "d": -0.113,
+              "b": 0.18,
+              "a": 0.22,
+              "iv": 62.4,
+              "oi": 1031
+            },
+            {
+              "k": 25.0,
+              "d": -0.161,
+              "b": 0.35,
+              "a": 0.4,
+              "iv": 63.9,
+              "oi": 3393
+            },
+            {
+              "k": 26.0,
+              "d": -0.222,
+              "b": 0.56,
+              "a": 0.66,
+              "iv": 64.3,
+              "oi": 2832
+            },
+            {
+              "k": 27.0,
+              "d": -0.297,
+              "b": 0.84,
+              "a": 0.95,
+              "iv": 63.2,
+              "oi": 2672
+            },
+            {
+              "k": 27.5,
+              "d": -0.339,
+              "b": 1.04,
+              "a": 1.15,
+              "iv": 63.7,
+              "oi": 146
+            },
+            {
+              "k": 28.0,
+              "d": -0.384,
+              "b": 1.26,
+              "a": 1.37,
+              "iv": 64.0,
+              "oi": 1905
+            },
+            {
+              "k": 28.5,
+              "d": -0.43,
+              "b": 1.41,
+              "a": 1.62,
+              "iv": 62.7,
+              "oi": 72
+            },
+            {
+              "k": 29.0,
+              "d": -0.476,
+              "b": 1.38,
+              "a": 1.92,
+              "iv": 58.3,
+              "oi": 1173
+            },
+            {
+              "k": 29.5,
+              "d": -0.521,
+              "b": 1.62,
+              "a": 2.21,
+              "iv": 57.8,
+              "oi": 1098
+            },
+            {
+              "k": 30.0,
+              "d": -0.565,
+              "b": 2.34,
+              "a": 2.49,
+              "iv": 65.0,
+              "oi": 3324
+            },
+            {
+              "k": 30.5,
+              "d": -0.605,
+              "b": 2.64,
+              "a": 2.87,
+              "iv": 65.7,
+              "oi": 127
+            },
+            {
+              "k": 31.0,
+              "d": -0.643,
+              "b": 2.96,
+              "a": 3.25,
+              "iv": 66.1,
+              "oi": 454
+            },
+            {
+              "k": 31.5,
+              "d": -0.677,
+              "b": 3.25,
+              "a": 3.65,
+              "iv": 65.2,
+              "oi": 110
+            },
+            {
+              "k": 32.0,
+              "d": -0.708,
+              "b": 3.7,
+              "a": 4.15,
+              "iv": 69.6,
+              "oi": 2745
+            },
+            {
+              "k": 32.5,
+              "d": -0.738,
+              "b": 4.1,
+              "a": 4.6,
+              "iv": 71.1,
+              "oi": 88
+            },
+            {
+              "k": 33.0,
+              "d": -0.761,
+              "b": 4.45,
+              "a": 5.0,
+              "iv": 69.7,
+              "oi": 425
+            },
+            {
+              "k": 33.5,
+              "d": -0.785,
+              "b": 4.15,
+              "a": 5.45,
+              "iv": 85.6,
+              "oi": 1
+            },
+            {
+              "k": 34.0,
+              "d": -0.803,
+              "b": 5.25,
+              "a": 5.9,
+              "iv": 68.9,
+              "oi": 647
+            },
+            {
+              "k": 34.5,
+              "d": -0.826,
+              "b": 4.85,
+              "a": 6.35,
+              "iv": 89.7,
+              "oi": 0
+            },
+            {
+              "k": 35.0,
+              "d": -0.841,
+              "b": 6.25,
+              "a": 6.85,
+              "iv": 75.7,
+              "oi": 5815
+            },
+            {
+              "k": 35.5,
+              "d": -0.86,
+              "b": 6.2,
+              "a": 7.3,
+              "iv": 95.4,
+              "oi": 1
+            },
+            {
+              "k": 36.0,
+              "d": -0.87,
+              "b": 6.9,
+              "a": 7.8,
+              "iv": 99.1,
+              "oi": 321
+            }
+          ]
+        },
+        {
+          "exp": "2026-09-25",
+          "dte": 27,
+          "calls": [
+            {
+              "k": 22.0,
+              "d": 0.951,
+              "b": 6.65,
+              "a": 8.25,
+              "iv": 139.1,
+              "oi": 5
+            },
+            {
+              "k": 23.0,
+              "d": 0.919,
+              "b": 5.65,
+              "a": 6.75,
+              "iv": 101.6,
+              "oi": 13
+            },
+            {
+              "k": 24.0,
+              "d": 0.873,
+              "b": 4.9,
+              "a": 5.95,
+              "iv": 98.2,
+              "oi": 26
+            },
+            {
+              "k": 25.0,
+              "d": 0.818,
+              "b": 4.1,
+              "a": 5.6,
+              "iv": 78.0,
+              "oi": 57
+            },
+            {
+              "k": 26.0,
+              "d": 0.752,
+              "b": 3.4,
+              "a": 4.15,
+              "iv": 65.4,
+              "oi": 14
+            },
+            {
+              "k": 27.0,
+              "d": 0.681,
+              "b": 2.71,
+              "a": 3.3,
+              "iv": 61.6,
+              "oi": 28
+            },
+            {
+              "k": 28.0,
+              "d": 0.606,
+              "b": 2.36,
+              "a": 2.67,
+              "iv": 64.7,
+              "oi": 122
+            },
+            {
+              "k": 29.0,
+              "d": 0.53,
+              "b": 1.9,
+              "a": 2.24,
+              "iv": 66.2,
+              "oi": 208
+            },
+            {
+              "k": 30.0,
+              "d": 0.457,
+              "b": 1.51,
+              "a": 1.7,
+              "iv": 64.8,
+              "oi": 218
+            },
+            {
+              "k": 31.0,
+              "d": 0.389,
+              "b": 1.18,
+              "a": 1.5,
+              "iv": 67.5,
+              "oi": 81
+            },
+            {
+              "k": 32.0,
+              "d": 0.328,
+              "b": 0.93,
+              "a": 1.24,
+              "iv": 68.8,
+              "oi": 167
+            },
+            {
+              "k": 33.0,
+              "d": 0.274,
+              "b": 0.73,
+              "a": 1.05,
+              "iv": 70.3,
+              "oi": 325
+            },
+            {
+              "k": 34.0,
+              "d": 0.228,
+              "b": 0.58,
+              "a": 0.83,
+              "iv": 70.8,
+              "oi": 279
+            },
+            {
+              "k": 35.0,
+              "d": 0.189,
+              "b": 0.46,
+              "a": 0.59,
+              "iv": 69.9,
+              "oi": 399
+            },
+            {
+              "k": 36.0,
+              "d": 0.155,
+              "b": 0.4,
+              "a": 0.55,
+              "iv": 73.7,
+              "oi": 406
+            }
+          ],
+          "puts": [
+            {
+              "k": 22.0,
+              "d": -0.049,
+              "b": 0.08,
+              "a": 0.16,
+              "iv": 63.8,
+              "oi": 132
+            },
+            {
+              "k": 23.0,
+              "d": -0.081,
+              "b": 0.01,
+              "a": 0.25,
+              "iv": 51.7,
+              "oi": 150
+            },
+            {
+              "k": 24.0,
+              "d": -0.127,
+              "b": 0.26,
+              "a": 0.43,
+              "iv": 63.3,
+              "oi": 446
+            },
+            {
+              "k": 25.0,
+              "d": -0.182,
+              "b": 0.47,
+              "a": 0.59,
+              "iv": 63.6,
+              "oi": 514
+            },
+            {
+              "k": 26.0,
+              "d": -0.247,
+              "b": 0.77,
+              "a": 0.88,
+              "iv": 64.2,
+              "oi": 305
+            },
+            {
+              "k": 27.0,
+              "d": -0.319,
+              "b": 1.1,
+              "a": 1.3,
+              "iv": 65.3,
+              "oi": 514
+            },
+            {
+              "k": 28.0,
+              "d": -0.395,
+              "b": 1.53,
+              "a": 1.73,
+              "iv": 65.6,
+              "oi": 341
+            },
+            {
+              "k": 29.0,
+              "d": -0.47,
+              "b": 1.86,
+              "a": 2.18,
+              "iv": 61.8,
+              "oi": 178
+            },
+            {
+              "k": 30.0,
+              "d": -0.543,
+              "b": 2.6,
+              "a": 2.91,
+              "iv": 66.7,
+              "oi": 262
+            },
+            {
+              "k": 31.0,
+              "d": -0.611,
+              "b": 3.25,
+              "a": 3.6,
+              "iv": 67.4,
+              "oi": 415
+            },
+            {
+              "k": 32.0,
+              "d": -0.672,
+              "b": 3.9,
+              "a": 4.45,
+              "iv": 68.7,
+              "oi": 101
+            },
+            {
+              "k": 33.0,
+              "d": -0.726,
+              "b": 4.75,
+              "a": 5.25,
+              "iv": 70.9,
+              "oi": 120
+            },
+            {
+              "k": 34.0,
+              "d": -0.772,
+              "b": 5.55,
+              "a": 6.15,
+              "iv": 72.5,
+              "oi": 118
+            },
+            {
+              "k": 35.0,
+              "d": -0.811,
+              "b": 5.6,
+              "a": 7.05,
+              "iv": 88.7,
+              "oi": 19
+            },
+            {
+              "k": 36.0,
+              "d": -0.845,
+              "b": 6.4,
+              "a": 7.95,
+              "iv": 91.6,
+              "oi": 3
+            }
+          ]
+        },
+        {
+          "exp": "2026-10-16",
+          "dte": 48,
+          "calls": [
+            {
+              "k": 22.0,
+              "d": 0.897,
+              "b": 6.95,
+              "a": 7.8,
+              "iv": 85.8,
+              "oi": 186
+            },
+            {
+              "k": 23.0,
+              "d": 0.861,
+              "b": 6.2,
+              "a": 6.85,
+              "iv": 63.8,
+              "oi": 255
+            },
+            {
+              "k": 24.0,
+              "d": 0.819,
+              "b": 5.45,
+              "a": 6.35,
+              "iv": 69.6,
+              "oi": 307
+            },
+            {
+              "k": 25.0,
+              "d": 0.771,
+              "b": 4.7,
+              "a": 5.3,
+              "iv": 64.0,
+              "oi": 5387
+            },
+            {
+              "k": 26.0,
+              "d": 0.719,
+              "b": 4.35,
+              "a": 4.6,
+              "iv": 68.1,
+              "oi": 360
+            },
+            {
+              "k": 27.0,
+              "d": 0.663,
+              "b": 3.7,
+              "a": 4.25,
+              "iv": 70.4,
+              "oi": 290
+            },
+            {
+              "k": 28.0,
+              "d": 0.606,
+              "b": 3.15,
+              "a": 3.45,
+              "iv": 66.8,
+              "oi": 379
+            },
+            {
+              "k": 29.0,
+              "d": 0.55,
+              "b": 2.8,
+              "a": 2.93,
+              "iv": 67.9,
+              "oi": 756
+            },
+            {
+              "k": 30.0,
+              "d": 0.495,
+              "b": 2.36,
+              "a": 2.5,
+              "iv": 68.2,
+              "oi": 1642
+            },
+            {
+              "k": 31.0,
+              "d": 0.445,
+              "b": 2.02,
+              "a": 2.2,
+              "iv": 68.8,
+              "oi": 2066
+            },
+            {
+              "k": 32.0,
+              "d": 0.398,
+              "b": 1.72,
+              "a": 1.84,
+              "iv": 68.7,
+              "oi": 1309
+            },
+            {
+              "k": 33.0,
+              "d": 0.356,
+              "b": 1.45,
+              "a": 1.63,
+              "iv": 69.7,
+              "oi": 1123
+            },
+            {
+              "k": 34.0,
+              "d": 0.318,
+              "b": 1.24,
+              "a": 1.35,
+              "iv": 69.6,
+              "oi": 3401
+            },
+            {
+              "k": 35.0,
+              "d": 0.284,
+              "b": 1.06,
+              "a": 1.14,
+              "iv": 70.0,
+              "oi": 2399
+            },
+            {
+              "k": 36.0,
+              "d": 0.252,
+              "b": 0.88,
+              "a": 1.02,
+              "iv": 71.0,
+              "oi": 1054
+            }
+          ],
+          "puts": [
+            {
+              "k": 22.0,
+              "d": -0.103,
+              "b": 0.35,
+              "a": 0.44,
+              "iv": 66.7,
+              "oi": 2242
+            },
+            {
+              "k": 23.0,
+              "d": -0.14,
+              "b": 0.39,
+              "a": 0.65,
+              "iv": 64.2,
+              "oi": 451
+            },
+            {
+              "k": 24.0,
+              "d": -0.181,
+              "b": 0.6,
+              "a": 0.96,
+              "iv": 65.7,
+              "oi": 1009
+            },
+            {
+              "k": 25.0,
+              "d": -0.229,
+              "b": 1.06,
+              "a": 1.14,
+              "iv": 67.2,
+              "oi": 2288
+            },
+            {
+              "k": 26.0,
+              "d": -0.281,
+              "b": 1.41,
+              "a": 1.52,
+              "iv": 67.8,
+              "oi": 666
+            },
+            {
+              "k": 27.0,
+              "d": -0.337,
+              "b": 1.61,
+              "a": 1.91,
+              "iv": 64.9,
+              "oi": 520
+            },
+            {
+              "k": 28.0,
+              "d": -0.394,
+              "b": 2.11,
+              "a": 2.39,
+              "iv": 65.7,
+              "oi": 875
+            },
+            {
+              "k": 29.0,
+              "d": -0.45,
+              "b": 2.73,
+              "a": 2.9,
+              "iv": 66.9,
+              "oi": 1271
+            },
+            {
+              "k": 30.0,
+              "d": -0.505,
+              "b": 3.3,
+              "a": 3.55,
+              "iv": 67.7,
+              "oi": 1003
+            },
+            {
+              "k": 31.0,
+              "d": -0.555,
+              "b": 3.9,
+              "a": 4.2,
+              "iv": 67.6,
+              "oi": 504
+            },
+            {
+              "k": 32.0,
+              "d": -0.602,
+              "b": 4.6,
+              "a": 4.9,
+              "iv": 68.2,
+              "oi": 561
+            },
+            {
+              "k": 33.0,
+              "d": -0.644,
+              "b": 5.35,
+              "a": 5.65,
+              "iv": 69.0,
+              "oi": 524
+            },
+            {
+              "k": 34.0,
+              "d": -0.682,
+              "b": 6.1,
+              "a": 6.45,
+              "iv": 69.5,
+              "oi": 158
+            },
+            {
+              "k": 35.0,
+              "d": -0.716,
+              "b": 6.95,
+              "a": 7.45,
+              "iv": 73.2,
+              "oi": 443
+            },
+            {
+              "k": 36.0,
+              "d": -0.748,
+              "b": 7.8,
+              "a": 8.3,
+              "iv": 74.2,
+              "oi": 116
+            }
+          ]
+        },
+        {
+          "exp": "2026-11-20",
+          "dte": 83,
+          "calls": [
+            {
+              "k": 22.0,
+              "d": 0.831,
+              "b": 7.85,
+              "a": 8.95,
+              "iv": 78.0,
+              "oi": 1068
+            },
+            {
+              "k": 23.0,
+              "d": 0.799,
+              "b": 7.15,
+              "a": 8.85,
+              "iv": 85.1,
+              "oi": 300
+            },
+            {
+              "k": 24.0,
+              "d": 0.765,
+              "b": 6.45,
+              "a": 8.2,
+              "iv": 84.2,
+              "oi": 376
+            },
+            {
+              "k": 25.0,
+              "d": 0.73,
+              "b": 5.95,
+              "a": 6.85,
+              "iv": 77.1,
+              "oi": 460
+            },
+            {
+              "k": 26.0,
+              "d": 0.694,
+              "b": 5.4,
+              "a": 6.1,
+              "iv": 75.5,
+              "oi": 431
+            },
+            {
+              "k": 27.0,
+              "d": 0.658,
+              "b": 4.9,
+              "a": 5.95,
+              "iv": 79.5,
+              "oi": 182
+            },
+            {
+              "k": 28.0,
+              "d": 0.621,
+              "b": 4.55,
+              "a": 4.95,
+              "iv": 75.9,
+              "oi": 415
+            },
+            {
+              "k": 29.0,
+              "d": 0.585,
+              "b": 4.05,
+              "a": 4.7,
+              "iv": 77.3,
+              "oi": 242
+            },
+            {
+              "k": 30.0,
+              "d": 0.55,
+              "b": 3.75,
+              "a": 4.45,
+              "iv": 79.8,
+              "oi": 939
+            },
+            {
+              "k": 31.0,
+              "d": 0.515,
+              "b": 3.4,
+              "a": 4.1,
+              "iv": 80.3,
+              "oi": 260
+            },
+            {
+              "k": 32.0,
+              "d": 0.482,
+              "b": 3.0,
+              "a": 3.6,
+              "iv": 78.4,
+              "oi": 1307
+            },
+            {
+              "k": 33.0,
+              "d": 0.45,
+              "b": 2.68,
+              "a": 3.15,
+              "iv": 77.2,
+              "oi": 479
+            },
+            {
+              "k": 34.0,
+              "d": 0.42,
+              "b": 2.36,
+              "a": 2.98,
+              "iv": 78.0,
+              "oi": 449
+            },
+            {
+              "k": 35.0,
+              "d": 0.39,
+              "b": 2.3,
+              "a": 2.64,
+              "iv": 79.2,
+              "oi": 3076
+            },
+            {
+              "k": 36.0,
+              "d": 0.363,
+              "b": 1.97,
+              "a": 2.36,
+              "iv": 77.9,
+              "oi": 588
+            }
+          ],
+          "puts": [
+            {
+              "k": 22.0,
+              "d": -0.17,
+              "b": 0.97,
+              "a": 1.26,
+              "iv": 75.8,
+              "oi": 578
+            },
+            {
+              "k": 23.0,
+              "d": -0.201,
+              "b": 1.27,
+              "a": 1.6,
+              "iv": 76.5,
+              "oi": 453
+            },
+            {
+              "k": 24.0,
+              "d": -0.235,
+              "b": 1.52,
+              "a": 2.1,
+              "iv": 77.4,
+              "oi": 885
+            },
+            {
+              "k": 25.0,
+              "d": -0.27,
+              "b": 2.15,
+              "a": 2.31,
+              "iv": 78.3,
+              "oi": 3136
+            },
+            {
+              "k": 26.0,
+              "d": -0.306,
+              "b": 2.39,
+              "a": 2.9,
+              "iv": 78.1,
+              "oi": 267
+            },
+            {
+              "k": 27.0,
+              "d": -0.342,
+              "b": 2.7,
+              "a": 3.25,
+              "iv": 75.4,
+              "oi": 253
+            },
+            {
+              "k": 28.0,
+              "d": -0.379,
+              "b": 3.3,
+              "a": 3.85,
+              "iv": 77.3,
+              "oi": 417
+            },
+            {
+              "k": 29.0,
+              "d": -0.415,
+              "b": 3.8,
+              "a": 4.4,
+              "iv": 77.0,
+              "oi": 680
+            },
+            {
+              "k": 30.0,
+              "d": -0.45,
+              "b": 4.5,
+              "a": 5.0,
+              "iv": 78.4,
+              "oi": 942
+            },
+            {
+              "k": 31.0,
+              "d": -0.485,
+              "b": 5.15,
+              "a": 5.7,
+              "iv": 79.5,
+              "oi": 151
+            },
+            {
+              "k": 32.0,
+              "d": -0.518,
+              "b": 5.8,
+              "a": 6.45,
+              "iv": 80.4,
+              "oi": 526
+            },
+            {
+              "k": 33.0,
+              "d": -0.55,
+              "b": 6.4,
+              "a": 7.1,
+              "iv": 79.4,
+              "oi": 293
+            },
+            {
+              "k": 34.0,
+              "d": -0.58,
+              "b": 7.0,
+              "a": 7.8,
+              "iv": 78.4,
+              "oi": 86
+            },
+            {
+              "k": 35.0,
+              "d": -0.61,
+              "b": 8.1,
+              "a": 8.55,
+              "iv": 82.0,
+              "oi": 279
+            },
+            {
+              "k": 36.0,
+              "d": -0.637,
+              "b": 8.6,
+              "a": 9.35,
+              "iv": 79.9,
+              "oi": 75
+            }
+          ]
+        }
+      ]
+    },
     "SPCX": {
       "spot": 141.5,
       "expiries": [
@@ -81088,7 +83096,7 @@
       }
     ]
   },
-  "generated_at": "2026-08-29T17:47:24+00:00",
+  "generated_at": "2026-08-29T20:12:03+00:00",
   "universe": {
     "wheel": 20,
     "growth": 16,
@@ -81133,6 +83141,9 @@
       "PATH",
       "NBIS"
     ],
-    "user_names": []
+    "user_names": [
+      "HIMS",
+      "NWBO"
+    ]
   }
 }
