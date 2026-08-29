@@ -170,6 +170,7 @@ td.l{text-align:left}
 .acctbtn{background:var(--accent); color:#1a1205; border:0; border-radius:8px; padding:6px 12px; font-weight:700; font-size:12.5px; cursor:pointer; white-space:nowrap}
 .acctbtn[data-act="signout"]{background:var(--surface-2); color:var(--muted); border:1px solid var(--line)}
 .acctmsg{font-size:12.5px; margin-top:6px; color:var(--good)} .acctmsg.dim{color:var(--faint)}
+.wlnote{font-size:12.5px; color:var(--faint); margin:0 0 10px; padding:8px 11px; border-left:2px solid var(--accent); background:color-mix(in srgb,var(--accent) 6%,transparent); border-radius:0 8px 8px 0}
 .wlseg{display:inline-flex; border:1px solid var(--line); border-radius:9px; overflow:hidden; margin:2px 0 10px}
 .wlseg button{background:var(--surface); color:var(--muted); border:0; padding:6px 14px; font-family:inherit; font-size:13px; font-weight:600; cursor:pointer}
 .wlseg button+button{border-left:1px solid var(--line)}
@@ -1095,7 +1096,8 @@ function renderWatchTable(){
         ${TH('','200MA','Is price above its 200-day moving average?')}
         ${TH('','PCR','Put/Call ratio of open interest.')}
       </tr></thead><tbody>${rows}</tbody></table></div>`;
-  host.innerHTML = `<div class="acctwrap">${acct}${acctmsg}</div>` + seg + table;
+  const note = mine ? `<div class="wlnote">Your private list — separate from the public <b>All</b> tab (which still holds every default name). Add any ticker above; it syncs to your account.</div>` : '';
+  host.innerHTML = `<div class="acctwrap">${acct}${acctmsg}</div>` + seg + note + table;
   host.querySelectorAll('.wlseg button').forEach(b=>b.onclick=()=>wlView(b.dataset.v));
   host.querySelectorAll('.star').forEach(s=>{ const go=e=>{e.stopPropagation(); wlToggle(s.dataset.star);};
     s.onclick=go; s.onkeydown=e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();go(e);}};});
