@@ -176,6 +176,13 @@ td.l{text-align:left}
 .wlseg button+button{border-left:1px solid var(--line)}
 .wlseg button.on{background:var(--accent-soft); color:var(--accent)}
 .wlseg .c{font-family:"IBM Plex Mono"; font-size:11.5px; opacity:.85; margin-left:5px}
+/* header-wide universe switch — mirrors .wlseg, chooses which watchlist drives EVERY tab */
+.univtog{margin-left:18px; display:inline-flex; border:1px solid var(--line); border-radius:9px; overflow:hidden}
+.univtog button{background:var(--surface); color:var(--muted); border:0; padding:5px 12px; font-family:inherit; font-size:12px; font-weight:600; cursor:pointer; white-space:nowrap}
+.univtog button+button{border-left:1px solid var(--line)}
+.univtog button.on{background:var(--accent-soft); color:var(--accent)}
+.univtog .mono{font-family:"IBM Plex Mono"; font-size:11px; opacity:.85; margin-left:4px}
+.univtog:empty{display:none}
 .star{cursor:pointer; color:var(--faint); font-size:16px; line-height:1; user-select:none; transition:color .12s}
 .star.on,.star:hover{color:var(--accent)}
 td.star-c,th.star-c{width:1%; text-align:center; padding-left:12px; padding-right:2px}
@@ -383,6 +390,7 @@ th.thelp:hover{color:var(--text)} th.thelp:hover .thi{border-color:var(--accent)
     <a data-tab="fund">Fundamentals</a>
     <a data-tab="rules">Rules</a>
   </nav>
+  <span class="univtog" id="univtog"></span>
   <span class="tag" id="upd">loading…</span>
 </div></header>
 
@@ -689,37 +697,76 @@ function sparkPopup(key){
 
 fetch('data/signals.json',{cache:'no-store'}).then(r=>r.json()).then(J=>{
   DATA=J; SIGS=J.signals||[]; LEAPS=J.leaps||[]; MKT=J.market||{};
+  const dt=J.generated_at?new Date(J.generated_at):null;
+  document.getElementById('upd').textContent=dt?'updated '+dt.toUTCString().slice(17,22)+' UTC':'preview';
+  renderPulse(); renderMarket();     // market-wide, universe-independent — render once
+  initAuth();   // Supabase magic-link accounts + per-user watchlist (falls back to guest/localStorage)
+  rebuild();    // derive READY/LEAPQ/BYTK/CHAINROWS for the ACTIVE universe + render every universe-scoped tab
+  const first=(READY[0]&&READY[0].ticker)||(LEAPQ[0]&&LEAPQ[0].ticker)||Object.keys(BYTK)[0];
+  if(first) setSym(first);
+}).catch(e=>{document.getElementById('meta').textContent='could not load signals ('+e+')';});
+
+/* ── Active universe ─────────────────────────────────────────────────────────────
+   Every tab reads ONE ticker set — either the DEFAULT hand-curated watchlist, or a signed-in
+   (or guest) user's OWN list. The engine scans the union of both (build_json folds registered
+   users' Supabase tickers into the scan), so switching is a pure client-side filter: no extra
+   fetch. The default list is never mutated; a user's list is private to them. */
+let UNIV='default', ACT=null;
+try{ const _u=localStorage.getItem('oi_univ'); if(_u==='mine'||_u==='default') UNIV=_u; }catch(e){}
+function activeSet(){
+  if(UNIV==='mine') return new Set([...MYWL.picks].map(t=>String(t).toUpperCase()));
+  const u=(DATA&&DATA.universe)||{};
+  return new Set([...(u.wheel_names||[]),...(u.growth_names||[])].map(t=>String(t).toUpperCase()));
+}
+function setUniv(v){ v=(v==='mine'?'mine':'default'); if(v===UNIV) return;
+  UNIV=v; try{localStorage.setItem('oi_univ',v);}catch(e){} rebuild(); }
+function updateMeta(){
+  const u=(DATA&&DATA.universe)||{};
+  const total=(UNIV==='mine')?MYWL.picks.size:((u.wheel||0)+(u.growth||0));
+  const scope=(UNIV==='mine')?'your list':'default watchlist';
+  const el=document.getElementById('meta'); if(el)
+    el.innerHTML=`<b>${READY.length} setup${READY.length===1?'':'s'} ready</b> + <b>${LEAPQ.length} LEAP${LEAPQ.length===1?'':'s'}</b> from ${total} name${total===1?'':'s'} · ${scope}`;
+}
+// Header switch — only shown once there's a personal list to switch to (signed in, or guest picks).
+function renderUnivToggle(){
+  const host=document.getElementById('univtog'); if(!host) return;
+  if(!(MYWL.picks.size>0 || USER)){ host.innerHTML=''; return; }
+  const mine=UNIV==='mine';
+  host.innerHTML=`<button class="${mine?'':'on'}" data-u="default">Default</button>`
+               + `<button class="${mine?'on':''}" data-u="mine">★ My list <span class="mono">${MYWL.picks.size}</span></button>`;
+  host.querySelectorAll('button').forEach(b=>b.onclick=()=>setUniv(b.dataset.u));
+}
+// Rebuild every universe-scoped view from the raw scan, filtered to the active ticker set.
+function rebuild(){
+  if(!DATA) return;
+  ACT=activeSet();
+  const inU=t=>ACT.has(String(t||'').toUpperCase());
+  const sigs=SIGS.filter(s=>inU(s.ticker)), leaps=LEAPS.filter(l=>inU(l.ticker));
   // ready = actionable CSP/CC (right side of median + real setup)
-  READY=SIGS.filter(s=>s.qualifies!==false && s.median_ok===true && (s.timing_score||0)>=4)
+  READY=sigs.filter(s=>s.qualifies!==false && s.median_ok===true && (s.timing_score||0)>=4)
             .sort((a,b)=>(b.timing_score||0)-(a.timing_score||0)||(b.premium_pct||0)-(a.premium_pct||0));
-  LEAPQ=LEAPS.filter(l=>l.qualifies)
+  LEAPQ=leaps.filter(l=>l.qualifies)
              .sort((a,b)=>(b.timing_score||0)-(a.timing_score||0)||(a.carry_pct||99)-(b.carry_pct||99));
   // per-ticker merge for watchlist / deep dive
   BYTK={};
   const put=(t)=>BYTK[t]||(BYTK[t]={ticker:t,sector:'—'});
-  SIGS.forEach(s=>{const o=put(s.ticker); o.sector=s.sector||o.sector; o.pctb=s.pct_b;
+  sigs.forEach(s=>{const o=put(s.ticker); o.sector=s.sector||o.sector; o.pctb=s.pct_b;
     if(s.strategy==='CSP')o.csp=s; if(s.strategy==='CC')o.cc=s;});
-  LEAPS.forEach(l=>{const o=put(l.ticker); o.sector=(o.sector==='—'?l.sector:o.sector)||'—'; o.leap=l; o.rsi=l.rsi;});
+  leaps.forEach(l=>{const o=put(l.ticker); o.sector=(o.sector==='—'?l.sector:o.sector)||'—'; o.leap=l; o.rsi=l.rsi;});
   // chain rows = every engine-selected contract
   CHAINROWS=[];
-  SIGS.forEach(s=>{ if(s.qualifies===false) return;   // Options Chain = working strikes only
+  sigs.forEach(s=>{ if(s.qualifies===false) return;   // Options Chain = working strikes only
     CHAINROWS.push({tk:s.ticker,type:s.strategy,strike:s.strike,exp:s.expiry,dte:s.dte,
     delta:s.delta,mid:s.mid,iv:s.iv,oi:s.oi,spread:s.spread_pct,pop:s.pop,
     yield:(s.premium_pct!=null?s.premium_pct.toFixed(1)+'% prem':'')}); });
-  LEAPS.forEach(l=>CHAINROWS.push({tk:l.ticker,type:'LEAP',strike:l.strike,exp:l.expiry,dte:l.dte,
+  leaps.forEach(l=>CHAINROWS.push({tk:l.ticker,type:'LEAP',strike:l.strike,exp:l.expiry,dte:l.dte,
     delta:l.delta,mid:l.mid,iv:l.iv,oi:null,spread:null,pop:null,
     yield:(l.extrinsic_pct!=null?l.extrinsic_pct+'% time value · '+num(l.carry_pct,1,'%/yr'):'')}));
-
-  const dt=J.generated_at?new Date(J.generated_at):null;
-  document.getElementById('upd').textContent=dt?'updated '+dt.toUTCString().slice(17,22)+' UTC':'preview';
-  const u=J.universe||{};
-  document.getElementById('meta').innerHTML=`<b>${READY.length} setup${READY.length===1?'':'s'} ready</b> + <b>${LEAPQ.length} LEAP${LEAPQ.length===1?'':'s'}</b> from ${(u.wheel||0)+(u.growth||0)} names · full field in Watchlist`;
-
-  renderPulse(); renderReady(); renderLeaps(); renderOverview(); renderChain(); buildChips(); renderMarket();
-  initAuth();   // Supabase magic-link accounts + per-user watchlist (falls back to guest/localStorage)
-  const first=(READY[0]&&READY[0].ticker)||(LEAPQ[0]&&LEAPQ[0].ticker)||(SIGS[0]&&SIGS[0].ticker);
-  if(first) setSym(first);
-}).catch(e=>{document.getElementById('meta').textContent='could not load signals ('+e+')';});
+  updateMeta(); renderUnivToggle();
+  renderReady(); renderLeaps(); renderChain(); buildChips(); renderOverview();
+  const dv=document.getElementById('v-deep');
+  if(CUR && dv && !dv.hidden) renderDeep(CUR);   // keep an open TA breakdown in sync with the universe
+}
 
 /* ---------- market pulse (shared strip + market tab) ---------- */
 function ledFor(kind,v){ if(v==null)return '';
@@ -984,7 +1031,8 @@ function renderOverview(){
     `<div class="hcell" style="background:${heatColor(s.pct)}">${secIcon(s.label)}<div class="hl">${s.label}</div>
       <div class="hp mono">${s.pct==null?'—':(s.pct>=0?'+':'')+s.pct.toFixed(2)+'%'}</div></div>`).join('');
   renderWatchTable();
-  const ov=DATA.overview||[];
+  // IV / RSI snapshots follow the active universe too (default names, or the user's own list).
+  const ov=(DATA.overview||[]).filter(o=>!ACT||ACT.has(String(o.ticker||'').toUpperCase()));
   // IV zones (the wheel-engine "The Wheel Machine" scale): LOW 15–25 · MID 25–45 · HIGH 45+.
   const IV_LINES=[{v:15,label:'LOW · 15',color:'#22c55e'},{v:25,label:'MID · 25',color:'#eab308'},{v:45,label:'HIGH · 45',color:'#ef4444'}];
   // RSI gates: 30 = oversold (CSP) · 50 = trend midline (LEAP) · 70 = overbought (CC).
@@ -1004,12 +1052,12 @@ const WL_KEY='oi_mywatch';
 const SUPA_URL='https://asxwbjrripzbkcxbkect.supabase.co';
 const SUPA_KEY='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImFzeHdianJyaXB6YmtjeGJrZWN0Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODgwMTQ5OTgsImV4cCI6MjEwMzU5MDk5OH0.Uq8Fi9eH14CUC9dt2oB6OFVTH3tNdzanN9rKRNVcB4k';
 let SB=null, USER=null, AUTHMSG='';
-let MYWL={picks:new Set(), view:'all'};
+let MYWL={picks:new Set()};
 function loadLocalPicks(){ try{const j=JSON.parse(localStorage.getItem(WL_KEY)||'{}');
-  MYWL={picks:new Set(Array.isArray(j.picks)?j.picks:[]), view:(j.view==='mine'?'mine':'all')};}
-  catch(e){ MYWL={picks:new Set(), view:'all'}; } }
+  MYWL={picks:new Set(Array.isArray(j.picks)?j.picks:[])};}
+  catch(e){ MYWL={picks:new Set()}; } }
 loadLocalPicks();
-function wlSave(){ if(USER) return; try{localStorage.setItem(WL_KEY, JSON.stringify({picks:[...MYWL.picks], view:MYWL.view}));}catch(e){} }
+function wlSave(){ if(USER) return; try{localStorage.setItem(WL_KEY, JSON.stringify({picks:[...MYWL.picks]}));}catch(e){} }
 
 function initAuth(){
   if(!window.supabase || !SUPA_URL) return;                    // library blocked / unconfigured → guest-only
@@ -1018,7 +1066,7 @@ function initAuth(){
   SB.auth.onAuthStateChange((_e,session)=>onAuth(session));
 }
 function onAuth(session){ USER=session?session.user:null; AUTHMSG='';
-  if(USER) syncCloud(); else { loadLocalPicks(); renderWatchTable(); } }
+  if(USER) syncCloud(); else { loadLocalPicks(); rebuild(); } }
 async function cloudList(){ try{const {data,error}=await SB.from('watchlist').select('ticker');
   if(error){ AUTHMSG='List load failed: '+error.message; } return error?[]:(data||[]).map(r=>r.ticker);}catch(e){return[];} }
 async function cloudAdd(tk){ try{const {error}=await SB.from('watchlist').insert({user_id:USER.id,ticker:tk});
@@ -1029,7 +1077,11 @@ async function cloudRemove(tk){ try{const {error}=await SB.from('watchlist').del
 async function syncCloud(){                                    // migrate any guest picks up on first login, then load
   const local=[...MYWL.picks];
   if(local.length){ try{await SB.from('watchlist').upsert(local.map(t=>({user_id:USER.id,ticker:t})),{onConflict:'user_id,ticker',ignoreDuplicates:true});}catch(e){} }
-  MYWL.picks=new Set(await cloudList()); renderWatchTable();
+  MYWL.picks=new Set(await cloudList());
+  // Signed in and you have a list → make it the active universe (unless you've picked a preference).
+  let pref=null; try{pref=localStorage.getItem('oi_univ');}catch(e){}
+  if(MYWL.picks.size && pref===null) UNIV='mine';
+  rebuild();
 }
 function signIn(email){ email=(email||'').trim(); if(!email||!SB){ AUTHMSG='Enter an email.'; renderWatchTable(); return; }
   AUTHMSG='Sending…'; renderWatchTable();
@@ -1039,17 +1091,20 @@ function signOut(){ if(SB) SB.auth.signOut(); }
 
 function wlToggle(tk){ tk=(tk||'').toUpperCase(); if(!tk)return;
   const had=MYWL.picks.has(tk); had?MYWL.picks.delete(tk):MYWL.picks.add(tk);
-  if(USER){ had?cloudRemove(tk):cloudAdd(tk); } else wlSave(); renderWatchTable(); }
+  if(USER){ had?cloudRemove(tk):cloudAdd(tk); } else wlSave(); rebuild(); }
 function wlAdd(tk){ tk=(tk||'').toUpperCase().trim().replace(/[^A-Z.\-]/g,''); if(!tk||MYWL.picks.has(tk))return;
-  MYWL.picks.add(tk); if(USER) cloudAdd(tk); else wlSave(); MYWL.view='mine'; renderWatchTable(); }
-function wlView(v){ MYWL.view=v; wlSave(); renderWatchTable(); }
+  MYWL.picks.add(tk); if(USER) cloudAdd(tk); else wlSave();
+  if(UNIV!=='mine') setUniv('mine'); else rebuild(); }   // adding a ticker switches the whole app to your list
 
 function renderWatchTable(){
   const host=document.getElementById('ov-watch'); if(!host) return;
   const omap={}; (DATA.overview||[]).forEach(o=>omap[o.ticker]=o);
-  const all=(DATA.overview||[]).slice().sort((a,b)=>a.ticker<b.ticker?-1:1);
-  const mine=MYWL.view==='mine';
-  document.getElementById('ov-count').textContent = mine ? (MYWL.picks.size+' in my list') : (all.length+' names');
+  // "Default" rows = only the hand-curated watchlist (never the user-union that the scan folds in).
+  const u=(DATA.universe||{});
+  const dset=new Set([...(u.wheel_names||[]),...(u.growth_names||[])].map(t=>String(t).toUpperCase()));
+  const all=(DATA.overview||[]).filter(o=>dset.has(String(o.ticker||'').toUpperCase())).sort((a,b)=>a.ticker<b.ticker?-1:1);
+  const mine=UNIV==='mine';
+  document.getElementById('ov-count').textContent = mine ? (MYWL.picks.size+' in my list') : (all.length+' default names');
   const acct = USER
     ? `<div class="acctbar"><span class="acctwho">✓ ${USER.email}</span><button class="acctbtn" data-act="signout">Sign out</button>
         <span class="addwrap"><input id="wl-add" placeholder="add any ticker…" maxlength="8" autocapitalize="characters"><button class="acctbtn" data-act="add">＋ Add</button></span></div>`
@@ -1058,7 +1113,7 @@ function renderWatchTable(){
         <span class="addwrap"><input id="wl-add" placeholder="add any ticker…" maxlength="8" autocapitalize="characters"><button class="acctbtn" data-act="add">＋ Add</button></span></div>`;
   const acctmsg = AUTHMSG ? `<div class="acctmsg">${AUTHMSG}</div>` : (SB?'':`<div class="acctmsg dim">Accounts unavailable right now — your list is saved in this browser.</div>`);
   const seg=`<div class="wlseg">
-    <button class="${mine?'':'on'}" data-v="all">All <span class="c mono">${all.length}</span></button>
+    <button class="${mine?'':'on'}" data-v="default">Default <span class="c mono">${all.length}</span></button>
     <button class="${mine?'on':''}" data-v="mine">★ My list <span class="c mono">${MYWL.picks.size}</span></button></div>`;
   const star=tk=>`<span class="star${MYWL.picks.has(tk)?' on':''}" data-star="${tk}" role="button" tabindex="0" aria-label="star ${tk}">${MYWL.picks.has(tk)?'★':'☆'}</span>`;
   const fullRow=o=>`<tr class="clk" data-tk="${o.ticker}">
@@ -1096,9 +1151,9 @@ function renderWatchTable(){
         ${TH('','200MA','Is price above its 200-day moving average?')}
         ${TH('','PCR','Put/Call ratio of open interest.')}
       </tr></thead><tbody>${rows}</tbody></table></div>`;
-  const note = mine ? `<div class="wlnote">Your private list — separate from the public <b>All</b> tab (which still holds every default name). Add any ticker above; it syncs to your account.</div>` : '';
+  const note = mine ? `<div class="wlnote">Your private list — it now drives <b>every tab</b> (Signals, Chain, TA, Fundamentals). The public <b>Default</b> list is untouched; switch back any time from the header or here. Add any ticker above; it syncs to your account.</div>` : '';
   host.innerHTML = `<div class="acctwrap">${acct}${acctmsg}</div>` + seg + note + table;
-  host.querySelectorAll('.wlseg button').forEach(b=>b.onclick=()=>wlView(b.dataset.v));
+  host.querySelectorAll('.wlseg button').forEach(b=>b.onclick=()=>setUniv(b.dataset.v));
   host.querySelectorAll('.star').forEach(s=>{ const go=e=>{e.stopPropagation(); wlToggle(s.dataset.star);};
     s.onclick=go; s.onkeydown=e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();go(e);}};});
   host.querySelectorAll('tr.clk').forEach(tr=>tr.onclick=()=>{setSym(tr.dataset.tk); go('deep');});

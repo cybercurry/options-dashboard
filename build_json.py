@@ -15,12 +15,22 @@ import statistics
 
 import requests
 
+import os
+
 import macro
 import signals
 import sheets
 
 HERE = pathlib.Path(__file__).parent
 OUT = HERE / "site" / "data"
+
+# Registered users' private watchlists live in Supabase (per-user, row-level-security). The
+# public site is anonymous, but the cron folds the *deduped union* of every user's tickers into
+# the scan so their custom picks have real data in signals.json — the front-end then filters each
+# tab to whichever universe (default vs. the signed-in user's own list) is active. This never
+# exposes who owns which ticker (the union is unattributed) and never touches the default list.
+SUPABASE_URL = os.environ.get("SUPABASE_URL", "https://asxwbjrripzbkcxbkect.supabase.co")
+USER_TICKER_CAP = 40   # safety ceiling on extra scan load beyond the default universe
 
 
 def load_universe():
@@ -35,6 +45,31 @@ def load_universe():
     if live.get("wheel"):
         return {"wheel": live.get("wheel", []), "growth": live.get("growth", []), "_source": "sheet"}
     return {"wheel": cfg.get("wheel", []), "growth": cfg.get("growth", []), "_source": "fallback"}
+
+
+def _user_tickers():
+    """Deduped union of every registered user's private watchlist tickers, read with the Supabase
+    service_role key (env SUPABASE_SERVICE_KEY) which bypasses row-level security. Unattributed —
+    we never learn or store who owns what, only the set of symbols to make sure they get scanned.
+    Returns [] on any missing-key / network / parse error so the build never breaks."""
+    key = os.environ.get("SUPABASE_SERVICE_KEY")
+    if not key:
+        return []
+    try:
+        r = requests.get(SUPABASE_URL + "/rest/v1/watchlist",
+                         params={"select": "ticker"},
+                         headers={"apikey": key, "Authorization": "Bearer " + key},
+                         timeout=15)
+        r.raise_for_status()
+        seen, out = set(), []
+        for row in (r.json() or []):
+            t = str(row.get("ticker") or "").strip().upper()
+            if t and t not in seen:
+                seen.add(t)
+                out.append(t)
+        return out
+    except Exception:
+        return []
 
 
 def _fred_last(series):
@@ -418,6 +453,17 @@ def fetch_chains(names, prices):
 
 def main():
     uni = load_universe()
+    # Default universe (what every anonymous visitor sees) — captured before we fold in users'
+    # picks, so the front-end can always tell the two apart.
+    default_wheel = [str(t).upper() for t in uni.get("wheel", [])]
+    default_growth = [str(t).upper() for t in uni.get("growth", [])]
+    default_set = set(default_wheel) | set(default_growth)
+    # Fold registered users' private picks (deduped, capped) into the scan so their tickers get
+    # real data. New symbols enter the "wheel" bucket → full CSP/CC/LEAP treatment, which is the
+    # richest research view. Each unique symbol is fetched once (Tradier/SEC load stays minimal).
+    extra = [t for t in _user_tickers() if t not in default_set][:USER_TICKER_CAP]
+    if extra:
+        uni["wheel"] = list(uni.get("wheel", [])) + extra
     data = signals.scan(uni)                       # {"signals": [...], "leaps": [...], "params": {...}}
     data["market"] = fetch_market()
     data["pulse"] = fetch_pulse()
@@ -428,11 +474,15 @@ def main():
     data["chains"] = fetch_chains(_names, _prices)
     data["market_stats"] = fetch_market_stats()
     data["generated_at"] = datetime.datetime.now(datetime.timezone.utc).isoformat(timespec="seconds")
-    data["universe"] = {"wheel": len(uni.get("wheel", [])),
-                        "growth": len(uni.get("growth", [])),
+    # universe payload keeps the DEFAULT list distinct from the user-added extras, so the
+    # front-end renders the default watchlist by default and can filter to a signed-in user's own
+    # picks (matched client-side against their private Supabase list) without mixing the two.
+    data["universe"] = {"wheel": len(default_wheel),
+                        "growth": len(default_growth),
                         "source": uni.get("_source"),
-                        "wheel_names": [str(t).upper() for t in uni.get("wheel", [])],
-                        "growth_names": [str(t).upper() for t in uni.get("growth", [])]}
+                        "wheel_names": default_wheel,
+                        "growth_names": default_growth,
+                        "user_names": extra}
     OUT.mkdir(parents=True, exist_ok=True)
     (OUT / "signals.json").write_text(json.dumps(data, indent=2, default=str))
     print("wrote {} — {} signals, {} leaps (universe: {})".format(
