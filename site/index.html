@@ -1227,18 +1227,45 @@ const FXICON={
   numbers:_svg+'<rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 10h18M10 4v16"/></svg>',
   news:_svg+'<path d="M16 6h3a1 1 0 0 1 1 1v11a2 2 0 0 1-4 0v-13a1 1 0 0 0-1-1h-10a1 1 0 0 0-1 1v12a3 3 0 0 0 3 3h11"/><path d="M8 8h4"/><path d="M8 12h4"/><path d="M8 16h4"/></svg>',
   chev:'<svg class="fxchev" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6l-6 6"/></svg>'};
+/* Extended fundamentals (S&P 500) — a separate file, lazy-loaded the first time the tab is used,
+   so it never weighs down the main data payload. Watchlist entries (richer: news + AI) live in
+   DATA.fundamentals and take precedence over the coverage set. */
+let FUNDX=null, FUNDX_STATE='idle';   // idle | loading | done | error
+function loadFundExtra(then){
+  if(FUNDX_STATE==='done'||FUNDX_STATE==='error'){ then&&then(); return; }
+  if(FUNDX_STATE==='loading') return;
+  FUNDX_STATE='loading';
+  fetch('data/fundamentals.json',{cache:'no-store'})
+    .then(r=>r.ok?r.json():Promise.reject(r.status))
+    .then(j=>{ FUNDX=(j&&j.fundamentals)||{}; FUNDX_STATE='done'; then&&then(); })
+    .catch(()=>{ FUNDX_STATE='error'; then&&then(); });
+}
+function fundEntry(tk){
+  const w=DATA.fundamentals||{};
+  if(w[tk]) return w[tk];                 // watchlist (richer) wins
+  if(FUNDX && FUNDX[tk]) return FUNDX[tk];
+  return undefined;
+}
 function renderFund(tk){
-  const host=document.getElementById('fund-body'); const fmap=DATA.fundamentals||{};
-  if(!Object.keys(fmap).length){ host.innerHTML=`<div class="empty">Fundamentals populate on the next scan cycle — check back shortly.</div>`; return; }
-  const f=fmap[tk];
-  if(!f){ host.innerHTML=`<div class="empty">Pick a ticker to read its filings.</div>`; return; }
+  const host=document.getElementById('fund-body');
+  if(!tk){ host.innerHTML=`<div class="empty">Type any US-listed ticker above to research its filings.</div>`; return; }
+  const f=fundEntry(tk);
+  if(f===undefined){                       // not in the watchlist set — pull the S&P-500 file once, then retry
+    if(FUNDX_STATE==='idle'||FUNDX_STATE==='loading'){
+      host.innerHTML=`<div class="empty">Fetching filings for <b>${tk}</b>…</div>`;
+      loadFundExtra(()=>{ if(CUR===tk) renderFund(tk); });
+      return;
+    }
+    host.innerHTML=`<div class="empty">No fundamentals for <b>${tk}</b> — not in the covered set (S&P 500 + watchlist)${FUNDX_STATE==='error'?', and the coverage file is unavailable':''}. US-listed filers only.</div>`;
+    return;
+  }
   if(!f.ok){ host.innerHTML=`<div class="empty">No fundamentals for <b>${tk}</b> — ${f.error||'not a US-listed filer'}.</div>`; return; }
   const g=f.groups||{}, m=f.metrics||{}, p=f.profile||{};
   const V=['Valuation','Quality','Health'].map(k=>(g[k]||{}).verdict||'⚪');
   const ov = V.includes('🔴')?['🔴','FRAGILE','#7f1d1d'] : V.includes('🟡')?['🟡','MIXED','#a16207'] : V.includes('🟢')?['🟢','SOUND','#166534'] : ['⚪','NO DATA','#475569'];
   const cls=[p.sector,p.industry,p.country].filter(Boolean).join('  ·  ')||'US-listed filer';
   const orow=(DATA.overview||[]).find(o=>o.ticker===tk);
-  const priceStr=(orow&&orow.price!=null)?'$'+orow.price.toFixed(2):'price n/a';
+  const priceStr=(orow&&orow.price!=null)?'$'+orow.price.toFixed(2):(f.price!=null?'$'+(+f.price).toFixed(2):'price n/a');
   const dots=['Valuation','Quality','Health'].map((k,i)=>V[i]+' '+k).join('&nbsp;&nbsp;');
   const tip=arr=>arr.map(t=>`<div><span>${t[0]}</span><b>${t[1]}</b></div>`).join('');
   const chip=(name,verd,arr)=>`<span class="fxchip" tabindex="0" style="background:${VCOL[verd]||'#475569'}">${verd} ${name}<span class="fxtip">${tip(arr)}</span></span>`;
@@ -1321,7 +1348,7 @@ function showTab(tab){
   document.querySelectorAll('#nav a').forEach(a=>a.classList.toggle('on',a.dataset.tab===tab));
   if(tab==='deep') renderDeep(CUR||Object.keys(BYTK)[0]);
   if(tab==='chain' && CUR && (DATA.chains||{})[CUR]) renderChainTk(CUR);   // open on the ticker you were viewing
-  if(tab==='fund') renderFund(CUR||Object.keys(DATA.fundamentals||{})[0]||Object.keys(BYTK)[0]);
+  if(tab==='fund'){ loadFundExtra(); renderFund(CUR||Object.keys(DATA.fundamentals||{})[0]||Object.keys(BYTK)[0]); }
   window.scrollTo(0,0);
 }
 // Tab switches become real history entries → the browser Back/Forward arrows navigate tabs

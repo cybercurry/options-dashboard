@@ -1,0 +1,60 @@
+name: Refresh fundamentals (S&P 500)
+
+# Builds site/data/fundamentals.json — the Fundamentals tab's "research any ticker" coverage set
+# (S&P 500, SEC-filing metrics + valuation). Runs ONCE A DAY on purpose: filings change
+# quarterly, and this keeps ~500 SEC requests out of the 30-minute options scan and well within
+# SEC's fair-access limit. Cloudflare Pages auto-deploys on the push.
+on:
+  schedule:
+    - cron: "0 16 * * *"        # 16:00 UTC = 12:00 ET (EDT) / 11:00 ET (EST)
+  workflow_dispatch: {}         # manual "Run workflow" button
+
+permissions:
+  contents: write
+
+concurrency:
+  group: fundamentals-data
+  cancel-in-progress: false
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    env:
+      TRADIER_TOKEN: ${{ secrets.TRADIER_TOKEN }}
+      TRADIER_ENV:   ${{ secrets.TRADIER_ENV }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+
+      - name: Install deps
+        run: pip install requests
+
+      - name: Build S&P-500 fundamentals → JSON
+        run: python build_fundamentals.py
+
+      - name: Commit fresh fundamentals (only if it changed)
+        run: |
+          if git diff --quiet -- site/data/fundamentals.json; then
+            echo "No change — skipping commit."
+          else
+            git config user.name  "optionintel-bot"
+            git config user.email "optionintel-bot@users.noreply.github.com"
+            git add site/data/fundamentals.json
+            git commit -m "data: refresh S&P-500 fundamentals"
+            pushed=0
+            for i in 1 2 3 4 5; do
+              if git push; then pushed=1; break; fi
+              echo "push rejected — rebasing on latest origin/main (attempt $i)"
+              git fetch origin main
+              git rebase -X theirs origin/main || git rebase --abort
+              sleep $((i * 3))
+            done
+            if [ "$pushed" != "1" ]; then
+              echo "::error::could not push refreshed fundamentals after 5 attempts"; exit 1
+            fi
+          fi
