@@ -1,0 +1,60 @@
+name: Selftest fundamentals (PATH)
+
+# Manual harness for the on-demand fundamentals function. Prints the Python ground truth (the
+# proven fundamentals.py engine) for a ticker AND curls the deployed Cloudflare function, so the
+# two can be compared. Read the logs to validate / iterate.
+on:
+  workflow_dispatch:
+    inputs:
+      ticker:
+        description: "Ticker to test"
+        default: "PATH"
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    env:
+      TRADIER_TOKEN: ${{ secrets.TRADIER_TOKEN }}
+      TRADIER_ENV:   ${{ secrets.TRADIER_ENV }}
+      TK: ${{ github.event.inputs.ticker }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install requests
+
+      - name: Python ground truth (the proven engine)
+        run: |
+          python - <<'PY'
+          import json, os, fundamentals, tradier
+          tk = os.environ.get("TK") or "PATH"
+          price = None
+          try:
+              if tradier.is_configured():
+                  q = tradier.get_quotes([tk]); price = (q[0].get("last") if q else None)
+          except Exception as e:
+              print("price err:", e)
+          print("TICKER", tk, "PRICE", price)
+          res = fundamentals.analyze(tk, price)
+          slim = {k: res.get(k) for k in ("ok", "company", "cik", "groups", "metrics", "flags")}
+          print("GROUND_TRUTH", json.dumps(slim, default=str))
+          PY
+
+      - name: Curl the deployed Cloudflare function
+        run: |
+          echo "=== /api/ping ==="
+          for i in 1 2 3 4 5 6 7 8; do
+            code=$(curl -s -o /tmp/ping -w "%{http_code}" https://optionintel.app/api/ping || echo 000)
+            echo "attempt $i -> $code"; [ "$code" = "200" ] && break; sleep 20
+          done
+          echo "--- body ---"; cat /tmp/ping; echo
+          echo "=== /api/fundamentals?t=$TK ==="
+          for i in 1 2 3 4 5 6 7 8; do
+            code=$(curl -s -o /tmp/f -w "%{http_code}" "https://optionintel.app/api/fundamentals?t=$TK" || echo 000)
+            echo "attempt $i -> $code"; [ "$code" = "200" ] && break; sleep 20
+          done
+          echo "--- body (first 4000 chars) ---"; head -c 4000 /tmp/f; echo

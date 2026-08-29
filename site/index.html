@@ -1240,23 +1240,37 @@ function loadFundExtra(then){
     .then(j=>{ FUNDX=(j&&j.fundamentals)||{}; FUNDX_STATE='done'; then&&then(); })
     .catch(()=>{ FUNDX_STATE='error'; then&&then(); });
 }
+/* On-demand SEC lookup (Cloudflare function /api/fundamentals) — covers the whole US-listed
+   universe: the off-index small/mid caps that are the real research targets. Cached per session. */
+let FUNDLIVE={}, FUNDLIVE_STATE={};        // tk -> entry ; tk -> 'loading' | 'done' | 'error'
+function fetchLive(tk){
+  if(FUNDLIVE_STATE[tk]==='loading') return;
+  FUNDLIVE_STATE[tk]='loading';
+  fetch('/api/fundamentals?t='+encodeURIComponent(tk),{cache:'no-store'})
+    .then(r=>r.ok?r.json():Promise.reject(r.status))
+    .then(j=>{ FUNDLIVE[tk]=j||{ok:false,error:'no data'}; FUNDLIVE_STATE[tk]='done'; if(CUR===tk) renderFund(tk); })
+    .catch(()=>{ FUNDLIVE_STATE[tk]='error'; if(CUR===tk) renderFund(tk); });
+}
 function fundEntry(tk){
   const w=DATA.fundamentals||{};
-  if(w[tk]) return w[tk];                 // watchlist (richer) wins
-  if(FUNDX && FUNDX[tk]) return FUNDX[tk];
+  if(w[tk]) return w[tk];                 // watchlist (richer: news + AI) wins
+  if(FUNDX && FUNDX[tk]) return FUNDX[tk];   // S&P-500 daily cache
+  if(FUNDLIVE[tk]) return FUNDLIVE[tk];   // live SEC lookup
   return undefined;
 }
 function renderFund(tk){
   const host=document.getElementById('fund-body');
   if(!tk){ host.innerHTML=`<div class="empty">Type any US-listed ticker above to research its filings.</div>`; return; }
   const f=fundEntry(tk);
-  if(f===undefined){                       // not in the watchlist set — pull the S&P-500 file once, then retry
+  if(f===undefined){                       // not watchlist/cache — load the S&P cache once, then go live
     if(FUNDX_STATE==='idle'||FUNDX_STATE==='loading'){
       host.innerHTML=`<div class="empty">Fetching filings for <b>${tk}</b>…</div>`;
       loadFundExtra(()=>{ if(CUR===tk) renderFund(tk); });
       return;
     }
-    host.innerHTML=`<div class="empty">No fundamentals for <b>${tk}</b> — not in the covered set (S&P 500 + watchlist)${FUNDX_STATE==='error'?', and the coverage file is unavailable':''}. US-listed filers only.</div>`;
+    if(FUNDLIVE_STATE[tk]==='error'){ host.innerHTML=`<div class="empty">Couldn't reach SEC for <b>${tk}</b> just now — try again in a moment. US-listed filers only.</div>`; return; }
+    host.innerHTML=`<div class="empty">Fetching SEC filings for <b>${tk}</b>…</div>`;
+    fetchLive(tk);
     return;
   }
   if(!f.ok){ host.innerHTML=`<div class="empty">No fundamentals for <b>${tk}</b> — ${f.error||'not a US-listed filer'}.</div>`; return; }
