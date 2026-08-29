@@ -8,6 +8,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;700;800&family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
 <style>
 /* Dark, editorial, "all signal no noise" — MNI-inspired: near-black navy, one amber accent,
    tiles that glow amber on hover. Committed dark (deliberate single look). */
@@ -159,6 +160,16 @@ tbody tr.clk{cursor:pointer} tbody tr:last-child td{border-bottom:0} tbody tr:ho
 td.l{text-align:left}
 .tk{font-family:"Archivo",sans-serif; font-weight:700; font-size:15px}
 /* Phase-0 personal watchlist — star + filter, saved per browser (localStorage) */
+.acctwrap{margin:2px 0 10px}
+.acctbar{display:flex; flex-wrap:wrap; align-items:center; gap:8px 12px}
+.acctwho{font-weight:600; color:var(--good); font-size:13px}
+.acctinfo{font-size:12.5px; color:var(--faint); max-width:520px}
+.addwrap{display:inline-flex; gap:6px; align-items:center}
+.acctbar input{background:var(--surface-2); border:1px solid var(--line); border-radius:8px; color:var(--text); padding:6px 10px; font-size:13px; font-family:"IBM Plex Sans"; min-width:120px}
+.acctbar #wl-add{width:130px; text-transform:uppercase; font-family:"IBM Plex Mono"}
+.acctbtn{background:var(--accent); color:#1a1205; border:0; border-radius:8px; padding:6px 12px; font-weight:700; font-size:12.5px; cursor:pointer; white-space:nowrap}
+.acctbtn[data-act="signout"]{background:var(--surface-2); color:var(--muted); border:1px solid var(--line)}
+.acctmsg{font-size:12.5px; margin-top:6px; color:var(--good)} .acctmsg.dim{color:var(--faint)}
 .wlseg{display:inline-flex; border:1px solid var(--line); border-radius:9px; overflow:hidden; margin:2px 0 10px}
 .wlseg button{background:var(--surface); color:var(--muted); border:0; padding:6px 14px; font-family:inherit; font-size:13px; font-weight:600; cursor:pointer}
 .wlseg button+button{border-left:1px solid var(--line)}
@@ -704,6 +715,7 @@ fetch('data/signals.json',{cache:'no-store'}).then(r=>r.json()).then(J=>{
   document.getElementById('meta').innerHTML=`<b>${READY.length} setup${READY.length===1?'':'s'} ready</b> + <b>${LEAPQ.length} LEAP${LEAPQ.length===1?'':'s'}</b> from ${(u.wheel||0)+(u.growth||0)} names · full field in Watchlist`;
 
   renderPulse(); renderReady(); renderLeaps(); renderOverview(); renderChain(); buildChips(); renderMarket();
+  initAuth();   // Supabase magic-link accounts + per-user watchlist (falls back to guest/localStorage)
   const first=(READY[0]&&READY[0].ticker)||(LEAPQ[0]&&LEAPQ[0].ticker)||(SIGS[0]&&SIGS[0].ticker);
   if(first) setSym(first);
 }).catch(e=>{document.getElementById('meta').textContent='could not load signals ('+e+')';});
@@ -983,24 +995,68 @@ function renderOverview(){
 }
 /* ---- Phase-0 personal watchlist: pick from the scanned universe, saved per browser.
    No login, no backend — Phase 1 later wires this same UI to an account. ---- */
+/* ── Personal watchlist — Phase 1: Supabase magic-link accounts. Signed in → the list lives in
+   the user's own private table (row-level security), synced across devices; signed out → a guest
+   list in localStorage. Either way it's SEPARATE from the public default (which never changes),
+   and you can add ANY ticker, not just the scanned ones. ── */
 const WL_KEY='oi_mywatch';
-let MYWL=(function(){ try{const j=JSON.parse(localStorage.getItem(WL_KEY)||'{}');
-  return {picks:new Set(Array.isArray(j.picks)?j.picks:[]), view:(j.view==='mine'?'mine':'all')};}
-  catch(e){ return {picks:new Set(), view:'all'}; } })();
-function wlSave(){ try{localStorage.setItem(WL_KEY, JSON.stringify({picks:[...MYWL.picks], view:MYWL.view}));}catch(e){} }
-function wlToggle(tk){ MYWL.picks.has(tk)?MYWL.picks.delete(tk):MYWL.picks.add(tk); wlSave(); renderWatchTable(); }
+const SUPA_URL='https://asxwbjrripzbkcxbkect.supabase.co';
+const SUPA_KEY='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImFzeHdianJyaXB6YmtjeGJrZWN0Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODgwMTQ5OTgsImV4cCI6MjEwMzU5MDk5OH0.Uq8Fi9eH14CUC9dt2oB6OFVTH3tNdzanN9rKRNVcB4k';
+let SB=null, USER=null, AUTHMSG='';
+let MYWL={picks:new Set(), view:'all'};
+function loadLocalPicks(){ try{const j=JSON.parse(localStorage.getItem(WL_KEY)||'{}');
+  MYWL={picks:new Set(Array.isArray(j.picks)?j.picks:[]), view:(j.view==='mine'?'mine':'all')};}
+  catch(e){ MYWL={picks:new Set(), view:'all'}; } }
+loadLocalPicks();
+function wlSave(){ if(USER) return; try{localStorage.setItem(WL_KEY, JSON.stringify({picks:[...MYWL.picks], view:MYWL.view}));}catch(e){} }
+
+function initAuth(){
+  if(!window.supabase || !SUPA_URL) return;                    // library blocked / unconfigured → guest-only
+  try{ SB=window.supabase.createClient(SUPA_URL, SUPA_KEY); }catch(e){ SB=null; return; }
+  SB.auth.getSession().then(({data})=>onAuth(data&&data.session));
+  SB.auth.onAuthStateChange((_e,session)=>onAuth(session));
+}
+function onAuth(session){ USER=session?session.user:null; AUTHMSG='';
+  if(USER) syncCloud(); else { loadLocalPicks(); renderWatchTable(); } }
+async function cloudList(){ try{const {data,error}=await SB.from('watchlist').select('ticker'); return error?[]:(data||[]).map(r=>r.ticker);}catch(e){return[];} }
+async function cloudAdd(tk){ try{await SB.from('watchlist').upsert({user_id:USER.id,ticker:tk});}catch(e){} }
+async function cloudRemove(tk){ try{await SB.from('watchlist').delete().eq('ticker',tk);}catch(e){} }
+async function syncCloud(){                                    // migrate any guest picks up on first login, then load
+  const local=[...MYWL.picks];
+  if(local.length){ try{await SB.from('watchlist').upsert(local.map(t=>({user_id:USER.id,ticker:t})));}catch(e){} }
+  MYWL.picks=new Set(await cloudList()); renderWatchTable();
+}
+function signIn(email){ email=(email||'').trim(); if(!email||!SB){ AUTHMSG='Enter an email.'; renderWatchTable(); return; }
+  AUTHMSG='Sending…'; renderWatchTable();
+  SB.auth.signInWithOtp({email, options:{emailRedirectTo:location.origin}})
+    .then(({error})=>{ AUTHMSG=error?('Error: '+error.message):('✓ Check '+email+' for the sign-in link.'); renderWatchTable(); }); }
+function signOut(){ if(SB) SB.auth.signOut(); }
+
+function wlToggle(tk){ tk=(tk||'').toUpperCase(); if(!tk)return;
+  const had=MYWL.picks.has(tk); had?MYWL.picks.delete(tk):MYWL.picks.add(tk);
+  if(USER){ had?cloudRemove(tk):cloudAdd(tk); } else wlSave(); renderWatchTable(); }
+function wlAdd(tk){ tk=(tk||'').toUpperCase().trim().replace(/[^A-Z.\-]/g,''); if(!tk||MYWL.picks.has(tk))return;
+  MYWL.picks.add(tk); if(USER) cloudAdd(tk); else wlSave(); MYWL.view='mine'; renderWatchTable(); }
 function wlView(v){ MYWL.view=v; wlSave(); renderWatchTable(); }
 
 function renderWatchTable(){
+  const host=document.getElementById('ov-watch'); if(!host) return;
+  const omap={}; (DATA.overview||[]).forEach(o=>omap[o.ticker]=o);
   const all=(DATA.overview||[]).slice().sort((a,b)=>a.ticker<b.ticker?-1:1);
   const mine=MYWL.view==='mine';
-  const ov = mine ? all.filter(o=>MYWL.picks.has(o.ticker)) : all;
-  document.getElementById('ov-count').textContent = mine ? (ov.length+' starred') : (all.length+' names');
+  document.getElementById('ov-count').textContent = mine ? (MYWL.picks.size+' in my list') : (all.length+' names');
+  const acct = USER
+    ? `<div class="acctbar"><span class="acctwho">✓ ${USER.email}</span><button class="acctbtn" data-act="signout">Sign out</button>
+        <span class="addwrap"><input id="wl-add" placeholder="add any ticker…" maxlength="8" autocapitalize="characters"><button class="acctbtn" data-act="add">＋ Add</button></span></div>`
+    : `<div class="acctbar"><span class="acctinfo">Sign in to keep your own list across devices — the public default never changes.</span>
+        <span class="addwrap"><input id="wl-email" type="email" placeholder="you@email.com"><button class="acctbtn" data-act="signin">Send magic link</button></span>
+        <span class="addwrap"><input id="wl-add" placeholder="add any ticker…" maxlength="8" autocapitalize="characters"><button class="acctbtn" data-act="add">＋ Add</button></span></div>`;
+  const acctmsg = AUTHMSG ? `<div class="acctmsg">${AUTHMSG}</div>` : (SB?'':`<div class="acctmsg dim">Accounts unavailable right now — your list is saved in this browser.</div>`);
   const seg=`<div class="wlseg">
     <button class="${mine?'':'on'}" data-v="all">All <span class="c mono">${all.length}</span></button>
     <button class="${mine?'on':''}" data-v="mine">★ My list <span class="c mono">${MYWL.picks.size}</span></button></div>`;
   const star=tk=>`<span class="star${MYWL.picks.has(tk)?' on':''}" data-star="${tk}" role="button" tabindex="0" aria-label="star ${tk}">${MYWL.picks.has(tk)?'★':'☆'}</span>`;
-  const rows=ov.map(o=>`<tr class="clk" data-tk="${o.ticker}">
+  const fullRow=o=>`<tr class="clk" data-tk="${o.ticker}">
     <td class="l star-c">${star(o.ticker)}</td>
     <td class="l"><span class="tk">${o.ticker}</span></td>
     <td class="mono">${o.price==null?'—':'$'+o.price.toFixed(2)}</td>
@@ -1011,30 +1067,42 @@ function renderWatchTable(){
     <td class="l">${ivvsTag(o.iv_vs_hv)}</td>
     <td class="mono">${o.rsi==null?'—':o.rsi}</td>
     <td>${o.above_200?'<span class="ok">✅</span>':'<span class="no">❌</span>'}</td>
-    <td class="mono">${o.pcr==null?'—':o.pcr.toFixed(2)}</td></tr>`).join('');
+    <td class="mono">${o.pcr==null?'—':o.pcr.toFixed(2)}</td></tr>`;
+  const compactRow=tk=>`<tr class="clk" data-tk="${tk}">
+    <td class="l star-c">${star(tk)}</td>
+    <td class="l"><span class="tk">${tk}</span></td>
+    <td class="dim" colspan="9">not in the options scan — click to open its chart, or research it in <b>Fundamentals</b> →</td></tr>`;
+  const rows = mine
+    ? [...MYWL.picks].sort().map(tk=> omap[tk]?fullRow(omap[tk]):compactRow(tk)).join('')
+    : all.map(fullRow).join('');
   const TH=(cls,lbl,tip)=>`<th class="${cls} thelp" data-tip="${tip.replace(/"/g,'&quot;')}">${lbl}<i class="thi">i</i></th>`;
-  const table = (mine && ov.length===0)
-    ? `<div class="empty">No starred names yet — tap the <b>☆</b> on any ticker (switch to <b>All</b>) to build your list. It's saved in this browser.</div>`
+  const table = (mine && MYWL.picks.size===0)
+    ? `<div class="empty">Your list is empty — tap the <b>☆</b> on any ticker in <b>All</b>, or type any symbol into <b>add any ticker</b> above.</div>`
     : `<div class="tablewrap"><table><thead><tr>
         <th class="l star-c" aria-label="favourite"></th>
-        ${TH('l','Ticker','The underlying symbol. Click any row to open it in the TA tab. Tap the star to add it to your personal list (saved in this browser).')}
+        ${TH('l','Ticker','The underlying symbol. Click a row to open it in TA. Tap the star to add/remove it from your list.')}
         ${TH('','Price','Latest price for the underlying.')}
         ${TH('','Chg %','Percent change on the session.')}
-        ${TH('','HV%ile','Where current 20-day historical (realized) volatility sits in its own 1-year range. High = the stock is moving more than usual; richer option premium.')}
-        ${TH('','HV20','20-day historical (realized) volatility, annualized — how much the stock ACTUALLY moved recently.')}
-        ${TH('','ATM IV C/P','At-the-money implied volatility, call / put. What options are PRICING IN for future movement.')}
-        ${TH('l','IV vs HV','Is implied vol rich or cheap versus realized? Rich = the market is overpaying for movement (good to sell); Cheap = underpaying.')}
-        ${TH('','RSI','14-day Relative Strength Index. &lt;30 oversold (CSP setup) · ~50 neutral · &gt;70 overbought (CC setup).')}
-        ${TH('','200MA','Is price above its 200-day moving average? A simple long-term uptrend check (a LEAP prerequisite).')}
-        ${TH('','PCR','Put/Call ratio of open interest — a positioning tell. &gt;1 = more puts (defensive) · &lt;1 = more calls (bullish).')}
+        ${TH('','HV%ile','Where current 20-day realized volatility sits in its own 1-year range.')}
+        ${TH('','HV20','20-day historical (realized) volatility, annualized.')}
+        ${TH('','ATM IV C/P','At-the-money implied volatility, call / put.')}
+        ${TH('l','IV vs HV','Is implied vol rich or cheap versus realized?')}
+        ${TH('','RSI','14-day Relative Strength Index. &lt;30 oversold · &gt;70 overbought.')}
+        ${TH('','200MA','Is price above its 200-day moving average?')}
+        ${TH('','PCR','Put/Call ratio of open interest.')}
       </tr></thead><tbody>${rows}</tbody></table></div>`;
-  document.getElementById('ov-watch').innerHTML = seg + table;
-  document.querySelectorAll('#ov-watch .wlseg button').forEach(b=>b.onclick=()=>wlView(b.dataset.v));
-  document.querySelectorAll('#ov-watch .star').forEach(s=>{
-    const go=e=>{e.stopPropagation(); wlToggle(s.dataset.star);};
+  host.innerHTML = `<div class="acctwrap">${acct}${acctmsg}</div>` + seg + table;
+  host.querySelectorAll('.wlseg button').forEach(b=>b.onclick=()=>wlView(b.dataset.v));
+  host.querySelectorAll('.star').forEach(s=>{ const go=e=>{e.stopPropagation(); wlToggle(s.dataset.star);};
     s.onclick=go; s.onkeydown=e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();go(e);}};});
-  document.querySelectorAll('#ov-watch tr.clk').forEach(tr=>tr.onclick=()=>{setSym(tr.dataset.tk); go('deep');});
-  wireTips(document.getElementById('ov-watch'));
+  host.querySelectorAll('tr.clk').forEach(tr=>tr.onclick=()=>{setSym(tr.dataset.tk); go('deep');});
+  const addI=host.querySelector('#wl-add'); const emI=host.querySelector('#wl-email');
+  const doAdd=()=>{ if(addI) wlAdd(addI.value); };
+  host.querySelectorAll('[data-act]').forEach(b=>b.onclick=()=>{ const a=b.dataset.act;
+    if(a==='signin') signIn(emI?emI.value:''); else if(a==='signout') signOut(); else if(a==='add') doAdd(); });
+  if(addI) addI.onkeydown=e=>{ if(e.key==='Enter'){ e.preventDefault(); doAdd(); } };
+  if(emI) emI.onkeydown=e=>{ if(e.key==='Enter'){ e.preventDefault(); signIn(emI.value); } };
+  wireTips(host);
 }
 
 /* ---------- options chain ---------- */
