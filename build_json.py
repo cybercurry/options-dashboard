@@ -252,6 +252,22 @@ def _forward_pe_scrape():
     return None
 
 
+def _sp500_forward_pe():
+    """S&P 500 12-month-forward P/E. Yahoo/Finviz don't publish it for the index, so use the
+    public historyofmarket.com JSON feed (cap-weighted forward consensus, no API key). Returns a
+    sanity-banded float or None; never raises."""
+    try:
+        r = requests.get("https://historyofmarket.com/api/sp500/forward-pe.json",
+                         headers=_BROWSER_UA, timeout=20)
+        r.raise_for_status()
+        v = float((r.json().get("current") or {}).get("forward"))
+        if 3.0 < v < 100.0:
+            return v
+    except Exception:
+        return None
+    return None
+
+
 def fetch_market_stats():
     """Everything the app's 📊 Market Stats tab shows — via the pure `macro` module + yfinance."""
     ms = {}
@@ -283,9 +299,15 @@ def fetch_market_stats():
     # Yahoo almost never carries forwardPE for the ETFs — scrape the real holdings-weighted
     # figure (Finviz) so the tile isn't perpetually empty.
     if ms.get("pe_forward") is None:
-        fp = _forward_pe_scrape()
+        fp = _sp500_forward_pe()
         if fp is not None:
             ms["pe_forward"] = fp
+            ms["pe_forward_src"] = "historyofmarket.com"
+        else:
+            fp = _forward_pe_scrape()
+            if fp is not None:
+                ms["pe_forward"] = fp
+                ms["pe_forward_src"] = "Finviz"
     vh = _yf_hist("^VIX", "1y")
     if vh:
         now, prev = vh[-1], (vh[-2] if len(vh) > 1 else vh[-1])
