@@ -52,7 +52,10 @@ def _user_tickers():
     service_role key (env SUPABASE_SERVICE_KEY) which bypasses row-level security. Unattributed —
     we never learn or store who owns what, only the set of symbols to make sure they get scanned.
     Returns [] on any missing-key / network / parse error so the build never breaks."""
-    key = os.environ.get("SUPABASE_SERVICE_KEY")
+    # .strip(): a key pasted into a GitHub secret often carries a trailing newline, which requests
+    # rejects as an invalid header character — that would silently break the read (and, before this,
+    # returned an empty list that looked like "no users").
+    key = (os.environ.get("SUPABASE_SERVICE_KEY") or "").strip()
     if not key:
         return []
     try:

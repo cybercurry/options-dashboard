@@ -32,7 +32,7 @@ jobs:
         run: |
           python - <<'PY'
           import os, requests, build_json
-          key = os.environ.get("SUPABASE_SERVICE_KEY") or ""
+          key = (os.environ.get("SUPABASE_SERVICE_KEY") or "").strip()   # tolerate a pasted trailing newline
           url = "https://asxwbjrripzbkcxbkect.supabase.co"
           print("SERVICE_KEY present:", bool(key))
           # (a) The engine's own read — deduped union of every user's private tickers.
