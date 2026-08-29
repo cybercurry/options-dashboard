@@ -58,3 +58,14 @@ jobs:
             echo "attempt $i -> $code"; [ "$code" = "200" ] && break; sleep 20
           done
           echo "--- body (first 4000 chars) ---"; head -c 4000 /tmp/f; echo
+
+      - name: Supabase connectivity (public anon key)
+        run: |
+          URL="https://asxwbjrripzbkcxbkect.supabase.co"
+          KEY="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImFzeHdianJyaXB6YmtjeGJrZWN0Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODgwMTQ5OTgsImV4cCI6MjEwMzU5MDk5OH0.Uq8Fi9eH14CUC9dt2oB6OFVTH3tNdzanN9rKRNVcB4k"
+          echo "=== REST: watchlist table (RLS, no user → [] if table exists) ==="
+          curl -s -o /tmp/sb -w "status %{http_code}\n" "$URL/rest/v1/watchlist?select=ticker&limit=1" -H "apikey: $KEY" -H "Authorization: Bearer $KEY"
+          echo "body:"; cat /tmp/sb; echo
+          echo "=== Auth settings (is the project reachable / email enabled?) ==="
+          curl -s -o /tmp/sba -w "status %{http_code}\n" "$URL/auth/v1/settings" -H "apikey: $KEY"
+          echo "body (first 500):"; head -c 500 /tmp/sba; echo
