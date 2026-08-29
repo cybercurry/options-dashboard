@@ -1018,12 +1018,16 @@ function initAuth(){
 }
 function onAuth(session){ USER=session?session.user:null; AUTHMSG='';
   if(USER) syncCloud(); else { loadLocalPicks(); renderWatchTable(); } }
-async function cloudList(){ try{const {data,error}=await SB.from('watchlist').select('ticker'); return error?[]:(data||[]).map(r=>r.ticker);}catch(e){return[];} }
-async function cloudAdd(tk){ try{await SB.from('watchlist').upsert({user_id:USER.id,ticker:tk});}catch(e){} }
-async function cloudRemove(tk){ try{await SB.from('watchlist').delete().eq('ticker',tk);}catch(e){} }
+async function cloudList(){ try{const {data,error}=await SB.from('watchlist').select('ticker');
+  if(error){ AUTHMSG='List load failed: '+error.message; } return error?[]:(data||[]).map(r=>r.ticker);}catch(e){return[];} }
+async function cloudAdd(tk){ try{const {error}=await SB.from('watchlist').insert({user_id:USER.id,ticker:tk});
+  if(error && error.code!=='23505'){ AUTHMSG='Save failed for '+tk+': '+error.message; renderWatchTable(); } }
+  catch(e){ AUTHMSG='Save failed for '+tk; renderWatchTable(); } }
+async function cloudRemove(tk){ try{const {error}=await SB.from('watchlist').delete().eq('ticker',tk);
+  if(error){ AUTHMSG='Remove failed for '+tk+': '+error.message; renderWatchTable(); } }catch(e){} }
 async function syncCloud(){                                    // migrate any guest picks up on first login, then load
   const local=[...MYWL.picks];
-  if(local.length){ try{await SB.from('watchlist').upsert(local.map(t=>({user_id:USER.id,ticker:t})));}catch(e){} }
+  if(local.length){ try{await SB.from('watchlist').upsert(local.map(t=>({user_id:USER.id,ticker:t})),{onConflict:'user_id,ticker',ignoreDuplicates:true});}catch(e){} }
   MYWL.picks=new Set(await cloudList()); renderWatchTable();
 }
 function signIn(email){ email=(email||'').trim(); if(!email||!SB){ AUTHMSG='Enter an email.'; renderWatchTable(); return; }
