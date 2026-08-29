@@ -9,6 +9,12 @@ on:
       ticker:
         description: "Ticker to test"
         default: "PATH"
+      seed_tickers:
+        description: "Comma-separated tickers to insert into a user's watchlist (blank = skip)"
+        default: ""
+      seed_user:
+        description: "user_id (uuid) to seed the tickers for"
+        default: ""
 
 permissions:
   contents: read
@@ -21,12 +27,38 @@ jobs:
       TRADIER_ENV:   ${{ secrets.TRADIER_ENV }}
       SUPABASE_SERVICE_KEY: ${{ secrets.SUPABASE_SERVICE_KEY }}
       TK: ${{ github.event.inputs.ticker }}
+      SEED_TICKERS: ${{ github.event.inputs.seed_tickers }}
+      SEED_USER:    ${{ github.event.inputs.seed_user }}
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
       - run: pip install requests
+
+      - name: Seed watchlist rows (owner test — proves DB write + fold path)
+        if: ${{ github.event.inputs.seed_tickers != '' }}
+        run: |
+          python - <<'PY'
+          import os, requests
+          key = (os.environ.get("SUPABASE_SERVICE_KEY") or "").strip()
+          url = "https://asxwbjrripzbkcxbkect.supabase.co"
+          user = (os.environ.get("SEED_USER") or "").strip()
+          tickers = [t.strip().upper() for t in (os.environ.get("SEED_TICKERS") or "").split(",") if t.strip()]
+          if not (key and user and tickers):
+              print("seed skipped — missing key/user/tickers"); raise SystemExit(0)
+          rows = [{"user_id": user, "ticker": t} for t in tickers]
+          r = requests.post(url + "/rest/v1/watchlist", json=rows,
+                            headers={"apikey": key, "Authorization": "Bearer " + key,
+                                     "Content-Type": "application/json",
+                                     "Prefer": "resolution=ignore-duplicates,return=representation"},
+                            timeout=15)
+          print("INSERT status:", r.status_code, r.text[:300])
+          # Read the row set back (service_role bypasses RLS) to confirm what's stored now.
+          g = requests.get(url + "/rest/v1/watchlist", params={"select": "ticker,user_id"},
+                          headers={"apikey": key, "Authorization": "Bearer " + key}, timeout=15)
+          print("WATCHLIST now:", g.status_code, g.text[:500])
+          PY
 
       - name: Supabase service-key read (folds users' watchlists into the scan)
         run: |
