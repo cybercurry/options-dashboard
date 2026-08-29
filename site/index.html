@@ -1185,8 +1185,18 @@ function leapTile(l){
     <div class="detail">${verdictLine}${web('LEAP $'+l.strike, gnodes)}<div class="webfoot">${foot}</div><div class="webkey">${key}</div></div></div>`;
 }
 function renderDeep(tk){
-  const o=BYTK[tk]; const host=document.getElementById('deep-body');
-  if(!o){host.innerHTML=`<div class="empty">Pick a ticker to see its full breakdown.</div>`;return;}
+  const host=document.getElementById('deep-body');
+  const di=document.getElementById('deep-in'); if(di && tk) di.value=tk;   // autopopulate the TA input
+  if(!tk){ host.innerHTML=`<div class="empty">Type a ticker to see its full breakdown.</div>`; return; }
+  const o=BYTK[tk];
+  if(!o){
+    // researched (e.g. via Fundamentals) but not in the options scan — show the price chart anyway,
+    // in this same click, instead of a dead empty state.
+    host.innerHTML=`<div class="head" style="margin:6px 0 0"><h1 style="font-size:22px">${tk} <span class="dim" style="font-size:14px;font-weight:400">chart only · not in the wheel watchlist</span></h1></div>
+      <p class="hint">The CSP / CC / LEAP tiles are computed for the watchlist; for other names the price chart is shown below.</p>`;
+    document.getElementById('sym2').textContent=tk; mountChart('tvchart2',tk);
+    markSel(); return;
+  }
   const wset=new Set((DATA.universe&&DATA.universe.wheel_names)||[]);
   const gset=new Set((DATA.universe&&DATA.universe.growth_names)||[]);
   const inW=wset.has(tk), inG=gset.has(tk);
