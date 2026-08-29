@@ -19,6 +19,7 @@ jobs:
     env:
       TRADIER_TOKEN: ${{ secrets.TRADIER_TOKEN }}
       TRADIER_ENV:   ${{ secrets.TRADIER_ENV }}
+      SUPABASE_SERVICE_KEY: ${{ secrets.SUPABASE_SERVICE_KEY }}
       TK: ${{ github.event.inputs.ticker }}
     steps:
       - uses: actions/checkout@v4
@@ -26,6 +27,20 @@ jobs:
         with:
           python-version: "3.12"
       - run: pip install requests
+
+      - name: Supabase service-key read (folds users' watchlists into the scan)
+        run: |
+          python - <<'PY'
+          import os, build_json
+          has = bool(os.environ.get("SUPABASE_SERVICE_KEY"))
+          print("SERVICE_KEY present:", has)
+          tk = build_json._user_tickers()   # deduped union of every user's private tickers
+          print("USER_TICKERS count:", len(tk))
+          print("USER_TICKERS sample:", tk[:20])   # symbols only — never prints the key
+          if has and not tk:
+              print("NOTE: key set but read returned nothing — no users have added tickers yet, "
+                    "or the key/RLS-bypass is wrong. (An empty user list is a valid state.)")
+          PY
 
       - name: Python ground truth (the proven engine)
         run: |
