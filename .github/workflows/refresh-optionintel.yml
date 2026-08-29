@@ -30,6 +30,9 @@ jobs:
     env:
       TRADIER_TOKEN: ${{ secrets.TRADIER_TOKEN }}
       TRADIER_ENV:   ${{ secrets.TRADIER_ENV }}
+      # Lets the scan fold registered users' private watchlist tickers in (build_json._user_tickers).
+      # Absent → the read no-ops and only the default watchlist is scanned; the build never breaks.
+      SUPABASE_SERVICE_KEY: ${{ secrets.SUPABASE_SERVICE_KEY }}
     steps:
       - uses: actions/checkout@v4
 
