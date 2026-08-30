@@ -579,7 +579,7 @@ th.thelp:hover{color:var(--text)} th.thelp:hover .thi{border-color:var(--accent)
 
 </main>
 
-<footer class="wrap"><b>optionintel.app</b> — one engine, every tab · real Tradier chains &amp; greeks · the same rules the <b>Rules</b> tab lists · <b>research only, not advice</b> · <span class="pre" style="opacity:.6">build <span id="buildid">2026-08-30 · arch-A · auth-status</span></span></footer>
+<footer class="wrap"><b>optionintel.app</b> — one engine, every tab · real Tradier chains &amp; greeks · the same rules the <b>Rules</b> tab lists · <b>research only, not advice</b> · <span class="pre" style="opacity:.6">build <span id="buildid">2026-08-30 · arch-A · auth-implicit</span></span></footer>
 
 <script>
 const KIND={csp:"CSP",cc:"CC",leap:"LEAP"};
@@ -747,6 +747,8 @@ function renderAuthStatus(){
     el.innerHTML=`<span class="au-dot au-on"></span><span class="au-em" title="Signed in as ${USER.email}">${USER.email}</span>`
                + `<button class="au-out" data-act="hsignout">sign out</button>`;
     const b=el.querySelector('.au-out'); if(b) b.onclick=()=>signOut();
+  } else if(/error/i.test(AUTHMSG||'')){
+    el.innerHTML=`<span class="au-dot" style="background:var(--bad)"></span><span class="au-guest" style="color:var(--bad)" title="${(AUTHMSG||'').replace(/"/g,'&quot;')}">${(AUTHMSG||'').slice(0,64)}</span>`;
   } else {
     el.innerHTML=`<span class="au-dot"></span><span class="au-guest">Guest · not signed in</span>`;
   }
@@ -1084,12 +1086,26 @@ loadLocalPicks();
 function wlSave(){ if(USER) return; try{localStorage.setItem(WL_KEY, JSON.stringify({picks:[...MYWL.picks]}));}catch(e){} }
 
 function initAuth(){
+  renderAuthStatus();                                          // paint the Guest chip immediately
   if(!window.supabase || !SUPA_URL) return;                    // library blocked / unconfigured → guest-only
-  try{ SB=window.supabase.createClient(SUPA_URL, SUPA_KEY); }catch(e){ SB=null; return; }
-  SB.auth.getSession().then(({data})=>onAuth(data&&data.session));
+  // Surface any error the magic-link redirect carries back (so a failed sign-in is never silent).
+  try{
+    const h=new URLSearchParams((location.hash||'').replace(/^#/,''));
+    const q=new URLSearchParams((location.search||'').replace(/^\?/,''));
+    const err=h.get('error_description')||h.get('error')||q.get('error_description')||q.get('error');
+    if(err) AUTHMSG='Sign-in error: '+decodeURIComponent(err);
+  }catch(e){}
+  // IMPLICIT flow: the magic link returns the access token directly in the URL hash — no PKCE
+  // code_verifier to look up — so sign-in completes even when the email opens the link in a new
+  // tab or a different browser than the one that requested it (the common magic-link failure).
+  try{ SB=window.supabase.createClient(SUPA_URL, SUPA_KEY,
+        {auth:{flowType:'implicit', detectSessionInUrl:true, persistSession:true, autoRefreshToken:true}}); }
+  catch(e){ SB=null; renderAuthStatus(); return; }
+  SB.auth.getSession().then(({data,error})=>{ if(error) AUTHMSG='Session error: '+error.message; onAuth(data&&data.session); });
   SB.auth.onAuthStateChange((_e,session)=>onAuth(session));
 }
-function onAuth(session){ USER=session?session.user:null; AUTHMSG='';
+function onAuth(session){ USER=session?session.user:null;
+  if(USER) AUTHMSG='';                                         // keep any error message visible while signed out
   if(USER) syncCloud(); else { loadLocalPicks(); rebuild(); } }
 async function cloudList(){ try{const {data,error}=await SB.from('watchlist').select('ticker');
   if(error){ AUTHMSG='List load failed: '+error.message; } return error?[]:(data||[]).map(r=>r.ticker);}catch(e){return[];} }
