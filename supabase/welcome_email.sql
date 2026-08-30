@@ -44,7 +44,9 @@ begin
       'reply_to', reply_to,
       'subject',  'Welcome to OptionIntel — how to use it',
       'text',     'Welcome to OptionIntel (optionintel.app) — options intelligence for the wheel '
-              || 'strategy; research, not advice. A clean way to work an idea, top to bottom: '
+              || 'strategy; research, not advice. Registering lets you build your own watchlist and '
+              || 'make it truly yours — your picks drive every tab, private and synced across '
+              || 'devices; more personalization is on the way. A clean way to work an idea, top to bottom: '
               || '1) Read the market (Market tab): macro, rates, volatility regime. '
               || '2) Set today''s goal: income (CSP/CC) or long exposure (LEAP). '
               || '3) Select the stock (Fundamentals): valuation & quality from SEC filings. '
@@ -60,8 +62,9 @@ begin
 <div style="font-family:Arial,Helvetica,sans-serif;max-width:600px;margin:0 auto;color:#111827;background:#ffffff;padding:8px 4px">
   <h1 style="margin:0 0 4px;font-size:24px">Welcome to OptionIntel 👋</h1>
   <p style="color:#6b7280;margin:0 0 6px;font-size:14px">Options intelligence for the wheel strategy — research, not advice.</p>
-  <p style="color:#5B8DEF;margin:0 0 22px;font-size:12px;font-weight:bold;letter-spacing:.06em;text-transform:uppercase">Context → Select → Confirm → Structure → Manage</p>
-  <p style="line-height:1.6;font-size:14px;margin:0 0 22px">A clean way to work through an idea — top to bottom, using the tabs:</p>
+  <p style="color:#5B8DEF;margin:0 0 20px;font-size:12px;font-weight:bold;letter-spacing:.06em;text-transform:uppercase">Context → Select → Confirm → Structure → Manage</p>
+  <p style="line-height:1.6;font-size:14px;margin:0 0 16px">Thanks for registering 🙌 Signing in lets you <b>build your own watchlist</b> and make OptionIntel truly yours — your picks drive every tab, private to you and synced across your devices. This is just the start: more personalization is on the way.</p>
+  <p style="line-height:1.6;font-size:14px;margin:0 0 22px">Here's a clean way to work through an idea — top to bottom, using the tabs:</p>
   <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="border-collapse:collapse">
     <tr><td style="padding:0"><table role="presentation" width="100%" cellpadding="0" cellspacing="0"><tr>
       <td width="42" valign="top" style="padding:0 12px 0 0"><div style="width:30px;height:30px;border-radius:50%;background:#5B8DEF;color:#fff;font-weight:bold;font-size:14px;text-align:center;line-height:30px">1</div></td>
@@ -109,7 +112,7 @@ begin
     <b>Above all — manage risk and position size.</b> No single trade should be able to hurt you. The plan matters more than the pick.
   </div>
   <p style="margin:24px 0 6px"><a href="https://optionintel.app" style="background:#5B8DEF;color:#ffffff;text-decoration:none;padding:12px 22px;border-radius:8px;display:inline-block;font-weight:bold;font-size:14px">Open OptionIntel →</a></p>
-  <p style="font-size:14px;line-height:1.6;margin:22px 0 2px">Have feedback or a question? Just hit <b>Reply</b> — it comes straight to me.</p>
+  <p style="font-size:14px;line-height:1.6;margin:22px 0 2px">Thanks for being here — I hope it helps you trade a little sharper. Feedback or a question? Just hit <b>Reply</b> — it comes straight to me.</p>
   <p style="font-size:14px;margin:0;color:#111827">— Jay</p>
   <p style="color:#9ca3af;font-size:12px;border-top:1px solid #e5e7eb;padding-top:14px;margin-top:20px;line-height:1.6">Research &amp; education only — not financial advice, an offer, or a recommendation. You're receiving this once because you signed in at optionintel.app.</p>
 </div>
