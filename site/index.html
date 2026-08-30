@@ -6,6 +6,8 @@
 <title>OptionIntel — Wheel Signals</title>
 <link rel="icon" href="/favicon.ico" sizes="32x32">
 <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<script>/* snapshot the landing URL before anything (supabase-js) can clean the hash */
+window.__AUTHSNAP=(function(){try{return{hash:location.hash||'',search:location.search||''};}catch(e){return{hash:'',search:''};}})();</script>
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -579,7 +581,7 @@ th.thelp:hover{color:var(--text)} th.thelp:hover .thi{border-color:var(--accent)
 
 </main>
 
-<footer class="wrap"><b>optionintel.app</b> — one engine, every tab · real Tradier chains &amp; greeks · the same rules the <b>Rules</b> tab lists · <b>research only, not advice</b> · <span class="pre" style="opacity:.6">build <span id="buildid">2026-08-30 · arch-A · auth-implicit</span></span></footer>
+<footer class="wrap"><b>optionintel.app</b> — one engine, every tab · real Tradier chains &amp; greeks · the same rules the <b>Rules</b> tab lists · <b>research only, not advice</b> · <span class="pre" style="opacity:.6">build <span id="buildid">2026-08-30 · arch-A · auth-diag</span></span></footer>
 
 <script>
 const KIND={csp:"CSP",cc:"CC",leap:"LEAP"};
@@ -716,7 +718,34 @@ fetch('data/signals.json',{cache:'no-store'}).then(r=>r.json()).then(J=>{
   rebuild();    // derive READY/LEAPQ/BYTK/CHAINROWS for the ACTIVE universe + render every universe-scoped tab
   const first=(READY[0]&&READY[0].ticker)||(LEAPQ[0]&&LEAPQ[0].ticker)||Object.keys(BYTK)[0];
   if(first) setSym(first);
+  showAuthDiag(); setTimeout(showAuthDiag, 2000);   // surface the landing URL after a magic-link click
 }).catch(e=>{document.getElementById('meta').textContent='could not load signals ('+e+')';});
+
+// Temporary sign-in diagnostic: shows exactly what the magic-link redirect delivered (token in
+// the hash? a ?code=? an error? did a session get stored?). Only appears right after a link click
+// (URL carries auth params) or with ?debug — invisible to normal visitors.
+function showAuthDiag(){
+  try{
+    const s=window.__AUTHSNAP||{hash:'',search:''};
+    const raw=(s.hash||'')+' '+(s.search||'');
+    const hasTok=/access_token=/.test(raw), hasCode=/[?&]code=/.test(raw), hasErr=/error/i.test(raw);
+    const dbg=/[?&]debug/.test(location.search||'');
+    if(!(hasTok||hasCode||hasErr||dbg)) return;
+    let stored=false; try{ for(let i=0;i<localStorage.length;i++){ if(/sb-.*-auth-token/.test(localStorage.key(i)||'')){stored=true;break;} } }catch(e){}
+    const bid=document.getElementById('buildid'); const build=bid?bid.textContent:'?';
+    const d=document.getElementById('authdiag')||document.createElement('div');
+    d.id='authdiag';
+    d.style.cssText='position:fixed;left:8px;right:8px;bottom:8px;z-index:99999;background:#0b0b0b;color:#7CFC7C;'
+      +'font:12px/1.5 ui-monospace,monospace;padding:10px 12px;border:1px solid #2a2;border-radius:8px;'
+      +'white-space:pre-wrap;word-break:break-all;box-shadow:0 6px 24px rgba(0,0,0,.55)';
+    d.innerHTML='<b>AUTH DIAG</b> · build '+build+'<br>'
+      +'token_in_url:'+hasTok+' · code_in_url:'+hasCode+' · error_in_url:'+hasErr+' · stored_session:'+stored+' · signed_in:'+(!!USER)+'<br>'
+      +'hash='+((s.hash||'(empty)').slice(0,160))+'<br>'
+      +'search='+((s.search||'(empty)').slice(0,160))
+      +' <button onclick="this.closest(\'#authdiag\').remove()" style="margin-left:8px;background:#222;color:#7CFC7C;border:1px solid #2a2;border-radius:4px;cursor:pointer">close</button>';
+    document.body.appendChild(d);
+  }catch(e){}
+}
 
 /* ── Active universe ─────────────────────────────────────────────────────────────
    Every tab reads ONE ticker set — either the DEFAULT hand-curated watchlist, or a signed-in

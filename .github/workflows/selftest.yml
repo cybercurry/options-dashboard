@@ -40,6 +40,19 @@ jobs:
           python-version: "3.12"
       - run: pip install requests
 
+      - name: Verify the LIVE site serves the latest code (proves repo → deploy path)
+        run: |
+          for i in 1 2 3 4 5 6 7 8; do
+            code=$(curl -s -o /tmp/site -w "%{http_code}" https://optionintel.app/ || echo 000)
+            echo "attempt $i -> $code"; [ "$code" = "200" ] && break; sleep 15
+          done
+          echo "--- build stamp on live site ---"
+          grep -o 'id="buildid">[^<]*' /tmp/site || echo "buildid NOT FOUND"
+          echo "--- auth flowType on live site ---"
+          grep -o "flowType:'[a-z]*'" /tmp/site || echo "flowType NOT FOUND"
+          echo "--- diagnostic snapshot present? ---"
+          grep -c "__AUTHSNAP" /tmp/site || true
+
       - name: Send a real magic link (end-to-end custom-SMTP test)
         if: ${{ github.event.inputs.otp_email != '' }}
         run: |
