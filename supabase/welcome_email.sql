@@ -48,7 +48,7 @@ begin
               || 'make it truly yours — your picks drive every tab, private and synced across '
               || 'devices; more personalization is on the way. A clean way to work an idea, top to bottom: '
               || '1) Read the market (Market tab): macro, rates, volatility regime. '
-              || '2) Set today''s goal: income (CSP/CC) or long exposure (LEAP). '
+              || '2) Set the goal: income (a cash-secured put or covered call) or long exposure (a LEAP). '
               || '3) Select the stock (Fundamentals): valuation & quality from SEC filings. '
               || '4) Confirm trend & timing (TA). '
               || '5) Scan the Signals for a match; note the timing score. '
@@ -59,62 +59,56 @@ begin
               || 'Feedback or a question? Just reply to this email — it comes straight to me. — Jay. '
               || 'Open https://optionintel.app',
       'html',     $html$
-<div style="font-family:Arial,Helvetica,sans-serif;max-width:600px;margin:0 auto;color:#111827;background:#ffffff;padding:8px 4px">
-  <h1 style="margin:0 0 4px;font-size:24px">Welcome to OptionIntel 👋</h1>
-  <p style="color:#6b7280;margin:0 0 6px;font-size:14px">Options intelligence for the wheel strategy — research, not advice.</p>
-  <p style="color:#5B8DEF;margin:0 0 20px;font-size:12px;font-weight:bold;letter-spacing:.06em;text-transform:uppercase">Context → Select → Confirm → Structure → Manage</p>
-  <p style="line-height:1.6;font-size:14px;margin:0 0 16px">Thanks for registering 🙌 Signing in lets you <b>build your own watchlist</b> and make OptionIntel truly yours — your picks drive every tab, private to you and synced across your devices. This is just the start: more personalization is on the way.</p>
-  <p style="line-height:1.6;font-size:14px;margin:0 0 22px">Here's a clean way to work through an idea — top to bottom, using the tabs:</p>
+<div style="font-family:'Helvetica Neue',Arial,sans-serif;max-width:600px;margin:0 auto;color:#111827;background:#ffffff;padding:8px 4px">
+  <h1 style="margin:0 0 4px;font-size:24px">Welcome to OptionIntel</h1>
+  <p style="color:#6b7280;margin:0 0 4px;font-size:14px">Options intelligence for the wheel strategy — research, not advice.</p>
+  <p style="color:#5B8DEF;margin:0 0 22px;font-size:11.5px;font-weight:bold;letter-spacing:.09em;text-transform:uppercase">Context&nbsp;&rarr;&nbsp;Select&nbsp;&rarr;&nbsp;Confirm&nbsp;&rarr;&nbsp;Structure&nbsp;&rarr;&nbsp;Manage</p>
+  <p style="line-height:1.65;font-size:14px;margin:0 0 16px">Thanks for registering. Signing in lets you <b>build your own watchlist</b> and make OptionIntel truly yours — your picks drive every tab, private to you and synced across your devices. This is just the start; more personalization is on the way.</p>
+  <p style="line-height:1.65;font-size:14px;margin:0 0 24px">A clean way to work through an idea — top to bottom, using the tabs:</p>
   <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="border-collapse:collapse">
-    <tr><td style="padding:0"><table role="presentation" width="100%" cellpadding="0" cellspacing="0"><tr>
-      <td width="42" valign="top" style="padding:0 12px 0 0"><div style="width:30px;height:30px;border-radius:50%;background:#5B8DEF;color:#fff;font-weight:bold;font-size:14px;text-align:center;line-height:30px">1</div></td>
-      <td valign="top" style="padding:2px 0"><div style="font-weight:bold;font-size:14px">Read the market <a href="https://optionintel.app/#market" style="color:#5B8DEF;text-decoration:none;font-weight:normal">· Market ↗</a></div>
-      <div style="color:#4b5563;font-size:13px;line-height:1.5;margin-top:2px">Macro backdrop, rates, and the volatility regime. Trade with the tape, not against it.</div></td>
-    </tr></table></td></tr>
-    <tr><td style="padding:5px 0 5px 15px;color:#cbd2db;font-size:15px;line-height:1">↓</td></tr>
-    <tr><td style="padding:0"><table role="presentation" width="100%" cellpadding="0" cellspacing="0"><tr>
-      <td width="42" valign="top" style="padding:0 12px 0 0"><div style="width:30px;height:30px;border-radius:50%;background:#5B8DEF;color:#fff;font-weight:bold;font-size:14px;text-align:center;line-height:30px">2</div></td>
-      <td valign="top" style="padding:2px 0"><div style="font-weight:bold;font-size:14px">Set today's goal</div>
-      <div style="color:#4b5563;font-size:13px;line-height:1.5;margin-top:2px">Income (sell a CSP / CC) or long exposure (a LEAP)? Decide what you want <i>before</i> you look.</div></td>
-    </tr></table></td></tr>
-    <tr><td style="padding:5px 0 5px 15px;color:#cbd2db;font-size:15px;line-height:1">↓</td></tr>
-    <tr><td style="padding:0"><table role="presentation" width="100%" cellpadding="0" cellspacing="0"><tr>
-      <td width="42" valign="top" style="padding:0 12px 0 0"><div style="width:30px;height:30px;border-radius:50%;background:#5B8DEF;color:#fff;font-weight:bold;font-size:14px;text-align:center;line-height:30px">3</div></td>
-      <td valign="top" style="padding:2px 0"><div style="font-weight:bold;font-size:14px">Select the stock <a href="https://optionintel.app/#fund" style="color:#5B8DEF;text-decoration:none;font-weight:normal">· Fundamentals ↗</a></div>
-      <div style="color:#4b5563;font-size:13px;line-height:1.5;margin-top:2px">Valuation &amp; quality straight from SEC filings. Look for asymmetric upside, not just familiar names.</div></td>
-    </tr></table></td></tr>
-    <tr><td style="padding:5px 0 5px 15px;color:#cbd2db;font-size:15px;line-height:1">↓</td></tr>
-    <tr><td style="padding:0"><table role="presentation" width="100%" cellpadding="0" cellspacing="0"><tr>
-      <td width="42" valign="top" style="padding:0 12px 0 0"><div style="width:30px;height:30px;border-radius:50%;background:#5B8DEF;color:#fff;font-weight:bold;font-size:14px;text-align:center;line-height:30px">4</div></td>
-      <td valign="top" style="padding:2px 0"><div style="font-weight:bold;font-size:14px">Confirm trend &amp; timing <a href="https://optionintel.app/#deep" style="color:#5B8DEF;text-decoration:none;font-weight:normal">· TA ↗</a></div>
-      <div style="color:#4b5563;font-size:13px;line-height:1.5;margin-top:2px">Is the chart set up — and is <i>now</i> a sensible entry? Check the trend, then the timing read.</div></td>
-    </tr></table></td></tr>
-    <tr><td style="padding:5px 0 5px 15px;color:#cbd2db;font-size:15px;line-height:1">↓</td></tr>
-    <tr><td style="padding:0"><table role="presentation" width="100%" cellpadding="0" cellspacing="0"><tr>
-      <td width="42" valign="top" style="padding:0 12px 0 0"><div style="width:30px;height:30px;border-radius:50%;background:#5B8DEF;color:#fff;font-weight:bold;font-size:14px;text-align:center;line-height:30px">5</div></td>
-      <td valign="top" style="padding:2px 0"><div style="font-weight:bold;font-size:14px">Scan the <a href="https://optionintel.app/#signals" style="color:#5B8DEF;text-decoration:none">Signals ↗</a></div>
-      <div style="color:#4b5563;font-size:13px;line-height:1.5;margin-top:2px">Does anything match your criteria and interest? Note its timing score before acting.</div></td>
-    </tr></table></td></tr>
-    <tr><td style="padding:5px 0 5px 15px;color:#cbd2db;font-size:15px;line-height:1">↓</td></tr>
-    <tr><td style="padding:0"><table role="presentation" width="100%" cellpadding="0" cellspacing="0"><tr>
-      <td width="42" valign="top" style="padding:0 12px 0 0"><div style="width:30px;height:30px;border-radius:50%;background:#5B8DEF;color:#fff;font-weight:bold;font-size:14px;text-align:center;line-height:30px">6</div></td>
-      <td valign="top" style="padding:2px 0"><div style="font-weight:bold;font-size:14px">Structure the trade <a href="https://optionintel.app/#chain" style="color:#5B8DEF;text-decoration:none;font-weight:normal">· Options Chain ↗</a></div>
-      <div style="color:#4b5563;font-size:13px;line-height:1.5;margin-top:2px"><b>Hover a Bid</b> to see the expected return at each Delta. Pick your &#916; (&#8776;30 preset) and DTE (30&#8211;35 preset) — both editable.</div></td>
-    </tr></table></td></tr>
-    <tr><td style="padding:5px 0 5px 15px;color:#cbd2db;font-size:15px;line-height:1">↓</td></tr>
-    <tr><td style="padding:0"><table role="presentation" width="100%" cellpadding="0" cellspacing="0"><tr>
-      <td width="42" valign="top" style="padding:0 12px 0 0"><div style="width:30px;height:30px;border-radius:50%;background:#5B8DEF;color:#fff;font-weight:bold;font-size:14px;text-align:center;line-height:30px">7</div></td>
-      <td valign="top" style="padding:2px 0"><div style="font-weight:bold;font-size:14px">Size it &amp; plan the exit</div>
-      <div style="color:#4b5563;font-size:13px;line-height:1.5;margin-top:2px">Choose your position size, then decide your exit <i>up front</i> — for both cases: it works out, or it goes against you.</div></td>
-    </tr></table></td></tr>
+    <tr>
+      <td width="38" valign="top" style="border-left:2px solid #D7E3F8;padding:0 0 26px 0"><div style="width:27px;height:27px;line-height:27px;border-radius:50%;background:#5B8DEF;color:#fff;font-size:13px;font-weight:bold;text-align:center;margin-left:-14px;box-shadow:0 0 0 4px #ffffff">1</div></td>
+      <td valign="top" style="padding:0 0 26px 12px"><div style="font-size:14px;font-weight:bold">Read the market <a href="https://optionintel.app/#market" style="color:#5B8DEF;text-decoration:none;font-weight:normal">· Market &#8599;</a></div>
+        <div style="color:#4b5563;font-size:13px;line-height:1.55;margin-top:3px">The macro backdrop, rates, and the volatility regime. Work with the tape, not against it.</div></td>
+    </tr>
+    <tr>
+      <td width="38" valign="top" style="border-left:2px solid #D7E3F8;padding:0 0 26px 0"><div style="width:27px;height:27px;line-height:27px;border-radius:50%;background:#5B8DEF;color:#fff;font-size:13px;font-weight:bold;text-align:center;margin-left:-14px;box-shadow:0 0 0 4px #ffffff">2</div></td>
+      <td valign="top" style="padding:0 0 26px 12px"><div style="font-size:14px;font-weight:bold">Set the goal</div>
+        <div style="color:#4b5563;font-size:13px;line-height:1.55;margin-top:3px">Income (a cash-secured put or covered call) or long exposure (a LEAP)? Decide before you look.</div></td>
+    </tr>
+    <tr>
+      <td width="38" valign="top" style="border-left:2px solid #D7E3F8;padding:0 0 26px 0"><div style="width:27px;height:27px;line-height:27px;border-radius:50%;background:#5B8DEF;color:#fff;font-size:13px;font-weight:bold;text-align:center;margin-left:-14px;box-shadow:0 0 0 4px #ffffff">3</div></td>
+      <td valign="top" style="padding:0 0 26px 12px"><div style="font-size:14px;font-weight:bold">Select the stock <a href="https://optionintel.app/#fund" style="color:#5B8DEF;text-decoration:none;font-weight:normal">· Fundamentals &#8599;</a></div>
+        <div style="color:#4b5563;font-size:13px;line-height:1.55;margin-top:3px">Valuation and quality straight from SEC filings — room to find asymmetric names, not just the index.</div></td>
+    </tr>
+    <tr>
+      <td width="38" valign="top" style="border-left:2px solid #D7E3F8;padding:0 0 26px 0"><div style="width:27px;height:27px;line-height:27px;border-radius:50%;background:#5B8DEF;color:#fff;font-size:13px;font-weight:bold;text-align:center;margin-left:-14px;box-shadow:0 0 0 4px #ffffff">4</div></td>
+      <td valign="top" style="padding:0 0 26px 12px"><div style="font-size:14px;font-weight:bold">Confirm trend &amp; timing <a href="https://optionintel.app/#deep" style="color:#5B8DEF;text-decoration:none;font-weight:normal">· TA &#8599;</a></div>
+        <div style="color:#4b5563;font-size:13px;line-height:1.55;margin-top:3px">Is the chart set up — and is now a sensible entry? Trend first, then the timing read.</div></td>
+    </tr>
+    <tr>
+      <td width="38" valign="top" style="border-left:2px solid #D7E3F8;padding:0 0 26px 0"><div style="width:27px;height:27px;line-height:27px;border-radius:50%;background:#5B8DEF;color:#fff;font-size:13px;font-weight:bold;text-align:center;margin-left:-14px;box-shadow:0 0 0 4px #ffffff">5</div></td>
+      <td valign="top" style="padding:0 0 26px 12px"><div style="font-size:14px;font-weight:bold">Scan the <a href="https://optionintel.app/#signals" style="color:#5B8DEF;text-decoration:none">Signals &#8599;</a></div>
+        <div style="color:#4b5563;font-size:13px;line-height:1.55;margin-top:3px">Does anything match your criteria and interest? Note its timing score before acting.</div></td>
+    </tr>
+    <tr>
+      <td width="38" valign="top" style="border-left:2px solid #D7E3F8;padding:0 0 26px 0"><div style="width:27px;height:27px;line-height:27px;border-radius:50%;background:#5B8DEF;color:#fff;font-size:13px;font-weight:bold;text-align:center;margin-left:-14px;box-shadow:0 0 0 4px #ffffff">6</div></td>
+      <td valign="top" style="padding:0 0 26px 12px"><div style="font-size:14px;font-weight:bold">Structure the trade <a href="https://optionintel.app/#chain" style="color:#5B8DEF;text-decoration:none;font-weight:normal">· Options Chain &#8599;</a></div>
+        <div style="color:#4b5563;font-size:13px;line-height:1.55;margin-top:3px">Hover a Bid to see the expected return at each Delta. &#916;&#8776;30 and 30&#8211;35 DTE come preset — both editable.</div></td>
+    </tr>
+    <tr>
+      <td width="38" valign="top" style="border-left:2px solid #D7E3F8;padding:0"><div style="width:27px;height:27px;line-height:27px;border-radius:50%;background:#5B8DEF;color:#fff;font-size:13px;font-weight:bold;text-align:center;margin-left:-14px;box-shadow:0 0 0 4px #ffffff">7</div></td>
+      <td valign="top" style="padding:0 0 0 12px"><div style="font-size:14px;font-weight:bold">Size it &amp; plan the exit</div>
+        <div style="color:#4b5563;font-size:13px;line-height:1.55;margin-top:3px">Choose the position size, then decide the exit before entering — for both cases: it works out, or it goes against you.</div></td>
+    </tr>
   </table>
-  <div style="background:#FEF3C7;border:1px solid #FCD34D;border-radius:10px;padding:14px 16px;margin:24px 0 6px;color:#92400E;font-size:14px;line-height:1.55">
-    <b>Above all — manage risk and position size.</b> No single trade should be able to hurt you. The plan matters more than the pick.
+  <div style="background:#FEF3C7;border:1px solid #FCD34D;border-radius:12px;padding:15px 17px;margin:26px 0 6px;color:#92400E;font-size:14px;line-height:1.6">
+    <b>Above all — manage risk and position size.</b> No single trade should be able to hurt you; decide the exit before entering, for both outcomes.
   </div>
-  <p style="margin:24px 0 6px"><a href="https://optionintel.app" style="background:#5B8DEF;color:#ffffff;text-decoration:none;padding:12px 22px;border-radius:8px;display:inline-block;font-weight:bold;font-size:14px">Open OptionIntel →</a></p>
-  <p style="font-size:14px;line-height:1.6;margin:22px 0 2px">Thanks for being here — I hope it helps you trade a little sharper. Feedback or a question? Just hit <b>Reply</b> — it comes straight to me.</p>
+  <p style="margin:24px 0 6px"><a href="https://optionintel.app" style="background:#5B8DEF;color:#ffffff;text-decoration:none;padding:13px 24px;border-radius:9px;display:inline-block;font-weight:bold;font-size:14px">Open OptionIntel &rarr;</a></p>
+  <p style="font-size:14px;line-height:1.65;margin:22px 0 2px">Feedback or a question? Just hit <b>Reply</b> — it reaches me directly.</p>
   <p style="font-size:14px;margin:0;color:#111827">— Jay</p>
-  <p style="color:#9ca3af;font-size:12px;border-top:1px solid #e5e7eb;padding-top:14px;margin-top:20px;line-height:1.6">Research &amp; education only — not financial advice, an offer, or a recommendation. You're receiving this once because you signed in at optionintel.app.</p>
+  <p style="color:#9ca3af;font-size:12px;border-top:1px solid #e5e7eb;padding-top:14px;margin-top:22px;line-height:1.6">Research and education only — not financial advice, an offer, or a recommendation. You're receiving this once because you signed in at optionintel.app.</p>
 </div>
       $html$
     )
