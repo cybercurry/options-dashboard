@@ -18,6 +18,9 @@ on:
       otp_email:
         description: "Email to send a real magic-link to (tests custom SMTP end-to-end; blank = skip)"
         default: ""
+      feedback_test:
+        description: "Set 'yes' to POST a real test feedback (sends one email to FEEDBACK_TO)"
+        default: ""
 
 permissions:
   contents: read
@@ -39,6 +42,20 @@ jobs:
         with:
           python-version: "3.12"
       - run: pip install requests
+
+      - name: Feedback endpoint (route probe + optional real send)
+        run: |
+          echo "=== GET /api/feedback (route deployed?) ==="
+          curl -s -o /tmp/fg -w "status %{http_code}\n" https://optionintel.app/api/feedback
+          echo "body:"; cat /tmp/fg; echo
+          if [ "${{ github.event.inputs.feedback_test }}" = "yes" ]; then
+            echo "=== POST /api/feedback (real end-to-end send → FEEDBACK_TO) ==="
+            curl -s -o /tmp/fp -w "status %{http_code}\n" -X POST https://optionintel.app/api/feedback \
+              -H "Content-Type: application/json" \
+              -d '{"category":"Bug","message":"CI end-to-end feedback test — please ignore.","email":"cybercurry@runbox.com","page":"#overview"}'
+            echo "body:"; cat /tmp/fp; echo
+            echo "200 {ok:true} = configured + sent · 500 = env vars not set · 502 = Resend send failed"
+          fi
 
       - name: Verify the LIVE site serves the latest code (proves repo → deploy path)
         run: |
