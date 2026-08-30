@@ -195,7 +195,13 @@ td.l{text-align:left}
 .authstatus .au-guest{color:var(--muted)}
 .authstatus .au-out{background:none; border:0; color:var(--muted); font-size:11px; cursor:pointer; text-decoration:underline; padding:0; margin-left:2px}
 .authstatus .au-out:hover{color:var(--text)}
-@media (max-width:640px){ .authstatus .au-em{max-width:120px} }
+.authstatus .au-input{background:var(--surface-2); border:1px solid var(--line); border-radius:8px; color:var(--text); padding:5px 9px; font-size:12px; font-family:"IBM Plex Sans"; width:170px}
+.authstatus .au-input::placeholder{color:var(--faint)}
+.authstatus .au-primary{background:var(--accent-soft); color:var(--accent); border:1px solid var(--line); border-radius:8px; padding:5px 11px; font-size:11.5px; font-weight:600; cursor:pointer; white-space:nowrap}
+.authstatus .au-primary:hover{filter:brightness(1.08)}
+.authstatus .au-msg{font-size:11px; color:var(--muted); max-width:220px; overflow:hidden; text-overflow:ellipsis}
+.authstatus .au-msg.err{color:var(--bad)}
+@media (max-width:640px){ .authstatus{flex-wrap:wrap; margin-left:0; width:100%} .authstatus .au-em{max-width:150px} .authstatus .au-input{width:140px} }
 .star{cursor:pointer; color:var(--faint); font-size:16px; line-height:1; user-select:none; transition:color .12s}
 .star.on,.star:hover{color:var(--accent)}
 td.star-c,th.star-c{width:1%; text-align:center; padding-left:12px; padding-right:2px}
@@ -581,7 +587,7 @@ th.thelp:hover{color:var(--text)} th.thelp:hover .thi{border-color:var(--accent)
 
 </main>
 
-<footer class="wrap"><b>optionintel.app</b> — one engine, every tab · real Tradier chains &amp; greeks · the same rules the <b>Rules</b> tab lists · <b>research only, not advice</b> · <span class="pre" style="opacity:.6">build <span id="buildid">2026-08-30 · arch-A · auth-setsession</span></span></footer>
+<footer class="wrap"><b>optionintel.app</b> — one engine, every tab · real Tradier chains &amp; greeks · the same rules the <b>Rules</b> tab lists · <b>research only, not advice</b> · <span class="pre" style="opacity:.6">build <span id="buildid">2026-08-30 · arch-A · account-hdr</span></span></footer>
 
 <script>
 const KIND={csp:"CSP",cc:"CC",leap:"LEAP"};
@@ -730,7 +736,8 @@ function showAuthDiag(){
     const raw=(s.hash||'')+' '+(s.search||'');
     const hasTok=/access_token=/.test(raw), hasRt=/refresh_token=/.test(raw), hasCode=/[?&]code=/.test(raw), hasErr=/error/i.test(raw);
     const dbg=/[?&]debug/.test(location.search||'');
-    if(!(hasTok||hasCode||hasErr||dbg)) return;
+    if(!dbg) return;   // debug-only: append ?debug to the URL to inspect the sign-in flow. Real
+                       // sign-in errors already surface in the header chip, so normal users never see this.
     let stored=false; try{ for(let i=0;i<localStorage.length;i++){ if(/sb-.*-auth-token/.test(localStorage.key(i)||'')){stored=true;break;} } }catch(e){}
     const bid=document.getElementById('buildid'); const build=bid?bid.textContent:'?';
     const d=document.getElementById('authdiag')||document.createElement('div');
@@ -768,19 +775,30 @@ function updateMeta(){
   const el=document.getElementById('meta'); if(el)
     el.innerHTML=`<b>${READY.length} setup${READY.length===1?'':'s'} ready</b> + <b>${LEAPQ.length} LEAP${LEAPQ.length===1?'':'s'}</b> from ${total} name${total===1?'':'s'} · ${scope}`;
 }
-// Header sign-in status — a green dot + your email when authenticated, a grey "Guest" otherwise.
-// This is the authoritative, always-on confirmation of access (mirrors the Overview account bar).
+// Header account control (top-right) — the single place to sign in / out and see access status:
+//  · signed in  → green dot + email + sign out
+//  · signed out → email field + "Send link" (magic-link sign-in)
+//  · no backend → a plain "Guest" (accounts unavailable)
+// Any sign-in message/error shows right here, so the Overview no longer duplicates it.
 function renderAuthStatus(){
   const el=document.getElementById('authstatus'); if(!el) return;
+  const msg = AUTHMSG ? `<span class="au-msg${/error/i.test(AUTHMSG)?' err':''}" title="${AUTHMSG.replace(/"/g,'&quot;')}">${AUTHMSG.slice(0,48)}</span>` : '';
   if(USER){
     el.innerHTML=`<span class="au-dot au-on"></span><span class="au-em" title="Signed in as ${USER.email}">${USER.email}</span>`
-               + `<button class="au-out" data-act="hsignout">sign out</button>`;
-    const b=el.querySelector('.au-out'); if(b) b.onclick=()=>signOut();
-  } else if(/error/i.test(AUTHMSG||'')){
-    el.innerHTML=`<span class="au-dot" style="background:var(--bad)"></span><span class="au-guest" style="color:var(--bad)" title="${(AUTHMSG||'').replace(/"/g,'&quot;')}">${(AUTHMSG||'').slice(0,64)}</span>`;
+               + `<button class="au-out" data-act="hsignout">sign out</button>${msg}`;
+  } else if(SB){
+    el.innerHTML=`<span class="au-dot"></span>`
+               + `<input id="hd-email" class="au-input" type="email" placeholder="sign in · you@email.com" autocomplete="email" spellcheck="false">`
+               + `<button class="au-primary" data-act="hsignin">Send link</button>${msg}`;
   } else {
-    el.innerHTML=`<span class="au-dot"></span><span class="au-guest">Guest · not signed in</span>`;
+    el.innerHTML=`<span class="au-dot"></span><span class="au-guest">Guest</span>${msg}`;
   }
+  el.querySelectorAll('[data-act]').forEach(b=>b.onclick=()=>{
+    const a=b.dataset.act;
+    if(a==='hsignout') signOut();
+    else if(a==='hsignin'){ const i=el.querySelector('#hd-email'); signIn(i?i.value:''); }
+  });
+  const inp=el.querySelector('#hd-email'); if(inp) inp.onkeydown=e=>{ if(e.key==='Enter'){ e.preventDefault(); signIn(inp.value); } };
 }
 // Header switch — only shown once there's a personal list to switch to (signed in, or guest picks).
 function renderUnivToggle(){
@@ -1157,8 +1175,8 @@ function onAuth(session){ USER=session?session.user:null;
 async function cloudList(){ try{const {data,error}=await SB.from('watchlist').select('ticker');
   if(error){ AUTHMSG='List load failed: '+error.message; } return error?[]:(data||[]).map(r=>r.ticker);}catch(e){return[];} }
 async function cloudAdd(tk){ try{const {error}=await SB.from('watchlist').insert({user_id:USER.id,ticker:tk});
-  if(error && error.code!=='23505'){ AUTHMSG='Save failed for '+tk+': '+error.message; renderWatchTable(); } }
-  catch(e){ AUTHMSG='Save failed for '+tk; renderWatchTable(); } }
+  if(error && error.code!=='23505'){ AUTHMSG='Save failed for '+tk+': '+error.message; renderAuthStatus(); } }
+  catch(e){ AUTHMSG='Save failed for '+tk; renderAuthStatus(); } }
 async function cloudRemove(tk){ try{const {error}=await SB.from('watchlist').delete().eq('ticker',tk);
   if(error){ AUTHMSG='Remove failed for '+tk+': '+error.message; renderWatchTable(); } }catch(e){} }
 async function syncCloud(){                                    // migrate any guest picks up on first login, then load
@@ -1170,10 +1188,10 @@ async function syncCloud(){                                    // migrate any gu
   if(MYWL.picks.size && pref===null) UNIV='mine';
   rebuild();
 }
-function signIn(email){ email=(email||'').trim(); if(!email||!SB){ AUTHMSG='Enter an email.'; renderWatchTable(); return; }
-  AUTHMSG='Sending…'; renderWatchTable();
+function signIn(email){ email=(email||'').trim(); if(!email||!SB){ AUTHMSG='Enter an email.'; renderAuthStatus(); return; }
+  AUTHMSG='Sending…'; renderAuthStatus();
   SB.auth.signInWithOtp({email, options:{emailRedirectTo:location.origin}})
-    .then(({error})=>{ AUTHMSG=error?('Error: '+error.message):('✓ Check '+email+' for the sign-in link.'); renderWatchTable(); }); }
+    .then(({error})=>{ AUTHMSG=error?('Error: '+error.message):('✓ Check '+email+' for the sign-in link.'); renderAuthStatus(); }); }
 function signOut(){ if(SB) SB.auth.signOut(); }
 
 function wlToggle(tk){ tk=(tk||'').toUpperCase(); if(!tk)return;
@@ -1192,13 +1210,13 @@ function renderWatchTable(){
   const all=(DATA.overview||[]).filter(o=>dset.has(String(o.ticker||'').toUpperCase())).sort((a,b)=>a.ticker<b.ticker?-1:1);
   const mine=UNIV==='mine';
   document.getElementById('ov-count').textContent = mine ? (MYWL.picks.size+' in my list') : (all.length+' default names');
+  // Account/sign-in lives in the header now (top-right). Here we keep only the watchlist action:
+  // add any ticker. Signed out → a hint pointing to the header to make the list portable.
   const acct = USER
-    ? `<div class="acctbar"><span class="acctwho">✓ ${USER.email}</span><button class="acctbtn" data-act="signout">Sign out</button>
-        <span class="addwrap"><input id="wl-add" placeholder="add any ticker…" maxlength="8" autocapitalize="characters"><button class="acctbtn" data-act="add">＋ Add</button></span></div>`
-    : `<div class="acctbar"><span class="acctinfo">Sign in to keep your own list across devices — the public default never changes.</span>
-        <span class="addwrap"><input id="wl-email" type="email" placeholder="you@email.com"><button class="acctbtn" data-act="signin">Send magic link</button></span>
+    ? `<div class="acctbar"><span class="addwrap"><input id="wl-add" placeholder="add any ticker…" maxlength="8" autocapitalize="characters"><button class="acctbtn" data-act="add">＋ Add</button></span></div>`
+    : `<div class="acctbar"><span class="acctinfo">Tickers you add save in this browser. <b>Sign in (top-right)</b> to keep your list across devices.</span>
         <span class="addwrap"><input id="wl-add" placeholder="add any ticker…" maxlength="8" autocapitalize="characters"><button class="acctbtn" data-act="add">＋ Add</button></span></div>`;
-  const acctmsg = AUTHMSG ? `<div class="acctmsg">${AUTHMSG}</div>` : (SB?'':`<div class="acctmsg dim">Accounts unavailable right now — your list is saved in this browser.</div>`);
+  const acctmsg = (!SB && !USER) ? `<div class="acctmsg dim">Accounts unavailable right now — your list is saved in this browser.</div>` : '';
   const seg=`<div class="wlseg">
     <button class="${mine?'':'on'}" data-v="default">Default <span class="c mono">${all.length}</span></button>
     <button class="${mine?'on':''}" data-v="mine">★ My list <span class="c mono">${MYWL.picks.size}</span></button></div>`;
@@ -1244,12 +1262,10 @@ function renderWatchTable(){
   host.querySelectorAll('.star').forEach(s=>{ const go=e=>{e.stopPropagation(); wlToggle(s.dataset.star);};
     s.onclick=go; s.onkeydown=e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();go(e);}};});
   host.querySelectorAll('tr.clk').forEach(tr=>tr.onclick=()=>{setSym(tr.dataset.tk); go('deep');});
-  const addI=host.querySelector('#wl-add'); const emI=host.querySelector('#wl-email');
+  const addI=host.querySelector('#wl-add');
   const doAdd=()=>{ if(addI) wlAdd(addI.value); };
-  host.querySelectorAll('[data-act]').forEach(b=>b.onclick=()=>{ const a=b.dataset.act;
-    if(a==='signin') signIn(emI?emI.value:''); else if(a==='signout') signOut(); else if(a==='add') doAdd(); });
+  host.querySelectorAll('[data-act]').forEach(b=>b.onclick=()=>{ if(b.dataset.act==='add') doAdd(); });
   if(addI) addI.onkeydown=e=>{ if(e.key==='Enter'){ e.preventDefault(); doAdd(); } };
-  if(emI) emI.onkeydown=e=>{ if(e.key==='Enter'){ e.preventDefault(); signIn(emI.value); } };
   wireTips(host);
 }
 
