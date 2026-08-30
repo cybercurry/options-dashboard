@@ -207,6 +207,21 @@ td.l{text-align:left}
 .authstatus .au-msg{font-size:11px; color:var(--muted); max-width:220px; overflow:hidden; text-overflow:ellipsis}
 .authstatus .au-msg.err{color:var(--bad)}
 @media (max-width:640px){ .authstatus{flex-wrap:wrap; margin-left:0; width:100%} .authstatus .au-em{max-width:150px} .authstatus .au-input{width:140px} }
+/* feedback button + modal */
+.fbtn{position:fixed; right:16px; bottom:16px; z-index:900; background:var(--accent); color:#fff; border:0; border-radius:24px; padding:10px 16px; font-family:inherit; font-size:13px; font-weight:700; cursor:pointer; box-shadow:0 4px 14px rgba(0,0,0,.28)}
+.fbtn:hover{filter:brightness(1.08)}
+.fbmodal{position:fixed; inset:0; z-index:1000; background:rgba(0,0,0,.5); display:flex; align-items:center; justify-content:center; padding:16px}
+.fbcard{background:var(--surface); border:1px solid var(--line); border-radius:14px; width:min(460px,100%); padding:18px; box-shadow:0 20px 60px rgba(0,0,0,.45)}
+.fbhead{display:flex; justify-content:space-between; align-items:center; font-size:16px}
+.fbx{background:none; border:0; color:var(--muted); font-size:22px; line-height:1; cursor:pointer; padding:0 4px}
+.fbsub{color:var(--muted); font-size:13px; margin:6px 0 12px; line-height:1.5}
+.fbinput{width:100%; background:var(--surface-2); border:1px solid var(--line); border-radius:8px; color:var(--text); padding:9px 11px; font-size:13px; font-family:"IBM Plex Sans"; box-sizing:border-box; margin-bottom:8px}
+.fbtext{resize:vertical; min-height:96px; line-height:1.5}
+.fbhp{position:absolute; left:-9999px; width:1px; height:1px; opacity:0}
+.fbfoot{display:flex; justify-content:space-between; align-items:center; gap:10px; margin-top:2px}
+.fbmsgline{font-size:12px; color:var(--muted)} .fbmsgline.err{color:var(--bad)} .fbmsgline.ok{color:var(--good)}
+.fbbtn{background:var(--accent); color:#fff; border:0; border-radius:8px; padding:8px 16px; font-weight:700; font-size:13px; cursor:pointer}
+.fbbtn2{background:none; border:0; color:var(--muted); font-size:13px; cursor:pointer; margin-right:6px}
 .star{cursor:pointer; color:var(--faint); font-size:16px; line-height:1; user-select:none; transition:color .12s}
 .star.on,.star:hover{color:var(--accent)}
 td.star-c,th.star-c{width:1%; text-align:center; padding-left:12px; padding-right:2px}
@@ -594,7 +609,7 @@ th.thelp:hover{color:var(--text)} th.thelp:hover .thi{border-color:var(--accent)
 
 </main>
 
-<footer class="wrap"><b>optionintel.app</b> — one engine, every tab · real Tradier chains &amp; greeks · the same rules the <b>Rules</b> tab lists · <b>research only, not advice</b> · <span class="pre" style="opacity:.6">build <span id="buildid">2026-08-30 · arch-A · header-v2</span></span></footer>
+<footer class="wrap"><b>optionintel.app</b> — one engine, every tab · real Tradier chains &amp; greeks · the same rules the <b>Rules</b> tab lists · <b>research only, not advice</b> · <span class="pre" style="opacity:.6">build <span id="buildid">2026-08-30 · arch-A · feedback</span></span></footer>
 
 <script>
 const KIND={csp:"CSP",cc:"CC",leap:"LEAP"};
@@ -1666,6 +1681,21 @@ history.replaceState({tab:'overview',sym:null},'','#overview');   // seed the fi
 })();
 </script>
 <div id="calc" class="calcpop" hidden><div class="cx-body"></div></div>
+
+<!-- feedback: floating button + modal → /api/feedback → Resend → owner inbox -->
+<button id="fbtn" class="fbtn" type="button" aria-label="Send feedback">💬 Feedback</button>
+<div id="fbmodal" class="fbmodal" hidden>
+  <div class="fbcard" role="dialog" aria-modal="true" aria-label="Send feedback">
+    <div class="fbhead"><b>Send feedback</b><button class="fbx" data-fb="close" aria-label="Close">×</button></div>
+    <p class="fbsub">Found a bug, have an idea, or general feedback? It goes straight to the maker's inbox.</p>
+    <select id="fb-cat" class="fbinput"><option>Bug</option><option>Idea</option><option selected>Feedback</option><option>Other</option></select>
+    <textarea id="fb-msg" class="fbinput fbtext" rows="5" maxlength="4000" placeholder="What happened, or what would make this better?"></textarea>
+    <input id="fb-email" class="fbinput" type="email" placeholder="Your email (optional — so I can reply)" autocomplete="email">
+    <input id="fb-website" class="fbhp" tabindex="-1" autocomplete="off" aria-hidden="true" placeholder="Leave this empty">
+    <div class="fbfoot"><span id="fb-msgline" class="fbmsgline"></span>
+      <span><button class="fbbtn2" data-fb="close">Cancel</button><button class="fbbtn" data-fb="send">Send</button></span></div>
+  </div>
+</div>
 <script>
 /* Chain Bid → profit calculator. Desktop: HOVER the Bid to open (prepopulated; hover-off closes).
    Touch: TAP pins it open; tap elsewhere / × / Esc closes. Fixed-position popover so the
@@ -1698,6 +1728,37 @@ document.addEventListener('click',function(e){
   if(m && !m.hidden && ((e.target.closest&&e.target.closest('.modal-x')) || !(e.target.closest&&e.target.closest('#calc')))) hideCalc(true);
 });
 document.addEventListener('keydown',function(e){ if(e.key==='Escape') hideCalc(true); });
+
+/* ---------- feedback (bug / idea / feedback → /api/feedback → owner inbox) ---------- */
+(function(){
+  const modal=document.getElementById('fbmodal'), btn=document.getElementById('fbtn');
+  if(!modal||!btn) return;
+  const line=()=>document.getElementById('fb-msgline');
+  const open=()=>{ const em=document.getElementById('fb-email');
+    if(em && !em.value && typeof USER!=='undefined' && USER && USER.email) em.value=USER.email;
+    const l=line(); if(l){l.className='fbmsgline'; l.textContent='';}
+    modal.hidden=false; setTimeout(()=>{ const t=document.getElementById('fb-msg'); if(t) t.focus(); },30); };
+  const close=()=>{ modal.hidden=true; };
+  btn.onclick=open;
+  modal.addEventListener('click',e=>{ if(e.target===modal) close(); });
+  document.addEventListener('keydown',e=>{ if(e.key==='Escape' && !modal.hidden) close(); });
+  async function send(){
+    const msg=(document.getElementById('fb-msg').value||'').trim(); const l=line();
+    if(msg.length<3){ l.className='fbmsgline err'; l.textContent='Please write a little more.'; return; }
+    const body={ message:msg, category:document.getElementById('fb-cat').value,
+      email:(document.getElementById('fb-email').value||'').trim(),
+      page:(location.hash||location.pathname||''), website:(document.getElementById('fb-website').value||'') };
+    l.className='fbmsgline'; l.textContent='Sending…';
+    try{
+      const r=await fetch('/api/feedback',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(body)});
+      const j=await r.json().catch(()=>({}));
+      if(r.ok && j.ok){ l.className='fbmsgline ok'; l.textContent='✓ Thanks — sent!';
+        document.getElementById('fb-msg').value=''; setTimeout(close,1200); }
+      else { l.className='fbmsgline err'; l.textContent=(j&&j.error)||'Could not send — try again.'; }
+    }catch(e){ l.className='fbmsgline err'; l.textContent='Could not send — try again.'; }
+  }
+  modal.querySelectorAll('[data-fb]').forEach(b=>b.onclick=()=>{ b.dataset.fb==='send'?send():close(); });
+})();
 </script>
 </body>
 </html>

@@ -35,7 +35,7 @@ begin
                  'Authorization', 'Bearer ' || resend_key,
                  'Content-Type',  'application/json'),
     body    := jsonb_build_object(
-      'from',    'OptionIntel <noreply@optionintel.app>',
+      'from',    'OptionIntel <hello@optionintel.app>',
       'to',      NEW.email,
       'subject', 'Welcome to OptionIntel — how to use it',
       'text',    'Welcome to OptionIntel (optionintel.app) — options intelligence for the wheel '
