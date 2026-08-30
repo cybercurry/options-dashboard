@@ -35,8 +35,8 @@ header{position:sticky; top:0; z-index:10; background:color-mix(in srgb,var(--in
 .brand{display:flex; align-items:center; gap:10px; font-family:"Archivo",sans-serif; font-weight:800; letter-spacing:-.02em; font-size:20px; cursor:pointer}
 .brand .dot{width:11px;height:11px;border-radius:50%;background:var(--accent); box-shadow:0 0 0 4px color-mix(in srgb,var(--accent) 22%,transparent)}
 .brand b{color:var(--text)} .brand span{color:var(--faint); font-weight:600}
-nav{display:flex; gap:4px; margin-left:6px; flex-wrap:wrap}
-nav a{color:var(--muted); text-decoration:none; font-weight:500; font-size:14px; padding:7px 12px; border-radius:8px; cursor:pointer}
+nav{display:flex; gap:4px; margin-left:6px; flex-wrap:nowrap; white-space:nowrap}
+nav a{color:var(--text); text-decoration:none; font-weight:700; font-size:18px; padding:7px 12px; border-radius:8px; cursor:pointer; white-space:nowrap}
 nav a:hover{color:var(--text); background:var(--surface-2)} nav a.on{color:var(--accent); background:var(--accent-soft)}
 .tag{font-size:11px; font-weight:600; letter-spacing:.08em; text-transform:uppercase; color:var(--faint); white-space:nowrap}
 /* right-side header cluster: pushes the updated-time, watchlist switch, and account to the top-right */
@@ -418,7 +418,8 @@ th.thelp:hover{color:var(--text)} th.thelp:hover .thi{border-color:var(--accent)
    instead of the nav wrapping up into the logo inside a fixed-height bar. */
 @media (max-width:760px){
   .bar{height:auto; min-height:60px; flex-wrap:wrap; padding:8px 0; gap:6px 16px}
-  #nav{order:3; width:100%; margin-left:0}
+  #nav{order:3; width:100%; margin-left:0; flex-wrap:wrap; white-space:normal}
+  #nav a{font-size:16px}
   .tag{order:2}
   /* Options Chain ticker + expiry lists: one row that slides inside itself (like the
      watchlist), instead of wrapping to many rows — swiping scrolls the strip, not the page. */
@@ -449,7 +450,6 @@ th.thelp:hover{color:var(--text)} th.thelp:hover .thi{border-color:var(--accent)
     <a data-tab="rules">Rules</a>
   </nav>
   <div class="hdr-right">
-    <span class="tag" id="upd">loading…</span>
     <span class="univtog" id="univtog"></span>
     <span class="authstatus" id="authstatus"></span>
   </div>
@@ -628,7 +628,7 @@ th.thelp:hover{color:var(--text)} th.thelp:hover .thi{border-color:var(--accent)
 
 </main>
 
-<footer class="wrap"><b>optionintel.app</b> — one engine, every tab · real Tradier chains &amp; greeks · the same rules the <b>Rules</b> tab lists · <b>research only, not advice</b> · <span class="pre" style="opacity:.6">build <span id="buildid">2026-08-30 · arch-A · cyan-yours</span></span></footer>
+<footer class="wrap"><b>optionintel.app</b> — one engine, every tab · real Tradier chains &amp; greeks · the same rules the <b>Rules</b> tab lists · <b>research only, not advice</b> · <span id="upd" style="opacity:.75">updated…</span> · <span class="pre" style="opacity:.6">build <span id="buildid">2026-08-30 · arch-A · hdr-tabs</span></span></footer>
 
 <script>
 const KIND={csp:"CSP",cc:"CC",leap:"LEAP"};
