@@ -76,6 +76,11 @@ nav a:hover{color:var(--text); background:var(--surface-2)} nav a.on{color:var(-
 .fxhero-sub{font-size:12.5px; color:var(--muted); margin-top:6px}
 .fxhero-tk{display:inline-block; background:var(--accent); color:#111; font-weight:800; font-size:13px; letter-spacing:.5px; padding:4px 11px; border-radius:8px}
 .fxhero-price{font-size:20px; font-weight:700; margin-top:8px}
+/* Fundamentals → add-to-watchlist: link the researched name straight into your own list */
+.fxwl{display:inline-block; margin:8px 0 0; font-family:"IBM Plex Sans",sans-serif; font-size:12.5px; font-weight:700; cursor:pointer; padding:6px 13px; border-radius:8px; border:1px solid var(--accent); background:transparent; color:var(--accent); white-space:nowrap}
+.fxwl:hover{background:rgba(245,165,36,.12)}
+.fxwl.on{background:var(--accent); color:#111; border-color:var(--accent)}
+.fxwl.on:hover{background:var(--accent); filter:brightness(.95)}
 .fxhero-verdict{margin-top:14px; display:flex; align-items:center; gap:14px; flex-wrap:wrap; padding:9px 16px; border-radius:12px}
 .fxov{font-size:18px; font-weight:800; color:#fff; letter-spacing:.5px} .fxvsub{font-size:13px; font-weight:600; color:rgba(255,255,255,.9); margin-left:auto}
 .fxsrc{font-size:12px; color:var(--faint); margin:2px 0 12px}
@@ -609,7 +614,7 @@ th.thelp:hover{color:var(--text)} th.thelp:hover .thi{border-color:var(--accent)
 
 </main>
 
-<footer class="wrap"><b>optionintel.app</b> — one engine, every tab · real Tradier chains &amp; greeks · the same rules the <b>Rules</b> tab lists · <b>research only, not advice</b> · <span class="pre" style="opacity:.6">build <span id="buildid">2026-08-30 · arch-A · deeplinks</span></span></footer>
+<footer class="wrap"><b>optionintel.app</b> — one engine, every tab · real Tradier chains &amp; greeks · the same rules the <b>Rules</b> tab lists · <b>research only, not advice</b> · <span class="pre" style="opacity:.6">build <span id="buildid">2026-08-30 · arch-A · wl-everywhere</span></span></footer>
 
 <script>
 const KIND={csp:"CSP",cc:"CC",leap:"LEAP"};
@@ -1226,6 +1231,11 @@ function wlToggle(tk){ tk=(tk||'').toUpperCase(); if(!tk)return;
 function wlAdd(tk){ tk=(tk||'').toUpperCase().trim().replace(/[^A-Z.\-]/g,''); if(!tk||MYWL.picks.has(tk))return;
   MYWL.picks.add(tk); if(USER) cloudAdd(tk); else wlSave();
   if(UNIV!=='mine') setUniv('mine'); else rebuild(); }   // adding a ticker switches the whole app to your list
+// Fundamentals → link the researched name into your own watchlist (or unlink it). Mirrors the
+// star's behaviour: adding switches the app to "My List". Repaint the tab so the button flips.
+function fundWL(tk){ tk=(tk||'').toUpperCase(); if(!tk) return;
+  if(MYWL.picks.has(tk)) wlToggle(tk); else wlAdd(tk);
+  renderFund(tk); }
 
 function renderWatchTable(){
   const host=document.getElementById('ov-watch'); if(!host) return;
@@ -1343,7 +1353,7 @@ function renderChainTk(tk){
   renderChainExp(tk, pick);
 }
 function renderChain(){
-  const chains=DATA.chains||{}; const tks=Object.keys(BYTK).sort();
+  const chains=DATA.chains||{}; const tks=selTks();
   const cc=document.getElementById('chain-chips');
   cc.innerHTML=tks.map(t=>`<span class="cchip${chains[t]?'':' noch'}" data-t="${t}">${t}</span>`).join('');
   cc.querySelectorAll('.cchip').forEach(el=>el.onclick=()=>renderChainTk(el.dataset.t));
@@ -1469,8 +1479,12 @@ function renderDeep(tk){
     <div class="cards">${tiles.join('')}</div>`;
   document.getElementById('sym2').textContent=tk; mountChart('tvchart2',tk);
 }
+// Every ticker the active universe should let you open — its scanned names PLUS any watchlist
+// pick that has no scan row yet, so a freshly-added ticker is selectable EVERYWHERE: a chart in
+// TA, a live SEC lookup in Fundamentals, and a "populates next scan" note in the Chain.
+function selTks(){ const s=new Set(Object.keys(BYTK)); (ACT||new Set()).forEach(t=>s.add(String(t||'').toUpperCase())); return [...s].sort(); }
 function buildChips(){
-  const tks=Object.keys(BYTK).sort();
+  const tks=selTks();
   const chipHtml=tks.map(t=>`<span class="tchip" data-t="${t}">${t}</span>`).join('');
   document.getElementById('deep-chips').innerHTML=chipHtml;
   document.getElementById('fund-chips').innerHTML=chipHtml;
@@ -1588,7 +1602,8 @@ function renderFund(tk){
     <div class="fxhero"><div class="fxhero-top">
       <div><div class="fxhero-name">${f.company||tk}</div><div class="fxhero-sub">${cls}</div></div>
       <div style="text-align:right;white-space:nowrap"><span class="fxhero-tk">${tk}</span><div class="fxhero-price">${priceStr}</div>
-        <a class="editlink" style="margin:6px 0 0;display:inline-block" onclick="CUR='${tk}';setSym('${tk}');go('deep')">→ Technical Analysis</a></div>
+        <a class="editlink" style="margin:6px 0 0;display:inline-block" onclick="CUR='${tk}';setSym('${tk}');go('deep')">→ Technical Analysis</a>
+        <div><button class="fxwl${MYWL.picks.has(tk)?' on':''}" onclick="fundWL('${tk}')" title="${MYWL.picks.has(tk)?'On your watchlist — click to remove':'Add '+tk+' to your own watchlist'}">${MYWL.picks.has(tk)?'★ On My List':'☆ Add to My List'}</button></div></div>
     </div><div class="fxhero-verdict" style="background:${ov[2]}"><span class="fxov">${ov[0]} ${ov[1]}</span><span class="fxvsub">${dots}</span></div></div>
     <div class="fxsrc">${f.cik?('SEC CIK '+f.cik):'Yahoo Finance'}${f.source?(' · '+f.source):''}</div>
     <div class="fxchips">${chip('Valuation',V[0],[['P/E',fxNum(m.pe,1)],['PEG',fxNum(m.peg,2)],['FCF yield',fxPct(m.fcf_yield)],['Market cap',fxMoney(m.market_cap)]])}
@@ -1628,9 +1643,9 @@ const TABS=['overview','signals','chain','deep','market','fund','rules'];
 function showTab(tab){
   TABS.forEach(t=>document.getElementById('v-'+t).hidden=(t!==tab));
   document.querySelectorAll('#nav a').forEach(a=>a.classList.toggle('on',a.dataset.tab===tab));
-  if(tab==='deep') renderDeep(CUR||Object.keys(BYTK)[0]);
+  if(tab==='deep') renderDeep(CUR||selTks()[0]);
   if(tab==='chain' && CUR && (DATA.chains||{})[CUR]) renderChainTk(CUR);   // open on the ticker you were viewing
-  if(tab==='fund'){ loadFundExtra(); renderFund(CUR||Object.keys(DATA.fundamentals||{})[0]||Object.keys(BYTK)[0]); }
+  if(tab==='fund'){ loadFundExtra(); renderFund(CUR||Object.keys(DATA.fundamentals||{})[0]||selTks()[0]); }
   window.scrollTo(0,0);
 }
 // Tab switches become real history entries → the browser Back/Forward arrows navigate tabs
