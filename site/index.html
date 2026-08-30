@@ -185,6 +185,15 @@ td.l{text-align:left}
 .univtog button.on{background:var(--accent-soft); color:var(--accent)}
 .univtog .mono{font-family:"IBM Plex Mono"; font-size:11px; opacity:.85; margin-left:4px}
 .univtog:empty{display:none}
+/* header sign-in status — always-visible confirmation of access, next to the universe switch */
+.authstatus{display:inline-flex; align-items:center; gap:6px; font-size:12px; margin-left:18px; color:var(--muted); white-space:nowrap}
+.authstatus .au-dot{width:8px; height:8px; border-radius:50%; background:var(--faint); flex:none}
+.authstatus .au-dot.au-on{background:var(--good); box-shadow:0 0 0 3px color-mix(in srgb, var(--good) 25%, transparent)}
+.authstatus .au-em{color:var(--text); font-weight:600; max-width:190px; overflow:hidden; text-overflow:ellipsis}
+.authstatus .au-guest{color:var(--muted)}
+.authstatus .au-out{background:none; border:0; color:var(--muted); font-size:11px; cursor:pointer; text-decoration:underline; padding:0; margin-left:2px}
+.authstatus .au-out:hover{color:var(--text)}
+@media (max-width:640px){ .authstatus .au-em{max-width:120px} }
 .star{cursor:pointer; color:var(--faint); font-size:16px; line-height:1; user-select:none; transition:color .12s}
 .star.on,.star:hover{color:var(--accent)}
 td.star-c,th.star-c{width:1%; text-align:center; padding-left:12px; padding-right:2px}
@@ -392,6 +401,7 @@ th.thelp:hover{color:var(--text)} th.thelp:hover .thi{border-color:var(--accent)
     <a data-tab="fund">Fundamentals</a>
     <a data-tab="rules">Rules</a>
   </nav>
+  <span class="authstatus" id="authstatus"></span>
   <span class="univtog" id="univtog"></span>
   <span class="tag" id="upd">loading…</span>
 </div></header>
@@ -569,7 +579,7 @@ th.thelp:hover{color:var(--text)} th.thelp:hover .thi{border-color:var(--accent)
 
 </main>
 
-<footer class="wrap"><b>optionintel.app</b> — one engine, every tab · real Tradier chains &amp; greeks · the same rules the <b>Rules</b> tab lists · <b>research only, not advice</b> · <span class="pre" style="opacity:.6">build <span id="buildid">2026-08-29 · arch-A · icons</span></span></footer>
+<footer class="wrap"><b>optionintel.app</b> — one engine, every tab · real Tradier chains &amp; greeks · the same rules the <b>Rules</b> tab lists · <b>research only, not advice</b> · <span class="pre" style="opacity:.6">build <span id="buildid">2026-08-30 · arch-A · auth-status</span></span></footer>
 
 <script>
 const KIND={csp:"CSP",cc:"CC",leap:"LEAP"};
@@ -729,6 +739,18 @@ function updateMeta(){
   const el=document.getElementById('meta'); if(el)
     el.innerHTML=`<b>${READY.length} setup${READY.length===1?'':'s'} ready</b> + <b>${LEAPQ.length} LEAP${LEAPQ.length===1?'':'s'}</b> from ${total} name${total===1?'':'s'} · ${scope}`;
 }
+// Header sign-in status — a green dot + your email when authenticated, a grey "Guest" otherwise.
+// This is the authoritative, always-on confirmation of access (mirrors the Overview account bar).
+function renderAuthStatus(){
+  const el=document.getElementById('authstatus'); if(!el) return;
+  if(USER){
+    el.innerHTML=`<span class="au-dot au-on"></span><span class="au-em" title="Signed in as ${USER.email}">${USER.email}</span>`
+               + `<button class="au-out" data-act="hsignout">sign out</button>`;
+    const b=el.querySelector('.au-out'); if(b) b.onclick=()=>signOut();
+  } else {
+    el.innerHTML=`<span class="au-dot"></span><span class="au-guest">Guest · not signed in</span>`;
+  }
+}
 // Header switch — only shown once there's a personal list to switch to (signed in, or guest picks).
 function renderUnivToggle(){
   const host=document.getElementById('univtog'); if(!host) return;
@@ -764,7 +786,7 @@ function rebuild(){
   leaps.forEach(l=>CHAINROWS.push({tk:l.ticker,type:'LEAP',strike:l.strike,exp:l.expiry,dte:l.dte,
     delta:l.delta,mid:l.mid,iv:l.iv,oi:null,spread:null,pop:null,
     yield:(l.extrinsic_pct!=null?l.extrinsic_pct+'% time value · '+num(l.carry_pct,1,'%/yr'):'')}));
-  updateMeta(); renderUnivToggle();
+  updateMeta(); renderUnivToggle(); renderAuthStatus();
   renderReady(); renderLeaps(); renderChain(); buildChips(); renderOverview();
   const dv=document.getElementById('v-deep');
   if(CUR && dv && !dv.hidden) renderDeep(CUR);   // keep an open TA breakdown in sync with the universe
