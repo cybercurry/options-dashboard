@@ -164,10 +164,11 @@ def _yf_last(sym):
 
 
 # The app's PULSE_TICKERS / SECTOR_TICKERS, verbatim.
+# Overview pulse line: indices, dollar, and the two majors' crypto. The 10Y/3M yields live on the
+# Market tab (yield curve) instead, so here BTC is joined by ETH to round out the line.
 PULSE = [("^GSPC", "S&P 500", "", False), ("^NDX", "Nasdaq 100", "", False), ("^DJI", "Dow Jones", "", False),
          ("^RUT", "R2000", "", False), ("DX-Y.NYB", "DXY", "", False), ("CL=F", "Crude Oil", "$", False),
-         ("GC=F", "Gold", "$", False), ("BTC-USD", "Bitcoin", "$", False), ("^TNX", "10Y Yield", "", True),
-         ("^IRX", "3M Yield", "", True)]
+         ("GC=F", "Gold", "$", False), ("BTC-USD", "Bitcoin", "$", False), ("ETH-USD", "Ethereum", "$", False)]
 SECTORS = [("XLK", "Technology"), ("XLF", "Financials"), ("XLV", "Health Care"), ("XLE", "Energy"),
            ("XLI", "Industrials"), ("XLC", "Comm. Services"), ("XLY", "Consumer Disc."),
            ("XLP", "Consumer Staples"), ("XLU", "Utilities"), ("XLRE", "Real Estate"),
