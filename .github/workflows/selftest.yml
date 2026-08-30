@@ -15,6 +15,9 @@ on:
       seed_user:
         description: "user_id (uuid) to seed the tickers for"
         default: ""
+      otp_email:
+        description: "Email to send a real magic-link to (tests custom SMTP end-to-end; blank = skip)"
+        default: ""
 
 permissions:
   contents: read
@@ -29,12 +32,37 @@ jobs:
       TK: ${{ github.event.inputs.ticker }}
       SEED_TICKERS: ${{ github.event.inputs.seed_tickers }}
       SEED_USER:    ${{ github.event.inputs.seed_user }}
+      OTP_EMAIL:    ${{ github.event.inputs.otp_email }}
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
       - run: pip install requests
+
+      - name: Send a real magic link (end-to-end custom-SMTP test)
+        if: ${{ github.event.inputs.otp_email != '' }}
+        run: |
+          python - <<'PY'
+          import os, requests
+          url = "https://asxwbjrripzbkcxbkect.supabase.co"
+          # public anon key (same one embedded in the site; safe to use here)
+          anon = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImFzeHdianJyaXB6YmtjeGJrZWN0Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODgwMTQ5OTgsImV4cCI6MjEwMzU5MDk5OH0.Uq8Fi9eH14CUC9dt2oB6OFVTH3tNdzanN9rKRNVcB4k"
+          email = os.environ["OTP_EMAIL"].strip()
+          r = requests.post(url + "/auth/v1/otp",
+                            params={"redirect_to": "https://optionintel.app"},
+                            json={"email": email, "create_user": True},
+                            headers={"apikey": anon, "Content-Type": "application/json"},
+                            timeout=20)
+          print("OTP send status:", r.status_code)
+          print("body:", r.text[:400])
+          if r.status_code == 200:
+              print("RESULT: OK — Supabase accepted the send (custom SMTP working, no rate-limit block).")
+          elif r.status_code == 429:
+              print("RESULT: RATE-LIMITED — the email rate limit is still low or not saved.")
+          else:
+              print("RESULT: ERROR — likely SMTP misconfig; read the body above.")
+          PY
 
       - name: Seed watchlist rows (owner test — proves DB write + fold path)
         if: ${{ github.event.inputs.seed_tickers != '' }}
