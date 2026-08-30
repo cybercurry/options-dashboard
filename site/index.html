@@ -609,11 +609,12 @@ th.thelp:hover{color:var(--text)} th.thelp:hover .thi{border-color:var(--accent)
 
 </main>
 
-<footer class="wrap"><b>optionintel.app</b> — one engine, every tab · real Tradier chains &amp; greeks · the same rules the <b>Rules</b> tab lists · <b>research only, not advice</b> · <span class="pre" style="opacity:.6">build <span id="buildid">2026-08-30 · arch-A · feedback-ok</span></span></footer>
+<footer class="wrap"><b>optionintel.app</b> — one engine, every tab · real Tradier chains &amp; greeks · the same rules the <b>Rules</b> tab lists · <b>research only, not advice</b> · <span class="pre" style="opacity:.6">build <span id="buildid">2026-08-30 · arch-A · deeplinks</span></span></footer>
 
 <script>
 const KIND={csp:"CSP",cc:"CC",leap:"LEAP"};
 let DATA=null, SIGS=[], LEAPS=[], MKT={}, BYTK={}, READY=[], LEAPQ=[], CHAINROWS=[];
+let INITIAL_TAB='overview';   // deep-link target from the URL hash (e.g. #market), opened once data loads
 let CHAIN_TK=null, CHAIN_EXP=null, CALC_CTX=null;
 const num=(v,d=1,s='')=>v==null?'<span class="dim">—</span>':(typeof v==='number'?v.toFixed(d):v)+s;
 const abs=v=>Math.abs(v||0);
@@ -746,6 +747,7 @@ fetch('data/signals.json',{cache:'no-store'}).then(r=>r.json()).then(J=>{
   rebuild();    // derive READY/LEAPQ/BYTK/CHAINROWS for the ACTIVE universe + render every universe-scoped tab
   const first=(READY[0]&&READY[0].ticker)||(LEAPQ[0]&&LEAPQ[0].ticker)||Object.keys(BYTK)[0];
   if(first) setSym(first);
+  if(INITIAL_TAB && INITIAL_TAB!=='overview') showTab(INITIAL_TAB);   // open a deep-linked tab now that data is in
   showAuthDiag(); setTimeout(showAuthDiag, 2000);   // surface the landing URL after a magic-link click
 }).catch(e=>{document.getElementById('meta').textContent='could not load signals ('+e+')';});
 
@@ -1641,7 +1643,11 @@ addEventListener('popstate',e=>{
   showTab(tab);
 });
 document.querySelectorAll('[data-tab]').forEach(el=>el.addEventListener('click',e=>{e.preventDefault(); go(el.dataset.tab);}));
-history.replaceState({tab:'overview',sym:null},'','#overview');   // seed the first history entry
+// Honor a deep-link hash on first load (e.g. optionintel.app/#market → Market tab); default Overview.
+// The actual showTab for the target runs after signals.json loads (see the fetch handler), so
+// data-dependent tabs (Chain/TA/Fundamentals) populate correctly.
+(function(){ let t=(location.hash||'').replace(/^#/,''); INITIAL_TAB=TABS.includes(t)?t:'overview';
+  history.replaceState({tab:INITIAL_TAB,sym:null},'','#'+INITIAL_TAB); })();
 </script>
 <script>
 /* Mobile: tap-to-toggle for every hover/focus popup. A 1st tap opens it, a 2nd tap
