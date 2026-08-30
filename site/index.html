@@ -21,6 +21,8 @@ window.__AUTHSNAP=(function(){try{return{hash:location.hash||'',search:location.
   --text:#FBFDFF; --muted:#D2DBEA; --faint:#A2B0C6; --accent:#F5A524; --accent-2:#F5A524;
   --accent-soft:#241B0E; --accent-line:#4A3A1C;
   --csp:#2FC08A; --cc:#5B8DEF; --leap:#B389F2; --good:#2FC08A; --bad:#F0684C; --warn:#F5A524; --track:#18202F;
+  /* CYAN = "this is yours" — the user's own picks & selections, set apart from the amber app accent */
+  --mine:#22D3EE; --mine-ink:#062a30; --mine-soft:#0c2b31; --mine-line:#1c6270;
   --shadow:0 1px 2px rgba(0,0,0,.5),0 14px 34px rgba(0,0,0,.4);
   --glow:0 0 0 1px var(--accent),0 8px 30px rgba(245,165,36,.16);
 }
@@ -75,12 +77,13 @@ nav a:hover{color:var(--text); background:var(--surface-2)} nav a.on{color:var(-
 .fxhero-name{font-family:"Archivo",sans-serif; font-size:24px; font-weight:800}
 .fxhero-sub{font-size:12.5px; color:var(--muted); margin-top:6px}
 .fxhero-tk{display:inline-block; background:var(--accent); color:#111; font-weight:800; font-size:13px; letter-spacing:.5px; padding:4px 11px; border-radius:8px}
+.fxhero-tk.mine{background:var(--mine); color:var(--mine-ink)}   /* your pick → cyan badge */
 .fxhero-price{font-size:20px; font-weight:700; margin-top:8px}
 /* Fundamentals → add-to-watchlist: link the researched name straight into your own list */
-.fxwl{display:inline-block; margin:8px 0 0; font-family:"IBM Plex Sans",sans-serif; font-size:12.5px; font-weight:700; cursor:pointer; padding:6px 13px; border-radius:8px; border:1px solid var(--accent); background:transparent; color:var(--accent); white-space:nowrap}
-.fxwl:hover{background:rgba(245,165,36,.12)}
-.fxwl.on{background:var(--accent); color:#111; border-color:var(--accent)}
-.fxwl.on:hover{background:var(--accent); filter:brightness(.95)}
+.fxwl{display:inline-block; margin:8px 0 0; font-family:"IBM Plex Sans",sans-serif; font-size:12.5px; font-weight:700; cursor:pointer; padding:6px 13px; border-radius:8px; border:1px solid var(--mine); background:transparent; color:var(--mine); white-space:nowrap}
+.fxwl:hover{background:var(--mine-soft)}
+.fxwl.on{background:var(--mine); color:var(--mine-ink); border-color:var(--mine)}
+.fxwl.on:hover{background:var(--mine); filter:brightness(.95)}
 .fxhero-verdict{margin-top:14px; display:flex; align-items:center; gap:14px; flex-wrap:wrap; padding:9px 16px; border-radius:12px}
 .fxov{font-size:18px; font-weight:800; color:#fff; letter-spacing:.5px} .fxvsub{font-size:13px; font-weight:600; color:rgba(255,255,255,.9); margin-left:auto}
 .fxsrc{font-size:12px; color:var(--faint); margin:2px 0 12px}
@@ -178,7 +181,7 @@ td.l{text-align:left}
 .addwrap{display:inline-flex; gap:6px; align-items:center}
 .acctbar input{background:var(--surface-2); border:1px solid var(--line); border-radius:8px; color:var(--text); padding:6px 10px; font-size:13px; font-family:"IBM Plex Sans"; min-width:120px}
 .acctbar #wl-add{width:130px; text-transform:uppercase; font-family:"IBM Plex Mono"}
-.acctbtn{background:var(--accent); color:#1a1205; border:0; border-radius:8px; padding:6px 12px; font-weight:700; font-size:12.5px; cursor:pointer; white-space:nowrap}
+.acctbtn{background:var(--mine); color:var(--mine-ink); border:0; border-radius:8px; padding:6px 12px; font-weight:700; font-size:12.5px; cursor:pointer; white-space:nowrap}
 .acctbtn[data-act="signout"]{background:var(--surface-2); color:var(--muted); border:1px solid var(--line)}
 .acctmsg{font-size:12.5px; margin-top:6px; color:var(--good)} .acctmsg.dim{color:var(--faint)}
 .wlnote{font-size:12.5px; color:var(--faint); margin:0 0 10px; padding:8px 11px; border-left:2px solid var(--accent); background:color-mix(in srgb,var(--accent) 6%,transparent); border-radius:0 8px 8px 0}
@@ -186,15 +189,21 @@ td.l{text-align:left}
 .wlseg button{background:var(--surface); color:var(--muted); border:0; padding:6px 14px; font-family:inherit; font-size:13px; font-weight:600; cursor:pointer}
 .wlseg button+button{border-left:1px solid var(--line)}
 .wlseg button.on{background:var(--accent-soft); color:var(--accent)}
+.wlseg button[data-v="mine"]{color:var(--mine)}
+.wlseg button[data-v="mine"].on{background:var(--mine-soft); color:var(--mine)}
 .wlseg .c{font-family:"IBM Plex Mono"; font-size:11.5px; opacity:.85; margin-left:5px}
 /* header-wide watchlist switch — the prominent control that chooses which list drives EVERY tab */
 .univtog{display:inline-flex; align-items:center; gap:8px}
 .univtog .univlbl{font-size:10.5px; text-transform:uppercase; letter-spacing:.07em; color:var(--faint); font-weight:700}
-.univtog .seg{display:inline-flex; border:1.5px solid var(--accent); border-radius:10px; overflow:hidden}
+.univtog .seg{display:inline-flex; border:1.5px solid var(--mine-line); border-radius:10px; overflow:hidden}
 .univtog .seg button{background:var(--surface); color:var(--muted); border:0; padding:7px 15px; font-family:inherit; font-size:13px; font-weight:700; cursor:pointer; white-space:nowrap; transition:background .12s,color .12s}
-.univtog .seg button+button{border-left:1.5px solid var(--accent)}
+.univtog .seg button+button{border-left:1.5px solid var(--mine-line)}
 .univtog .seg button.on{background:var(--accent); color:#fff}
 .univtog .seg button:not(.on):hover{background:var(--accent-soft); color:var(--accent)}
+/* the personal list is cyan: its button reads cyan idle, fills cyan when active */
+.univtog .seg button[data-u="mine"]{color:var(--mine)}
+.univtog .seg button[data-u="mine"].on{background:var(--mine); color:var(--mine-ink)}
+.univtog .seg button[data-u="mine"]:not(.on):hover{background:var(--mine-soft); color:var(--mine)}
 .univtog .mono{font-family:"IBM Plex Mono"; font-size:11px; opacity:.9; margin-left:4px}
 .univtog:empty{display:none}
 /* header sign-in status — always-visible confirmation of access, next to the universe switch */
@@ -228,7 +237,7 @@ td.l{text-align:left}
 .fbbtn{background:var(--accent); color:#fff; border:0; border-radius:8px; padding:8px 16px; font-weight:700; font-size:13px; cursor:pointer}
 .fbbtn2{background:none; border:0; color:var(--muted); font-size:13px; cursor:pointer; margin-right:6px}
 .star{cursor:pointer; color:var(--faint); font-size:16px; line-height:1; user-select:none; transition:color .12s}
-.star.on,.star:hover{color:var(--accent)}
+.star.on,.star:hover{color:var(--mine)}
 td.star-c,th.star-c{width:1%; text-align:center; padding-left:12px; padding-right:2px}
 .pill{display:inline-block; font-size:11px; font-weight:700; letter-spacing:.03em; padding:3px 9px; border-radius:999px; color:#fff}
 .p-csp{background:var(--csp)} .p-cc{background:var(--cc)} .p-leap{background:var(--leap)}
@@ -251,15 +260,20 @@ td.star-c,th.star-c{width:1%; text-align:center; padding-left:12px; padding-righ
 .picker input:focus{outline:2px solid var(--accent); outline-offset:1px}
 .tchip{font-family:"IBM Plex Mono"; font-size:12.5px; font-weight:600; color:var(--muted); background:var(--surface-2); border:1px solid var(--line); padding:5px 11px; border-radius:8px; cursor:pointer}
 .tchip:hover{color:var(--text)} .tchip.on{color:#fff; background:var(--accent); border-color:var(--accent)}
+/* a ticker that is on YOUR list reads cyan wherever it's selectable — outline idle, filled when open */
+.tchip.mine{color:var(--mine); border-color:var(--mine-line); background:var(--mine-soft)}
+.tchip.mine.on{color:var(--mine-ink); background:var(--mine); border-color:var(--mine)}
 /* Options Chain browser: own ticker-chip class so the global markSel() highlight
    (which targets .tchip) doesn't fight the chain's independent selection. */
 .cchip{font-family:"IBM Plex Mono"; font-size:12.5px; font-weight:600; color:var(--muted); background:var(--surface-2); border:1px solid var(--line); padding:5px 11px; border-radius:8px; cursor:pointer}
 .cchip:hover{color:var(--text)} .cchip.on{color:#fff; background:var(--accent); border-color:var(--accent)}
+.cchip.mine{color:var(--mine); border-color:var(--mine-line); background:var(--mine-soft)}
+.cchip.mine.on{color:var(--mine-ink); background:var(--mine); border-color:var(--mine)}
 .cchip.noch{opacity:.45}
 .chips{display:flex; flex-wrap:wrap; gap:7px; margin:10px 0 2px}
 .etiles{display:flex; flex-wrap:wrap; gap:7px; margin:10px 0}
 .etile{font-family:"IBM Plex Mono"; font-size:12.5px; font-weight:600; color:var(--muted); background:var(--surface-2); border:1px solid var(--line); padding:6px 11px; border-radius:8px; cursor:pointer; white-space:nowrap}
-.etile:hover{color:var(--text)} .etile.on{color:#fff; background:var(--accent); border-color:var(--accent)}
+.etile:hover{color:var(--text)} .etile.on{color:var(--mine-ink); background:var(--mine); border-color:var(--mine)}
 .ch2{display:grid; grid-template-columns:1fr 1fr; gap:14px}
 @media (max-width:680px){.ch2{grid-template-columns:1fr}}
 #v-chain tbody tr.tgt td{background:var(--accent-soft)}
@@ -320,8 +334,8 @@ td.star-c,th.star-c{width:1%; text-align:center; padding-left:12px; padding-righ
 .wn-ok{border-color:color-mix(in srgb,var(--good) 55%,var(--line)); color:var(--good)}
 .wn-no{border-color:color-mix(in srgb,var(--bad) 55%,var(--line)); color:var(--bad)}
 .wn-warn{border-color:color-mix(in srgb,var(--warn) 55%,var(--line)); color:var(--warn)}
-.wn-pre{border-color:color-mix(in srgb,var(--cc) 55%,var(--line)); color:var(--cc)}   /* Δ / DTE — pre-selection, not a market gate */
-.lchip.cpre, .lchip.cpre b{color:var(--cc)}   /* Δ chip — pre-selection param */
+.wn-pre{border-color:color-mix(in srgb,var(--mine) 55%,var(--line)); color:var(--mine)}   /* Δ / DTE — user-editable pre-selection → cyan */
+.lchip.cpre, .lchip.cpre b{color:var(--mine)}   /* Δ chip — user-editable pre-selection → cyan */
 /* aggregate traffic light — the scorecard verdict, shown on tiles + watchlist */
 .ltlight{font-size:12px; font-weight:700; white-space:nowrap; display:inline-flex; align-items:center; gap:5px}
 .lt-go{color:var(--good)} .lt-caution{color:var(--warn)} .lt-avoid{color:var(--bad)} .lt-neutral{color:var(--faint)}
@@ -331,7 +345,7 @@ td.star-c,th.star-c{width:1%; text-align:center; padding-left:12px; padding-righ
 .verdict{font-family:"Archivo",sans-serif; font-weight:800; font-size:13px; margin-bottom:9px; letter-spacing:.02em; display:flex; align-items:center; gap:7px}
 .verdict .vwhy{font-family:"IBM Plex Sans"; font-weight:500; font-size:12px; color:var(--muted)}
 .webfoot{text-align:center; font-size:11px; color:var(--faint); font-family:"IBM Plex Mono"; border-top:1px solid var(--line-soft); padding-top:9px; margin-top:2px}
-.webfoot .pre{color:var(--cc); font-weight:600}   /* DTE etc. — a pre-selection parameter, not a market reading */
+.webfoot .pre{color:var(--mine); font-weight:600}   /* DTE etc. — a user-editable pre-selection parameter → cyan */
 .webkey{font-size:11.5px; color:var(--muted); line-height:1.5; margin-top:8px; padding-top:8px; border-top:1px solid var(--line-soft)}
 .webkey>div{padding:2px 0}
 .mkt-grid{display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:14px; margin-top:18px}
@@ -614,7 +628,7 @@ th.thelp:hover{color:var(--text)} th.thelp:hover .thi{border-color:var(--accent)
 
 </main>
 
-<footer class="wrap"><b>optionintel.app</b> — one engine, every tab · real Tradier chains &amp; greeks · the same rules the <b>Rules</b> tab lists · <b>research only, not advice</b> · <span class="pre" style="opacity:.6">build <span id="buildid">2026-08-30 · arch-A · wl-everywhere</span></span></footer>
+<footer class="wrap"><b>optionintel.app</b> — one engine, every tab · real Tradier chains &amp; greeks · the same rules the <b>Rules</b> tab lists · <b>research only, not advice</b> · <span class="pre" style="opacity:.6">build <span id="buildid">2026-08-30 · arch-A · cyan-yours</span></span></footer>
 
 <script>
 const KIND={csp:"CSP",cc:"CC",leap:"LEAP"};
@@ -1355,7 +1369,7 @@ function renderChainTk(tk){
 function renderChain(){
   const chains=DATA.chains||{}; const tks=selTks();
   const cc=document.getElementById('chain-chips');
-  cc.innerHTML=tks.map(t=>`<span class="cchip${chains[t]?'':' noch'}" data-t="${t}">${t}</span>`).join('');
+  cc.innerHTML=tks.map(t=>`<span class="cchip${chains[t]?'':' noch'}${MYWL.picks.has(t)?' mine':''}" data-t="${t}">${t}</span>`).join('');
   cc.querySelectorAll('.cchip').forEach(el=>el.onclick=()=>renderChainTk(el.dataset.t));
   const first=(CHAIN_TK&&chains[CHAIN_TK]?CHAIN_TK:null)||tks.find(t=>chains[t])||tks[0];
   if(first) renderChainTk(first);
@@ -1485,7 +1499,7 @@ function renderDeep(tk){
 function selTks(){ const s=new Set(Object.keys(BYTK)); (ACT||new Set()).forEach(t=>s.add(String(t||'').toUpperCase())); return [...s].sort(); }
 function buildChips(){
   const tks=selTks();
-  const chipHtml=tks.map(t=>`<span class="tchip" data-t="${t}">${t}</span>`).join('');
+  const chipHtml=tks.map(t=>`<span class="tchip${MYWL.picks.has(t)?' mine':''}" data-t="${t}">${t}</span>`).join('');
   document.getElementById('deep-chips').innerHTML=chipHtml;
   document.getElementById('fund-chips').innerHTML=chipHtml;
   document.querySelectorAll('#deep-chips .tchip').forEach(c=>c.onclick=()=>{setSym(c.dataset.t); renderDeep(c.dataset.t);});
@@ -1601,7 +1615,7 @@ function renderFund(tk){
   host.innerHTML=`
     <div class="fxhero"><div class="fxhero-top">
       <div><div class="fxhero-name">${f.company||tk}</div><div class="fxhero-sub">${cls}</div></div>
-      <div style="text-align:right;white-space:nowrap"><span class="fxhero-tk">${tk}</span><div class="fxhero-price">${priceStr}</div>
+      <div style="text-align:right;white-space:nowrap"><span class="fxhero-tk${MYWL.picks.has(tk)?' mine':''}">${tk}</span><div class="fxhero-price">${priceStr}</div>
         <a class="editlink" style="margin:6px 0 0;display:inline-block" onclick="CUR='${tk}';setSym('${tk}');go('deep')">→ Technical Analysis</a>
         <div><button class="fxwl${MYWL.picks.has(tk)?' on':''}" onclick="fundWL('${tk}')" title="${MYWL.picks.has(tk)?'On your watchlist — click to remove':'Add '+tk+' to your own watchlist'}">${MYWL.picks.has(tk)?'★ On My List':'☆ Add to My List'}</button></div></div>
     </div><div class="fxhero-verdict" style="background:${ov[2]}"><span class="fxov">${ov[0]} ${ov[1]}</span><span class="fxvsub">${dots}</span></div></div>
