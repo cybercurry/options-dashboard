@@ -389,6 +389,7 @@ td.star-c,th.star-c{width:1%; text-align:center; padding-left:12px; padding-righ
 .cal{width:100%; border-collapse:collapse; min-width:640px; font-size:13.5px}
 .cal th{background:var(--surface-2); color:var(--faint); text-align:left; padding:9px 12px; font-size:11px; text-transform:uppercase; letter-spacing:.04em; white-space:nowrap}
 .cal td{padding:8px 12px; border-bottom:1px solid var(--line-soft); white-space:nowrap} .cal tr:last-child td{border-bottom:0}
+.hol-closed{color:var(--bad); font-weight:600} .hol-early{color:var(--warn); font-weight:600}
 .cal tr.cal-usd td{background:color-mix(in srgb,var(--accent) 9%,transparent)} .cal tr.cal-usd td:first-child{box-shadow:inset 3px 0 0 var(--accent)} .cal tr.cal-usd .cur{color:var(--accent); font-weight:700}
 .cal tr.cal-eur td{background:color-mix(in srgb,var(--cc) 10%,transparent)} .cal tr.cal-eur td:first-child{box-shadow:inset 3px 0 0 var(--cc)} .cal tr.cal-eur .cur{color:var(--cc); font-weight:700}
 .cal tr.cal-cad td{background:color-mix(in srgb,var(--good) 10%,transparent)} .cal tr.cal-cad td:first-child{box-shadow:inset 3px 0 0 var(--good)} .cal tr.cal-cad .cur{color:var(--good); font-weight:700}
@@ -957,7 +958,20 @@ const _MSI={
   vol:'<path d="M239.24,131.4c-22,46.8-41.4,68.6-61.2,68.6-25.1,0-40.73-33.32-57.28-68.6C107.7,103.56,92.9,72,78,72c-16.4,0-36.31,37.21-46.72,59.4a8,8,0,0,1-14.48-6.8C38.71,77.8,58.16,56,78,56c25.1,0,40.73,33.32,57.28,68.6C148.3,152.44,163.1,184,178,184c16.4,0,36.31-37.21,46.72-59.4a8,8,0,0,1,14.48,6.8Z"/>',
   cal:'<path d="M208,32H184V24a8,8,0,0,0-16,0v8H88V24a8,8,0,0,0-16,0v8H48A16,16,0,0,0,32,48V208a16,16,0,0,0,16,16H208a16,16,0,0,0,16-16V48A16,16,0,0,0,208,32ZM72,48v8a8,8,0,0,0,16,0V48h80v8a8,8,0,0,0,16,0V48h24V80H48V48ZM208,208H48V96H208V208Zm-68-76a12,12,0,1,1-12-12A12,12,0,0,1,140,132Zm44,0a12,12,0,1,1-12-12A12,12,0,0,1,184,132ZM96,172a12,12,0,1,1-12-12A12,12,0,0,1,96,172Zm44,0a12,12,0,1,1-12-12A12,12,0,0,1,140,172Zm44,0a12,12,0,1,1-12-12A12,12,0,0,1,184,172Z"/>'
 };
-function msec(key,text){return `<div class="msec"><svg class="msi" viewBox="0 0 256 256" fill="currentColor" aria-hidden="true">${_MSI[key]}</svg>${text}</div>`;}
+function msec(key,text){return `<div class="msec"><svg class="msi" viewBox="0 0 256 256" fill="currentColor" aria-hidden="true">${_MSI[key]||_MSI.cal}</svg>${text}</div>`;}
+function holidaysTable(rows){
+  rows=rows||[];
+  if(!rows.length) return '<div class="empty">Holiday calendar unavailable.</div>';
+  const body=rows.map(h=>{
+    const d=new Date(h.date+'T00:00:00');
+    const status=h.type==='closed'
+      ? '<span class="hol-closed">● Closed</span>'
+      : '<span class="hol-early">◐ Early close · 1 pm ET</span>';
+    return `<tr><td class="mono">${d.toLocaleDateString('en-US',{month:'short',day:'2-digit',year:'numeric'})}</td><td>${h.day}</td><td>${h.name}</td><td class="l">${status}</td></tr>`;
+  }).join('');
+  return `<div class="tablewrap"><table class="cal"><thead><tr><th class="l">Date</th><th class="l">Day</th><th class="l">Holiday</th><th class="l">Market</th></tr></thead><tbody>${body}</tbody></table></div>
+    <div class="fxdd-cap">NYSE / NASDAQ — full closures and 1 pm-ET early closes. Computed from the exchange's fixed rules, so it stays current with no external feed.</div>`;
+}
 function renderMarket(){
   const ms=DATA.market_stats;
   const host=document.getElementById('mkt-body');
@@ -999,7 +1013,8 @@ function renderMarket(){
     ${msec('rates','Rates &amp; the Yield Curve')}<div class="mrow">${rates}</div>${yieldCurveSvg(yc,spread!=null&&spread<0)}
     ${msec('val',"Valuation &amp; the Seller's Edge")}<div class="mrow">${val}</div>
     ${msec('vol','Volatility Regime')}<div class="mrow">${vol}</div>${regime}
-    ${msec('cal','This Week — Economic Calendar')}${calendarTable(ms.calendar)}`;
+    ${msec('cal','This Week — Economic Calendar')}${calendarTable(ms.calendar)}
+    ${msec('hol','Market Holidays')}${holidaysTable(DATA.market_holidays)}`;
 }
 
 /* ---------- signals: ready CSP/CC ---------- */

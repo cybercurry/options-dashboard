@@ -291,6 +291,72 @@ def _forward_pe_scrape():
     return None
 
 
+def _nth_weekday(year, month, weekday, n):
+    """The n-th `weekday` (Mon=0) of month; n<0 = last."""
+    d = datetime.date(year, month, 1)
+    first = d + datetime.timedelta(days=(weekday - d.weekday()) % 7)
+    if n > 0:
+        return first + datetime.timedelta(weeks=n - 1)
+    cand = first
+    while (cand + datetime.timedelta(weeks=1)).month == month:
+        cand += datetime.timedelta(weeks=1)
+    return cand
+
+
+def _observed(d):
+    """NYSE weekend-observance: Sat holiday → Fri, Sun → Mon."""
+    if d.weekday() == 5:
+        return d - datetime.timedelta(days=1)
+    if d.weekday() == 6:
+        return d + datetime.timedelta(days=1)
+    return d
+
+
+def _easter(y):
+    a = y % 19; b = y // 100; c = y % 100; d = b // 4; e = b % 4; f = (b + 8) // 25
+    g = (b - f + 1) // 3; h = (19 * a + b - d - g + 15) % 30; i = c // 4; k = c % 4
+    l = (32 + 2 * e + 2 * i - h - k) % 7; m = (a + 11 * h + 22 * l) // 451
+    return datetime.date(y, (h + l - 7 * m + 114) // 31, ((h + l - 7 * m + 114) % 31) + 1)
+
+
+def _us_market_days(year):
+    """NYSE/NASDAQ full closures + 1 pm-ET early closes for a year → [(name, date, type)]."""
+    closed = [
+        ("New Year's Day", _observed(datetime.date(year, 1, 1))),
+        ("Martin Luther King Jr. Day", _nth_weekday(year, 1, 0, 3)),
+        ("Washington's Birthday", _nth_weekday(year, 2, 0, 3)),
+        ("Good Friday", _easter(year) - datetime.timedelta(days=2)),
+        ("Memorial Day", _nth_weekday(year, 5, 0, -1)),
+        ("Juneteenth", _observed(datetime.date(year, 6, 19))),
+        ("Independence Day", _observed(datetime.date(year, 7, 4))),
+        ("Labor Day", _nth_weekday(year, 9, 0, 1)),
+        ("Thanksgiving Day", _nth_weekday(year, 11, 3, 4)),
+        ("Christmas Day", _observed(datetime.date(year, 12, 25))),
+    ]
+    out = [(n, d, "closed") for n, d in closed]
+    tg = _nth_weekday(year, 11, 3, 4)
+    out.append(("Day after Thanksgiving", tg + datetime.timedelta(days=1), "early"))
+    j3, j4 = datetime.date(year, 7, 3), datetime.date(year, 7, 4)
+    if j4.weekday() != 5 and j3.weekday() < 5:          # not the Sat→Fri full-holiday case
+        out.append(("Day before Independence Day", j3, "early"))
+    xe = datetime.date(year, 12, 24)
+    if xe.weekday() < 5 and _observed(datetime.date(year, 12, 25)) != xe:
+        out.append(("Christmas Eve", xe, "early"))
+    return out
+
+
+def fetch_market_holidays():
+    """Upcoming NYSE/NASDAQ holidays & early closes — computed from fixed rules (no API/key)."""
+    today = datetime.date.today()
+    rows = []
+    for y in (today.year, today.year + 1):
+        for name, d, typ in _us_market_days(y):
+            if d >= today:
+                rows.append({"date": d.isoformat(), "day": d.strftime("%a"), "name": name, "type": typ})
+    rows.sort(key=lambda r: r["date"])
+    return rows[:12]
+
+
 def _sp500_forward_pe():
     """S&P 500 12-month-forward P/E. Yahoo/Finviz don't publish it for the index, so use the
     public historyofmarket.com JSON feed (cap-weighted forward consensus, no API key). Returns a
@@ -477,6 +543,7 @@ def main():
     data["fundamentals"] = fetch_fundamentals_all(_names, _prices)
     data["chains"] = fetch_chains(_names, _prices)
     data["market_stats"] = fetch_market_stats()
+    data["market_holidays"] = fetch_market_holidays()
     data["generated_at"] = datetime.datetime.now(datetime.timezone.utc).isoformat(timespec="seconds")
     # universe payload keeps the DEFAULT list distinct from the user-added extras, so the
     # front-end renders the default watchlist by default and can filter to a signed-in user's own
