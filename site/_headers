@@ -5,3 +5,6 @@
   Cache-Control: no-cache
 /index.html
   Cache-Control: no-cache
+# Data JSON must always revalidate — it's the freshness the whole app reads from.
+/data/*
+  Cache-Control: no-cache
