@@ -70,6 +70,29 @@ jobs:
           echo "--- diagnostic snapshot present? ---"
           grep -c "__AUTHSNAP" /tmp/site || true
 
+      - name: Live data freshness (what a browser actually receives for /data/signals.json)
+        run: |
+          echo "=== response headers (cache behaviour at the edge) ==="
+          curl -sI "https://optionintel.app/data/signals.json" | grep -iE "cache-control|cf-cache-status|age:|etag|last-modified|expires" || echo "(no cache headers seen)"
+          echo "=== payload freshness (cache-busted, like the app fetches it) ==="
+          curl -s "https://optionintel.app/data/signals.json?t=$(date +%s)" -o /tmp/sig
+          python - <<'PY'
+          import json
+          d=json.load(open("/tmp/sig"))
+          ov={o.get("ticker"):o for o in d.get("overview",[])}
+          a=ov.get("AAPL",{})
+          print("generated_at:", d.get("generated_at"))
+          print("AAPL price:", a.get("price"), "pct:", a.get("pct"))
+          PY
+          echo "=== same URL WITHOUT cache-buster (what a stale client might get) ==="
+          curl -s "https://optionintel.app/data/signals.json" -o /tmp/sig2
+          python - <<'PY'
+          import json
+          d=json.load(open("/tmp/sig2"))
+          a={o.get("ticker"):o for o in d.get("overview",[])}.get("AAPL",{})
+          print("generated_at:", d.get("generated_at"), "| AAPL:", a.get("price"))
+          PY
+
       - name: Send a real magic link (end-to-end custom-SMTP test)
         if: ${{ github.event.inputs.otp_email != '' }}
         run: |
