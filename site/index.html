@@ -39,6 +39,9 @@ nav{display:flex; gap:4px; margin-left:6px; flex-wrap:nowrap; white-space:nowrap
 nav a{color:var(--text); text-decoration:none; font-weight:700; font-size:18px; padding:7px 12px; border-radius:8px; cursor:pointer; white-space:nowrap}
 nav a:hover{color:var(--text); background:var(--surface-2)} nav a.on{color:var(--accent); background:var(--accent-soft)}
 .tag{font-size:11px; font-weight:600; letter-spacing:.08em; text-transform:uppercase; color:var(--faint); white-space:nowrap}
+/* snapshot-age cue: Overview/Chain quotes are a batch snapshot (vs the live TA chart) */
+.snap{display:inline-block; margin-left:10px; font-size:11.5px; font-weight:600; color:var(--faint); background:var(--surface-2); border:1px solid var(--line); border-radius:999px; padding:3px 10px; white-space:nowrap; vertical-align:middle; cursor:help}
+.snap .snapdim{opacity:.6; font-weight:500}
 /* right-side header cluster: pushes the updated-time, watchlist switch, and account to the top-right */
 .hdr-right{margin-left:auto; display:flex; align-items:center; gap:14px; flex-wrap:wrap; justify-content:flex-end}
 .logo{flex:0 0 auto; display:flex; flex-direction:column; align-items:center; gap:2px; color:var(--text); cursor:pointer; line-height:1; text-decoration:none; transition:color .15s}
@@ -473,7 +476,7 @@ th.thelp:hover{color:var(--text)} th.thelp:hover .thi{border-color:var(--accent)
 
   <!-- ══════════ OVERVIEW ══════════ -->
   <section id="v-overview" class="view">
-    <div class="head"><h1>Market Pulse</h1><div class="meta" id="ov-upd">Live market backdrop, sector rotation, and the full watchlist read.</div></div>
+    <div class="head"><h1>Market Pulse</h1><div class="meta" id="ov-upd">Live market backdrop, sector rotation, and the full watchlist read.</div><span class="js-snap snap"></span></div>
     <div class="pulse10" id="ov-pulse"></div>
     <div class="gauges" id="ov-gauges"></div>
     <div class="subhead">Sector Heatmap <span class="n">SPDR sectors + BTC · colour = move strength</span></div>
@@ -488,7 +491,7 @@ th.thelp:hover{color:var(--text)} th.thelp:hover .thi{border-color:var(--accent)
 
   <!-- ══════════ OPTIONS CHAIN ══════════ -->
   <section id="v-chain" class="view" hidden>
-    <div class="head"><h1>Options Chain</h1><div class="meta">Pick a ticker, then an expiry (DTE) — the full calls &amp; puts ladder with Δ, bid/ask, IV and OI. 🎯 marks the ≈30Δ strike (the usual CSP/CC sell target).</div></div>
+    <div class="head"><h1>Options Chain</h1><div class="meta">Pick a ticker, then an expiry (DTE) — the full calls &amp; puts ladder with Δ, bid/ask, IV and OI. 🎯 marks the ≈30Δ strike (the usual CSP/CC sell target).</div><span class="js-snap snap"></span></div>
     <div id="chain-chips" class="chips"></div>
     <div id="chain-exps" class="etiles"></div>
     <div id="chain-body"></div>
@@ -629,7 +632,7 @@ th.thelp:hover{color:var(--text)} th.thelp:hover .thi{border-color:var(--accent)
 
 </main>
 
-<footer class="wrap"><b>optionintel.app</b> — one engine, every tab · real Tradier chains &amp; greeks · the same rules the <b>Rules</b> tab lists · <b>research only, not advice</b> · <span id="upd" style="opacity:.75">updated…</span> · <span class="pre" style="opacity:.6">build <span id="buildid">2026-09-01 · arch-A · auto-refresh</span></span></footer>
+<footer class="wrap"><b>optionintel.app</b> — one engine, every tab · real Tradier chains &amp; greeks · the same rules the <b>Rules</b> tab lists · <b>research only, not advice</b> · <span id="upd" style="opacity:.75">updated…</span> · <span class="pre" style="opacity:.6">build <span id="buildid">2026-09-01 · arch-A · snapshot-age</span></span></footer>
 
 <script>
 const KIND={csp:"CSP",cc:"CC",leap:"LEAP"};
@@ -758,12 +761,25 @@ function sparkPopup(key){
   return head+miniChart(hist)+`<div class="spcap">${arrow} ${Math.abs(pct).toFixed(1)}%</span> <span class="dim">over 90d</span></div>`;
 }
 
+// Overview + Options Chain quotes are a batch SNAPSHOT baked into signals.json (unlike the live TA
+// chart), so show how old that snapshot is — plainly, so a lag behind the chart reads as expected.
+function relAge(iso){ if(!iso) return ''; const s=Math.max(0,(Date.now()-new Date(iso).getTime())/1000);
+  if(s<90) return 'just now';
+  const m=Math.round(s/60); if(m<60) return m+' min ago';
+  const h=Math.floor(m/60), mm=m%60; if(h<24) return h+'h'+(mm?' '+mm+'m':'')+' ago';
+  return Math.floor(h/24)+'d ago'; }
+function snapHTML(){ const g=DATA&&DATA.generated_at; if(!g) return '';
+  const utc=new Date(g).toUTCString().slice(17,22);
+  return `<span title="Overview &amp; Options Chain prices are a snapshot from the last scan — every 30 min during US market hours (08:30–17:00 ET). The TA chart is live and independent.">&#9719; Quotes: snapshot &middot; ${relAge(g)} <span class="snapdim">(${utc} UTC)</span></span>`; }
+function renderSnap(){ const h=snapHTML(); document.querySelectorAll('.js-snap').forEach(e=>e.innerHTML=h); }
+
 let _lastGen=null, _refreshing=false;
 function applyData(J, first){
   DATA=J; SIGS=J.signals||[]; LEAPS=J.leaps||[]; MKT=J.market||{};
   _lastGen=J.generated_at||null;
   const dt=J.generated_at?new Date(J.generated_at):null;
   document.getElementById('upd').textContent=dt?'updated '+dt.toUTCString().slice(17,22)+' UTC':'preview';
+  renderSnap();
   renderPulse(); renderMarket();     // market-wide, universe-independent
   if(first) initAuth();   // Supabase magic-link accounts + per-user watchlist (falls back to guest/localStorage) — once only
   rebuild();    // derive READY/LEAPQ/BYTK/CHAINROWS for the ACTIVE universe + render every universe-scoped tab
@@ -794,9 +810,10 @@ function maybeRefresh(){
     .catch(()=>{})
     .finally(()=>{ _refreshing=false; });
 }
-document.addEventListener('visibilitychange',()=>{ if(!document.hidden) maybeRefresh(); });
+document.addEventListener('visibilitychange',()=>{ if(!document.hidden){ maybeRefresh(); renderSnap(); } });
 addEventListener('focus', maybeRefresh);
 setInterval(maybeRefresh, 10*60*1000);   // backstop while the tab stays open and visible
+setInterval(renderSnap, 60*1000);        // keep the 'N min ago' snapshot age current
 
 // Temporary sign-in diagnostic: shows exactly what the magic-link redirect delivered (token in
 // the hash? a ?code=? an error? did a session get stored?). Only appears right after a link click
