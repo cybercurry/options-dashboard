@@ -632,7 +632,7 @@ th.thelp:hover{color:var(--text)} th.thelp:hover .thi{border-color:var(--accent)
 
 </main>
 
-<footer class="wrap"><b>optionintel.app</b> — one engine, every tab · real Tradier chains &amp; greeks · the same rules the <b>Rules</b> tab lists · <b>research only, not advice</b> · <span id="upd" style="opacity:.75">updated…</span> · <span class="pre" style="opacity:.6">build <span id="buildid">2026-09-01 · arch-A · snapshot-age</span></span></footer>
+<footer class="wrap"><b>optionintel.app</b> — one engine, every tab · real Tradier chains &amp; greeks · the same rules the <b>Rules</b> tab lists · <b>research only, not advice</b> · <span id="upd" style="opacity:.75">updated…</span> · <span class="pre" style="opacity:.6">build <span id="buildid">2026-09-01 · arch-A · vol-bands</span></span></footer>
 
 <script>
 const KIND={csp:"CSP",cc:"CC",leap:"LEAP"};
@@ -1030,7 +1030,7 @@ function renderMarket(){
     mtile('2Y Treasury',ycMap['2Y']!=null?ycMap['2Y'].toFixed(2)+'%':'—','short end',"Tracks where the market expects the Fed to be in ~2 years."),
     mtile('10Y Treasury',ycMap['10Y']!=null?ycMap['10Y'].toFixed(2)+'%':'—','benchmark',"The benchmark long rate — growth & inflation expectations, and the discount rate equities are valued against. A rising 10Y pressures high-multiple stocks."),
     mtile('30Y Treasury',ycMap['30Y']!=null?ycMap['30Y'].toFixed(2)+'%':'—','long end',"The long bond — 30-year borrowing cost. Driven more by long-run inflation and term premium than by Fed policy. When the 30Y sells off faster than the short end (a 'bear steepener'), the market is demanding more to hold duration — usually on fiscal or inflation worries."),
-    mtile('MOVE',ms.move!=null?ms.move.toFixed(0):'—',(ms.move_chg!=null?((ms.move_chg>=0?'+':'')+ms.move_chg):'')+' · Treasury vol',"The MOVE index — the bond market's VIX: the implied volatility of US Treasuries. Rising MOVE = rate uncertainty and stress, which leaks into equities and option pricing. The rate-world companion to VIX.",[['<80','Calm'],['80–120','Normal'],['120–160','Elevated'],['>160','Stress']],band(ms.move,120,160))
+    mtile('MOVE',ms.move!=null?ms.move.toFixed(0):'—',(ms.move_chg!=null?((ms.move_chg>=0?'+':'')+ms.move_chg):'')+' · Treasury vol',"The MOVE index — the bond market's VIX: ICE BofA's yield-curve-weighted implied vol of US Treasuries. Rising MOVE = rate uncertainty and stress, which leaks into equities and option pricing. Bands per market convention (Schwab / Russell Investments): calm <80, normal 80–120, elevated 120–150, stress >150 (record ~217 in Oct 2008; ~200 at the Mar-2023 SVB shock).",[['<80','Calm'],['80–120','Normal'],['120–150','Elevated'],['>150','Stress']],band(ms.move,120,150))
   ].join('');
   const val=[
     mtile('S&P 500 P/E',ms.pe_trailing!=null?ms.pe_trailing.toFixed(1):'—','trailing',"Price ÷ trailing 12-month S&P earnings (via SPY) — the market's valuation. Long-run average ~16–17; a richer market leaves a CSP seller less cushion if assigned.",[['≲16','Cheap / fair'],['17–19','Above average'],['20–24','Rich'],['≥25','Very rich — stretched']]),
@@ -1039,8 +1039,8 @@ function renderMarket(){
     mtile('VRP',ms.vrp!=null?((ms.vrp>=0?'+':'')+ms.vrp.toFixed(1)+' pts'):'—','VIX − realized',"Variance Risk Premium — implied (VIX) minus realized vol, in volatility points (percentage points of annualized vol). Positive = options price in more movement than the S&P delivers; that extra is the edge you pocket selling premium. Negative = you'd be underpaid — don't sell.",null,ms.vrp==null?'':(ms.vrp>=0?'good':'bad'))
   ].join('');
   const vol=[
-    mtile('OVX',ms.ovx!=null?ms.ovx.toFixed(1):'—',ms.ovx_chg!=null?((ms.ovx_chg>=0?'+':'')+ms.ovx_chg):'',"CBOE Crude Oil Volatility Index — oil's implied vol. Spikes hard on supply shocks (2020 negative oil prices, 2022 invasion). Watch it if energy names are on your watchlist.",[['<25','Calm'],['25–40','Normal'],['40–60','Elevated'],['>60','Extreme — supply shock']],band(ms.ovx,40,60)),
-    mtile('GVZ',ms.gvz!=null?ms.gvz.toFixed(1):'—',ms.gvz_chg!=null?((ms.gvz_chg>=0?'+':'')+ms.gvz_chg):'',"CBOE Gold Volatility Index — gold's implied vol. A GVZ spike means your GLD option premium just got richer — and usually signals something macro breaking.",[['<14','Calm'],['14–18','Normal'],['18–24','Elevated'],['>24','Extreme — flight to safety']],band(ms.gvz,18,24))
+    mtile('OVX',ms.ovx!=null?ms.ovx.toFixed(1):'—',ms.ovx_chg!=null?((ms.ovx_chg>=0?'+':'')+ms.ovx_chg):'',"CBOE Crude Oil Volatility Index (OVX) — 30-day implied vol on USO (WTI) options, VIX methodology. Spikes hard on supply shocks (2020 negative oil, 2022 invasion). Bands: normal ~25–35; >50 is exceptionally high (per market convention / SpotGamma). Watch it if energy names are on your watchlist.",[['<25','Calm'],['25–35','Normal'],['35–50','Elevated'],['>50','Extreme — supply shock']],band(ms.ovx,35,50)),
+    mtile('GVZ',ms.gvz!=null?ms.gvz.toFixed(1):'—',ms.gvz_chg!=null?((ms.gvz_chg>=0?'+':'')+ms.gvz_chg):'',"CBOE Gold Volatility Index (GVZ) — 30-day implied vol on GLD options, VIX methodology. A GVZ spike means your GLD option premium just got richer — and usually signals something macro breaking. Bands: gold vol typically sits in the teens (calm/normal); the low-20s are elevated and 30+ is stress/flight-to-safety (per CBOE data / market convention).",[['<14','Calm'],['14–20','Normal'],['20–30','Elevated'],['>30','Extreme — flight to safety']],band(ms.gvz,20,30))
   ].join('');
   // VIX lives on Overview (the sentiment dials); here it just sets the current regime row.
   const vix=ms.vix, vzone=vix==null?'':vix<15?'Low':vix<20?'Normal':vix<=30?'Elevated':'Fear';
