@@ -93,6 +93,25 @@ jobs:
           print("generated_at:", d.get("generated_at"), "| AAPL:", a.get("price"))
           PY
 
+      - name: Vol-index band audit (derive regime bands from real history)
+        run: |
+          pip install yfinance >/dev/null 2>&1 || pip install yfinance
+          python - <<'PY'
+          import numpy as np, yfinance as yf
+          # Percentiles of each vol index over ~10y → defensible Calm/Normal/Elevated/Extreme cutoffs.
+          for sym in ["^VIX","^GVZ","^OVX","^MOVE"]:
+              try:
+                  h = yf.Ticker(sym).history(period="10y")["Close"].dropna()
+                  if not len(h):
+                      print(f"{sym}: NO DATA"); continue
+                  p = np.percentile(h,[10,25,50,75,85,90,95,99])
+                  print(f"{sym}: n={len(h)} last={h.iloc[-1]:.1f} min={h.min():.1f} max={h.max():.1f} | "
+                        f"p10={p[0]:.1f} p25={p[1]:.1f} p50={p[2]:.1f} p75={p[3]:.1f} "
+                        f"p85={p[4]:.1f} p90={p[5]:.1f} p95={p[6]:.1f} p99={p[7]:.1f}")
+              except Exception as e:
+                  print(f"{sym}: ERR {type(e).__name__} {e}")
+          PY
+
       - name: Send a real magic link (end-to-end custom-SMTP test)
         if: ${{ github.event.inputs.otp_email != '' }}
         run: |
