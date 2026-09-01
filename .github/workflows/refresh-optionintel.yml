@@ -13,8 +13,17 @@ on:
       - "wheel_universe.json"
       - ".github/workflows/refresh-optionintel.yml"
   schedule:
-    - cron: "*/30 13-21 * * 1-5"   # every 30 min, ~US market hours (UTC), Mon–Fri
-  workflow_dispatch: {}             # manual "Run workflow" button
+    # Best-effort FALLBACK only. GitHub throttles/skips high-frequency cron, so this alone does NOT
+    # give a dependable 30-min heartbeat — an external scheduler (Cloudflare Worker / cron-job.org)
+    # dispatches this workflow reliably. The band 12–22 UTC covers 08:30–17:00 ET in BOTH EDT and
+    # EST; the ET gate below is the single source of truth that keeps every run inside the real window.
+    - cron: "*/30 12-22 * * 1-5"
+  workflow_dispatch:                # manual / external dispatch
+    inputs:
+      force:
+        description: "Run even outside the ET market window"
+        type: boolean
+        default: false
 
 permissions:
   contents: write                   # allow the bot to push the refreshed JSON
@@ -41,13 +50,42 @@ jobs:
           python-version: "3.12"
           cache: pip
 
+      # Single source of truth for WHEN the heartbeat runs: every 30 min, 08:30–17:00 ET
+      # (market open −1h … close +1h), Mon–Fri. Uses the America/New_York tz, so it tracks EDT/EST
+      # automatically. A code push always runs (fresh deploy); a manual dispatch can force off-window.
+      - id: gate
+        name: Gate to the ET market window (DST-aware)
+        env:
+          EVENT: ${{ github.event_name }}
+          FORCE: ${{ github.event.inputs.force }}
+        run: |
+          python - <<'PY'
+          import os
+          from datetime import datetime
+          from zoneinfo import ZoneInfo
+          ev   = os.environ.get("EVENT", "")
+          force= (os.environ.get("FORCE") or "").lower() == "true"
+          now  = datetime.now(ZoneInfo("America/New_York"))
+          weekday  = now.weekday() < 5                 # Mon–Fri
+          mins     = now.hour * 60 + now.minute
+          in_window= (8*60 + 30) <= mins <= (17*60)    # 08:30 … 17:00 ET
+          go = (ev == "push") or force or (weekday and in_window)
+          print(f"{now:%a %Y-%m-%d %H:%M} ET | weekday={weekday} in_window={in_window} "
+                f"event={ev} force={force} -> go={go}")
+          with open(os.environ["GITHUB_OUTPUT"], "a") as f:
+              f.write(f"go={'true' if go else 'false'}\n")
+          PY
+
       - name: Install engine deps
+        if: steps.gate.outputs.go == 'true'
         run: pip install requests yfinance
 
       - name: Run engine → JSON
+        if: steps.gate.outputs.go == 'true'
         run: python build_json.py
 
       - name: Commit fresh data (only if it changed)
+        if: steps.gate.outputs.go == 'true'
         run: |
           if git diff --quiet -- site/data/signals.json; then
             echo "No change — skipping commit."
