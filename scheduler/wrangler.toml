@@ -1,0 +1,11 @@
+name = "optionintel-refresh-scheduler"
+main = "refresh-scheduler.js"
+compatibility_date = "2026-09-01"
+
+# UTC. The band 12–22 covers 08:30–17:00 ET in BOTH EDT and EST; the Worker code refines the exact
+# edges and DST. Fires on :00 and :30 → a 30-min heartbeat aligned to the market half-hours.
+[triggers]
+crons = ["0,30 12-22 * * 1-5"]
+
+# GH_TOKEN and REFRESH_KEY are secrets — set them with `wrangler secret put …` or in the dashboard,
+# never in this file.
