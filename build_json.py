@@ -440,7 +440,8 @@ def fetch_market_stats():
 # ── Options-chain embed ──────────────────────────────────────────────────────────
 # The static site has no live backend, so the browsable Options Chain must be baked into
 # the JSON. Bounded (expiries + strike band) to keep the file light and the scan fast.
-CHAIN_TARGET_DTES  = [7, 21, 30, 45, 60, 90]   # embed the expiry nearest each (deduped)
+CHAIN_WEEKLY_DTE_MAX  = 49   # embed EVERY expiry out to ~7 weeks → a chain tab for each week
+CHAIN_FAR_TARGET_DTES = [63, 90]   # plus the nearest expiry to each longer monthly horizon
 CHAIN_DTE_MAX      = 120    # only consider expiries within ~4 months
 CHAIN_STRIKE_BAND  = 0.25   # strikes within ±25% of spot …
 CHAIN_STRIKES_SIDE = 28     # … and at most this many each side of ATM
@@ -477,10 +478,15 @@ def fetch_chains(names, prices):
                     avail.append((e, d))
             if not avail:
                 continue
-            # Spread the embedded expiries across target DTEs so the ~30-day working window
-            # (what CSP/CC actually trade) is always present, not just the front weeklies.
+            # Embed EVERY weekly expiry out to ~7 weeks so the browsable chain has a tab for
+            # each week — the old nearest-target snapping left 2-week gaps across the working
+            # window (what CSP/CC actually trade). Then add the nearest expiry to each longer
+            # monthly horizon. Names without weeklies simply contribute whatever they list.
             chosen = {}
-            for tgt in CHAIN_TARGET_DTES:
+            for e, d in avail:
+                if d <= CHAIN_WEEKLY_DTE_MAX:
+                    chosen[e] = d
+            for tgt in CHAIN_FAR_TARGET_DTES:
                 e, d = min(avail, key=lambda x: abs(x[1] - tgt))
                 chosen[e] = d
             picked = sorted(chosen.items(), key=lambda x: x[1])
