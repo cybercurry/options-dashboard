@@ -44,6 +44,8 @@ nav a:hover{color:var(--text); background:var(--surface-2)} nav a.on{color:var(-
 .snap .snapdim{opacity:.6; font-weight:500}
 /* right-side header cluster: pushes the updated-time, watchlist switch, and account to the top-right */
 .hdr-right{margin-left:auto; display:flex; align-items:center; gap:14px; flex-wrap:wrap; justify-content:flex-end}
+/* compact "last Tradier data pull" pill — always visible so staleness is caught without scrolling to the footer */
+.freshpill{font-family:"IBM Plex Mono",monospace; font-size:11.5px; color:var(--muted); background:var(--line-soft); border:1px solid var(--line); border-radius:999px; padding:3px 9px; white-space:nowrap}
 .logo{flex:0 0 auto; display:flex; flex-direction:column; align-items:center; gap:2px; color:var(--text); cursor:pointer; line-height:1; text-decoration:none; transition:color .15s}
 .logo .logomark{width:33px; height:33px; display:block}
 .logo .logotype{font-family:"Archivo",sans-serif; font-weight:800; font-size:15px; letter-spacing:-.01em}
@@ -454,6 +456,7 @@ th.thelp:hover{color:var(--text)} th.thelp:hover .thi{border-color:var(--accent)
     <a data-tab="rules">Rules</a>
   </nav>
   <div class="hdr-right">
+    <span class="freshpill" id="freshpill" title=""></span>
     <span class="univtog" id="univtog"></span>
     <span class="authstatus" id="authstatus"></span>
   </div>
@@ -632,7 +635,7 @@ th.thelp:hover{color:var(--text)} th.thelp:hover .thi{border-color:var(--accent)
 
 </main>
 
-<footer class="wrap"><b>optionintel.app</b> — one engine, every tab · real Tradier chains &amp; greeks · the same rules the <b>Rules</b> tab lists · <b>research only, not advice</b> · <span id="upd" style="opacity:.75">updated…</span> · <span class="pre" style="opacity:.6">build <span id="buildid">2026-09-01 · arch-A · vol-bands</span></span></footer>
+<footer class="wrap"><b>optionintel.app</b> — one engine, every tab · real Tradier chains &amp; greeks · the same rules the <b>Rules</b> tab lists · <b>research only, not advice</b> · <span id="upd" style="opacity:.75">updated…</span> · <span class="pre" style="opacity:.6">build <span id="buildid">2026-09-04 · arch-A · weekly-chain+stamp</span></span></footer>
 
 <script>
 const KIND={csp:"CSP",cc:"CC",leap:"LEAP"};
@@ -774,11 +777,25 @@ function snapHTML(){ const g=DATA&&DATA.generated_at; if(!g) return '';
 function renderSnap(){ const h=snapHTML(); document.querySelectorAll('.js-snap').forEach(e=>e.innerHTML=h); }
 
 let _lastGen=null, _refreshing=false;
+// Stamp the most recent Tradier data-pull time in two places: the footer (full date + time,
+// authoritative) and a compact always-visible pill top-right (so staleness is caught without
+// scrolling). Both read generated_at — the instant build_json.py pulled Tradier and wrote the JSON.
+const _MON=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+function setStamps(dt){
+  const upd=document.getElementById('upd'), fp=document.getElementById('freshpill');
+  if(!dt){ if(upd)upd.textContent='preview'; if(fp){fp.textContent='preview'; fp.title='';} return; }
+  const p=n=>String(n).padStart(2,'0');
+  const hm=p(dt.getUTCHours())+':'+p(dt.getUTCMinutes());
+  const full=_MON[dt.getUTCMonth()]+' '+dt.getUTCDate()+', '+dt.getUTCFullYear()+', '+hm+' UTC';
+  const short='◷ '+_MON[dt.getUTCMonth()]+' '+dt.getUTCDate()+' · '+hm+' UTC';
+  if(upd)upd.textContent='updated '+full;
+  if(fp){ fp.textContent=short; fp.title='Most recent Tradier data pull: '+full; }
+}
 function applyData(J, first){
   DATA=J; SIGS=J.signals||[]; LEAPS=J.leaps||[]; MKT=J.market||{};
   _lastGen=J.generated_at||null;
   const dt=J.generated_at?new Date(J.generated_at):null;
-  document.getElementById('upd').textContent=dt?'updated '+dt.toUTCString().slice(17,22)+' UTC':'preview';
+  setStamps(dt);
   renderSnap();
   renderPulse(); renderMarket();     // market-wide, universe-independent
   if(first) initAuth();   // Supabase magic-link accounts + per-user watchlist (falls back to guest/localStorage) — once only
