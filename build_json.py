@@ -478,14 +478,25 @@ def fetch_chains(names, prices):
                     avail.append((e, d))
             if not avail:
                 continue
-            # Embed EVERY weekly expiry out to ~7 weeks so the browsable chain has a tab for
-            # each week — the old nearest-target snapping left 2-week gaps across the working
-            # window (what CSP/CC actually trade). Then add the nearest expiry to each longer
-            # monthly horizon. Names without weeklies simply contribute whatever they list.
-            chosen = {}
+            # One expiry PER WEEK out to ~7 weeks so the browsable chain has a tab for each
+            # week (the old nearest-target snapping left 2-week gaps across the working window
+            # CSP/CC trade). Prefer the Friday standard weekly in each 7-day bucket, else the
+            # latest DTE — this deliberately skips the daily expiries index ETFs list, which
+            # would balloon the JSON. Then add the nearest expiry to each longer monthly
+            # horizon. Names without weeklies simply contribute whatever they list.
+            weekly = {}
             for e, d in avail:
-                if d <= CHAIN_WEEKLY_DTE_MAX:
-                    chosen[e] = d
+                if d > CHAIN_WEEKLY_DTE_MAX:
+                    continue
+                wk = d // 7
+                try:
+                    is_fri = _dt.date.fromisoformat(e).weekday() == 4
+                except Exception:
+                    is_fri = False
+                cur = weekly.get(wk)
+                if cur is None or (is_fri and not cur[2]) or (is_fri == cur[2] and d > cur[1]):
+                    weekly[wk] = (e, d, is_fri)
+            chosen = {e: d for (e, d, _f) in weekly.values()}
             for tgt in CHAIN_FAR_TARGET_DTES:
                 e, d = min(avail, key=lambda x: abs(x[1] - tgt))
                 chosen[e] = d
