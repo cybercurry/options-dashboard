@@ -7234,8 +7234,8 @@
     },
     {
       "label": "Bitcoin",
-      "price": 80042.046875,
-      "pct": 0.4645022971143886,
+      "price": 80050.0,
+      "pct": 0.4744846348484488,
       "prefix": "$",
       "is_yield": false,
       "hist": [
@@ -7328,13 +7328,13 @@
         77300,
         81272,
         79672,
-        80042
+        80050
       ]
     },
     {
       "label": "Ethereum",
-      "price": 2479.75,
-      "pct": 0.9638079000438893,
+      "price": 2480.0,
+      "pct": 0.9739867293512949,
       "prefix": "$",
       "is_yield": false,
       "hist": [
@@ -7501,8 +7501,8 @@
     {
       "label": "Digital Assets",
       "ticker": "BTC",
-      "pct": 0.4645022971143886,
-      "price": 80042.046875
+      "pct": 0.4744846348484488,
+      "price": 80050.0
     }
   ],
   "fundamentals": {
@@ -7795,6 +7795,18 @@
           "when": "Sep 04"
         },
         {
+          "title": "Dow Jones Futures: U.S., Iran Exchange Attacks; Nvidia, Micron, Sandisk Flash Buy Signals",
+          "publisher": "Investor's Business Daily",
+          "link": "https://www.investors.com/market-trend/stock-market-today/dow-jones-futures-nvidia-micron-sandisk-buy-signals-apple-inflation-reports/?src=A00220&yptr=yahoo",
+          "when": "Sep 05"
+        },
+        {
+          "title": "Why I Just Added to My Chevron Position Despite Trump Criticism",
+          "publisher": "Motley Fool",
+          "link": "https://www.fool.com/investing/2026/09/05/why-i-just-added-to-my-chevron-position-despite-ne/",
+          "when": "Sep 05"
+        },
+        {
           "title": "With AI Revenue Set to Surge 400% Over the Next 2 Years, Broadcom Stock Looks Like a Buy on Recent Dip",
           "publisher": "Motley Fool",
           "link": "https://www.fool.com/investing/2026/09/05/ai-revenue-set-surge-broadcom-stock-buy-dip/",
@@ -7810,18 +7822,6 @@
           "title": "Ares Capital Fell Enough to Push Its Yield Near 10%. Here's the Number That Actually Worries Me.",
           "publisher": "Motley Fool",
           "link": "https://www.fool.com/investing/2026/09/05/ares-capital-fell-enough-to-push-its-yield-near-10-here-s-the-number-that-actually-worries-me/",
-          "when": "Sep 05"
-        },
-        {
-          "title": "Anthropic Could Be the Next Mega IPO: 2 Magnificent Stocks That Already Own a Piece of the AI Unicorn",
-          "publisher": "Motley Fool",
-          "link": "https://www.fool.com/investing/2026/09/05/anthropic-could-be-the-next-mega-ipo-2-magnificent/",
-          "when": "Sep 05"
-        },
-        {
-          "title": "Warren Buffett's Successor Greg Abel Spent $4.5 Billion Buying 1 Stock Last Quarter, and He Spent At Least $3.3 Billion Buying More This Quarter",
-          "publisher": "Motley Fool",
-          "link": "https://www.fool.com/investing/2026/09/05/warren-buffetts-successor-greg-abel-spent-45-bil/",
           "when": "Sep 05"
         }
       ]
@@ -7884,6 +7884,12 @@
       "flags": [],
       "news": [
         {
+          "title": "Costco kills member perk that saved customers money",
+          "publisher": "TheStreet",
+          "link": "https://www.thestreet.com/retail/costco-kills-next-a-perk-growing-faster-than-its-stores",
+          "when": "Sep 05"
+        },
+        {
           "title": "If You Buy Amazon With $10,000 at a 10% Discount From Its High, Here's What I Predict It Could Be Worth in 10 Years",
           "publisher": "Motley Fool",
           "link": "https://www.fool.com/investing/2026/09/05/buy-amazon-10000-10-discount-predict-10-years/",
@@ -7911,12 +7917,6 @@
           "title": "Barnes & Noble tops 720 stores in major revival",
           "publisher": "USA TODAY",
           "link": "https://www.usatoday.com/story/money/retail/2026/09/04/barnes-noble-new-store-openings-2026-locations/91615906007/",
-          "when": "Sep 04"
-        },
-        {
-          "title": "AWS Plans 2 Million More NVIDIA GPUs. Is This Better News for AMZN\u2019s Cloud Growth or NVDA\u2019s Backlog?",
-          "publisher": "Insider Monkey",
-          "link": "https://finance.yahoo.com/technology/ai/articles/aws-plans-2-million-more-230419284.html",
           "when": "Sep 04"
         }
       ]
@@ -8568,6 +8568,12 @@
       ],
       "news": [
         {
+          "title": "AI\u2019s Next Winners? Investor Bets on Snowflake, CrowdStrike and Palantir",
+          "publisher": "Benzinga",
+          "link": "https://finance.yahoo.com/technology/ai/articles/ai-next-winners-investor-bets-170009073.html",
+          "when": "Sep 05"
+        },
+        {
           "title": "Palantir Jumped 7.7% on an Expanded PwC Alliance as Globant Launched a Salesforce AI Pod. Which Services Model Scales Better?",
           "publisher": "Insider Monkey",
           "link": "https://finance.yahoo.com/technology/ai/articles/palantir-jumped-7-7-expanded-123838463.html",
@@ -8595,12 +8601,6 @@
           "title": "Palantir (PLTR) Stock Fair Value Edges Higher After Strong Q2 And Raised Guidance",
           "publisher": "Simply Wall St.",
           "link": "https://finance.yahoo.com/markets/stocks/articles/palantir-pltr-stock-fair-value-201019421.html",
-          "when": "Sep 04"
-        },
-        {
-          "title": "3 Reasons PLTR Has Explosive Upside Potential",
-          "publisher": "StockStory",
-          "link": "https://finance.yahoo.com/markets/stocks/articles/3-reasons-pltr-explosive-upside-200610011.html",
           "when": "Sep 04"
         }
       ]
@@ -8774,15 +8774,15 @@
           "when": "Sep 04"
         },
         {
-          "title": "Apple (AAPL) Draws New \u00a32 Billion UK ATT Lawsuit With Wider Europe Stakes",
-          "publisher": "Simply Wall St.",
-          "link": "https://finance.yahoo.com/technology/articles/apple-aapl-draws-2-billion-170534240.html",
+          "title": "Dow Jones Futures: U.S., Iran Exchange Attacks; Nvidia, Micron, Sandisk Flash Buy Signals",
+          "publisher": "Investor's Business Daily",
+          "link": "https://www.investors.com/market-trend/stock-market-today/dow-jones-futures-nvidia-micron-sandisk-buy-signals-apple-inflation-reports/?src=A00220&yptr=yahoo",
           "when": "Sep 05"
         },
         {
-          "title": "Dow Jones Futures: Nvidia, Micron, Sandisk Flash Buy Signals; Apple, Inflation Reports Ahead",
-          "publisher": "Investor's Business Daily",
-          "link": "https://www.investors.com/market-trend/stock-market-today/dow-jones-futures-nvidia-micron-sandisk-buy-signals-apple-inflation-reports/?src=A00220&yptr=yahoo",
+          "title": "Apple (AAPL) Draws New \u00a32 Billion UK ATT Lawsuit With Wider Europe Stakes",
+          "publisher": "Simply Wall St.",
+          "link": "https://finance.yahoo.com/technology/articles/apple-aapl-draws-2-billion-170534240.html",
           "when": "Sep 05"
         },
         {
@@ -10046,7 +10046,7 @@
       ],
       "news": [
         {
-          "title": "Dow Jones Futures: Nvidia, Micron, Sandisk Flash Buy Signals; Apple, Inflation Reports Ahead",
+          "title": "Dow Jones Futures: U.S., Iran Exchange Attacks; Nvidia, Micron, Sandisk Flash Buy Signals",
           "publisher": "Investor's Business Daily",
           "link": "https://www.investors.com/market-trend/stock-market-today/dow-jones-futures-nvidia-micron-sandisk-buy-signals-apple-inflation-reports/?src=A00220&yptr=yahoo",
           "when": "Sep 05"
@@ -143850,7 +143850,7 @@
       "type": "closed"
     }
   ],
-  "generated_at": "2026-09-05T18:02:25+00:00",
+  "generated_at": "2026-09-05T18:32:30+00:00",
   "universe": {
     "wheel": 18,
     "growth": 19,
