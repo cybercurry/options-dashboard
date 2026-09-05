@@ -7234,8 +7234,8 @@
     },
     {
       "label": "Bitcoin",
-      "price": 80029.0,
-      "pct": 0.4481265564308057,
+      "price": 80090.0078125,
+      "pct": 0.524700304333825,
       "prefix": "$",
       "is_yield": false,
       "hist": [
@@ -7328,13 +7328,13 @@
         77300,
         81272,
         79672,
-        80029
+        80090
       ]
     },
     {
       "label": "Ethereum",
-      "price": 2474.1201171875,
-      "pct": 0.7345854353676184,
+      "price": 2479.10009765625,
+      "pct": 0.9373469199498663,
       "prefix": "$",
       "is_yield": false,
       "hist": [
@@ -7427,7 +7427,7 @@
         2392,
         2508,
         2456,
-        2474
+        2479
       ]
     }
   ],
@@ -7501,8 +7501,8 @@
     {
       "label": "Digital Assets",
       "ticker": "BTC",
-      "pct": 0.4481265564308057,
-      "price": 80029.0
+      "pct": 0.524700304333825,
+      "price": 80090.0078125
     }
   ],
   "fundamentals": {
@@ -7795,6 +7795,12 @@
           "when": "Sep 04"
         },
         {
+          "title": "Anthropic Could Be the Next Mega IPO: 2 Magnificent Stocks That Already Own a Piece of the AI Unicorn",
+          "publisher": "Motley Fool",
+          "link": "https://www.fool.com/investing/2026/09/05/anthropic-could-be-the-next-mega-ipo-2-magnificent/",
+          "when": "Sep 05"
+        },
+        {
           "title": "Warren Buffett's Successor Greg Abel Spent $4.5 Billion Buying 1 Stock Last Quarter, and He Spent At Least $3.3 Billion Buying More This Quarter",
           "publisher": "Motley Fool",
           "link": "https://www.fool.com/investing/2026/09/05/warren-buffetts-successor-greg-abel-spent-45-bil/",
@@ -7816,12 +7822,6 @@
           "title": "Fed Chair Kevin Warsh Just Shifted the Central Bank's Entire Focus on Inflation in One Sentence",
           "publisher": "Motley Fool",
           "link": "https://www.fool.com/investing/2026/09/05/fed-chair-kevin-warsh-just-shifted-central-bank-focus-on-inflation-in-one-sentence/",
-          "when": "Sep 05"
-        },
-        {
-          "title": "Kraken Robotics Stock Is Down 55% -- Is September the Month to Buy the Dip?",
-          "publisher": "Motley Fool",
-          "link": "https://www.fool.com/investing/2026/09/05/kraken-robotics-stock-down-september-buy-dip/",
           "when": "Sep 05"
         }
       ]
@@ -9492,6 +9492,12 @@
       "flags": [],
       "news": [
         {
+          "title": "Anthropic Could Be the Next Mega IPO: 2 Magnificent Stocks That Already Own a Piece of the AI Unicorn",
+          "publisher": "Motley Fool",
+          "link": "https://www.fool.com/investing/2026/09/05/anthropic-could-be-the-next-mega-ipo-2-magnificent/",
+          "when": "Sep 05"
+        },
+        {
           "title": "Anthropic Weighs Lockup Periods Longer Than the Standard 180 Days. Here's Why That Matters.",
           "publisher": "Motley Fool",
           "link": "https://www.fool.com/investing/2026/09/05/anthropic-lockup-periods-longer-180-day-ipo/",
@@ -9519,12 +9525,6 @@
           "title": "Insiders and Early Investors Are Selling SpaceX Stock and Index Funds Are Buying It. Which Side Do You Want to Be On?",
           "publisher": "Motley Fool",
           "link": "https://www.fool.com/investing/2026/09/05/insiders-and-early-investors-are-selling-spacex-st/",
-          "when": "Sep 05"
-        },
-        {
-          "title": "2 Space Stocks to Buy in September",
-          "publisher": "Motley Fool",
-          "link": "https://www.fool.com/investing/2026/09/05/2-space-stocks-to-buy-in-september/",
           "when": "Sep 05"
         }
       ]
@@ -143850,7 +143850,7 @@
       "type": "closed"
     }
   ],
-  "generated_at": "2026-09-05T17:01:39+00:00",
+  "generated_at": "2026-09-05T17:16:46+00:00",
   "universe": {
     "wheel": 18,
     "growth": 19,
