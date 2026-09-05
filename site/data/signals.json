@@ -7234,8 +7234,8 @@
     },
     {
       "label": "Bitcoin",
-      "price": 79748.0390625,
-      "pct": 0.09547939343472756,
+      "price": 79723.046875,
+      "pct": 0.06411053448456272,
       "prefix": "$",
       "is_yield": false,
       "hist": [
@@ -7328,13 +7328,13 @@
         77300,
         81272,
         79672,
-        79748
+        79723
       ]
     },
     {
       "label": "Ethereum",
-      "price": 2457.93994140625,
-      "pct": 0.07580444560371102,
+      "price": 2457.050048828125,
+      "pct": 0.039572186985092905,
       "prefix": "$",
       "is_yield": false,
       "hist": [
@@ -7427,7 +7427,7 @@
         2392,
         2508,
         2456,
-        2458
+        2457
       ]
     }
   ],
@@ -7501,8 +7501,8 @@
     {
       "label": "Digital Assets",
       "ticker": "BTC",
-      "pct": 0.09547939343472756,
-      "price": 79748.0390625
+      "pct": 0.06411053448456272,
+      "price": 79723.046875
     }
   ],
   "fundamentals": {
@@ -7795,6 +7795,18 @@
           "when": "Sep 04"
         },
         {
+          "title": "Why Deere Stock Hit an All-Time High This Week",
+          "publisher": "Motley Fool",
+          "link": "https://www.fool.com/investing/2026/09/05/why-deere-stock-hit-an-all-time-high-this-week/",
+          "when": "Sep 05"
+        },
+        {
+          "title": "Here's Why USA Rare Earth Is a Buy Before Its Next Earnings Report",
+          "publisher": "Motley Fool",
+          "link": "https://www.fool.com/investing/2026/09/05/heres-why-usa-is-a-buy-before-next-earnings/",
+          "when": "Sep 05"
+        },
+        {
           "title": "There Are Only a Handful of S&P 500 Stocks That Yield Over 5%. Here's My Top Pick to Buy in September.",
           "publisher": "Motley Fool",
           "link": "https://www.fool.com/investing/2026/09/05/there-are-only-a-handful-of-sp-500-stocks-that-yie/",
@@ -7810,18 +7822,6 @@
           "title": "Most Investors Overpay for AI Hype. Nvidia Is the Exception.",
           "publisher": "Motley Fool",
           "link": "https://www.fool.com/investing/2026/09/05/most-investors-overpay-for-ai-hype-nvidia-is-the-e/",
-          "when": "Sep 05"
-        },
-        {
-          "title": "Anthropic's IPO Could Value It at 30 Times Revenue. Here's Why I'm Still Interested Anyway.",
-          "publisher": "Motley Fool",
-          "link": "https://www.fool.com/investing/2026/09/05/anthropic-s-ipo-could-value-it-at-30-times-revenue-here-s-why-i-m-still-interested-anyway/",
-          "when": "Sep 05"
-        },
-        {
-          "title": "3 Incredible High-Growth Stocks to Buy With $10,000 Right Now",
-          "publisher": "Motley Fool",
-          "link": "https://www.fool.com/investing/2026/09/05/incredible-high-growth-stocks-buy-nvda-nbis-mu/",
           "when": "Sep 05"
         }
       ]
@@ -143850,7 +143850,7 @@
       "type": "closed"
     }
   ],
-  "generated_at": "2026-09-05T14:57:43+00:00",
+  "generated_at": "2026-09-05T15:01:53+00:00",
   "universe": {
     "wheel": 18,
     "growth": 19,
