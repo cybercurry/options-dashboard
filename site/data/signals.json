@@ -7234,8 +7234,8 @@
     },
     {
       "label": "Bitcoin",
-      "price": 79810.390625,
-      "pct": 0.173739744569823,
+      "price": 79949.0,
+      "pct": 0.34771482912552276,
       "prefix": "$",
       "is_yield": false,
       "hist": [
@@ -7328,13 +7328,13 @@
         77300,
         81272,
         79672,
-        79810
+        79949
       ]
     },
     {
       "label": "Ethereum",
-      "price": 2459.7900390625,
-      "pct": 0.1511317585836114,
+      "price": 2467.97998046875,
+      "pct": 0.4845878210307353,
       "prefix": "$",
       "is_yield": false,
       "hist": [
@@ -7427,7 +7427,7 @@
         2392,
         2508,
         2456,
-        2460
+        2468
       ]
     }
   ],
@@ -7501,8 +7501,8 @@
     {
       "label": "Digital Assets",
       "ticker": "BTC",
-      "pct": 0.173739744569823,
-      "price": 79810.390625
+      "pct": 0.34771482912552276,
+      "price": 79949.0
     }
   ],
   "fundamentals": {
@@ -7579,6 +7579,12 @@
           "when": "Sep 04"
         },
         {
+          "title": "Tesla's Ashok Elluswamy Says Intelligence, Not Sensors Are The 'Core Issue' For Self-Driving As TSLA Launches Cybercab Without Steering Wheel",
+          "publisher": "Benzinga",
+          "link": "https://tech.yahoo.com/ai/gemini/articles/teslas-ashok-elluswamy-says-intelligence-151525187.html",
+          "when": "Sep 05"
+        },
+        {
           "title": "Elon Musk Says Tesla Cybercab\u2019s Rare-Earth-Free Motor Was \u2018Extremely Hard\u2019 To Achieve \u2014 Gary Black Calls TSLA Launch \u2018Largely A Bust\u2019",
           "publisher": "Benzinga",
           "link": "https://finance.yahoo.com/technology/articles/elon-musk-says-tesla-cybercab-133036109.html",
@@ -7600,12 +7606,6 @@
           "title": "SpaceX is now in your 401(k), and Musk is the risk",
           "publisher": "TheStreet",
           "link": "https://www.thestreet.com/retirement/spacex-401k-exposure-nasdaq-100-musk-risk",
-          "when": "Sep 05"
-        },
-        {
-          "title": "Tesla (TSLA) Stock Trades Down, Here Is Why",
-          "publisher": "StockStory",
-          "link": "https://finance.yahoo.com/markets/stocks/articles/tesla-tsla-stock-trades-down-015810122.html",
           "when": "Sep 05"
         }
       ]
@@ -7795,6 +7795,24 @@
           "when": "Sep 04"
         },
         {
+          "title": "Kraken Robotics Stock Is Down 55% -- Is September the Month to Buy the Dip?",
+          "publisher": "Motley Fool",
+          "link": "https://www.fool.com/investing/2026/09/05/kraken-robotics-stock-down-september-buy-dip/",
+          "when": "Sep 05"
+        },
+        {
+          "title": "Anthropic Weighs Lockup Periods Longer Than the Standard 180 Days. Here's Why That Matters.",
+          "publisher": "Motley Fool",
+          "link": "https://www.fool.com/investing/2026/09/05/anthropic-lockup-periods-longer-180-day-ipo/",
+          "when": "Sep 05"
+        },
+        {
+          "title": "Rocket Lab's Revenue Is Soaring. So Why Is the Stock Sinking?",
+          "publisher": "Motley Fool",
+          "link": "https://www.fool.com/investing/2026/09/05/rocket-lab-revenue-soar-why-stock-sink/",
+          "when": "Sep 05"
+        },
+        {
           "title": "Why I'm Still Investing in VTI Right Now No Matter What the Stock Market Does",
           "publisher": "Motley Fool",
           "link": "https://www.fool.com/investing/2026/09/05/why-im-still-investing-in-vti-right-now-no-matter/",
@@ -7804,24 +7822,6 @@
           "title": "If a Downturn Is Coming, 50 Years of Market History Says This Is the Single Best Response",
           "publisher": "Motley Fool",
           "link": "https://www.fool.com/investing/2026/09/05/if-a-downturn-is-coming-50-years-of-market-history/",
-          "when": "Sep 05"
-        },
-        {
-          "title": "Here's How Many Shares of Procter & Gamble You'd Need for $15,000 in Yearly Dividends",
-          "publisher": "Motley Fool",
-          "link": "https://www.fool.com/investing/2026/09/05/shares-procter-gamble-15000-yearly-dividends/",
-          "when": "Sep 05"
-        },
-        {
-          "title": "Gilead Sciences Just Won Its Third FDA Approval in Less Than 4 Months. Is the Stock Still Underrating This Turnaround Play?",
-          "publisher": "Motley Fool",
-          "link": "https://www.fool.com/investing/2026/09/05/gilead-sciences-just-won-its-third-fda-approval-in/",
-          "when": "Sep 05"
-        },
-        {
-          "title": "Why Deere Stock Hit an All-Time High This Week",
-          "publisher": "Motley Fool",
-          "link": "https://www.fool.com/investing/2026/09/05/why-deere-stock-hit-an-all-time-high-this-week/",
           "when": "Sep 05"
         }
       ]
@@ -8668,7 +8668,7 @@
       ],
       "news": [
         {
-          "title": "Walmart, Target, and Kroger face growing retail crime issue",
+          "title": "Walmart, Target, and Kroger face new retail crime issue",
           "publisher": "TheStreet",
           "link": "https://www.thestreet.com/retail/tech-brand-used-by-walmart-target-shares-new-retail-crime-issue",
           "when": "Sep 05"
@@ -9170,10 +9170,10 @@
       ],
       "news": [
         {
-          "title": "'Detestable, inexcusable, vile': AMC CEO slams Robinhood for tokenized stock offerings",
-          "publisher": "Yahoo Finance Video",
-          "link": "https://finance.yahoo.com/video/detestable-inexcusable-vile-amc-ceo-162000374.html",
-          "when": "Sep 04"
+          "title": "What Is Robinhood Chain? The Ethereum Layer-2 Network for Tokenized Stocks and Meme Coins",
+          "publisher": "decrypt",
+          "link": "https://decrypt.co/resources/what-robinhood-chain-ethereum-layer-2-network-tokenized-stocks",
+          "when": "Sep 05"
         },
         {
           "title": "Bitwise's Matt Hougan Names Robinhood, Solana, Uniswap And Ethereum As His Tokenization Basket",
@@ -9492,6 +9492,18 @@
       "flags": [],
       "news": [
         {
+          "title": "Anthropic Weighs Lockup Periods Longer Than the Standard 180 Days. Here's Why That Matters.",
+          "publisher": "Motley Fool",
+          "link": "https://www.fool.com/investing/2026/09/05/anthropic-lockup-periods-longer-180-day-ipo/",
+          "when": "Sep 05"
+        },
+        {
+          "title": "Rocket Lab's Revenue Is Soaring. So Why Is the Stock Sinking?",
+          "publisher": "Motley Fool",
+          "link": "https://www.fool.com/investing/2026/09/05/rocket-lab-revenue-soar-why-stock-sink/",
+          "when": "Sep 05"
+        },
+        {
           "title": "Jim Cramer Explains Why Velo3D (VELO) Is Only Worth a Quarter Position Right Now",
           "publisher": "Insider Monkey",
           "link": "https://finance.yahoo.com/markets/stocks/articles/jim-cramer-explains-why-velo3d-145323852.html",
@@ -9513,18 +9525,6 @@
           "title": "2 Space Stocks to Buy in September",
           "publisher": "Motley Fool",
           "link": "https://www.fool.com/investing/2026/09/05/2-space-stocks-to-buy-in-september/",
-          "when": "Sep 05"
-        },
-        {
-          "title": "What Move Will SpaceX Stock Make After Sept. 9? The Evidence Is Piling Up, and Here\u2019s What It Shows.",
-          "publisher": "Motley Fool",
-          "link": "https://www.fool.com/investing/2026/09/05/what-move-will-spacex-stock-make-after-sept-9-the-evidence-is-piling-up-and-here-s-what-it-shows/",
-          "when": "Sep 05"
-        },
-        {
-          "title": "Howmet\u2019s SpaceX threat looks more like a buying opportunity: Bernstein",
-          "publisher": "Investing.com",
-          "link": "https://finance.yahoo.com/markets/stocks/articles/howmet-spacex-threat-looks-more-033119339.html",
           "when": "Sep 05"
         }
       ]
@@ -143850,7 +143850,7 @@
       "type": "closed"
     }
   ],
-  "generated_at": "2026-09-05T16:01:48+00:00",
+  "generated_at": "2026-09-05T16:32:14+00:00",
   "universe": {
     "wheel": 18,
     "growth": 19,
