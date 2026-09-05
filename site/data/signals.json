@@ -7234,8 +7234,8 @@
     },
     {
       "label": "Bitcoin",
-      "price": 79796.9765625,
-      "pct": 0.1569031297472545,
+      "price": 79719.109375,
+      "pct": 0.05916839478126157,
       "prefix": "$",
       "is_yield": false,
       "hist": [
@@ -7328,13 +7328,13 @@
         77300,
         81272,
         79672,
-        79797
+        79719
       ]
     },
     {
       "label": "Ethereum",
-      "price": 2478.72998046875,
-      "pct": 0.92227748124869,
+      "price": 2476.60009765625,
+      "pct": 0.8355586268759208,
       "prefix": "$",
       "is_yield": false,
       "hist": [
@@ -7427,7 +7427,7 @@
         2392,
         2508,
         2456,
-        2479
+        2477
       ]
     }
   ],
@@ -7501,8 +7501,8 @@
     {
       "label": "Digital Assets",
       "ticker": "BTC",
-      "pct": 0.1569031297472545,
-      "price": 79796.9765625
+      "pct": 0.05916839478126157,
+      "price": 79719.109375
     }
   ],
   "fundamentals": {
@@ -7573,12 +7573,6 @@
       ],
       "news": [
         {
-          "title": "No steering wheel, no problem: Can Tesla speed by Cybercab probe?",
-          "publisher": "Yahoo Finance Video",
-          "link": "https://finance.yahoo.com/video/no-steering-wheel-no-problem-201602999.html",
-          "when": "Sep 04"
-        },
-        {
           "title": "Prediction: Amazon Will Join Nvidia, Apple, and Alphabet in the $4 Trillion Club Before 2029",
           "publisher": "Motley Fool",
           "link": "https://www.fool.com/investing/2026/09/05/prediction-amazon-will-join-nvidia-apple-and-alpha/",
@@ -7606,6 +7600,12 @@
           "title": "A Used EV Is the Way to Get Those Luxury Wheels",
           "publisher": "Barrons.com",
           "link": "https://www.barrons.com/articles/ev-luxury-used-bargains-lease-f501dcc7?siteid=yhoof2&yptr=yahoo",
+          "when": "Sep 05"
+        },
+        {
+          "title": "Tesla (TSLA) Faces NHTSA Cybercab Safety Probe After Austin Robotaxi Rollout",
+          "publisher": "Simply Wall St.",
+          "link": "https://finance.yahoo.com/technology/ai/articles/tesla-tsla-faces-nhtsa-cybercab-061245889.html",
           "when": "Sep 05"
         }
       ]
@@ -7795,10 +7795,10 @@
           "when": "Sep 04"
         },
         {
-          "title": "Nvidia stock moves closer to all-time high",
-          "publisher": "Yahoo Finance",
-          "link": "https://finance.yahoo.com/markets/article/nvidia-stock-moves-closer-to-all-time-high-193309793.html",
-          "when": "Jul 27"
+          "title": "Should You Buy AMC Entertainment Holdings (AMC) Stock While It's Below $3?",
+          "publisher": "Motley Fool",
+          "link": "https://www.fool.com/investing/2026/09/05/should-you-buy-amc-entertainment-holdings-amc-stoc/",
+          "when": "Sep 05"
         },
         {
           "title": "Prediction: Amazon Will Join Nvidia, Apple, and Alphabet in the $4 Trillion Club Before 2029",
@@ -7979,6 +7979,12 @@
       "flags": [],
       "news": [
         {
+          "title": "3 Great Quality Stocks To Own In September 2026",
+          "publisher": "Simply Wall St.",
+          "link": "https://finance.yahoo.com/markets/stocks/articles/3-great-quality-stocks-own-201414086.html",
+          "when": "Sep 05"
+        },
+        {
           "title": "Amazon, Alphabet, and Microsoft: Two I'm Buying and One I'm Selling",
           "publisher": "Motley Fool",
           "link": "https://www.fool.com/investing/2026/09/05/amazon-alphabet-and-microsoft-two-im-buying-and-on/",
@@ -8007,12 +8013,6 @@
           "publisher": "Investing.com",
           "link": "https://finance.yahoo.com/technology/ai/articles/ai-hiring-boom-could-turn-010734269.html",
           "when": "Sep 05"
-        },
-        {
-          "title": "ChronoScale Says It Plans a 50 MW Microsoft AI Deployment. Can CHRN Fund the Build Without Diluting Shareholders?",
-          "publisher": "Insider Monkey",
-          "link": "https://finance.yahoo.com/technology/ai/articles/chronoscale-says-plans-50-mw-231034421.html",
-          "when": "Sep 04"
         }
       ]
     },
@@ -8568,6 +8568,12 @@
       ],
       "news": [
         {
+          "title": "3 Great Quality Stocks To Own In September 2026",
+          "publisher": "Simply Wall St.",
+          "link": "https://finance.yahoo.com/markets/stocks/articles/3-great-quality-stocks-own-201414086.html",
+          "when": "Sep 05"
+        },
+        {
           "title": "AI\u2019s Next Winners? Investor Bets on Snowflake, CrowdStrike and Palantir",
           "publisher": "Benzinga",
           "link": "https://finance.yahoo.com/technology/ai/articles/ai-next-winners-investor-bets-170009073.html",
@@ -8595,12 +8601,6 @@
           "title": "Inside Zeta's Transformation From Hopeful Do-Over To Surging AI Marketing Stock",
           "publisher": "Investor's Business Daily",
           "link": "https://www.investors.com/research/the-new-america/zeta-stock-ai-stock-inference-hyper-personalized-ads/?src=A00220&yptr=yahoo",
-          "when": "Sep 04"
-        },
-        {
-          "title": "Palantir (PLTR) Stock Fair Value Edges Higher After Strong Q2 And Raised Guidance",
-          "publisher": "Simply Wall St.",
-          "link": "https://finance.yahoo.com/markets/stocks/articles/palantir-pltr-stock-fair-value-201019421.html",
           "when": "Sep 04"
         }
       ]
@@ -143850,7 +143850,7 @@
       "type": "closed"
     }
   ],
-  "generated_at": "2026-09-05T20:01:44+00:00",
+  "generated_at": "2026-09-05T20:31:40+00:00",
   "universe": {
     "wheel": 18,
     "growth": 19,
