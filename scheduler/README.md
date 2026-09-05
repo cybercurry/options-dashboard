@@ -4,7 +4,8 @@ Reliable 30-min heartbeat that dispatches the `refresh-optionintel.yml` GitHub w
 GitHub's own cron (which throttles/skips `*/30`). Timing is enforced by the workflow's DST-aware ET
 gate; this Worker also checks the window so it doesn't spend Actions minutes off-hours.
 
-**Window:** every 30 min, **08:30–17:00 ET** (market open −1h … close +1h), **Mon–Fri**, EDT/EST-aware.
+**Window:** every 30 min, **08:30–17:00 ET** (market open −1h … close +1h), **every day** (incl.
+weekends — keeps 24/7 BTC/ETH quotes and the data-pull stamp current), EDT/EST-aware.
 
 ## One-time setup (dashboard, ~10 min)
 
@@ -25,7 +26,7 @@ Worker → **Settings** → **Variables and Secrets** → add two **Secrets**:
 - `REFRESH_KEY` = any random string (guards the manual test URL)
 
 ### 4. Cron trigger
-Worker → **Settings** → **Triggers** → **Cron Triggers** → **Add** → `0,30 12-22 * * 1-5`.
+Worker → **Settings** → **Triggers** → **Cron Triggers** → **Add** → `0,30 12-22 * * *`.
 (UTC. The band covers the ET window in both seasons; the code refines the exact 08:30/17:00 edges.)
 
 ### 5. Test

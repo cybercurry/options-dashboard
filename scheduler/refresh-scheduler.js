@@ -7,14 +7,14 @@
 // Timing: the workflow itself is the source of truth for the ET market window (a DST-aware
 // zoneinfo gate). This Worker ALSO checks the window before dispatching — purely to avoid spending
 // GitHub Actions minutes on runs that would just gate out — using Intl with America/New_York, which
-// tracks EDT/EST automatically. Window = 08:30–17:00 ET (open −1h … close +1h), Mon–Fri.
+// tracks EDT/EST automatically. Window = 08:30–17:00 ET (open −1h … close +1h), every day.
 //
 // Secrets (set in the Worker, never in this file):
 //   GH_TOKEN     fine-grained GitHub PAT — repo cybercurry/options-dashboard, Actions: Read & write
 //   REFRESH_KEY  any random string — guards the manual /dispatch test endpoint
 //
 // Cron trigger (UTC; the band covers the ET window in both seasons, the code refines the edges):
-//   0,30 12-22 * * 1-5
+//   0,30 12-22 * * *   (every day incl. weekends — keeps 24/7 crypto quotes + the stamp current)
 
 const OWNER = "cybercurry";
 const REPO = "options-dashboard";
@@ -23,16 +23,16 @@ const WORKFLOW = "refresh-optionintel.yml";
 function inEtWindow(now = new Date()) {
   const parts = new Intl.DateTimeFormat("en-US", {
     timeZone: "America/New_York",
-    weekday: "short", hour: "2-digit", minute: "2-digit", hour12: false,
+    hour: "2-digit", minute: "2-digit", hour12: false,
   }).formatToParts(now);
   const val = (t) => parts.find((p) => p.type === t)?.value;
-  const weekday = val("weekday");                 // "Mon", "Tue", …
   let hh = parseInt(val("hour"), 10);
   if (hh === 24) hh = 0;                           // some ICU builds emit "24" at midnight
   const mins = hh * 60 + parseInt(val("minute"), 10);
-  const isWeekday = ["Mon", "Tue", "Wed", "Thu", "Fri"].includes(weekday);
+  // Every day incl. weekends — crypto (BTC/ETH) trades 24/7 and we want the data-pull stamp
+  // current; stock/options data simply re-shows Friday's close while those markets are shut.
   const inWindow = mins >= 8 * 60 + 30 && mins <= 17 * 60;   // 08:30 … 17:00 ET (inclusive)
-  return isWeekday && inWindow;
+  return inWindow;
 }
 
 async function dispatch(env, force = false) {

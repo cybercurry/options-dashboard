@@ -17,7 +17,9 @@ on:
     # give a dependable 30-min heartbeat — an external scheduler (Cloudflare Worker / cron-job.org)
     # dispatches this workflow reliably. The band 12–22 UTC covers 08:30–17:00 ET in BOTH EDT and
     # EST; the ET gate below is the single source of truth that keeps every run inside the real window.
-    - cron: "*/30 12-22 * * 1-5"
+    # Runs every day (incl. weekends) so BTC/ETH quotes and the data-pull stamp stay current when
+    # crypto trades 24/7 — stock/options data simply re-shows Friday's close while markets are shut.
+    - cron: "*/30 12-22 * * *"
   workflow_dispatch:                # manual / external dispatch
     inputs:
       force:
@@ -51,8 +53,9 @@ jobs:
           cache: pip
 
       # Single source of truth for WHEN the heartbeat runs: every 30 min, 08:30–17:00 ET
-      # (market open −1h … close +1h), Mon–Fri. Uses the America/New_York tz, so it tracks EDT/EST
-      # automatically. A code push always runs (fresh deploy); a manual dispatch can force off-window.
+      # (market open −1h … close +1h), EVERY day incl. weekends (crypto is 24/7 and we want the
+      # data-pull stamp current). Uses America/New_York, so it tracks EDT/EST automatically.
+      # A code push always runs (fresh deploy); a manual dispatch can force off-window.
       - id: gate
         name: Gate to the ET market window (DST-aware)
         env:
@@ -66,11 +69,10 @@ jobs:
           ev   = os.environ.get("EVENT", "")
           force= (os.environ.get("FORCE") or "").lower() == "true"
           now  = datetime.now(ZoneInfo("America/New_York"))
-          weekday  = now.weekday() < 5                 # Mon–Fri
           mins     = now.hour * 60 + now.minute
-          in_window= (8*60 + 30) <= mins <= (17*60)    # 08:30 … 17:00 ET
-          go = (ev == "push") or force or (weekday and in_window)
-          print(f"{now:%a %Y-%m-%d %H:%M} ET | weekday={weekday} in_window={in_window} "
+          in_window= (8*60 + 30) <= mins <= (17*60)    # 08:30 … 17:00 ET, every day
+          go = (ev == "push") or force or in_window
+          print(f"{now:%a %Y-%m-%d %H:%M} ET | in_window={in_window} "
                 f"event={ev} force={force} -> go={go}")
           with open(os.environ["GITHUB_OUTPUT"], "a") as f:
               f.write(f"go={'true' if go else 'false'}\n")
