@@ -7234,8 +7234,8 @@
     },
     {
       "label": "Bitcoin",
-      "price": 79719.109375,
-      "pct": 0.05916839478126157,
+      "price": 79760.7421875,
+      "pct": 0.11142367747754012,
       "prefix": "$",
       "is_yield": false,
       "hist": [
@@ -7328,13 +7328,13 @@
         77300,
         81272,
         79672,
-        79719
+        79761
       ]
     },
     {
       "label": "Ethereum",
-      "price": 2476.60009765625,
-      "pct": 0.8355586268759208,
+      "price": 2478.31005859375,
+      "pct": 0.9051802288964295,
       "prefix": "$",
       "is_yield": false,
       "hist": [
@@ -7427,7 +7427,7 @@
         2392,
         2508,
         2456,
-        2477
+        2478
       ]
     }
   ],
@@ -7501,8 +7501,8 @@
     {
       "label": "Digital Assets",
       "ticker": "BTC",
-      "pct": 0.05916839478126157,
-      "price": 79719.109375
+      "pct": 0.11142367747754012,
+      "price": 79760.7421875
     }
   ],
   "fundamentals": {
@@ -7579,6 +7579,12 @@
           "when": "Sep 05"
         },
         {
+          "title": "Tesla's Cybercab 'Storm' Was More of a 'Drizzle,' WSJ's Tim Higgins Says",
+          "publisher": "Benzinga",
+          "link": "https://finance.yahoo.com/markets/stocks/articles/teslas-cybercab-storm-more-drizzle-193401400.html",
+          "when": "Sep 05"
+        },
+        {
           "title": "Elon Musk\u2019s Inner Circle Is Pouring Cash Into Making Psychedelics Mainstream",
           "publisher": "The Wall Street Journal",
           "link": "https://www.wsj.com/health/healthcare/elon-musks-inner-circle-is-pouring-cash-into-making-psychedelics-mainstream-98ea1b57?siteid=yhoof2&yptr=yahoo",
@@ -7600,12 +7606,6 @@
           "title": "A Used EV Is the Way to Get Those Luxury Wheels",
           "publisher": "Barrons.com",
           "link": "https://www.barrons.com/articles/ev-luxury-used-bargains-lease-f501dcc7?siteid=yhoof2&yptr=yahoo",
-          "when": "Sep 05"
-        },
-        {
-          "title": "Tesla (TSLA) Faces NHTSA Cybercab Safety Probe After Austin Robotaxi Rollout",
-          "publisher": "Simply Wall St.",
-          "link": "https://finance.yahoo.com/technology/ai/articles/tesla-tsla-faces-nhtsa-cybercab-061245889.html",
           "when": "Sep 05"
         }
       ]
@@ -7689,6 +7689,12 @@
       ],
       "news": [
         {
+          "title": "Why It\u2019s Time to Load Up on SoFi Stock",
+          "publisher": "Barchart",
+          "link": "https://www.barchart.com/story/news/4461596/why-its-time-to-load-up-on-sofi-stock",
+          "when": "Sep 05"
+        },
+        {
           "title": "SoFi Raised Its Revenue Guidance and the Stock Fell 10%. Here's What the Market Missed.",
           "publisher": "Motley Fool",
           "link": "https://www.fool.com/investing/2026/09/05/sofi-raised-its-revenue-guidance-and-the-stock-fell-10-here-s-what-the-market-missed/",
@@ -7716,12 +7722,6 @@
           "title": "SoFi Technologies Teams Up With Payward: Will SoFiUSD Gain Traction?",
           "publisher": "Zacks",
           "link": "https://finance.yahoo.com/markets/crypto/articles/sofi-technologies-teams-payward-sofiusd-172200819.html",
-          "when": "Sep 04"
-        },
-        {
-          "title": "SoFi, WisdomTree, Ridgepost Capital, Ares, and S&P Global Shares Are Soaring, What You Need To Know",
-          "publisher": "StockStory",
-          "link": "https://finance.yahoo.com/markets/stocks/articles/sofi-wisdomtree-ridgepost-capital-ares-023118737.html",
           "when": "Sep 04"
         }
       ]
@@ -7789,10 +7789,10 @@
       ],
       "news": [
         {
-          "title": "Apple's John Ternus needs to be his own type of CEO and 'not Tim Cook 2'",
-          "publisher": "Yahoo Finance Video",
-          "link": "https://finance.yahoo.com/video/apples-john-ternus-needs-own-203847038.html",
-          "when": "Sep 04"
+          "title": "3 Nuclear Stocks to Buy With $2,000 After One Fell 83%",
+          "publisher": "Motley Fool",
+          "link": "https://www.fool.com/investing/2026/09/05/3-nuclear-stocks-to-buy-with-usd2-000-after-one-fell-83/",
+          "when": "Sep 05"
         },
         {
           "title": "Should You Buy AMC Entertainment Holdings (AMC) Stock While It's Below $3?",
@@ -8079,6 +8079,12 @@
       ],
       "news": [
         {
+          "title": "3 Nuclear Stocks to Buy With $2,000 After One Fell 83%",
+          "publisher": "Motley Fool",
+          "link": "https://www.fool.com/investing/2026/09/05/3-nuclear-stocks-to-buy-with-usd2-000-after-one-fell-83/",
+          "when": "Sep 05"
+        },
+        {
           "title": "Is Constellation Energy Stock Underperforming the Dow?",
           "publisher": "Barchart",
           "link": "https://www.barchart.com/story/news/4446001/is-constellation-energy-stock-underperforming-the-dow",
@@ -8106,12 +8112,6 @@
           "title": "Better Energy Play: NextEra vs. Constellation Energy",
           "publisher": "Motley Fool",
           "link": "https://www.fool.com/investing/2026/09/03/better-energy-play-nextera-vs-constellation-energy/",
-          "when": "Sep 03"
-        },
-        {
-          "title": "Trump Warned Towns They\u2019d End Up Poor Without Data Centers but Berkshire\u2019s CEO Sees a Revolt Growing",
-          "publisher": "24/7 Wall St.",
-          "link": "https://247wallst.com/investing/2026/09/03/trump-warned-towns-theyd-end-up-poor-without-data-centers-but-berkshires-ceo-sees-a-revolt-growing/",
           "when": "Sep 03"
         }
       ]
@@ -8768,12 +8768,6 @@
       ],
       "news": [
         {
-          "title": "Apple's John Ternus needs to be his own type of CEO and 'not Tim Cook 2'",
-          "publisher": "Yahoo Finance Video",
-          "link": "https://finance.yahoo.com/video/apples-john-ternus-needs-own-203847038.html",
-          "when": "Sep 04"
-        },
-        {
           "title": "Prediction: Amazon Will Join Nvidia, Apple, and Alphabet in the $4 Trillion Club Before 2029",
           "publisher": "Motley Fool",
           "link": "https://www.fool.com/investing/2026/09/05/prediction-amazon-will-join-nvidia-apple-and-alpha/",
@@ -8801,6 +8795,12 @@
           "title": "Morgan Stanley estimates Apple foldable iPhone could generate $14 billion in December-quarter revenue",
           "publisher": "InvestorsHub",
           "link": "https://investorshub.advfn.com/market-news/article/35723/morgan-stanley-estimates-apple-foldable-iphone-could-generate-14-billion-in-december-quarter-revenue",
+          "when": "Sep 05"
+        },
+        {
+          "title": "MicroStrategy Drops $250 Bitcoin Jordans. But You Can\u2019t Buy With Crypto",
+          "publisher": "BeInCrypto",
+          "link": "https://beincrypto.com/strategy-bitcoin-jordans-nike-stock/",
           "when": "Sep 05"
         }
       ]
@@ -143850,7 +143850,7 @@
       "type": "closed"
     }
   ],
-  "generated_at": "2026-09-05T20:31:40+00:00",
+  "generated_at": "2026-09-05T21:02:24+00:00",
   "universe": {
     "wheel": 18,
     "growth": 19,
