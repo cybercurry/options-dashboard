@@ -7234,8 +7234,8 @@
     },
     {
       "label": "Bitcoin",
-      "price": 79737.2421875,
-      "pct": 0.08192773258159924,
+      "price": 79748.0390625,
+      "pct": 0.09547939343472756,
       "prefix": "$",
       "is_yield": false,
       "hist": [
@@ -7328,13 +7328,13 @@
         77300,
         81272,
         79672,
-        79737
+        79748
       ]
     },
     {
       "label": "Ethereum",
-      "price": 2457.550048828125,
-      "pct": 0.059929845599882015,
+      "price": 2457.93994140625,
+      "pct": 0.07580444560371102,
       "prefix": "$",
       "is_yield": false,
       "hist": [
@@ -7501,8 +7501,8 @@
     {
       "label": "Digital Assets",
       "ticker": "BTC",
-      "pct": 0.08192773258159924,
-      "price": 79737.2421875
+      "pct": 0.09547939343472756,
+      "price": 79748.0390625
     }
   ],
   "fundamentals": {
@@ -7579,10 +7579,10 @@
           "when": "Sep 04"
         },
         {
-          "title": "Tech stocks today: Tesla's Cybercab event fails to impress, Feds launch investigation into the robotaxi",
-          "publisher": "Yahoo Finance",
-          "link": "https://finance.yahoo.com/technology/live/tech-stocks-today-apple-ceo-steps-down-nvidia-mag-7-145623375.html",
-          "when": "Aug 31"
+          "title": "Elon Musk Says Tesla Cybercab\u2019s Rare-Earth-Free Motor Was \u2018Extremely Hard\u2019 To Achieve \u2014 Gary Black Calls TSLA Launch \u2018Largely A Bust\u2019",
+          "publisher": "Benzinga",
+          "link": "https://finance.yahoo.com/technology/articles/elon-musk-says-tesla-cybercab-133036109.html",
+          "when": "Sep 05"
         },
         {
           "title": "A Used EV Is the Way to Get Those Luxury Wheels",
@@ -7795,10 +7795,22 @@
           "when": "Sep 04"
         },
         {
-          "title": "Tech stocks today: Tesla's Cybercab event fails to impress, Feds launch investigation into the robotaxi",
-          "publisher": "Yahoo Finance",
-          "link": "https://finance.yahoo.com/technology/live/tech-stocks-today-apple-ceo-steps-down-nvidia-mag-7-145623375.html",
-          "when": "Aug 31"
+          "title": "There Are Only a Handful of S&P 500 Stocks That Yield Over 5%. Here's My Top Pick to Buy in September.",
+          "publisher": "Motley Fool",
+          "link": "https://www.fool.com/investing/2026/09/05/there-are-only-a-handful-of-sp-500-stocks-that-yie/",
+          "when": "Sep 05"
+        },
+        {
+          "title": "Alphabet's Stock Slipped 2.2% After Sundar Pichai's Earnings Beat Was Inflated by a $77.1 Billion Unrealized Gain on Equity Holdings. Should Investors Discount That Gain When Judging the Real Growth Story?",
+          "publisher": "Motley Fool",
+          "link": "https://www.fool.com/investing/2026/09/05/alphabets-stock-slipped-22-after-sundar-pichais-ea/",
+          "when": "Sep 05"
+        },
+        {
+          "title": "Most Investors Overpay for AI Hype. Nvidia Is the Exception.",
+          "publisher": "Motley Fool",
+          "link": "https://www.fool.com/investing/2026/09/05/most-investors-overpay-for-ai-hype-nvidia-is-the-e/",
+          "when": "Sep 05"
         },
         {
           "title": "Anthropic's IPO Could Value It at 30 Times Revenue. Here's Why I'm Still Interested Anyway.",
@@ -7810,18 +7822,6 @@
           "title": "3 Incredible High-Growth Stocks to Buy With $10,000 Right Now",
           "publisher": "Motley Fool",
           "link": "https://www.fool.com/investing/2026/09/05/incredible-high-growth-stocks-buy-nvda-nbis-mu/",
-          "when": "Sep 05"
-        },
-        {
-          "title": "If You Buy Amazon With $10,000 at a 10% Discount From Its High, Here's What I Predict It Could Be Worth in 10 Years",
-          "publisher": "Motley Fool",
-          "link": "https://www.fool.com/investing/2026/09/05/buy-amazon-10000-10-discount-predict-10-years/",
-          "when": "Sep 05"
-        },
-        {
-          "title": "The Fed Meets in Two Weeks. Here's the ETF I'd Buy Today Regardless of What It Does.",
-          "publisher": "Motley Fool",
-          "link": "https://www.fool.com/investing/2026/09/05/the-fed-meets-in-two-weeks-here-s-the-etf-i-d-buy-today-regardless-of-what-it-does/",
           "when": "Sep 05"
         }
       ]
@@ -8668,12 +8668,6 @@
       ],
       "news": [
         {
-          "title": "Is Lululemon a warning sign for retail stocks? What investors should know.",
-          "publisher": "Yahoo Finance Video",
-          "link": "https://finance.yahoo.com/video/is-lululemon-a-warning-sign-for-retail-stocks-what-investors-should-know-144135968.html",
-          "when": "Sep 04"
-        },
-        {
           "title": "Walmart, Target, and Kroger face growing retail crime issue",
           "publisher": "TheStreet",
           "link": "https://www.thestreet.com/retail/tech-brand-used-by-walmart-target-shares-new-retail-crime-issue",
@@ -8701,6 +8695,12 @@
           "title": "Shuffle Board: Kohl\u2019s Taps Walmart Exec; CreateMe Builds Leadership",
           "publisher": "Sourcing Journal",
           "link": "https://wwd.com/sourcing-journal/industry-news/shuffle-board-kohls-ryan-waymire-createme-executives-1239198354/",
+          "when": "Sep 04"
+        },
+        {
+          "title": "Inflation Odds Move Toward 100%",
+          "publisher": "24/7 Wall St.",
+          "link": "https://247wallst.com/investing/2026/09/04/inflation-odds-move-toward-100/",
           "when": "Sep 04"
         }
       ]
@@ -8863,6 +8863,12 @@
       "flags": [],
       "news": [
         {
+          "title": "Alphabet's Stock Slipped 2.2% After Sundar Pichai's Earnings Beat Was Inflated by a $77.1 Billion Unrealized Gain on Equity Holdings. Should Investors Discount That Gain When Judging the Real Growth Story?",
+          "publisher": "Motley Fool",
+          "link": "https://www.fool.com/investing/2026/09/05/alphabets-stock-slipped-22-after-sundar-pichais-ea/",
+          "when": "Sep 05"
+        },
+        {
           "title": "What Berkshire Hathaway (BRK.A)'s Tech Tilt and Taylor Morrison Deal Means For Shareholders",
           "publisher": "Simply Wall St.",
           "link": "https://finance.yahoo.com/markets/stocks/articles/berkshire-hathaway-brk-tech-tilt-130531062.html",
@@ -8890,12 +8896,6 @@
           "title": "Entergy Says Google\u2019s Arkansas Solar Payments Could Total $2.1 Billion. Is Power Becoming Alphabet\u2019s New Bottleneck?",
           "publisher": "Insider Monkey",
           "link": "https://finance.yahoo.com/energy/articles/entergy-says-google-arkansas-solar-230127052.html",
-          "when": "Sep 04"
-        },
-        {
-          "title": "Marvell Raised Its Outlook but Fell as Google Chip Revenue Stayed Distant. Has the AI Payoff Been Priced In? (Ready for review)",
-          "publisher": "Insider Monkey",
-          "link": "https://finance.yahoo.com/markets/stocks/articles/marvell-raised-outlook-fell-google-225856871.html",
           "when": "Sep 04"
         }
       ]
@@ -143850,7 +143850,7 @@
       "type": "closed"
     }
   ],
-  "generated_at": "2026-09-05T14:32:27+00:00",
+  "generated_at": "2026-09-05T14:57:43+00:00",
   "universe": {
     "wheel": 18,
     "growth": 19,
