@@ -7234,8 +7234,8 @@
     },
     {
       "label": "Bitcoin",
-      "price": 80050.0,
-      "pct": 0.4744846348484488,
+      "price": 79956.3828125,
+      "pct": 0.3569813410692291,
       "prefix": "$",
       "is_yield": false,
       "hist": [
@@ -7328,13 +7328,13 @@
         77300,
         81272,
         79672,
-        80050
+        79956
       ]
     },
     {
       "label": "Ethereum",
-      "price": 2480.0,
-      "pct": 0.9739867293512949,
+      "price": 2478.02001953125,
+      "pct": 0.8933711964577595,
       "prefix": "$",
       "is_yield": false,
       "hist": [
@@ -7427,7 +7427,7 @@
         2392,
         2508,
         2456,
-        2480
+        2478
       ]
     }
   ],
@@ -7501,8 +7501,8 @@
     {
       "label": "Digital Assets",
       "ticker": "BTC",
-      "pct": 0.4744846348484488,
-      "price": 80050.0
+      "pct": 0.3569813410692291,
+      "price": 79956.3828125
     }
   ],
   "fundamentals": {
@@ -7795,6 +7795,24 @@
           "when": "Sep 04"
         },
         {
+          "title": "Will Eli Lilly Split Its Stock? Here's What History Says Will Happen If It Does.",
+          "publisher": "Motley Fool",
+          "link": "https://www.fool.com/investing/2026/09/05/will-eli-lilly-split-its-stock-what-history-says/",
+          "when": "Sep 05"
+        },
+        {
+          "title": "Two Chip-Equipment Stocks Just Crushed Nvidia. Is the AI Rally Broadening?",
+          "publisher": "Insider Monkey",
+          "link": "https://finance.yahoo.com/technology/articles/two-chip-equipment-stocks-just-184332143.html",
+          "when": "Sep 05"
+        },
+        {
+          "title": "Apple's First iPhone Under New CEO John Ternus Launches Sept. 9. Here's Whether It's Finally Time to Buy the Stock.",
+          "publisher": "Motley Fool",
+          "link": "https://www.fool.com/investing/2026/09/05/apple-first-iphone-new-ceo-john-ternus-buy-stock/",
+          "when": "Sep 05"
+        },
+        {
           "title": "Dow Jones Futures: U.S., Iran Exchange Attacks; Nvidia, Micron, Sandisk Flash Buy Signals",
           "publisher": "Investor's Business Daily",
           "link": "https://www.investors.com/market-trend/stock-market-today/dow-jones-futures-nvidia-micron-sandisk-buy-signals-apple-inflation-reports/?src=A00220&yptr=yahoo",
@@ -7804,24 +7822,6 @@
           "title": "Why I Just Added to My Chevron Position Despite Trump Criticism",
           "publisher": "Motley Fool",
           "link": "https://www.fool.com/investing/2026/09/05/why-i-just-added-to-my-chevron-position-despite-ne/",
-          "when": "Sep 05"
-        },
-        {
-          "title": "With AI Revenue Set to Surge 400% Over the Next 2 Years, Broadcom Stock Looks Like a Buy on Recent Dip",
-          "publisher": "Motley Fool",
-          "link": "https://www.fool.com/investing/2026/09/05/ai-revenue-set-surge-broadcom-stock-buy-dip/",
-          "when": "Sep 05"
-        },
-        {
-          "title": "Schwab Bond ETFs See Billions Pour In, and Here's Why",
-          "publisher": "Motley Fool",
-          "link": "https://www.fool.com/investing/2026/09/05/schwab-bond-etfs-see-billions-pour-in-and-heres-wh/",
-          "when": "Sep 05"
-        },
-        {
-          "title": "Ares Capital Fell Enough to Push Its Yield Near 10%. Here's the Number That Actually Worries Me.",
-          "publisher": "Motley Fool",
-          "link": "https://www.fool.com/investing/2026/09/05/ares-capital-fell-enough-to-push-its-yield-near-10-here-s-the-number-that-actually-worries-me/",
           "when": "Sep 05"
         }
       ]
@@ -8774,6 +8774,12 @@
           "when": "Sep 04"
         },
         {
+          "title": "Apple's First iPhone Under New CEO John Ternus Launches Sept. 9. Here's Whether It's Finally Time to Buy the Stock.",
+          "publisher": "Motley Fool",
+          "link": "https://www.fool.com/investing/2026/09/05/apple-first-iphone-new-ceo-john-ternus-buy-stock/",
+          "when": "Sep 05"
+        },
+        {
           "title": "Dow Jones Futures: U.S., Iran Exchange Attacks; Nvidia, Micron, Sandisk Flash Buy Signals",
           "publisher": "Investor's Business Daily",
           "link": "https://www.investors.com/market-trend/stock-market-today/dow-jones-futures-nvidia-micron-sandisk-buy-signals-apple-inflation-reports/?src=A00220&yptr=yahoo",
@@ -8795,12 +8801,6 @@
           "title": "MicroStrategy Drops $250 Bitcoin Jordans. But You Can\u2019t Buy With Crypto",
           "publisher": "BeInCrypto",
           "link": "https://beincrypto.com/strategy-bitcoin-jordans-nike-stock/",
-          "when": "Sep 05"
-        },
-        {
-          "title": "Here's How Many Shares of Apple (AAPL) Stock You'd Need for $12,000 in Yearly Dividends",
-          "publisher": "Motley Fool",
-          "link": "https://www.fool.com/investing/2026/09/05/heres-how-many-shares-of-apple-aapl-stock-youd-nee/",
           "when": "Sep 05"
         }
       ]
@@ -10655,6 +10655,12 @@
       ],
       "news": [
         {
+          "title": "Two Chip-Equipment Stocks Just Crushed Nvidia. Is the AI Rally Broadening?",
+          "publisher": "Insider Monkey",
+          "link": "https://finance.yahoo.com/technology/articles/two-chip-equipment-stocks-just-184332143.html",
+          "when": "Sep 05"
+        },
+        {
           "title": "Lam Research Legal Chief Sold $1.5 Million as AI Chip Demand Booms. Is the Signal Bearish?",
           "publisher": "Insider Monkey",
           "link": "https://finance.yahoo.com/technology/ai/articles/lam-research-legal-chief-sold-062159762.html",
@@ -10682,12 +10688,6 @@
           "title": "This Chip Equipment Stock Just Raised Its Dividend by 26.9%.",
           "publisher": "Barchart",
           "link": "https://www.barchart.com/story/news/4435589/this-chip-equipment-stock-just-raised-its-dividend-by-26-9",
-          "when": "Sep 03"
-        },
-        {
-          "title": "Lam Research (LRCX) Rises Higher Than Market: Key Facts",
-          "publisher": "Zacks",
-          "link": "https://finance.yahoo.com/markets/stocks/articles/lam-research-lrcx-rises-higher-214502237.html",
           "when": "Sep 03"
         }
       ]
@@ -143850,7 +143850,7 @@
       "type": "closed"
     }
   ],
-  "generated_at": "2026-09-05T18:32:30+00:00",
+  "generated_at": "2026-09-05T19:02:40+00:00",
   "universe": {
     "wheel": 18,
     "growth": 19,
