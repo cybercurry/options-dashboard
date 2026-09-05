@@ -7234,8 +7234,8 @@
     },
     {
       "label": "Bitcoin",
-      "price": 80044.3125,
-      "pct": 0.46734598861033483,
+      "price": 80042.046875,
+      "pct": 0.4645022971143886,
       "prefix": "$",
       "is_yield": false,
       "hist": [
@@ -7328,13 +7328,13 @@
         77300,
         81272,
         79672,
-        80044
+        80042
       ]
     },
     {
       "label": "Ethereum",
-      "price": 2478.530029296875,
-      "pct": 0.9141364058553814,
+      "price": 2479.75,
+      "pct": 0.9638079000438893,
       "prefix": "$",
       "is_yield": false,
       "hist": [
@@ -7427,7 +7427,7 @@
         2392,
         2508,
         2456,
-        2479
+        2480
       ]
     }
   ],
@@ -7501,8 +7501,8 @@
     {
       "label": "Digital Assets",
       "ticker": "BTC",
-      "pct": 0.46734598861033483,
-      "price": 80044.3125
+      "pct": 0.4645022971143886,
+      "price": 80042.046875
     }
   ],
   "fundamentals": {
@@ -7795,6 +7795,24 @@
           "when": "Sep 04"
         },
         {
+          "title": "With AI Revenue Set to Surge 400% Over the Next 2 Years, Broadcom Stock Looks Like a Buy on Recent Dip",
+          "publisher": "Motley Fool",
+          "link": "https://www.fool.com/investing/2026/09/05/ai-revenue-set-surge-broadcom-stock-buy-dip/",
+          "when": "Sep 05"
+        },
+        {
+          "title": "Schwab Bond ETFs See Billions Pour In, and Here's Why",
+          "publisher": "Motley Fool",
+          "link": "https://www.fool.com/investing/2026/09/05/schwab-bond-etfs-see-billions-pour-in-and-heres-wh/",
+          "when": "Sep 05"
+        },
+        {
+          "title": "Ares Capital Fell Enough to Push Its Yield Near 10%. Here's the Number That Actually Worries Me.",
+          "publisher": "Motley Fool",
+          "link": "https://www.fool.com/investing/2026/09/05/ares-capital-fell-enough-to-push-its-yield-near-10-here-s-the-number-that-actually-worries-me/",
+          "when": "Sep 05"
+        },
+        {
           "title": "Anthropic Could Be the Next Mega IPO: 2 Magnificent Stocks That Already Own a Piece of the AI Unicorn",
           "publisher": "Motley Fool",
           "link": "https://www.fool.com/investing/2026/09/05/anthropic-could-be-the-next-mega-ipo-2-magnificent/",
@@ -7804,24 +7822,6 @@
           "title": "Warren Buffett's Successor Greg Abel Spent $4.5 Billion Buying 1 Stock Last Quarter, and He Spent At Least $3.3 Billion Buying More This Quarter",
           "publisher": "Motley Fool",
           "link": "https://www.fool.com/investing/2026/09/05/warren-buffetts-successor-greg-abel-spent-45-bil/",
-          "when": "Sep 05"
-        },
-        {
-          "title": "Dow Jones Futures: Nvidia, Micron, Sandisk Flash Buy Signals; Apple, Inflation Reports Ahead",
-          "publisher": "Investor's Business Daily",
-          "link": "https://www.investors.com/market-trend/stock-market-today/dow-jones-futures-nvidia-micron-sandisk-buy-signals-apple-inflation-reports/?src=A00220&yptr=yahoo",
-          "when": "Sep 05"
-        },
-        {
-          "title": "The Nuclear Energy Boom: Where the Industry Really Stands Heading Into 4Q 2026",
-          "publisher": "Motley Fool",
-          "link": "https://www.fool.com/investing/2026/09/05/the-nuclear-energy-boom-where-the-industry-really/",
-          "when": "Sep 05"
-        },
-        {
-          "title": "Fed Chair Kevin Warsh Just Shifted the Central Bank's Entire Focus on Inflation in One Sentence",
-          "publisher": "Motley Fool",
-          "link": "https://www.fool.com/investing/2026/09/05/fed-chair-kevin-warsh-just-shifted-central-bank-focus-on-inflation-in-one-sentence/",
           "when": "Sep 05"
         }
       ]
@@ -8668,6 +8668,12 @@
       ],
       "news": [
         {
+          "title": "T-Mobile drops new phone plan for customers after raising prices",
+          "publisher": "TheStreet",
+          "link": "https://www.thestreet.com/retail/t-mobile-super-essentials-saver-plan-walmart",
+          "when": "Sep 05"
+        },
+        {
           "title": "Walmart, Target, and Kroger face new retail crime issue",
           "publisher": "TheStreet",
           "link": "https://www.thestreet.com/retail/tech-brand-used-by-walmart-target-shares-new-retail-crime-issue",
@@ -8695,12 +8701,6 @@
           "title": "Shuffle Board: Kohl\u2019s Taps Walmart Exec; CreateMe Builds Leadership",
           "publisher": "Sourcing Journal",
           "link": "https://wwd.com/sourcing-journal/industry-news/shuffle-board-kohls-ryan-waymire-createme-executives-1239198354/",
-          "when": "Sep 04"
-        },
-        {
-          "title": "Retail Earnings Just Exposed a Bigger Divide in the U.S. Consumer Economy",
-          "publisher": "MarketBeat",
-          "link": "https://www.marketbeat.com/articles/retail-earnings-just-exposed-a-bigger-divide-in-the-us-consumer-economy/?utm_source=yahoofinance&utm_medium=yahoofinance",
           "when": "Sep 04"
         }
       ]
@@ -9355,12 +9355,6 @@
       "flags": [],
       "news": [
         {
-          "title": "Bitcoin ETFs see $731M inflow surge",
-          "publisher": "Yahoo Finance Video",
-          "link": "https://finance.yahoo.com/video/bitcoin-etfs-see-731m-inflow-174600995.html",
-          "when": "Sep 04"
-        },
-        {
           "title": "Bitcoin Just Exploded 40% From Its July Low \u2014 Is $100,000 Back on the Table?",
           "publisher": "24/7 Wall St.",
           "link": "https://247wallst.com/investing/2026/09/05/bitcoin-just-exploded-40-from-its-july-low-is-100000-back-on-the-table/",
@@ -9382,6 +9376,12 @@
           "title": "Why Did Equitable Holdings (EQH) Shares Climb Today?",
           "publisher": "Simply Wall St.",
           "link": "https://finance.yahoo.com/markets/stocks/articles/why-did-equitable-holdings-eqh-190932107.html",
+          "when": "Sep 04"
+        },
+        {
+          "title": "Bitcoin ETFs see $731M inflow surge",
+          "publisher": "Yahoo Finance Video",
+          "link": "https://finance.yahoo.com/video/bitcoin-etfs-see-731m-inflow-174600995.html",
           "when": "Sep 04"
         },
         {
@@ -143850,7 +143850,7 @@
       "type": "closed"
     }
   ],
-  "generated_at": "2026-09-05T17:32:38+00:00",
+  "generated_at": "2026-09-05T18:02:25+00:00",
   "universe": {
     "wheel": 18,
     "growth": 19,
