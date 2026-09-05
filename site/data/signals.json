@@ -7234,8 +7234,8 @@
     },
     {
       "label": "Bitcoin",
-      "price": 79723.046875,
-      "pct": 0.06411053448456272,
+      "price": 79709.296875,
+      "pct": 0.04685226885396965,
       "prefix": "$",
       "is_yield": false,
       "hist": [
@@ -7328,13 +7328,13 @@
         77300,
         81272,
         79672,
-        79723
+        79709
       ]
     },
     {
       "label": "Ethereum",
-      "price": 2457.050048828125,
-      "pct": 0.039572186985092905,
+      "price": 2458.669921875,
+      "pct": 0.10552583196026255,
       "prefix": "$",
       "is_yield": false,
       "hist": [
@@ -7427,7 +7427,7 @@
         2392,
         2508,
         2456,
-        2457
+        2459
       ]
     }
   ],
@@ -7501,8 +7501,8 @@
     {
       "label": "Digital Assets",
       "ticker": "BTC",
-      "pct": 0.06411053448456272,
-      "price": 79723.046875
+      "pct": 0.04685226885396965,
+      "price": 79709.296875
     }
   ],
   "fundamentals": {
@@ -8369,6 +8369,12 @@
       "flags": [],
       "news": [
         {
+          "title": "Billionaire Activist Investor Dan Loeb Bought Gold, Then Dumped It 3 Months Later \u2014 Timing Hasn't Paid Off Yet",
+          "publisher": "Benzinga",
+          "link": "https://finance.yahoo.com/markets/commodities/articles/billionaire-activist-investor-dan-loeb-140011100.html",
+          "when": "Sep 05"
+        },
+        {
           "title": "Exchange-Traded Funds Higher, Equity Futures Mixed Pre-Bell Friday After August Jobs Report Tops Estimates",
           "publisher": "MT Newswires",
           "link": "https://finance.yahoo.com/markets/stocks/articles/exchange-traded-funds-higher-equity-133330774.html",
@@ -8396,12 +8402,6 @@
           "title": "Exchange-Traded Funds Higher, Equity Futures Mixed Pre-Bell Thursday as Markets Weigh Oil Prices, Tech Earnings",
           "publisher": "MT Newswires",
           "link": "https://finance.yahoo.com/markets/stocks/articles/exchange-traded-funds-higher-equity-132019027.html",
-          "when": "Sep 03"
-        },
-        {
-          "title": "Gold Miners or Gold Itself: Which Trade Actually Paid Investors More",
-          "publisher": "24/7 Wall St.",
-          "link": "https://247wallst.com/investing/etf/2026/09/03/gold-miners-or-gold-itself-which-trade-actually-paid-investors-more/",
           "when": "Sep 03"
         }
       ]
@@ -9176,6 +9176,12 @@
           "when": "Sep 04"
         },
         {
+          "title": "Bitwise's Matt Hougan Names Robinhood, Solana, Uniswap And Ethereum As His Tokenization Basket",
+          "publisher": "Stocktwits",
+          "link": "https://stocktwits.com/news-articles/markets/cryptocurrency/bitwise-robinhood-solana-uniswap-and-ethereum-tokenization-basket/cZszWvtRJDq",
+          "when": "Sep 05"
+        },
+        {
           "title": "Cathie Wood\u2019s Ark Invest Buys HOOD Stock As Robinhood Sees Its Third-Best Week In Six Months",
           "publisher": "Stocktwits",
           "link": "https://stocktwits.com/news-articles/markets/equity/cathie-wood-s-ark-invest-buys-hood-stock-as-robinhood-sees-its-third-best-week-in-six-months/cZszOK7RJDo",
@@ -9197,12 +9203,6 @@
           "title": "Stocks to Watch Recap: Tesla, Lululemon, AMC, Volkswagen",
           "publisher": "The Wall Street Journal",
           "link": "https://www.wsj.com/livecoverage/august-jobs-report-stock-market-09-04-2026/card/stocks-to-watch-volkswagen-lululemon-amc-hckSUh7fSpTgHLWgPDdS?siteid=yhoof2&yptr=yahoo",
-          "when": "Sep 04"
-        },
-        {
-          "title": "\u2018Inexcusable, Vile\u2019: AMC Chief Executive Slams Robinhood Stock Tokens",
-          "publisher": "The Wall Street Journal",
-          "link": "https://www.wsj.com/livecoverage/august-jobs-report-stock-market-09-04-2026/card/-inexcusable-vile-amc-chief-executive-slams-robinhood-stock-tokens-hgv6zEgWPxAMcnVbAoBN?siteid=yhoof2&yptr=yahoo",
           "when": "Sep 04"
         }
       ]
@@ -9492,10 +9492,10 @@
       "flags": [],
       "news": [
         {
-          "title": "Planet Labs lifts revenue guidance on strong military demand: AlphaSpace",
-          "publisher": "Yahoo Finance Video",
-          "link": "https://finance.yahoo.com/video/planet-labs-lifts-revenue-guidance-151235842.html",
-          "when": "Sep 04"
+          "title": "Jim Cramer Explains Why Velo3D (VELO) Is Only Worth a Quarter Position Right Now",
+          "publisher": "Insider Monkey",
+          "link": "https://finance.yahoo.com/markets/stocks/articles/jim-cramer-explains-why-velo3d-145323852.html",
+          "when": "Sep 05"
         },
         {
           "title": "29 People Now Control 27% of All Billionaire Wealth, and the Gap Is Widening Fast",
@@ -143850,7 +143850,7 @@
       "type": "closed"
     }
   ],
-  "generated_at": "2026-09-05T15:01:53+00:00",
+  "generated_at": "2026-09-05T15:31:49+00:00",
   "universe": {
     "wheel": 18,
     "growth": 19,
