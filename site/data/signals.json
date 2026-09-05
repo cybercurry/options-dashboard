@@ -7234,8 +7234,8 @@
     },
     {
       "label": "Bitcoin",
-      "price": 79648.9609375,
-      "pct": -0.028878177433011576,
+      "price": 79720.5,
+      "pct": 0.06091383300981246,
       "prefix": "$",
       "is_yield": false,
       "hist": [
@@ -7328,13 +7328,13 @@
         77300,
         81272,
         79672,
-        79649
+        79720
       ]
     },
     {
       "label": "Ethereum",
-      "price": 2454.419921875,
-      "pct": -0.06751426626545598,
+      "price": 2458.989990234375,
+      "pct": 0.11855751674736403,
       "prefix": "$",
       "is_yield": false,
       "hist": [
@@ -7427,7 +7427,7 @@
         2392,
         2508,
         2456,
-        2454
+        2459
       ]
     }
   ],
@@ -7501,8 +7501,8 @@
     {
       "label": "Digital Assets",
       "ticker": "BTC",
-      "pct": -0.028878177433011576,
-      "price": 79648.9609375
+      "pct": 0.06091383300981246,
+      "price": 79720.5
     }
   ],
   "fundamentals": {
@@ -7689,6 +7689,12 @@
       ],
       "news": [
         {
+          "title": "SoFi Raised Its Revenue Guidance and the Stock Fell 10%. Here's What the Market Missed.",
+          "publisher": "Motley Fool",
+          "link": "https://www.fool.com/investing/2026/09/05/sofi-raised-its-revenue-guidance-and-the-stock-fell-10-here-s-what-the-market-missed/",
+          "when": "Sep 05"
+        },
+        {
           "title": "SoFi Technologies, Inc. (SOFI) Declines More Than Market: Some Information for Investors",
           "publisher": "Zacks",
           "link": "https://finance.yahoo.com/markets/stocks/articles/sofi-technologies-inc-sofi-declines-214504371.html",
@@ -7716,12 +7722,6 @@
           "title": "SoFi, WisdomTree, Ridgepost Capital, Ares, and S&P Global Shares Are Soaring, What You Need To Know",
           "publisher": "StockStory",
           "link": "https://finance.yahoo.com/markets/stocks/articles/sofi-wisdomtree-ridgepost-capital-ares-023118737.html",
-          "when": "Sep 04"
-        },
-        {
-          "title": "SoFi's Kraken Deal Grows Its Stablecoin Reach \u2014 Analyst Calls It 'Another Positive Development' But Still Sees 13% Downside",
-          "publisher": "Stocktwits",
-          "link": "https://stocktwits.com/news-articles/markets/equity/so-fi-s-kraken-deal-grows-its-stablecoin-reach-analyst-calls-it-another-positive-development-but-still-sees-13-downside/cZswofBRJv6",
           "when": "Sep 04"
         }
       ]
@@ -7801,27 +7801,27 @@
           "when": "Aug 31"
         },
         {
+          "title": "History Says That Bitcoin Is an Unbelievable Bargain Right Now",
+          "publisher": "Motley Fool",
+          "link": "https://www.fool.com/investing/2026/09/05/history-says-that-bitcoin-is-an-unbelievable-barga/",
+          "when": "Sep 05"
+        },
+        {
+          "title": "SoFi Raised Its Revenue Guidance and the Stock Fell 10%. Here's What the Market Missed.",
+          "publisher": "Motley Fool",
+          "link": "https://www.fool.com/investing/2026/09/05/sofi-raised-its-revenue-guidance-and-the-stock-fell-10-here-s-what-the-market-missed/",
+          "when": "Sep 05"
+        },
+        {
           "title": "All It Takes Is $10,000 Invested in This Dividend Stock to Generate Over $241 in Yearly Dividends",
           "publisher": "Motley Fool",
           "link": "https://www.fool.com/investing/2026/09/05/10000-invested-dividend-stock-241-yearly-income/",
           "when": "Sep 05"
         },
         {
-          "title": "Dow Jones Futures: Nvidia, Micron, Sandisk Flash Buy Signals; Apple, Inflation Reports Ahead",
-          "publisher": "Investor's Business Daily",
-          "link": "https://www.investors.com/market-trend/stock-market-today/dow-jones-futures-nvidia-micron-sandisk-buy-signals-apple-inflation-reports/?src=A00220&yptr=yahoo",
-          "when": "Sep 05"
-        },
-        {
-          "title": "Recent News From Nvidia and SK Hynix Reveals Exactly What the Market Expects for Micron Technology's Future",
-          "publisher": "Motley Fool",
-          "link": "https://www.fool.com/investing/2026/09/05/news-nvidia-sk-hynix-market-micron-future/",
-          "when": "Sep 05"
-        },
-        {
-          "title": "Insiders and Early Investors Are Selling SpaceX Stock and Index Funds Are Buying It. Which Side Do You Want to Be On?",
-          "publisher": "Motley Fool",
-          "link": "https://www.fool.com/investing/2026/09/05/insiders-and-early-investors-are-selling-spacex-st/",
+          "title": "Can Equinix (EQIX) Justify A Pricey Earnings Valuation On AI Growth?",
+          "publisher": "Simply Wall St.",
+          "link": "https://finance.yahoo.com/markets/stocks/articles/equinix-eqix-justify-pricey-earnings-121336903.html",
           "when": "Sep 05"
         }
       ]
@@ -8568,6 +8568,12 @@
       ],
       "news": [
         {
+          "title": "Palantir Jumped 7.7% on an Expanded PwC Alliance as Globant Launched a Salesforce AI Pod. Which Services Model Scales Better?",
+          "publisher": "Insider Monkey",
+          "link": "https://finance.yahoo.com/technology/ai/articles/palantir-jumped-7-7-expanded-123838463.html",
+          "when": "Sep 05"
+        },
+        {
           "title": "Palantir Billionaire Peter Thiel Just Bought Shares of This AI Stock That\u2019s Climbed 200,000% Since Its IPO -- And It\u2019s His Top Position.",
           "publisher": "Motley Fool",
           "link": "https://www.fool.com/investing/2026/09/05/palantir-billionaire-peter-thiel-just-bought-shares-of-this-ai-stock-that-s-climbed-200-000-since-its-ipo-and-it-s-his-top-position/",
@@ -8595,12 +8601,6 @@
           "title": "3 Reasons PLTR Has Explosive Upside Potential",
           "publisher": "StockStory",
           "link": "https://finance.yahoo.com/markets/stocks/articles/3-reasons-pltr-explosive-upside-200610011.html",
-          "when": "Sep 04"
-        },
-        {
-          "title": "Palantir just won the Army and lost Michael Burry",
-          "publisher": "TheStreet",
-          "link": "https://www.thestreet.com/investing/palantir-army-contract-michael-burry-warning",
           "when": "Sep 04"
         }
       ]
@@ -9176,6 +9176,12 @@
           "when": "Sep 04"
         },
         {
+          "title": "Cathie Wood\u2019s Ark Invest Buys HOOD Stock As Robinhood Sees Its Third-Best Week In Six Months",
+          "publisher": "Stocktwits",
+          "link": "https://stocktwits.com/news-articles/markets/equity/cathie-wood-s-ark-invest-buys-hood-stock-as-robinhood-sees-its-third-best-week-in-six-months/cZszOK7RJDo",
+          "when": "Sep 05"
+        },
+        {
           "title": "Watch Out, Solana and Ethereum. Robinhood's Blockchain Is Eating Your Lunch.",
           "publisher": "Motley Fool",
           "link": "https://www.fool.com/investing/2026/09/05/watch-out-solana-and-ethereum-robinhoods-blockchai/",
@@ -9197,12 +9203,6 @@
           "title": "\u2018Inexcusable, Vile\u2019: AMC Chief Executive Slams Robinhood Stock Tokens",
           "publisher": "The Wall Street Journal",
           "link": "https://www.wsj.com/livecoverage/august-jobs-report-stock-market-09-04-2026/card/-inexcusable-vile-amc-chief-executive-slams-robinhood-stock-tokens-hgv6zEgWPxAMcnVbAoBN?siteid=yhoof2&yptr=yahoo",
-          "when": "Sep 04"
-        },
-        {
-          "title": "Cramer Says a Wave of 21 Year Olds on Robinhood Is the Only Reason This Market Has Not Cracked",
-          "publisher": "24/7 Wall St.",
-          "link": "https://247wallst.com/investing/2026/09/04/cramer-says-a-wave-of-21-year-olds-on-robinhood-is-the-only-reason-this-market-has-not-cracked-2/",
           "when": "Sep 04"
         }
       ]
@@ -10761,6 +10761,12 @@
           "when": "Sep 04"
         },
         {
+          "title": "Credo Technology Just Plunged 20%\u2014Did the Market Overreact?",
+          "publisher": "MarketBeat",
+          "link": "https://www.marketbeat.com/articles/credo-technology-just-plunged-20did-the-market-overreact/?utm_source=yahoofinance&utm_medium=yahoofinance",
+          "when": "Sep 04"
+        },
+        {
           "title": "Dow, S&P 500, Nasdaq Futures Tread Water As August Jobs Data Looms: TSLA, LULU, PL, CRDO Stocks In Focus",
           "publisher": "Stocktwits",
           "link": "https://stocktwits.com/news-articles/markets/equity/dow-s-and-p-500-nasdaq-futures-tread-water-as-august-jobs-data-looms-tsla-lulu-pl-crdo-stocks-in-focus/cZswpHIRJwT",
@@ -10782,12 +10788,6 @@
           "title": "CRDO Stock at $165: Buy, Sell, or Hold?",
           "publisher": "24/7 Wall St.",
           "link": "https://247wallst.com/investing/2026/09/03/crdo-stock-at-165-buy-sell-or-hold/",
-          "when": "Sep 03"
-        },
-        {
-          "title": "Will Credo's Neocloud Expansion Broaden Its AEC Growth Runway?",
-          "publisher": "Zacks",
-          "link": "https://finance.yahoo.com/markets/stocks/articles/credos-neocloud-expansion-broaden-aec-143400269.html",
           "when": "Sep 03"
         }
       ]
@@ -143850,7 +143850,7 @@
       "type": "closed"
     }
   ],
-  "generated_at": "2026-09-05T12:32:27+00:00",
+  "generated_at": "2026-09-05T13:01:46+00:00",
   "universe": {
     "wheel": 18,
     "growth": 19,
