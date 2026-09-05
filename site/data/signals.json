@@ -7234,8 +7234,8 @@
     },
     {
       "label": "Bitcoin",
-      "price": 79720.5,
-      "pct": 0.06091383300981246,
+      "price": 79758.8671875,
+      "pct": 0.10907027761881682,
       "prefix": "$",
       "is_yield": false,
       "hist": [
@@ -7328,13 +7328,13 @@
         77300,
         81272,
         79672,
-        79720
+        79759
       ]
     },
     {
       "label": "Ethereum",
-      "price": 2458.989990234375,
-      "pct": 0.11855751674736403,
+      "price": 2460.3701171875,
+      "pct": 0.17474982346092904,
       "prefix": "$",
       "is_yield": false,
       "hist": [
@@ -7427,7 +7427,7 @@
         2392,
         2508,
         2456,
-        2459
+        2460
       ]
     }
   ],
@@ -7501,8 +7501,8 @@
     {
       "label": "Digital Assets",
       "ticker": "BTC",
-      "pct": 0.06091383300981246,
-      "price": 79720.5
+      "pct": 0.10907027761881682,
+      "price": 79758.8671875
     }
   ],
   "fundamentals": {
@@ -7579,6 +7579,12 @@
           "when": "Sep 04"
         },
         {
+          "title": "Tech stocks today: Tesla's Cybercab event fails to impress, Feds launch investigation into the robotaxi",
+          "publisher": "Yahoo Finance",
+          "link": "https://finance.yahoo.com/technology/live/tech-stocks-today-apple-ceo-steps-down-nvidia-mag-7-145623375.html",
+          "when": "Aug 31"
+        },
+        {
           "title": "A Used EV Is the Way to Get Those Luxury Wheels",
           "publisher": "Barrons.com",
           "link": "https://www.barrons.com/articles/ev-luxury-used-bargains-lease-f501dcc7?siteid=yhoof2&yptr=yahoo",
@@ -7601,12 +7607,6 @@
           "publisher": "StockStory",
           "link": "https://finance.yahoo.com/markets/stocks/articles/tesla-tsla-stock-trades-down-015810122.html",
           "when": "Sep 05"
-        },
-        {
-          "title": "Self-Driving\u2019s Next Task: Potholes",
-          "publisher": "Barrons.com",
-          "link": "https://www.barrons.com/articles/self-drivings-next-task-potholes-a696a3f5?siteid=yhoof2&yptr=yahoo",
-          "when": "Sep 04"
         }
       ]
     },
@@ -7801,27 +7801,27 @@
           "when": "Aug 31"
         },
         {
+          "title": "My Top Nuclear Stock to Buy Right Now (and It's Not Even Close)",
+          "publisher": "Motley Fool",
+          "link": "https://www.fool.com/investing/2026/09/05/my-top-nuclear-stock-to-buy-right-now-and-its-not/",
+          "when": "Sep 05"
+        },
+        {
+          "title": "Why UiPath Rallied in August",
+          "publisher": "Motley Fool",
+          "link": "https://www.fool.com/investing/2026/09/05/why-uipath-rallied-in-august/",
+          "when": "Sep 05"
+        },
+        {
+          "title": "Foxconn expects Q3 to beat market expectations as AI demand stays strong",
+          "publisher": "Investing.com",
+          "link": "https://finance.yahoo.com/technology/ai/articles/foxconn-expects-q3-beat-market-125524002.html",
+          "when": "Sep 05"
+        },
+        {
           "title": "History Says That Bitcoin Is an Unbelievable Bargain Right Now",
           "publisher": "Motley Fool",
           "link": "https://www.fool.com/investing/2026/09/05/history-says-that-bitcoin-is-an-unbelievable-barga/",
-          "when": "Sep 05"
-        },
-        {
-          "title": "SoFi Raised Its Revenue Guidance and the Stock Fell 10%. Here's What the Market Missed.",
-          "publisher": "Motley Fool",
-          "link": "https://www.fool.com/investing/2026/09/05/sofi-raised-its-revenue-guidance-and-the-stock-fell-10-here-s-what-the-market-missed/",
-          "when": "Sep 05"
-        },
-        {
-          "title": "All It Takes Is $10,000 Invested in This Dividend Stock to Generate Over $241 in Yearly Dividends",
-          "publisher": "Motley Fool",
-          "link": "https://www.fool.com/investing/2026/09/05/10000-invested-dividend-stock-241-yearly-income/",
-          "when": "Sep 05"
-        },
-        {
-          "title": "Can Equinix (EQIX) Justify A Pricey Earnings Valuation On AI Growth?",
-          "publisher": "Simply Wall St.",
-          "link": "https://finance.yahoo.com/markets/stocks/articles/equinix-eqix-justify-pricey-earnings-121336903.html",
           "when": "Sep 05"
         }
       ]
@@ -8863,6 +8863,12 @@
       "flags": [],
       "news": [
         {
+          "title": "What Berkshire Hathaway (BRK.A)'s Tech Tilt and Taylor Morrison Deal Means For Shareholders",
+          "publisher": "Simply Wall St.",
+          "link": "https://finance.yahoo.com/markets/stocks/articles/berkshire-hathaway-brk-tech-tilt-130531062.html",
+          "when": "Sep 05"
+        },
+        {
           "title": "Amazon, Alphabet, and Microsoft: Two I'm Buying and One I'm Selling",
           "publisher": "Motley Fool",
           "link": "https://www.fool.com/investing/2026/09/05/amazon-alphabet-and-microsoft-two-im-buying-and-on/",
@@ -8890,12 +8896,6 @@
           "title": "Marvell Raised Its Outlook but Fell as Google Chip Revenue Stayed Distant. Has the AI Payoff Been Priced In? (Ready for review)",
           "publisher": "Insider Monkey",
           "link": "https://finance.yahoo.com/markets/stocks/articles/marvell-raised-outlook-fell-google-225856871.html",
-          "when": "Sep 04"
-        },
-        {
-          "title": "Jim Cramer Flagged Another Risk For Adobe Inc. (NASDAQ:ADBE)",
-          "publisher": "Insider Monkey",
-          "link": "https://finance.yahoo.com/markets/stocks/articles/jim-cramer-flagged-another-risk-225229766.html",
           "when": "Sep 04"
         }
       ]
@@ -9498,12 +9498,6 @@
           "when": "Sep 04"
         },
         {
-          "title": "Tesla launches Cybercab service in Austin",
-          "publisher": "Yahoo Finance Video",
-          "link": "https://finance.yahoo.com/video/tesla-launches-cybercab-austin-132708389.html",
-          "when": "Sep 04"
-        },
-        {
           "title": "Insiders and Early Investors Are Selling SpaceX Stock and Index Funds Are Buying It. Which Side Do You Want to Be On?",
           "publisher": "Motley Fool",
           "link": "https://www.fool.com/investing/2026/09/05/insiders-and-early-investors-are-selling-spacex-st/",
@@ -9525,6 +9519,12 @@
           "title": "Howmet\u2019s SpaceX threat looks more like a buying opportunity: Bernstein",
           "publisher": "Investing.com",
           "link": "https://finance.yahoo.com/markets/stocks/articles/howmet-spacex-threat-looks-more-033119339.html",
+          "when": "Sep 05"
+        },
+        {
+          "title": "SpaceX is now in your 401(k), and Musk is the risk",
+          "publisher": "TheStreet",
+          "link": "https://www.thestreet.com/retirement/spacex-401k-exposure-nasdaq-100-musk-risk",
           "when": "Sep 05"
         }
       ]
@@ -10046,6 +10046,12 @@
       ],
       "news": [
         {
+          "title": "Bloom Energy, Illumina, Everpure Rise On S&P 500 Inclusion",
+          "publisher": "Investor's Business Daily",
+          "link": "https://www.investors.com/news/bloom-energy-illumina-everpure-rise-sp-500-index-inclusion/?src=A00220&yptr=yahoo",
+          "when": "Sep 05"
+        },
+        {
           "title": "Dow Jones Futures: Nvidia, Micron, Sandisk Flash Buy Signals; Apple, Inflation Reports Ahead",
           "publisher": "Investor's Business Daily",
           "link": "https://www.investors.com/market-trend/stock-market-today/dow-jones-futures-nvidia-micron-sandisk-buy-signals-apple-inflation-reports/?src=A00220&yptr=yahoo",
@@ -10067,12 +10073,6 @@
           "title": "BE, P, ILMN Join S&P 500; LNG Misses Out \u2014 Bloom Energy Stock Gains While Cheniere Energy Slips",
           "publisher": "Stocktwits",
           "link": "https://stocktwits.com/news-articles/markets/equity/be-p-ilmn-join-s-and-p-500-lng-misses-out-bloom-energy-stock-gains-while-cheniere-energy-slips/cZsDmHnRJDi",
-          "when": "Sep 04"
-        },
-        {
-          "title": "Bloom Energy, Illumina, Everpure Rise On S&P 500 Inclusion",
-          "publisher": "Investor's Business Daily",
-          "link": "https://www.investors.com/news/bloom-energy-illumina-everpure-rise-sp-500-index-inclusion/?src=A00220&yptr=yahoo",
           "when": "Sep 04"
         },
         {
@@ -10352,6 +10352,12 @@
       "flags": [],
       "news": [
         {
+          "title": "Why UiPath Rallied in August",
+          "publisher": "Motley Fool",
+          "link": "https://www.fool.com/investing/2026/09/05/why-uipath-rallied-in-august/",
+          "when": "Sep 05"
+        },
+        {
           "title": "UiPath (PATH) Founder Publishes Enterprise AI Orchestration Framework",
           "publisher": "Simply Wall St.",
           "link": "https://finance.yahoo.com/technology/ai/articles/uipath-path-founder-publishes-enterprise-101251218.html",
@@ -10379,12 +10385,6 @@
           "title": "UiPath (PATH) Grew ARR 12% as Net Retention Rate Reached 109%. Can Agentic Automation Reaccelerate Expansion?",
           "publisher": "Insider Monkey",
           "link": "https://finance.yahoo.com/markets/stocks/articles/uipath-path-grew-arr-12-233338876.html",
-          "when": "Sep 04"
-        },
-        {
-          "title": "PATH Q2 Deep Dive: AI Adoption, Platform Consolidation, and Execution Challenges Shape Outlook",
-          "publisher": "StockStory",
-          "link": "https://finance.yahoo.com/technology/ai/articles/path-q2-deep-dive-ai-204610589.html",
           "when": "Sep 04"
         }
       ]
@@ -143850,7 +143850,7 @@
       "type": "closed"
     }
   ],
-  "generated_at": "2026-09-05T13:01:46+00:00",
+  "generated_at": "2026-09-05T13:32:46+00:00",
   "universe": {
     "wheel": 18,
     "growth": 19,
