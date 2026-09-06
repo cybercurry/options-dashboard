@@ -7231,8 +7231,8 @@
     },
     {
       "label": "Bitcoin",
-      "price": 79809.1171875,
-      "pct": -0.018478182678560717,
+      "price": 79838.9765625,
+      "pct": 0.018928392637884706,
       "prefix": "$",
       "is_yield": false,
       "hist": [
@@ -7325,13 +7325,13 @@
         81272,
         79672,
         79824,
-        79809
+        79839
       ]
     },
     {
       "label": "Ethereum",
-      "price": 2491.330078125,
-      "pct": 0.4270701980584102,
+      "price": 2494.800048828125,
+      "pct": 0.5669468825843849,
       "prefix": "$",
       "is_yield": false,
       "hist": [
@@ -7424,7 +7424,7 @@
         2508,
         2456,
         2481,
-        2491
+        2495
       ]
     }
   ],
@@ -7498,8 +7498,8 @@
     {
       "label": "Digital Assets",
       "ticker": "BTC",
-      "pct": -0.018478182678560717,
-      "price": 79809.1171875
+      "pct": 0.018928392637884706,
+      "price": 79838.9765625
     }
   ],
   "fundamentals": {
@@ -7792,33 +7792,33 @@
           "when": "Sep 06"
         },
         {
-          "title": "Should You Buy Snowflake Stock After Its Recent Surge? The Answer Might Shock You.",
+          "title": "Retirees Face a Familiar Trap: Chase Yield or Chase Growth?",
           "publisher": "Motley Fool",
-          "link": "https://www.fool.com/investing/2026/09/06/should-buy-snowflake-stock-surge-answer-shock-you/",
+          "link": "https://www.fool.com/investing/2026/09/06/retirees-face-a-familiar-trap-chase-yield-or-chase/",
           "when": "Sep 06"
         },
         {
-          "title": "GitLab Is Starting to Prove the Bears Wrong",
+          "title": "Despite Revenue Skyrocketing More Than 100%, Nvidia Stock Trades at 24 Times Forward Earnings. Is the Market Warning Investors About What's to Come?",
           "publisher": "Motley Fool",
-          "link": "https://www.fool.com/investing/2026/09/06/gitlab-is-starting-to-prove-the-bears-wrong/",
+          "link": "https://www.fool.com/investing/2026/09/06/skyrocket-nvidia-stock-valuation-market-warning/",
           "when": "Sep 06"
         },
         {
-          "title": "Where Will Shopify Stock Be in 5 Years?",
+          "title": "Prediction: Micron Stock Will Skyrocket After Sept. 30",
           "publisher": "Motley Fool",
-          "link": "https://www.fool.com/investing/2026/09/06/where-will-shopify-stock-be-in-5-years/",
+          "link": "https://www.fool.com/investing/2026/09/06/prediction-micron-stock-will-skyrocket-after-septe/",
           "when": "Sep 06"
         },
         {
-          "title": "Oil Surged, Then Slumped, Year to Date in 2026. Here's My Prediction for What's Ahead.",
+          "title": "Social Security's Trump Bump-Led 2027 COLA Should Have Its First Silver Lining Since 2023, but There's a Steep Price to Pay for This Victory",
           "publisher": "Motley Fool",
-          "link": "https://www.fool.com/investing/2026/09/06/oil-surged-then-slumped-year-to-date-in-2026-heres/",
+          "link": "https://www.fool.com/retirement/2026/09/06/social-security-trump-bump-led-2027-cola-first-silver-lining-since-2023-steep-price-to-pay/",
           "when": "Sep 06"
         },
         {
-          "title": "2 Nuclear Energy Stocks to Buy in September",
+          "title": "BWX Technologies Already Builds Reactors for the Navy. Why Is It Still the Cheapest Nuclear Stock?",
           "publisher": "Motley Fool",
-          "link": "https://www.fool.com/investing/2026/09/06/2-nuclear-energy-stocks-to-buy-in-september/",
+          "link": "https://www.fool.com/investing/2026/09/06/bwx-technologies-already-builds-reactors-for-the-n/",
           "when": "Sep 06"
         }
       ]
@@ -8006,9 +8006,9 @@
           "when": "Sep 05"
         },
         {
-          "title": "Amazon, Alphabet, and Microsoft: Two I'm Buying and One I'm Selling",
-          "publisher": "Motley Fool",
-          "link": "https://www.fool.com/investing/2026/09/05/amazon-alphabet-and-microsoft-two-im-buying-and-on/",
+          "title": "GTA VI's Console Problem Isn't Take-Two's Problem",
+          "publisher": "MarketBeat",
+          "link": "https://www.marketbeat.com/articles/gta-vis-console-problem-isnt-take-twos-problem/?utm_source=yahoofinance&utm_medium=yahoofinance",
           "when": "Sep 05"
         }
       ]
@@ -8076,6 +8076,12 @@
       ],
       "news": [
         {
+          "title": "BWX Technologies Already Builds Reactors for the Navy. Why Is It Still the Cheapest Nuclear Stock?",
+          "publisher": "Motley Fool",
+          "link": "https://www.fool.com/investing/2026/09/06/bwx-technologies-already-builds-reactors-for-the-n/",
+          "when": "Sep 06"
+        },
+        {
           "title": "3 Nuclear Stocks to Buy With $2,000 After One Fell 83%",
           "publisher": "Motley Fool",
           "link": "https://www.fool.com/investing/2026/09/05/3-nuclear-stocks-to-buy-with-usd2-000-after-one-fell-83/",
@@ -8103,12 +8109,6 @@
           "title": "Peter Thiel\u2019s Fund Disclosed $59 Million in This Beaten-Down Power Stock",
           "publisher": "Insider Monkey",
           "link": "https://finance.yahoo.com/markets/stocks/articles/peter-thiel-fund-disclosed-59-185030291.html",
-          "when": "Sep 03"
-        },
-        {
-          "title": "Better Energy Play: NextEra vs. Constellation Energy",
-          "publisher": "Motley Fool",
-          "link": "https://www.fool.com/investing/2026/09/03/better-energy-play-nextera-vs-constellation-energy/",
           "when": "Sep 03"
         }
       ]
@@ -9168,6 +9168,12 @@
       ],
       "news": [
         {
+          "title": "Robinhood Chain Now Earns 240x The Fees Of Arbitrum Itself - And ARB Is Up 45% On The Cut It Gets",
+          "publisher": "Stocktwits",
+          "link": "https://stocktwits.com/news-articles/markets/cryptocurrency/robinhood-chain-now-earns-240x-the-fees-of-arbitrum-itself-arb/cZtbl34RJDD",
+          "when": "Sep 06"
+        },
+        {
           "title": "Should You Forget Robinhood and Buy Webull Instead?",
           "publisher": "Motley Fool",
           "link": "https://www.fool.com/investing/2026/09/06/should-you-forget-robinhood-and-buy-webull-instead/",
@@ -9195,12 +9201,6 @@
           "title": "Cathie Wood buys surging crypto stock despite latest controversy",
           "publisher": "TheStreet",
           "link": "https://www.thestreet.com/crypto/markets/cathie-wood-buys-surging-crypto-stock-despite-latest-controversy",
-          "when": "Sep 05"
-        },
-        {
-          "title": "What Is Robinhood Chain? The Ethereum Layer-2 Network for Tokenized Stocks and Meme Coins",
-          "publisher": "decrypt",
-          "link": "https://decrypt.co/resources/what-robinhood-chain-ethereum-layer-2-network-tokenized-stocks",
           "when": "Sep 05"
         }
       ]
@@ -154008,7 +154008,7 @@
       "type": "closed"
     }
   ],
-  "generated_at": "2026-09-06T13:31:43+00:00",
+  "generated_at": "2026-09-06T14:02:29+00:00",
   "universe": {
     "wheel": 18,
     "growth": 19,
