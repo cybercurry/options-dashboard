@@ -7231,8 +7231,8 @@
     },
     {
       "label": "Bitcoin",
-      "price": 79599.0,
-      "pct": -0.2817042012908333,
+      "price": 79634.3515625,
+      "pct": -0.23741724333505854,
       "prefix": "$",
       "is_yield": false,
       "hist": [
@@ -7325,13 +7325,13 @@
         81272,
         79672,
         79824,
-        79599
+        79640
       ]
     },
     {
       "label": "Ethereum",
-      "price": 2479.1201171875,
-      "pct": -0.06512094712645133,
+      "price": 2479.10009765625,
+      "pct": -0.06592794692460435,
       "prefix": "$",
       "is_yield": false,
       "hist": [
@@ -7498,8 +7498,8 @@
     {
       "label": "Digital Assets",
       "ticker": "BTC",
-      "pct": -0.2817042012908333,
-      "price": 79599.0
+      "pct": -0.23741724333505854,
+      "price": 79634.3515625
     }
   ],
   "fundamentals": {
@@ -7792,6 +7792,12 @@
           "when": "Sep 06"
         },
         {
+          "title": "Will Alphabet Break Warren Buffett's Cardinal Rule of Investing?",
+          "publisher": "Motley Fool",
+          "link": "https://www.fool.com/investing/2026/09/06/will-alphabet-break-warren-buffett-cardinal-rule/",
+          "when": "Sep 06"
+        },
+        {
           "title": "Prediction: This Is What Sandisk Stock Will Be Worth in 12 Months",
           "publisher": "Motley Fool",
           "link": "https://www.fool.com/investing/2026/09/06/prediction-this-is-what-sandisk-stock-will-be-worth-in-12-months/",
@@ -7813,12 +7819,6 @@
           "title": "Dow Jones Futures Loom After U.S.-Iran Attacks; Nvidia, Micron, Sandisk Flash Buy Signals",
           "publisher": "Investor's Business Daily",
           "link": "https://www.investors.com/market-trend/stock-market-today/dow-jones-futures-nvidia-micron-sandisk-buy-signals-apple-inflation-reports/?src=A00220&yptr=yahoo",
-          "when": "Sep 06"
-        },
-        {
-          "title": "Buying Archer Aviation Today Could Set You Up for Life",
-          "publisher": "Motley Fool",
-          "link": "https://www.fool.com/investing/2026/09/06/buying-archer-aviation-today-could-set-you-up-for/",
           "when": "Sep 06"
         }
       ]
@@ -8860,6 +8860,12 @@
       "flags": [],
       "news": [
         {
+          "title": "Will Alphabet Break Warren Buffett's Cardinal Rule of Investing?",
+          "publisher": "Motley Fool",
+          "link": "https://www.fool.com/investing/2026/09/06/will-alphabet-break-warren-buffett-cardinal-rule/",
+          "when": "Sep 06"
+        },
+        {
           "title": "Why Rezolve AI Stock Plummeted This Week",
           "publisher": "Motley Fool",
           "link": "https://www.fool.com/investing/2026/09/06/why-rezolve-ai-stock-plummeted-this-week/",
@@ -8887,12 +8893,6 @@
           "title": "Prediction: Amazon Will Join Nvidia, Apple, and Alphabet in the $4 Trillion Club Before 2029",
           "publisher": "Motley Fool",
           "link": "https://www.fool.com/investing/2026/09/05/prediction-amazon-will-join-nvidia-apple-and-alpha/",
-          "when": "Sep 05"
-        },
-        {
-          "title": "5 big analyst AI moves: iPhone launch to be negative for Apple stock",
-          "publisher": "Investing.com",
-          "link": "https://finance.yahoo.com/technology/ai/articles/5-big-analyst-ai-moves-182536563.html",
           "when": "Sep 05"
         }
       ]
@@ -154008,7 +154008,7 @@
       "type": "closed"
     }
   ],
-  "generated_at": "2026-09-06T15:17:18+00:00",
+  "generated_at": "2026-09-06T15:31:49+00:00",
   "universe": {
     "wheel": 18,
     "growth": 19,
