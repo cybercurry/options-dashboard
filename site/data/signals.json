@@ -7231,8 +7231,8 @@
     },
     {
       "label": "Bitcoin",
-      "price": 79701.0,
-      "pct": -0.1539228702255091,
+      "price": 79693.6171875,
+      "pct": -0.1631717487378226,
       "prefix": "$",
       "is_yield": false,
       "hist": [
@@ -7325,13 +7325,13 @@
         81272,
         79672,
         79824,
-        79701
+        79694
       ]
     },
     {
       "label": "Ethereum",
-      "price": 2479.81005859375,
-      "pct": -0.0373089784730829,
+      "price": 2481.60009765625,
+      "pct": 0.034848613234816916,
       "prefix": "$",
       "is_yield": false,
       "hist": [
@@ -7424,7 +7424,7 @@
         2508,
         2456,
         2481,
-        2480
+        2482
       ]
     }
   ],
@@ -7498,8 +7498,8 @@
     {
       "label": "Digital Assets",
       "ticker": "BTC",
-      "pct": -0.1539228702255091,
-      "price": 79701.0
+      "pct": -0.1631717487378226,
+      "price": 79693.6171875
     }
   ],
   "fundamentals": {
@@ -7792,33 +7792,33 @@
           "when": "Sep 06"
         },
         {
+          "title": "2 Ways Elon Musk Can Make SpaceX Win the New Space Race",
+          "publisher": "Motley Fool",
+          "link": "https://www.fool.com/investing/2026/09/06/ways-elon-musk-make-spacex-win-new-space-race/",
+          "when": "Sep 06"
+        },
+        {
+          "title": "Forget the \"Magnificent Seven.\" This Payments Stock Could Be the Better Long-Term Bet.",
+          "publisher": "Motley Fool",
+          "link": "https://www.fool.com/investing/2026/09/06/forget-the-magnificent-seven-this-payments-stock-c/",
+          "when": "Sep 06"
+        },
+        {
+          "title": "Nvidia's cash could reshape an AI cloud contender",
+          "publisher": "TheStreet",
+          "link": "https://www.thestreet.com/investing/nvidia-nscale-pre-ipo-investment",
+          "when": "Sep 06"
+        },
+        {
+          "title": "Uh Oh! BigBear.ai's Stock Dropped Below $3. Does That Mean a Reverse Split Is Imminent?",
+          "publisher": "Motley Fool",
+          "link": "https://www.fool.com/investing/2026/09/06/uh-oh-bigbearais-stock-dropped-below-3-does-that-m/",
+          "when": "Sep 06"
+        },
+        {
           "title": "Where Will Ford Be in 5 Years?",
           "publisher": "Motley Fool",
           "link": "https://www.fool.com/investing/2026/09/06/where-will-ford-be-in-5-years/",
-          "when": "Sep 06"
-        },
-        {
-          "title": "A Fed Rate Hike May Be in the Cards on Sept. 16, and 36 Years of History Says the Stock Market Won't Be Happy (at Least Initially)",
-          "publisher": "Motley Fool",
-          "link": "https://www.fool.com/investing/2026/09/06/fed-rate-hike-in-the-cards-sept-16-36-years-history-says-stock-market-wont-be-happy/",
-          "when": "Sep 06"
-        },
-        {
-          "title": "1 Cryptocurrency Up 29% in 3 Weeks to Buy Before It Soars Another 515% by 2029",
-          "publisher": "Motley Fool",
-          "link": "https://www.fool.com/investing/2026/09/06/1-cryptocurrency-up-29-in-3-weeks-to-buy-before-it/",
-          "when": "Sep 06"
-        },
-        {
-          "title": "Will Alphabet Break Warren Buffett's Cardinal Rule of Investing?",
-          "publisher": "Motley Fool",
-          "link": "https://www.fool.com/investing/2026/09/06/will-alphabet-break-warren-buffett-cardinal-rule/",
-          "when": "Sep 06"
-        },
-        {
-          "title": "Prediction: This Is What Sandisk Stock Will Be Worth in 12 Months",
-          "publisher": "Motley Fool",
-          "link": "https://www.fool.com/investing/2026/09/06/prediction-this-is-what-sandisk-stock-will-be-worth-in-12-months/",
           "when": "Sep 06"
         }
       ]
@@ -9068,6 +9068,12 @@
       ],
       "news": [
         {
+          "title": "Zscaler\u2019s Strong Quarter Still Left Investors Waiting on 1 Key Signal",
+          "publisher": "MarketBeat",
+          "link": "https://www.marketbeat.com/articles/zscalers-strong-quarter-still-left-investors-waiting-on-1-key-signal/?utm_source=yahoofinance&utm_medium=yahoofinance",
+          "when": "Sep 05"
+        },
+        {
           "title": "Why Zscaler (ZS) Is Down 7.8% After Slower 2027 Outlook And AI-Focused Restructuring \u2013 And What's Next",
           "publisher": "Simply Wall St.",
           "link": "https://finance.yahoo.com/markets/stocks/articles/why-zscaler-zs-down-7-110844518.html",
@@ -9095,12 +9101,6 @@
           "title": "The Gap Between CRWD Stock And Its Own Numbers",
           "publisher": "Trefis",
           "link": "https://www.trefis.com/articles/614384/the-gap-between-crwd-stock-and-its-own-numbers/2026-09-04",
-          "when": "Sep 04"
-        },
-        {
-          "title": "Update: Wall Street Wraps Mixed Week in Red Following Strong Jobs Report",
-          "publisher": "MT Newswires",
-          "link": "https://finance.yahoo.com/markets/stocks/articles/wall-street-wraps-mixed-week-204238792.html",
           "when": "Sep 04"
         }
       ]
@@ -9490,6 +9490,12 @@
       "flags": [],
       "news": [
         {
+          "title": "2 Ways Elon Musk Can Make SpaceX Win the New Space Race",
+          "publisher": "Motley Fool",
+          "link": "https://www.fool.com/investing/2026/09/06/ways-elon-musk-make-spacex-win-new-space-race/",
+          "when": "Sep 06"
+        },
+        {
           "title": "Forget Starlink? Japan\u2019s $1 Billion BlueBird Play Makes ASTS the National Satellite OS",
           "publisher": "24/7 Wall St.",
           "link": "https://247wallst.com/investing/2026/09/06/forget-starlink-japans-1-billion-bluebird-play-makes-asts-the-national-satellite-os/",
@@ -9518,12 +9524,6 @@
           "publisher": "Motley Fool",
           "link": "https://www.fool.com/investing/2026/09/05/elon-musk-says-his-new-foundry-can-get-gas-turbi/",
           "when": "Sep 06"
-        },
-        {
-          "title": "Elon Musk Says He's Happy About 'Half the Time' After Documentary Describes Him as 'The Most Miserable Man' \u2014 Mom Has This to Say",
-          "publisher": "Benzinga",
-          "link": "https://www.yahoo.com/entertainment/celebrity/articles/elon-musk-says-hes-happy-223019646.html",
-          "when": "Sep 05"
         }
       ]
     },
@@ -154008,7 +154008,7 @@
       "type": "closed"
     }
   ],
-  "generated_at": "2026-09-06T16:02:22+00:00",
+  "generated_at": "2026-09-06T16:33:07+00:00",
   "universe": {
     "wheel": 18,
     "growth": 19,
