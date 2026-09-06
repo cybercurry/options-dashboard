@@ -7231,8 +7231,8 @@
     },
     {
       "label": "Bitcoin",
-      "price": 79919.84375,
-      "pct": 0.120235420660042,
+      "price": 79826.5703125,
+      "pct": 0.003386361868007448,
       "prefix": "$",
       "is_yield": false,
       "hist": [
@@ -7325,13 +7325,13 @@
         81272,
         79672,
         79824,
-        79920
+        79827
       ]
     },
     {
       "label": "Ethereum",
-      "price": 2493.550048828125,
-      "pct": 0.5165586025046798,
+      "price": 2491.530029296875,
+      "pct": 0.4351303545789831,
       "prefix": "$",
       "is_yield": false,
       "hist": [
@@ -7424,7 +7424,7 @@
         2508,
         2456,
         2481,
-        2494
+        2492
       ]
     }
   ],
@@ -7498,8 +7498,8 @@
     {
       "label": "Digital Assets",
       "ticker": "BTC",
-      "pct": 0.120235420660042,
-      "price": 79919.84375
+      "pct": 0.003386361868007448,
+      "price": 79826.5703125
     }
   ],
   "fundamentals": {
@@ -7570,6 +7570,12 @@
       ],
       "news": [
         {
+          "title": "Cathie Wood's Ark Has Delivered Just a 13.8% Annualized Return Since 2014, Roughly Matching the S&P 500. Should You Trust Her Bold Predictions for 2030?",
+          "publisher": "Motley Fool",
+          "link": "https://www.fool.com/investing/2026/09/06/cathie-wood-ark-annual-return-sp-500-trust/",
+          "when": "Sep 06"
+        },
+        {
           "title": "Elon Musk's Tesla Cybertruck Has A New Ford Rival That Wants To Outsell It 5-To-1",
           "publisher": "Benzinga",
           "link": "https://finance.yahoo.com/markets/stocks/articles/elon-musks-tesla-cybertruck-ford-160016241.html",
@@ -7598,12 +7604,6 @@
           "publisher": "Benzinga",
           "link": "https://finance.yahoo.com/technology/articles/gene-munster-says-tesla-cybercabs-013023621.html",
           "when": "Sep 06"
-        },
-        {
-          "title": "Elon Musk Says He's Happy About 'Half the Time' After Documentary Describes Him as 'The Most Miserable Man' \u2014 Mom Has This to Say",
-          "publisher": "Benzinga",
-          "link": "https://www.yahoo.com/entertainment/celebrity/articles/elon-musk-says-hes-happy-223019646.html",
-          "when": "Sep 05"
         }
       ]
     },
@@ -7792,33 +7792,33 @@
           "when": "Sep 06"
         },
         {
-          "title": "BDC and Mortgage REIT Income Is Taxed Differently Than a Bank Dividend. Here's Where to Hold Each.",
+          "title": "The U.S. National Debt Just Surpassed $40 Trillion. Here's What This Means for Your Portfolio in 2026 and Beyond.",
           "publisher": "Motley Fool",
-          "link": "https://www.fool.com/investing/2026/09/06/bdc-and-mortgage-reit-income-is-taxed-differently/",
+          "link": "https://www.fool.com/investing/2026/09/06/us-debt-40-trillion-what-this-means-portfolio-2026/",
           "when": "Sep 06"
         },
         {
-          "title": "What Should I Invest In? I'm Putting My Money in These 2 Stocks for 2027.",
-          "publisher": "Motley Fool",
-          "link": "https://www.fool.com/investing/2026/09/06/what-should-invest-put-my-money-stock-nlst-iren/",
+          "title": "NVIDIA (NVDA)\u2019s $20 Billion Groq Bet Goes Live This Year With New AI Racks",
+          "publisher": "Insider Monkey",
+          "link": "https://finance.yahoo.com/technology/ai/articles/nvidia-nvda-20-billion-groq-190737433.html",
           "when": "Sep 06"
         },
         {
-          "title": "NuScale Power Stock Will Spike 23.7% Over the Next 11 Months According to This Wall Street Analyst",
+          "title": "Should You Forget High-Yield Dividend ETFs and Buy a Dividend Growth ETF Instead?",
           "publisher": "Motley Fool",
-          "link": "https://www.fool.com/investing/2026/09/06/nuscale-power-stock-will-spike-over-the-next/",
+          "link": "https://www.fool.com/investing/2026/09/06/forget-high-yield-dividend-etf-buy-growth-schd/",
           "when": "Sep 06"
         },
         {
-          "title": "September Is Historically the Worst Month for Stocks. A Pattern From 2000 Says This Could Happen Next.",
+          "title": "Prediction: Snowflake's Product Revenue Passes $8 Billion in Fiscal 2028",
           "publisher": "Motley Fool",
-          "link": "https://www.fool.com/investing/2026/09/06/september-is-historically-worst-month-for-stocks/",
+          "link": "https://www.fool.com/investing/2026/09/06/prediction-snowflake-s-product-revenue-passes-usd8-billion-in-fiscal-2028/",
           "when": "Sep 06"
         },
         {
-          "title": "Nvidia Is Near Its High While Its Biggest Chip Peers Sit 18% to 32% Below Theirs. These Are the Chip Stocks to Buy.",
+          "title": "Cathie Wood's Ark Has Delivered Just a 13.8% Annualized Return Since 2014, Roughly Matching the S&P 500. Should You Trust Her Bold Predictions for 2030?",
           "publisher": "Motley Fool",
-          "link": "https://www.fool.com/investing/2026/09/06/nvidia-is-near-its-high-while-its-biggest-chip-peers-sit-18-to-32-below-theirs-these-are-the-chip-stocks-to-buy/",
+          "link": "https://www.fool.com/investing/2026/09/06/cathie-wood-ark-annual-return-sp-500-trust/",
           "when": "Sep 06"
         }
       ]
@@ -7881,6 +7881,12 @@
       "flags": [],
       "news": [
         {
+          "title": "The Amazon Service Bezos Nicknamed \u201cArtificial Artificial Intelligence\u201d is Closing for Good",
+          "publisher": "Insider Monkey",
+          "link": "https://finance.yahoo.com/technology/ai/articles/amazon-bezos-nicknamed-artificial-artificial-192119001.html",
+          "when": "Sep 06"
+        },
+        {
           "title": "2 Superior Growth Stocks to Buy and Hold for 10 Years",
           "publisher": "Motley Fool",
           "link": "https://www.fool.com/investing/2026/09/06/2-superior-growth-stocks-to-buy-and-hold-for-10-ye/",
@@ -7908,12 +7914,6 @@
           "title": "\u2018AI Laggard\u2019 Apple Is Sitting Pretty, But AAPL Stock Might Be Running Out of Room to Outperform",
           "publisher": "Barchart",
           "link": "https://www.barchart.com/story/news/4461863/ai-laggard-apple-is-sitting-pretty-but-aapl-stock-might-be-running-out-of-room-to-outperform",
-          "when": "Sep 05"
-        },
-        {
-          "title": "If You Buy Amazon With $10,000 at a 10% Discount From Its High, Here's What I Predict It Could Be Worth in 10 Years",
-          "publisher": "Motley Fool",
-          "link": "https://www.fool.com/investing/2026/09/05/buy-amazon-10000-10-discount-predict-10-years/",
           "when": "Sep 05"
         }
       ]
@@ -8771,6 +8771,12 @@
           "when": "Sep 06"
         },
         {
+          "title": "Inflation, Apple, Adobe, Oracle, Macy\u2019s, and More to Watch This Week",
+          "publisher": "Barrons.com",
+          "link": "https://www.barrons.com/articles/inflation-apple-adobe-oracle-macys-and-more-to-watch-this-week-23a2c022?siteid=yhoof2&yptr=yahoo",
+          "when": "Sep 06"
+        },
+        {
           "title": "KeyBanc warns Apple\u2019s iPhone 18 launch may be a negative catalyst for shares",
           "publisher": "Investing.com",
           "link": "https://finance.yahoo.com/markets/stocks/articles/keybanc-warns-apple-iphone-18-173545777.html",
@@ -8789,15 +8795,9 @@
           "when": "Sep 06"
         },
         {
-          "title": "What to Expect in Markets This Week: Fresh Inflation Data; Apple\u2019s Fall Launch Event and Oracle Earnings",
-          "publisher": "Investopedia",
-          "link": "https://www.investopedia.com/what-to-expect-in-markets-this-week-fresh-inflation-data-apple-fall-launch-event-and-oracle-earnings-12100794",
-          "when": "Sep 06"
-        },
-        {
-          "title": "The world is about to meet Apple\u2019s new CEO. Here are his biggest challenges",
-          "publisher": "CNN Business",
-          "link": "https://www.cnn.com/2026/09/06/tech/apple-ceo-john-ternus-challenges",
+          "title": "Apple Stock: September Surprise Could Be Bigger Than a New iPhone",
+          "publisher": "Barchart",
+          "link": "https://www.barchart.com/story/news/4467453/apple-stock-september-surprise-could-be-bigger-than-a-new-iphone",
           "when": "Sep 06"
         }
       ]
@@ -9490,6 +9490,12 @@
       "flags": [],
       "news": [
         {
+          "title": "Trump\u2019s Financial Disclosure Reveals a Personal Stake in Musk\u2019s SpaceX (SPCX)",
+          "publisher": "Insider Monkey",
+          "link": "https://finance.yahoo.com/markets/stocks/articles/trump-financial-disclosure-reveals-personal-191447311.html",
+          "when": "Sep 06"
+        },
+        {
           "title": "Scott Galloway issues grim SpaceX stock price forecast",
           "publisher": "TheStreet",
           "link": "https://www.thestreet.com/investing/stocks/spcx-scott-galloway-spacex-stock-price-target-forecast",
@@ -9517,12 +9523,6 @@
           "title": "Elon Musk Fires Back at Bernie Sanders Over His $900 Billion Fortune",
           "publisher": "BeInCrypto",
           "link": "https://beincrypto.com/elon-musk-wealth-stock-cash-sanders/",
-          "when": "Sep 06"
-        },
-        {
-          "title": "Think SpaceX's $28.5 Trillion Idea Sounded Crazy? Wait Till You Hear What Anthropic Says.",
-          "publisher": "Motley Fool",
-          "link": "https://www.fool.com/investing/2026/09/06/think-spacexs-285-trillion-idea-sounded-crazy-wait/",
           "when": "Sep 06"
         }
       ]
@@ -154008,7 +154008,7 @@
       "type": "closed"
     }
   ],
-  "generated_at": "2026-09-06T19:01:38+00:00",
+  "generated_at": "2026-09-06T19:32:33+00:00",
   "universe": {
     "wheel": 18,
     "growth": 19,
