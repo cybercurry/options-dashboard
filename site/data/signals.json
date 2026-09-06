@@ -7231,8 +7231,8 @@
     },
     {
       "label": "Bitcoin",
-      "price": 80005.1328125,
-      "pct": 0.22708198861653983,
+      "price": 79908.75,
+      "pct": 0.10633763495899728,
       "prefix": "$",
       "is_yield": false,
       "hist": [
@@ -7325,13 +7325,13 @@
         81272,
         79672,
         79824,
-        80005
+        79909
       ]
     },
     {
       "label": "Ethereum",
-      "price": 2504.47998046875,
-      "pct": 0.9571509679126011,
+      "price": 2499.010009765625,
+      "pct": 0.7366530352590939,
       "prefix": "$",
       "is_yield": false,
       "hist": [
@@ -7424,7 +7424,7 @@
         2508,
         2456,
         2481,
-        2504
+        2499
       ]
     }
   ],
@@ -7498,8 +7498,8 @@
     {
       "label": "Digital Assets",
       "ticker": "BTC",
-      "pct": 0.22708198861653983,
-      "price": 80005.1328125
+      "pct": 0.10633763495899728,
+      "price": 79908.75
     }
   ],
   "fundamentals": {
@@ -7786,6 +7786,24 @@
       ],
       "news": [
         {
+          "title": "GitLab Is Starting to Prove the Bears Wrong",
+          "publisher": "Motley Fool",
+          "link": "https://www.fool.com/investing/2026/09/06/gitlab-is-starting-to-prove-the-bears-wrong/",
+          "when": "Sep 06"
+        },
+        {
+          "title": "Where Will Shopify Stock Be in 5 Years?",
+          "publisher": "Motley Fool",
+          "link": "https://www.fool.com/investing/2026/09/06/where-will-shopify-stock-be-in-5-years/",
+          "when": "Sep 06"
+        },
+        {
+          "title": "Oil Surged, Then Slumped, Year to Date in 2026. Here's My Prediction for What's Ahead.",
+          "publisher": "Motley Fool",
+          "link": "https://www.fool.com/investing/2026/09/06/oil-surged-then-slumped-year-to-date-in-2026-heres/",
+          "when": "Sep 06"
+        },
+        {
           "title": "2 Nuclear Energy Stocks to Buy in September",
           "publisher": "Motley Fool",
           "link": "https://www.fool.com/investing/2026/09/06/2-nuclear-energy-stocks-to-buy-in-september/",
@@ -7801,24 +7819,6 @@
           "title": "Dow Jones Futures Loom After U.S.-Iran Attacks; Nvidia, Micron, Sandisk Flash Buy Signals",
           "publisher": "Investor's Business Daily",
           "link": "https://www.investors.com/market-trend/stock-market-today/dow-jones-futures-nvidia-micron-sandisk-buy-signals-apple-inflation-reports/?src=A00220&yptr=yahoo",
-          "when": "Sep 06"
-        },
-        {
-          "title": "Copper Just Soared to an All-Time High, but This Stock Is Still a Great Value",
-          "publisher": "Motley Fool",
-          "link": "https://www.fool.com/investing/2026/09/06/copper-soared-all-time-high-stock-value-fcx/",
-          "when": "Sep 06"
-        },
-        {
-          "title": "Pepsi Is Dirt Cheap With a 4.2% Dividend Yield. Here's Why Wall Street Is Favoring Coca-Cola Instead.",
-          "publisher": "Motley Fool",
-          "link": "https://www.fool.com/investing/2026/09/06/pepsi-is-dirt-cheap-with-a-41-dividend-yield-heres/",
-          "when": "Sep 06"
-        },
-        {
-          "title": "NuScale Stock Is Down 83% -- Bargain or Trap? The Honest Answer Will Surprise You.",
-          "publisher": "Motley Fool",
-          "link": "https://www.fool.com/investing/2026/09/06/nuscale-stock-down-bargain-or-trap-answer-smr/",
           "when": "Sep 06"
         }
       ]
@@ -7976,6 +7976,12 @@
       "flags": [],
       "news": [
         {
+          "title": "The Agent Production Gap: When 171% ROI Isn\u2019t Enough to Ship",
+          "publisher": "Forkast News",
+          "link": "https://finance.yahoo.com/technology/ai/articles/agent-production-gap-171-roi-123605791.html",
+          "when": "Sep 06"
+        },
+        {
           "title": "I Own Both Oracle and NuScale for Different Reasons. Here's How They Fit Together.",
           "publisher": "Motley Fool",
           "link": "https://www.fool.com/investing/2026/09/06/i-own-both-oracle-and-nuscale-for-different-reason/",
@@ -8003,12 +8009,6 @@
           "title": "What Move Will SpaceX Stock Make After Sept. 9? The Evidence Is Piling Up, and Here\u2019s What It Shows.",
           "publisher": "Motley Fool",
           "link": "https://www.fool.com/investing/2026/09/05/what-move-will-spacex-stock-make-after-sept-9-the-evidence-is-piling-up-and-here-s-what-it-shows/",
-          "when": "Sep 05"
-        },
-        {
-          "title": "Seattle Times, Newsday sue OpenAI and Microsoft over AI training",
-          "publisher": "Investing.com",
-          "link": "https://finance.yahoo.com/technology/ai/articles/seattle-times-newsday-sue-openai-062913073.html",
           "when": "Sep 05"
         }
       ]
@@ -154008,7 +154008,7 @@
       "type": "closed"
     }
   ],
-  "generated_at": "2026-09-06T12:32:37+00:00",
+  "generated_at": "2026-09-06T13:02:28+00:00",
   "universe": {
     "wheel": 18,
     "growth": 19,
