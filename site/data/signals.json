@@ -7231,8 +7231,8 @@
     },
     {
       "label": "Bitcoin",
-      "price": 79838.9765625,
-      "pct": 0.018928392637884706,
+      "price": 79585.5234375,
+      "pct": -0.29858707476568824,
       "prefix": "$",
       "is_yield": false,
       "hist": [
@@ -7325,13 +7325,13 @@
         81272,
         79672,
         79824,
-        79839
+        79586
       ]
     },
     {
       "label": "Ethereum",
-      "price": 2494.800048828125,
-      "pct": 0.5669468825843849,
+      "price": 2476.919921875,
+      "pct": -0.1538121932355141,
       "prefix": "$",
       "is_yield": false,
       "hist": [
@@ -7424,7 +7424,7 @@
         2508,
         2456,
         2481,
-        2495
+        2477
       ]
     }
   ],
@@ -7498,8 +7498,8 @@
     {
       "label": "Digital Assets",
       "ticker": "BTC",
-      "pct": 0.018928392637884706,
-      "price": 79838.9765625
+      "pct": -0.29858707476568824,
+      "price": 79585.5234375
     }
   ],
   "fundamentals": {
@@ -7792,6 +7792,18 @@
           "when": "Sep 06"
         },
         {
+          "title": "PepsiCo Hasn't Been This Cheap Relative to Free Cash Flow in 10 Years. Here's Why That's the Signal to Buy.",
+          "publisher": "Motley Fool",
+          "link": "https://www.fool.com/investing/2026/09/06/pepsi-hasnt-been-this-cheap-relative-to-free-cash/",
+          "when": "Sep 06"
+        },
+        {
+          "title": "BNY Mellon Oversees $62 Trillion in Client Assets. Custody Is the Quietest Fee Machine in Finance.",
+          "publisher": "Motley Fool",
+          "link": "https://www.fool.com/investing/2026/09/06/bny-mellon-oversees-62-trillion-in-client-assets/",
+          "when": "Sep 06"
+        },
+        {
           "title": "Retirees Face a Familiar Trap: Chase Yield or Chase Growth?",
           "publisher": "Motley Fool",
           "link": "https://www.fool.com/investing/2026/09/06/retirees-face-a-familiar-trap-chase-yield-or-chase/",
@@ -7807,18 +7819,6 @@
           "title": "Prediction: Micron Stock Will Skyrocket After Sept. 30",
           "publisher": "Motley Fool",
           "link": "https://www.fool.com/investing/2026/09/06/prediction-micron-stock-will-skyrocket-after-septe/",
-          "when": "Sep 06"
-        },
-        {
-          "title": "Social Security's Trump Bump-Led 2027 COLA Should Have Its First Silver Lining Since 2023, but There's a Steep Price to Pay for This Victory",
-          "publisher": "Motley Fool",
-          "link": "https://www.fool.com/retirement/2026/09/06/social-security-trump-bump-led-2027-cola-first-silver-lining-since-2023-steep-price-to-pay/",
-          "when": "Sep 06"
-        },
-        {
-          "title": "BWX Technologies Already Builds Reactors for the Navy. Why Is It Still the Cheapest Nuclear Stock?",
-          "publisher": "Motley Fool",
-          "link": "https://www.fool.com/investing/2026/09/06/bwx-technologies-already-builds-reactors-for-the-n/",
           "when": "Sep 06"
         }
       ]
@@ -8276,6 +8276,12 @@
       ],
       "news": [
         {
+          "title": "McDonald's Once Owned 90% Of A Popular Restaurant Chain. Selling It Left Billions On The Table",
+          "publisher": "Money Digest",
+          "link": "https://www.moneydigest.com/2247570/mcdonalds-owned-popular-restaurant-chain-missed-billions-chipotle/",
+          "when": "Sep 06"
+        },
+        {
           "title": "How Investors May Respond To Chipotle Mexican Grill (CMG) Using South Korea As Its Asian Testbed",
           "publisher": "Simply Wall St.",
           "link": "https://finance.yahoo.com/markets/stocks/articles/investors-may-respond-chipotle-mexican-031012173.html",
@@ -8303,12 +8309,6 @@
           "title": "CAVA Stock Slips 15% in 3 Months: Should You Buy, Sell or Hold?",
           "publisher": "Zacks",
           "link": "https://finance.yahoo.com/markets/stocks/articles/cava-stock-slips-15-3-135500915.html",
-          "when": "Sep 04"
-        },
-        {
-          "title": "Del Taco leans on catering in turnaround plan",
-          "publisher": "Restaurant Dive",
-          "link": "https://www.restaurantdive.com/news/del-taco-catering-overhaul-menu-expansion/829583/",
           "when": "Sep 04"
         }
       ]
@@ -8795,9 +8795,9 @@
           "when": "Sep 05"
         },
         {
-          "title": "Apple (AAPL) Draws New \u00a32 Billion UK ATT Lawsuit With Wider Europe Stakes",
-          "publisher": "Simply Wall St.",
-          "link": "https://finance.yahoo.com/technology/articles/apple-aapl-draws-2-billion-170534240.html",
+          "title": "5 big analyst AI moves: iPhone launch to be negative for Apple stock",
+          "publisher": "Investing.com",
+          "link": "https://finance.yahoo.com/technology/ai/articles/5-big-analyst-ai-moves-182536563.html",
           "when": "Sep 05"
         }
       ]
@@ -8890,9 +8890,9 @@
           "when": "Sep 05"
         },
         {
-          "title": "Why Gabelli\u2019s Global Content & Connectivity Fund Likes Alphabet (GOOGL)",
-          "publisher": "Insider Monkey",
-          "link": "https://finance.yahoo.com/markets/stocks/articles/why-gabelli-global-content-connectivity-153522934.html",
+          "title": "5 big analyst AI moves: iPhone launch to be negative for Apple stock",
+          "publisher": "Investing.com",
+          "link": "https://finance.yahoo.com/technology/ai/articles/5-big-analyst-ai-moves-182536563.html",
           "when": "Sep 05"
         }
       ]
@@ -154008,7 +154008,7 @@
       "type": "closed"
     }
   ],
-  "generated_at": "2026-09-06T14:02:29+00:00",
+  "generated_at": "2026-09-06T14:32:32+00:00",
   "universe": {
     "wheel": 18,
     "growth": 19,
