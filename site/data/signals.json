@@ -7231,8 +7231,8 @@
     },
     {
       "label": "Bitcoin",
-      "price": 79450.0078125,
-      "pct": -0.46835537812498496,
+      "price": 79599.0,
+      "pct": -0.2817042012908333,
       "prefix": "$",
       "is_yield": false,
       "hist": [
@@ -7325,13 +7325,13 @@
         81272,
         79672,
         79824,
-        79450
+        79599
       ]
     },
     {
       "label": "Ethereum",
-      "price": 2475.02001953125,
-      "pct": -0.23039844237229268,
+      "price": 2479.1201171875,
+      "pct": -0.06512094712645133,
       "prefix": "$",
       "is_yield": false,
       "hist": [
@@ -7424,7 +7424,7 @@
         2508,
         2456,
         2481,
-        2475
+        2479
       ]
     }
   ],
@@ -7498,8 +7498,8 @@
     {
       "label": "Digital Assets",
       "ticker": "BTC",
-      "pct": -0.46835537812498496,
-      "price": 79450.0078125
+      "pct": -0.2817042012908333,
+      "price": 79599.0
     }
   ],
   "fundamentals": {
@@ -7792,6 +7792,18 @@
           "when": "Sep 06"
         },
         {
+          "title": "Prediction: This Is What Sandisk Stock Will Be Worth in 12 Months",
+          "publisher": "Motley Fool",
+          "link": "https://www.fool.com/investing/2026/09/06/prediction-this-is-what-sandisk-stock-will-be-worth-in-12-months/",
+          "when": "Sep 06"
+        },
+        {
+          "title": "ChargePoint Stock Soared 77% Last Week. Here's Why It Could Keep Rising.",
+          "publisher": "Motley Fool",
+          "link": "https://www.fool.com/investing/2026/09/06/chargepoint-stock-soared-why-it-could-keep-rising/",
+          "when": "Sep 06"
+        },
+        {
           "title": "Fed Chair Kevin Warsh Warned a Rate Hike Could Be Coming. Some Dividend Stocks Would Get Hurt -- Others Could Actually Win.",
           "publisher": "Motley Fool",
           "link": "https://www.fool.com/investing/2026/09/06/fed-chair-kevin-warsh-warned-a-rate-hike-could-be-coming-some-dividend-stocks-would-get-hurt-others-could-actually-win/",
@@ -7807,18 +7819,6 @@
           "title": "Buying Archer Aviation Today Could Set You Up for Life",
           "publisher": "Motley Fool",
           "link": "https://www.fool.com/investing/2026/09/06/buying-archer-aviation-today-could-set-you-up-for/",
-          "when": "Sep 06"
-        },
-        {
-          "title": "Thinking About Retiring at 55? The Hidden Health Insurance Trap You Must Plan For.",
-          "publisher": "Motley Fool",
-          "link": "https://www.fool.com/retirement/2026/09/06/thinking-about-retiring-at-55-the-hidden-health-in/",
-          "when": "Sep 06"
-        },
-        {
-          "title": "China Is Still Chasing Nvidia\u2019s 3-Year-Old Chip \u2014 While Nvidia Has Moved Generations Ahead",
-          "publisher": "24/7 Wall St.",
-          "link": "https://247wallst.com/investing/2026/09/06/china-is-still-chasing-nvidias-3-year-old-chip-while-nvidia-has-moved-generations-ahead/",
           "when": "Sep 06"
         }
       ]
@@ -9186,7 +9186,7 @@
           "when": "Sep 06"
         },
         {
-          "title": "The AI Shift Turning Everyday Investors Into Mini Quant Funds",
+          "title": "He\u2019s Letting AI Agents Invest His Money. They Even Have Names.",
           "publisher": "The Wall Street Journal",
           "link": "https://www.wsj.com/tech/ai/the-ai-shift-turning-everyday-investors-into-mini-quant-funds-ebe4d45f?siteid=yhoof2&yptr=yahoo",
           "when": "Sep 06"
@@ -154008,7 +154008,7 @@
       "type": "closed"
     }
   ],
-  "generated_at": "2026-09-06T15:01:39+00:00",
+  "generated_at": "2026-09-06T15:17:18+00:00",
   "universe": {
     "wheel": 18,
     "growth": 19,
