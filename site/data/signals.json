@@ -7231,8 +7231,8 @@
     },
     {
       "label": "Bitcoin",
-      "price": 79908.75,
-      "pct": 0.10633763495899728,
+      "price": 79809.1171875,
+      "pct": -0.018478182678560717,
       "prefix": "$",
       "is_yield": false,
       "hist": [
@@ -7325,13 +7325,13 @@
         81272,
         79672,
         79824,
-        79909
+        79809
       ]
     },
     {
       "label": "Ethereum",
-      "price": 2499.010009765625,
-      "pct": 0.7366530352590939,
+      "price": 2491.330078125,
+      "pct": 0.4270701980584102,
       "prefix": "$",
       "is_yield": false,
       "hist": [
@@ -7424,7 +7424,7 @@
         2508,
         2456,
         2481,
-        2499
+        2491
       ]
     }
   ],
@@ -7498,8 +7498,8 @@
     {
       "label": "Digital Assets",
       "ticker": "BTC",
-      "pct": 0.10633763495899728,
-      "price": 79908.75
+      "pct": -0.018478182678560717,
+      "price": 79809.1171875
     }
   ],
   "fundamentals": {
@@ -7786,6 +7786,18 @@
       ],
       "news": [
         {
+          "title": "Why Nvidia wants Hugging Face to keep helping its rivals: Chart of the Day",
+          "publisher": "Yahoo Finance",
+          "link": "https://finance.yahoo.com/markets/article/why-nvidia-wants-hugging-face-to-keep-helping-its-rivals-chart-of-the-day-132655037.html",
+          "when": "Sep 06"
+        },
+        {
+          "title": "Should You Buy Snowflake Stock After Its Recent Surge? The Answer Might Shock You.",
+          "publisher": "Motley Fool",
+          "link": "https://www.fool.com/investing/2026/09/06/should-buy-snowflake-stock-surge-answer-shock-you/",
+          "when": "Sep 06"
+        },
+        {
           "title": "GitLab Is Starting to Prove the Bears Wrong",
           "publisher": "Motley Fool",
           "link": "https://www.fool.com/investing/2026/09/06/gitlab-is-starting-to-prove-the-bears-wrong/",
@@ -7807,18 +7819,6 @@
           "title": "2 Nuclear Energy Stocks to Buy in September",
           "publisher": "Motley Fool",
           "link": "https://www.fool.com/investing/2026/09/06/2-nuclear-energy-stocks-to-buy-in-september/",
-          "when": "Sep 06"
-        },
-        {
-          "title": "Is This the Smartest ETF to Buy and Hold in 2026? Here's What History Suggests.",
-          "publisher": "Motley Fool",
-          "link": "https://www.fool.com/investing/2026/09/06/is-this-the-smartest-etf-to-buy-and-hold-in-2026-h/",
-          "when": "Sep 06"
-        },
-        {
-          "title": "Dow Jones Futures Loom After U.S.-Iran Attacks; Nvidia, Micron, Sandisk Flash Buy Signals",
-          "publisher": "Investor's Business Daily",
-          "link": "https://www.investors.com/market-trend/stock-market-today/dow-jones-futures-nvidia-micron-sandisk-buy-signals-apple-inflation-reports/?src=A00220&yptr=yahoo",
           "when": "Sep 06"
         }
       ]
@@ -7976,6 +7976,12 @@
       "flags": [],
       "news": [
         {
+          "title": "Should You Buy Snowflake Stock After Its Recent Surge? The Answer Might Shock You.",
+          "publisher": "Motley Fool",
+          "link": "https://www.fool.com/investing/2026/09/06/should-buy-snowflake-stock-surge-answer-shock-you/",
+          "when": "Sep 06"
+        },
+        {
           "title": "The Agent Production Gap: When 171% ROI Isn\u2019t Enough to Ship",
           "publisher": "Forkast News",
           "link": "https://finance.yahoo.com/technology/ai/articles/agent-production-gap-171-roi-123605791.html",
@@ -8003,12 +8009,6 @@
           "title": "Amazon, Alphabet, and Microsoft: Two I'm Buying and One I'm Selling",
           "publisher": "Motley Fool",
           "link": "https://www.fool.com/investing/2026/09/05/amazon-alphabet-and-microsoft-two-im-buying-and-on/",
-          "when": "Sep 05"
-        },
-        {
-          "title": "What Move Will SpaceX Stock Make After Sept. 9? The Evidence Is Piling Up, and Here\u2019s What It Shows.",
-          "publisher": "Motley Fool",
-          "link": "https://www.fool.com/investing/2026/09/05/what-move-will-spacex-stock-make-after-sept-9-the-evidence-is-piling-up-and-here-s-what-it-shows/",
           "when": "Sep 05"
         }
       ]
@@ -9490,6 +9490,12 @@
       "flags": [],
       "news": [
         {
+          "title": "Suze Orman says one mistake crushed SpaceX IPO returns",
+          "publisher": "TheStreet",
+          "link": "https://www.thestreet.com/investing/suze-orman-spacex-ipo-entry-price-lesson",
+          "when": "Sep 06"
+        },
+        {
           "title": "Elon Musk Fires Back at Bernie Sanders Over His $900 Billion Fortune",
           "publisher": "BeInCrypto",
           "link": "https://beincrypto.com/elon-musk-wealth-stock-cash-sanders/",
@@ -9517,12 +9523,6 @@
           "title": "Prediction: Here's What a $10,000 Investment in Rocket Lab Will Be Worth in 5 Years",
           "publisher": "Motley Fool",
           "link": "https://www.fool.com/investing/2026/09/05/prediction-10000-in-rocket-lab-worth-in-5-years/",
-          "when": "Sep 05"
-        },
-        {
-          "title": "Elon Musk Says Cybercab Is Gold to Reflect 'Golden Era' of Mobility as Tesla Launches Robotaxi With Starlink",
-          "publisher": "Benzinga",
-          "link": "https://finance.yahoo.com/technology/articles/elon-musk-says-cybercab-gold-213015412.html",
           "when": "Sep 05"
         }
       ]
@@ -154008,7 +154008,7 @@
       "type": "closed"
     }
   ],
-  "generated_at": "2026-09-06T13:02:28+00:00",
+  "generated_at": "2026-09-06T13:31:43+00:00",
   "universe": {
     "wheel": 18,
     "growth": 19,
