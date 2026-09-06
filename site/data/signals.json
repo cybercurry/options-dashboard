@@ -7231,8 +7231,8 @@
     },
     {
       "label": "Bitcoin",
-      "price": 79753.4765625,
-      "pct": -0.08818242899039097,
+      "price": 79915.4921875,
+      "pct": 0.11478396528294965,
       "prefix": "$",
       "is_yield": false,
       "hist": [
@@ -7325,13 +7325,13 @@
         81272,
         79672,
         79824,
-        79753
+        79915
       ]
     },
     {
       "label": "Ethereum",
-      "price": 2491.9599609375,
-      "pct": 0.45246116731734176,
+      "price": 2496.56005859375,
+      "pct": 0.6378939745950607,
       "prefix": "$",
       "is_yield": false,
       "hist": [
@@ -7424,7 +7424,7 @@
         2508,
         2456,
         2481,
-        2492
+        2497
       ]
     }
   ],
@@ -7498,8 +7498,8 @@
     {
       "label": "Digital Assets",
       "ticker": "BTC",
-      "pct": -0.08818242899039097,
-      "price": 79753.4765625
+      "pct": 0.11478396528294965,
+      "price": 79915.4921875
     }
   ],
   "fundamentals": {
@@ -7792,6 +7792,12 @@
           "when": "Sep 06"
         },
         {
+          "title": "What Should I Invest In? I'm Putting My Money in These 2 Stocks for 2027.",
+          "publisher": "Motley Fool",
+          "link": "https://www.fool.com/investing/2026/09/06/what-should-invest-put-my-money-stock-nlst-iren/",
+          "when": "Sep 06"
+        },
+        {
           "title": "NuScale Power Stock Will Spike 23.7% Over the Next 11 Months According to This Wall Street Analyst",
           "publisher": "Motley Fool",
           "link": "https://www.fool.com/investing/2026/09/06/nuscale-power-stock-will-spike-over-the-next/",
@@ -7813,12 +7819,6 @@
           "title": "Why SoundHound AI Stock Rocketed 16.8% Higher in August",
           "publisher": "Motley Fool",
           "link": "https://www.fool.com/investing/2026/09/06/why-soundhound-ai-stock-rocketed-168-higher-in-aug/",
-          "when": "Sep 06"
-        },
-        {
-          "title": "2 Superior Growth Stocks to Buy and Hold for 10 Years",
-          "publisher": "Motley Fool",
-          "link": "https://www.fool.com/investing/2026/09/06/2-superior-growth-stocks-to-buy-and-hold-for-10-ye/",
           "when": "Sep 06"
         }
       ]
@@ -8276,6 +8276,12 @@
       ],
       "news": [
         {
+          "title": "McDonald's (MCD) Exit From A 90% Restaurant Stake Still Haunts Investors",
+          "publisher": "Simply Wall St.",
+          "link": "https://finance.yahoo.com/markets/stocks/articles/mcdonalds-mcd-exit-90-restaurant-181105022.html",
+          "when": "Sep 06"
+        },
+        {
           "title": "McDonald's Once Owned 90% Of A Popular Restaurant Chain. Selling It Left Billions On The Table",
           "publisher": "Money Digest",
           "link": "https://www.moneydigest.com/2247570/mcdonalds-owned-popular-restaurant-chain-missed-billions-chipotle/",
@@ -8303,12 +8309,6 @@
           "title": "McDonald's Trades at 19.15X P/E: Is This a Discounted Opportunity?",
           "publisher": "Zacks",
           "link": "https://finance.yahoo.com/markets/stocks/articles/mcdonalds-trades-19-15x-p-140700667.html",
-          "when": "Sep 04"
-        },
-        {
-          "title": "CAVA Stock Slips 15% in 3 Months: Should You Buy, Sell or Hold?",
-          "publisher": "Zacks",
-          "link": "https://finance.yahoo.com/markets/stocks/articles/cava-stock-slips-15-3-135500915.html",
           "when": "Sep 04"
         }
       ]
@@ -10160,6 +10160,12 @@
       ],
       "news": [
         {
+          "title": "What Should I Invest In? I'm Putting My Money in These 2 Stocks for 2027.",
+          "publisher": "Motley Fool",
+          "link": "https://www.fool.com/investing/2026/09/06/what-should-invest-put-my-money-stock-nlst-iren/",
+          "when": "Sep 06"
+        },
+        {
           "title": "Is Investis Holding (SWX:IREN) Still Below Fair Value As Bond Issuance And Earnings Land?",
           "publisher": "Simply Wall St.",
           "link": "https://finance.yahoo.com/markets/stocks/articles/investis-holding-swx-iren-still-070708744.html",
@@ -10188,12 +10194,6 @@
           "publisher": "Blockspace",
           "link": "https://blockspace.media/short/iren-secures-2-4b-from-blue-owl-led-gpu-financing-round/",
           "when": "Sep 04"
-        },
-        {
-          "title": "Cipher Digital\u2019s 2.5 GW Gas Pipeline, IREN\u2019s $2.8B GPU Financing, Nscale\u2019s IPO and $103B Contract Backlog",
-          "publisher": "Blockspace",
-          "link": "https://blockspace.media/podcast/cipher-digitals-2-5-gw-gas-pipeline-irens-2-8b-gpu-financing-nscales-ipo-and-103b-contract-backlog/",
-          "when": "Sep 03"
         }
       ]
     },
@@ -154008,7 +154008,7 @@
       "type": "closed"
     }
   ],
-  "generated_at": "2026-09-06T18:01:35+00:00",
+  "generated_at": "2026-09-06T18:31:37+00:00",
   "universe": {
     "wheel": 18,
     "growth": 19,
