@@ -7231,8 +7231,8 @@
     },
     {
       "label": "Bitcoin",
-      "price": 79693.6171875,
-      "pct": -0.1631717487378226,
+      "price": 79663.40625,
+      "pct": -0.20101874684057552,
       "prefix": "$",
       "is_yield": false,
       "hist": [
@@ -7325,13 +7325,13 @@
         81272,
         79672,
         79824,
-        79694
+        79663
       ]
     },
     {
       "label": "Ethereum",
-      "price": 2481.60009765625,
-      "pct": 0.034848613234816916,
+      "price": 2484.070068359375,
+      "pct": 0.1344146736970142,
       "prefix": "$",
       "is_yield": false,
       "hist": [
@@ -7424,7 +7424,7 @@
         2508,
         2456,
         2481,
-        2482
+        2484
       ]
     }
   ],
@@ -7498,8 +7498,8 @@
     {
       "label": "Digital Assets",
       "ticker": "BTC",
-      "pct": -0.1631717487378226,
-      "price": 79693.6171875
+      "pct": -0.20101874684057552,
+      "price": 79663.40625
     }
   ],
   "fundamentals": {
@@ -7792,6 +7792,24 @@
           "when": "Sep 06"
         },
         {
+          "title": "Where Will SCHD Stock Be in 5 Years?",
+          "publisher": "Motley Fool",
+          "link": "https://www.fool.com/investing/2026/09/06/where-will-schd-stock-be-in-5-years/",
+          "when": "Sep 06"
+        },
+        {
+          "title": "Nvidia\u2019s Profits Could Rival a Country\u2019s GDP by 2029",
+          "publisher": "24/7 Wall St.",
+          "link": "https://247wallst.com/investing/2026/09/06/nvidias-profits-could-rival-a-countrys-gdp-by-2029/",
+          "when": "Sep 06"
+        },
+        {
+          "title": "What to Invest in for the Next 5 Years: My Prediction Is Boring, and That's the Point",
+          "publisher": "Motley Fool",
+          "link": "https://www.fool.com/investing/2026/09/06/what-to-invest-in-for-the-next-5-years-my-predicti/",
+          "when": "Sep 06"
+        },
+        {
           "title": "2 Ways Elon Musk Can Make SpaceX Win the New Space Race",
           "publisher": "Motley Fool",
           "link": "https://www.fool.com/investing/2026/09/06/ways-elon-musk-make-spacex-win-new-space-race/",
@@ -7801,24 +7819,6 @@
           "title": "Forget the \"Magnificent Seven.\" This Payments Stock Could Be the Better Long-Term Bet.",
           "publisher": "Motley Fool",
           "link": "https://www.fool.com/investing/2026/09/06/forget-the-magnificent-seven-this-payments-stock-c/",
-          "when": "Sep 06"
-        },
-        {
-          "title": "Nvidia's cash could reshape an AI cloud contender",
-          "publisher": "TheStreet",
-          "link": "https://www.thestreet.com/investing/nvidia-nscale-pre-ipo-investment",
-          "when": "Sep 06"
-        },
-        {
-          "title": "Uh Oh! BigBear.ai's Stock Dropped Below $3. Does That Mean a Reverse Split Is Imminent?",
-          "publisher": "Motley Fool",
-          "link": "https://www.fool.com/investing/2026/09/06/uh-oh-bigbearais-stock-dropped-below-3-does-that-m/",
-          "when": "Sep 06"
-        },
-        {
-          "title": "Where Will Ford Be in 5 Years?",
-          "publisher": "Motley Fool",
-          "link": "https://www.fool.com/investing/2026/09/06/where-will-ford-be-in-5-years/",
           "when": "Sep 06"
         }
       ]
@@ -154008,7 +154008,7 @@
       "type": "closed"
     }
   ],
-  "generated_at": "2026-09-06T16:33:07+00:00",
+  "generated_at": "2026-09-06T17:02:35+00:00",
   "universe": {
     "wheel": 18,
     "growth": 19,
