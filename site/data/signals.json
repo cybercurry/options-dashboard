@@ -7231,8 +7231,8 @@
     },
     {
       "label": "Bitcoin",
-      "price": 79634.3515625,
-      "pct": -0.23741724333505854,
+      "price": 79701.0,
+      "pct": -0.1539228702255091,
       "prefix": "$",
       "is_yield": false,
       "hist": [
@@ -7325,13 +7325,13 @@
         81272,
         79672,
         79824,
-        79640
+        79701
       ]
     },
     {
       "label": "Ethereum",
-      "price": 2479.10009765625,
-      "pct": -0.06592794692460435,
+      "price": 2479.81005859375,
+      "pct": -0.0373089784730829,
       "prefix": "$",
       "is_yield": false,
       "hist": [
@@ -7424,7 +7424,7 @@
         2508,
         2456,
         2481,
-        2479
+        2480
       ]
     }
   ],
@@ -7498,8 +7498,8 @@
     {
       "label": "Digital Assets",
       "ticker": "BTC",
-      "pct": -0.23741724333505854,
-      "price": 79634.3515625
+      "pct": -0.1539228702255091,
+      "price": 79701.0
     }
   ],
   "fundamentals": {
@@ -7570,6 +7570,12 @@
       ],
       "news": [
         {
+          "title": "Tesla's Cybercab just met its first real test, and it's federal",
+          "publisher": "TheStreet",
+          "link": "https://www.thestreet.com/automotive/teslas-cybercab-just-met-its-first-real-test-and-its-federal",
+          "when": "Sep 06"
+        },
+        {
           "title": "Elon Musk Fires Back at Bernie Sanders Over His $900 Billion Fortune",
           "publisher": "BeInCrypto",
           "link": "https://beincrypto.com/elon-musk-wealth-stock-cash-sanders/",
@@ -7597,12 +7603,6 @@
           "title": "Elon Musk Says Cybercab Is Gold to Reflect 'Golden Era' of Mobility as Tesla Launches Robotaxi With Starlink",
           "publisher": "Benzinga",
           "link": "https://finance.yahoo.com/technology/articles/elon-musk-says-cybercab-gold-213015412.html",
-          "when": "Sep 05"
-        },
-        {
-          "title": "Prediction: Amazon Will Join Nvidia, Apple, and Alphabet in the $4 Trillion Club Before 2029",
-          "publisher": "Motley Fool",
-          "link": "https://www.fool.com/investing/2026/09/05/prediction-amazon-will-join-nvidia-apple-and-alpha/",
           "when": "Sep 05"
         }
       ]
@@ -7792,6 +7792,24 @@
           "when": "Sep 06"
         },
         {
+          "title": "Where Will Ford Be in 5 Years?",
+          "publisher": "Motley Fool",
+          "link": "https://www.fool.com/investing/2026/09/06/where-will-ford-be-in-5-years/",
+          "when": "Sep 06"
+        },
+        {
+          "title": "A Fed Rate Hike May Be in the Cards on Sept. 16, and 36 Years of History Says the Stock Market Won't Be Happy (at Least Initially)",
+          "publisher": "Motley Fool",
+          "link": "https://www.fool.com/investing/2026/09/06/fed-rate-hike-in-the-cards-sept-16-36-years-history-says-stock-market-wont-be-happy/",
+          "when": "Sep 06"
+        },
+        {
+          "title": "1 Cryptocurrency Up 29% in 3 Weeks to Buy Before It Soars Another 515% by 2029",
+          "publisher": "Motley Fool",
+          "link": "https://www.fool.com/investing/2026/09/06/1-cryptocurrency-up-29-in-3-weeks-to-buy-before-it/",
+          "when": "Sep 06"
+        },
+        {
           "title": "Will Alphabet Break Warren Buffett's Cardinal Rule of Investing?",
           "publisher": "Motley Fool",
           "link": "https://www.fool.com/investing/2026/09/06/will-alphabet-break-warren-buffett-cardinal-rule/",
@@ -7801,24 +7819,6 @@
           "title": "Prediction: This Is What Sandisk Stock Will Be Worth in 12 Months",
           "publisher": "Motley Fool",
           "link": "https://www.fool.com/investing/2026/09/06/prediction-this-is-what-sandisk-stock-will-be-worth-in-12-months/",
-          "when": "Sep 06"
-        },
-        {
-          "title": "ChargePoint Stock Soared 77% Last Week. Here's Why It Could Keep Rising.",
-          "publisher": "Motley Fool",
-          "link": "https://www.fool.com/investing/2026/09/06/chargepoint-stock-soared-why-it-could-keep-rising/",
-          "when": "Sep 06"
-        },
-        {
-          "title": "Fed Chair Kevin Warsh Warned a Rate Hike Could Be Coming. Some Dividend Stocks Would Get Hurt -- Others Could Actually Win.",
-          "publisher": "Motley Fool",
-          "link": "https://www.fool.com/investing/2026/09/06/fed-chair-kevin-warsh-warned-a-rate-hike-could-be-coming-some-dividend-stocks-would-get-hurt-others-could-actually-win/",
-          "when": "Sep 06"
-        },
-        {
-          "title": "Dow Jones Futures Loom After U.S.-Iran Attacks; Nvidia, Micron, Sandisk Flash Buy Signals",
-          "publisher": "Investor's Business Daily",
-          "link": "https://www.investors.com/market-trend/stock-market-today/dow-jones-futures-nvidia-micron-sandisk-buy-signals-apple-inflation-reports/?src=A00220&yptr=yahoo",
           "when": "Sep 06"
         }
       ]
@@ -8765,6 +8765,12 @@
       ],
       "news": [
         {
+          "title": "Stock Market Week Ahead: Week Of The Big Bond Scheme",
+          "publisher": "Investor's Business Daily",
+          "link": "https://www.investors.com/research/investing-action-plan/stock-market-week-ahead-week-of-the-big-bond-scheme/?src=A00220&yptr=yahoo",
+          "when": "Sep 06"
+        },
+        {
           "title": "Dow Jones Futures Loom After U.S.-Iran Attacks; Nvidia, Micron, Sandisk Flash Buy Signals",
           "publisher": "Investor's Business Daily",
           "link": "https://www.investors.com/market-trend/stock-market-today/dow-jones-futures-nvidia-micron-sandisk-buy-signals-apple-inflation-reports/?src=A00220&yptr=yahoo",
@@ -8792,12 +8798,6 @@
           "title": "Apple's First iPhone Under New CEO John Ternus Launches Sept. 9. Here's Whether It's Finally Time to Buy the Stock.",
           "publisher": "Motley Fool",
           "link": "https://www.fool.com/investing/2026/09/05/apple-first-iphone-new-ceo-john-ternus-buy-stock/",
-          "when": "Sep 05"
-        },
-        {
-          "title": "5 big analyst AI moves: iPhone launch to be negative for Apple stock",
-          "publisher": "Investing.com",
-          "link": "https://finance.yahoo.com/technology/ai/articles/5-big-analyst-ai-moves-182536563.html",
           "when": "Sep 05"
         }
       ]
@@ -154008,7 +154008,7 @@
       "type": "closed"
     }
   ],
-  "generated_at": "2026-09-06T15:31:49+00:00",
+  "generated_at": "2026-09-06T16:02:22+00:00",
   "universe": {
     "wheel": 18,
     "growth": 19,
