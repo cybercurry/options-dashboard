@@ -7231,8 +7231,8 @@
     },
     {
       "label": "Bitcoin",
-      "price": 79585.5234375,
-      "pct": -0.29858707476568824,
+      "price": 79450.0078125,
+      "pct": -0.46835537812498496,
       "prefix": "$",
       "is_yield": false,
       "hist": [
@@ -7325,13 +7325,13 @@
         81272,
         79672,
         79824,
-        79586
+        79450
       ]
     },
     {
       "label": "Ethereum",
-      "price": 2476.919921875,
-      "pct": -0.1538121932355141,
+      "price": 2475.02001953125,
+      "pct": -0.23039844237229268,
       "prefix": "$",
       "is_yield": false,
       "hist": [
@@ -7424,7 +7424,7 @@
         2508,
         2456,
         2481,
-        2477
+        2475
       ]
     }
   ],
@@ -7498,8 +7498,8 @@
     {
       "label": "Digital Assets",
       "ticker": "BTC",
-      "pct": -0.29858707476568824,
-      "price": 79585.5234375
+      "pct": -0.46835537812498496,
+      "price": 79450.0078125
     }
   ],
   "fundamentals": {
@@ -7792,33 +7792,33 @@
           "when": "Sep 06"
         },
         {
-          "title": "PepsiCo Hasn't Been This Cheap Relative to Free Cash Flow in 10 Years. Here's Why That's the Signal to Buy.",
+          "title": "Fed Chair Kevin Warsh Warned a Rate Hike Could Be Coming. Some Dividend Stocks Would Get Hurt -- Others Could Actually Win.",
           "publisher": "Motley Fool",
-          "link": "https://www.fool.com/investing/2026/09/06/pepsi-hasnt-been-this-cheap-relative-to-free-cash/",
+          "link": "https://www.fool.com/investing/2026/09/06/fed-chair-kevin-warsh-warned-a-rate-hike-could-be-coming-some-dividend-stocks-would-get-hurt-others-could-actually-win/",
           "when": "Sep 06"
         },
         {
-          "title": "BNY Mellon Oversees $62 Trillion in Client Assets. Custody Is the Quietest Fee Machine in Finance.",
-          "publisher": "Motley Fool",
-          "link": "https://www.fool.com/investing/2026/09/06/bny-mellon-oversees-62-trillion-in-client-assets/",
+          "title": "Dow Jones Futures Loom After U.S.-Iran Attacks; Nvidia, Micron, Sandisk Flash Buy Signals",
+          "publisher": "Investor's Business Daily",
+          "link": "https://www.investors.com/market-trend/stock-market-today/dow-jones-futures-nvidia-micron-sandisk-buy-signals-apple-inflation-reports/?src=A00220&yptr=yahoo",
           "when": "Sep 06"
         },
         {
-          "title": "Retirees Face a Familiar Trap: Chase Yield or Chase Growth?",
+          "title": "Buying Archer Aviation Today Could Set You Up for Life",
           "publisher": "Motley Fool",
-          "link": "https://www.fool.com/investing/2026/09/06/retirees-face-a-familiar-trap-chase-yield-or-chase/",
+          "link": "https://www.fool.com/investing/2026/09/06/buying-archer-aviation-today-could-set-you-up-for/",
           "when": "Sep 06"
         },
         {
-          "title": "Despite Revenue Skyrocketing More Than 100%, Nvidia Stock Trades at 24 Times Forward Earnings. Is the Market Warning Investors About What's to Come?",
+          "title": "Thinking About Retiring at 55? The Hidden Health Insurance Trap You Must Plan For.",
           "publisher": "Motley Fool",
-          "link": "https://www.fool.com/investing/2026/09/06/skyrocket-nvidia-stock-valuation-market-warning/",
+          "link": "https://www.fool.com/retirement/2026/09/06/thinking-about-retiring-at-55-the-hidden-health-in/",
           "when": "Sep 06"
         },
         {
-          "title": "Prediction: Micron Stock Will Skyrocket After Sept. 30",
-          "publisher": "Motley Fool",
-          "link": "https://www.fool.com/investing/2026/09/06/prediction-micron-stock-will-skyrocket-after-septe/",
+          "title": "China Is Still Chasing Nvidia\u2019s 3-Year-Old Chip \u2014 While Nvidia Has Moved Generations Ahead",
+          "publisher": "24/7 Wall St.",
+          "link": "https://247wallst.com/investing/2026/09/06/china-is-still-chasing-nvidias-3-year-old-chip-while-nvidia-has-moved-generations-ahead/",
           "when": "Sep 06"
         }
       ]
@@ -8565,6 +8565,12 @@
       ],
       "news": [
         {
+          "title": "Michael Burry sends a strong warning to Palantir stock investors",
+          "publisher": "TheStreet",
+          "link": "https://www.thestreet.com/investing/stocks/michael-burry-warns-palantir-stock-investors-bear-case",
+          "when": "Sep 06"
+        },
+        {
           "title": "Michael Burry Says Palantir's Books Look More Like a Consultant's Than a Software Company's",
           "publisher": "Motley Fool",
           "link": "https://www.fool.com/investing/2026/09/05/michael-burry-says-palantir-s-books-look-more-like-a-consultant-s-than-a-software-company-s/",
@@ -8592,12 +8598,6 @@
           "title": "Palantir Jumped 7.7% on an Expanded PwC Alliance as Globant Launched a Salesforce AI Pod. Which Services Model Scales Better?",
           "publisher": "Insider Monkey",
           "link": "https://finance.yahoo.com/technology/ai/articles/palantir-jumped-7-7-expanded-123838463.html",
-          "when": "Sep 05"
-        },
-        {
-          "title": "Palantir Billionaire Peter Thiel Just Bought Shares of This AI Stock That\u2019s Climbed 200,000% Since Its IPO -- And It\u2019s His Top Position.",
-          "publisher": "Motley Fool",
-          "link": "https://www.fool.com/investing/2026/09/05/palantir-billionaire-peter-thiel-just-bought-shares-of-this-ai-stock-that-s-climbed-200-000-since-its-ipo-and-it-s-his-top-position/",
           "when": "Sep 05"
         }
       ]
@@ -8960,6 +8960,12 @@
       ],
       "news": [
         {
+          "title": "China Is Still Chasing Nvidia\u2019s 3-Year-Old Chip \u2014 While Nvidia Has Moved Generations Ahead",
+          "publisher": "24/7 Wall St.",
+          "link": "https://247wallst.com/investing/2026/09/06/china-is-still-chasing-nvidias-3-year-old-chip-while-nvidia-has-moved-generations-ahead/",
+          "when": "Sep 06"
+        },
+        {
           "title": "AMD Committed Up to $5 Billion to Anthropic, and Anthropic's IPO Prospectus Is Reportedly Days Away",
           "publisher": "Motley Fool",
           "link": "https://www.fool.com/investing/2026/09/05/amd-committed-up-to-usd5-billion-to-anthropic-and-anthropic-s-ipo-prospectus-is-reportedly-days-away/",
@@ -8987,12 +8993,6 @@
           "title": "Marvell Stock Had A Huge Year And Still Sits Well Below Its High",
           "publisher": "Trefis",
           "link": "https://www.trefis.com/articles/614423/marvell-stock-had-a-huge-year-and-still-sits-well-below-its-high/2026-09-04",
-          "when": "Sep 04"
-        },
-        {
-          "title": "Here\u2019s the Real Reason Nvidia Is Buying Hugging Face",
-          "publisher": "Barrons.com",
-          "link": "https://www.barrons.com/articles/nvidia-stock-hugging-face-ai-b814c729?siteid=yhoof2&yptr=yahoo",
           "when": "Sep 04"
         }
       ]
@@ -9490,6 +9490,12 @@
       "flags": [],
       "news": [
         {
+          "title": "Forget Starlink? Japan\u2019s $1 Billion BlueBird Play Makes ASTS the National Satellite OS",
+          "publisher": "24/7 Wall St.",
+          "link": "https://247wallst.com/investing/2026/09/06/forget-starlink-japans-1-billion-bluebird-play-makes-asts-the-national-satellite-os/",
+          "when": "Sep 06"
+        },
+        {
           "title": "Suze Orman says one mistake crushed SpaceX IPO returns",
           "publisher": "TheStreet",
           "link": "https://www.thestreet.com/investing/suze-orman-spacex-ipo-entry-price-lesson",
@@ -9517,12 +9523,6 @@
           "title": "Elon Musk Says He's Happy About 'Half the Time' After Documentary Describes Him as 'The Most Miserable Man' \u2014 Mom Has This to Say",
           "publisher": "Benzinga",
           "link": "https://www.yahoo.com/entertainment/celebrity/articles/elon-musk-says-hes-happy-223019646.html",
-          "when": "Sep 05"
-        },
-        {
-          "title": "Prediction: Here's What a $10,000 Investment in Rocket Lab Will Be Worth in 5 Years",
-          "publisher": "Motley Fool",
-          "link": "https://www.fool.com/investing/2026/09/05/prediction-10000-in-rocket-lab-worth-in-5-years/",
           "when": "Sep 05"
         }
       ]
@@ -154008,7 +154008,7 @@
       "type": "closed"
     }
   ],
-  "generated_at": "2026-09-06T14:32:32+00:00",
+  "generated_at": "2026-09-06T15:01:39+00:00",
   "universe": {
     "wheel": 18,
     "growth": 19,
