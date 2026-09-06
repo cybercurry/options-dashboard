@@ -7231,8 +7231,8 @@
     },
     {
       "label": "Bitcoin",
-      "price": 79822.546875,
-      "pct": -0.0016540322418823195,
+      "price": 79805.7421875,
+      "pct": -0.02270624142705069,
       "prefix": "$",
       "is_yield": false,
       "hist": [
@@ -7325,13 +7325,13 @@
         81272,
         79672,
         79824,
-        79823
+        79806
       ]
     },
     {
       "label": "Ethereum",
-      "price": 2491.050048828125,
-      "pct": 0.4157820423452474,
+      "price": 2492.550048828125,
+      "pct": 0.4762479784409024,
       "prefix": "$",
       "is_yield": false,
       "hist": [
@@ -7424,7 +7424,7 @@
         2508,
         2456,
         2481,
-        2491
+        2493
       ]
     }
   ],
@@ -7498,8 +7498,8 @@
     {
       "label": "Digital Assets",
       "ticker": "BTC",
-      "pct": -0.0016540322418823195,
-      "price": 79822.546875
+      "pct": -0.02270624142705069,
+      "price": 79805.7421875
     }
   ],
   "fundamentals": {
@@ -7792,6 +7792,12 @@
           "when": "Sep 06"
         },
         {
+          "title": "Dow Jones Futures Due With Iran, Apple, Inflation In Focus; Nvidia, Micron, Sandisk Flash Buy Signals",
+          "publisher": "Investor's Business Daily",
+          "link": "https://www.investors.com/market-trend/stock-market-today/dow-jones-futures-nvidia-micron-sandisk-buy-signals-apple-inflation-reports/?src=A00220&yptr=yahoo",
+          "when": "Sep 06"
+        },
+        {
           "title": "Should You Forget SpaceX (SPCX) Stock?",
           "publisher": "Motley Fool",
           "link": "https://www.fool.com/investing/2026/09/06/should-you-forget-spacex-spcx-stock/",
@@ -7813,12 +7819,6 @@
           "title": "The U.S. National Debt Just Surpassed $40 Trillion. Here's What This Means for Your Portfolio in 2026 and Beyond.",
           "publisher": "Motley Fool",
           "link": "https://www.fool.com/investing/2026/09/06/us-debt-40-trillion-what-this-means-portfolio-2026/",
-          "when": "Sep 06"
-        },
-        {
-          "title": "NVIDIA (NVDA)\u2019s $20 Billion Groq Bet Goes Live This Year With New AI Racks",
-          "publisher": "Insider Monkey",
-          "link": "https://finance.yahoo.com/technology/ai/articles/nvidia-nvda-20-billion-groq-190737433.html",
           "when": "Sep 06"
         }
       ]
@@ -8765,6 +8765,12 @@
       ],
       "news": [
         {
+          "title": "Dow Jones Futures Due With Iran, Apple, Inflation In Focus; Nvidia, Micron, Sandisk Flash Buy Signals",
+          "publisher": "Investor's Business Daily",
+          "link": "https://www.investors.com/market-trend/stock-market-today/dow-jones-futures-nvidia-micron-sandisk-buy-signals-apple-inflation-reports/?src=A00220&yptr=yahoo",
+          "when": "Sep 06"
+        },
+        {
           "title": "The 'Waffle House Index' is real, and Apple is filming it",
           "publisher": "TheStreet",
           "link": "https://www.thestreet.com/entertainment/waffle-house-index-movie-apple-films-plan-b",
@@ -8786,12 +8792,6 @@
           "title": "Stock Market Week Ahead: Week Of The Big Bond Scheme",
           "publisher": "Investor's Business Daily",
           "link": "https://www.investors.com/research/investing-action-plan/stock-market-week-ahead-week-of-the-big-bond-scheme/?src=A00220&yptr=yahoo",
-          "when": "Sep 06"
-        },
-        {
-          "title": "Dow Jones Futures Loom After U.S.-Iran Attacks; Nvidia, Micron, Sandisk Flash Buy Signals",
-          "publisher": "Investor's Business Daily",
-          "link": "https://www.investors.com/market-trend/stock-market-today/dow-jones-futures-nvidia-micron-sandisk-buy-signals-apple-inflation-reports/?src=A00220&yptr=yahoo",
           "when": "Sep 06"
         },
         {
@@ -8866,6 +8866,12 @@
           "when": "Sep 06"
         },
         {
+          "title": "Google Unveils Gemini 3.8 Flash and Fairwind Program: How to Play GOOGL Stock Here",
+          "publisher": "Barchart",
+          "link": "https://www.barchart.com/story/news/4467718/google-unveils-gemini-3-8-flash-and-fairwind-program-how-to-play-googl-stock-here",
+          "when": "Sep 06"
+        },
+        {
           "title": "Why Rezolve AI Stock Plummeted This Week",
           "publisher": "Motley Fool",
           "link": "https://www.fool.com/investing/2026/09/06/why-rezolve-ai-stock-plummeted-this-week/",
@@ -8888,12 +8894,6 @@
           "publisher": "Simply Wall St.",
           "link": "https://finance.yahoo.com/technology/ai/articles/crowdstrike-crwd-unveiled-broad-ai-001430063.html",
           "when": "Sep 06"
-        },
-        {
-          "title": "Prediction: Amazon Will Join Nvidia, Apple, and Alphabet in the $4 Trillion Club Before 2029",
-          "publisher": "Motley Fool",
-          "link": "https://www.fool.com/investing/2026/09/05/prediction-amazon-will-join-nvidia-apple-and-alpha/",
-          "when": "Sep 05"
         }
       ]
     },
@@ -10044,7 +10044,7 @@
       ],
       "news": [
         {
-          "title": "Dow Jones Futures Loom After U.S.-Iran Attacks; Nvidia, Micron, Sandisk Flash Buy Signals",
+          "title": "Dow Jones Futures Due With Iran, Apple, Inflation In Focus; Nvidia, Micron, Sandisk Flash Buy Signals",
           "publisher": "Investor's Business Daily",
           "link": "https://www.investors.com/market-trend/stock-market-today/dow-jones-futures-nvidia-micron-sandisk-buy-signals-apple-inflation-reports/?src=A00220&yptr=yahoo",
           "when": "Sep 06"
@@ -154008,7 +154008,7 @@
       "type": "closed"
     }
   ],
-  "generated_at": "2026-09-06T20:01:57+00:00",
+  "generated_at": "2026-09-06T20:17:10+00:00",
   "universe": {
     "wheel": 18,
     "growth": 19,
