@@ -7231,8 +7231,8 @@
     },
     {
       "label": "Bitcoin",
-      "price": 79684.578125,
-      "pct": -0.17449550793225965,
+      "price": 79736.71875,
+      "pct": -0.10917591513738278,
       "prefix": "$",
       "is_yield": false,
       "hist": [
@@ -7325,13 +7325,13 @@
         81272,
         79672,
         79824,
-        79685
+        79737
       ]
     },
     {
       "label": "Ethereum",
-      "price": 2488.780029296875,
-      "pct": 0.324276138403623,
+      "price": 2492.409912109375,
+      "pct": 0.47059897985384236,
       "prefix": "$",
       "is_yield": false,
       "hist": [
@@ -7424,7 +7424,7 @@
         2508,
         2456,
         2481,
-        2489
+        2492
       ]
     }
   ],
@@ -7498,8 +7498,8 @@
     {
       "label": "Digital Assets",
       "ticker": "BTC",
-      "pct": -0.17449550793225965,
-      "price": 79684.578125
+      "pct": -0.10917591513738278,
+      "price": 79736.71875
     }
   ],
   "fundamentals": {
@@ -7792,6 +7792,12 @@
           "when": "Sep 06"
         },
         {
+          "title": "Why SoundHound AI Stock Rocketed 16.8% Higher in August",
+          "publisher": "Motley Fool",
+          "link": "https://www.fool.com/investing/2026/09/06/why-soundhound-ai-stock-rocketed-168-higher-in-aug/",
+          "when": "Sep 06"
+        },
+        {
           "title": "2 Superior Growth Stocks to Buy and Hold for 10 Years",
           "publisher": "Motley Fool",
           "link": "https://www.fool.com/investing/2026/09/06/2-superior-growth-stocks-to-buy-and-hold-for-10-ye/",
@@ -7813,12 +7819,6 @@
           "title": "Nvidia\u2019s Profits Could Rival a Country\u2019s GDP by 2029",
           "publisher": "24/7 Wall St.",
           "link": "https://247wallst.com/investing/2026/09/06/nvidias-profits-could-rival-a-countrys-gdp-by-2029/",
-          "when": "Sep 06"
-        },
-        {
-          "title": "What to Invest in for the Next 5 Years: My Prediction Is Boring, and That's the Point",
-          "publisher": "Motley Fool",
-          "link": "https://www.fool.com/investing/2026/09/06/what-to-invest-in-for-the-next-5-years-my-predicti/",
           "when": "Sep 06"
         }
       ]
@@ -8765,6 +8765,12 @@
       ],
       "news": [
         {
+          "title": "KeyBanc warns Apple\u2019s iPhone 18 launch may be a negative catalyst for shares",
+          "publisher": "Investing.com",
+          "link": "https://finance.yahoo.com/markets/stocks/articles/keybanc-warns-apple-iphone-18-173545777.html",
+          "when": "Sep 06"
+        },
+        {
           "title": "Stock Market Week Ahead: Week Of The Big Bond Scheme",
           "publisher": "Investor's Business Daily",
           "link": "https://www.investors.com/research/investing-action-plan/stock-market-week-ahead-week-of-the-big-bond-scheme/?src=A00220&yptr=yahoo",
@@ -8792,12 +8798,6 @@
           "title": "Prediction: Amazon Will Join Nvidia, Apple, and Alphabet in the $4 Trillion Club Before 2029",
           "publisher": "Motley Fool",
           "link": "https://www.fool.com/investing/2026/09/05/prediction-amazon-will-join-nvidia-apple-and-alpha/",
-          "when": "Sep 05"
-        },
-        {
-          "title": "Apple's First iPhone Under New CEO John Ternus Launches Sept. 9. Here's Whether It's Finally Time to Buy the Stock.",
-          "publisher": "Motley Fool",
-          "link": "https://www.fool.com/investing/2026/09/05/apple-first-iphone-new-ceo-john-ternus-buy-stock/",
           "when": "Sep 05"
         }
       ]
@@ -9490,6 +9490,12 @@
       "flags": [],
       "news": [
         {
+          "title": "Scott Galloway issues grim SpaceX stock price forecast",
+          "publisher": "TheStreet",
+          "link": "https://www.thestreet.com/investing/stocks/spcx-scott-galloway-spacex-stock-price-target-forecast",
+          "when": "Sep 06"
+        },
+        {
           "title": "2 Ways Elon Musk Can Make SpaceX Win the New Space Race",
           "publisher": "Motley Fool",
           "link": "https://www.fool.com/investing/2026/09/06/ways-elon-musk-make-spacex-win-new-space-race/",
@@ -9517,12 +9523,6 @@
           "title": "Think SpaceX's $28.5 Trillion Idea Sounded Crazy? Wait Till You Hear What Anthropic Says.",
           "publisher": "Motley Fool",
           "link": "https://www.fool.com/investing/2026/09/06/think-spacexs-285-trillion-idea-sounded-crazy-wait/",
-          "when": "Sep 06"
-        },
-        {
-          "title": "Elon Musk Says His New Foundry Can Get Gas Turbines Online 18 Months Faster. Here's What This \"Profound Game Changer\" Would Mean for SpaceX and Tesla.",
-          "publisher": "Motley Fool",
-          "link": "https://www.fool.com/investing/2026/09/05/elon-musk-says-his-new-foundry-can-get-gas-turbi/",
           "when": "Sep 06"
         }
       ]
@@ -154008,7 +154008,7 @@
       "type": "closed"
     }
   ],
-  "generated_at": "2026-09-06T17:32:20+00:00",
+  "generated_at": "2026-09-06T17:41:57+00:00",
   "universe": {
     "wheel": 18,
     "growth": 19,
