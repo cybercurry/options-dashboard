@@ -7014,8 +7014,8 @@
     },
     {
       "label": "DXY",
-      "price": 98.8949966430664,
-      "pct": -0.2672519254295236,
+      "price": 98.90799713134766,
+      "pct": -0.25414130844573224,
       "prefix": "",
       "is_yield": false,
       "hist": [
@@ -7082,7 +7082,7 @@
         99.56,
         99.0,
         99.16,
-        98.89
+        98.91
       ]
     },
     {
@@ -7233,8 +7233,8 @@
     },
     {
       "label": "Bitcoin",
-      "price": 79110.0,
-      "pct": -1.543305726914057,
+      "price": 79193.1328125,
+      "pct": -1.4398424238629248,
       "prefix": "$",
       "is_yield": false,
       "hist": [
@@ -7327,13 +7327,13 @@
         79672,
         79824,
         80350,
-        79110
+        79193
       ]
     },
     {
       "label": "Ethereum",
-      "price": 2486.75,
-      "pct": -1.1055195196081558,
+      "price": 2495.659912109375,
+      "pct": -0.7511850954872723,
       "prefix": "$",
       "is_yield": false,
       "hist": [
@@ -7426,7 +7426,7 @@
         2456,
         2481,
         2515,
-        2487
+        2496
       ]
     }
   ],
@@ -7500,8 +7500,8 @@
     {
       "label": "Digital Assets",
       "ticker": "BTC",
-      "pct": -1.543305726914057,
-      "price": 79110.0
+      "pct": -1.4398424238629248,
+      "price": 79193.1328125
     }
   ],
   "fundamentals": {
@@ -7788,6 +7788,30 @@
       ],
       "news": [
         {
+          "title": "2 Safe High-Yield Energy Dividend Stocks You've Probably Never Heard Of",
+          "publisher": "Motley Fool",
+          "link": "https://www.fool.com/investing/2026/09/07/3-safe-energy-dividends-youve-probably-never-heard/",
+          "when": "Sep 07"
+        },
+        {
+          "title": "Jim Cramer Explains Why \u201cBuyers Flocked in\u201d for Dell (DELL)",
+          "publisher": "Insider Monkey",
+          "link": "https://finance.yahoo.com/markets/stocks/articles/jim-cramer-explains-why-buyers-174139489.html",
+          "when": "Sep 07"
+        },
+        {
+          "title": "Is Micron Technology Stock Running Out of Steam?",
+          "publisher": "Motley Fool",
+          "link": "https://www.fool.com/investing/2026/09/07/is-micron-technology-stock-running-out-of-steam/",
+          "when": "Sep 07"
+        },
+        {
+          "title": "Verizon's Share Price Is Lower Than It Was 5 Years Ago. With Dividends Reinvested, You're Up About 24%.",
+          "publisher": "Motley Fool",
+          "link": "https://www.fool.com/investing/2026/09/07/verizon-s-share-price-is-lower-than-it-was-5-years-ago-with-dividends-reinvested-you-re-up-about-24/",
+          "when": "Sep 07"
+        },
+        {
           "title": "Elon Musk Owns 28% of Tesla, a Stake Worth Nearly $350 Billion. Here's Why His Ownership Level Matters for Shareholders.",
           "publisher": "Motley Fool",
           "link": "https://www.fool.com/investing/2026/09/07/elon-musk-owns-tesla-stake-worth-billion-stock/",
@@ -7797,30 +7821,6 @@
           "title": "AI Is Moving Into Everyday Business \u2014 These 5 Stocks Sit Squarely in the Path of the Surge",
           "publisher": "24/7 Wall St.",
           "link": "https://247wallst.com/investing/2026/09/07/ai-is-moving-into-everyday-business-these-5-stocks-sit-squarely-in-the-path-of-the-surge/",
-          "when": "Sep 07"
-        },
-        {
-          "title": "Is Netflix Stock More Likely to Hit $100 or $60 by the End of 2026?",
-          "publisher": "Motley Fool",
-          "link": "https://www.fool.com/investing/2026/09/07/is-netflix-stock-more-likely-to-hit-100-or-60-by-the-end-of-2026/",
-          "when": "Sep 07"
-        },
-        {
-          "title": "Nvidia Is No Longer Just a Chip Company. It\u2019s the Infrastructure Platform for All of AI",
-          "publisher": "24/7 Wall St.",
-          "link": "https://247wallst.com/investing/2026/09/07/nvidia-is-no-longer-just-a-chip-company-its-the-infrastructure-platform-for-all-of-ai/",
-          "when": "Sep 07"
-        },
-        {
-          "title": "Why Does Amazon Trade at a Discount to Walmart and Costco? Here's the Only Answer That Makes Sense.",
-          "publisher": "Motley Fool",
-          "link": "https://www.fool.com/investing/2026/09/07/why-does-amazon-trade-at-a-discount-to-walmart-and/",
-          "when": "Sep 07"
-        },
-        {
-          "title": "IREN\u2019s AI Pricing Is Exploding \u2014 Why the Neocloud\u2019s $2.6 Billion Contract Base Could Scale Dramatically",
-          "publisher": "24/7 Wall St.",
-          "link": "https://247wallst.com/investing/2026/09/07/irens-ai-pricing-is-exploding-why-the-neoclouds-2-6-billion-contract-base-could-scale-dramatically/",
           "when": "Sep 07"
         }
       ]
@@ -8767,6 +8767,12 @@
       ],
       "news": [
         {
+          "title": "Apple Faces Its Biggest iPhone Test in Years -- Morgan Stanley Sees $14B Foldable Opportunity",
+          "publisher": "GuruFocus.com",
+          "link": "https://finance.yahoo.com/markets/stocks/articles/apple-faces-biggest-iphone-test-174840294.html",
+          "when": "Sep 07"
+        },
+        {
           "title": "DELL Expands Consumer PC Reach: Can It Challenge HPQ & AAPL?",
           "publisher": "Zacks",
           "link": "https://finance.yahoo.com/markets/stocks/articles/dell-expands-consumer-pc-reach-165000055.html",
@@ -8794,12 +8800,6 @@
           "title": "Is Apple Stock a Buy Now Ahead of its Product Launch Event?",
           "publisher": "Zacks",
           "link": "https://finance.yahoo.com/markets/stocks/articles/apple-stock-buy-now-ahead-140000662.html",
-          "when": "Sep 07"
-        },
-        {
-          "title": "The S&P 100 ETF Just Dumped Nike and Colgate for 4 AI Stocks. Here\u2019s What That Means for Your Portfolio",
-          "publisher": "24/7 Wall St.",
-          "link": "https://247wallst.com/investing/etf/2026/09/07/the-sp-100-etf-just-dumped-nike-and-colgate-for-4-ai-stocks-heres-what-that-means-for-your-portfolio/",
           "when": "Sep 07"
         }
       ]
@@ -8868,6 +8868,12 @@
           "when": "Sep 07"
         },
         {
+          "title": "Google-Backed Pixxel Raises $100 Million in India's Biggest Space-Tech Round",
+          "publisher": "GuruFocus.com",
+          "link": "https://finance.yahoo.com/technology/articles/google-backed-pixxel-raises-100-174102678.html",
+          "when": "Sep 07"
+        },
+        {
           "title": "Jabil Rises 36.2% Year to Date: Should You Buy the Stock?",
           "publisher": "Zacks",
           "link": "https://finance.yahoo.com/markets/stocks/articles/jabil-rises-36-2-date-152000660.html",
@@ -8889,12 +8895,6 @@
           "title": "Alphabet May Be the Mag 7 Stock Investors Are Underestimating",
           "publisher": "24/7 Wall St.",
           "link": "https://247wallst.com/investing/2026/09/07/alphabet-may-be-the-mag-7-stock-investors-are-underestimating/",
-          "when": "Sep 07"
-        },
-        {
-          "title": "Broadcom vs Marvell: One of These AI Chip Stocks Is a Clear Winner",
-          "publisher": "24/7 Wall St.",
-          "link": "https://247wallst.com/investing/2026/09/07/broadcom-vs-marvell-one-of-these-ai-chip-stocks-is-a-clear-winner/",
           "when": "Sep 07"
         }
       ]
@@ -8962,6 +8962,12 @@
       ],
       "news": [
         {
+          "title": "Wall Street Is Worried About AMD. Here\u2019s Why Long-Term Investors Shouldn\u2019t Be",
+          "publisher": "24/7 Wall St.",
+          "link": "https://247wallst.com/investing/2026/09/07/wall-street-is-worried-about-amd-heres-why-long-term-investors-shouldnt-be/",
+          "when": "Sep 07"
+        },
+        {
           "title": "Cathie Wood Dumps $25 Million of Palantir Shares. Should PLTR Investors Worry?",
           "publisher": "GuruFocus.com",
           "link": "https://finance.yahoo.com/markets/stocks/articles/cathie-wood-dumps-25-million-172403799.html",
@@ -8989,12 +8995,6 @@
           "title": "AMD\u2019s Whole AI Story Has One Threat It Cannot Ignore: Broadcom",
           "publisher": "24/7 Wall St.",
           "link": "https://247wallst.com/investing/2026/09/07/amds-whole-ai-story-has-one-threat-it-cannot-ignore-broadcom/",
-          "when": "Sep 07"
-        },
-        {
-          "title": "Micron Jumps 6% as AI Memory Trade Keeps Running",
-          "publisher": "GuruFocus.com",
-          "link": "https://finance.yahoo.com/technology/ai/articles/micron-jumps-6-ai-memory-120948403.html",
           "when": "Sep 07"
         }
       ]
@@ -154034,7 +154034,7 @@
       "type": "closed"
     }
   ],
-  "generated_at": "2026-09-07T17:38:03+00:00",
+  "generated_at": "2026-09-07T18:01:46+00:00",
   "universe": {
     "wheel": 18,
     "growth": 19,
