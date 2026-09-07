@@ -7014,8 +7014,8 @@
     },
     {
       "label": "DXY",
-      "price": 98.86699676513672,
-      "pct": -0.2954889936985894,
+      "price": 98.89399719238281,
+      "pct": -0.26825984258026514,
       "prefix": "",
       "is_yield": false,
       "hist": [
@@ -7082,7 +7082,7 @@
         99.56,
         99.0,
         99.16,
-        98.87
+        98.89
       ]
     },
     {
@@ -7233,8 +7233,8 @@
     },
     {
       "label": "Bitcoin",
-      "price": 79011.1484375,
-      "pct": -1.6663318685836148,
+      "price": 79105.4921875,
+      "pct": -1.5489159445496559,
       "prefix": "$",
       "is_yield": false,
       "hist": [
@@ -7327,13 +7327,13 @@
         79672,
         79824,
         80350,
-        79011
+        79105
       ]
     },
     {
       "label": "Ethereum",
-      "price": 2483.14990234375,
-      "pct": -1.2486902393803567,
+      "price": 2487.669921875,
+      "pct": -1.068935546184746,
       "prefix": "$",
       "is_yield": false,
       "hist": [
@@ -7426,7 +7426,7 @@
         2456,
         2481,
         2515,
-        2483
+        2488
       ]
     }
   ],
@@ -7500,8 +7500,8 @@
     {
       "label": "Digital Assets",
       "ticker": "BTC",
-      "pct": -1.6663318685836148,
-      "price": 79011.1484375
+      "pct": -1.5489159445496559,
+      "price": 79105.4921875
     }
   ],
   "fundamentals": {
@@ -7572,6 +7572,12 @@
       ],
       "news": [
         {
+          "title": "Elon Musk Owns 28% of Tesla, a Stake Worth Nearly $350 Billion. Here's Why His Ownership Level Matters for Shareholders.",
+          "publisher": "Motley Fool",
+          "link": "https://www.fool.com/investing/2026/09/07/elon-musk-owns-tesla-stake-worth-billion-stock/",
+          "when": "Sep 07"
+        },
+        {
           "title": "Tesla Stock Is Tumbling -- Robotaxi Hopes Hit a Major Roadblock",
           "publisher": "GuruFocus.com",
           "link": "https://finance.yahoo.com/markets/stocks/articles/tesla-stock-tumbling-robotaxi-hopes-154916600.html",
@@ -7599,12 +7605,6 @@
           "title": "Tesla vs SpaceX: Elon Musk\u2019s Two Companies Are Chasing the Same AI Prize. Only One Is Positioned to Win It",
           "publisher": "24/7 Wall St.",
           "link": "https://247wallst.com/investing/2026/09/07/tesla-vs-spacex-elon-musks-two-companies-are-chasing-the-same-ai-prize-only-one-is-positioned-to-win-it/",
-          "when": "Sep 07"
-        },
-        {
-          "title": "Tesla Wants to Be Seen as an AI Company",
-          "publisher": "24/7 Wall St.",
-          "link": "https://247wallst.com/investing/2026/09/07/tesla-wants-to-be-seen-as-an-ai-company/",
           "when": "Sep 07"
         }
       ]
@@ -7788,6 +7788,12 @@
       ],
       "news": [
         {
+          "title": "Elon Musk Owns 28% of Tesla, a Stake Worth Nearly $350 Billion. Here's Why His Ownership Level Matters for Shareholders.",
+          "publisher": "Motley Fool",
+          "link": "https://www.fool.com/investing/2026/09/07/elon-musk-owns-tesla-stake-worth-billion-stock/",
+          "when": "Sep 07"
+        },
+        {
           "title": "AI Is Moving Into Everyday Business \u2014 These 5 Stocks Sit Squarely in the Path of the Surge",
           "publisher": "24/7 Wall St.",
           "link": "https://247wallst.com/investing/2026/09/07/ai-is-moving-into-everyday-business-these-5-stocks-sit-squarely-in-the-path-of-the-surge/",
@@ -7815,12 +7821,6 @@
           "title": "IREN\u2019s AI Pricing Is Exploding \u2014 Why the Neocloud\u2019s $2.6 Billion Contract Base Could Scale Dramatically",
           "publisher": "24/7 Wall St.",
           "link": "https://247wallst.com/investing/2026/09/07/irens-ai-pricing-is-exploding-why-the-neoclouds-2-6-billion-contract-base-could-scale-dramatically/",
-          "when": "Sep 07"
-        },
-        {
-          "title": "Jensen Huang Declares \u201cAGI Has Arrived\u201d \u2014 Powered by 100,000+ Nvidia Grace Blackwell GPUs",
-          "publisher": "24/7 Wall St.",
-          "link": "https://247wallst.com/investing/2026/09/07/jensen-huang-declares-agi-has-arrived-powered-by-100000-nvidia-grace-blackwell-gpus/",
           "when": "Sep 07"
         }
       ]
@@ -8567,6 +8567,18 @@
       ],
       "news": [
         {
+          "title": "Cathie Wood Dumps $25 Million of Palantir Shares. Should PLTR Investors Worry?",
+          "publisher": "GuruFocus.com",
+          "link": "https://finance.yahoo.com/markets/stocks/articles/cathie-wood-dumps-25-million-172403799.html",
+          "when": "Sep 07"
+        },
+        {
+          "title": "Palantir Surged 51% in August. The Rest of Tech Wasn't Even Close",
+          "publisher": "GuruFocus.com",
+          "link": "https://finance.yahoo.com/markets/stocks/articles/palantir-surged-51-august-rest-172023418.html",
+          "when": "Sep 07"
+        },
+        {
           "title": "Palantir Stock Could Make a Dramatic Move Over the Next Year (Hint: It Implies a Big Move)",
           "publisher": "Motley Fool",
           "link": "https://www.fool.com/investing/2026/09/07/palantir-stock-could-make-a-dramatic-move-over-the/",
@@ -8589,18 +8601,6 @@
           "publisher": "Benzinga",
           "link": "https://finance.yahoo.com/technology/ai/articles/palantir-alex-karp-real-ai-013013347.html",
           "when": "Sep 07"
-        },
-        {
-          "title": "Michael Burry sends a strong warning to Palantir stock investors",
-          "publisher": "TheStreet",
-          "link": "https://www.thestreet.com/investing/stocks/michael-burry-warns-palantir-stock-investors-bear-case",
-          "when": "Sep 06"
-        },
-        {
-          "title": "Michael Burry Says Palantir's Books Look More Like a Consultant's Than a Software Company's",
-          "publisher": "Motley Fool",
-          "link": "https://www.fool.com/investing/2026/09/05/michael-burry-says-palantir-s-books-look-more-like-a-consultant-s-than-a-software-company-s/",
-          "when": "Sep 06"
         }
       ]
     },
@@ -8767,6 +8767,12 @@
       ],
       "news": [
         {
+          "title": "DELL Expands Consumer PC Reach: Can It Challenge HPQ & AAPL?",
+          "publisher": "Zacks",
+          "link": "https://finance.yahoo.com/markets/stocks/articles/dell-expands-consumer-pc-reach-165000055.html",
+          "when": "Sep 07"
+        },
+        {
           "title": "The Real Satellite Race Isn\u2019t About Rockets \u2014 It\u2019s About Who Controls the Spectrum in Your Phone",
           "publisher": "24/7 Wall St.",
           "link": "https://247wallst.com/investing/2026/09/07/the-real-satellite-race-isnt-about-rockets-its-about-who-controls-the-spectrum-in-your-phone/",
@@ -8794,12 +8800,6 @@
           "title": "The S&P 100 ETF Just Dumped Nike and Colgate for 4 AI Stocks. Here\u2019s What That Means for Your Portfolio",
           "publisher": "24/7 Wall St.",
           "link": "https://247wallst.com/investing/etf/2026/09/07/the-sp-100-etf-just-dumped-nike-and-colgate-for-4-ai-stocks-heres-what-that-means-for-your-portfolio/",
-          "when": "Sep 07"
-        },
-        {
-          "title": "Apple Just Made a Move Most Investors Overlooked. This Is Why I Keep Buying The Stock",
-          "publisher": "24/7 Wall St.",
-          "link": "https://247wallst.com/investing/2026/09/07/apple-just-made-a-move-most-investors-overlooked-this-is-why-i-keep-buying-the-stock/",
           "when": "Sep 07"
         }
       ]
@@ -8962,6 +8962,12 @@
       ],
       "news": [
         {
+          "title": "Cathie Wood Dumps $25 Million of Palantir Shares. Should PLTR Investors Worry?",
+          "publisher": "GuruFocus.com",
+          "link": "https://finance.yahoo.com/markets/stocks/articles/cathie-wood-dumps-25-million-172403799.html",
+          "when": "Sep 07"
+        },
+        {
           "title": "Nvidia Is No Longer Just a Chip Company. It\u2019s the Infrastructure Platform for All of AI",
           "publisher": "24/7 Wall St.",
           "link": "https://247wallst.com/investing/2026/09/07/nvidia-is-no-longer-just-a-chip-company-its-the-infrastructure-platform-for-all-of-ai/",
@@ -8989,12 +8995,6 @@
           "title": "Micron Jumps 6% as AI Memory Trade Keeps Running",
           "publisher": "GuruFocus.com",
           "link": "https://finance.yahoo.com/technology/ai/articles/micron-jumps-6-ai-memory-120948403.html",
-          "when": "Sep 07"
-        },
-        {
-          "title": "Nvidia just sent a strong signal to AMD and Intel investors",
-          "publisher": "TheStreet",
-          "link": "https://www.thestreet.com/investing/stocks/nvidia-vera-cpu-strong-signal-to-amd-intel-investors",
           "when": "Sep 07"
         }
       ]
@@ -154034,7 +154034,7 @@
       "type": "closed"
     }
   ],
-  "generated_at": "2026-09-07T17:02:42+00:00",
+  "generated_at": "2026-09-07T17:32:37+00:00",
   "universe": {
     "wheel": 18,
     "growth": 19,
