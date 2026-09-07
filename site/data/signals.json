@@ -7233,8 +7233,8 @@
     },
     {
       "label": "Bitcoin",
-      "price": 79204.4765625,
-      "pct": -1.4257245105060767,
+      "price": 79240.609375,
+      "pct": -1.3807552616938001,
       "prefix": "$",
       "is_yield": false,
       "hist": [
@@ -7327,13 +7327,13 @@
         79672,
         79824,
         80350,
-        79204
+        79241
       ]
     },
     {
       "label": "Ethereum",
-      "price": 2489.6201171875,
-      "pct": -0.991379075986698,
+      "price": 2495.429931640625,
+      "pct": -0.7603310888431358,
       "prefix": "$",
       "is_yield": false,
       "hist": [
@@ -7426,7 +7426,7 @@
         2456,
         2481,
         2515,
-        2490
+        2495
       ]
     }
   ],
@@ -7500,8 +7500,8 @@
     {
       "label": "Digital Assets",
       "ticker": "BTC",
-      "pct": -1.4257245105060767,
-      "price": 79204.4765625
+      "pct": -1.3807552616938001,
+      "price": 79240.609375
     }
   ],
   "fundamentals": {
@@ -7788,39 +7788,39 @@
       ],
       "news": [
         {
+          "title": "Is AST SpaceMobile a Millionaire-Maker Over The Next Decade?",
+          "publisher": "Motley Fool",
+          "link": "https://www.fool.com/investing/2026/09/07/is-ast-spacemobile-a-millionaire-maker-over-the-ne/",
+          "when": "Sep 07"
+        },
+        {
+          "title": "Oracle Stock Is 54% Below Its High. The Last Time It Fell That Far, Getting Back Took More Than a Decade.",
+          "publisher": "Motley Fool",
+          "link": "https://www.fool.com/investing/2026/09/07/oracle-stock-is-54-below-its-high-the-last-time-it-fell-that-far-getting-back-took-more-than-a-decade/",
+          "when": "Sep 07"
+        },
+        {
+          "title": "The Bond Market Sell-Off Is Appearing in Earnings Reports",
+          "publisher": "Motley Fool",
+          "link": "https://www.fool.com/investing/2026/09/07/the-bond-market-sell-off-is-appearing-in-earnings-reports/",
+          "when": "Sep 07"
+        },
+        {
+          "title": "Jim Cramer Wants Nvidia to Buy Back $500 Billion. Can Apple\u2019s Playbook Work?",
+          "publisher": "Insider Monkey",
+          "link": "https://finance.yahoo.com/markets/stocks/articles/jim-cramer-wants-nvidia-buy-203415967.html",
+          "when": "Sep 07"
+        },
+        {
+          "title": "Jim Cramer Discusses NVIDIA (NVDA) Acquiring Hugging Face",
+          "publisher": "Insider Monkey",
+          "link": "https://finance.yahoo.com/technology/ai/articles/jim-cramer-discusses-nvidia-nvda-202249174.html",
+          "when": "Sep 07"
+        },
+        {
           "title": "Could This Vanguard Growth ETF Be a No-Brainer Buy for Long-Term Investors?",
           "publisher": "Motley Fool",
           "link": "https://www.fool.com/investing/2026/09/07/could-this-vanguard-growth-etf-be-a-no-brainer-buy-for-long-term-investors/",
-          "when": "Sep 07"
-        },
-        {
-          "title": "Set a Fair Starting Line, as Favorites Can Falter",
-          "publisher": "Motley Fool",
-          "link": "https://www.fool.com/investing/2026/09/07/set-a-fair-starting-line-as-favorites-can-falter/",
-          "when": "Sep 07"
-        },
-        {
-          "title": "Nvidia, Microsoft at Center of $7 Trillion AI Boom",
-          "publisher": "GuruFocus.com",
-          "link": "https://finance.yahoo.com/technology/ai/articles/nvidia-microsoft-center-7-trillion-192652924.html",
-          "when": "Sep 07"
-        },
-        {
-          "title": "TSMC's $265 Billion U.S. Bet Is Becoming Part of Taiwan's Chip Diplomacy",
-          "publisher": "GuruFocus.com",
-          "link": "https://finance.yahoo.com/technology/articles/tsmcs-265-billion-u-bet-192538926.html",
-          "when": "Sep 07"
-        },
-        {
-          "title": "Will Silver Take Off Before the End of 2026?",
-          "publisher": "Motley Fool",
-          "link": "https://www.fool.com/investing/2026/09/07/will-silver-take-off-before-the-end-of-2026/",
-          "when": "Sep 07"
-        },
-        {
-          "title": "Nvidia Stock: Is It Still a Good Buy at $230?",
-          "publisher": "Motley Fool",
-          "link": "https://www.fool.com/investing/2026/09/07/nvidia-stock-is-it-still-a-good-buy-at-230/",
           "when": "Sep 07"
         }
       ]
@@ -7895,6 +7895,12 @@
           "when": "Sep 07"
         },
         {
+          "title": "Fatal Amazon Plane Crash Delays Hundreds of Miami Flights",
+          "publisher": "Barrons.com",
+          "link": "https://www.barrons.com/articles/amazon-plane-crash-boeing-miami-airport-35c47fa3?siteid=yhoof2&yptr=yahoo",
+          "when": "Sep 07"
+        },
+        {
           "title": "Why Does Amazon Trade at a Discount to Walmart and Costco? Here's the Only Answer That Makes Sense.",
           "publisher": "Motley Fool",
           "link": "https://www.fool.com/investing/2026/09/07/why-does-amazon-trade-at-a-discount-to-walmart-and/",
@@ -7910,12 +7916,6 @@
           "title": "IREN\u2019s AI Pricing Is Exploding \u2014 Why the Neocloud\u2019s $2.6 Billion Contract Base Could Scale Dramatically",
           "publisher": "24/7 Wall St.",
           "link": "https://247wallst.com/investing/2026/09/07/irens-ai-pricing-is-exploding-why-the-neoclouds-2-6-billion-contract-base-could-scale-dramatically/",
-          "when": "Sep 07"
-        },
-        {
-          "title": "Jabil Rises 36.2% Year to Date: Should You Buy the Stock?",
-          "publisher": "Zacks",
-          "link": "https://finance.yahoo.com/markets/stocks/articles/jabil-rises-36-2-date-152000660.html",
           "when": "Sep 07"
         }
       ]
@@ -8567,6 +8567,12 @@
       ],
       "news": [
         {
+          "title": "Burry\u2019s Palantir Warning Is Back. Accenture Shows What Investors Should Check",
+          "publisher": "Insider Monkey",
+          "link": "https://finance.yahoo.com/markets/stocks/articles/burry-palantir-warning-back-accenture-204332089.html",
+          "when": "Sep 07"
+        },
+        {
           "title": "Cathie Wood Is Moving Money From Palantir Into Rocket Lab and Fintech",
           "publisher": "GuruFocus.com",
           "link": "https://finance.yahoo.com/markets/stocks/articles/cathie-wood-moving-money-palantir-192133259.html",
@@ -8594,12 +8600,6 @@
           "title": "Investors Pulled $700 Million From IGV Hours Before Snowflake Reignited Software",
           "publisher": "24/7 Wall St.",
           "link": "https://247wallst.com/investing/etf/2026/09/07/investors-pulled-700-million-from-igv-hours-before-snowflake-reignited-software/",
-          "when": "Sep 07"
-        },
-        {
-          "title": "Down Nearly 50% in 2026, Is BigBear.ai Stock Cheap Enough to Finally Buy?",
-          "publisher": "Motley Fool",
-          "link": "https://www.fool.com/investing/2026/09/07/down-nearly-50-in-2026-is-bigbear-ai-cheap-enough-to-finally-buy/",
           "when": "Sep 07"
         }
       ]
@@ -8673,6 +8673,12 @@
           "when": "Sep 07"
         },
         {
+          "title": "Jim Cramer Says Buy Walmart (WMT) as Target\u2019s (TGT) Turnaround Gains Momentum",
+          "publisher": "Insider Monkey",
+          "link": "https://finance.yahoo.com/markets/stocks/articles/jim-cramer-says-buy-walmart-202439296.html",
+          "when": "Sep 07"
+        },
+        {
           "title": "Why Does Amazon Trade at a Discount to Walmart and Costco? Here's the Only Answer That Makes Sense.",
           "publisher": "Motley Fool",
           "link": "https://www.fool.com/investing/2026/09/07/why-does-amazon-trade-at-a-discount-to-walmart-and/",
@@ -8694,12 +8700,6 @@
           "title": "Retailers are Handling Tariff Refunds in Very Different Ways: Walmart and Home Depot",
           "publisher": "Insider Monkey",
           "link": "https://finance.yahoo.com/economy/policy/articles/retailers-handling-tariff-refunds-very-225628436.html",
-          "when": "Sep 06"
-        },
-        {
-          "title": "S&P 500 Companies Snag More Than $10 Billion in Tariff Refunds. What Goes to You.",
-          "publisher": "Barrons.com",
-          "link": "https://www.barrons.com/articles/tariff-refunds-walmart-trump-fedex-8193fdd5?siteid=yhoof2&yptr=yahoo",
           "when": "Sep 06"
         }
       ]
@@ -8767,6 +8767,12 @@
       ],
       "news": [
         {
+          "title": "Jim Cramer Wants Nvidia to Buy Back $500 Billion. Can Apple\u2019s Playbook Work?",
+          "publisher": "Insider Monkey",
+          "link": "https://finance.yahoo.com/markets/stocks/articles/jim-cramer-wants-nvidia-buy-203415967.html",
+          "when": "Sep 07"
+        },
+        {
           "title": "KeyBanc Delivers Stark Warning on Apple Stock Ahead of iPhone 18 Launch",
           "publisher": "GuruFocus.com",
           "link": "https://finance.yahoo.com/markets/stocks/articles/keybanc-delivers-stark-warning-apple-191353530.html",
@@ -8794,12 +8800,6 @@
           "title": "DELL Expands Consumer PC Reach: Can It Challenge HPQ & AAPL?",
           "publisher": "Zacks",
           "link": "https://finance.yahoo.com/markets/stocks/articles/dell-expands-consumer-pc-reach-165000055.html",
-          "when": "Sep 07"
-        },
-        {
-          "title": "The Real Satellite Race Isn\u2019t About Rockets \u2014 It\u2019s About Who Controls the Spectrum in Your Phone",
-          "publisher": "24/7 Wall St.",
-          "link": "https://247wallst.com/investing/2026/09/07/the-real-satellite-race-isnt-about-rockets-its-about-who-controls-the-spectrum-in-your-phone/",
           "when": "Sep 07"
         }
       ]
@@ -9265,6 +9265,12 @@
       "flags": [],
       "news": [
         {
+          "title": "Jim Cramer Says Meta (META) is \u201cAt the Price\u201d After Settlement Eases Major Legal Overhang",
+          "publisher": "Insider Monkey",
+          "link": "https://finance.yahoo.com/markets/stocks/articles/jim-cramer-says-meta-meta-203146510.html",
+          "when": "Sep 07"
+        },
+        {
           "title": "Nvidia, Microsoft at Center of $7 Trillion AI Boom",
           "publisher": "GuruFocus.com",
           "link": "https://finance.yahoo.com/technology/ai/articles/nvidia-microsoft-center-7-trillion-192652924.html",
@@ -9292,12 +9298,6 @@
           "title": "Here is What to Know Beyond Why Meta Platforms, Inc. (META) is a Trending Stock",
           "publisher": "Zacks",
           "link": "https://finance.yahoo.com/markets/stocks/articles/know-beyond-why-meta-platforms-130005630.html",
-          "when": "Sep 07"
-        },
-        {
-          "title": "Nvidia, Tech Giants Flash Stunning Market Signal",
-          "publisher": "GuruFocus.com",
-          "link": "https://finance.yahoo.com/markets/stocks/articles/nvidia-tech-giants-flash-stunning-123419569.html",
           "when": "Sep 07"
         }
       ]
@@ -9492,6 +9492,12 @@
       "flags": [],
       "news": [
         {
+          "title": "Is AST SpaceMobile a Millionaire-Maker Over The Next Decade?",
+          "publisher": "Motley Fool",
+          "link": "https://www.fool.com/investing/2026/09/07/is-ast-spacemobile-a-millionaire-maker-over-the-ne/",
+          "when": "Sep 07"
+        },
+        {
           "title": "SpaceX Is 34% Below Its High. Now 319 Million More Shares Are Coming",
           "publisher": "GuruFocus.com",
           "link": "https://finance.yahoo.com/markets/stocks/articles/spacex-34-below-high-now-192336291.html",
@@ -9519,12 +9525,6 @@
           "title": "How Nvidia\u2019s Investment Juggernaut Can Jump from Big to Enormous",
           "publisher": "Barrons.com",
           "link": "https://www.barrons.com/articles/nvidia-investment-portfolio-intel-spacex-fa97899f?siteid=yhoof2&yptr=yahoo",
-          "when": "Sep 07"
-        },
-        {
-          "title": "Better Space Stock: AST SpaceMobile vs. L3Harris Technologies",
-          "publisher": "Motley Fool",
-          "link": "https://www.fool.com/investing/2026/09/07/better-space-stock-ast-spacemobile-vs-l3harris/",
           "when": "Sep 07"
         }
       ]
@@ -154034,7 +154034,7 @@
       "type": "closed"
     }
   ],
-  "generated_at": "2026-09-07T20:31:41+00:00",
+  "generated_at": "2026-09-07T21:02:19+00:00",
   "universe": {
     "wheel": 18,
     "growth": 19,
