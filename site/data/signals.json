@@ -6455,7 +6455,7 @@
   "count": 66,
   "leap_count": 33,
   "market": {
-    "vix": 15.29,
+    "vix": 15.3,
     "vix_label": "normal",
     "fng": 42,
     "fng_label": "Fear",
@@ -7014,8 +7014,8 @@
     },
     {
       "label": "DXY",
-      "price": 98.88300323486328,
-      "pct": -0.27934693123851106,
+      "price": 98.89199829101562,
+      "pct": -0.27027567688177045,
       "prefix": "",
       "is_yield": false,
       "hist": [
@@ -7082,7 +7082,7 @@
         99.56,
         99.0,
         99.16,
-        98.88
+        98.89
       ]
     },
     {
@@ -7233,8 +7233,8 @@
     },
     {
       "label": "Bitcoin",
-      "price": 78935.46875,
-      "pct": -1.760519352528378,
+      "price": 78859.2890625,
+      "pct": -1.8553291136458983,
       "prefix": "$",
       "is_yield": false,
       "hist": [
@@ -7327,13 +7327,13 @@
         79672,
         79824,
         80350,
-        78935
+        78859
       ]
     },
     {
       "label": "Ethereum",
-      "price": 2479.300048828125,
-      "pct": -1.4017933914275416,
+      "price": 2473.18994140625,
+      "pct": -1.6447835991949988,
       "prefix": "$",
       "is_yield": false,
       "hist": [
@@ -7426,7 +7426,7 @@
         2456,
         2481,
         2515,
-        2479
+        2473
       ]
     }
   ],
@@ -7500,8 +7500,8 @@
     {
       "label": "Digital Assets",
       "ticker": "BTC",
-      "pct": -1.760519352528378,
-      "price": 78935.46875
+      "pct": -1.8553291136458983,
+      "price": 78859.2890625
     }
   ],
   "fundamentals": {
@@ -7572,6 +7572,12 @@
       ],
       "news": [
         {
+          "title": "Tesla Stock Is Tumbling -- Robotaxi Hopes Hit a Major Roadblock",
+          "publisher": "GuruFocus.com",
+          "link": "https://finance.yahoo.com/markets/stocks/articles/tesla-stock-tumbling-robotaxi-hopes-154916600.html",
+          "when": "Sep 07"
+        },
+        {
           "title": "Tesla Says This Time Is Different. Wall Street Is Split on Whether to Believe It",
           "publisher": "24/7 Wall St.",
           "link": "https://247wallst.com/investing/2026/09/07/tesla-says-this-time-is-different-wall-street-is-split-on-whether-to-believe-it/",
@@ -7599,12 +7605,6 @@
           "title": "Tesla Wants to Be Seen as an AI Company",
           "publisher": "24/7 Wall St.",
           "link": "https://247wallst.com/investing/2026/09/07/tesla-wants-to-be-seen-as-an-ai-company/",
-          "when": "Sep 07"
-        },
-        {
-          "title": "Where Will Tesla Be in 5 Years?",
-          "publisher": "Motley Fool",
-          "link": "https://www.fool.com/investing/2026/09/07/where-will-tesla-be-in-5-years/",
           "when": "Sep 07"
         }
       ]
@@ -7788,6 +7788,30 @@
       ],
       "news": [
         {
+          "title": "Hyperliquid Strategies Soared by 94% in August. Should Investors Forget Bitcoin and Buy This Stock Instead?",
+          "publisher": "Motley Fool",
+          "link": "https://www.fool.com/investing/2026/09/07/hyperliquid-soared-by-94-in-august/",
+          "when": "Sep 07"
+        },
+        {
+          "title": "This Is What I'd Do With Pfizer Stock Right Now",
+          "publisher": "Motley Fool",
+          "link": "https://www.fool.com/investing/2026/09/07/this-is-what-i-d-do-with-pfizer-stock-right-now/",
+          "when": "Sep 07"
+        },
+        {
+          "title": "1 Stat That Makes Costco Hard to Ignore this September",
+          "publisher": "Motley Fool",
+          "link": "https://www.fool.com/investing/2026/09/07/1-stat-that-makes-costco-hard-to-ignore-this-septe/",
+          "when": "Sep 07"
+        },
+        {
+          "title": "Up 26% in 2026, Is Coca-Cola a Buy Near an All-Time High?",
+          "publisher": "Motley Fool",
+          "link": "https://www.fool.com/investing/2026/09/07/up-26-in-2026-is-coca-cola-a-buy-near-an-all-time/",
+          "when": "Sep 07"
+        },
+        {
           "title": "What If the Clarity Act Doesn't Pass This Year? Here Are 3 Ways to Bulletproof Your Crypto Portfolio.",
           "publisher": "Motley Fool",
           "link": "https://www.fool.com/investing/2026/09/07/what-if-the-clarity-act-doesnt-pass-this-year-here/",
@@ -7797,30 +7821,6 @@
           "title": "What's Wrong With PepsiCo Stock?",
           "publisher": "Motley Fool",
           "link": "https://www.fool.com/investing/2026/09/07/what-s-wrong-with-pepsico-stock/",
-          "when": "Sep 07"
-        },
-        {
-          "title": "Caterpillar's Power Generation Backlog Just Hit $72 Billion. The Construction Cycle Barely Matters Anymore.",
-          "publisher": "Motley Fool",
-          "link": "https://www.fool.com/investing/2026/09/07/caterpillars-power-generation-backlog-just-hit-72/",
-          "when": "Sep 07"
-        },
-        {
-          "title": "Everyone Is Watching Nvidia. But This Memory Stock Could Be the Next AI Winner",
-          "publisher": "24/7 Wall St.",
-          "link": "https://247wallst.com/investing/2026/09/07/everyone-is-watching-nvidia-but-this-memory-stock-could-be-the-next-ai-winner/",
-          "when": "Sep 07"
-        },
-        {
-          "title": "Has Nike's Stock Bottomed Out?",
-          "publisher": "Motley Fool",
-          "link": "https://www.fool.com/investing/2026/09/07/has-nike-s-stock-bottomed-out/",
-          "when": "Sep 07"
-        },
-        {
-          "title": "Most People Asking \"What Should I Invest In?\" Are Overthinking It. Start With Index Funds and These 4 Stocks.",
-          "publisher": "Motley Fool",
-          "link": "https://www.fool.com/investing/2026/09/07/most-people-asking-what-should-i-invest-in-are/",
           "when": "Sep 07"
         }
       ]
@@ -7984,6 +7984,12 @@
           "when": "Sep 07"
         },
         {
+          "title": "Microsoft Is Close to a New All-Time High. This Number Will Determine If It Keeps Climbing",
+          "publisher": "24/7 Wall St.",
+          "link": "https://247wallst.com/investing/2026/09/07/microsoft-is-close-to-a-new-all-time-high-this-number-will-determine-if-it-keeps-climbing/",
+          "when": "Sep 07"
+        },
+        {
           "title": "Jabil Rises 36.2% Year to Date: Should You Buy the Stock?",
           "publisher": "Zacks",
           "link": "https://finance.yahoo.com/markets/stocks/articles/jabil-rises-36-2-date-152000660.html",
@@ -8005,12 +8011,6 @@
           "title": "AMD Is Behind The AI Chip Shift Nobody Is Talking About",
           "publisher": "24/7 Wall St.",
           "link": "https://247wallst.com/investing/2026/09/07/amd-is-behind-the-ai-chip-shift-nobody-is-talking-about/",
-          "when": "Sep 07"
-        },
-        {
-          "title": "Microsoft Stock Is Building a Trillion-Dollar AI Opportunity. Is $600 Next?",
-          "publisher": "24/7 Wall St.",
-          "link": "https://247wallst.com/investing/2026/09/07/microsoft-stock-is-building-a-trillion-dollar-ai-opportunity-is-600-next/",
           "when": "Sep 07"
         }
       ]
@@ -153297,7 +153297,7 @@
     "pe_forward": 20.12,
     "pe_forward_src": "historyofmarket.com",
     "vix": 15.3,
-    "vix_chg": 0.76,
+    "vix_chg": 0.77,
     "vix_hi": 31.0,
     "vix_lo": 13.5,
     "vix_avg": 18.1,
@@ -154034,7 +154034,7 @@
       "type": "closed"
     }
   ],
-  "generated_at": "2026-09-07T15:32:23+00:00",
+  "generated_at": "2026-09-07T16:01:42+00:00",
   "universe": {
     "wheel": 18,
     "growth": 19,
