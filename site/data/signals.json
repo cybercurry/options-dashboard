@@ -7014,8 +7014,8 @@
     },
     {
       "label": "DXY",
-      "price": 98.89399719238281,
-      "pct": -0.26825984258026514,
+      "price": 98.8949966430664,
+      "pct": -0.2672519254295236,
       "prefix": "",
       "is_yield": false,
       "hist": [
@@ -7233,8 +7233,8 @@
     },
     {
       "label": "Bitcoin",
-      "price": 79105.4921875,
-      "pct": -1.5489159445496559,
+      "price": 79110.0,
+      "pct": -1.543305726914057,
       "prefix": "$",
       "is_yield": false,
       "hist": [
@@ -7327,13 +7327,13 @@
         79672,
         79824,
         80350,
-        79105
+        79110
       ]
     },
     {
       "label": "Ethereum",
-      "price": 2487.669921875,
-      "pct": -1.068935546184746,
+      "price": 2486.75,
+      "pct": -1.1055195196081558,
       "prefix": "$",
       "is_yield": false,
       "hist": [
@@ -7426,7 +7426,7 @@
         2456,
         2481,
         2515,
-        2488
+        2487
       ]
     }
   ],
@@ -7500,8 +7500,8 @@
     {
       "label": "Digital Assets",
       "ticker": "BTC",
-      "pct": -1.5489159445496559,
-      "price": 79105.4921875
+      "pct": -1.543305726914057,
+      "price": 79110.0
     }
   ],
   "fundamentals": {
@@ -7572,6 +7572,12 @@
       ],
       "news": [
         {
+          "title": "Billionaire has 5-word response to Elon Musk's Tesla chart",
+          "publisher": "TheStreet",
+          "link": "https://www.thestreet.com/crypto/markets/billionaire-has-5-word-response-to-elon-musks-tesla-chart",
+          "when": "Sep 07"
+        },
+        {
           "title": "Elon Musk Owns 28% of Tesla, a Stake Worth Nearly $350 Billion. Here's Why His Ownership Level Matters for Shareholders.",
           "publisher": "Motley Fool",
           "link": "https://www.fool.com/investing/2026/09/07/elon-musk-owns-tesla-stake-worth-billion-stock/",
@@ -7599,12 +7605,6 @@
           "title": "OpenAI, Anthropic IPOs Could Spark a Selloff in These Struggling Stocks \u2014 IBM, Tesla, AppLovin Among Names at Risk",
           "publisher": "Benzinga Private Markets",
           "link": "https://www.benzinga.com/markets/equities/26/09/61647784/openai-anthropic-ipos-could-spark-a-selloff-in-these-struggling-stocks-ibm-tesla-applovin-among-names-at-risk?utm_source=yahooFinance&utm_campaign=partner_feed&utm_medium=referral",
-          "when": "Sep 07"
-        },
-        {
-          "title": "Tesla vs SpaceX: Elon Musk\u2019s Two Companies Are Chasing the Same AI Prize. Only One Is Positioned to Win It",
-          "publisher": "24/7 Wall St.",
-          "link": "https://247wallst.com/investing/2026/09/07/tesla-vs-spacex-elon-musks-two-companies-are-chasing-the-same-ai-prize-only-one-is-positioned-to-win-it/",
           "when": "Sep 07"
         }
       ]
@@ -154034,7 +154034,7 @@
       "type": "closed"
     }
   ],
-  "generated_at": "2026-09-07T17:32:37+00:00",
+  "generated_at": "2026-09-07T17:38:03+00:00",
   "universe": {
     "wheel": 18,
     "growth": 19,
