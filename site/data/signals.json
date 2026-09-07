@@ -7233,8 +7233,8 @@
     },
     {
       "label": "Bitcoin",
-      "price": 79361.203125,
-      "pct": -1.230669786090277,
+      "price": 79204.4765625,
+      "pct": -1.4257245105060767,
       "prefix": "$",
       "is_yield": false,
       "hist": [
@@ -7327,13 +7327,13 @@
         79672,
         79824,
         80350,
-        79361
+        79204
       ]
     },
     {
       "label": "Ethereum",
-      "price": 2496.2900390625,
-      "pct": -0.7261258504220325,
+      "price": 2489.6201171875,
+      "pct": -0.991379075986698,
       "prefix": "$",
       "is_yield": false,
       "hist": [
@@ -7426,7 +7426,7 @@
         2456,
         2481,
         2515,
-        2496
+        2490
       ]
     }
   ],
@@ -7500,8 +7500,8 @@
     {
       "label": "Digital Assets",
       "ticker": "BTC",
-      "pct": -1.230669786090277,
-      "price": 79361.203125
+      "pct": -1.4257245105060767,
+      "price": 79204.4765625
     }
   ],
   "fundamentals": {
@@ -7788,6 +7788,12 @@
       ],
       "news": [
         {
+          "title": "Could This Vanguard Growth ETF Be a No-Brainer Buy for Long-Term Investors?",
+          "publisher": "Motley Fool",
+          "link": "https://www.fool.com/investing/2026/09/07/could-this-vanguard-growth-etf-be-a-no-brainer-buy-for-long-term-investors/",
+          "when": "Sep 07"
+        },
+        {
           "title": "Set a Fair Starting Line, as Favorites Can Falter",
           "publisher": "Motley Fool",
           "link": "https://www.fool.com/investing/2026/09/07/set-a-fair-starting-line-as-favorites-can-falter/",
@@ -7815,12 +7821,6 @@
           "title": "Nvidia Stock: Is It Still a Good Buy at $230?",
           "publisher": "Motley Fool",
           "link": "https://www.fool.com/investing/2026/09/07/nvidia-stock-is-it-still-a-good-buy-at-230/",
-          "when": "Sep 07"
-        },
-        {
-          "title": "Anthropic Seeking $15 Billion in Debt Before Its IPO: Is That a Warning Sign or a Bullish Signal for AI Infrastructure Stocks?",
-          "publisher": "Motley Fool",
-          "link": "https://www.fool.com/investing/2026/09/07/anthropic-seeking-usd15-billion-in-debt-before-its-ipo-is-that-a-warning-sign-or-a-bullish-signal-for-ai-infrastructure-stocks/",
           "when": "Sep 07"
         }
       ]
@@ -9170,6 +9170,12 @@
       ],
       "news": [
         {
+          "title": "Robinhood Wins a New Role in the Oura IPO: Underwriter",
+          "publisher": "The Wall Street Journal",
+          "link": "https://www.wsj.com/finance/robinhood-wins-a-new-role-in-the-oura-ipo-underwriter-9a76c632?siteid=yhoof2&yptr=yahoo",
+          "when": "Sep 07"
+        },
+        {
           "title": "Robinhood Markets, Inc. (HOOD) Is Up 17.12% in One Week: What You Should Know",
           "publisher": "Zacks",
           "link": "https://finance.yahoo.com/markets/stocks/articles/robinhood-markets-inc-hood-17-160004989.html",
@@ -9197,12 +9203,6 @@
           "title": "Should You Forget Robinhood and Buy Webull Instead?",
           "publisher": "Motley Fool",
           "link": "https://www.fool.com/investing/2026/09/06/should-you-forget-robinhood-and-buy-webull-instead/",
-          "when": "Sep 06"
-        },
-        {
-          "title": "This Little-Known Altcoin Powering Robinhood's New Blockchain Just Soared By 45%. Is ARB a Buy, Sell, or Hold?",
-          "publisher": "Motley Fool",
-          "link": "https://www.fool.com/investing/2026/09/05/this-little-known-altcoin-powering-robinhoods-new/",
           "when": "Sep 06"
         }
       ]
@@ -154034,7 +154034,7 @@
       "type": "closed"
     }
   ],
-  "generated_at": "2026-09-07T20:02:21+00:00",
+  "generated_at": "2026-09-07T20:31:41+00:00",
   "universe": {
     "wheel": 18,
     "growth": 19,
