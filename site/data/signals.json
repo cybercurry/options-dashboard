@@ -7221,8 +7221,8 @@
     },
     {
       "label": "Bitcoin",
-      "price": 77308.609375,
-      "pct": 0.17468688267128218,
+      "price": 77316.5625,
+      "pct": 0.1849923559303912,
       "prefix": "$",
       "is_yield": false,
       "hist": [
@@ -7315,13 +7315,13 @@
         78260,
         76568,
         77174,
-        77309
+        77317
       ]
     },
     {
       "label": "Ethereum",
-      "price": 2533.300048828125,
-      "pct": 0.7382953006451309,
+      "price": 2533.340087890625,
+      "pct": 0.7398874795516708,
       "prefix": "$",
       "is_yield": false,
       "hist": [
@@ -7488,8 +7488,8 @@
     {
       "label": "Digital Assets",
       "ticker": "BTC",
-      "pct": 0.17468688267128218,
-      "price": 77308.609375
+      "pct": 0.1849923559303912,
+      "price": 77316.5625
     }
   ],
   "fundamentals": {
@@ -7788,6 +7788,12 @@
           "when": "Sep 11"
         },
         {
+          "title": "September Has Historically Been a Difficult Month for Bitcoin. This Is the Most Likely Scenario for What Happens Next.",
+          "publisher": "Motley Fool",
+          "link": "https://www.fool.com/investing/2026/09/12/september-has-historically-been-a-difficult-month/",
+          "when": "Sep 12"
+        },
+        {
           "title": "HPE's $7.6 Billion AI Backlog Is Waiting on Memory Supply to Catch Up",
           "publisher": "Motley Fool",
           "link": "https://www.fool.com/investing/2026/09/12/hpe-billion-ai-backlog-waiting-memory-supply/",
@@ -7803,12 +7809,6 @@
           "title": "Prediction: Owning 100 Shares of Amazon Stock Will Turn $25,000 Into $50,000 by 2030",
           "publisher": "Motley Fool",
           "link": "https://www.fool.com/investing/2026/09/12/prediction-amazon-stock-25000-into-50000/",
-          "when": "Sep 12"
-        },
-        {
-          "title": "Breakfast News: 4 CEOs Playing the Long Game",
-          "publisher": "Motley Fool",
-          "link": "https://www.fool.com/investing/breakfast-news/2026/09/12/breakfast-news/",
           "when": "Sep 12"
         }
       ]
@@ -155985,7 +155985,7 @@
       "type": "closed"
     }
   ],
-  "generated_at": "2026-09-12T12:32:57+00:00",
+  "generated_at": "2026-09-12T12:35:15+00:00",
   "universe": {
     "wheel": 18,
     "growth": 19,
