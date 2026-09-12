@@ -7221,8 +7221,8 @@
     },
     {
       "label": "Bitcoin",
-      "price": 77154.671875,
-      "pct": -0.024781727444322943,
+      "price": 77178.84375,
+      "pct": 0.006539622520040922,
       "prefix": "$",
       "is_yield": false,
       "hist": [
@@ -7315,13 +7315,13 @@
         78260,
         76568,
         77174,
-        77155
+        77179
       ]
     },
     {
       "label": "Ethereum",
-      "price": 2521.639892578125,
-      "pct": 0.27462173615460106,
+      "price": 2522.590087890625,
+      "pct": 0.31240685996107853,
       "prefix": "$",
       "is_yield": false,
       "hist": [
@@ -7414,7 +7414,7 @@
         2467,
         2437,
         2515,
-        2522
+        2523
       ]
     }
   ],
@@ -7488,8 +7488,8 @@
     {
       "label": "Digital Assets",
       "ticker": "BTC",
-      "pct": -0.024781727444322943,
-      "price": 77154.671875
+      "pct": 0.006539622520040922,
+      "price": 77178.84375
     }
   ],
   "fundamentals": {
@@ -7776,6 +7776,12 @@
       ],
       "news": [
         {
+          "title": "This Artificial Intelligence Stock Is Down 71% and Could Be a Screaming Buy",
+          "publisher": "Motley Fool",
+          "link": "https://www.fool.com/investing/2026/09/12/this-artificial-intelligence-stock-is-down-71-and/",
+          "when": "Sep 12"
+        },
+        {
           "title": "Is Toast Stock a Buy After a Record 9,500-Restaurant Quarter?",
           "publisher": "Motley Fool",
           "link": "https://www.fool.com/investing/2026/09/12/is-toast-stock-a-buy-after-record-9500-restaurant/",
@@ -7803,12 +7809,6 @@
           "title": "Worried About RMDs in Retirement? 3 Key Moves to Lower the Hassle Factors.",
           "publisher": "Motley Fool",
           "link": "https://www.fool.com/retirement/2026/09/12/worried-about-rmds-in-retirement-3-key-moves-to-lo/",
-          "when": "Sep 12"
-        },
-        {
-          "title": "Elon Musk Needs Tesla to Reach a $8.5 Trillion Market Cap to Cash In. Here's How Tesla Can Reach That Valuation.",
-          "publisher": "Motley Fool",
-          "link": "https://www.fool.com/investing/2026/09/12/elon-musks-tesla-shareholders-approved-an-85-trill/",
           "when": "Sep 12"
         }
       ]
@@ -155985,7 +155985,7 @@
       "type": "closed"
     }
   ],
-  "generated_at": "2026-09-12T20:26:01+00:00",
+  "generated_at": "2026-09-12T20:32:45+00:00",
   "universe": {
     "wheel": 18,
     "growth": 19,
