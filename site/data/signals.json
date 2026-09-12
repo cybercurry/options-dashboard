@@ -7221,8 +7221,8 @@
     },
     {
       "label": "Bitcoin",
-      "price": 77434.7734375,
-      "pct": 0.3381673224173598,
+      "price": 77453.0,
+      "pct": 0.36178487557405603,
       "prefix": "$",
       "is_yield": false,
       "hist": [
@@ -7315,13 +7315,13 @@
         78260,
         76568,
         77174,
-        77435
+        77453
       ]
     },
     {
       "label": "Ethereum",
-      "price": 2543.0400390625,
-      "pct": 1.1256122364774024,
+      "price": 2542.489990234375,
+      "pct": 1.103739193328379,
       "prefix": "$",
       "is_yield": false,
       "hist": [
@@ -7488,8 +7488,8 @@
     {
       "label": "Digital Assets",
       "ticker": "BTC",
-      "pct": 0.3381673224173598,
-      "price": 77434.7734375
+      "pct": 0.36178487557405603,
+      "price": 77453.0
     }
   ],
   "fundamentals": {
@@ -9693,44 +9693,7 @@
           "text": "Rich valuation \u2014 P/E 79"
         }
       ],
-      "news": [
-        {
-          "title": "ServiceNow (NOW) Outperforms Broader Market: What You Need to Know",
-          "publisher": "Zacks",
-          "link": "https://finance.yahoo.com/markets/stocks/articles/servicenow-now-outperforms-broader-market-214503848.html",
-          "when": "Sep 11"
-        },
-        {
-          "title": "Is Salesforce Stock Cheap Because Software Is Dying?",
-          "publisher": "Trefis",
-          "link": "https://www.trefis.com/articles/615054/is-salesforce-stock-cheap-because-software-is-dying/2026-09-11",
-          "when": "Sep 11"
-        },
-        {
-          "title": "Is UiPath Stock A Buy After Falling Despite A Raised Outlook?",
-          "publisher": "Trefis",
-          "link": "https://www.trefis.com/articles/615065/is-uipath-stock-a-buy-after-falling-despite-a-raised-outlook/2026-09-11",
-          "when": "Sep 11"
-        },
-        {
-          "title": "Adobe Pulls Back, Then Recovers as CEO Handoff Meets Soft Q4 Outlook; Intuit and ServiceNow Hold Steady",
-          "publisher": "24/7 Wall St.",
-          "link": "https://247wallst.com/investing/2026/09/11/adobe-pulls-back-then-recovers-as-ceo-handoff-meets-soft-q4-outlook-intuit-and-servicenow-hold-steady/",
-          "when": "Sep 11"
-        },
-        {
-          "title": "Can Rising Adoption of Teamwork Graph Drive TEAM's Next Growth Phase?",
-          "publisher": "Zacks",
-          "link": "https://finance.yahoo.com/technology/ai/articles/rising-adoption-teamwork-graph-drive-131700495.html",
-          "when": "Sep 11"
-        },
-        {
-          "title": "Dow Jones Futures Rise, Oil Prices Fall, Oracle Jumps; CPI Inflation Data To Inform Fed",
-          "publisher": "Investor's Business Daily",
-          "link": "https://www.investors.com/market-trend/stock-market-today/dow-jones-futures-sp500-oil-prices-treasury-yields-cpi-inflation-oracle-earnings/?src=A00220&yptr=yahoo",
-          "when": "Sep 11"
-        }
-      ]
+      "news": []
     },
     "CQQQ": {
       "ok": true,
@@ -155985,7 +155948,7 @@
       "type": "closed"
     }
   ],
-  "generated_at": "2026-09-12T14:32:44+00:00",
+  "generated_at": "2026-09-12T14:34:18+00:00",
   "universe": {
     "wheel": 18,
     "growth": 19,
