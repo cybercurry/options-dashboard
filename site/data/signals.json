@@ -7221,8 +7221,8 @@
     },
     {
       "label": "Bitcoin",
-      "price": 77386.2734375,
-      "pct": 0.27532215739514143,
+      "price": 77372.0703125,
+      "pct": 0.25691808039605135,
       "prefix": "$",
       "is_yield": false,
       "hist": [
@@ -7315,13 +7315,13 @@
         78260,
         76568,
         77174,
-        77386
+        77372
       ]
     },
     {
       "label": "Ethereum",
-      "price": 2537.5400390625,
-      "pct": 0.9069012218031469,
+      "price": 2534.81005859375,
+      "pct": 0.7983418039192891,
       "prefix": "$",
       "is_yield": false,
       "hist": [
@@ -7414,7 +7414,7 @@
         2467,
         2437,
         2515,
-        2538
+        2535
       ]
     }
   ],
@@ -7488,8 +7488,8 @@
     {
       "label": "Digital Assets",
       "ticker": "BTC",
-      "pct": 0.27532215739514143,
-      "price": 77386.2734375
+      "pct": 0.25691808039605135,
+      "price": 77372.0703125
     }
   ],
   "fundamentals": {
@@ -7788,27 +7788,27 @@
           "when": "Sep 11"
         },
         {
+          "title": "Should You Buy Archer Aviation Stock While It's Below $6?",
+          "publisher": "Motley Fool",
+          "link": "https://www.fool.com/investing/2026/09/12/should-you-buy-archer-aviation-stock-while-its-bel/",
+          "when": "Sep 12"
+        },
+        {
+          "title": "Nvidia\u2019s $10B Anchor in Anthropic\u2019s $100B IPO Closes the Compute Landlord Loop",
+          "publisher": "Forkast News",
+          "link": "https://finance.yahoo.com/technology/ai/articles/nvidia-10b-anchor-anthropic-100b-153357501.html",
+          "when": "Sep 12"
+        },
+        {
+          "title": "Rivian Sacrificed Its 2027 Profit Target. Here's Why Investors Should Applaud.",
+          "publisher": "Motley Fool",
+          "link": "https://www.fool.com/investing/2026/09/12/rivian-sacrificed-its-2027-profit-target-heres-why/",
+          "when": "Sep 12"
+        },
+        {
           "title": "NuScale Power Stock Jumps 15% in 1 Day. Here's How Nuclear Energy Investors Should Respond.",
           "publisher": "Motley Fool",
           "link": "https://www.fool.com/investing/2026/09/12/nuscale-power-stock-jumps-nuclear-energy-invest/",
-          "when": "Sep 12"
-        },
-        {
-          "title": "40,000 Employees Today and 4 Million Agents Tomorrow: Nvidia CEO Jensen Huang Believes Agentic AI Will Soon Become the Norm in the Workplace",
-          "publisher": "Motley Fool",
-          "link": "https://www.fool.com/investing/2026/09/12/nvidia-ceo-jensen-huang-agentic-ai-workplace/",
-          "when": "Sep 12"
-        },
-        {
-          "title": "3 High-Yield Dividend Stocks Worth Loading Up On This Month",
-          "publisher": "Motley Fool",
-          "link": "https://www.fool.com/investing/2026/09/12/3-high-yield-dividend-stocks-worth-loading-up-on-t/",
-          "when": "Sep 12"
-        },
-        {
-          "title": "Greg Abel Is Betting on Homebuilders Even as the Pending Home Sales Index Sits Near Its Second-Lowest Reading Ever, Down 36% Since 2021. Is Berkshire Early to a Housing Recovery, or Just Early?",
-          "publisher": "Motley Fool",
-          "link": "https://www.fool.com/investing/2026/09/12/greg-abel-is-betting-on-homebuilders-even-as-the-p/",
           "when": "Sep 12"
         }
       ]
@@ -7871,6 +7871,18 @@
       "flags": [],
       "news": [
         {
+          "title": "Anthropic\u2019s Prisoner\u2019s Dilemma: Dario Amodei Hits the Brakes on AI While Begging Everyone Else to Do the Same",
+          "publisher": "24/7 Wall St.",
+          "link": "https://247wallst.com/investing/2026/09/12/anthropics-prisoners-dilemma-dario-amodei-hits-the-brakes-on-ai-while-begging-everyone-else-to-do-the-same/",
+          "when": "Sep 12"
+        },
+        {
+          "title": "Amazon Price Prediction: The Stock\u2019s Path Toward $300 Looks Clearer",
+          "publisher": "24/7 Wall St.",
+          "link": "https://247wallst.com/investing/2026/09/12/amazon-price-prediction-the-stocks-path-toward-300-looks-clearer/",
+          "when": "Sep 12"
+        },
+        {
           "title": "$2.3 Billion in Daily Profits: Why Betting Against the Magnificent 7 Keeps Failing",
           "publisher": "24/7 Wall St.",
           "link": "https://247wallst.com/investing/2026/09/12/2-3-billion-in-daily-profits-why-betting-against-the-magnificent-7-keeps-failing/",
@@ -7892,18 +7904,6 @@
           "title": "Want in on Anthropic Before the IPO? Buy These 8 Stocks",
           "publisher": "Benzinga",
           "link": "https://finance.yahoo.com/technology/ai/articles/want-anthropic-ipo-buy-8-113034122.html",
-          "when": "Sep 12"
-        },
-        {
-          "title": "The $760 Billion AI Risk That Nobody Is Talking About. But Should.",
-          "publisher": "Motley Fool",
-          "link": "https://www.fool.com/investing/2026/09/12/the-760-billion-ai-risk-that-nobody-is-talking-abo/",
-          "when": "Sep 12"
-        },
-        {
-          "title": "Jim Cramer Names Amazon (AMZN) a \u201cSleep-at-Night Growth Stock\u201d",
-          "publisher": "Insider Monkey",
-          "link": "https://finance.yahoo.com/markets/stocks/articles/jim-cramer-names-amazon-amzn-105432511.html",
           "when": "Sep 12"
         }
       ]
@@ -7966,6 +7966,12 @@
       "flags": [],
       "news": [
         {
+          "title": "Anthropic\u2019s Prisoner\u2019s Dilemma: Dario Amodei Hits the Brakes on AI While Begging Everyone Else to Do the Same",
+          "publisher": "24/7 Wall St.",
+          "link": "https://247wallst.com/investing/2026/09/12/anthropics-prisoners-dilemma-dario-amodei-hits-the-brakes-on-ai-while-begging-everyone-else-to-do-the-same/",
+          "when": "Sep 12"
+        },
+        {
           "title": "$2.3 Billion in Daily Profits: Why Betting Against the Magnificent 7 Keeps Failing",
           "publisher": "24/7 Wall St.",
           "link": "https://247wallst.com/investing/2026/09/12/2-3-billion-in-daily-profits-why-betting-against-the-magnificent-7-keeps-failing/",
@@ -7993,12 +7999,6 @@
           "title": "Microsoft Signs \u2018Iron-Clad\u2019 AI Safety Deal \u2014 Schools Can Seek Damages if Student Data Is Misused",
           "publisher": "Benzinga",
           "link": "https://www.yahoo.com/news/us/articles/microsoft-signs-iron-clad-ai-023005073.html",
-          "when": "Sep 12"
-        },
-        {
-          "title": "Microsoft Stock Is Flat So Far in 2026. Is a Rally Coming to End the Year?",
-          "publisher": "Motley Fool",
-          "link": "https://www.fool.com/investing/2026/09/11/microsoft-stock-is-flat-for-2026-is-a-rally-coming/",
           "when": "Sep 12"
         }
       ]
@@ -8851,6 +8851,12 @@
           "when": "Sep 11"
         },
         {
+          "title": "Anthropic\u2019s Prisoner\u2019s Dilemma: Dario Amodei Hits the Brakes on AI While Begging Everyone Else to Do the Same",
+          "publisher": "24/7 Wall St.",
+          "link": "https://247wallst.com/investing/2026/09/12/anthropics-prisoners-dilemma-dario-amodei-hits-the-brakes-on-ai-while-begging-everyone-else-to-do-the-same/",
+          "when": "Sep 12"
+        },
+        {
           "title": "\u2018The Oil of the Next 50 Years\u2019 \u2014 Trump Touts AI Data Centers Delivering Wealth and Investment to Communities",
           "publisher": "24/7 Wall St.",
           "link": "https://247wallst.com/investing/2026/09/12/the-oil-of-the-next-50-years-trump-touts-ai-data-centers-delivering-wealth-and-investment-to-communities/",
@@ -8872,12 +8878,6 @@
           "title": "Jim Cramer on Why Marvell (MRVL) Plunged",
           "publisher": "Insider Monkey",
           "link": "https://finance.yahoo.com/markets/stocks/articles/jim-cramer-why-marvell-mrvl-110613884.html",
-          "when": "Sep 12"
-        },
-        {
-          "title": "CP Group leader tells of modernizing Boca\u2019s Innovation Campus: \u2018It became a place\u2019",
-          "publisher": "South Florida Sun Sentinel",
-          "link": "https://www.sun-sentinel.com/2026/09/12/cp-group-leader-tells-of-modernizing-bocas-innovation-campus-it-became-a-place/",
           "when": "Sep 12"
         }
       ]
@@ -155985,7 +155985,7 @@
       "type": "closed"
     }
   ],
-  "generated_at": "2026-09-12T15:34:52+00:00",
+  "generated_at": "2026-09-12T16:02:56+00:00",
   "universe": {
     "wheel": 18,
     "growth": 19,
