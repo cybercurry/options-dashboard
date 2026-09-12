@@ -7221,8 +7221,8 @@
     },
     {
       "label": "Bitcoin",
-      "price": 77372.21875,
-      "pct": 0.2571104222348852,
+      "price": 77355.6484375,
+      "pct": 0.23563899906926533,
       "prefix": "$",
       "is_yield": false,
       "hist": [
@@ -7315,13 +7315,13 @@
         78260,
         76568,
         77174,
-        77372
+        77356
       ]
     },
     {
       "label": "Ethereum",
-      "price": 2532.449951171875,
-      "pct": 0.7044906241050031,
+      "price": 2532.330078125,
+      "pct": 0.69972379579335,
       "prefix": "$",
       "is_yield": false,
       "hist": [
@@ -7488,8 +7488,8 @@
     {
       "label": "Digital Assets",
       "ticker": "BTC",
-      "pct": 0.2571104222348852,
-      "price": 77372.21875
+      "pct": 0.23563899906926533,
+      "price": 77355.6484375
     }
   ],
   "fundamentals": {
@@ -7788,27 +7788,27 @@
           "when": "Sep 11"
         },
         {
+          "title": "Nvidia takes new role as AI\u2019s $5 trillion bill comes due",
+          "publisher": "TheStreet",
+          "link": "https://www.thestreet.com/investing/nvidia-takes-new-role-as-ais-5-trillion-bill-comes-due",
+          "when": "Sep 12"
+        },
+        {
+          "title": "Jim Cramer Flips the Script: Why Older Investors Should Ditch Growth Stocks for 30-Year Treasuries",
+          "publisher": "24/7 Wall St.",
+          "link": "https://247wallst.com/investing/2026/09/12/jim-cramer-flips-the-script-why-older-investors-should-ditch-growth-stocks-for-30-year-treasuries/",
+          "when": "Sep 12"
+        },
+        {
+          "title": "What Is an IPO? Most New Listings Lose Money in Year 1. Here's How I Filter the Winners.",
+          "publisher": "Motley Fool",
+          "link": "https://www.fool.com/investing/2026/09/12/what-is-an-ipo-most-new-listings-lose-money-in-yea/",
+          "when": "Sep 12"
+        },
+        {
           "title": "Do You Really Need Bond ETFs Before Age 50? Here's What I'd Do.",
           "publisher": "Motley Fool",
           "link": "https://www.fool.com/investing/2026/09/12/do-you-need-bonds-before-age-50-what-id-do/",
-          "when": "Sep 12"
-        },
-        {
-          "title": "3 Forgotten AI Stocks That Should Rebound From Their Corrections",
-          "publisher": "Motley Fool",
-          "link": "https://www.fool.com/investing/2026/09/12/3-forgotten-ai-stocks-that-should-rebound-from-the/",
-          "when": "Sep 12"
-        },
-        {
-          "title": "Palantir's Growth Has Kept Accelerating, but Can the Rally Continue?",
-          "publisher": "Motley Fool",
-          "link": "https://www.fool.com/investing/2026/09/12/palantirs-growth-has-kept-accelerating-but-can-the/",
-          "when": "Sep 12"
-        },
-        {
-          "title": "Anthropic\u2019s Prisoner\u2019s Dilemma: Dario Amodei Hits the Brakes on AI While Begging Everyone Else to Do the Same",
-          "publisher": "24/7 Wall St.",
-          "link": "https://247wallst.com/investing/2026/09/12/anthropics-prisoners-dilemma-dario-amodei-hits-the-brakes-on-ai-while-begging-everyone-else-to-do-the-same/",
           "when": "Sep 12"
         }
       ]
@@ -8756,6 +8756,12 @@
           "when": "Sep 12"
         },
         {
+          "title": "Jim Cramer Flips the Script: Why Older Investors Should Ditch Growth Stocks for 30-Year Treasuries",
+          "publisher": "24/7 Wall St.",
+          "link": "https://247wallst.com/investing/2026/09/12/jim-cramer-flips-the-script-why-older-investors-should-ditch-growth-stocks-for-30-year-treasuries/",
+          "when": "Sep 12"
+        },
+        {
           "title": "Dow Jones Futures: Fed Rate Hike Seen As Oil, Yields Pressure Stocks; Apple, Moderna Are New Buys",
           "publisher": "Investor's Business Daily",
           "link": "https://www.investors.com/market-trend/stock-market-today/dow-jones-futures-100-oil-surging-yields-pressure-stocks-with-fed-rate-hike-seen-apple-leads-new-buys/?src=A00220&yptr=yahoo",
@@ -8777,12 +8783,6 @@
           "title": "$2.3 Billion in Daily Profits: Why Betting Against the Magnificent 7 Keeps Failing",
           "publisher": "24/7 Wall St.",
           "link": "https://247wallst.com/investing/2026/09/12/2-3-billion-in-daily-profits-why-betting-against-the-magnificent-7-keeps-failing/",
-          "when": "Sep 12"
-        },
-        {
-          "title": "Apple and Taiwan Semiconductor Manufacturing Just Announced a Cutting-Edge Chip. 1 Stock Offers Far Greater Upside.",
-          "publisher": "Motley Fool",
-          "link": "https://www.fool.com/investing/2026/09/12/apple-and-taiwan-semiconductor-manufacturing-just/",
           "when": "Sep 12"
         }
       ]
@@ -9487,6 +9487,12 @@
           "when": "Sep 11"
         },
         {
+          "title": "What Is an IPO? Most New Listings Lose Money in Year 1. Here's How I Filter the Winners.",
+          "publisher": "Motley Fool",
+          "link": "https://www.fool.com/investing/2026/09/12/what-is-an-ipo-most-new-listings-lose-money-in-yea/",
+          "when": "Sep 12"
+        },
+        {
           "title": "Nvidia Could Make Anthropic IPO Bigger than SpaceX With $10 Billion",
           "publisher": "BeInCrypto",
           "link": "https://beincrypto.com/nvidia-muscle-anthropic-ipo-beat-spacex/",
@@ -9502,12 +9508,6 @@
           "title": "Jim Cramer Explains Why SpaceX (SPCX) Is His New Fantasy Flex Player",
           "publisher": "Insider Monkey",
           "link": "https://finance.yahoo.com/markets/stocks/articles/jim-cramer-explains-why-spacex-111019935.html",
-          "when": "Sep 12"
-        },
-        {
-          "title": "Jim Cramer Couldn\u2019t Blame Anyone Who Held These Two Elon Musk Stocks",
-          "publisher": "Insider Monkey",
-          "link": "https://finance.yahoo.com/markets/stocks/articles/jim-cramer-couldn-t-blame-105852649.html",
           "when": "Sep 12"
         }
       ]
@@ -155985,7 +155985,7 @@
       "type": "closed"
     }
   ],
-  "generated_at": "2026-09-12T16:35:20+00:00",
+  "generated_at": "2026-09-12T17:02:39+00:00",
   "universe": {
     "wheel": 18,
     "growth": 19,
