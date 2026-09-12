@@ -7221,8 +7221,8 @@
     },
     {
       "label": "Bitcoin",
-      "price": 77148.9296875,
-      "pct": -0.0322223196304261,
+      "price": 77140.6328125,
+      "pct": -0.042973216095243405,
       "prefix": "$",
       "is_yield": false,
       "hist": [
@@ -7315,13 +7315,13 @@
         78260,
         76568,
         77174,
-        77149
+        77141
       ]
     },
     {
       "label": "Ethereum",
-      "price": 2523.52001953125,
-      "pct": 0.34938618590629744,
+      "price": 2521.699951171875,
+      "pct": 0.2770100045144108,
       "prefix": "$",
       "is_yield": false,
       "hist": [
@@ -7414,7 +7414,7 @@
         2467,
         2437,
         2515,
-        2523
+        2522
       ]
     }
   ],
@@ -7488,8 +7488,8 @@
     {
       "label": "Digital Assets",
       "ticker": "BTC",
-      "pct": -0.0322223196304261,
-      "price": 77148.9296875
+      "pct": -0.042973216095243405,
+      "price": 77140.6328125
     }
   ],
   "fundamentals": {
@@ -7682,12 +7682,6 @@
           "when": "Sep 12"
         },
         {
-          "title": "Why It\u2019s Time to Buy the Dip in Affirm Stock",
-          "publisher": "Barchart",
-          "link": "https://www.barchart.com/story/news/4572753/why-its-time-to-buy-the-dip-in-affirm-stock",
-          "when": "Sep 12"
-        },
-        {
           "title": "Jim Cramer Remains A Believer In Affirm Holdings (NASDAQ:AFRM)",
           "publisher": "Insider Monkey",
           "link": "https://finance.yahoo.com/markets/stocks/articles/jim-cramer-remains-believer-affirm-105203543.html",
@@ -7710,6 +7704,12 @@
           "publisher": "MarketBeat",
           "link": "https://www.marketbeat.com/articles/chime-finds-its-stride-with-a-590m-deal-that-could-reshape-its-banking-model/?utm_source=yahoofinance&utm_medium=yahoofinance",
           "when": "Sep 11"
+        },
+        {
+          "title": "Stocks making big moves yesterday: SoFi, Marvell Technology, Lululemon, Cloudflare, and Victoria's Secret",
+          "publisher": "StockStory",
+          "link": "https://finance.yahoo.com/markets/stocks/articles/stocks-making-big-moves-yesterday-171304198.html",
+          "when": "Sep 10"
         }
       ]
     },
@@ -8869,15 +8869,15 @@
           "when": "Sep 12"
         },
         {
-          "title": "The $760 Billion AI Risk That Nobody Is Talking About. But Should.",
-          "publisher": "Motley Fool",
-          "link": "https://www.fool.com/investing/2026/09/12/the-760-billion-ai-risk-that-nobody-is-talking-abo/",
+          "title": "Why Cathie Wood Is Selling Google and Buying More Meta Platforms Stock",
+          "publisher": "Barchart",
+          "link": "https://www.barchart.com/story/news/4572825/why-cathie-wood-is-selling-google-and-buying-more-meta-platforms-stock",
           "when": "Sep 12"
         },
         {
-          "title": "Jim Cramer on Why Marvell (MRVL) Plunged",
-          "publisher": "Insider Monkey",
-          "link": "https://finance.yahoo.com/markets/stocks/articles/jim-cramer-why-marvell-mrvl-110613884.html",
+          "title": "The $760 Billion AI Risk That Nobody Is Talking About. But Should.",
+          "publisher": "Motley Fool",
+          "link": "https://www.fool.com/investing/2026/09/12/the-760-billion-ai-risk-that-nobody-is-talking-abo/",
           "when": "Sep 12"
         }
       ]
@@ -9266,6 +9266,12 @@
           "when": "Sep 12"
         },
         {
+          "title": "Why Cathie Wood Is Selling Google and Buying More Meta Platforms Stock",
+          "publisher": "Barchart",
+          "link": "https://www.barchart.com/story/news/4572825/why-cathie-wood-is-selling-google-and-buying-more-meta-platforms-stock",
+          "when": "Sep 12"
+        },
+        {
           "title": "The $760 Billion AI Risk That Nobody Is Talking About. But Should.",
           "publisher": "Motley Fool",
           "link": "https://www.fool.com/investing/2026/09/12/the-760-billion-ai-risk-that-nobody-is-talking-abo/",
@@ -9275,12 +9281,6 @@
           "title": "A flawed system and one man\u2019s hubris cost Meta shareholders $17 billion",
           "publisher": "Fortune",
           "link": "https://finance.yahoo.com/markets/stocks/articles/flawed-system-one-man-hubris-110000349.html",
-          "when": "Sep 12"
-        },
-        {
-          "title": "Mark Zuckerberg\u2019s Meta bet that AI would shrink its management ranks. Now it\u2019s quietly rebuilding them",
-          "publisher": "Fortune",
-          "link": "https://finance.yahoo.com/technology/ai/articles/mark-zuckerberg-meta-bet-ai-091600760.html",
           "when": "Sep 12"
         }
       ]
@@ -155985,7 +155985,7 @@
       "type": "closed"
     }
   ],
-  "generated_at": "2026-09-12T18:35:01+00:00",
+  "generated_at": "2026-09-12T19:02:52+00:00",
   "universe": {
     "wheel": 18,
     "growth": 19,
