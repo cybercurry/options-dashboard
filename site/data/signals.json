@@ -7221,8 +7221,8 @@
     },
     {
       "label": "Bitcoin",
-      "price": 77333.4296875,
-      "pct": 0.20684846277365665,
+      "price": 77279.1015625,
+      "pct": 0.13645134976392193,
       "prefix": "$",
       "is_yield": false,
       "hist": [
@@ -7315,13 +7315,13 @@
         78260,
         76568,
         77174,
-        77333
+        77279
       ]
     },
     {
       "label": "Ethereum",
-      "price": 2530.68994140625,
-      "pct": 0.6345027110729262,
+      "price": 2526.830078125,
+      "pct": 0.4810127811190945,
       "prefix": "$",
       "is_yield": false,
       "hist": [
@@ -7414,7 +7414,7 @@
         2467,
         2437,
         2515,
-        2531
+        2527
       ]
     }
   ],
@@ -7488,8 +7488,8 @@
     {
       "label": "Digital Assets",
       "ticker": "BTC",
-      "pct": 0.20684846277365665,
-      "price": 77333.4296875
+      "pct": 0.13645134976392193,
+      "price": 77279.1015625
     }
   ],
   "fundamentals": {
@@ -7788,6 +7788,12 @@
           "when": "Sep 11"
         },
         {
+          "title": "Prediction: Nvidia Stock Could Be Worth This Much by January 2028",
+          "publisher": "Motley Fool",
+          "link": "https://www.fool.com/investing/2026/09/12/predict-nvidia-stock-worth-this-much-2028/",
+          "when": "Sep 12"
+        },
+        {
           "title": "This 5.8%-Yielding Dividend Stock Has Made 3 Deals -- Including Nearly $3.2 Billion in Acquisitions -- in the Last 2 Weeks. Should Income Investors Be Worried or Excited?",
           "publisher": "Motley Fool",
           "link": "https://www.fool.com/investing/2026/09/12/this-5-8-yielding-dividend-stock-has-made-3-deals-including-nearly-usd3-2-billion-in-acquisitions-in-the-last-2-weeks-should-income-investors-be-worried-or-excited/",
@@ -7803,12 +7809,6 @@
           "title": "Jim Cramer Flips the Script: Why Older Investors Should Ditch Growth Stocks for 30-Year Treasuries",
           "publisher": "24/7 Wall St.",
           "link": "https://247wallst.com/investing/2026/09/12/jim-cramer-flips-the-script-why-older-investors-should-ditch-growth-stocks-for-30-year-treasuries/",
-          "when": "Sep 12"
-        },
-        {
-          "title": "What Is an IPO? Most New Listings Lose Money in Year 1. Here's How I Filter the Winners.",
-          "publisher": "Motley Fool",
-          "link": "https://www.fool.com/investing/2026/09/12/what-is-an-ipo-most-new-listings-lose-money-in-yea/",
           "when": "Sep 12"
         }
       ]
@@ -155985,7 +155985,7 @@
       "type": "closed"
     }
   ],
-  "generated_at": "2026-09-12T17:04:51+00:00",
+  "generated_at": "2026-09-12T17:32:52+00:00",
   "universe": {
     "wheel": 18,
     "growth": 19,
