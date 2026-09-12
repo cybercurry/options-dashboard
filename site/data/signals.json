@@ -7221,8 +7221,8 @@
     },
     {
       "label": "Bitcoin",
-      "price": 77418.859375,
-      "pct": 0.3175462526444406,
+      "price": 77433.8671875,
+      "pct": 0.3369930248750652,
       "prefix": "$",
       "is_yield": false,
       "hist": [
@@ -7315,13 +7315,13 @@
         78260,
         76568,
         77174,
-        77419
+        77434
       ]
     },
     {
       "label": "Ethereum",
-      "price": 2540.030029296875,
-      "pct": 1.00591727465571,
+      "price": 2539.860107421875,
+      "pct": 0.9991602227108709,
       "prefix": "$",
       "is_yield": false,
       "hist": [
@@ -7488,8 +7488,8 @@
     {
       "label": "Digital Assets",
       "ticker": "BTC",
-      "pct": 0.3175462526444406,
-      "price": 77418.859375
+      "pct": 0.3369930248750652,
+      "price": 77433.8671875
     }
   ],
   "fundamentals": {
@@ -7788,6 +7788,12 @@
           "when": "Sep 11"
         },
         {
+          "title": "NuScale Power Stock Jumps 15% in 1 Day. Here's How Nuclear Energy Investors Should Respond.",
+          "publisher": "Motley Fool",
+          "link": "https://www.fool.com/investing/2026/09/12/nuscale-power-stock-jumps-nuclear-energy-invest/",
+          "when": "Sep 12"
+        },
+        {
           "title": "40,000 Employees Today and 4 Million Agents Tomorrow: Nvidia CEO Jensen Huang Believes Agentic AI Will Soon Become the Norm in the Workplace",
           "publisher": "Motley Fool",
           "link": "https://www.fool.com/investing/2026/09/12/nvidia-ceo-jensen-huang-agentic-ai-workplace/",
@@ -7803,12 +7809,6 @@
           "title": "Greg Abel Is Betting on Homebuilders Even as the Pending Home Sales Index Sits Near Its Second-Lowest Reading Ever, Down 36% Since 2021. Is Berkshire Early to a Housing Recovery, or Just Early?",
           "publisher": "Motley Fool",
           "link": "https://www.fool.com/investing/2026/09/12/greg-abel-is-betting-on-homebuilders-even-as-the-p/",
-          "when": "Sep 12"
-        },
-        {
-          "title": "$2.3 Billion in Daily Profits: Why Betting Against the Magnificent 7 Keeps Failing",
-          "publisher": "24/7 Wall St.",
-          "link": "https://247wallst.com/investing/2026/09/12/2-3-billion-in-daily-profits-why-betting-against-the-magnificent-7-keeps-failing/",
           "when": "Sep 12"
         }
       ]
@@ -9481,6 +9481,12 @@
           "when": "Sep 11"
         },
         {
+          "title": "SpaceX signs $1.1 billion-per month computing deal",
+          "publisher": "Yahoo Finance Video",
+          "link": "https://finance.yahoo.com/video/spacex-signs-1-1-billion-195052486.html",
+          "when": "Sep 11"
+        },
+        {
           "title": "Nvidia Could Make Anthropic IPO Bigger than SpaceX With $10 Billion",
           "publisher": "BeInCrypto",
           "link": "https://beincrypto.com/nvidia-muscle-anthropic-ipo-beat-spacex/",
@@ -9502,12 +9508,6 @@
           "title": "Jim Cramer Couldn\u2019t Blame Anyone Who Held These Two Elon Musk Stocks",
           "publisher": "Insider Monkey",
           "link": "https://finance.yahoo.com/markets/stocks/articles/jim-cramer-couldn-t-blame-105852649.html",
-          "when": "Sep 12"
-        },
-        {
-          "title": "If SpaceX Stock Falls Below $100, History Suggests This Is the Move to Make",
-          "publisher": "Motley Fool",
-          "link": "https://www.fool.com/investing/2026/09/12/if-spacex-stock-falls-below-100-history-suggests-t/",
           "when": "Sep 12"
         }
       ]
@@ -155985,7 +155985,7 @@
       "type": "closed"
     }
   ],
-  "generated_at": "2026-09-12T15:22:52+00:00",
+  "generated_at": "2026-09-12T15:32:38+00:00",
   "universe": {
     "wheel": 18,
     "growth": 19,
