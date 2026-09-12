@@ -7221,8 +7221,8 @@
     },
     {
       "label": "Bitcoin",
-      "price": 77151.9921875,
-      "pct": -0.02825400379784515,
+      "price": 77118.8828125,
+      "pct": -0.07115635711035795,
       "prefix": "$",
       "is_yield": false,
       "hist": [
@@ -7315,13 +7315,13 @@
         78260,
         76568,
         77174,
-        77152
+        77119
       ]
     },
     {
       "label": "Ethereum",
-      "price": 2521.409912109375,
-      "pct": 0.2654764158499523,
+      "price": 2519.510009765625,
+      "pct": 0.18992558505293022,
       "prefix": "$",
       "is_yield": false,
       "hist": [
@@ -7414,7 +7414,7 @@
         2467,
         2437,
         2515,
-        2521
+        2520
       ]
     }
   ],
@@ -7488,8 +7488,8 @@
     {
       "label": "Digital Assets",
       "ticker": "BTC",
-      "pct": -0.02825400379784515,
-      "price": 77151.9921875
+      "pct": -0.07115635711035795,
+      "price": 77118.8828125
     }
   ],
   "fundamentals": {
@@ -7782,6 +7782,18 @@
           "when": "Sep 11"
         },
         {
+          "title": "Investing in the Vanguard S&P 500 ETF (VOO)? Beware of This 1 Sneaky Risk.",
+          "publisher": "Motley Fool",
+          "link": "https://www.fool.com/investing/2026/09/12/investing-in-the-vanguard-sp-500-etf-voo-beware-of/",
+          "when": "Sep 12"
+        },
+        {
+          "title": "Google's Historic 396 MW Clean Energy Deal Just Changed the Game for 1 AI Power Play",
+          "publisher": "Motley Fool",
+          "link": "https://www.fool.com/investing/2026/09/12/googles-historic-396-mw-clean-energy-deal-just-cha/",
+          "when": "Sep 12"
+        },
+        {
           "title": "Worried About RMDs in Retirement? 3 Key Moves to Lower the Hassle Factors.",
           "publisher": "Motley Fool",
           "link": "https://www.fool.com/retirement/2026/09/12/worried-about-rmds-in-retirement-3-key-moves-to-lo/",
@@ -7797,18 +7809,6 @@
           "title": "Better AI Chip Stock: Broadcom vs. Nvidia",
           "publisher": "Motley Fool",
           "link": "https://www.fool.com/investing/2026/09/12/better-ai-chip-stock-broadcom-vs-nvidia/",
-          "when": "Sep 12"
-        },
-        {
-          "title": "Analyst sets jaw-dropping Nvidia price target",
-          "publisher": "TheStreet",
-          "link": "https://www.thestreet.com/investing/stocks/analyst-sets-jaw-dropping-nvidia-price-target",
-          "when": "Sep 12"
-        },
-        {
-          "title": "Dividend King Altria Recently Raised Its Quarterly Dividend by Nearly 5%. Is the Stock a Buy?",
-          "publisher": "Motley Fool",
-          "link": "https://www.fool.com/investing/2026/09/12/dividend-king-altria-raise-dividend-stock-buy/",
           "when": "Sep 12"
         }
       ]
@@ -7901,9 +7901,9 @@
           "when": "Sep 12"
         },
         {
-          "title": "Prediction: Owning 100 Shares of Amazon Stock Will Turn $25,000 Into $50,000 by 2030",
-          "publisher": "Motley Fool",
-          "link": "https://www.fool.com/investing/2026/09/12/prediction-amazon-stock-25000-into-50000/",
+          "title": "Goldman Sachs Is Bullish. Here Are 3 Reasons AFRM Stock Could Climb 69%.",
+          "publisher": "Barchart",
+          "link": "https://www.barchart.com/story/news/4572918/goldman-sachs-is-bullish-here-are-3-reasons-afrm-stock-could-climb-69",
           "when": "Sep 12"
         }
       ]
@@ -7964,7 +7964,44 @@
         }
       },
       "flags": [],
-      "news": []
+      "news": [
+        {
+          "title": "Anthropic\u2019s Prisoner\u2019s Dilemma: Dario Amodei Hits the Brakes on AI While Begging Everyone Else to Do the Same",
+          "publisher": "24/7 Wall St.",
+          "link": "https://247wallst.com/investing/2026/09/12/anthropics-prisoners-dilemma-dario-amodei-hits-the-brakes-on-ai-while-begging-everyone-else-to-do-the-same/",
+          "when": "Sep 12"
+        },
+        {
+          "title": "$2.3 Billion in Daily Profits: Why Betting Against the Magnificent 7 Keeps Failing",
+          "publisher": "24/7 Wall St.",
+          "link": "https://247wallst.com/investing/2026/09/12/2-3-billion-in-daily-profits-why-betting-against-the-magnificent-7-keeps-failing/",
+          "when": "Sep 12"
+        },
+        {
+          "title": "The $760 Billion AI Risk That Nobody Is Talking About. But Should.",
+          "publisher": "Motley Fool",
+          "link": "https://www.fool.com/investing/2026/09/12/the-760-billion-ai-risk-that-nobody-is-talking-abo/",
+          "when": "Sep 12"
+        },
+        {
+          "title": "Jim Cramer Wondered Whether Microsoft Corporation (NASDAQ:MSFT) Isn\u2019t \u201cThat\u201d Dependent On AI",
+          "publisher": "Insider Monkey",
+          "link": "https://finance.yahoo.com/technology/ai/articles/jim-cramer-wondered-whether-microsoft-105632101.html",
+          "when": "Sep 12"
+        },
+        {
+          "title": "Jim Cramer Discussed Taking The Long View For Chevron Corporation (NYSE:CVX)",
+          "publisher": "Insider Monkey",
+          "link": "https://finance.yahoo.com/energy/articles/jim-cramer-discussed-taking-long-104953141.html",
+          "when": "Sep 12"
+        },
+        {
+          "title": "Microsoft Signs \u2018Iron-Clad\u2019 AI Safety Deal \u2014 Schools Can Seek Damages if Student Data Is Misused",
+          "publisher": "Benzinga",
+          "link": "https://www.yahoo.com/news/us/articles/microsoft-signs-iron-clad-ai-023005073.html",
+          "when": "Sep 12"
+        }
+      ]
     },
     "CEG": {
       "ok": true,
@@ -8631,12 +8668,6 @@
           "when": "Sep 12"
         },
         {
-          "title": "Dear Bloom Energy Stock Fans, Mark Your Calendars for September 21",
-          "publisher": "Barchart",
-          "link": "https://www.barchart.com/story/news/4572910/dear-bloom-energy-stock-fans-mark-your-calendars-for-september-21",
-          "when": "Sep 12"
-        },
-        {
           "title": "Greystone Logistics Inc (GLGI) (Q4 2026) Earnings Call Highlights: Navigating the Loss of a ...",
           "publisher": "GuruFocus.com",
           "link": "https://finance.yahoo.com/markets/stocks/articles/greystone-logistics-inc-glgi-q4-030108976.html",
@@ -8646,6 +8677,12 @@
           "title": "Walmart and Target\u2019s Shelves are Becoming a Battleground for Budget-Conscious Shoppers",
           "publisher": "Insider Monkey",
           "link": "https://finance.yahoo.com/markets/stocks/articles/walmart-target-shelves-becoming-battleground-223132477.html",
+          "when": "Sep 11"
+        },
+        {
+          "title": "Est\u00e9e Lauder\u2019s Lawsuit Over Alleged Counterfeits Sold On Walmart Moves Forward, Says Report",
+          "publisher": "Stocktwits",
+          "link": "https://stocktwits.com/news-articles/markets/equity/estee-lauder-s-lawsuit-over-alleged-counterfeits-sold-on-walmart-moves-forward-says-report/cZtXucpRBbW",
           "when": "Sep 11"
         }
       ]
@@ -8814,6 +8851,12 @@
           "when": "Sep 11"
         },
         {
+          "title": "Google's Historic 396 MW Clean Energy Deal Just Changed the Game for 1 AI Power Play",
+          "publisher": "Motley Fool",
+          "link": "https://www.fool.com/investing/2026/09/12/googles-historic-396-mw-clean-energy-deal-just-cha/",
+          "when": "Sep 12"
+        },
+        {
           "title": "Anthropic\u2019s Prisoner\u2019s Dilemma: Dario Amodei Hits the Brakes on AI While Begging Everyone Else to Do the Same",
           "publisher": "24/7 Wall St.",
           "link": "https://247wallst.com/investing/2026/09/12/anthropics-prisoners-dilemma-dario-amodei-hits-the-brakes-on-ai-while-begging-everyone-else-to-do-the-same/",
@@ -8835,12 +8878,6 @@
           "title": "Why Cathie Wood Is Selling Google and Buying More Meta Platforms Stock",
           "publisher": "Barchart",
           "link": "https://www.barchart.com/story/news/4572825/why-cathie-wood-is-selling-google-and-buying-more-meta-platforms-stock",
-          "when": "Sep 12"
-        },
-        {
-          "title": "The $760 Billion AI Risk That Nobody Is Talking About. But Should.",
-          "publisher": "Motley Fool",
-          "link": "https://www.fool.com/investing/2026/09/12/the-760-billion-ai-risk-that-nobody-is-talking-abo/",
           "when": "Sep 12"
         }
       ]
@@ -9016,6 +9053,12 @@
       ],
       "news": [
         {
+          "title": "Zscaler CEO Highlights AI Security Surge, Zero-Trust Momentum at Citi Conference",
+          "publisher": "MarketBeat",
+          "link": "https://www.marketbeat.com/instant-alerts/event-zscaler-ceo-highlights-ai-security-surge-zero-trust-momentum-at-citi-conference-2026-09-12/?utm_source=yahoofinance&utm_medium=yahoofinance",
+          "when": "Sep 12"
+        },
+        {
           "title": "Is Zscaler (ZS)\u2019s Depressed Stock Opportunity Or Warning? Answer May Lie in Emerging AI Security Business",
           "publisher": "Insider Monkey",
           "link": "https://finance.yahoo.com/markets/stocks/articles/zscaler-zs-depressed-stock-opportunity-114031388.html",
@@ -9043,12 +9086,6 @@
           "title": "Zscaler (ZS) Q4 2026 Earnings Call Transcript",
           "publisher": "Motley Fool",
           "link": "https://www.fool.com/earnings/call-transcripts/2026/09/09/zscaler-zs-q4-2026-earnings-call-transcript/",
-          "when": "Sep 09"
-        },
-        {
-          "title": "Cloudflare Surges 9% on OpenAI Security Partnership, Zscaler Rises 3%",
-          "publisher": "24/7 Wall St.",
-          "link": "https://247wallst.com/investing/2026/09/09/cloudflare-surges-9-on-openai-security-partnership-zscaler-rises-3/",
           "when": "Sep 09"
         }
       ]
@@ -10393,12 +10430,6 @@
       "flags": [],
       "news": [
         {
-          "title": "Dear Bloom Energy Stock Fans, Mark Your Calendars for September 21",
-          "publisher": "Barchart",
-          "link": "https://www.barchart.com/story/news/4572910/dear-bloom-energy-stock-fans-mark-your-calendars-for-september-21",
-          "when": "Sep 12"
-        },
-        {
           "title": "Veteran analyst resets Palantir price target for rest of 2026",
           "publisher": "TheStreet",
           "link": "https://www.thestreet.com/investing/palantir-da-davidson-raises-price-target",
@@ -10426,6 +10457,12 @@
           "title": "Oracle Surges 7% as AI Cloud Backlog Hits $664B, CoreWeave and Nebius Climb 4%",
           "publisher": "24/7 Wall St.",
           "link": "https://247wallst.com/investing/2026/09/11/oracle-surges-7-as-ai-cloud-backlog-hits-664b-coreweave-and-nebius-climb-4/",
+          "when": "Sep 11"
+        },
+        {
+          "title": "Nebius' Heavy CapEx Push: Can Customer Prepayments Ease the Strain?",
+          "publisher": "Zacks",
+          "link": "https://finance.yahoo.com/technology/ai/articles/nebius-heavy-capex-push-customer-122200284.html",
           "when": "Sep 11"
         }
       ]
@@ -10699,7 +10736,44 @@
           "text": "Rich valuation \u2014 P/E 65"
         }
       ],
-      "news": []
+      "news": [
+        {
+          "title": "Arm vs. Credo Technology Group: Which Semiconductor Stock Is a Better Buy in 2026?",
+          "publisher": "Motley Fool",
+          "link": "https://www.fool.com/coverage/better-buy/2026/09/11/arm-vs-credo-technology-group-which-semiconductor-stock-is-a-better-buy-in-2026/",
+          "when": "Sep 11"
+        },
+        {
+          "title": "Credo Technology Co-Founder and CTO Sells Nearly 4,000 Shares Worth Over $600,000 Amid a 27% One-Year Return",
+          "publisher": "Motley Fool",
+          "link": "https://www.fool.com/coverage/filings/2026/09/10/credo-technology-co-founder-and-cto-sells-nearly-4-000-shares-worth-over-usd600-000-amid-a-27-one-year-return/",
+          "when": "Sep 10"
+        },
+        {
+          "title": "Credo (CRDO) Reports 115% Revenue Growth but Lower GAAP Gross Margin. Can AI Connectivity Scale Without Further Margin Compression?",
+          "publisher": "Insider Monkey",
+          "link": "https://finance.yahoo.com/technology/ai/articles/credo-crdo-reports-115-revenue-162122654.html",
+          "when": "Sep 10"
+        },
+        {
+          "title": "What Investors Need To Understand About Broadcom, Credo and Snowflake Earnings",
+          "publisher": "24/7 Wall St.",
+          "link": "https://247wallst.com/videos/what-investors-need-to-understand-about-broadcom-credo-and-snowflake-earnings/",
+          "when": "Sep 09"
+        },
+        {
+          "title": "Credo (CRDO) Has Nearly 38% Upside to Rosenblatt\u2019s Target\u2014What\u2019s Holding It Back?",
+          "publisher": "Insider Monkey",
+          "link": "https://finance.yahoo.com/markets/stocks/articles/credo-crdo-nearly-38-upside-194241514.html",
+          "when": "Sep 09"
+        },
+        {
+          "title": "The Credo Selloff Could Be a Huge Buying Opportunity: Analysts Still See $300+.",
+          "publisher": "24/7 Wall St.",
+          "link": "https://247wallst.com/investing/2026/09/09/the-credo-selloff-could-be-a-huge-buying-opportunity-analysts-still-see-300/",
+          "when": "Sep 09"
+        }
+      ]
     }
   },
   "chains": {
@@ -155911,7 +155985,7 @@
       "type": "closed"
     }
   ],
-  "generated_at": "2026-09-12T19:04:27+00:00",
+  "generated_at": "2026-09-12T19:31:58+00:00",
   "universe": {
     "wheel": 18,
     "growth": 19,
