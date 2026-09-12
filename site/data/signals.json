@@ -7221,8 +7221,8 @@
     },
     {
       "label": "Bitcoin",
-      "price": 77158.3515625,
-      "pct": -0.02001367449241398,
+      "price": 77195.5,
+      "pct": 0.02812240148706291,
       "prefix": "$",
       "is_yield": false,
       "hist": [
@@ -7315,13 +7315,13 @@
         78260,
         76568,
         77174,
-        77158
+        77196
       ]
     },
     {
       "label": "Ethereum",
-      "price": 2521.469970703125,
-      "pct": 0.26786468420976206,
+      "price": 2522.300048828125,
+      "pct": 0.3008732712965978,
       "prefix": "$",
       "is_yield": false,
       "hist": [
@@ -7414,7 +7414,7 @@
         2467,
         2437,
         2515,
-        2521
+        2522
       ]
     }
   ],
@@ -7488,8 +7488,8 @@
     {
       "label": "Digital Assets",
       "ticker": "BTC",
-      "pct": -0.02001367449241398,
-      "price": 77158.3515625
+      "pct": 0.02812240148706291,
+      "price": 77195.5
     }
   ],
   "fundamentals": {
@@ -7558,44 +7558,7 @@
           "text": "Rich valuation \u2014 P/E 338"
         }
       ],
-      "news": [
-        {
-          "title": "Elon Musk Says Autopilot Wasn\u2019t in Use During Tesla Crash, Slams \u2018Legacy Media\u2019",
-          "publisher": "Benzinga",
-          "link": "https://www.yahoo.com/news/us/articles/elon-musk-says-autopilot-wasn-183034805.html",
-          "when": "Sep 12"
-        },
-        {
-          "title": "Elon Musk Needs Tesla to Reach a $8.5 Trillion Market Cap to Cash In. Here's How Tesla Can Reach That Valuation.",
-          "publisher": "Motley Fool",
-          "link": "https://www.fool.com/investing/2026/09/12/elon-musks-tesla-shareholders-approved-an-85-trill/",
-          "when": "Sep 12"
-        },
-        {
-          "title": "Elon Musk Says \u2018Enormous, Free Fusion Reactor in the Sky\u2019 Will Supply 100% of Energy Needs",
-          "publisher": "24/7 Wall St.",
-          "link": "https://247wallst.com/investing/2026/09/12/elon-musk-says-enormous-free-fusion-reactor-in-the-sky-will-supply-100-of-energy-needs/",
-          "when": "Sep 12"
-        },
-        {
-          "title": "$2.3 Billion in Daily Profits: Why Betting Against the Magnificent 7 Keeps Failing",
-          "publisher": "24/7 Wall St.",
-          "link": "https://247wallst.com/investing/2026/09/12/2-3-billion-in-daily-profits-why-betting-against-the-magnificent-7-keeps-failing/",
-          "when": "Sep 12"
-        },
-        {
-          "title": "Tim Cook warns of US crisis: \u2018I\u2019ve never seen anything like it\u2019 and Musk agrees. Shockproof your hard cash today",
-          "publisher": "Moneywise",
-          "link": "https://finance.yahoo.com/economy/articles/tim-cook-warns-us-crisis-111500350.html",
-          "when": "Sep 12"
-        },
-        {
-          "title": "Jim Cramer Couldn\u2019t Blame Anyone Who Held These Two Elon Musk Stocks",
-          "publisher": "Insider Monkey",
-          "link": "https://finance.yahoo.com/markets/stocks/articles/jim-cramer-couldn-t-blame-105852649.html",
-          "when": "Sep 12"
-        }
-      ]
+      "news": []
     },
     "SOFI": {
       "ok": true,
@@ -7776,6 +7739,24 @@
       ],
       "news": [
         {
+          "title": "Berkshire Hathaway Has Paid Exactly 1 Dividend Since 1965. Here's Where the Cash Goes Instead.",
+          "publisher": "Motley Fool",
+          "link": "https://www.fool.com/investing/2026/09/12/berkshire-hathaway-has-paid-exactly-1-dividend/",
+          "when": "Sep 12"
+        },
+        {
+          "title": "The Exit Path for AI Labs Is Bifurcating Again: $80B in Acquisitions vs. a Stalled IPO Pipeline",
+          "publisher": "Forkast News",
+          "link": "https://finance.yahoo.com/technology/ai/articles/exit-path-ai-labs-bifurcating-203253879.html",
+          "when": "Sep 12"
+        },
+        {
+          "title": "3 Reasons I Think Cathie Wood Is Buying Robinhood Stock Again",
+          "publisher": "Motley Fool",
+          "link": "https://www.fool.com/investing/2026/09/12/3-reasons-i-think-cathie-wood-is-buying-robinhood-stock-again/",
+          "when": "Sep 12"
+        },
+        {
           "title": "This Artificial Intelligence Stock Is Down 71% and Could Be a Screaming Buy",
           "publisher": "Motley Fool",
           "link": "https://www.fool.com/investing/2026/09/12/this-artificial-intelligence-stock-is-down-71-and/",
@@ -7791,24 +7772,6 @@
           "title": "1 Magnificent Growth Stock Down 55% to Buy Right Now, According to Wall Street",
           "publisher": "Motley Fool",
           "link": "https://www.fool.com/investing/2026/09/12/1-growth-stock-down-55-buy-right-now-wall-street/",
-          "when": "Sep 12"
-        },
-        {
-          "title": "Investing in the Vanguard S&P 500 ETF (VOO)? Beware of This 1 Sneaky Risk.",
-          "publisher": "Motley Fool",
-          "link": "https://www.fool.com/investing/2026/09/12/investing-in-the-vanguard-sp-500-etf-voo-beware-of/",
-          "when": "Sep 12"
-        },
-        {
-          "title": "Google's Historic 396 MW Clean Energy Deal Just Changed the Game for 1 AI Power Play",
-          "publisher": "Motley Fool",
-          "link": "https://www.fool.com/investing/2026/09/12/googles-historic-396-mw-clean-energy-deal-just-cha/",
-          "when": "Sep 12"
-        },
-        {
-          "title": "Worried About RMDs in Retirement? 3 Key Moves to Lower the Hassle Factors.",
-          "publisher": "Motley Fool",
-          "link": "https://www.fool.com/retirement/2026/09/12/worried-about-rmds-in-retirement-3-key-moves-to-lo/",
           "when": "Sep 12"
         }
       ]
@@ -9153,6 +9116,12 @@
       ],
       "news": [
         {
+          "title": "3 Reasons I Think Cathie Wood Is Buying Robinhood Stock Again",
+          "publisher": "Motley Fool",
+          "link": "https://www.fool.com/investing/2026/09/12/3-reasons-i-think-cathie-wood-is-buying-robinhood-stock-again/",
+          "when": "Sep 12"
+        },
+        {
           "title": "Robinhood Markets Targets Global Growth With Tokenization, AI Trading and Wealth Push",
           "publisher": "MarketBeat",
           "link": "https://www.marketbeat.com/instant-alerts/event-robinhood-markets-targets-global-growth-with-tokenization-ai-trading-and-wealth-push-2026-09-12/?utm_source=yahoofinance&utm_medium=yahoofinance",
@@ -9180,12 +9149,6 @@
           "title": "Buy Robinhood Markets Stock, Analyst Says. Plus, Intuit and 4 More Stocks.",
           "publisher": "Barrons.com",
           "link": "https://www.barrons.com/articles/buy-robinhood-markets-stock-analyst-says-plus-intuit-and-4-more-stocks-4a79bf12?siteid=yhoof2&yptr=yahoo",
-          "when": "Sep 11"
-        },
-        {
-          "title": "Robinhood Stock Pullback May Be Misleading",
-          "publisher": "GuruFocus.com",
-          "link": "https://finance.yahoo.com/markets/stocks/articles/robinhood-stock-pullback-may-misleading-201443706.html",
           "when": "Sep 11"
         }
       ]
@@ -9475,6 +9438,12 @@
       "flags": [],
       "news": [
         {
+          "title": "The Exit Path for AI Labs Is Bifurcating Again: $80B in Acquisitions vs. a Stalled IPO Pipeline",
+          "publisher": "Forkast News",
+          "link": "https://finance.yahoo.com/technology/ai/articles/exit-path-ai-labs-bifurcating-203253879.html",
+          "when": "Sep 12"
+        },
+        {
           "title": "SpaceX To Get Weighting Boost In Nasdaq 100 After Rebalance",
           "publisher": "Bloomberg",
           "link": "https://finance.yahoo.com/markets/stocks/articles/spacex-weighting-boost-nasdaq-100-175851733.html",
@@ -9502,12 +9471,6 @@
           "title": "Jim Cramer Explains Why SpaceX (SPCX) Is His New Fantasy Flex Player",
           "publisher": "Insider Monkey",
           "link": "https://finance.yahoo.com/markets/stocks/articles/jim-cramer-explains-why-spacex-111019935.html",
-          "when": "Sep 12"
-        },
-        {
-          "title": "Jim Cramer Couldn\u2019t Blame Anyone Who Held These Two Elon Musk Stocks",
-          "publisher": "Insider Monkey",
-          "link": "https://finance.yahoo.com/markets/stocks/articles/jim-cramer-couldn-t-blame-105852649.html",
           "when": "Sep 12"
         }
       ]
@@ -155985,7 +155948,7 @@
       "type": "closed"
     }
   ],
-  "generated_at": "2026-09-12T20:35:04+00:00",
+  "generated_at": "2026-09-12T21:02:44+00:00",
   "universe": {
     "wheel": 18,
     "growth": 19,
