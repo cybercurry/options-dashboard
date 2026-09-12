@@ -7221,8 +7221,8 @@
     },
     {
       "label": "Bitcoin",
-      "price": 77316.5625,
-      "pct": 0.1849923559303912,
+      "price": 77316.578125,
+      "pct": 0.18501260243974915,
       "prefix": "$",
       "is_yield": false,
       "hist": [
@@ -7315,13 +7315,13 @@
         78260,
         76568,
         77174,
-        77317
+        77318
       ]
     },
     {
       "label": "Ethereum",
-      "price": 2533.340087890625,
-      "pct": 0.7398874795516708,
+      "price": 2535.02001953125,
+      "pct": 0.806691034770668,
       "prefix": "$",
       "is_yield": false,
       "hist": [
@@ -7414,7 +7414,7 @@
         2467,
         2437,
         2515,
-        2533
+        2535
       ]
     }
   ],
@@ -7488,8 +7488,8 @@
     {
       "label": "Digital Assets",
       "ticker": "BTC",
-      "pct": 0.1849923559303912,
-      "price": 77316.5625
+      "pct": 0.18501260243974915,
+      "price": 77316.578125
     }
   ],
   "fundamentals": {
@@ -7788,27 +7788,27 @@
           "when": "Sep 11"
         },
         {
+          "title": "3 Agentic AI Stocks to Own Before AI Changes the World as We Know It",
+          "publisher": "Motley Fool",
+          "link": "https://www.fool.com/investing/2026/09/12/agentic-ai-stocks-own-before-ai-changes-world/",
+          "when": "Sep 12"
+        },
+        {
+          "title": "AMD Just Raised the Top of the Company's 2030 Market to $3 Trillion",
+          "publisher": "Motley Fool",
+          "link": "https://www.fool.com/investing/2026/09/12/amd-just-raised-the-top-of-the-company-s-2030-market-to-usd3-trillion/",
+          "when": "Sep 12"
+        },
+        {
+          "title": "Chevron Already Committed $7 Billion to Venezuela. Trump Says Exxon Is Next. Here's the Big Difference Between the 2.",
+          "publisher": "Motley Fool",
+          "link": "https://www.fool.com/investing/2026/09/12/chevron-already-committed-7-billion-to-venezuela-t/",
+          "when": "Sep 12"
+        },
+        {
           "title": "September Has Historically Been a Difficult Month for Bitcoin. This Is the Most Likely Scenario for What Happens Next.",
           "publisher": "Motley Fool",
           "link": "https://www.fool.com/investing/2026/09/12/september-has-historically-been-a-difficult-month/",
-          "when": "Sep 12"
-        },
-        {
-          "title": "HPE's $7.6 Billion AI Backlog Is Waiting on Memory Supply to Catch Up",
-          "publisher": "Motley Fool",
-          "link": "https://www.fool.com/investing/2026/09/12/hpe-billion-ai-backlog-waiting-memory-supply/",
-          "when": "Sep 12"
-        },
-        {
-          "title": "Nvidia Could Make Anthropic IPO Bigger than SpaceX With $10 Billion",
-          "publisher": "BeInCrypto",
-          "link": "https://beincrypto.com/nvidia-muscle-anthropic-ipo-beat-spacex/",
-          "when": "Sep 12"
-        },
-        {
-          "title": "Prediction: Owning 100 Shares of Amazon Stock Will Turn $25,000 Into $50,000 by 2030",
-          "publisher": "Motley Fool",
-          "link": "https://www.fool.com/investing/2026/09/12/prediction-amazon-stock-25000-into-50000/",
           "when": "Sep 12"
         }
       ]
@@ -7877,6 +7877,12 @@
           "when": "Sep 12"
         },
         {
+          "title": "Want in on Anthropic Before the IPO? Buy These 8 Stocks",
+          "publisher": "Benzinga",
+          "link": "https://finance.yahoo.com/technology/ai/articles/want-anthropic-ipo-buy-8-113034122.html",
+          "when": "Sep 12"
+        },
+        {
           "title": "The $760 Billion AI Risk That Nobody Is Talking About. But Should.",
           "publisher": "Motley Fool",
           "link": "https://www.fool.com/investing/2026/09/12/the-760-billion-ai-risk-that-nobody-is-talking-abo/",
@@ -7898,12 +7904,6 @@
           "title": "3 Ways to Invest in Anthropic Pre-IPO",
           "publisher": "Motley Fool",
           "link": "https://www.fool.com/investing/2026/09/12/3-ways-to-invest-in-anthropic-pre-ipo/",
-          "when": "Sep 12"
-        },
-        {
-          "title": "David Tepper makes surprising double bet on AI's biggest bottleneck",
-          "publisher": "TheStreet",
-          "link": "https://www.thestreet.com/investing/david-tepper-adds-coreweave-spacex-stock-ai-bottleneck",
           "when": "Sep 12"
         }
       ]
@@ -8756,6 +8756,12 @@
           "when": "Sep 12"
         },
         {
+          "title": "Dow Jones Futures: Fed Rate Hike Seen As Oil, Yields Pressure Stocks; Apple, Moderna Are New Buys",
+          "publisher": "Investor's Business Daily",
+          "link": "https://www.investors.com/market-trend/stock-market-today/dow-jones-futures-100-oil-surging-yields-pressure-stocks-with-fed-rate-hike-seen-apple-leads-new-buys/?src=A00220&yptr=yahoo",
+          "when": "Sep 12"
+        },
+        {
           "title": "Tim Cook warns of US crisis: \u2018I\u2019ve never seen anything like it\u2019 and Musk agrees. Shockproof your hard cash today",
           "publisher": "Moneywise",
           "link": "https://finance.yahoo.com/economy/articles/tim-cook-warns-us-crisis-111500350.html",
@@ -8777,12 +8783,6 @@
           "title": "Jim Cramer Highlights Affirm (AFRM) and Its Strong Merchant Network",
           "publisher": "Insider Monkey",
           "link": "https://finance.yahoo.com/markets/stocks/articles/jim-cramer-highlights-affirm-afrm-093043840.html",
-          "when": "Sep 12"
-        },
-        {
-          "title": "Why Apple Needed to Reboot Its Health App",
-          "publisher": "The Wall Street Journal",
-          "link": "https://www.wsj.com/tech/personal-tech/apple-watch-health-app-e7becf7a?siteid=yhoof2&yptr=yahoo",
           "when": "Sep 12"
         }
       ]
@@ -8945,6 +8945,12 @@
       ],
       "news": [
         {
+          "title": "AMD Just Raised the Top of the Company's 2030 Market to $3 Trillion",
+          "publisher": "Motley Fool",
+          "link": "https://www.fool.com/investing/2026/09/12/amd-just-raised-the-top-of-the-company-s-2030-market-to-usd3-trillion/",
+          "when": "Sep 12"
+        },
+        {
           "title": "AMD\u2019s CFO, Jean Hu, Just Announced Fantastic News for Investors",
           "publisher": "Motley Fool",
           "link": "https://www.fool.com/investing/2026/09/12/amd-s-cfo-jean-hu-just-announced-fantastic-news-for-investors/",
@@ -8972,12 +8978,6 @@
           "title": "TSM\u2019s Record Month Confirms AMD\u2019s AI Ramp, but Its Pricing Power Could Take Some of the Upside Back",
           "publisher": "Insider Monkey",
           "link": "https://finance.yahoo.com/technology/ai/articles/tsm-record-month-confirms-amd-230905086.html",
-          "when": "Sep 11"
-        },
-        {
-          "title": "TSM Just Posted Record Sales. Nvidia May Be Both the Winner and the One Paying for It",
-          "publisher": "Insider Monkey",
-          "link": "https://finance.yahoo.com/markets/stocks/articles/tsm-just-posted-record-sales-225826905.html",
           "when": "Sep 11"
         }
       ]
@@ -9254,6 +9254,12 @@
           "when": "Sep 12"
         },
         {
+          "title": "Mark Zuckerberg\u2019s Meta bet that AI would shrink its management ranks. Now it\u2019s quietly rebuilding them",
+          "publisher": "Fortune",
+          "link": "https://finance.yahoo.com/technology/ai/articles/mark-zuckerberg-meta-bet-ai-091600760.html",
+          "when": "Sep 12"
+        },
+        {
           "title": "Meta May Overtake Google Search in Ad Revenue This Year, Bernstein Says",
           "publisher": "Insider Monkey",
           "link": "https://finance.yahoo.com/media-advertising/articles/meta-may-overtake-google-search-084633342.html",
@@ -9275,12 +9281,6 @@
           "title": "Why Meta Platforms Stock Only Bumped Slightly Higher on Friday",
           "publisher": "Motley Fool",
           "link": "https://www.fool.com/investing/2026/09/11/why-meta-platforms-stock-only-bumped-slightly-high/",
-          "when": "Sep 11"
-        },
-        {
-          "title": "2 Nasdaq 100 Stocks with Exciting Potential and 1 We Brush Off",
-          "publisher": "StockStory",
-          "link": "https://finance.yahoo.com/markets/stocks/articles/2-nasdaq-100-stocks-exciting-221105481.html",
           "when": "Sep 11"
         }
       ]
@@ -155985,7 +155985,7 @@
       "type": "closed"
     }
   ],
-  "generated_at": "2026-09-12T12:35:15+00:00",
+  "generated_at": "2026-09-12T13:02:55+00:00",
   "universe": {
     "wheel": 18,
     "growth": 19,
