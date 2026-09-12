@@ -7221,8 +7221,8 @@
     },
     {
       "label": "Bitcoin",
-      "price": 77355.6484375,
-      "pct": 0.23563899906926533,
+      "price": 77333.4296875,
+      "pct": 0.20684846277365665,
       "prefix": "$",
       "is_yield": false,
       "hist": [
@@ -7315,13 +7315,13 @@
         78260,
         76568,
         77174,
-        77356
+        77333
       ]
     },
     {
       "label": "Ethereum",
-      "price": 2532.330078125,
-      "pct": 0.69972379579335,
+      "price": 2530.68994140625,
+      "pct": 0.6345027110729262,
       "prefix": "$",
       "is_yield": false,
       "hist": [
@@ -7414,7 +7414,7 @@
         2467,
         2437,
         2515,
-        2532
+        2531
       ]
     }
   ],
@@ -7488,8 +7488,8 @@
     {
       "label": "Digital Assets",
       "ticker": "BTC",
-      "pct": 0.23563899906926533,
-      "price": 77355.6484375
+      "pct": 0.20684846277365665,
+      "price": 77333.4296875
     }
   ],
   "fundamentals": {
@@ -7788,6 +7788,12 @@
           "when": "Sep 11"
         },
         {
+          "title": "This 5.8%-Yielding Dividend Stock Has Made 3 Deals -- Including Nearly $3.2 Billion in Acquisitions -- in the Last 2 Weeks. Should Income Investors Be Worried or Excited?",
+          "publisher": "Motley Fool",
+          "link": "https://www.fool.com/investing/2026/09/12/this-5-8-yielding-dividend-stock-has-made-3-deals-including-nearly-usd3-2-billion-in-acquisitions-in-the-last-2-weeks-should-income-investors-be-worried-or-excited/",
+          "when": "Sep 12"
+        },
+        {
           "title": "Nvidia takes new role as AI\u2019s $5 trillion bill comes due",
           "publisher": "TheStreet",
           "link": "https://www.thestreet.com/investing/nvidia-takes-new-role-as-ais-5-trillion-bill-comes-due",
@@ -7803,12 +7809,6 @@
           "title": "What Is an IPO? Most New Listings Lose Money in Year 1. Here's How I Filter the Winners.",
           "publisher": "Motley Fool",
           "link": "https://www.fool.com/investing/2026/09/12/what-is-an-ipo-most-new-listings-lose-money-in-yea/",
-          "when": "Sep 12"
-        },
-        {
-          "title": "Do You Really Need Bond ETFs Before Age 50? Here's What I'd Do.",
-          "publisher": "Motley Fool",
-          "link": "https://www.fool.com/investing/2026/09/12/do-you-need-bonds-before-age-50-what-id-do/",
           "when": "Sep 12"
         }
       ]
@@ -155985,7 +155985,7 @@
       "type": "closed"
     }
   ],
-  "generated_at": "2026-09-12T17:02:39+00:00",
+  "generated_at": "2026-09-12T17:04:51+00:00",
   "universe": {
     "wheel": 18,
     "growth": 19,
