@@ -6833,8 +6833,8 @@
     },
     {
       "label": "Bitcoin",
-      "price": 77450.359375,
-      "pct": 0.3583632154939176,
+      "price": 77444.578125,
+      "pct": 0.35087200703445287,
       "prefix": "$",
       "is_yield": false,
       "hist": [
@@ -6927,13 +6927,13 @@
         78260,
         76568,
         77174,
-        77450
+        77445
       ]
     },
     {
       "label": "Ethereum",
-      "price": 2539.72998046875,
-      "pct": 0.9939856412646275,
+      "price": 2539.360107421875,
+      "pct": 0.9792774031950335,
       "prefix": "$",
       "is_yield": false,
       "hist": [
@@ -7026,7 +7026,7 @@
         2467,
         2437,
         2515,
-        2540
+        2539
       ]
     }
   ],
@@ -7100,8 +7100,8 @@
     {
       "label": "Digital Assets",
       "ticker": "BTC",
-      "pct": 0.3583632154939176,
-      "price": 77450.359375
+      "pct": 0.35087200703445287,
+      "price": 77444.578125
     }
   ],
   "fundamentals": {
@@ -8897,6 +8897,138 @@
         }
       ]
     },
+    "IBIT": {
+      "ok": true,
+      "error": null,
+      "ticker": "IBIT",
+      "company": "iShares Bitcoin Trust ETF",
+      "cik": "0001980994",
+      "source": "SEC EDGAR \u2014 10-K / 10-Q filings",
+      "profile": {
+        "summary": "The shares are intended to constitute a simple means of making an investment similar to an investment in bitcoin rather than by acquiring, holding and trading bitcoin directly on a peer-to-peer or other basis or via a digital asset exchange. The fund is non-diversified.",
+        "sic": "Commodity Contracts Brokers & Dealers",
+        "summary_short": "The shares are intended to constitute a simple means of making an investment similar to an investment in bitcoin rather than by acquiring, holding and trading bitcoin directly on a peer-to-peer or other basis or via a digital asset exchange. The fund is non-diversified.",
+        "summary_ai": false
+      },
+      "metrics": {
+        "revenue": null,
+        "revenue_prev": null,
+        "net_income": -8968686985.0,
+        "net_income_prev": 14232135930.0,
+        "rev_growth": null,
+        "ni_growth": -1.6301715377868795,
+        "gross_margin": null,
+        "op_margin": null,
+        "net_margin": null,
+        "roe": null,
+        "fcf": null,
+        "fcf_margin": null,
+        "debt_to_equity": null,
+        "current_ratio": null,
+        "interest_coverage": null,
+        "eps": -7.46,
+        "shares": 1301360000.0,
+        "share_change": null,
+        "capex": null,
+        "rnd": null,
+        "market_cap": 56960527200.00001,
+        "pe": null,
+        "fcf_yield": null,
+        "peg": null
+      },
+      "groups": {
+        "Valuation": {
+          "verdict": "\u26aa"
+        },
+        "Quality": {
+          "verdict": "\u26aa"
+        },
+        "Health": {
+          "verdict": "\u26aa"
+        }
+      },
+      "flags": [],
+      "news": [
+        {
+          "title": "Crypto Mining Stocks Fall Harder Than Bitcoin on a Risk-Off Tape: Cipher Mining Sinks 6%, MARA and Riot Drop 4%",
+          "publisher": "24/7 Wall St.",
+          "link": "https://247wallst.com/investing/2026/09/10/crypto-mining-stocks-fall-harder-than-bitcoin-on-a-risk-off-tape-cipher-mining-sinks-6-mara-and-riot-drop-4/",
+          "when": "Sep 10"
+        },
+        {
+          "title": "From Farmland to Fast Trading, ETFs Are Doing It All",
+          "publisher": "etf.com",
+          "link": "http://www.etf.com/sections/podcasts/farmland-fast-trading-etfs-are-doing-it-all?utm_source=yahoo-finance&utm_medium=rss&utm_campaign=yahoo-finance-rss",
+          "when": "Sep 09"
+        },
+        {
+          "title": "Crypto ETFs in 2026: Bitcoin, Ethereum and the Altcoin Wave Explained",
+          "publisher": "etf.com",
+          "link": "http://www.etf.com/sections/features/crypto-etfs-2026-bitcoin-ethereum-and-altcoin-wave-explained?utm_source=yahoo-finance&utm_medium=rss&utm_campaign=yahoo-finance-rss",
+          "when": "Sep 09"
+        },
+        {
+          "title": "Crypto Market Today, Sept. 8: Bitcoin Slides as Fed Hike Odds Pass 60%",
+          "publisher": "Motley Fool",
+          "link": "https://www.fool.com/coverage/stock-market-today/2026/09/08/crypto-market-today-sept-8-bitcoin-slides-as-fed-hike-odds-pass-60/",
+          "when": "Sep 08"
+        },
+        {
+          "title": "Goldman Is Paying $2.25 Billion for the Firm Behind This Bitcoin Income Fund",
+          "publisher": "24/7 Wall St.",
+          "link": "https://247wallst.com/investing/etf/2026/09/08/goldman-is-paying-2-25-billion-for-the-firm-behind-this-bitcoin-income-fund/",
+          "when": "Sep 08"
+        },
+        {
+          "title": "Crypto Mining Stocks Rally While Bitcoin Slips: Cipher Mining Jumps 8%, MARA Climbs 6%",
+          "publisher": "24/7 Wall St.",
+          "link": "https://247wallst.com/investing/2026/09/08/crypto-mining-stocks-rally-while-bitcoin-slips-cipher-mining-jumps-8-mara-climbs-6/",
+          "when": "Sep 08"
+        }
+      ]
+    },
+    "SPX": {
+      "ok": false,
+      "error": "No fundamentals available. SEC: SPX not in SEC's ticker list (US-listed filers only). Yahoo fallback also returned nothing (foreign/ADR names may lack coverage).",
+      "news": [
+        {
+          "title": "MoneyMasters Podcast 9-3-26- Howard Lindzon on AI and the \"Degenerate Economy\"",
+          "publisher": "MoneyShow",
+          "link": "https://finance.yahoo.com/technology/ai/articles/moneymasters-podcast-9-3-26-163200254.html",
+          "when": "Sep 03"
+        },
+        {
+          "title": "MAIN- A High-Yielding BDC That's Rebounding Nicely",
+          "publisher": "MoneyShow",
+          "link": "https://finance.yahoo.com/markets/stocks/articles/main-high-yielding-bdc-thats-050100970.html",
+          "when": "Sep 03"
+        },
+        {
+          "title": "Market Minute 8-31-26- Oil Rises on Fresh Mideast Strikes",
+          "publisher": "MoneyShow",
+          "link": "https://finance.yahoo.com/energy/articles/market-minute-8-31-26-142000475.html",
+          "when": "Aug 31"
+        },
+        {
+          "title": "MoneyMasters Podcast 8-20-26- Canadian Commodity Plays or American AI Stocks",
+          "publisher": "MoneyShow",
+          "link": "https://finance.yahoo.com/markets/stocks/articles/moneymasters-podcast-8-20-26-163200254.html",
+          "when": "Aug 20"
+        },
+        {
+          "title": "Three Sectors to Target When Inflation is a Primary Threat",
+          "publisher": "MoneyShow",
+          "link": "https://finance.yahoo.com/markets/stocks/articles/three-sectors-target-inflation-primary-050100578.html",
+          "when": "Aug 20"
+        },
+        {
+          "title": "Financials- On an 11-Week Win Streak, and Still Looking Solid",
+          "publisher": "MoneyShow",
+          "link": "https://finance.yahoo.com/markets/stocks/articles/financials-11-week-win-streak-050100378.html",
+          "when": "Aug 18"
+        }
+      ]
+    },
     "SPCX": {
       "ok": true,
       "error": null,
@@ -9908,44 +10040,7 @@
         }
       },
       "flags": [],
-      "news": [
-        {
-          "title": "Veteran analyst resets Palantir price target for rest of 2026",
-          "publisher": "TheStreet",
-          "link": "https://www.thestreet.com/investing/palantir-da-davidson-raises-price-target",
-          "when": "Sep 12"
-        },
-        {
-          "title": "Oracle's AI Cloud Growth Lifts CoreWeave, Nebius and IREN",
-          "publisher": "GuruFocus.com",
-          "link": "https://finance.yahoo.com/technology/ai/articles/oracles-ai-cloud-growth-lifts-211041374.html",
-          "when": "Sep 11"
-        },
-        {
-          "title": "Nebius CEO Volozh estimates $250 billion in capex spend by 2030",
-          "publisher": "Blockspace",
-          "link": "https://blockspace.media/insight/nebius-5gw-buildout-needs-250-billion/",
-          "when": "Sep 11"
-        },
-        {
-          "title": "CoreWeave Doubles Down on Physical AI: Can CRWV Capture More Demand?",
-          "publisher": "Zacks",
-          "link": "https://finance.yahoo.com/technology/ai/articles/coreweave-doubles-down-physical-ai-144900968.html",
-          "when": "Sep 11"
-        },
-        {
-          "title": "Oracle Surges 7% as AI Cloud Backlog Hits $664B, CoreWeave and Nebius Climb 4%",
-          "publisher": "24/7 Wall St.",
-          "link": "https://247wallst.com/investing/2026/09/11/oracle-surges-7-as-ai-cloud-backlog-hits-664b-coreweave-and-nebius-climb-4/",
-          "when": "Sep 11"
-        },
-        {
-          "title": "Nebius' Heavy CapEx Push: Can Customer Prepayments Ease the Strain?",
-          "publisher": "Zacks",
-          "link": "https://finance.yahoo.com/technology/ai/articles/nebius-heavy-capex-push-customer-122200284.html",
-          "when": "Sep 11"
-        }
-      ]
+      "news": []
     },
     "HIMS": {
       "ok": true,
@@ -142735,7 +142830,7 @@
       "type": "closed"
     }
   ],
-  "generated_at": "2026-09-12T15:01:55+00:00",
+  "generated_at": "2026-09-12T15:03:25+00:00",
   "universe": {
     "wheel": 18,
     "growth": 19,
