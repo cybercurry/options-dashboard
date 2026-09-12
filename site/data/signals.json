@@ -7221,8 +7221,8 @@
     },
     {
       "label": "Bitcoin",
-      "price": 77250.5078125,
-      "pct": 0.09940023765353523,
+      "price": 77203.1015625,
+      "pct": 0.03797232828581798,
       "prefix": "$",
       "is_yield": false,
       "hist": [
@@ -7315,13 +7315,13 @@
         78260,
         76568,
         77174,
-        77251
+        77203
       ]
     },
     {
       "label": "Ethereum",
-      "price": 2525.4599609375,
-      "pct": 0.42652919560985936,
+      "price": 2525.669921875,
+      "pct": 0.4348784264612382,
       "prefix": "$",
       "is_yield": false,
       "hist": [
@@ -7414,7 +7414,7 @@
         2467,
         2437,
         2515,
-        2525
+        2526
       ]
     }
   ],
@@ -7488,8 +7488,8 @@
     {
       "label": "Digital Assets",
       "ticker": "BTC",
-      "pct": 0.09940023765353523,
-      "price": 77250.5078125
+      "pct": 0.03797232828581798,
+      "price": 77203.1015625
     }
   ],
   "fundamentals": {
@@ -7788,6 +7788,18 @@
           "when": "Sep 11"
         },
         {
+          "title": "Analyst sets jaw-dropping Nvidia price target",
+          "publisher": "TheStreet",
+          "link": "https://www.thestreet.com/investing/stocks/analyst-sets-jaw-dropping-nvidia-price-target",
+          "when": "Sep 12"
+        },
+        {
+          "title": "Dividend King Altria Recently Raised Its Quarterly Dividend by Nearly 5%. Is the Stock a Buy?",
+          "publisher": "Motley Fool",
+          "link": "https://www.fool.com/investing/2026/09/12/dividend-king-altria-raise-dividend-stock-buy/",
+          "when": "Sep 12"
+        },
+        {
           "title": "Prediction: Nvidia Stock Could Be Worth This Much by January 2028",
           "publisher": "Motley Fool",
           "link": "https://www.fool.com/investing/2026/09/12/predict-nvidia-stock-worth-this-much-2028/",
@@ -7797,18 +7809,6 @@
           "title": "This 5.8%-Yielding Dividend Stock Has Made 3 Deals -- Including Nearly $3.2 Billion in Acquisitions -- in the Last 2 Weeks. Should Income Investors Be Worried or Excited?",
           "publisher": "Motley Fool",
           "link": "https://www.fool.com/investing/2026/09/12/this-5-8-yielding-dividend-stock-has-made-3-deals-including-nearly-usd3-2-billion-in-acquisitions-in-the-last-2-weeks-should-income-investors-be-worried-or-excited/",
-          "when": "Sep 12"
-        },
-        {
-          "title": "Nvidia takes new role as AI\u2019s $5 trillion bill comes due",
-          "publisher": "TheStreet",
-          "link": "https://www.thestreet.com/investing/nvidia-takes-new-role-as-ais-5-trillion-bill-comes-due",
-          "when": "Sep 12"
-        },
-        {
-          "title": "Jim Cramer Flips the Script: Why Older Investors Should Ditch Growth Stocks for 30-Year Treasuries",
-          "publisher": "24/7 Wall St.",
-          "link": "https://247wallst.com/investing/2026/09/12/jim-cramer-flips-the-script-why-older-investors-should-ditch-growth-stocks-for-30-year-treasuries/",
           "when": "Sep 12"
         }
       ]
@@ -155985,7 +155985,7 @@
       "type": "closed"
     }
   ],
-  "generated_at": "2026-09-12T17:34:20+00:00",
+  "generated_at": "2026-09-12T17:49:06+00:00",
   "universe": {
     "wheel": 18,
     "growth": 19,
