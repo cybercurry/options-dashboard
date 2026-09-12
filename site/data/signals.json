@@ -7221,8 +7221,8 @@
     },
     {
       "label": "Bitcoin",
-      "price": 77144.25,
-      "pct": -0.03828614918073292,
+      "price": 77154.671875,
+      "pct": -0.024781727444322943,
       "prefix": "$",
       "is_yield": false,
       "hist": [
@@ -7315,13 +7315,13 @@
         78260,
         76568,
         77174,
-        77144
+        77155
       ]
     },
     {
       "label": "Ethereum",
-      "price": 2519.800048828125,
-      "pct": 0.20145917371738875,
+      "price": 2521.639892578125,
+      "pct": 0.27462173615460106,
       "prefix": "$",
       "is_yield": false,
       "hist": [
@@ -7414,7 +7414,7 @@
         2467,
         2437,
         2515,
-        2520
+        2522
       ]
     }
   ],
@@ -7488,8 +7488,8 @@
     {
       "label": "Digital Assets",
       "ticker": "BTC",
-      "pct": -0.03828614918073292,
-      "price": 77144.25
+      "pct": -0.024781727444322943,
+      "price": 77154.671875
     }
   ],
   "fundamentals": {
@@ -7560,12 +7560,6 @@
       ],
       "news": [
         {
-          "title": "Inside Tesla\u2019s Cybertruck and robotaxi experience",
-          "publisher": "Yahoo Finance Video",
-          "link": "https://finance.yahoo.com/video/inside-tesla-cybertruck-robotaxi-experience-202100555.html",
-          "when": "Sep 11"
-        },
-        {
           "title": "Elon Musk Says Autopilot Wasn\u2019t in Use During Tesla Crash, Slams \u2018Legacy Media\u2019",
           "publisher": "Benzinga",
           "link": "https://www.yahoo.com/news/us/articles/elon-musk-says-autopilot-wasn-183034805.html",
@@ -7593,6 +7587,12 @@
           "title": "Tim Cook warns of US crisis: \u2018I\u2019ve never seen anything like it\u2019 and Musk agrees. Shockproof your hard cash today",
           "publisher": "Moneywise",
           "link": "https://finance.yahoo.com/economy/articles/tim-cook-warns-us-crisis-111500350.html",
+          "when": "Sep 12"
+        },
+        {
+          "title": "Jim Cramer Couldn\u2019t Blame Anyone Who Held These Two Elon Musk Stocks",
+          "publisher": "Insider Monkey",
+          "link": "https://finance.yahoo.com/markets/stocks/articles/jim-cramer-couldn-t-blame-105852649.html",
           "when": "Sep 12"
         }
       ]
@@ -7966,6 +7966,12 @@
       "flags": [],
       "news": [
         {
+          "title": "Zscaler Conference: AI Agents, Agentic SOC Fuel Zero-Trust Growth Ambitions",
+          "publisher": "MarketBeat",
+          "link": "https://www.marketbeat.com/instant-alerts/event-zscaler-conference-ai-agents-agentic-soc-fuel-zero-trust-growth-ambitions-2026-09-12/?utm_source=yahoofinance&utm_medium=yahoofinance",
+          "when": "Sep 12"
+        },
+        {
           "title": "Anthropic\u2019s Prisoner\u2019s Dilemma: Dario Amodei Hits the Brakes on AI While Begging Everyone Else to Do the Same",
           "publisher": "24/7 Wall St.",
           "link": "https://247wallst.com/investing/2026/09/12/anthropics-prisoners-dilemma-dario-amodei-hits-the-brakes-on-ai-while-begging-everyone-else-to-do-the-same/",
@@ -7993,12 +7999,6 @@
           "title": "Jim Cramer Discussed Taking The Long View For Chevron Corporation (NYSE:CVX)",
           "publisher": "Insider Monkey",
           "link": "https://finance.yahoo.com/energy/articles/jim-cramer-discussed-taking-long-104953141.html",
-          "when": "Sep 12"
-        },
-        {
-          "title": "Microsoft Signs \u2018Iron-Clad\u2019 AI Safety Deal \u2014 Schools Can Seek Damages if Student Data Is Misused",
-          "publisher": "Benzinga",
-          "link": "https://www.yahoo.com/news/us/articles/microsoft-signs-iron-clad-ai-023005073.html",
           "when": "Sep 12"
         }
       ]
@@ -8951,6 +8951,12 @@
           "when": "Sep 12"
         },
         {
+          "title": "Why AMD Stock Forecast Has Room to Run",
+          "publisher": "Barchart",
+          "link": "https://www.barchart.com/story/news/4573363/why-amd-stock-forecast-has-room-to-run",
+          "when": "Sep 12"
+        },
+        {
           "title": "Qualcomm Lost Apple\u2019s Modem Business. Amazon Just Offered a $60 Billion Escape Route.",
           "publisher": "24/7 Wall St.",
           "link": "https://247wallst.com/investing/2026/09/12/qualcomm-lost-apples-modem-business-amazon-just-offered-a-60-billion-escape-route/",
@@ -8972,12 +8978,6 @@
           "title": "Why Power Integrations (POWI) Stock Is Trading Up Today",
           "publisher": "StockStory",
           "link": "https://finance.yahoo.com/markets/stocks/articles/why-power-integrations-powi-stock-045105470.html",
-          "when": "Sep 12"
-        },
-        {
-          "title": "Qorvo, Qualcomm, Texas Instruments, Vishay Intertechnology, and Impinj Stocks Trade Up, What You Need To Know",
-          "publisher": "StockStory",
-          "link": "https://finance.yahoo.com/markets/stocks/articles/qorvo-qualcomm-texas-instruments-vishay-041105294.html",
           "when": "Sep 12"
         }
       ]
@@ -9053,6 +9053,12 @@
       ],
       "news": [
         {
+          "title": "Zscaler Conference: AI Agents, Agentic SOC Fuel Zero-Trust Growth Ambitions",
+          "publisher": "MarketBeat",
+          "link": "https://www.marketbeat.com/instant-alerts/event-zscaler-conference-ai-agents-agentic-soc-fuel-zero-trust-growth-ambitions-2026-09-12/?utm_source=yahoofinance&utm_medium=yahoofinance",
+          "when": "Sep 12"
+        },
+        {
           "title": "1 Magnificent Growth Stock Down 55% to Buy Right Now, According to Wall Street",
           "publisher": "Motley Fool",
           "link": "https://www.fool.com/investing/2026/09/12/1-growth-stock-down-55-buy-right-now-wall-street/",
@@ -9081,12 +9087,6 @@
           "publisher": "Trefis",
           "link": "https://www.trefis.com/articles/614777/what-is-really-behind-crowdstrike-stocks-doubling/2026-09-10",
           "when": "Sep 11"
-        },
-        {
-          "title": "Should You Get Paid To Wait For Palo Alto Networks To Slow Down?",
-          "publisher": "Trefis",
-          "link": "https://www.trefis.com/articles/614688/should-you-get-paid-to-wait-for-palo-alto-networks-to-slow-down/2026-09-09",
-          "when": "Sep 10"
         }
       ]
     },
@@ -155985,7 +155985,7 @@
       "type": "closed"
     }
   ],
-  "generated_at": "2026-09-12T20:04:59+00:00",
+  "generated_at": "2026-09-12T20:26:01+00:00",
   "universe": {
     "wheel": 18,
     "growth": 19,
