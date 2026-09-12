@@ -7221,8 +7221,8 @@
     },
     {
       "label": "Bitcoin",
-      "price": 77357.1484375,
-      "pct": 0.23758266396687322,
+      "price": 77434.7734375,
+      "pct": 0.3381673224173598,
       "prefix": "$",
       "is_yield": false,
       "hist": [
@@ -7315,13 +7315,13 @@
         78260,
         76568,
         77174,
-        77357
+        77435
       ]
     },
     {
       "label": "Ethereum",
-      "price": 2541.669921875,
-      "pct": 1.0711286509681672,
+      "price": 2543.0400390625,
+      "pct": 1.1256122364774024,
       "prefix": "$",
       "is_yield": false,
       "hist": [
@@ -7414,7 +7414,7 @@
         2467,
         2437,
         2515,
-        2542
+        2543
       ]
     }
   ],
@@ -7488,8 +7488,8 @@
     {
       "label": "Digital Assets",
       "ticker": "BTC",
-      "pct": 0.23758266396687322,
-      "price": 77357.1484375
+      "pct": 0.3381673224173598,
+      "price": 77434.7734375
     }
   ],
   "fundamentals": {
@@ -7676,6 +7676,12 @@
       ],
       "news": [
         {
+          "title": "Where Will SoFi Stock Be in 5 Years?",
+          "publisher": "Motley Fool",
+          "link": "https://www.fool.com/investing/2026/09/12/where-will-sofi-stock-be-in-5-years/",
+          "when": "Sep 12"
+        },
+        {
           "title": "Jim Cramer Remains A Believer In Affirm Holdings (NASDAQ:AFRM)",
           "publisher": "Insider Monkey",
           "link": "https://finance.yahoo.com/markets/stocks/articles/jim-cramer-remains-believer-affirm-105203543.html",
@@ -7703,12 +7709,6 @@
           "title": "SoFi vs. Nu: Which Digital Banking Stock Will Lead the Pack for Now?",
           "publisher": "Zacks",
           "link": "https://finance.yahoo.com/markets/stocks/articles/sofi-vs-nu-digital-banking-164400073.html",
-          "when": "Sep 10"
-        },
-        {
-          "title": "SoFi Stock Is Down More Than 40%. Here\u2019s Why I\u2019m Not Selling.",
-          "publisher": "24/7 Wall St.",
-          "link": "https://247wallst.com/investing/2026/09/10/sofi-stock-is-down-more-than-40-heres-why-im-not-selling/",
           "when": "Sep 10"
         }
       ]
@@ -7788,27 +7788,27 @@
           "when": "Sep 11"
         },
         {
+          "title": "Where Will SoFi Stock Be in 5 Years?",
+          "publisher": "Motley Fool",
+          "link": "https://www.fool.com/investing/2026/09/12/where-will-sofi-stock-be-in-5-years/",
+          "when": "Sep 12"
+        },
+        {
+          "title": "4 No-Brainer Dividend ETFs to Build Lasting Passive Income",
+          "publisher": "Motley Fool",
+          "link": "https://www.fool.com/investing/2026/09/12/4-no-brainer-dividend-etfs-build-passive-income/",
+          "when": "Sep 12"
+        },
+        {
+          "title": "Could Buying This Cryptocurrency Make You Rich?",
+          "publisher": "Motley Fool",
+          "link": "https://www.fool.com/investing/2026/09/12/could-buying-this-cryptocurrency-make-you-rich/",
+          "when": "Sep 12"
+        },
+        {
           "title": "Apple and Taiwan Semiconductor Manufacturing Just Announced a Cutting-Edge Chip. 1 Stock Offers Far Greater Upside.",
           "publisher": "Motley Fool",
           "link": "https://www.fool.com/investing/2026/09/12/apple-and-taiwan-semiconductor-manufacturing-just/",
-          "when": "Sep 12"
-        },
-        {
-          "title": "Qualcomm Lost Apple\u2019s Modem Business. Amazon Just Offered a $60 Billion Escape Route.",
-          "publisher": "24/7 Wall St.",
-          "link": "https://247wallst.com/investing/2026/09/12/qualcomm-lost-apples-modem-business-amazon-just-offered-a-60-billion-escape-route/",
-          "when": "Sep 12"
-        },
-        {
-          "title": "Will Midterm Elections Cause the Stock Market to Plunge? 75 Years of History Offer an Unexpected Answer.",
-          "publisher": "Motley Fool",
-          "link": "https://www.fool.com/investing/2026/09/12/will-midterm-elections-cause-stock-market-to-plunge-75-years-history-offer-unexpected-answer/",
-          "when": "Sep 12"
-        },
-        {
-          "title": "If a Stock Market Crash Is Coming, History Says This 1 Move Protects Investors Every Single Time",
-          "publisher": "Motley Fool",
-          "link": "https://www.fool.com/investing/2026/09/12/if-a-stock-market-crash-is-coming-history-says-thi/",
           "when": "Sep 12"
         }
       ]
@@ -8261,6 +8261,12 @@
       ],
       "news": [
         {
+          "title": "Starbucks CEO: \u201cThe Shine Is Back.\u201d Should You Buy After the Stock\u2019s 30% Jump?",
+          "publisher": "24/7 Wall St.",
+          "link": "https://247wallst.com/investing/2026/09/12/starbucks-ceo-the-shine-is-back-should-you-buy-after-the-stocks-30-jump/",
+          "when": "Sep 12"
+        },
+        {
           "title": "Brinker International (EAT) Down 10% Since Last Earnings Report: Can It Rebound?",
           "publisher": "Zacks",
           "link": "https://finance.yahoo.com/markets/stocks/articles/brinker-international-eat-down-10-153003270.html",
@@ -8288,12 +8294,6 @@
           "title": "Chipotle Mexican Grill (CMG) Sees a More Significant Dip Than Broader Market: Some Facts to Know",
           "publisher": "Zacks",
           "link": "https://finance.yahoo.com/markets/stocks/articles/chipotle-mexican-grill-cmg-sees-214506850.html",
-          "when": "Sep 09"
-        },
-        {
-          "title": "Casey\u2019s Post-Earnings Drop May Give Investors a Better Entry Into a Quality Retailer",
-          "publisher": "MarketBeat",
-          "link": "https://www.marketbeat.com/articles/caseys-post-earnings-drop-may-give-investors-a-better-entry-into-a-quality-retailer/?utm_source=yahoofinance&utm_medium=yahoofinance",
           "when": "Sep 09"
         }
       ]
@@ -8650,6 +8650,18 @@
       ],
       "news": [
         {
+          "title": "Walmart and Sam's Club just gave shoppers a reason to ditch Costco",
+          "publisher": "TheStreet",
+          "link": "https://www.thestreet.com/retail/walmart-sams-club-add-tap-to-pay-technology",
+          "when": "Sep 12"
+        },
+        {
+          "title": "Home Depot vs. Walmart: Which Consumer Stock Is a Better Buy in 2026?",
+          "publisher": "Motley Fool",
+          "link": "https://www.fool.com/coverage/better-buy/2026/09/12/home-depot-vs-walmart-which-consumer-stock-is-a-better-buy-in-2026/",
+          "when": "Sep 12"
+        },
+        {
           "title": "Greystone Logistics Inc (GLGI) (Q4 2026) Earnings Call Highlights: Navigating the Loss of a ...",
           "publisher": "GuruFocus.com",
           "link": "https://finance.yahoo.com/markets/stocks/articles/greystone-logistics-inc-glgi-q4-030108976.html",
@@ -8671,18 +8683,6 @@
           "title": "EBAY Paid Holders $19 Billion While The Stock Trailed The Market",
           "publisher": "Trefis",
           "link": "https://www.trefis.com/articles/615019/ebay-paid-holders-19-billion-while-the-stock-trailed-the-market/2026-09-11",
-          "when": "Sep 11"
-        },
-        {
-          "title": "3 Dividend Kings to Buy if the Fed Starts Raising Rates: KO, PG, WMT",
-          "publisher": "Zacks",
-          "link": "https://finance.yahoo.com/markets/stocks/articles/3-dividend-kings-buy-fed-191500096.html",
-          "when": "Sep 11"
-        },
-        {
-          "title": "What a $10,000 Investment in Walmart Could Be Worth by September 2027",
-          "publisher": "Motley Fool",
-          "link": "https://www.fool.com/investing/2026/09/11/what-a-10000-investment-in-walmart-could-be-worth/",
           "when": "Sep 11"
         }
       ]
@@ -155985,7 +155985,7 @@
       "type": "closed"
     }
   ],
-  "generated_at": "2026-09-12T14:04:39+00:00",
+  "generated_at": "2026-09-12T14:32:44+00:00",
   "universe": {
     "wheel": 18,
     "growth": 19,
