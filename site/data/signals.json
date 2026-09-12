@@ -6833,8 +6833,8 @@
     },
     {
       "label": "Bitcoin",
-      "price": 77175.4921875,
-      "pct": 0.0021967462644711944,
+      "price": 77172.75,
+      "pct": -0.0013565161264494918,
       "prefix": "$",
       "is_yield": false,
       "hist": [
@@ -6927,13 +6927,13 @@
         78260,
         76568,
         77174,
-        77175
+        77173
       ]
     },
     {
       "label": "Ethereum",
-      "price": 2524.570068359375,
-      "pct": 0.3911420485711581,
+      "price": 2524.280029296875,
+      "pct": 0.37960845990669956,
       "prefix": "$",
       "is_yield": false,
       "hist": [
@@ -7026,7 +7026,7 @@
         2467,
         2437,
         2515,
-        2525
+        2524
       ]
     }
   ],
@@ -7100,8 +7100,8 @@
     {
       "label": "Digital Assets",
       "ticker": "BTC",
-      "pct": 0.0021967462644711944,
-      "price": 77175.4921875
+      "pct": -0.0013565161264494918,
+      "price": 77172.75
     }
   ],
   "fundamentals": {
@@ -8860,6 +8860,12 @@
       "flags": [],
       "news": [
         {
+          "title": "From LeBron James to Sydney Sweeney: Prediction Markets Launch NFL Ad Blitz",
+          "publisher": "Barrons.com",
+          "link": "https://www.barrons.com/articles/nfl-sports-betting-draftkings-fanduel-sydney-sweeney-lebron-james-6df311c8?siteid=yhoof2&yptr=yahoo",
+          "when": "Sep 12"
+        },
+        {
           "title": "$2.3 Billion in Daily Profits: Why Betting Against the Magnificent 7 Keeps Failing",
           "publisher": "24/7 Wall St.",
           "link": "https://247wallst.com/investing/2026/09/12/2-3-billion-in-daily-profits-why-betting-against-the-magnificent-7-keeps-failing/",
@@ -8887,12 +8893,6 @@
           "title": "Mark Zuckerberg\u2019s Meta bet that AI would shrink its management ranks. Now it\u2019s quietly rebuilding them",
           "publisher": "Fortune",
           "link": "https://finance.yahoo.com/technology/ai/articles/mark-zuckerberg-meta-bet-ai-091600760.html",
-          "when": "Sep 12"
-        },
-        {
-          "title": "Meta May Overtake Google Search in Ad Revenue This Year, Bernstein Says",
-          "publisher": "Insider Monkey",
-          "link": "https://finance.yahoo.com/media-advertising/articles/meta-may-overtake-google-search-084633342.html",
           "when": "Sep 12"
         }
       ]
@@ -142735,7 +142735,7 @@
       "type": "closed"
     }
   ],
-  "generated_at": "2026-09-12T18:01:57+00:00",
+  "generated_at": "2026-09-12T18:04:24+00:00",
   "universe": {
     "wheel": 18,
     "growth": 19,
