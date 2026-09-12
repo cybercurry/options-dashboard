@@ -7221,8 +7221,8 @@
     },
     {
       "label": "Bitcoin",
-      "price": 77372.0703125,
-      "pct": 0.25691808039605135,
+      "price": 77399.9921875,
+      "pct": 0.29309859260440163,
       "prefix": "$",
       "is_yield": false,
       "hist": [
@@ -7315,13 +7315,13 @@
         78260,
         76568,
         77174,
-        77372
+        77400
       ]
     },
     {
       "label": "Ethereum",
-      "price": 2534.81005859375,
-      "pct": 0.7983418039192891,
+      "price": 2535.2099609375,
+      "pct": 0.8142441761687769,
       "prefix": "$",
       "is_yield": false,
       "hist": [
@@ -7488,8 +7488,8 @@
     {
       "label": "Digital Assets",
       "ticker": "BTC",
-      "pct": 0.25691808039605135,
-      "price": 77372.0703125
+      "pct": 0.29309859260440163,
+      "price": 77399.9921875
     }
   ],
   "fundamentals": {
@@ -7788,6 +7788,12 @@
           "when": "Sep 11"
         },
         {
+          "title": "Anthropic\u2019s Prisoner\u2019s Dilemma: Dario Amodei Hits the Brakes on AI While Begging Everyone Else to Do the Same",
+          "publisher": "24/7 Wall St.",
+          "link": "https://247wallst.com/investing/2026/09/12/anthropics-prisoners-dilemma-dario-amodei-hits-the-brakes-on-ai-while-begging-everyone-else-to-do-the-same/",
+          "when": "Sep 12"
+        },
+        {
           "title": "Should You Buy Archer Aviation Stock While It's Below $6?",
           "publisher": "Motley Fool",
           "link": "https://www.fool.com/investing/2026/09/12/should-you-buy-archer-aviation-stock-while-its-bel/",
@@ -7803,12 +7809,6 @@
           "title": "Rivian Sacrificed Its 2027 Profit Target. Here's Why Investors Should Applaud.",
           "publisher": "Motley Fool",
           "link": "https://www.fool.com/investing/2026/09/12/rivian-sacrificed-its-2027-profit-target-heres-why/",
-          "when": "Sep 12"
-        },
-        {
-          "title": "NuScale Power Stock Jumps 15% in 1 Day. Here's How Nuclear Energy Investors Should Respond.",
-          "publisher": "Motley Fool",
-          "link": "https://www.fool.com/investing/2026/09/12/nuscale-power-stock-jumps-nuclear-energy-invest/",
           "when": "Sep 12"
         }
       ]
@@ -155985,7 +155985,7 @@
       "type": "closed"
     }
   ],
-  "generated_at": "2026-09-12T16:02:56+00:00",
+  "generated_at": "2026-09-12T16:05:15+00:00",
   "universe": {
     "wheel": 18,
     "growth": 19,
