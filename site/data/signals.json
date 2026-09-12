@@ -7221,8 +7221,8 @@
     },
     {
       "label": "Bitcoin",
-      "price": 77085.8515625,
-      "pct": -0.11395747787613653,
+      "price": 77134.9921875,
+      "pct": -0.05028220597057542,
       "prefix": "$",
       "is_yield": false,
       "hist": [
@@ -7315,13 +7315,13 @@
         78260,
         76568,
         77174,
-        77086
+        77135
       ]
     },
     {
       "label": "Ethereum",
-      "price": 2517.81005859375,
-      "pct": 0.12232594038066313,
+      "price": 2519.5400390625,
+      "pct": 0.1911197192328462,
       "prefix": "$",
       "is_yield": false,
       "hist": [
@@ -7414,7 +7414,7 @@
         2467,
         2437,
         2515,
-        2518
+        2520
       ]
     }
   ],
@@ -7488,8 +7488,8 @@
     {
       "label": "Digital Assets",
       "ticker": "BTC",
-      "pct": -0.11395747787613653,
-      "price": 77085.8515625
+      "pct": -0.05028220597057542,
+      "price": 77134.9921875
     }
   ],
   "fundamentals": {
@@ -7566,10 +7566,10 @@
           "when": "Sep 11"
         },
         {
-          "title": "Elon Musk\u2019s Boring Company raises $3B at $23B valuation",
-          "publisher": "Yahoo Finance Video",
-          "link": "https://finance.yahoo.com/video/elon-musk-boring-company-raises-195300108.html",
-          "when": "Sep 11"
+          "title": "Elon Musk Says Autopilot Wasn\u2019t in Use During Tesla Crash, Slams \u2018Legacy Media\u2019",
+          "publisher": "Benzinga",
+          "link": "https://www.yahoo.com/news/us/articles/elon-musk-says-autopilot-wasn-183034805.html",
+          "when": "Sep 12"
         },
         {
           "title": "Elon Musk Needs Tesla to Reach a $8.5 Trillion Market Cap to Cash In. Here's How Tesla Can Reach That Valuation.",
@@ -7776,10 +7776,16 @@
       ],
       "news": [
         {
-          "title": "SpaceX signs $1.1 billion-per month computing deal",
-          "publisher": "Yahoo Finance Video",
-          "link": "https://finance.yahoo.com/video/spacex-signs-1-1-billion-195052486.html",
-          "when": "Sep 11"
+          "title": "Is Toast Stock a Buy After a Record 9,500-Restaurant Quarter?",
+          "publisher": "Motley Fool",
+          "link": "https://www.fool.com/investing/2026/09/12/is-toast-stock-a-buy-after-record-9500-restaurant/",
+          "when": "Sep 12"
+        },
+        {
+          "title": "1 Magnificent Growth Stock Down 55% to Buy Right Now, According to Wall Street",
+          "publisher": "Motley Fool",
+          "link": "https://www.fool.com/investing/2026/09/12/1-growth-stock-down-55-buy-right-now-wall-street/",
+          "when": "Sep 12"
         },
         {
           "title": "Investing in the Vanguard S&P 500 ETF (VOO)? Beware of This 1 Sneaky Risk.",
@@ -7803,12 +7809,6 @@
           "title": "Elon Musk Needs Tesla to Reach a $8.5 Trillion Market Cap to Cash In. Here's How Tesla Can Reach That Valuation.",
           "publisher": "Motley Fool",
           "link": "https://www.fool.com/investing/2026/09/12/elon-musks-tesla-shareholders-approved-an-85-trill/",
-          "when": "Sep 12"
-        },
-        {
-          "title": "Better AI Chip Stock: Broadcom vs. Nvidia",
-          "publisher": "Motley Fool",
-          "link": "https://www.fool.com/investing/2026/09/12/better-ai-chip-stock-broadcom-vs-nvidia/",
           "when": "Sep 12"
         }
       ]
@@ -8845,12 +8845,6 @@
       "flags": [],
       "news": [
         {
-          "title": "SpaceX signs $1.1 billion-per month computing deal",
-          "publisher": "Yahoo Finance Video",
-          "link": "https://finance.yahoo.com/video/spacex-signs-1-1-billion-195052486.html",
-          "when": "Sep 11"
-        },
-        {
           "title": "Google's Historic 396 MW Clean Energy Deal Just Changed the Game for 1 AI Power Play",
           "publisher": "Motley Fool",
           "link": "https://www.fool.com/investing/2026/09/12/googles-historic-396-mw-clean-energy-deal-just-cha/",
@@ -8878,6 +8872,12 @@
           "title": "Why Cathie Wood Is Selling Google and Buying More Meta Platforms Stock",
           "publisher": "Barchart",
           "link": "https://www.barchart.com/story/news/4572825/why-cathie-wood-is-selling-google-and-buying-more-meta-platforms-stock",
+          "when": "Sep 12"
+        },
+        {
+          "title": "The $760 Billion AI Risk That Nobody Is Talking About. But Should.",
+          "publisher": "Motley Fool",
+          "link": "https://www.fool.com/investing/2026/09/12/the-760-billion-ai-risk-that-nobody-is-talking-abo/",
           "when": "Sep 12"
         }
       ]
@@ -9053,6 +9053,12 @@
       ],
       "news": [
         {
+          "title": "1 Magnificent Growth Stock Down 55% to Buy Right Now, According to Wall Street",
+          "publisher": "Motley Fool",
+          "link": "https://www.fool.com/investing/2026/09/12/1-growth-stock-down-55-buy-right-now-wall-street/",
+          "when": "Sep 12"
+        },
+        {
           "title": "Zscaler CEO Highlights AI Security Surge, Zero-Trust Momentum at Citi Conference",
           "publisher": "MarketBeat",
           "link": "https://www.marketbeat.com/instant-alerts/event-zscaler-ceo-highlights-ai-security-surge-zero-trust-momentum-at-citi-conference-2026-09-12/?utm_source=yahoofinance&utm_medium=yahoofinance",
@@ -9081,12 +9087,6 @@
           "publisher": "Trefis",
           "link": "https://www.trefis.com/articles/614688/should-you-get-paid-to-wait-for-palo-alto-networks-to-slow-down/2026-09-09",
           "when": "Sep 10"
-        },
-        {
-          "title": "Zscaler (ZS) Q4 2026 Earnings Call Transcript",
-          "publisher": "Motley Fool",
-          "link": "https://www.fool.com/earnings/call-transcripts/2026/09/09/zscaler-zs-q4-2026-earnings-call-transcript/",
-          "when": "Sep 09"
         }
       ]
     },
@@ -9250,7 +9250,7 @@
         {
           "title": "From LeBron James to Sydney Sweeney: Prediction Markets Launch NFL Ad Blitz",
           "publisher": "Barrons.com",
-          "link": "https://www.barrons.com/articles/nfl-sports-betting-draftkings-fanduel-sydney-sweeney-lebron-james-6df311c8?siteid=yhoof2&yptr=yahoo",
+          "link": "https://www.barrons.com/articles/nfl-prediction-market-ads-sydney-sweeney-lebron-james-6df311c8?siteid=yhoof2&yptr=yahoo",
           "when": "Sep 12"
         },
         {
@@ -9475,16 +9475,10 @@
       "flags": [],
       "news": [
         {
-          "title": "Elon Musk\u2019s Boring Company raises $3B at $23B valuation",
-          "publisher": "Yahoo Finance Video",
-          "link": "https://finance.yahoo.com/video/elon-musk-boring-company-raises-195300108.html",
-          "when": "Sep 11"
-        },
-        {
-          "title": "SpaceX signs $1.1 billion-per month computing deal",
-          "publisher": "Yahoo Finance Video",
-          "link": "https://finance.yahoo.com/video/spacex-signs-1-1-billion-195052486.html",
-          "when": "Sep 11"
+          "title": "SpaceX To Get Weighting Boost In Nasdaq 100 After Rebalance",
+          "publisher": "Bloomberg",
+          "link": "https://finance.yahoo.com/markets/stocks/articles/spacex-weighting-boost-nasdaq-100-175851733.html",
+          "when": "Sep 12"
         },
         {
           "title": "What Is an IPO? Most New Listings Lose Money in Year 1. Here's How I Filter the Winners.",
@@ -9508,6 +9502,12 @@
           "title": "Jim Cramer Explains Why SpaceX (SPCX) Is His New Fantasy Flex Player",
           "publisher": "Insider Monkey",
           "link": "https://finance.yahoo.com/markets/stocks/articles/jim-cramer-explains-why-spacex-111019935.html",
+          "when": "Sep 12"
+        },
+        {
+          "title": "Jim Cramer Couldn\u2019t Blame Anyone Who Held These Two Elon Musk Stocks",
+          "publisher": "Insider Monkey",
+          "link": "https://finance.yahoo.com/markets/stocks/articles/jim-cramer-couldn-t-blame-105852649.html",
           "when": "Sep 12"
         }
       ]
@@ -155985,7 +155985,7 @@
       "type": "closed"
     }
   ],
-  "generated_at": "2026-09-12T19:34:23+00:00",
+  "generated_at": "2026-09-12T20:02:39+00:00",
   "universe": {
     "wheel": 18,
     "growth": 19,
