@@ -12662,8 +12662,8 @@
     },
     {
       "label": "Bitcoin",
-      "price": 77220.4296875,
-      "pct": -0.06475832657608649,
+      "price": 77275.2109375,
+      "pct": 0.006137127905025963,
       "prefix": "$",
       "is_yield": false,
       "hist": [
@@ -12756,13 +12756,13 @@
         76568,
         77174,
         77270,
-        77220
+        77275
       ]
     },
     {
       "label": "Ethereum",
-      "price": 2505.260009765625,
-      "pct": -0.8188845660208499,
+      "price": 2506.419921875,
+      "pct": -0.7729646310181915,
       "prefix": "$",
       "is_yield": false,
       "hist": [
@@ -12855,7 +12855,7 @@
         2437,
         2515,
         2526,
-        2505
+        2506
       ]
     }
   ],
@@ -12929,8 +12929,8 @@
     {
       "label": "Digital Assets",
       "ticker": "BTC",
-      "pct": -0.06475832657608649,
-      "price": 77220.4296875
+      "pct": 0.006137127905025963,
+      "price": 77275.2109375
     }
   ],
   "fundamentals": {
@@ -13217,6 +13217,18 @@
       ],
       "news": [
         {
+          "title": "Should You Buy Bristol Myers Squibb Stock Right Now for the Yield Alone?",
+          "publisher": "Motley Fool",
+          "link": "https://www.fool.com/investing/2026/09/13/should-you-buy-bristol-myers-squibb-stock-yield/",
+          "when": "Sep 13"
+        },
+        {
+          "title": "Boeing Delivered 51 Jets in August. Here's Why the Stock is Finally Back Above $200.",
+          "publisher": "Motley Fool",
+          "link": "https://www.fool.com/investing/2026/09/13/boeing-delivered-51-jets-in-august-heres-why-the-s/",
+          "when": "Sep 13"
+        },
+        {
           "title": "Insiders Trim Positions in Five Below Stock After 39% Run-Up",
           "publisher": "Motley Fool",
           "link": "https://www.fool.com/investing/2026/09/13/insiders-trim-positions-in-five-below-stock-after/",
@@ -13238,18 +13250,6 @@
           "title": "Prediction: Applied Materials Books Its First $10 Billion Quarter This Fall",
           "publisher": "Motley Fool",
           "link": "https://www.fool.com/investing/2026/09/13/prediction-applied-materials-books-its-first-usd10-billion-quarter-this-fall/",
-          "when": "Sep 13"
-        },
-        {
-          "title": "The 10-Year Treasury Bond Yields Nearly 5% Right Now. Here's Why I'd Still Choose PepsiCo for Passive Income.",
-          "publisher": "Motley Fool",
-          "link": "https://www.fool.com/investing/2026/09/13/the-10-year-treasury-bond-yields-nearly-5-now/",
-          "when": "Sep 13"
-        },
-        {
-          "title": "Most Investors Think Netflix (NFLX) Is Too Expensive. I Think They're Wrong.",
-          "publisher": "Motley Fool",
-          "link": "https://www.fool.com/investing/2026/09/13/most-investors-think-netflix-nflx-is-too-expensive/",
           "when": "Sep 13"
         }
       ]
@@ -14197,7 +14197,7 @@
           "when": "Sep 13"
         },
         {
-          "title": "Dow Jones Futures: Fed Meeting Ahead; Anthropic's Amodei, OpenAI's Altman, SpaceX's Musk Call For AI Slowdown",
+          "title": "Dow Jones Futures: AI Stocks In Focus As Anthropic's Amodei, OpenAI's Altman, SpaceX's Musk Call For AI Slowdown",
           "publisher": "Investor's Business Daily",
           "link": "https://www.investors.com/market-trend/stock-market-today/dow-jones-futures-fed-meeting-anthropic-amodei-openai-altman-spacex-musk-ai-model-slowdown/?src=A00220&yptr=yahoo",
           "when": "Sep 13"
@@ -14594,6 +14594,12 @@
       ],
       "news": [
         {
+          "title": "DraftKings and Flutter Jump After Court Rules Prediction Markets Are Gambling, Not Federally Regulated Trading",
+          "publisher": "Insider Monkey",
+          "link": "https://finance.yahoo.com/markets/stocks/articles/draftkings-flutter-jump-court-rules-194622553.html",
+          "when": "Sep 13"
+        },
+        {
           "title": "AMC CEO Adam Aron Rips Robinhood\u2019s Stock Token Model Again, Calls It \u2018Abhorrent\u2019 Gamified Casino",
           "publisher": "Stocktwits",
           "link": "https://stocktwits.com/news-articles/markets/equity/amc-vs-robinhood-ceo-adam-aron-slams-robinhoods-stock-tokens/cZt1AzxRBbw",
@@ -14621,12 +14627,6 @@
           "title": "Jim Cramer Said Robinhood Markets (NASDAQ:HOOD) Just Keeps On Growing",
           "publisher": "Insider Monkey",
           "link": "https://finance.yahoo.com/markets/stocks/articles/jim-cramer-said-robinhood-markets-112158281.html",
-          "when": "Sep 12"
-        },
-        {
-          "title": "Jim Cramer Breaks Down the Generational Shift Driving Robinhood (HOOD) Forward",
-          "publisher": "Insider Monkey",
-          "link": "https://finance.yahoo.com/markets/stocks/articles/jim-cramer-breaks-down-generational-094136523.html",
           "when": "Sep 12"
         }
       ]
@@ -17193,6 +17193,12 @@
       ],
       "news": [
         {
+          "title": "Boeing Delivered 51 Jets in August. Here's Why the Stock is Finally Back Above $200.",
+          "publisher": "Motley Fool",
+          "link": "https://www.fool.com/investing/2026/09/13/boeing-delivered-51-jets-in-august-heres-why-the-s/",
+          "when": "Sep 13"
+        },
+        {
           "title": "If It Delivers Profit, Boeing (BA)\u2019s Defense Franchise Can Buffer Its Commercial Recovery",
           "publisher": "Insider Monkey",
           "link": "https://finance.yahoo.com/markets/stocks/articles/delivers-profit-boeing-ba-defense-000848794.html",
@@ -17220,12 +17226,6 @@
           "title": "How Top Fidelity Manager Beats The Herd With 'Overanalyzed' Stocks",
           "publisher": "Investor's Business Daily",
           "link": "https://www.investors.com/etfs-and-funds/mutual-funds/top-fund-fidelity-manager-beats-the-herd-with-overanalyzed-stocks/?src=A00220&yptr=yahoo",
-          "when": "Sep 11"
-        },
-        {
-          "title": "Elon Musk Backs Moving NASA SLS Workforce Elsewhere, Says \u2018Better To Repurpose\u2019 Workers As Multibillion-Dollar Rocket Faces Cost Questions",
-          "publisher": "Benzinga",
-          "link": "https://www.yahoo.com/news/science/articles/elon-musk-backs-moving-nasa-094509368.html",
           "when": "Sep 11"
         }
       ]
@@ -17845,6 +17845,12 @@
       ],
       "news": [
         {
+          "title": "Airbnb\u2019s CEO Says AI Is the Best Thing That Ever Happened to His Company. Here\u2019s Why",
+          "publisher": "24/7 Wall St.",
+          "link": "https://247wallst.com/investing/2026/09/13/airbnbs-ceo-says-ai-is-the-best-thing-that-ever-happened-to-his-company-heres-why/",
+          "when": "Sep 13"
+        },
+        {
           "title": "Walmart Just Declared War on DoorDash and Uber Eats, But Winning Won't Be Easy for 1 Simple Reason",
           "publisher": "Barchart",
           "link": "https://www.barchart.com/story/news/4578804/walmart-just-declared-war-on-doordash-and-uber-eats-but-winning-won-t-be-easy-for-1-simple-reason",
@@ -17872,12 +17878,6 @@
           "title": "Jason Calacanis Warns Chinese EVs Could End US Auto Industry: \u2018Consumers Will Love to Buy These Cars\u2019",
           "publisher": "Benzinga",
           "link": "https://finance.yahoo.com/economy/policy/articles/jason-calacanis-warns-chinese-evs-203055040.html",
-          "when": "Sep 11"
-        },
-        {
-          "title": "Inside Tesla\u2019s Cybertruck and robotaxi experience",
-          "publisher": "Yahoo Finance Video",
-          "link": "https://finance.yahoo.com/video/inside-tesla-cybertruck-robotaxi-experience-202100555.html",
           "when": "Sep 11"
         }
       ]
@@ -17940,9 +17940,15 @@
       "flags": [],
       "news": [
         {
-          "title": "Dow Jones Futures: Fed Meeting Ahead; Anthropic's Amodei, OpenAI's Altman, SpaceX's Musk Call For AI Slowdown",
+          "title": "Dow Jones Futures: AI Stocks In Focus As Anthropic's Amodei, OpenAI's Altman, SpaceX's Musk Call For AI Slowdown",
           "publisher": "Investor's Business Daily",
           "link": "https://www.investors.com/market-trend/stock-market-today/dow-jones-futures-fed-meeting-anthropic-amodei-openai-altman-spacex-musk-ai-model-slowdown/?src=A00220&yptr=yahoo",
+          "when": "Sep 13"
+        },
+        {
+          "title": "SPCX CFO Bret Johnsen Says China Has an \u2018Amazing Space Program\u2019 \u2014 But It\u2019s \u2018Not on a Starship Level\u2019",
+          "publisher": "Benzinga",
+          "link": "https://finance.yahoo.com/technology/ai/articles/spcx-cfo-bret-johnsen-says-183008246.html",
           "when": "Sep 13"
         },
         {
@@ -17967,12 +17973,6 @@
           "title": "Jordi Visser Puts Bitcoin In The Same Bucket As SpaceX, Anthropic And OpenAI, Says \u2018None Of Them Make Money\u2019",
           "publisher": "Stocktwits",
           "link": "https://stocktwits.com/news-articles/markets/cryptocurrency/jordi-visser-bitcoin-spacex-anthropic-and-openai-none-make-money/cZt1uu6RBbU",
-          "when": "Sep 13"
-        },
-        {
-          "title": "SpaceX and Rocket Lab Have a New Space Rival -- in Norway",
-          "publisher": "Motley Fool",
-          "link": "https://www.fool.com/investing/2026/09/13/spacex-and-rocket-lab-have-a-new-space-rival-in-no/",
           "when": "Sep 13"
         }
       ]
@@ -261238,7 +261238,7 @@
       "type": "closed"
     }
   ],
-  "generated_at": "2026-09-13T19:33:17+00:00",
+  "generated_at": "2026-09-13T20:04:12+00:00",
   "universe": {
     "wheel": 18,
     "growth": 19,
