@@ -1109,16 +1109,10 @@
       "earnings_in_window": false,
       "strong": true,
       "qualifies": true,
-      "median_ok": false,
-      "pct_b": 0.65,
-      "rsi": 55.8,
-      "above_200ma": true,
-      "timing_label": "\ud83d\udd34 NO SETUP",
-      "timing_score": 0,
-      "timing_reasons": [
-        "IV below realized \u2014 thin premium +0",
-        "\u26d4 Above median (%B 0.65) \u2014 CSP needs below"
-      ],
+      "median_ok": null,
+      "pct_b": null,
+      "rsi": null,
+      "above_200ma": false,
       "earnings_date": "2026-11-04",
       "gates": [
         {
@@ -1150,12 +1144,12 @@
           "s": "warn"
         },
         {
-          "l": "timing 0/12",
+          "l": "timing",
           "s": "warn"
         }
       ],
       "verdict": "caution",
-      "verdict_why": "wrong side of median \u2014 analyze",
+      "verdict_why": "setup unconfirmed",
       "shortlist": false
     },
     {
@@ -1378,16 +1372,10 @@
       "earnings_in_window": false,
       "strong": true,
       "qualifies": true,
-      "median_ok": false,
-      "pct_b": 0.94,
-      "rsi": 61.8,
+      "median_ok": null,
+      "pct_b": null,
+      "rsi": null,
       "above_200ma": false,
-      "timing_label": "\ud83d\udd34 NO SETUP",
-      "timing_score": 0,
-      "timing_reasons": [
-        "IV below realized \u2014 thin premium +0",
-        "\u26d4 Above median (%B 0.94) \u2014 CSP needs below"
-      ],
       "earnings_date": "2026-10-27",
       "gates": [
         {
@@ -1419,12 +1407,12 @@
           "s": "warn"
         },
         {
-          "l": "timing 0/12",
+          "l": "timing",
           "s": "warn"
         }
       ],
       "verdict": "caution",
-      "verdict_why": "wrong side of median \u2014 analyze",
+      "verdict_why": "setup unconfirmed",
       "shortlist": false
     },
     {
@@ -2164,17 +2152,10 @@
       "earnings_in_window": false,
       "strong": true,
       "qualifies": true,
-      "median_ok": true,
-      "pct_b": 0.27,
-      "rsi": 48.0,
+      "median_ok": null,
+      "pct_b": null,
+      "rsi": null,
       "above_200ma": false,
-      "timing_label": "\ud83d\udd34 NO SETUP",
-      "timing_score": 3,
-      "timing_reasons": [
-        "Lower third (%B 0.27) +1",
-        "Turning up from depressed +1",
-        "IV fair vs realized +1"
-      ],
       "earnings_date": "2026-10-20",
       "gates": [
         {
@@ -2203,16 +2184,16 @@
         },
         {
           "l": "median",
-          "s": "ok"
+          "s": "warn"
         },
         {
-          "l": "timing 3/12",
+          "l": "timing",
           "s": "warn"
         }
       ],
       "verdict": "caution",
-      "verdict_why": "no setup yet (3/12) \u2014 analyze",
-      "shortlist": true
+      "verdict_why": "setup unconfirmed",
+      "shortlist": false
     },
     {
       "ticker": "MP",
@@ -5146,18 +5127,10 @@
       "earnings_in_window": false,
       "strong": true,
       "qualifies": true,
-      "median_ok": true,
-      "pct_b": 0.65,
-      "rsi": 55.8,
-      "above_200ma": true,
-      "timing_label": "\ud83d\udfe1 PARTIAL SETUP",
-      "timing_score": 5,
-      "timing_reasons": [
-        "IV below realized \u2014 thin premium +0",
-        "RSI 56 mildly up +2",
-        "Upper range, turning (%B 0.65) +2",
-        "At/above the 20-day median \u2014 good strike +1"
-      ],
+      "median_ok": null,
+      "pct_b": null,
+      "rsi": null,
+      "above_200ma": false,
       "earnings_date": "2026-11-04",
       "gates": [
         {
@@ -5186,15 +5159,15 @@
         },
         {
           "l": "median",
-          "s": "ok"
+          "s": "warn"
         },
         {
-          "l": "timing 5/12",
+          "l": "timing",
           "s": "warn"
         }
       ],
       "verdict": "caution",
-      "verdict_why": "setup 5/12 \u2014 analyze",
+      "verdict_why": "setup unconfirmed",
       "shortlist": false
     },
     {
@@ -5546,18 +5519,10 @@
       "earnings_in_window": false,
       "strong": true,
       "qualifies": true,
-      "median_ok": true,
-      "pct_b": 0.94,
-      "rsi": 61.8,
+      "median_ok": null,
+      "pct_b": null,
+      "rsi": null,
       "above_200ma": false,
-      "timing_label": "\ud83d\udfe1 PARTIAL SETUP",
-      "timing_score": 7,
-      "timing_reasons": [
-        "IV a touch below realized +1",
-        "RSI 62 mildly up +2",
-        "Exhausted top (%B 0.94, turning) +3",
-        "At/above the 20-day median \u2014 good strike +1"
-      ],
       "earnings_date": "2026-10-27",
       "gates": [
         {
@@ -5586,15 +5551,15 @@
         },
         {
           "l": "median",
-          "s": "ok"
+          "s": "warn"
         },
         {
-          "l": "timing 7/12",
+          "l": "timing",
           "s": "warn"
         }
       ],
       "verdict": "caution",
-      "verdict_why": "setup 7/12 \u2014 analyze",
+      "verdict_why": "setup unconfirmed",
       "shortlist": false
     },
     {
@@ -7017,16 +6982,10 @@
       "earnings_in_window": false,
       "strong": true,
       "qualifies": true,
-      "median_ok": false,
-      "pct_b": 0.27,
-      "rsi": 48.0,
+      "median_ok": null,
+      "pct_b": null,
+      "rsi": null,
       "above_200ma": false,
-      "timing_label": "\ud83d\udfe1 PARTIAL SETUP",
-      "timing_score": 5,
-      "timing_reasons": [
-        "IV fair vs realized +2",
-        "RSI 48 neutral \u2014 safe to write +3"
-      ],
       "earnings_date": "2026-10-20",
       "gates": [
         {
@@ -7058,12 +7017,12 @@
           "s": "warn"
         },
         {
-          "l": "timing 5/12",
+          "l": "timing",
           "s": "warn"
         }
       ],
       "verdict": "caution",
-      "verdict_why": "setup 5/12 \u2014 analyze",
+      "verdict_why": "setup unconfirmed",
       "shortlist": false
     },
     {
@@ -8316,37 +8275,6 @@
       "good_pmcc": true
     },
     {
-      "ticker": "HOOD",
-      "strategy": "LEAP",
-      "spot": 112.57,
-      "expiry": "2028-01-21",
-      "dte": 495,
-      "strike": 90.0,
-      "delta": 0.778,
-      "mid": 46.35,
-      "cost": 4635.0,
-      "intrinsic": 22.57,
-      "extrinsic": 23.78,
-      "extrinsic_pct": 51.3,
-      "carry_pct": 15.58,
-      "iv": 67.6,
-      "iv_ratio": 0.77,
-      "above_200ma": true,
-      "above_50ma": true,
-      "ma_aligned": true,
-      "rsi": 55.8,
-      "rsi_rising": false,
-      "ext_ok": true,
-      "trend_ok": true,
-      "qualifies": true,
-      "verdict": "caution",
-      "timing_label": "\ud83d\udfe1 DECENT ENTRY",
-      "timing_score": 5,
-      "score_max": 11,
-      "sector": "Financial Services",
-      "good_pmcc": true
-    },
-    {
       "ticker": "KMB",
       "strategy": "LEAP",
       "spot": 98.15,
@@ -8795,18 +8723,18 @@
       "extrinsic_pct": 46.1,
       "carry_pct": 10.12,
       "iv": 40.6,
-      "iv_ratio": 1.24,
+      "iv_ratio": null,
       "above_200ma": false,
-      "above_50ma": true,
+      "above_50ma": false,
       "ma_aligned": false,
-      "rsi": 48.0,
+      "rsi": null,
       "rsi_rising": false,
       "ext_ok": true,
       "trend_ok": false,
       "qualifies": false,
       "verdict": "neutral",
-      "timing_label": "\ud83d\udfe1 DECENT ENTRY",
-      "timing_score": 5,
+      "timing_label": "\u26aa NEUTRAL",
+      "timing_score": 0,
       "score_max": 11,
       "sector": "Communication Services",
       "good_pmcc": false
@@ -9322,20 +9250,51 @@
       "extrinsic_pct": 48.5,
       "carry_pct": 14.63,
       "iv": 66.8,
-      "iv_ratio": 1.04,
+      "iv_ratio": null,
       "above_200ma": false,
       "above_50ma": false,
       "ma_aligned": false,
-      "rsi": 61.8,
-      "rsi_rising": true,
+      "rsi": null,
+      "rsi_rising": false,
       "ext_ok": true,
       "trend_ok": false,
       "qualifies": false,
       "verdict": "neutral",
-      "timing_label": "\ud83d\udfe0 MARGINAL",
-      "timing_score": 3,
+      "timing_label": "\u26aa NEUTRAL",
+      "timing_score": 0,
       "score_max": 11,
       "sector": "Technology",
+      "good_pmcc": false
+    },
+    {
+      "ticker": "HOOD",
+      "strategy": "LEAP",
+      "spot": 112.57,
+      "expiry": "2028-01-21",
+      "dte": 495,
+      "strike": 90.0,
+      "delta": 0.778,
+      "mid": 46.35,
+      "cost": 4635.0,
+      "intrinsic": 22.57,
+      "extrinsic": 23.78,
+      "extrinsic_pct": 51.3,
+      "carry_pct": 15.58,
+      "iv": 67.6,
+      "iv_ratio": null,
+      "above_200ma": false,
+      "above_50ma": false,
+      "ma_aligned": false,
+      "rsi": null,
+      "rsi_rising": false,
+      "ext_ok": true,
+      "trend_ok": false,
+      "qualifies": false,
+      "verdict": "neutral",
+      "timing_label": "\u26aa NEUTRAL",
+      "timing_score": 0,
+      "score_max": 11,
+      "sector": "Financial Services",
       "good_pmcc": false
     },
     {
@@ -10316,22 +10275,22 @@
       "ticker": "HOOD",
       "sector": "Financial Services",
       "price": 112.57,
-      "pct": -0.7,
-      "hv20": 87.8,
-      "hvpct": 91,
+      "pct": null,
+      "hv20": null,
+      "hvpct": null,
       "c_iv": 59,
       "p_iv": 60,
-      "iv_vs_hv": "cheap",
-      "rsi": 56,
-      "above_200": true,
+      "iv_vs_hv": "\u2014",
+      "rsi": null,
+      "above_200": false,
       "pcr": 0.52,
-      "pctb": 0.65,
-      "csp_timing": "\ud83d\udd34 NO SETUP",
-      "cc_timing": "\ud83d\udfe1 PARTIAL SETUP",
-      "leap_timing": "\ud83d\udfe1 DECENT ENTRY",
+      "pctb": null,
+      "csp_timing": null,
+      "cc_timing": null,
+      "leap_timing": "\u26aa NEUTRAL",
       "csp_verdict": "caution",
       "cc_verdict": "caution",
-      "leap_verdict": "caution",
+      "leap_verdict": "neutral",
       "is_wheel": true
     },
     {
@@ -10646,19 +10605,19 @@
       "ticker": "SKHY",
       "sector": "Technology",
       "price": 190.07,
-      "pct": 0.9,
-      "hv20": 64.2,
-      "hvpct": 4,
+      "pct": null,
+      "hv20": null,
+      "hvpct": null,
       "c_iv": 61,
       "p_iv": 61,
-      "iv_vs_hv": "cheap",
-      "rsi": 62,
+      "iv_vs_hv": "\u2014",
+      "rsi": null,
       "above_200": false,
       "pcr": 0.99,
-      "pctb": 0.94,
-      "csp_timing": "\ud83d\udd34 NO SETUP",
-      "cc_timing": "\ud83d\udfe1 PARTIAL SETUP",
-      "leap_timing": "\ud83d\udfe0 MARGINAL",
+      "pctb": null,
+      "csp_timing": null,
+      "cc_timing": null,
+      "leap_timing": "\u26aa NEUTRAL",
       "csp_verdict": "caution",
       "cc_verdict": "caution",
       "leap_verdict": "neutral",
@@ -10756,19 +10715,19 @@
       "ticker": "NFLX",
       "sector": "Communication Services",
       "price": 77.4,
-      "pct": 1.8,
-      "hv20": 32.8,
-      "hvpct": 54,
+      "pct": null,
+      "hv20": null,
+      "hvpct": null,
       "c_iv": 35,
       "p_iv": 34,
-      "iv_vs_hv": "fair",
-      "rsi": 48,
+      "iv_vs_hv": "\u2014",
+      "rsi": null,
       "above_200": false,
       "pcr": 0.29,
-      "pctb": 0.27,
-      "csp_timing": "\ud83d\udd34 NO SETUP",
-      "cc_timing": "\ud83d\udfe1 PARTIAL SETUP",
-      "leap_timing": "\ud83d\udfe1 DECENT ENTRY",
+      "pctb": null,
+      "csp_timing": null,
+      "cc_timing": null,
+      "leap_timing": "\u26aa NEUTRAL",
       "csp_verdict": "caution",
       "cc_verdict": "caution",
       "leap_verdict": "neutral",
@@ -12113,8 +12072,8 @@
     },
     {
       "label": "Bitcoin",
-      "price": 77106.109375,
-      "pct": -0.21270658462260172,
+      "price": 77055.71875,
+      "pct": -0.27791988773201437,
       "prefix": "$",
       "is_yield": false,
       "hist": [
@@ -12207,13 +12166,13 @@
         76568,
         77174,
         77270,
-        77100
+        77056
       ]
     },
     {
       "label": "Ethereum",
-      "price": 2488.179931640625,
-      "pct": -1.4950703485478667,
+      "price": 2487.419921875,
+      "pct": -1.5251584894999337,
       "prefix": "$",
       "is_yield": false,
       "hist": [
@@ -12306,7 +12265,7 @@
         2437,
         2515,
         2526,
-        2488
+        2487
       ]
     }
   ],
@@ -12380,8 +12339,8 @@
     {
       "label": "Digital Assets",
       "ticker": "BTC",
-      "pct": -0.21270658462260172,
-      "price": 77106.109375
+      "pct": -0.27791988773201437,
+      "price": 77055.71875
     }
   ],
   "fundamentals": {
@@ -12452,6 +12411,18 @@
       ],
       "news": [
         {
+          "title": "Rivian vs. Lucid: This Stock Is Clearly the Better Buy",
+          "publisher": "Motley Fool",
+          "link": "https://www.fool.com/investing/2026/09/13/rivian-vs-lucid-this-stock-is-clearly-the-better/",
+          "when": "Sep 13"
+        },
+        {
+          "title": "Robots Everywhere: Goldman Sachs Now Sees 6.5 Million Humanoid Robots by 2035",
+          "publisher": "24/7 Wall St.",
+          "link": "https://247wallst.com/investing/2026/09/13/robots-everywhere-goldman-sachs-now-sees-6-5-million-humanoid-robots-by-2035/",
+          "when": "Sep 13"
+        },
+        {
           "title": "Amazon\u2019s Zoox Enters San Francisco\u2019s Crowded Robotaxi Market, Taking Direct Aim at Waymo and Tesla",
           "publisher": "Insider Monkey",
           "link": "https://finance.yahoo.com/technology/articles/amazon-zoox-enters-san-francisco-112558972.html",
@@ -12473,18 +12444,6 @@
           "title": "Longevity Entrepreneur Peter Diamandis Says He\u2019s Not Trying to Live Longer Because He\u2019s Afraid of Dying \u2014 He\u2019s Just Not Done Being \u2018Curious\u2019",
           "publisher": "Benzinga",
           "link": "https://finance.yahoo.com/healthcare/articles/longevity-entrepreneur-peter-diamandis-says-230019533.html",
-          "when": "Sep 12"
-        },
-        {
-          "title": "$10,000 in Tesla When It Joined the S&P 500 Would Be About $15,700 Today. An Index Fund Would Have Done Better.",
-          "publisher": "Motley Fool",
-          "link": "https://www.fool.com/investing/2026/09/12/usd10-000-in-tesla-when-it-joined-the-s-and-p-500-would-be-about-usd15-700-today-an-index-fund-would-have-done-better/",
-          "when": "Sep 12"
-        },
-        {
-          "title": "Ted Lieu Cites Poll, Says 'Blue Tsunami' Could Be Coming as Democrats Hold 11-Point Lead Over Republicans in 2026 House Election Poll",
-          "publisher": "Benzinga",
-          "link": "https://www.yahoo.com/news/politics/articles/ted-lieu-cites-poll-says-203020851.html",
           "when": "Sep 12"
         }
       ]
@@ -12668,39 +12627,39 @@
       ],
       "news": [
         {
-          "title": "Where Will XRP Be in 3 Years?",
+          "title": "Rivian vs. Lucid: This Stock Is Clearly the Better Buy",
           "publisher": "Motley Fool",
-          "link": "https://www.fool.com/investing/2026/09/13/where-will-crypto-be-in-3-years/",
+          "link": "https://www.fool.com/investing/2026/09/13/rivian-vs-lucid-this-stock-is-clearly-the-better/",
           "when": "Sep 13"
         },
         {
-          "title": "Predicting Intel's Value by 2030 Could Make It Worth a Look Right Now",
+          "title": "Berkshire Hathaway Has Nearly 14% of Its $359 Billion Portfolio Invested in This Winning Stock That's Doubled in 5 Years",
           "publisher": "Motley Fool",
-          "link": "https://www.fool.com/investing/2026/09/13/predicting-intels-value-by-2030-could-make-it-wort/",
+          "link": "https://www.fool.com/investing/2026/09/13/berkshire-hathaway-has-nearly-14-of-its-portfolio/",
           "when": "Sep 13"
         },
         {
-          "title": "A Bear Market Is Coming at Some Point. History Says That's Actually Good News for Investors.",
+          "title": "Retiring in 2027? 3 Essential Financial Moves to Make",
           "publisher": "Motley Fool",
-          "link": "https://www.fool.com/investing/2026/09/13/bear-market-coming-history-says-good-news/",
+          "link": "https://www.fool.com/retirement/2026/09/13/retiring-in-2027-3-essential-financial-moves-to-ma/",
           "when": "Sep 13"
         },
         {
-          "title": "Skipping Social Security Could Pay Off Big Time in This 1 Scenario",
-          "publisher": "Motley Fool",
-          "link": "https://www.fool.com/retirement/2026/09/13/skipping-social-security-could-pay-off-big-time-in/",
+          "title": "Robots Everywhere: Goldman Sachs Now Sees 6.5 Million Humanoid Robots by 2035",
+          "publisher": "24/7 Wall St.",
+          "link": "https://247wallst.com/investing/2026/09/13/robots-everywhere-goldman-sachs-now-sees-6-5-million-humanoid-robots-by-2035/",
           "when": "Sep 13"
         },
         {
-          "title": "Can New iPhone Duo Power Apple's Stock Higher?",
+          "title": "Prediction: 2 AI Semiconductor Stocks That Will Join Micron and Broadcom in the $1 Trillion Club by 2028",
           "publisher": "Motley Fool",
-          "link": "https://www.fool.com/investing/2026/09/13/can-new-iphone-duo-power-apples-stock-higher/",
+          "link": "https://www.fool.com/investing/2026/09/13/predict-ai-semiconductor-stocks-micron-broadcom/",
           "when": "Sep 13"
         },
         {
-          "title": "NVIDIA\u2019s Older GPUs Still Earn Rent. What That Does and Doesn\u2019t Prove for CoreWeave",
-          "publisher": "Insider Monkey",
-          "link": "https://finance.yahoo.com/markets/stocks/articles/nvidia-older-gpus-still-earn-140210350.html",
+          "title": "UPS Cut Amazon Volumes on Purpose. The Margin Data Says It Worked.",
+          "publisher": "Motley Fool",
+          "link": "https://www.fool.com/investing/2026/09/13/ups-cut-amazon-volumes-on-purpose-the-margin-data/",
           "when": "Sep 13"
         }
       ]
@@ -12763,6 +12722,12 @@
       "flags": [],
       "news": [
         {
+          "title": "UPS Cut Amazon Volumes on Purpose. The Margin Data Says It Worked.",
+          "publisher": "Motley Fool",
+          "link": "https://www.fool.com/investing/2026/09/13/ups-cut-amazon-volumes-on-purpose-the-margin-data/",
+          "when": "Sep 13"
+        },
+        {
           "title": "Alibaba and Amazon Face the Same AI Spending Question: How Quickly Does Capacity Become Cash?",
           "publisher": "Insider Monkey",
           "link": "https://finance.yahoo.com/technology/ai/articles/alibaba-amazon-face-same-ai-140837189.html",
@@ -12790,12 +12755,6 @@
           "title": "Should You Buy Costco Stock Right Now With $2,000 and Hold for 5 Years?",
           "publisher": "Motley Fool",
           "link": "https://www.fool.com/investing/2026/09/13/buy-costco-stock-right-now-2000-and-hold-5-years/",
-          "when": "Sep 13"
-        },
-        {
-          "title": "3 Unstoppable Dow Stocks Worth Buying Right Now",
-          "publisher": "Motley Fool",
-          "link": "https://www.fool.com/investing/2026/09/13/3-unstoppable-dow-stocks-worth-buying-right-now/",
           "when": "Sep 13"
         }
       ]
@@ -13648,6 +13607,18 @@
           "when": "Sep 13"
         },
         {
+          "title": "Berkshire Hathaway Has Nearly 14% of Its $359 Billion Portfolio Invested in This Winning Stock That's Doubled in 5 Years",
+          "publisher": "Motley Fool",
+          "link": "https://www.fool.com/investing/2026/09/13/berkshire-hathaway-has-nearly-14-of-its-portfolio/",
+          "when": "Sep 13"
+        },
+        {
+          "title": "The Week Everybody Started Talking About AI Doomsday",
+          "publisher": "The Wall Street Journal",
+          "link": "https://www.wsj.com/tech/ai/the-week-everybody-started-talking-about-ai-doomsday-ab1fe116?siteid=yhoof2&yptr=yahoo",
+          "when": "Sep 13"
+        },
+        {
           "title": "Dow Jones Futures: Fed Meeting Ahead; Anthropic's Amodei, OpenAI's Altman, SpaceX's Musk Call For AI Slowdown",
           "publisher": "Investor's Business Daily",
           "link": "https://www.investors.com/market-trend/stock-market-today/dow-jones-futures-fed-meeting-anthropic-amodei-openai-altman-spacex-musk-ai-model-slowdown/?src=A00220&yptr=yahoo",
@@ -13663,18 +13634,6 @@
           "title": "Can New iPhone Duo Power Apple's Stock Higher?",
           "publisher": "Motley Fool",
           "link": "https://www.fool.com/investing/2026/09/13/can-new-iphone-duo-power-apples-stock-higher/",
-          "when": "Sep 13"
-        },
-        {
-          "title": "Oklo vs. NuScale vs. TMC: 3 Speculative Bets, Ranked By Which One Pays Off First.",
-          "publisher": "Motley Fool",
-          "link": "https://www.fool.com/investing/2026/09/13/oklo-vs-nuscale-vs-tmc-3-speculative-bets-ranked-b/",
-          "when": "Sep 13"
-        },
-        {
-          "title": "Dow Jones Futures: Fed Rate Hike Seen As Oil, Yields Pressure Stocks; Apple, Moderna Are New Buys",
-          "publisher": "Investor's Business Daily",
-          "link": "https://www.investors.com/market-trend/stock-market-today/dow-jones-futures-100-oil-surging-yields-pressure-stocks-with-fed-rate-hike-seen-apple-leads-new-buys/?src=A00220&yptr=yahoo",
           "when": "Sep 13"
         }
       ]
@@ -14140,6 +14099,12 @@
       "flags": [],
       "news": [
         {
+          "title": "Jim Cramer says big tech stock could double in 3\u20135 years",
+          "publisher": "TheStreet",
+          "link": "https://www.thestreet.com/investing/stocks/meta-stock-cramer-doubling-outlook",
+          "when": "Sep 13"
+        },
+        {
           "title": "Apple wants AI to listen all day without creeping people out",
           "publisher": "TheStreet",
           "link": "https://www.thestreet.com/investing/apple-wants-ai-to-listen-all-day-without-creeping-people-out",
@@ -14167,12 +14132,6 @@
           "title": "From LeBron James to Sydney Sweeney: Prediction Markets Launch NFL Ad Blitz",
           "publisher": "Barrons.com",
           "link": "https://www.barrons.com/articles/nfl-prediction-market-ads-sydney-sweeney-lebron-james-6df311c8?siteid=yhoof2&yptr=yahoo",
-          "when": "Sep 12"
-        },
-        {
-          "title": "5 big analyst AI moves: JPMorgan upgrades Meta, names KLA top chip equipment stock",
-          "publisher": "Investing.com",
-          "link": "https://finance.yahoo.com/technology/ai/articles/5-big-analyst-ai-moves-170544815.html",
           "when": "Sep 12"
         }
       ]
@@ -14952,6 +14911,12 @@
       ],
       "news": [
         {
+          "title": "Five Dividend Stocks Crushing Inflation With Consistent Dividend Payout Growth",
+          "publisher": "24/7 Wall St.",
+          "link": "https://247wallst.com/investing/2026/09/13/five-dividend-stocks-crushing-inflation-with-consistent-dividend-payout-growth/",
+          "when": "Sep 13"
+        },
+        {
           "title": "Dear UnitedHealth Stock Fans, Mark Your Calendars for October 1",
           "publisher": "Barchart",
           "link": "https://www.barchart.com/story/news/4575168/dear-unitedhealth-stock-fans-mark-your-calendars-for-october-1",
@@ -14979,12 +14944,6 @@
           "title": "Should You Buy Elevance Health Stock For The Margin It Lost?",
           "publisher": "Trefis",
           "link": "https://www.trefis.com/articles/614937/should-you-buy-elevance-health-stock-for-the-margin-it-lost/2026-09-10",
-          "when": "Sep 10"
-        },
-        {
-          "title": "UnitedHealth Reshapes Florida WellMed Operations With TPG Deal",
-          "publisher": "Zacks",
-          "link": "https://finance.yahoo.com/healthcare/articles/unitedhealth-reshapes-florida-wellmed-operations-172500374.html",
           "when": "Sep 10"
         }
       ]
@@ -15280,6 +15239,12 @@
       ],
       "news": [
         {
+          "title": "Prediction: 2 AI Semiconductor Stocks That Will Join Micron and Broadcom in the $1 Trillion Club by 2028",
+          "publisher": "Motley Fool",
+          "link": "https://www.fool.com/investing/2026/09/13/predict-ai-semiconductor-stocks-micron-broadcom/",
+          "when": "Sep 13"
+        },
+        {
           "title": "Prediction: This Artificial Intelligence (AI) Chip Stock Will Soar After Sept. 30 (Hint: It's Not Micron)",
           "publisher": "Motley Fool",
           "link": "https://www.fool.com/investing/2026/09/13/prediction-this-artificial-intelligence-ai-chip-st/",
@@ -15307,12 +15272,6 @@
           "title": "Cramer Asked Who Was Buying Gigantic Bloom Energy Calls. A Pelosi Filing Named Two of the Same Stocks Weeks Earlier.",
           "publisher": "24/7 Wall St.",
           "link": "https://247wallst.com/investing/2026/09/12/cramer-asked-who-was-buying-gigantic-bloom-energy-calls-a-pelosi-filing-named-two-of-the-same-stocks-weeks-earlier/",
-          "when": "Sep 12"
-        },
-        {
-          "title": "Where Will Micron Be in 10 Years?",
-          "publisher": "Motley Fool",
-          "link": "https://www.fool.com/investing/2026/09/12/where-will-micron-be-in-10-years/",
           "when": "Sep 12"
         }
       ]
@@ -15591,6 +15550,12 @@
       "flags": [],
       "news": [
         {
+          "title": "Prediction: 2 AI Semiconductor Stocks That Will Join Micron and Broadcom in the $1 Trillion Club by 2028",
+          "publisher": "Motley Fool",
+          "link": "https://www.fool.com/investing/2026/09/13/predict-ai-semiconductor-stocks-micron-broadcom/",
+          "when": "Sep 13"
+        },
+        {
           "title": "South Korea extends stock trading hours in push for global investors",
           "publisher": "Investing.com",
           "link": "https://finance.yahoo.com/markets/stocks/articles/south-korea-extends-stock-trading-093759625.html",
@@ -15618,12 +15583,6 @@
           "title": "Why Micron Stock Is on Pace for a Weekly Decline",
           "publisher": "Barrons.com",
           "link": "https://www.barrons.com/articles/micron-stock-oracle-ai-242830db?siteid=yhoof2&yptr=yahoo",
-          "when": "Sep 11"
-        },
-        {
-          "title": "Wall Street Just Erased $57 Billion From Micron. The Shortage Behind Its Boom Is Getting Worse.",
-          "publisher": "24/7 Wall St.",
-          "link": "https://247wallst.com/investing/2026/09/11/wall-street-just-erased-57-billion-from-micron-the-shortage-behind-its-boom-is-getting-worse/",
           "when": "Sep 11"
         }
       ]
@@ -260689,7 +260648,7 @@
       "type": "closed"
     }
   ],
-  "generated_at": "2026-09-13T15:10:25+00:00",
+  "generated_at": "2026-09-13T15:41:00+00:00",
   "universe": {
     "wheel": 18,
     "growth": 19,
