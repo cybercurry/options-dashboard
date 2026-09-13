@@ -12662,8 +12662,8 @@
     },
     {
       "label": "Bitcoin",
-      "price": 77275.2109375,
-      "pct": 0.006137127905025963,
+      "price": 77324.6484375,
+      "pct": 0.07011693907965633,
       "prefix": "$",
       "is_yield": false,
       "hist": [
@@ -12756,13 +12756,13 @@
         76568,
         77174,
         77270,
-        77275
+        77325
       ]
     },
     {
       "label": "Ethereum",
-      "price": 2506.419921875,
-      "pct": -0.7729646310181915,
+      "price": 2510.81005859375,
+      "pct": -0.5991628479793065,
       "prefix": "$",
       "is_yield": false,
       "hist": [
@@ -12855,7 +12855,7 @@
         2437,
         2515,
         2526,
-        2506
+        2511
       ]
     }
   ],
@@ -12929,8 +12929,8 @@
     {
       "label": "Digital Assets",
       "ticker": "BTC",
-      "pct": 0.006137127905025963,
-      "price": 77275.2109375
+      "pct": 0.07011693907965633,
+      "price": 77324.6484375
     }
   ],
   "fundamentals": {
@@ -13217,6 +13217,18 @@
       ],
       "news": [
         {
+          "title": "Apple Bought Back More Than $880 Billion of Its Own Stock During Tim Cook's 15 Years as CEO. Here's How That Reshaped Shareholder Returns.",
+          "publisher": "Motley Fool",
+          "link": "https://www.fool.com/investing/2026/09/13/apple-bought-back-880-billion-stock-tim-cook/",
+          "when": "Sep 13"
+        },
+        {
+          "title": "Viral AI Dommer Tweet: Engineered Panic?",
+          "publisher": "Zacks",
+          "link": "https://finance.yahoo.com/technology/ai/articles/viral-ai-dommer-tweet-engineered-200100694.html",
+          "when": "Sep 13"
+        },
+        {
           "title": "Should You Buy Bristol Myers Squibb Stock Right Now for the Yield Alone?",
           "publisher": "Motley Fool",
           "link": "https://www.fool.com/investing/2026/09/13/should-you-buy-bristol-myers-squibb-stock-yield/",
@@ -13238,18 +13250,6 @@
           "title": "Nvidia (NVDA) Looks Cheap on Piper\u2019s Forecasts, but the Earnings Assumptions Are the Real Test",
           "publisher": "Insider Monkey",
           "link": "https://finance.yahoo.com/markets/stocks/articles/nvidia-nvda-looks-cheap-piper-191328167.html",
-          "when": "Sep 13"
-        },
-        {
-          "title": "Meet the Magnificent Momentum-Driven ETF Obliterating the S&P 500 in 2026",
-          "publisher": "Motley Fool",
-          "link": "https://www.fool.com/investing/2026/09/13/meet-momentum-driven-etf-obliterating-sp-500-2026/",
-          "when": "Sep 13"
-        },
-        {
-          "title": "Prediction: Applied Materials Books Its First $10 Billion Quarter This Fall",
-          "publisher": "Motley Fool",
-          "link": "https://www.fool.com/investing/2026/09/13/prediction-applied-materials-books-its-first-usd10-billion-quarter-this-fall/",
           "when": "Sep 13"
         }
       ]
@@ -13407,6 +13407,12 @@
       "flags": [],
       "news": [
         {
+          "title": "Amazon, Alphabet, and Microsoft: Which 2 to Buy and Which 1 to Avoid",
+          "publisher": "Motley Fool",
+          "link": "https://www.fool.com/investing/2026/09/13/amazon-alphabet-and-microsoft-which-2-to-buy-and-w/",
+          "when": "Sep 13"
+        },
+        {
           "title": "Forget Chatbot Benchmarks. Google Just Found 1,000 Ways Into Microsoft\u2019s Best Customers.",
           "publisher": "24/7 Wall St.",
           "link": "https://247wallst.com/investing/2026/09/13/forget-chatbot-benchmarks-google-just-found-1000-ways-into-microsofts-best-customers/",
@@ -13434,12 +13440,6 @@
           "title": "Oklo vs. NuScale vs. TMC: 3 Speculative Bets, Ranked By Which One Pays Off First.",
           "publisher": "Motley Fool",
           "link": "https://www.fool.com/investing/2026/09/13/oklo-vs-nuscale-vs-tmc-3-speculative-bets-ranked-b/",
-          "when": "Sep 13"
-        },
-        {
-          "title": "Microsoft Stock: Is Now the Right Time to Buy or Should You Hold Off?",
-          "publisher": "Motley Fool",
-          "link": "https://www.fool.com/investing/2026/09/13/microsoft-stock-is-now-the-right-time-to-buy-or-sh/",
           "when": "Sep 13"
         }
       ]
@@ -14091,6 +14091,12 @@
       ],
       "news": [
         {
+          "title": "Jim Cramer Says a 25% Surtax Just Got Added to Everything You Buy. Congress Never Voted on It.",
+          "publisher": "24/7 Wall St.",
+          "link": "https://247wallst.com/investing/2026/09/13/jim-cramer-says-a-25-surtax-just-got-added-to-everything-you-buy-congress-never-voted-on-it/",
+          "when": "Sep 13"
+        },
+        {
           "title": "Trump Just Promised You $5,000. There\u2019s a Catch, and It Changes Everything About How You\u2019d Spend It.",
           "publisher": "24/7 Wall St.",
           "link": "https://247wallst.com/personal-finance/2026/09/13/trump-just-promised-you-5000-theres-a-catch-and-it-changes-everything-about-how-youd-spend-it/",
@@ -14119,12 +14125,6 @@
           "publisher": "Fortune",
           "link": "https://finance.yahoo.com/small-business/articles/one-bipolar-episode-put-him-080000372.html",
           "when": "Sep 13"
-        },
-        {
-          "title": "Mama\u2019s Creations (MAMA) Just Proved Its Growth Spurt Wasn\u2019t A Fluke",
-          "publisher": "Insider Monkey",
-          "link": "https://finance.yahoo.com/markets/stocks/articles/mama-creations-mama-just-proved-162554673.html",
-          "when": "Sep 12"
         }
       ]
     },
@@ -14203,6 +14203,12 @@
           "when": "Sep 13"
         },
         {
+          "title": "Apple Bought Back More Than $880 Billion of Its Own Stock During Tim Cook's 15 Years as CEO. Here's How That Reshaped Shareholder Returns.",
+          "publisher": "Motley Fool",
+          "link": "https://www.fool.com/investing/2026/09/13/apple-bought-back-880-billion-stock-tim-cook/",
+          "when": "Sep 13"
+        },
+        {
           "title": "Apple CEO rejects biggest fear over iPhone Duo launch",
           "publisher": "TheStreet",
           "link": "https://www.thestreet.com/technology/apple-ternus-iphone-duo-ai-strategy",
@@ -14218,12 +14224,6 @@
           "title": "Berkshire Hathaway Has Nearly 14% of Its $359 Billion Portfolio Invested in This Winning Stock That's Doubled in 5 Years",
           "publisher": "Motley Fool",
           "link": "https://www.fool.com/investing/2026/09/13/berkshire-hathaway-has-nearly-14-of-its-portfolio/",
-          "when": "Sep 13"
-        },
-        {
-          "title": "The Week Everybody Started Talking About AI Doomsday",
-          "publisher": "The Wall Street Journal",
-          "link": "https://www.wsj.com/tech/ai/the-week-everybody-started-talking-about-ai-doomsday-ab1fe116?siteid=yhoof2&yptr=yahoo",
           "when": "Sep 13"
         }
       ]
@@ -14386,6 +14386,18 @@
       ],
       "news": [
         {
+          "title": "Hewlett Packard Enterprise Raises 2027 Outlook as AI Networking Demand Surges",
+          "publisher": "MarketBeat",
+          "link": "https://www.marketbeat.com/instant-alerts/event-hewlett-packard-enterprise-raises-2027-outlook-as-ai-networking-demand-surges-2026-09-13/?utm_source=yahoofinance&utm_medium=yahoofinance",
+          "when": "Sep 13"
+        },
+        {
+          "title": "Viral AI Dommer Tweet: Engineered Panic?",
+          "publisher": "Zacks",
+          "link": "https://finance.yahoo.com/technology/ai/articles/viral-ai-dommer-tweet-engineered-200100694.html",
+          "when": "Sep 13"
+        },
+        {
           "title": "AMD and Intel\u2019s Shared AI Instructions Reach GCC. Can Software Cooperation Strengthen Both Stocks?",
           "publisher": "Insider Monkey",
           "link": "https://finance.yahoo.com/technology/ai/articles/amd-intel-shared-ai-instructions-165917161.html",
@@ -14407,18 +14419,6 @@
           "title": "Advanced Micro Devices, Inc. (AMD)\u2019s Halo Station Could Strengthen Its AI Position, but Near-Term Revenue Impact May Be Limited",
           "publisher": "Insider Monkey",
           "link": "https://finance.yahoo.com/technology/ai/articles/advanced-micro-devices-inc-amd-235430291.html",
-          "when": "Sep 12"
-        },
-        {
-          "title": "Nvidia vs. AMD: Elon Musk Picked a Side on the SpaceX Earnings Call",
-          "publisher": "Motley Fool",
-          "link": "https://www.fool.com/investing/2026/09/12/nvidia-vs-amd-elon-musk-picked-a-side-on-the-space/",
-          "when": "Sep 12"
-        },
-        {
-          "title": "Cramer Asked Who Was Buying Gigantic Bloom Energy Calls. A Pelosi Filing Named Two of the Same Stocks Weeks Earlier.",
-          "publisher": "24/7 Wall St.",
-          "link": "https://247wallst.com/investing/2026/09/12/cramer-asked-who-was-buying-gigantic-bloom-energy-calls-a-pelosi-filing-named-two-of-the-same-stocks-weeks-earlier/",
           "when": "Sep 12"
         }
       ]
@@ -15053,6 +15053,12 @@
       ],
       "news": [
         {
+          "title": "Where Will Archer Aviation Be by This Time Next Year?",
+          "publisher": "Motley Fool",
+          "link": "https://www.fool.com/investing/2026/09/13/where-will-archer-be-by-this-time-next-year/",
+          "when": "Sep 13"
+        },
+        {
           "title": "Should You Buy Archer Aviation Stock While It's Below $6?",
           "publisher": "Motley Fool",
           "link": "https://www.fool.com/investing/2026/09/12/should-you-buy-archer-aviation-stock-while-its-bel/",
@@ -15080,12 +15086,6 @@
           "title": "Is Joby Stock Priced For The Wrong Business?",
           "publisher": "Trefis",
           "link": "https://www.trefis.com/articles/614725/is-joby-stock-priced-for-the-wrong-business/2026-09-09",
-          "when": "Sep 09"
-        },
-        {
-          "title": "Cathie Wood Is Buying Archer While Trimming Palantir",
-          "publisher": "GuruFocus.com",
-          "link": "https://finance.yahoo.com/markets/stocks/articles/cathie-wood-buying-archer-while-163533472.html",
           "when": "Sep 09"
         }
       ]
@@ -18378,6 +18378,12 @@
       ],
       "news": [
         {
+          "title": "Viral AI Dommer Tweet: Engineered Panic?",
+          "publisher": "Zacks",
+          "link": "https://finance.yahoo.com/technology/ai/articles/viral-ai-dommer-tweet-engineered-200100694.html",
+          "when": "Sep 13"
+        },
+        {
           "title": "Nvidia CEO Jensen Huang doubles down on his big 2030 market bet",
           "publisher": "TheStreet",
           "link": "https://www.thestreet.com/markets/nvidia-ceo-jensen-huang-doubles-down-on-his-big-2030-market-bet",
@@ -18405,12 +18411,6 @@
           "title": "Oracle Just Showed a Less Painful Way to Finance AI Clouds. That\u2019s Awkward for CoreWeave",
           "publisher": "Insider Monkey",
           "link": "https://finance.yahoo.com/technology/ai/articles/oracle-just-showed-less-painful-225038778.html",
-          "when": "Sep 11"
-        },
-        {
-          "title": "Oracle's AI Cloud Growth Lifts CoreWeave, Nebius and IREN",
-          "publisher": "GuruFocus.com",
-          "link": "https://finance.yahoo.com/technology/ai/articles/oracles-ai-cloud-growth-lifts-211041374.html",
           "when": "Sep 11"
         }
       ]
@@ -18895,6 +18895,12 @@
       "flags": [],
       "news": [
         {
+          "title": "Viral AI Dommer Tweet: Engineered Panic?",
+          "publisher": "Zacks",
+          "link": "https://finance.yahoo.com/technology/ai/articles/viral-ai-dommer-tweet-engineered-200100694.html",
+          "when": "Sep 13"
+        },
+        {
           "title": "Veteran analyst resets Palantir price target for rest of 2026",
           "publisher": "TheStreet",
           "link": "https://www.thestreet.com/investing/palantir-da-davidson-raises-price-target",
@@ -18922,12 +18928,6 @@
           "title": "Oracle Surges 7% as AI Cloud Backlog Hits $664B, CoreWeave and Nebius Climb 4%",
           "publisher": "24/7 Wall St.",
           "link": "https://247wallst.com/investing/2026/09/11/oracle-surges-7-as-ai-cloud-backlog-hits-664b-coreweave-and-nebius-climb-4/",
-          "when": "Sep 11"
-        },
-        {
-          "title": "Nebius' Heavy CapEx Push: Can Customer Prepayments Ease the Strain?",
-          "publisher": "Zacks",
-          "link": "https://finance.yahoo.com/technology/ai/articles/nebius-heavy-capex-push-customer-122200284.html",
           "when": "Sep 11"
         }
       ]
@@ -261238,7 +261238,7 @@
       "type": "closed"
     }
   ],
-  "generated_at": "2026-09-13T20:04:12+00:00",
+  "generated_at": "2026-09-13T20:34:29+00:00",
   "universe": {
     "wheel": 18,
     "growth": 19,
