@@ -12662,8 +12662,8 @@
     },
     {
       "label": "Bitcoin",
-      "price": 77303.6484375,
-      "pct": 0.04293967415591737,
+      "price": 77348.890625,
+      "pct": 0.10149009869957482,
       "prefix": "$",
       "is_yield": false,
       "hist": [
@@ -12756,13 +12756,13 @@
         76568,
         77174,
         77270,
-        77304
+        77349
       ]
     },
     {
       "label": "Ethereum",
-      "price": 2506.300048828125,
-      "pct": -0.7777103031053945,
+      "price": 2508.0,
+      "pct": -0.7104106804104893,
       "prefix": "$",
       "is_yield": false,
       "hist": [
@@ -12855,7 +12855,7 @@
         2437,
         2515,
         2526,
-        2506
+        2508
       ]
     }
   ],
@@ -12929,8 +12929,8 @@
     {
       "label": "Digital Assets",
       "ticker": "BTC",
-      "pct": 0.04293967415591737,
-      "price": 77303.6484375
+      "pct": 0.10149009869957482,
+      "price": 77348.890625
     }
   ],
   "fundamentals": {
@@ -13217,6 +13217,18 @@
       ],
       "news": [
         {
+          "title": "Most Investors Think Netflix (NFLX) Is Too Expensive. I Think They're Wrong.",
+          "publisher": "Motley Fool",
+          "link": "https://www.fool.com/investing/2026/09/13/most-investors-think-netflix-nflx-is-too-expensive/",
+          "when": "Sep 13"
+        },
+        {
+          "title": "This Could Be the Biggest Problem With Retiring in Your 50s",
+          "publisher": "Motley Fool",
+          "link": "https://www.fool.com/retirement/2026/09/13/this-could-be-the-biggest-problem-with-retiring-in/",
+          "when": "Sep 13"
+        },
+        {
           "title": "McDonald's Yields 3%, the Highest in Over 6 Years. Is the Dow Dividend Stock a Value Trap or Too Cheap to Ignore?",
           "publisher": "Motley Fool",
           "link": "https://www.fool.com/investing/2026/09/13/mcdonalds-yields-29-the-highest-in-over-6-years-is/",
@@ -13238,18 +13250,6 @@
           "title": "Warren Buffett Made Apple Berkshire Hathaway's Single Largest Stock Position: $10,000 Invested 10 Years Ago Would Be Worth Roughly $122,400 Today",
           "publisher": "Motley Fool",
           "link": "https://www.fool.com/investing/2026/09/13/warren-buffett-made-apple-berkshire-hathaways-sing/",
-          "when": "Sep 13"
-        },
-        {
-          "title": "Bank of America has strong message for Marvell stock investors",
-          "publisher": "TheStreet",
-          "link": "https://www.thestreet.com/investing/marvell-stock-bofa-ai-growth-outlook",
-          "when": "Sep 13"
-        },
-        {
-          "title": "Nvidia vs. Broadcom: Which Trillion-Dollar AI Chip Stock Has More Upside After Their Latest Earnings?",
-          "publisher": "Motley Fool",
-          "link": "https://www.fool.com/investing/2026/09/13/nvidia-vs-broadcom-which-trillion-dollar-ai-chip-s/",
           "when": "Sep 13"
         }
       ]
@@ -13407,6 +13407,12 @@
       "flags": [],
       "news": [
         {
+          "title": "Forget Chatbot Benchmarks. Google Just Found 1,000 Ways Into Microsoft\u2019s Best Customers.",
+          "publisher": "24/7 Wall St.",
+          "link": "https://247wallst.com/investing/2026/09/13/forget-chatbot-benchmarks-google-just-found-1000-ways-into-microsofts-best-customers/",
+          "when": "Sep 13"
+        },
+        {
           "title": "Goldman Sachs Says AI Is Driving Half of S&P 500 Earnings Growth. That Number Cuts Both Ways.",
           "publisher": "24/7 Wall St.",
           "link": "https://247wallst.com/investing/2026/09/13/goldman-sachs-says-ai-is-driving-half-of-sp-500-earnings-growth-that-number-cuts-both-ways/",
@@ -13434,12 +13440,6 @@
           "title": "Microsoft Stock: Is Now the Right Time to Buy or Should You Hold Off?",
           "publisher": "Motley Fool",
           "link": "https://www.fool.com/investing/2026/09/13/microsoft-stock-is-now-the-right-time-to-buy-or-sh/",
-          "when": "Sep 13"
-        },
-        {
-          "title": "She Gave the Grandkids Cash for Their Down Payments and Left Them the Stock in Her Will. Done the Other Way Around, the IRS Would Have Collected $120,000 on the Same Two Gifts",
-          "publisher": "24/7 Wall St.",
-          "link": "https://247wallst.com/personal-finance/2026/09/13/she-gave-the-grandkids-cash-for-their-down-payments-and-left-them-the-stock-in-her-will-done-the-other-way-around-the-irs-would-have-collected-120000-on-the-same-two-gifts/",
           "when": "Sep 13"
         }
       ]
@@ -14097,6 +14097,12 @@
           "when": "Sep 13"
         },
         {
+          "title": "Walmart Just Declared War on DoorDash and Uber Eats, But Winning Won't Be Easy for 1 Simple Reason",
+          "publisher": "Barchart",
+          "link": "https://www.barchart.com/story/news/4578804/walmart-just-declared-war-on-doordash-and-uber-eats-but-winning-won-t-be-easy-for-1-simple-reason",
+          "when": "Sep 13"
+        },
+        {
           "title": "Should You Buy Costco Stock Right Now With $2,000 and Hold for 5 Years?",
           "publisher": "Motley Fool",
           "link": "https://www.fool.com/investing/2026/09/13/buy-costco-stock-right-now-2000-and-hold-5-years/",
@@ -14118,12 +14124,6 @@
           "title": "Walmart and Sam's Club just gave shoppers a reason to ditch Costco",
           "publisher": "TheStreet",
           "link": "https://www.thestreet.com/retail/walmart-sams-club-add-tap-to-pay-technology",
-          "when": "Sep 12"
-        },
-        {
-          "title": "Home Depot vs. Walmart: Which Consumer Stock Is a Better Buy in 2026?",
-          "publisher": "Motley Fool",
-          "link": "https://www.fool.com/coverage/better-buy/2026/09/12/home-depot-vs-walmart-which-consumer-stock-is-a-better-buy-in-2026/",
           "when": "Sep 12"
         }
       ]
@@ -14286,6 +14286,12 @@
       "flags": [],
       "news": [
         {
+          "title": "Forget Chatbot Benchmarks. Google Just Found 1,000 Ways Into Microsoft\u2019s Best Customers.",
+          "publisher": "24/7 Wall St.",
+          "link": "https://247wallst.com/investing/2026/09/13/forget-chatbot-benchmarks-google-just-found-1000-ways-into-microsofts-best-customers/",
+          "when": "Sep 13"
+        },
+        {
           "title": "Bank of America has strong message for Marvell stock investors",
           "publisher": "TheStreet",
           "link": "https://www.thestreet.com/investing/marvell-stock-bofa-ai-growth-outlook",
@@ -14313,12 +14319,6 @@
           "title": "Sundar Pichai Says Alphabet's Cloud Backlog Hit $514 Billion After 82% Revenue Growth Last Quarter. Is Google Cloud Becoming a Bigger Growth Driver Than Search?",
           "publisher": "Motley Fool",
           "link": "https://www.fool.com/investing/2026/09/13/sundar-pichai-alphabets-backlog-514-billion/",
-          "when": "Sep 13"
-        },
-        {
-          "title": "Broadcom\u2019s Anthropic Ramp Puts Google\u2019s TPU Business in a Different Light",
-          "publisher": "Insider Monkey",
-          "link": "https://finance.yahoo.com/technology/ai/articles/broadcom-anthropic-ramp-puts-google-113804111.html",
           "when": "Sep 13"
         }
       ]
@@ -16642,6 +16642,12 @@
       "flags": [],
       "news": [
         {
+          "title": "Most Investors Think Netflix (NFLX) Is Too Expensive. I Think They're Wrong.",
+          "publisher": "Motley Fool",
+          "link": "https://www.fool.com/investing/2026/09/13/most-investors-think-netflix-nflx-is-too-expensive/",
+          "when": "Sep 13"
+        },
+        {
           "title": "Spotify vs. Netflix: I\u2019d Bet on This Streaming Stock for the Next 5 Years",
           "publisher": "24/7 Wall St.",
           "link": "https://247wallst.com/investing/2026/09/12/spotify-vs-netflix-id-bet-on-this-streaming-stock-for-the-next-5-years/",
@@ -16669,12 +16675,6 @@
           "title": "Netflix Said It Was Different From Facebook. A New Lawsuit Says It Tracked Kids for Ads Anyway.",
           "publisher": "24/7 Wall St.",
           "link": "https://247wallst.com/investing/2026/09/11/netflix-said-it-was-different-from-facebook-a-new-lawsuit-says-it-tracked-kids-for-ads-anyway/",
-          "when": "Sep 11"
-        },
-        {
-          "title": "4 Broadcast Radio & TV Stocks to Watch From a Prospering Industry",
-          "publisher": "Zacks",
-          "link": "https://finance.yahoo.com/media-advertising/articles/4-broadcast-radio-tv-stocks-141200889.html",
           "when": "Sep 11"
         }
       ]
@@ -17845,6 +17845,12 @@
       ],
       "news": [
         {
+          "title": "Walmart Just Declared War on DoorDash and Uber Eats, But Winning Won't Be Easy for 1 Simple Reason",
+          "publisher": "Barchart",
+          "link": "https://www.barchart.com/story/news/4578804/walmart-just-declared-war-on-doordash-and-uber-eats-but-winning-won-t-be-easy-for-1-simple-reason",
+          "when": "Sep 13"
+        },
+        {
           "title": "MarketBeat Week in Review \u2013 09/07 - 09/11",
           "publisher": "MarketBeat",
           "link": "https://www.marketbeat.com/articles/marketbeat-week-in-review-09-07-09-11/?utm_source=yahoofinance&utm_medium=yahoofinance",
@@ -17872,12 +17878,6 @@
           "title": "Inside Tesla\u2019s Cybertruck and robotaxi experience",
           "publisher": "Yahoo Finance Video",
           "link": "https://finance.yahoo.com/video/inside-tesla-cybertruck-robotaxi-experience-202100555.html",
-          "when": "Sep 11"
-        },
-        {
-          "title": "Uber CEO makes shocking admission about layoffs",
-          "publisher": "TheStreet",
-          "link": "https://www.thestreet.com/employment/uber-ceo-makes-admission-about-layoffs-ride-fees",
           "when": "Sep 11"
         }
       ]
@@ -261238,7 +261238,7 @@
       "type": "closed"
     }
   ],
-  "generated_at": "2026-09-13T18:34:39+00:00",
+  "generated_at": "2026-09-13T18:47:28+00:00",
   "universe": {
     "wheel": 18,
     "growth": 19,
