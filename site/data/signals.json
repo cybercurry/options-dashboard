@@ -21,16 +21,10 @@
       "earnings_in_window": false,
       "strong": true,
       "qualifies": false,
-      "median_ok": false,
-      "pct_b": 0.61,
-      "rsi": 58.8,
+      "median_ok": null,
+      "pct_b": null,
+      "rsi": null,
       "above_200ma": false,
-      "timing_label": "\ud83d\udd34 NO SETUP",
-      "timing_score": 0,
-      "timing_reasons": [
-        "IV below realized \u2014 thin premium +0",
-        "\u26d4 Above median (%B 0.61) \u2014 CSP needs below"
-      ],
       "earnings_date": "2026-11-16",
       "gates": [
         {
@@ -62,7 +56,7 @@
           "s": "warn"
         },
         {
-          "l": "timing 0/12",
+          "l": "timing",
           "s": "warn"
         }
       ],
@@ -161,15 +155,10 @@
       "earnings_in_window": false,
       "strong": true,
       "qualifies": true,
-      "median_ok": true,
-      "pct_b": 0.3,
-      "rsi": 44.7,
+      "median_ok": null,
+      "pct_b": null,
+      "rsi": null,
       "above_200ma": false,
-      "timing_label": "\ud83d\udd34 NO SETUP",
-      "timing_score": 2,
-      "timing_reasons": [
-        "IV rich vs realized \u2014 premium fat +2"
-      ],
       "earnings_date": "2026-11-04",
       "gates": [
         {
@@ -198,16 +187,16 @@
         },
         {
           "l": "median",
-          "s": "ok"
+          "s": "warn"
         },
         {
-          "l": "timing 2/12",
+          "l": "timing",
           "s": "warn"
         }
       ],
       "verdict": "caution",
-      "verdict_why": "no setup yet (2/12) \u2014 analyze",
-      "shortlist": true
+      "verdict_why": "setup unconfirmed",
+      "shortlist": false
     },
     {
       "ticker": "CIFR",
@@ -300,18 +289,10 @@
       "earnings_in_window": false,
       "strong": true,
       "qualifies": true,
-      "median_ok": true,
-      "pct_b": 0.28,
-      "rsi": 37.8,
+      "median_ok": null,
+      "pct_b": null,
+      "rsi": null,
       "above_200ma": false,
-      "timing_label": "\ud83d\udfe1 PARTIAL SETUP",
-      "timing_score": 5,
-      "timing_reasons": [
-        "Lower third (%B 0.28) +1",
-        "Turning up from depressed +1",
-        "RSI 38 depressed +1",
-        "IV rich vs realized \u2014 premium fat +2"
-      ],
       "earnings_date": "2026-11-09",
       "gates": [
         {
@@ -340,16 +321,16 @@
         },
         {
           "l": "median",
-          "s": "ok"
+          "s": "warn"
         },
         {
-          "l": "timing 5/12",
+          "l": "timing",
           "s": "warn"
         }
       ],
       "verdict": "caution",
-      "verdict_why": "setup 5/12 \u2014 analyze",
-      "shortlist": true
+      "verdict_why": "setup unconfirmed",
+      "shortlist": false
     },
     {
       "ticker": "SMR",
@@ -419,7 +400,7 @@
       ],
       "verdict": "caution",
       "verdict_why": "no setup yet (2/12) \u2014 analyze",
-      "shortlist": false
+      "shortlist": true
     },
     {
       "ticker": "IREN",
@@ -512,16 +493,10 @@
       "earnings_in_window": false,
       "strong": true,
       "qualifies": false,
-      "median_ok": true,
-      "pct_b": 0.33,
-      "rsi": 44.4,
-      "above_200ma": true,
-      "timing_label": "\ud83d\udd34 NO SETUP",
-      "timing_score": 1,
-      "timing_reasons": [
-        "Turning up from depressed +1",
-        "IV below realized \u2014 thin premium +0"
-      ],
+      "median_ok": null,
+      "pct_b": null,
+      "rsi": null,
+      "above_200ma": false,
       "earnings_date": "2026-11-05",
       "gates": [
         {
@@ -550,10 +525,10 @@
         },
         {
           "l": "median",
-          "s": "ok"
+          "s": "warn"
         },
         {
-          "l": "timing 1/12",
+          "l": "timing",
           "s": "warn"
         }
       ],
@@ -630,7 +605,7 @@
       ],
       "verdict": "caution",
       "verdict_why": "no setup yet (3/12) \u2014 analyze",
-      "shortlist": false
+      "shortlist": true
     },
     {
       "ticker": "CRWV",
@@ -653,15 +628,10 @@
       "earnings_in_window": false,
       "strong": true,
       "qualifies": true,
-      "median_ok": true,
-      "pct_b": 0.46,
-      "rsi": 50.0,
+      "median_ok": null,
+      "pct_b": null,
+      "rsi": null,
       "above_200ma": false,
-      "timing_label": "\ud83d\udd34 NO SETUP",
-      "timing_score": 0,
-      "timing_reasons": [
-        "IV below realized \u2014 thin premium +0"
-      ],
       "earnings_date": "2026-11-11",
       "gates": [
         {
@@ -690,16 +660,16 @@
         },
         {
           "l": "median",
-          "s": "ok"
+          "s": "warn"
         },
         {
-          "l": "timing 0/12",
+          "l": "timing",
           "s": "warn"
         }
       ],
       "verdict": "caution",
-      "verdict_why": "no setup yet (0/12) \u2014 analyze",
-      "shortlist": true
+      "verdict_why": "setup unconfirmed",
+      "shortlist": false
     },
     {
       "ticker": "BE",
@@ -792,19 +762,10 @@
       "earnings_in_window": false,
       "strong": true,
       "qualifies": false,
-      "median_ok": true,
-      "pct_b": 0.13,
-      "rsi": 33.8,
+      "median_ok": null,
+      "pct_b": null,
+      "rsi": null,
       "above_200ma": false,
-      "timing_label": "\ud83d\udfe2 FULL SETUP \u2014 sell put",
-      "timing_score": 8,
-      "timing_reasons": [
-        "Near the lower band (%B 0.13) +2",
-        "Turning up from depressed +1",
-        "RSI 34 <37 and turning up +2",
-        "Up-day off a lower low +1",
-        "IV rich vs realized \u2014 premium fat +2"
-      ],
       "earnings_date": "2026-11-04",
       "gates": [
         {
@@ -833,11 +794,11 @@
         },
         {
           "l": "median",
-          "s": "ok"
+          "s": "warn"
         },
         {
-          "l": "timing 8/12",
-          "s": "ok"
+          "l": "timing",
+          "s": "warn"
         }
       ],
       "verdict": "avoid",
@@ -865,18 +826,10 @@
       "earnings_in_window": false,
       "strong": true,
       "qualifies": true,
-      "median_ok": true,
-      "pct_b": -0.06,
-      "rsi": 37.6,
+      "median_ok": null,
+      "pct_b": null,
+      "rsi": null,
       "above_200ma": false,
-      "timing_label": "\ud83d\udfe1 PARTIAL SETUP",
-      "timing_score": 7,
-      "timing_reasons": [
-        "At/through the lower band (%B -0.06) +3",
-        "Dropped to a 3-day low then bounced +2",
-        "RSI 38 depressed +1",
-        "IV fair vs realized +1"
-      ],
       "earnings_date": "2026-11-05",
       "gates": [
         {
@@ -905,16 +858,16 @@
         },
         {
           "l": "median",
-          "s": "ok"
+          "s": "warn"
         },
         {
-          "l": "timing 7/12",
+          "l": "timing",
           "s": "warn"
         }
       ],
       "verdict": "caution",
-      "verdict_why": "setup 7/12 \u2014 analyze",
-      "shortlist": true
+      "verdict_why": "setup unconfirmed",
+      "shortlist": false
     },
     {
       "ticker": "RGTI",
@@ -937,17 +890,10 @@
       "earnings_in_window": false,
       "strong": true,
       "qualifies": true,
-      "median_ok": true,
-      "pct_b": 0.3,
-      "rsi": 44.3,
+      "median_ok": null,
+      "pct_b": null,
+      "rsi": null,
       "above_200ma": false,
-      "timing_label": "\ud83d\udd34 NO SETUP",
-      "timing_score": 2,
-      "timing_reasons": [
-        "Lower third (%B 0.30) +1",
-        "Turning up from depressed +1",
-        "IV below realized \u2014 thin premium +0"
-      ],
       "earnings_date": "2026-11-10",
       "gates": [
         {
@@ -976,16 +922,16 @@
         },
         {
           "l": "median",
-          "s": "ok"
+          "s": "warn"
         },
         {
-          "l": "timing 2/12",
+          "l": "timing",
           "s": "warn"
         }
       ],
       "verdict": "caution",
-      "verdict_why": "no setup yet (2/12) \u2014 analyze",
-      "shortlist": true
+      "verdict_why": "setup unconfirmed",
+      "shortlist": false
     },
     {
       "ticker": "NBIS",
@@ -1196,7 +1142,7 @@
       ],
       "verdict": "caution",
       "verdict_why": "setup 5/12 \u2014 analyze",
-      "shortlist": false
+      "shortlist": true
     },
     {
       "ticker": "HOOD",
@@ -1360,19 +1306,10 @@
       "earnings_in_window": false,
       "strong": true,
       "qualifies": false,
-      "median_ok": true,
-      "pct_b": 0.1,
-      "rsi": 38.9,
-      "above_200ma": true,
-      "timing_label": "\ud83d\udfe1 PARTIAL SETUP",
-      "timing_score": 7,
-      "timing_reasons": [
-        "Near the lower band (%B 0.10) +2",
-        "Dropped to a 3-day low then bounced +2",
-        "RSI 39 depressed +1",
-        "Piercing line +2",
-        "IV below realized \u2014 thin premium +0"
-      ],
+      "median_ok": null,
+      "pct_b": null,
+      "rsi": null,
+      "above_200ma": false,
       "earnings_date": "2026-12-02",
       "gates": [
         {
@@ -1401,10 +1338,10 @@
         },
         {
           "l": "median",
-          "s": "ok"
+          "s": "warn"
         },
         {
-          "l": "timing 7/12",
+          "l": "timing",
           "s": "warn"
         }
       ],
@@ -1481,7 +1418,7 @@
       ],
       "verdict": "caution",
       "verdict_why": "no setup yet (3/12) \u2014 analyze",
-      "shortlist": false
+      "shortlist": true
     },
     {
       "ticker": "SKHY",
@@ -1784,18 +1721,10 @@
       "earnings_in_window": false,
       "strong": true,
       "qualifies": true,
-      "median_ok": true,
-      "pct_b": 0.25,
-      "rsi": 43.1,
+      "median_ok": null,
+      "pct_b": null,
+      "rsi": null,
       "above_200ma": false,
-      "timing_label": "\ud83d\udd34 NO SETUP",
-      "timing_score": 3,
-      "timing_reasons": [
-        "Lower third (%B 0.25) +1",
-        "Turning up from depressed +1",
-        "Up-day off a lower low +1",
-        "IV below realized \u2014 thin premium +0"
-      ],
       "earnings_date": "2026-11-09",
       "gates": [
         {
@@ -1824,16 +1753,16 @@
         },
         {
           "l": "median",
-          "s": "ok"
+          "s": "warn"
         },
         {
-          "l": "timing 3/12",
+          "l": "timing",
           "s": "warn"
         }
       ],
       "verdict": "caution",
-      "verdict_why": "no setup yet (3/12) \u2014 analyze",
-      "shortlist": true
+      "verdict_why": "setup unconfirmed",
+      "shortlist": false
     },
     {
       "ticker": "CRWD",
@@ -1856,15 +1785,10 @@
       "earnings_in_window": false,
       "strong": true,
       "qualifies": false,
-      "median_ok": true,
-      "pct_b": 0.48,
-      "rsi": 50.0,
-      "above_200ma": true,
-      "timing_label": "\ud83d\udd34 NO SETUP",
-      "timing_score": 0,
-      "timing_reasons": [
-        "IV below realized \u2014 thin premium +0"
-      ],
+      "median_ok": null,
+      "pct_b": null,
+      "rsi": null,
+      "above_200ma": false,
       "earnings_date": "2026-12-01",
       "gates": [
         {
@@ -1893,10 +1817,10 @@
         },
         {
           "l": "median",
-          "s": "ok"
+          "s": "warn"
         },
         {
-          "l": "timing 0/12",
+          "l": "timing",
           "s": "warn"
         }
       ],
@@ -1995,18 +1919,10 @@
       "earnings_in_window": false,
       "strong": true,
       "qualifies": false,
-      "median_ok": true,
-      "pct_b": 0.15,
-      "rsi": 45.8,
+      "median_ok": null,
+      "pct_b": null,
+      "rsi": null,
       "above_200ma": false,
-      "timing_label": "\ud83d\udfe1 PARTIAL SETUP",
-      "timing_score": 5,
-      "timing_reasons": [
-        "Near the lower band (%B 0.15) +2",
-        "Turning up from depressed +1",
-        "Bullish engulfing +2",
-        "IV below realized \u2014 thin premium +0"
-      ],
       "earnings_date": "2026-11-24",
       "gates": [
         {
@@ -2035,10 +1951,10 @@
         },
         {
           "l": "median",
-          "s": "ok"
+          "s": "warn"
         },
         {
-          "l": "timing 5/12",
+          "l": "timing",
           "s": "warn"
         }
       ],
@@ -2419,18 +2335,10 @@
       "earnings_in_window": false,
       "strong": true,
       "qualifies": true,
-      "median_ok": true,
-      "pct_b": -0.02,
-      "rsi": 41.7,
+      "median_ok": null,
+      "pct_b": null,
+      "rsi": null,
       "above_200ma": false,
-      "timing_label": "\ud83d\udfe1 PARTIAL SETUP",
-      "timing_score": 7,
-      "timing_reasons": [
-        "At/through the lower band (%B -0.02) +3",
-        "Dropped to a 3-day low then bounced +2",
-        "RSI 42 depressed +1",
-        "IV fair vs realized +1"
-      ],
       "earnings_date": "2026-11-05",
       "gates": [
         {
@@ -2459,16 +2367,16 @@
         },
         {
           "l": "median",
-          "s": "ok"
+          "s": "warn"
         },
         {
-          "l": "timing 7/12",
+          "l": "timing",
           "s": "warn"
         }
       ],
       "verdict": "caution",
-      "verdict_why": "setup 7/12 \u2014 analyze",
-      "shortlist": true
+      "verdict_why": "setup unconfirmed",
+      "shortlist": false
     },
     {
       "ticker": "CMG",
@@ -2491,15 +2399,10 @@
       "earnings_in_window": false,
       "strong": true,
       "qualifies": true,
-      "median_ok": true,
-      "pct_b": 0.46,
-      "rsi": 51.1,
-      "above_200ma": true,
-      "timing_label": "\ud83d\udd34 NO SETUP",
-      "timing_score": 1,
-      "timing_reasons": [
-        "IV fair vs realized +1"
-      ],
+      "median_ok": null,
+      "pct_b": null,
+      "rsi": null,
+      "above_200ma": false,
       "earnings_date": "2026-10-28",
       "gates": [
         {
@@ -2528,16 +2431,16 @@
         },
         {
           "l": "median",
-          "s": "ok"
+          "s": "warn"
         },
         {
-          "l": "timing 1/12",
+          "l": "timing",
           "s": "warn"
         }
       ],
       "verdict": "caution",
-      "verdict_why": "no setup yet (1/12) \u2014 analyze",
-      "shortlist": true
+      "verdict_why": "setup unconfirmed",
+      "shortlist": false
     },
     {
       "ticker": "SLV",
@@ -2608,7 +2511,7 @@
       ],
       "verdict": "caution",
       "verdict_why": "no setup yet (3/12) \u2014 analyze",
-      "shortlist": false
+      "shortlist": true
     },
     {
       "ticker": "IBIT",
@@ -2631,16 +2534,10 @@
       "earnings_in_window": false,
       "strong": true,
       "qualifies": true,
-      "median_ok": false,
-      "pct_b": 0.58,
-      "rsi": 59.3,
-      "above_200ma": true,
-      "timing_label": "\ud83d\udd34 NO SETUP",
-      "timing_score": 0,
-      "timing_reasons": [
-        "IV below realized \u2014 thin premium +0",
-        "\u26d4 Above median (%B 0.58) \u2014 CSP needs below"
-      ],
+      "median_ok": null,
+      "pct_b": null,
+      "rsi": null,
+      "above_200ma": false,
       "earnings_date": null,
       "gates": [
         {
@@ -2672,12 +2569,12 @@
           "s": "warn"
         },
         {
-          "l": "timing 0/12",
+          "l": "timing",
           "s": "warn"
         }
       ],
       "verdict": "caution",
-      "verdict_why": "wrong side of median \u2014 analyze",
+      "verdict_why": "setup unconfirmed",
       "shortlist": false
     },
     {
@@ -2820,7 +2717,7 @@
       ],
       "verdict": "caution",
       "verdict_why": "no setup yet (3/12) \u2014 analyze",
-      "shortlist": false
+      "shortlist": true
     },
     {
       "ticker": "CEG",
@@ -3105,7 +3002,7 @@
       ],
       "verdict": "caution",
       "verdict_why": "no setup yet (2/12) \u2014 analyze",
-      "shortlist": false
+      "shortlist": true
     },
     {
       "ticker": "META",
@@ -3456,7 +3353,7 @@
       ],
       "verdict": "caution",
       "verdict_why": "no setup yet (2/12) \u2014 analyze",
-      "shortlist": false
+      "shortlist": true
     },
     {
       "ticker": "WMT",
@@ -3690,16 +3587,10 @@
       "earnings_in_window": false,
       "strong": true,
       "qualifies": true,
-      "median_ok": true,
-      "pct_b": 0.4,
-      "rsi": 44.9,
+      "median_ok": null,
+      "pct_b": null,
+      "rsi": null,
       "above_200ma": false,
-      "timing_label": "\ud83d\udfe1 PARTIAL SETUP",
-      "timing_score": 4,
-      "timing_reasons": [
-        "Morning star +2",
-        "IV rich vs realized \u2014 premium fat +2"
-      ],
       "earnings_date": "2026-10-28",
       "gates": [
         {
@@ -3728,15 +3619,15 @@
         },
         {
           "l": "median",
-          "s": "ok"
+          "s": "warn"
         },
         {
-          "l": "timing 4/12",
+          "l": "timing",
           "s": "warn"
         }
       ],
       "verdict": "caution",
-      "verdict_why": "setup 4/12 \u2014 analyze",
+      "verdict_why": "setup unconfirmed",
       "shortlist": false
     },
     {
@@ -4116,18 +4007,10 @@
       "earnings_in_window": false,
       "strong": false,
       "qualifies": false,
-      "median_ok": true,
-      "pct_b": 0.1,
-      "rsi": 32.2,
+      "median_ok": null,
+      "pct_b": null,
+      "rsi": null,
       "above_200ma": false,
-      "timing_label": "\ud83d\udfe2 FULL SETUP \u2014 sell put",
-      "timing_score": 9,
-      "timing_reasons": [
-        "At/through the lower band (%B 0.10) +3",
-        "Dropped to a 3-day low then bounced +2",
-        "RSI 32 <37 and turning up +2",
-        "IV rich vs realized \u2014 premium fat +2"
-      ],
       "earnings_date": null,
       "gates": [
         {
@@ -4156,11 +4039,11 @@
         },
         {
           "l": "median",
-          "s": "ok"
+          "s": "warn"
         },
         {
-          "l": "timing 9/12",
-          "s": "ok"
+          "l": "timing",
+          "s": "warn"
         }
       ],
       "verdict": "avoid",
@@ -4259,17 +4142,10 @@
       "earnings_in_window": false,
       "strong": true,
       "qualifies": false,
-      "median_ok": true,
-      "pct_b": 0.61,
-      "rsi": 58.8,
+      "median_ok": null,
+      "pct_b": null,
+      "rsi": null,
       "above_200ma": false,
-      "timing_label": "\ud83d\udd34 NO SETUP",
-      "timing_score": 3,
-      "timing_reasons": [
-        "IV below realized \u2014 thin premium +0",
-        "RSI 59 mildly up +2",
-        "At/above the 20-day median \u2014 good strike +1"
-      ],
       "earnings_date": "2026-11-16",
       "gates": [
         {
@@ -4298,10 +4174,10 @@
         },
         {
           "l": "median",
-          "s": "ok"
+          "s": "warn"
         },
         {
-          "l": "timing 3/12",
+          "l": "timing",
           "s": "warn"
         }
       ],
@@ -4615,16 +4491,10 @@
       "earnings_in_window": false,
       "strong": true,
       "qualifies": true,
-      "median_ok": false,
-      "pct_b": 0.33,
-      "rsi": 44.4,
-      "above_200ma": true,
-      "timing_label": "\ud83d\udfe1 PARTIAL SETUP",
-      "timing_score": 4,
-      "timing_reasons": [
-        "IV below realized \u2014 thin premium +0",
-        "RSI 44 weak/neutral \u2014 safe to write +4"
-      ],
+      "median_ok": null,
+      "pct_b": null,
+      "rsi": null,
+      "above_200ma": false,
       "earnings_date": "2026-11-05",
       "gates": [
         {
@@ -4656,12 +4526,12 @@
           "s": "warn"
         },
         {
-          "l": "timing 4/12",
+          "l": "timing",
           "s": "warn"
         }
       ],
       "verdict": "caution",
-      "verdict_why": "setup 4/12 \u2014 analyze",
+      "verdict_why": "setup unconfirmed",
       "shortlist": false
     },
     {
@@ -4755,16 +4625,10 @@
       "earnings_in_window": false,
       "strong": true,
       "qualifies": true,
-      "median_ok": false,
-      "pct_b": 0.28,
-      "rsi": 37.8,
+      "median_ok": null,
+      "pct_b": null,
+      "rsi": null,
       "above_200ma": false,
-      "timing_label": "\ud83d\udfe2 FULL SETUP \u2014 write now",
-      "timing_score": 8,
-      "timing_reasons": [
-        "IV rich vs realized \u2014 fat premium +4",
-        "RSI 38 weak/neutral \u2014 safe to write +4"
-      ],
       "earnings_date": "2026-11-09",
       "gates": [
         {
@@ -4796,12 +4660,12 @@
           "s": "warn"
         },
         {
-          "l": "timing 8/12",
-          "s": "ok"
+          "l": "timing",
+          "s": "warn"
         }
       ],
-      "verdict": "go",
-      "verdict_why": "setup 8/12",
+      "verdict": "caution",
+      "verdict_why": "setup unconfirmed",
       "shortlist": false
     },
     {
@@ -4825,16 +4689,10 @@
       "earnings_in_window": false,
       "strong": true,
       "qualifies": true,
-      "median_ok": false,
-      "pct_b": -0.06,
-      "rsi": 37.6,
+      "median_ok": null,
+      "pct_b": null,
+      "rsi": null,
       "above_200ma": false,
-      "timing_label": "\ud83d\udfe1 PARTIAL SETUP",
-      "timing_score": 6,
-      "timing_reasons": [
-        "IV fair vs realized +2",
-        "RSI 38 weak/neutral \u2014 safe to write +4"
-      ],
       "earnings_date": "2026-11-05",
       "gates": [
         {
@@ -4866,12 +4724,12 @@
           "s": "warn"
         },
         {
-          "l": "timing 6/12",
+          "l": "timing",
           "s": "warn"
         }
       ],
       "verdict": "caution",
-      "verdict_why": "setup 6/12 \u2014 analyze",
+      "verdict_why": "setup unconfirmed",
       "shortlist": false
     },
     {
@@ -4965,16 +4823,10 @@
       "earnings_in_window": false,
       "strong": true,
       "qualifies": true,
-      "median_ok": false,
-      "pct_b": 0.3,
-      "rsi": 44.7,
+      "median_ok": null,
+      "pct_b": null,
+      "rsi": null,
       "above_200ma": false,
-      "timing_label": "\ud83d\udfe2 FULL SETUP \u2014 write now",
-      "timing_score": 8,
-      "timing_reasons": [
-        "IV rich vs realized \u2014 fat premium +4",
-        "RSI 45 weak/neutral \u2014 safe to write +4"
-      ],
       "earnings_date": "2026-11-04",
       "gates": [
         {
@@ -5006,12 +4858,12 @@
           "s": "warn"
         },
         {
-          "l": "timing 8/12",
-          "s": "ok"
+          "l": "timing",
+          "s": "warn"
         }
       ],
-      "verdict": "go",
-      "verdict_why": "setup 8/12",
+      "verdict": "caution",
+      "verdict_why": "setup unconfirmed",
       "shortlist": false
     },
     {
@@ -5035,16 +4887,10 @@
       "earnings_in_window": false,
       "strong": true,
       "qualifies": true,
-      "median_ok": false,
-      "pct_b": 0.1,
-      "rsi": 38.9,
-      "above_200ma": true,
-      "timing_label": "\ud83d\udfe1 PARTIAL SETUP",
-      "timing_score": 4,
-      "timing_reasons": [
-        "IV below realized \u2014 thin premium +0",
-        "RSI 39 weak/neutral \u2014 safe to write +4"
-      ],
+      "median_ok": null,
+      "pct_b": null,
+      "rsi": null,
+      "above_200ma": false,
       "earnings_date": "2026-12-02",
       "gates": [
         {
@@ -5076,12 +4922,12 @@
           "s": "warn"
         },
         {
-          "l": "timing 4/12",
+          "l": "timing",
           "s": "warn"
         }
       ],
       "verdict": "caution",
-      "verdict_why": "setup 4/12 \u2014 analyze",
+      "verdict_why": "setup unconfirmed",
       "shortlist": false
     },
     {
@@ -5105,16 +4951,10 @@
       "earnings_in_window": false,
       "strong": true,
       "qualifies": true,
-      "median_ok": false,
-      "pct_b": 0.25,
-      "rsi": 43.1,
+      "median_ok": null,
+      "pct_b": null,
+      "rsi": null,
       "above_200ma": false,
-      "timing_label": "\ud83d\udfe1 PARTIAL SETUP",
-      "timing_score": 4,
-      "timing_reasons": [
-        "IV below realized \u2014 thin premium +0",
-        "RSI 43 weak/neutral \u2014 safe to write +4"
-      ],
       "earnings_date": "2026-11-09",
       "gates": [
         {
@@ -5146,12 +4986,12 @@
           "s": "warn"
         },
         {
-          "l": "timing 4/12",
+          "l": "timing",
           "s": "warn"
         }
       ],
       "verdict": "caution",
-      "verdict_why": "setup 4/12 \u2014 analyze",
+      "verdict_why": "setup unconfirmed",
       "shortlist": false
     },
     {
@@ -5245,16 +5085,10 @@
       "earnings_in_window": false,
       "strong": true,
       "qualifies": false,
-      "median_ok": false,
-      "pct_b": 0.13,
-      "rsi": 33.8,
+      "median_ok": null,
+      "pct_b": null,
+      "rsi": null,
       "above_200ma": false,
-      "timing_label": "\ud83d\udfe2 FULL SETUP \u2014 write now",
-      "timing_score": 8,
-      "timing_reasons": [
-        "IV rich vs realized \u2014 fat premium +4",
-        "RSI 34 weak/neutral \u2014 safe to write +4"
-      ],
       "earnings_date": "2026-11-04",
       "gates": [
         {
@@ -5286,8 +5120,8 @@
           "s": "warn"
         },
         {
-          "l": "timing 8/12",
-          "s": "ok"
+          "l": "timing",
+          "s": "warn"
         }
       ],
       "verdict": "avoid",
@@ -5600,16 +5434,10 @@
       "earnings_in_window": false,
       "strong": true,
       "qualifies": true,
-      "median_ok": false,
-      "pct_b": 0.3,
-      "rsi": 44.3,
+      "median_ok": null,
+      "pct_b": null,
+      "rsi": null,
       "above_200ma": false,
-      "timing_label": "\ud83d\udfe1 PARTIAL SETUP",
-      "timing_score": 5,
-      "timing_reasons": [
-        "IV a touch below realized +1",
-        "RSI 44 weak/neutral \u2014 safe to write +4"
-      ],
       "earnings_date": "2026-11-10",
       "gates": [
         {
@@ -5641,12 +5469,12 @@
           "s": "warn"
         },
         {
-          "l": "timing 5/12",
+          "l": "timing",
           "s": "warn"
         }
       ],
       "verdict": "caution",
-      "verdict_why": "setup 5/12 \u2014 analyze",
+      "verdict_why": "setup unconfirmed",
       "shortlist": false
     },
     {
@@ -5740,16 +5568,10 @@
       "earnings_in_window": false,
       "strong": true,
       "qualifies": true,
-      "median_ok": false,
-      "pct_b": 0.46,
-      "rsi": 50.0,
+      "median_ok": null,
+      "pct_b": null,
+      "rsi": null,
       "above_200ma": false,
-      "timing_label": "\ud83d\udfe1 PARTIAL SETUP",
-      "timing_score": 4,
-      "timing_reasons": [
-        "IV a touch below realized +1",
-        "RSI 50 neutral \u2014 safe to write +3"
-      ],
       "earnings_date": "2026-11-11",
       "gates": [
         {
@@ -5781,12 +5603,12 @@
           "s": "warn"
         },
         {
-          "l": "timing 4/12",
+          "l": "timing",
           "s": "warn"
         }
       ],
       "verdict": "caution",
-      "verdict_why": "setup 4/12 \u2014 analyze",
+      "verdict_why": "setup unconfirmed",
       "shortlist": false
     },
     {
@@ -6165,16 +5987,10 @@
       "earnings_in_window": false,
       "strong": true,
       "qualifies": false,
-      "median_ok": false,
-      "pct_b": 0.15,
-      "rsi": 45.8,
+      "median_ok": null,
+      "pct_b": null,
+      "rsi": null,
       "above_200ma": false,
-      "timing_label": "\ud83d\udfe1 PARTIAL SETUP",
-      "timing_score": 4,
-      "timing_reasons": [
-        "IV a touch below realized +1",
-        "RSI 46 neutral \u2014 safe to write +3"
-      ],
       "earnings_date": "2026-11-24",
       "gates": [
         {
@@ -6206,7 +6022,7 @@
           "s": "warn"
         },
         {
-          "l": "timing 4/12",
+          "l": "timing",
           "s": "warn"
         }
       ],
@@ -6377,16 +6193,10 @@
       "earnings_in_window": false,
       "strong": true,
       "qualifies": true,
-      "median_ok": false,
-      "pct_b": 0.46,
-      "rsi": 51.1,
-      "above_200ma": true,
-      "timing_label": "\ud83d\udfe1 PARTIAL SETUP",
-      "timing_score": 5,
-      "timing_reasons": [
-        "IV fair vs realized +2",
-        "RSI 51 neutral \u2014 safe to write +3"
-      ],
+      "median_ok": null,
+      "pct_b": null,
+      "rsi": null,
+      "above_200ma": false,
       "earnings_date": "2026-10-28",
       "gates": [
         {
@@ -6418,12 +6228,12 @@
           "s": "warn"
         },
         {
-          "l": "timing 5/12",
+          "l": "timing",
           "s": "warn"
         }
       ],
       "verdict": "caution",
-      "verdict_why": "setup 5/12 \u2014 analyze",
+      "verdict_why": "setup unconfirmed",
       "shortlist": false
     },
     {
@@ -6447,16 +6257,10 @@
       "earnings_in_window": false,
       "strong": true,
       "qualifies": false,
-      "median_ok": false,
-      "pct_b": 0.48,
-      "rsi": 50.0,
-      "above_200ma": true,
-      "timing_label": "\ud83d\udd34 NO SETUP",
-      "timing_score": 3,
-      "timing_reasons": [
-        "IV below realized \u2014 thin premium +0",
-        "RSI 50 neutral \u2014 safe to write +3"
-      ],
+      "median_ok": null,
+      "pct_b": null,
+      "rsi": null,
+      "above_200ma": false,
       "earnings_date": "2026-12-01",
       "gates": [
         {
@@ -6488,7 +6292,7 @@
           "s": "warn"
         },
         {
-          "l": "timing 3/12",
+          "l": "timing",
           "s": "warn"
         }
       ],
@@ -6801,16 +6605,10 @@
       "earnings_in_window": false,
       "strong": true,
       "qualifies": false,
-      "median_ok": false,
-      "pct_b": 0.1,
-      "rsi": 32.2,
+      "median_ok": null,
+      "pct_b": null,
+      "rsi": null,
       "above_200ma": false,
-      "timing_label": "\ud83d\udfe2 FULL SETUP \u2014 write now",
-      "timing_score": 8,
-      "timing_reasons": [
-        "IV rich vs realized \u2014 fat premium +4",
-        "RSI 32 weak/neutral \u2014 safe to write +4"
-      ],
       "earnings_date": null,
       "gates": [
         {
@@ -6842,8 +6640,8 @@
           "s": "warn"
         },
         {
-          "l": "timing 8/12",
-          "s": "ok"
+          "l": "timing",
+          "s": "warn"
         }
       ],
       "verdict": "avoid",
@@ -6941,16 +6739,10 @@
       "earnings_in_window": false,
       "strong": true,
       "qualifies": true,
-      "median_ok": false,
-      "pct_b": -0.02,
-      "rsi": 41.7,
+      "median_ok": null,
+      "pct_b": null,
+      "rsi": null,
       "above_200ma": false,
-      "timing_label": "\ud83d\udfe1 PARTIAL SETUP",
-      "timing_score": 6,
-      "timing_reasons": [
-        "IV fair vs realized +2",
-        "RSI 42 weak/neutral \u2014 safe to write +4"
-      ],
       "earnings_date": "2026-11-05",
       "gates": [
         {
@@ -6982,12 +6774,12 @@
           "s": "warn"
         },
         {
-          "l": "timing 6/12",
+          "l": "timing",
           "s": "warn"
         }
       ],
       "verdict": "caution",
-      "verdict_why": "setup 6/12 \u2014 analyze",
+      "verdict_why": "setup unconfirmed",
       "shortlist": false
     },
     {
@@ -7295,17 +7087,10 @@
       "earnings_in_window": false,
       "strong": true,
       "qualifies": true,
-      "median_ok": true,
-      "pct_b": 0.58,
-      "rsi": 59.3,
-      "above_200ma": true,
-      "timing_label": "\ud83d\udd34 NO SETUP",
-      "timing_score": 3,
-      "timing_reasons": [
-        "IV below realized \u2014 thin premium +0",
-        "RSI 59 mildly up +2",
-        "At/above the 20-day median \u2014 good strike +1"
-      ],
+      "median_ok": null,
+      "pct_b": null,
+      "rsi": null,
+      "above_200ma": false,
       "earnings_date": null,
       "gates": [
         {
@@ -7334,15 +7119,15 @@
         },
         {
           "l": "median",
-          "s": "ok"
+          "s": "warn"
         },
         {
-          "l": "timing 3/12",
+          "l": "timing",
           "s": "warn"
         }
       ],
       "verdict": "caution",
-      "verdict_why": "no setup yet (3/12) \u2014 analyze",
+      "verdict_why": "setup unconfirmed",
       "shortlist": false
     },
     {
@@ -7579,16 +7364,10 @@
       "earnings_in_window": false,
       "strong": true,
       "qualifies": true,
-      "median_ok": false,
-      "pct_b": 0.4,
-      "rsi": 44.9,
+      "median_ok": null,
+      "pct_b": null,
+      "rsi": null,
       "above_200ma": false,
-      "timing_label": "\ud83d\udfe2 FULL SETUP \u2014 write now",
-      "timing_score": 8,
-      "timing_reasons": [
-        "IV rich vs realized \u2014 fat premium +4",
-        "RSI 45 weak/neutral \u2014 safe to write +4"
-      ],
       "earnings_date": "2026-10-28",
       "gates": [
         {
@@ -7620,12 +7399,12 @@
           "s": "warn"
         },
         {
-          "l": "timing 8/12",
-          "s": "ok"
+          "l": "timing",
+          "s": "warn"
         }
       ],
-      "verdict": "go",
-      "verdict_why": "setup 8/12",
+      "verdict": "caution",
+      "verdict_why": "setup unconfirmed",
       "shortlist": false
     },
     {
@@ -8691,37 +8470,6 @@
       "good_pmcc": true
     },
     {
-      "ticker": "CMG",
-      "strategy": "LEAP",
-      "spot": 36.2,
-      "expiry": "2028-01-21",
-      "dte": 495,
-      "strike": 30.0,
-      "delta": 0.782,
-      "mid": 10.95,
-      "cost": 1095.0,
-      "intrinsic": 6.2,
-      "extrinsic": 4.75,
-      "extrinsic_pct": 43.4,
-      "carry_pct": 9.68,
-      "iv": 41.2,
-      "iv_ratio": 1.28,
-      "above_200ma": true,
-      "above_50ma": true,
-      "ma_aligned": true,
-      "rsi": 51.1,
-      "rsi_rising": false,
-      "ext_ok": true,
-      "trend_ok": true,
-      "qualifies": true,
-      "verdict": "caution",
-      "timing_label": "\ud83d\udfe0 MARGINAL",
-      "timing_score": 4,
-      "score_max": 11,
-      "sector": "Consumer Cyclical",
-      "good_pmcc": true
-    },
-    {
       "ticker": "ANET",
       "strategy": "LEAP",
       "spot": 199.59,
@@ -8846,37 +8594,6 @@
       "good_pmcc": true
     },
     {
-      "ticker": "CRWD",
-      "strategy": "LEAP",
-      "spot": 206.74,
-      "expiry": "2028-01-21",
-      "dte": 495,
-      "strike": 165.0,
-      "delta": 0.783,
-      "mid": 78.17,
-      "cost": 7818.0,
-      "intrinsic": 41.74,
-      "extrinsic": 36.43,
-      "extrinsic_pct": 46.6,
-      "carry_pct": 13.0,
-      "iv": 56.8,
-      "iv_ratio": 0.65,
-      "above_200ma": true,
-      "above_50ma": true,
-      "ma_aligned": true,
-      "rsi": 50.0,
-      "rsi_rising": false,
-      "ext_ok": true,
-      "trend_ok": true,
-      "qualifies": true,
-      "verdict": "caution",
-      "timing_label": "\ud83d\udfe1 DECENT ENTRY",
-      "timing_score": 7,
-      "score_max": 11,
-      "sector": "Technology",
-      "good_pmcc": true
-    },
-    {
       "ticker": "PLTR",
       "strategy": "LEAP",
       "spot": 167.23,
@@ -8896,37 +8613,6 @@
       "above_50ma": true,
       "ma_aligned": true,
       "rsi": 49.2,
-      "rsi_rising": false,
-      "ext_ok": true,
-      "trend_ok": true,
-      "qualifies": true,
-      "verdict": "caution",
-      "timing_label": "\ud83d\udfe1 DECENT ENTRY",
-      "timing_score": 6,
-      "score_max": 11,
-      "sector": "Technology",
-      "good_pmcc": true
-    },
-    {
-      "ticker": "PATH",
-      "strategy": "LEAP",
-      "spot": 13.75,
-      "expiry": "2028-01-21",
-      "dte": 495,
-      "strike": 10.0,
-      "delta": 0.813,
-      "mid": 6.35,
-      "cost": 635.0,
-      "intrinsic": 3.75,
-      "extrinsic": 2.6,
-      "extrinsic_pct": 40.9,
-      "carry_pct": 13.94,
-      "iv": 72.0,
-      "iv_ratio": 0.88,
-      "above_200ma": true,
-      "above_50ma": false,
-      "ma_aligned": true,
-      "rsi": 38.9,
       "rsi_rising": false,
       "ext_ok": true,
       "trend_ok": true,
@@ -9263,11 +8949,11 @@
       "extrinsic_pct": 23.3,
       "carry_pct": 8.09,
       "iv": 54.1,
-      "iv_ratio": 2.59,
+      "iv_ratio": null,
       "above_200ma": false,
       "above_50ma": false,
       "ma_aligned": false,
-      "rsi": 32.2,
+      "rsi": null,
       "rsi_rising": false,
       "ext_ok": true,
       "trend_ok": false,
@@ -9325,18 +9011,18 @@
       "extrinsic_pct": 46.6,
       "carry_pct": 9.31,
       "iv": 35.9,
-      "iv_ratio": 1.64,
+      "iv_ratio": null,
       "above_200ma": false,
       "above_50ma": false,
       "ma_aligned": false,
-      "rsi": 44.9,
-      "rsi_rising": true,
+      "rsi": null,
+      "rsi_rising": false,
       "ext_ok": true,
       "trend_ok": false,
       "qualifies": false,
       "verdict": "neutral",
-      "timing_label": "\ud83d\udfe0 MARGINAL",
-      "timing_score": 2,
+      "timing_label": "\u26aa NEUTRAL",
+      "timing_score": 0,
       "score_max": 11,
       "sector": "Industrials",
       "good_pmcc": false
@@ -9370,6 +9056,37 @@
       "timing_score": 2,
       "score_max": 11,
       "sector": "Communication Services",
+      "good_pmcc": false
+    },
+    {
+      "ticker": "CMG",
+      "strategy": "LEAP",
+      "spot": 36.2,
+      "expiry": "2028-01-21",
+      "dte": 495,
+      "strike": 30.0,
+      "delta": 0.782,
+      "mid": 10.95,
+      "cost": 1095.0,
+      "intrinsic": 6.2,
+      "extrinsic": 4.75,
+      "extrinsic_pct": 43.4,
+      "carry_pct": 9.68,
+      "iv": 41.2,
+      "iv_ratio": null,
+      "above_200ma": false,
+      "above_50ma": false,
+      "ma_aligned": false,
+      "rsi": null,
+      "rsi_rising": false,
+      "ext_ok": true,
+      "trend_ok": false,
+      "qualifies": false,
+      "verdict": "neutral",
+      "timing_label": "\u26aa NEUTRAL",
+      "timing_score": 0,
+      "score_max": 11,
+      "sector": "Consumer Cyclical",
       "good_pmcc": false
     },
     {
@@ -9480,18 +9197,18 @@
       "extrinsic_pct": 42.4,
       "carry_pct": 10.87,
       "iv": 49.7,
-      "iv_ratio": 1.11,
-      "above_200ma": true,
-      "above_50ma": true,
+      "iv_ratio": null,
+      "above_200ma": false,
+      "above_50ma": false,
       "ma_aligned": false,
-      "rsi": 59.3,
+      "rsi": null,
       "rsi_rising": false,
       "ext_ok": true,
       "trend_ok": false,
       "qualifies": false,
       "verdict": "neutral",
-      "timing_label": "\ud83d\udfe0 MARGINAL",
-      "timing_score": 3,
+      "timing_label": "\u26aa NEUTRAL",
+      "timing_score": 0,
       "score_max": 11,
       "sector": "\u2014",
       "good_pmcc": false
@@ -9635,18 +9352,49 @@
       "extrinsic_pct": 45.6,
       "carry_pct": 13.0,
       "iv": 58.5,
-      "iv_ratio": 1.0,
+      "iv_ratio": null,
       "above_200ma": false,
-      "above_50ma": true,
+      "above_50ma": false,
       "ma_aligned": false,
-      "rsi": 45.8,
+      "rsi": null,
       "rsi_rising": false,
       "ext_ok": true,
       "trend_ok": false,
       "qualifies": false,
       "verdict": "neutral",
-      "timing_label": "\ud83d\udfe1 DECENT ENTRY",
-      "timing_score": 6,
+      "timing_label": "\u26aa NEUTRAL",
+      "timing_score": 0,
+      "score_max": 11,
+      "sector": "Technology",
+      "good_pmcc": false
+    },
+    {
+      "ticker": "CRWD",
+      "strategy": "LEAP",
+      "spot": 206.74,
+      "expiry": "2028-01-21",
+      "dte": 495,
+      "strike": 165.0,
+      "delta": 0.783,
+      "mid": 78.17,
+      "cost": 7818.0,
+      "intrinsic": 41.74,
+      "extrinsic": 36.43,
+      "extrinsic_pct": 46.6,
+      "carry_pct": 13.0,
+      "iv": 56.8,
+      "iv_ratio": null,
+      "above_200ma": false,
+      "above_50ma": false,
+      "ma_aligned": false,
+      "rsi": null,
+      "rsi_rising": false,
+      "ext_ok": true,
+      "trend_ok": false,
+      "qualifies": false,
+      "verdict": "neutral",
+      "timing_label": "\u26aa NEUTRAL",
+      "timing_score": 0,
       "score_max": 11,
       "sector": "Technology",
       "good_pmcc": false
@@ -9683,6 +9431,37 @@
       "good_pmcc": false
     },
     {
+      "ticker": "PATH",
+      "strategy": "LEAP",
+      "spot": 13.75,
+      "expiry": "2028-01-21",
+      "dte": 495,
+      "strike": 10.0,
+      "delta": 0.813,
+      "mid": 6.35,
+      "cost": 635.0,
+      "intrinsic": 3.75,
+      "extrinsic": 2.6,
+      "extrinsic_pct": 40.9,
+      "carry_pct": 13.94,
+      "iv": 72.0,
+      "iv_ratio": null,
+      "above_200ma": false,
+      "above_50ma": false,
+      "ma_aligned": false,
+      "rsi": null,
+      "rsi_rising": false,
+      "ext_ok": true,
+      "trend_ok": false,
+      "qualifies": false,
+      "verdict": "neutral",
+      "timing_label": "\u26aa NEUTRAL",
+      "timing_score": 0,
+      "score_max": 11,
+      "sector": "Technology",
+      "good_pmcc": false
+    },
+    {
       "ticker": "MP",
       "strategy": "LEAP",
       "spot": 50.51,
@@ -9697,18 +9476,18 @@
       "extrinsic_pct": 48.5,
       "carry_pct": 14.44,
       "iv": 65.1,
-      "iv_ratio": 1.17,
+      "iv_ratio": null,
       "above_200ma": false,
       "above_50ma": false,
       "ma_aligned": false,
-      "rsi": 41.7,
+      "rsi": null,
       "rsi_rising": false,
       "ext_ok": true,
       "trend_ok": false,
       "qualifies": false,
       "verdict": "neutral",
-      "timing_label": "\ud83d\udfe0 MARGINAL",
-      "timing_score": 4,
+      "timing_label": "\u26aa NEUTRAL",
+      "timing_score": 0,
       "score_max": 11,
       "sector": "Basic Materials",
       "good_pmcc": false
@@ -9759,18 +9538,18 @@
       "extrinsic_pct": 52.2,
       "carry_pct": 17.54,
       "iv": 78.5,
-      "iv_ratio": 2.29,
+      "iv_ratio": null,
       "above_200ma": false,
       "above_50ma": false,
       "ma_aligned": false,
-      "rsi": 33.8,
+      "rsi": null,
       "rsi_rising": false,
       "ext_ok": true,
       "trend_ok": false,
       "qualifies": false,
       "verdict": "neutral",
-      "timing_label": "\ud83d\udfe0 MARGINAL",
-      "timing_score": 2,
+      "timing_label": "\u26aa NEUTRAL",
+      "timing_score": 0,
       "score_max": 11,
       "sector": "Industrials",
       "good_pmcc": false
@@ -9790,18 +9569,18 @@
       "extrinsic_pct": 54.0,
       "carry_pct": 17.78,
       "iv": 76.8,
-      "iv_ratio": 1.89,
+      "iv_ratio": null,
       "above_200ma": false,
       "above_50ma": false,
       "ma_aligned": false,
-      "rsi": 37.8,
-      "rsi_rising": true,
+      "rsi": null,
+      "rsi_rising": false,
       "ext_ok": true,
       "trend_ok": false,
       "qualifies": false,
       "verdict": "neutral",
-      "timing_label": "\ud83d\udfe0 MARGINAL",
-      "timing_score": 2,
+      "timing_label": "\u26aa NEUTRAL",
+      "timing_score": 0,
       "score_max": 11,
       "sector": "Industrials",
       "good_pmcc": false
@@ -9883,18 +9662,18 @@
       "extrinsic_pct": 53.0,
       "carry_pct": 19.03,
       "iv": 83.9,
-      "iv_ratio": 1.12,
+      "iv_ratio": null,
       "above_200ma": false,
       "above_50ma": false,
       "ma_aligned": false,
-      "rsi": 37.6,
+      "rsi": null,
       "rsi_rising": false,
       "ext_ok": true,
       "trend_ok": false,
       "qualifies": false,
       "verdict": "neutral",
-      "timing_label": "\ud83d\udfe0 MARGINAL",
-      "timing_score": 4,
+      "timing_label": "\u26aa NEUTRAL",
+      "timing_score": 0,
       "score_max": 11,
       "sector": "Basic Materials",
       "good_pmcc": false
@@ -9914,18 +9693,18 @@
       "extrinsic_pct": 59.1,
       "carry_pct": 19.73,
       "iv": 80.8,
-      "iv_ratio": 1.09,
+      "iv_ratio": null,
       "above_200ma": false,
-      "above_50ma": true,
+      "above_50ma": false,
       "ma_aligned": false,
-      "rsi": 50.0,
-      "rsi_rising": true,
+      "rsi": null,
+      "rsi_rising": false,
       "ext_ok": false,
       "trend_ok": false,
       "qualifies": false,
       "verdict": "neutral",
-      "timing_label": "\ud83d\udfe1 DECENT ENTRY",
-      "timing_score": 5,
+      "timing_label": "\u26aa NEUTRAL",
+      "timing_score": 0,
       "score_max": 11,
       "sector": "Technology",
       "good_pmcc": false
@@ -9945,18 +9724,18 @@
       "extrinsic_pct": 62.6,
       "carry_pct": 20.21,
       "iv": 77.9,
-      "iv_ratio": 0.98,
+      "iv_ratio": null,
       "above_200ma": false,
       "above_50ma": false,
-      "ma_aligned": true,
-      "rsi": 43.1,
+      "ma_aligned": false,
+      "rsi": null,
       "rsi_rising": false,
       "ext_ok": false,
       "trend_ok": false,
       "qualifies": false,
       "verdict": "neutral",
-      "timing_label": "\ud83d\udfe1 DECENT ENTRY",
-      "timing_score": 5,
+      "timing_label": "\u26aa NEUTRAL",
+      "timing_score": 0,
       "score_max": 11,
       "sector": "Healthcare",
       "good_pmcc": false
@@ -10038,18 +9817,18 @@
       "extrinsic_pct": 67.0,
       "carry_pct": 22.24,
       "iv": 83.3,
-      "iv_ratio": 1.18,
+      "iv_ratio": null,
       "above_200ma": false,
       "above_50ma": false,
       "ma_aligned": false,
-      "rsi": 44.3,
-      "rsi_rising": true,
+      "rsi": null,
+      "rsi_rising": false,
       "ext_ok": false,
       "trend_ok": false,
       "qualifies": false,
       "verdict": "neutral",
-      "timing_label": "\ud83d\udfe0 MARGINAL",
-      "timing_score": 4,
+      "timing_label": "\u26aa NEUTRAL",
+      "timing_score": 0,
       "score_max": 11,
       "sector": "Technology",
       "good_pmcc": false
@@ -10224,18 +10003,18 @@
       "extrinsic_pct": 71.5,
       "carry_pct": 25.66,
       "iv": 96.8,
-      "iv_ratio": 0.73,
+      "iv_ratio": null,
       "above_200ma": false,
-      "above_50ma": true,
+      "above_50ma": false,
       "ma_aligned": false,
-      "rsi": 58.8,
+      "rsi": null,
       "rsi_rising": false,
       "ext_ok": false,
       "trend_ok": false,
       "qualifies": false,
       "verdict": "neutral",
-      "timing_label": "\ud83d\udfe0 MARGINAL",
-      "timing_score": 4,
+      "timing_label": "\u26aa NEUTRAL",
+      "timing_score": 0,
       "score_max": 11,
       "sector": "Financial Services",
       "good_pmcc": false
@@ -10255,18 +10034,18 @@
       "extrinsic_pct": 70.8,
       "carry_pct": 26.03,
       "iv": 98.1,
-      "iv_ratio": 0.89,
-      "above_200ma": true,
+      "iv_ratio": null,
+      "above_200ma": false,
       "above_50ma": false,
-      "ma_aligned": true,
-      "rsi": 44.4,
-      "rsi_rising": true,
+      "ma_aligned": false,
+      "rsi": null,
+      "rsi_rising": false,
       "ext_ok": false,
-      "trend_ok": true,
+      "trend_ok": false,
       "qualifies": false,
       "verdict": "neutral",
-      "timing_label": "\ud83d\udfe1 DECENT ENTRY",
-      "timing_score": 6,
+      "timing_label": "\u26aa NEUTRAL",
+      "timing_score": 0,
       "score_max": 11,
       "sector": "Technology",
       "good_pmcc": false
@@ -10317,18 +10096,18 @@
       "extrinsic_pct": 86.9,
       "carry_pct": 28.68,
       "iv": 91.2,
-      "iv_ratio": 1.86,
+      "iv_ratio": null,
       "above_200ma": false,
       "above_50ma": false,
-      "ma_aligned": true,
-      "rsi": 44.7,
-      "rsi_rising": true,
+      "ma_aligned": false,
+      "rsi": null,
+      "rsi_rising": false,
       "ext_ok": false,
       "trend_ok": false,
       "qualifies": false,
       "verdict": "neutral",
-      "timing_label": "\ud83d\udfe0 MARGINAL",
-      "timing_score": 2,
+      "timing_label": "\u26aa NEUTRAL",
+      "timing_score": 0,
       "score_max": 11,
       "sector": "Industrials",
       "good_pmcc": false
@@ -10493,22 +10272,22 @@
       "ticker": "CMG",
       "sector": "Consumer Cyclical",
       "price": 36.2,
-      "pct": 0.2,
-      "hv20": 32.2,
-      "hvpct": 41,
+      "pct": null,
+      "hv20": null,
+      "hvpct": null,
       "c_iv": 35,
       "p_iv": 34,
-      "iv_vs_hv": "fair",
-      "rsi": 51,
-      "above_200": true,
+      "iv_vs_hv": "\u2014",
+      "rsi": null,
+      "above_200": false,
       "pcr": 1.02,
-      "pctb": 0.46,
-      "csp_timing": "\ud83d\udd34 NO SETUP",
-      "cc_timing": "\ud83d\udfe1 PARTIAL SETUP",
-      "leap_timing": "\ud83d\udfe0 MARGINAL",
+      "pctb": null,
+      "csp_timing": null,
+      "cc_timing": null,
+      "leap_timing": "\u26aa NEUTRAL",
       "csp_verdict": "caution",
       "cc_verdict": "caution",
-      "leap_verdict": "caution",
+      "leap_verdict": "neutral",
       "is_wheel": true
     },
     {
@@ -10669,19 +10448,19 @@
       "ticker": "ZS",
       "sector": "Technology",
       "price": 164.54,
-      "pct": 0.6,
-      "hv20": 58.6,
-      "hvpct": 69,
+      "pct": null,
+      "hv20": null,
+      "hvpct": null,
       "c_iv": 51,
       "p_iv": 50,
-      "iv_vs_hv": "cheap",
-      "rsi": 46,
+      "iv_vs_hv": "\u2014",
+      "rsi": null,
       "above_200": false,
       "pcr": 0.39,
-      "pctb": 0.15,
-      "csp_timing": "\ud83d\udfe1 PARTIAL SETUP",
-      "cc_timing": "\ud83d\udfe1 PARTIAL SETUP",
-      "leap_timing": "\ud83d\udfe1 DECENT ENTRY",
+      "pctb": null,
+      "csp_timing": null,
+      "cc_timing": null,
+      "leap_timing": "\u26aa NEUTRAL",
       "csp_verdict": "avoid",
       "cc_verdict": "avoid",
       "leap_verdict": "neutral",
@@ -10735,19 +10514,19 @@
       "ticker": "IBIT",
       "sector": "\u2014",
       "price": 43.77,
-      "pct": 0.2,
-      "hv20": 44.8,
-      "hvpct": 67,
+      "pct": null,
+      "hv20": null,
+      "hvpct": null,
       "c_iv": 37,
       "p_iv": 37,
-      "iv_vs_hv": "cheap",
-      "rsi": 59,
-      "above_200": true,
+      "iv_vs_hv": "\u2014",
+      "rsi": null,
+      "above_200": false,
       "pcr": 0.25,
-      "pctb": 0.58,
-      "csp_timing": "\ud83d\udd34 NO SETUP",
-      "cc_timing": "\ud83d\udd34 NO SETUP",
-      "leap_timing": "\ud83d\udfe0 MARGINAL",
+      "pctb": null,
+      "csp_timing": null,
+      "cc_timing": null,
+      "leap_timing": "\u26aa NEUTRAL",
       "csp_verdict": "caution",
       "cc_verdict": "caution",
       "leap_verdict": "neutral",
@@ -10823,21 +10602,21 @@
       "ticker": "RDW",
       "sector": "Industrials",
       "price": 10.62,
-      "pct": -2.3,
-      "hv20": 49.1,
-      "hvpct": 4,
+      "pct": null,
+      "hv20": null,
+      "hvpct": null,
       "c_iv": 79,
       "p_iv": 85,
-      "iv_vs_hv": "rich",
-      "rsi": 45,
+      "iv_vs_hv": "\u2014",
+      "rsi": null,
       "above_200": false,
       "pcr": 0.27,
-      "pctb": 0.3,
-      "csp_timing": "\ud83d\udd34 NO SETUP",
-      "cc_timing": "\ud83d\udfe2 FULL SETUP \u2014 write now",
-      "leap_timing": "\ud83d\udfe0 MARGINAL",
+      "pctb": null,
+      "csp_timing": null,
+      "cc_timing": null,
+      "leap_timing": "\u26aa NEUTRAL",
       "csp_verdict": "caution",
-      "cc_verdict": "go",
+      "cc_verdict": "caution",
       "leap_verdict": "neutral",
       "is_wheel": true
     },
@@ -10911,21 +10690,21 @@
       "ticker": "RKLB",
       "sector": "Industrials",
       "price": 62.95,
-      "pct": 1.6,
-      "hv20": 40.6,
-      "hvpct": 2,
+      "pct": null,
+      "hv20": null,
+      "hvpct": null,
       "c_iv": 66,
       "p_iv": 68,
-      "iv_vs_hv": "rich",
-      "rsi": 38,
+      "iv_vs_hv": "\u2014",
+      "rsi": null,
       "above_200": false,
       "pcr": 0.34,
-      "pctb": 0.28,
-      "csp_timing": "\ud83d\udfe1 PARTIAL SETUP",
-      "cc_timing": "\ud83d\udfe2 FULL SETUP \u2014 write now",
-      "leap_timing": "\ud83d\udfe0 MARGINAL",
+      "pctb": null,
+      "csp_timing": null,
+      "cc_timing": null,
+      "leap_timing": "\u26aa NEUTRAL",
       "csp_verdict": "caution",
-      "cc_verdict": "go",
+      "cc_verdict": "caution",
       "leap_verdict": "neutral",
       "is_wheel": true
     },
@@ -10933,19 +10712,19 @@
       "ticker": "RGTI",
       "sector": "Technology",
       "price": 15.27,
-      "pct": 0.7,
-      "hv20": 70.8,
-      "hvpct": 13,
+      "pct": null,
+      "hv20": null,
+      "hvpct": null,
       "c_iv": 72,
       "p_iv": 69,
-      "iv_vs_hv": "cheap",
-      "rsi": 44,
+      "iv_vs_hv": "\u2014",
+      "rsi": null,
       "above_200": false,
       "pcr": 0.17,
-      "pctb": 0.3,
-      "csp_timing": "\ud83d\udd34 NO SETUP",
-      "cc_timing": "\ud83d\udfe1 PARTIAL SETUP",
-      "leap_timing": "\ud83d\udfe0 MARGINAL",
+      "pctb": null,
+      "csp_timing": null,
+      "cc_timing": null,
+      "leap_timing": "\u26aa NEUTRAL",
       "csp_verdict": "caution",
       "cc_verdict": "caution",
       "leap_verdict": "neutral",
@@ -10977,19 +10756,19 @@
       "ticker": "USAR",
       "sector": "Basic Materials",
       "price": 15.56,
-      "pct": -3.0,
-      "hv20": 74.7,
-      "hvpct": 10,
+      "pct": null,
+      "hv20": null,
+      "hvpct": null,
       "c_iv": 72,
       "p_iv": 82,
-      "iv_vs_hv": "fair",
-      "rsi": 38,
+      "iv_vs_hv": "\u2014",
+      "rsi": null,
       "above_200": false,
       "pcr": 0.79,
-      "pctb": -0.06,
-      "csp_timing": "\ud83d\udfe1 PARTIAL SETUP",
-      "cc_timing": "\ud83d\udfe1 PARTIAL SETUP",
-      "leap_timing": "\ud83d\udfe0 MARGINAL",
+      "pctb": null,
+      "csp_timing": null,
+      "cc_timing": null,
+      "leap_timing": "\u26aa NEUTRAL",
       "csp_verdict": "caution",
       "cc_verdict": "caution",
       "leap_verdict": "neutral",
@@ -10999,19 +10778,19 @@
       "ticker": "MP",
       "sector": "Basic Materials",
       "price": 50.51,
-      "pct": -1.6,
-      "hv20": 55.8,
-      "hvpct": 17,
+      "pct": null,
+      "hv20": null,
+      "hvpct": null,
       "c_iv": 62,
       "p_iv": 60,
-      "iv_vs_hv": "fair",
-      "rsi": 42,
+      "iv_vs_hv": "\u2014",
+      "rsi": null,
       "above_200": false,
       "pcr": 0.56,
-      "pctb": -0.02,
-      "csp_timing": "\ud83d\udfe1 PARTIAL SETUP",
-      "cc_timing": "\ud83d\udfe1 PARTIAL SETUP",
-      "leap_timing": "\ud83d\udfe0 MARGINAL",
+      "pctb": null,
+      "csp_timing": null,
+      "cc_timing": null,
+      "leap_timing": "\u26aa NEUTRAL",
       "csp_verdict": "caution",
       "cc_verdict": "caution",
       "leap_verdict": "neutral",
@@ -11175,19 +10954,19 @@
       "ticker": "AAOI",
       "sector": "Technology",
       "price": 105.36,
-      "pct": 2.0,
-      "hv20": 110.1,
-      "hvpct": 21,
+      "pct": null,
+      "hv20": null,
+      "hvpct": null,
       "c_iv": 84,
       "p_iv": 84,
-      "iv_vs_hv": "cheap",
-      "rsi": 44,
-      "above_200": true,
+      "iv_vs_hv": "\u2014",
+      "rsi": null,
+      "above_200": false,
       "pcr": 1.04,
-      "pctb": 0.33,
-      "csp_timing": "\ud83d\udd34 NO SETUP",
-      "cc_timing": "\ud83d\udfe1 PARTIAL SETUP",
-      "leap_timing": "\ud83d\udfe1 DECENT ENTRY",
+      "pctb": null,
+      "csp_timing": null,
+      "cc_timing": null,
+      "leap_timing": "\u26aa NEUTRAL",
       "csp_verdict": "avoid",
       "cc_verdict": "caution",
       "leap_verdict": "neutral",
@@ -11241,21 +11020,21 @@
       "ticker": "BA",
       "sector": "Industrials",
       "price": 210.45,
-      "pct": 2.8,
-      "hv20": 21.9,
-      "hvpct": 8,
+      "pct": null,
+      "hv20": null,
+      "hvpct": null,
       "c_iv": 30,
       "p_iv": 29,
-      "iv_vs_hv": "rich",
-      "rsi": 45,
+      "iv_vs_hv": "\u2014",
+      "rsi": null,
       "above_200": false,
       "pcr": 0.55,
-      "pctb": 0.4,
-      "csp_timing": "\ud83d\udfe1 PARTIAL SETUP",
-      "cc_timing": "\ud83d\udfe2 FULL SETUP \u2014 write now",
-      "leap_timing": "\ud83d\udfe0 MARGINAL",
+      "pctb": null,
+      "csp_timing": null,
+      "cc_timing": null,
+      "leap_timing": "\u26aa NEUTRAL",
       "csp_verdict": "caution",
-      "cc_verdict": "go",
+      "cc_verdict": "caution",
       "leap_verdict": "neutral",
       "is_wheel": true
     },
@@ -11285,19 +11064,19 @@
       "ticker": "JOBY",
       "sector": "Industrials",
       "price": 6.39,
-      "pct": 1.3,
-      "hv20": 34.2,
-      "hvpct": 0,
+      "pct": null,
+      "hv20": null,
+      "hvpct": null,
       "c_iv": 64,
       "p_iv": 64,
-      "iv_vs_hv": "rich",
-      "rsi": 34,
+      "iv_vs_hv": "\u2014",
+      "rsi": null,
       "above_200": false,
       "pcr": 0.28,
-      "pctb": 0.13,
-      "csp_timing": "\ud83d\udfe2 FULL SETUP \u2014 sell put",
-      "cc_timing": "\ud83d\udfe2 FULL SETUP \u2014 write now",
-      "leap_timing": "\ud83d\udfe0 MARGINAL",
+      "pctb": null,
+      "csp_timing": null,
+      "cc_timing": null,
+      "leap_timing": "\u26aa NEUTRAL",
       "csp_verdict": "avoid",
       "cc_verdict": "avoid",
       "leap_verdict": "neutral",
@@ -11351,22 +11130,22 @@
       "ticker": "CRWD",
       "sector": "Technology",
       "price": 206.74,
-      "pct": -1.0,
-      "hv20": 87.3,
-      "hvpct": 98,
+      "pct": null,
+      "hv20": null,
+      "hvpct": null,
       "c_iv": 50,
       "p_iv": 49,
-      "iv_vs_hv": "cheap",
-      "rsi": 50,
-      "above_200": true,
+      "iv_vs_hv": "\u2014",
+      "rsi": null,
+      "above_200": false,
       "pcr": 0.73,
-      "pctb": 0.48,
-      "csp_timing": "\ud83d\udd34 NO SETUP",
-      "cc_timing": "\ud83d\udd34 NO SETUP",
-      "leap_timing": "\ud83d\udfe1 DECENT ENTRY",
+      "pctb": null,
+      "csp_timing": null,
+      "cc_timing": null,
+      "leap_timing": "\u26aa NEUTRAL",
       "csp_verdict": "avoid",
       "cc_verdict": "avoid",
-      "leap_verdict": "caution",
+      "leap_verdict": "neutral",
       "is_wheel": true
     },
     {
@@ -11439,18 +11218,18 @@
       "ticker": "CQQQ",
       "sector": "\u2014",
       "price": 46.33,
-      "pct": 0.7,
-      "hv20": 20.9,
-      "hvpct": 8,
+      "pct": null,
+      "hv20": null,
+      "hvpct": null,
       "c_iv": 26,
       "p_iv": 37,
-      "iv_vs_hv": "rich",
-      "rsi": 32,
+      "iv_vs_hv": "\u2014",
+      "rsi": null,
       "above_200": false,
       "pcr": 0.25,
-      "pctb": 0.1,
-      "csp_timing": "\ud83d\udfe2 FULL SETUP \u2014 sell put",
-      "cc_timing": "\ud83d\udfe2 FULL SETUP \u2014 write now",
+      "pctb": null,
+      "csp_timing": null,
+      "cc_timing": null,
       "leap_timing": "\ud83d\udfe0 MARGINAL",
       "csp_verdict": "avoid",
       "cc_verdict": "avoid",
@@ -11483,19 +11262,19 @@
       "ticker": "CRWV",
       "sector": "Technology",
       "price": 88.99,
-      "pct": -0.1,
-      "hv20": 74.1,
-      "hvpct": 13,
+      "pct": null,
+      "hv20": null,
+      "hvpct": null,
       "c_iv": 71,
       "p_iv": 72,
-      "iv_vs_hv": "cheap",
-      "rsi": 50,
+      "iv_vs_hv": "\u2014",
+      "rsi": null,
       "above_200": false,
       "pcr": 1.76,
-      "pctb": 0.46,
-      "csp_timing": "\ud83d\udd34 NO SETUP",
-      "cc_timing": "\ud83d\udfe1 PARTIAL SETUP",
-      "leap_timing": "\ud83d\udfe1 DECENT ENTRY",
+      "pctb": null,
+      "csp_timing": null,
+      "cc_timing": null,
+      "leap_timing": "\u26aa NEUTRAL",
       "csp_verdict": "caution",
       "cc_verdict": "caution",
       "leap_verdict": "neutral",
@@ -11549,19 +11328,19 @@
       "ticker": "PURR",
       "sector": "Financial Services",
       "price": 11.61,
-      "pct": 5.4,
-      "hv20": 132.3,
-      "hvpct": 93,
+      "pct": null,
+      "hv20": null,
+      "hvpct": null,
       "c_iv": 93,
       "p_iv": 106,
-      "iv_vs_hv": "cheap",
-      "rsi": 59,
+      "iv_vs_hv": "\u2014",
+      "rsi": null,
       "above_200": false,
       "pcr": 0.06,
-      "pctb": 0.61,
-      "csp_timing": "\ud83d\udd34 NO SETUP",
-      "cc_timing": "\ud83d\udd34 NO SETUP",
-      "leap_timing": "\ud83d\udfe0 MARGINAL",
+      "pctb": null,
+      "csp_timing": null,
+      "cc_timing": null,
+      "leap_timing": "\u26aa NEUTRAL",
       "csp_verdict": "avoid",
       "cc_verdict": "avoid",
       "leap_verdict": "neutral",
@@ -11571,22 +11350,22 @@
       "ticker": "PATH",
       "sector": "Technology",
       "price": 13.75,
-      "pct": -0.9,
-      "hv20": 81.7,
-      "hvpct": 83,
+      "pct": null,
+      "hv20": null,
+      "hvpct": null,
       "c_iv": 56,
       "p_iv": 56,
-      "iv_vs_hv": "cheap",
-      "rsi": 39,
-      "above_200": true,
+      "iv_vs_hv": "\u2014",
+      "rsi": null,
+      "above_200": false,
       "pcr": 0.54,
-      "pctb": 0.1,
-      "csp_timing": "\ud83d\udfe1 PARTIAL SETUP",
-      "cc_timing": "\ud83d\udfe1 PARTIAL SETUP",
-      "leap_timing": "\ud83d\udfe1 DECENT ENTRY",
+      "pctb": null,
+      "csp_timing": null,
+      "cc_timing": null,
+      "leap_timing": "\u26aa NEUTRAL",
       "csp_verdict": "avoid",
       "cc_verdict": "caution",
-      "leap_verdict": "caution",
+      "leap_verdict": "neutral",
       "is_wheel": false
     },
     {
@@ -11615,19 +11394,19 @@
       "ticker": "HIMS",
       "sector": "Healthcare",
       "price": 27.51,
-      "pct": 0.3,
-      "hv20": 79.4,
-      "hvpct": 41,
+      "pct": null,
+      "hv20": null,
+      "hvpct": null,
       "c_iv": 64,
       "p_iv": 62,
-      "iv_vs_hv": "cheap",
-      "rsi": 43,
+      "iv_vs_hv": "\u2014",
+      "rsi": null,
       "above_200": false,
       "pcr": 0.26,
-      "pctb": 0.25,
-      "csp_timing": "\ud83d\udd34 NO SETUP",
-      "cc_timing": "\ud83d\udfe1 PARTIAL SETUP",
-      "leap_timing": "\ud83d\udfe1 DECENT ENTRY",
+      "pctb": null,
+      "csp_timing": null,
+      "cc_timing": null,
+      "leap_timing": "\u26aa NEUTRAL",
       "csp_verdict": "caution",
       "cc_verdict": "caution",
       "leap_verdict": "neutral",
@@ -12466,8 +12245,8 @@
     },
     {
       "label": "Bitcoin",
-      "price": 76787.9765625,
-      "pct": -0.624419904920015,
+      "price": 76686.6015625,
+      "pct": -0.7556149159506642,
       "prefix": "$",
       "is_yield": false,
       "hist": [
@@ -12560,13 +12339,13 @@
         76568,
         77174,
         77270,
-        76788
+        76687
       ]
     },
     {
       "label": "Ethereum",
-      "price": 2480.219970703125,
-      "pct": -1.8101984396500792,
+      "price": 2475.0400390625,
+      "pct": -2.015267532672893,
       "prefix": "$",
       "is_yield": false,
       "hist": [
@@ -12659,7 +12438,7 @@
         2437,
         2515,
         2526,
-        2480
+        2475
       ]
     }
   ],
@@ -12733,8 +12512,8 @@
     {
       "label": "Digital Assets",
       "ticker": "BTC",
-      "pct": -0.624419904920015,
-      "price": 76787.9765625
+      "pct": -0.7556149159506642,
+      "price": 76686.6015625
     }
   ],
   "fundamentals": {
@@ -12805,6 +12584,12 @@
       ],
       "news": [
         {
+          "title": "Dow Jones Futures: Fed Meeting Ahead; Anthropic's Amodei, OpenAI's Altman, SpaceX's Musk Call For AI Slowdown",
+          "publisher": "Investor's Business Daily",
+          "link": "https://www.investors.com/market-trend/stock-market-today/dow-jones-futures-fed-meeting-anthropic-amodei-openai-altman-spacex-musk-ai-model-slowdown/?src=A00220&yptr=yahoo",
+          "when": "Sep 13"
+        },
+        {
           "title": "Amazon\u2019s Zoox Enters San Francisco\u2019s Crowded Robotaxi Market, Taking Direct Aim at Waymo and Tesla",
           "publisher": "Insider Monkey",
           "link": "https://finance.yahoo.com/technology/articles/amazon-zoox-enters-san-francisco-112558972.html",
@@ -12832,12 +12617,6 @@
           "title": "$10,000 in Tesla When It Joined the S&P 500 Would Be About $15,700 Today. An Index Fund Would Have Done Better.",
           "publisher": "Motley Fool",
           "link": "https://www.fool.com/investing/2026/09/12/usd10-000-in-tesla-when-it-joined-the-s-and-p-500-would-be-about-usd15-700-today-an-index-fund-would-have-done-better/",
-          "when": "Sep 12"
-        },
-        {
-          "title": "Ted Lieu Cites Poll, Says 'Blue Tsunami' Could Be Coming as Democrats Hold 11-Point Lead Over Republicans in 2026 House Election Poll",
-          "publisher": "Benzinga",
-          "link": "https://www.yahoo.com/news/politics/articles/ted-lieu-cites-poll-says-203020851.html",
           "when": "Sep 12"
         }
       ]
@@ -13021,6 +12800,24 @@
       ],
       "news": [
         {
+          "title": "Even With 10-Year Treasury Yields at a 20-Month High, I'd Still Rather Buy This S&P 500 Dividend Stock for Passive Income in September.",
+          "publisher": "Motley Fool",
+          "link": "https://www.fool.com/investing/2026/09/13/even-with-10-year-treasury-yields-at-a-20-month-hi/",
+          "when": "Sep 13"
+        },
+        {
+          "title": "Dow Jones Futures: Fed Meeting Ahead; Anthropic's Amodei, OpenAI's Altman, SpaceX's Musk Call For AI Slowdown",
+          "publisher": "Investor's Business Daily",
+          "link": "https://www.investors.com/market-trend/stock-market-today/dow-jones-futures-fed-meeting-anthropic-amodei-openai-altman-spacex-musk-ai-model-slowdown/?src=A00220&yptr=yahoo",
+          "when": "Sep 13"
+        },
+        {
+          "title": "Sundar Pichai Says Alphabet's Cloud Backlog Hit $514 Billion After 82% Revenue Growth Last Quarter. Is Google Cloud Becoming a Bigger Growth Driver Than Search?",
+          "publisher": "Motley Fool",
+          "link": "https://www.fool.com/investing/2026/09/13/sundar-pichai-alphabets-backlog-514-billion/",
+          "when": "Sep 13"
+        },
+        {
           "title": "1 Rising Cryptocurrency I'll Be Buying in September, and 1 I'll Definitely Avoid",
           "publisher": "Motley Fool",
           "link": "https://www.fool.com/investing/2026/09/13/1-rising-cryptocurrency-ill-be-buying-in-september/",
@@ -13036,24 +12833,6 @@
           "title": "XRP ETFs Continue to See Significant New Inflows. Does That Make XRP a Buy Right Now?",
           "publisher": "Motley Fool",
           "link": "https://www.fool.com/investing/2026/09/13/xrp-etfs-continue-to-see-significant-new-inflows-d/",
-          "when": "Sep 13"
-        },
-        {
-          "title": "Nscale\u2019s Funding Talks Put Dell and Nokia\u2019s AI Supply Relationships to the Test",
-          "publisher": "Insider Monkey",
-          "link": "https://finance.yahoo.com/technology/ai/articles/nscale-funding-talks-put-dell-114055829.html",
-          "when": "Sep 13"
-        },
-        {
-          "title": "As the Stock Market Flashes a Warning Signal Seen Only Once Before, History Is Telling Investors to Do This Now.",
-          "publisher": "Motley Fool",
-          "link": "https://www.fool.com/investing/2026/09/13/as-the-stock-market-flashes-a-warning-signal-seen/",
-          "when": "Sep 13"
-        },
-        {
-          "title": "Salesforce Spent a Record $27.1 Billion on Buybacks in One Quarter. Here Is Why That Signal Matters.",
-          "publisher": "Motley Fool",
-          "link": "https://www.fool.com/investing/2026/09/13/salesforce-spent-a-record-271-billion-on-buybacks/",
           "when": "Sep 13"
         }
       ]
@@ -14001,6 +13780,12 @@
           "when": "Sep 13"
         },
         {
+          "title": "Dow Jones Futures: Fed Meeting Ahead; Anthropic's Amodei, OpenAI's Altman, SpaceX's Musk Call For AI Slowdown",
+          "publisher": "Investor's Business Daily",
+          "link": "https://www.investors.com/market-trend/stock-market-today/dow-jones-futures-fed-meeting-anthropic-amodei-openai-altman-spacex-musk-ai-model-slowdown/?src=A00220&yptr=yahoo",
+          "when": "Sep 13"
+        },
+        {
           "title": "Dow Jones Futures: Fed Rate Hike Seen As Oil, Yields Pressure Stocks; Apple, Moderna Are New Buys",
           "publisher": "Investor's Business Daily",
           "link": "https://www.investors.com/market-trend/stock-market-today/dow-jones-futures-100-oil-surging-yields-pressure-stocks-with-fed-rate-hike-seen-apple-leads-new-buys/?src=A00220&yptr=yahoo",
@@ -14022,12 +13807,6 @@
           "title": "Investing $20,000 in Apple Stock 10 Years Ago Paid Off More Than Investing the Same Amount in Amazon. Here's the Better Buy for the Next Decade.",
           "publisher": "Motley Fool",
           "link": "https://www.fool.com/investing/2026/09/13/investing-20000-in-apple-stock-10-years-ago-paid-o/",
-          "when": "Sep 13"
-        },
-        {
-          "title": "Louis Navellier is buying 3 headline-making stocks, including Google",
-          "publisher": "TheStreet",
-          "link": "https://www.thestreet.com/investing/stocks/louis-navellier-is-buying-3-headline-making-stocks-including-google",
           "when": "Sep 13"
         }
       ]
@@ -14090,6 +13869,12 @@
       "flags": [],
       "news": [
         {
+          "title": "Sundar Pichai Says Alphabet's Cloud Backlog Hit $514 Billion After 82% Revenue Growth Last Quarter. Is Google Cloud Becoming a Bigger Growth Driver Than Search?",
+          "publisher": "Motley Fool",
+          "link": "https://www.fool.com/investing/2026/09/13/sundar-pichai-alphabets-backlog-514-billion/",
+          "when": "Sep 13"
+        },
+        {
           "title": "Broadcom\u2019s Anthropic Ramp Puts Google\u2019s TPU Business in a Different Light",
           "publisher": "Insider Monkey",
           "link": "https://finance.yahoo.com/technology/ai/articles/broadcom-anthropic-ramp-puts-google-113804111.html",
@@ -14117,12 +13902,6 @@
           "title": "Can Alphabet Overtake Nvidia in 2027?",
           "publisher": "Motley Fool",
           "link": "https://www.fool.com/investing/2026/09/13/can-alphabet-overtake-nvidia-in-2027/",
-          "when": "Sep 13"
-        },
-        {
-          "title": "3 Unstoppable Dow Stocks Worth Buying Right Now",
-          "publisher": "Motley Fool",
-          "link": "https://www.fool.com/investing/2026/09/13/3-unstoppable-dow-stocks-worth-buying-right-now/",
           "when": "Sep 13"
         }
       ]
@@ -16351,6 +16130,12 @@
       ],
       "news": [
         {
+          "title": "Prediction: This Artificial Intelligence (AI) Chip Stock Will Soar After Sept. 30 (Hint: It's Not Micron)",
+          "publisher": "Motley Fool",
+          "link": "https://www.fool.com/investing/2026/09/13/prediction-this-artificial-intelligence-ai-chip-st/",
+          "when": "Sep 13"
+        },
+        {
           "title": "DeepSeek Cut Its KV-Cache HBM Need 75% and SSD Need 87.5%. Micron and Sandisk Investors Should Pay Attention",
           "publisher": "Insider Monkey",
           "link": "https://finance.yahoo.com/technology/ai/articles/deepseek-cut-kv-cache-hbm-011603128.html",
@@ -16378,12 +16163,6 @@
           "title": "SanDisk Drops Over 3% as Oracle's AI Boom Fails to Lift Memory",
           "publisher": "GuruFocus.com",
           "link": "https://finance.yahoo.com/markets/stocks/articles/sandisk-drops-over-3-oracles-200757715.html",
-          "when": "Sep 11"
-        },
-        {
-          "title": "Storage Stocks Slide as Profit Taking Follows Big Run: Seagate Falls 4%, SanDisk Drops 3%, Micron Holds Flat",
-          "publisher": "24/7 Wall St.",
-          "link": "https://247wallst.com/investing/2026/09/11/storage-stocks-slide-as-profit-taking-follows-big-run-seagate-falls-4-sandisk-drops-3-micron-holds-flat/",
           "when": "Sep 11"
         }
       ]
@@ -17644,6 +17423,12 @@
       "flags": [],
       "news": [
         {
+          "title": "Dow Jones Futures: Fed Meeting Ahead; Anthropic's Amodei, OpenAI's Altman, SpaceX's Musk Call For AI Slowdown",
+          "publisher": "Investor's Business Daily",
+          "link": "https://www.investors.com/market-trend/stock-market-today/dow-jones-futures-fed-meeting-anthropic-amodei-openai-altman-spacex-musk-ai-model-slowdown/?src=A00220&yptr=yahoo",
+          "when": "Sep 13"
+        },
+        {
           "title": "Jordi Visser Puts Bitcoin In The Same Bucket As SpaceX, Anthropic And OpenAI, Says \u2018None Of Them Make Money\u2019",
           "publisher": "Stocktwits",
           "link": "https://stocktwits.com/news-articles/markets/cryptocurrency/jordi-visser-bitcoin-spacex-anthropic-and-openai-none-make-money/cZt1uu6RBbU",
@@ -17671,12 +17456,6 @@
           "title": "Wall Street Thinks SpaceX Stock Has 50% Upside. Here's Why I Don't Care.",
           "publisher": "Motley Fool",
           "link": "https://www.fool.com/investing/2026/09/13/wall-street-thinks-spacex-stock-has-50-upside-here/",
-          "when": "Sep 13"
-        },
-        {
-          "title": "3 Reasons SpaceX Stock Could Crash in Q4 -- and 1 Reason It Won't",
-          "publisher": "Motley Fool",
-          "link": "https://www.fool.com/investing/2026/09/12/3-reasons-spacex-stock-could-crash-in-q4-and-1-rea/",
           "when": "Sep 13"
         }
       ]
@@ -257233,7 +257012,7 @@
       "type": "closed"
     }
   ],
-  "generated_at": "2026-09-13T12:34:44+00:00",
+  "generated_at": "2026-09-13T13:07:25+00:00",
   "universe": {
     "wheel": 18,
     "growth": 19,
