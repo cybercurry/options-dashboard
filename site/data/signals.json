@@ -21,10 +21,16 @@
       "earnings_in_window": false,
       "strong": true,
       "qualifies": false,
-      "median_ok": null,
-      "pct_b": null,
-      "rsi": null,
+      "median_ok": false,
+      "pct_b": 0.61,
+      "rsi": 58.8,
       "above_200ma": false,
+      "timing_label": "\ud83d\udd34 NO SETUP",
+      "timing_score": 0,
+      "timing_reasons": [
+        "IV below realized \u2014 thin premium +0",
+        "\u26d4 Above median (%B 0.61) \u2014 CSP needs below"
+      ],
       "earnings_date": "2026-11-16",
       "gates": [
         {
@@ -56,7 +62,7 @@
           "s": "warn"
         },
         {
-          "l": "timing",
+          "l": "timing 0/12",
           "s": "warn"
         }
       ],
@@ -155,10 +161,15 @@
       "earnings_in_window": false,
       "strong": true,
       "qualifies": true,
-      "median_ok": null,
-      "pct_b": null,
-      "rsi": null,
+      "median_ok": true,
+      "pct_b": 0.3,
+      "rsi": 44.7,
       "above_200ma": false,
+      "timing_label": "\ud83d\udd34 NO SETUP",
+      "timing_score": 2,
+      "timing_reasons": [
+        "IV rich vs realized \u2014 premium fat +2"
+      ],
       "earnings_date": "2026-11-04",
       "gates": [
         {
@@ -187,16 +198,16 @@
         },
         {
           "l": "median",
-          "s": "warn"
+          "s": "ok"
         },
         {
-          "l": "timing",
+          "l": "timing 2/12",
           "s": "warn"
         }
       ],
       "verdict": "caution",
-      "verdict_why": "setup unconfirmed",
-      "shortlist": false
+      "verdict_why": "no setup yet (2/12) \u2014 analyze",
+      "shortlist": true
     },
     {
       "ticker": "CIFR",
@@ -289,10 +300,18 @@
       "earnings_in_window": false,
       "strong": true,
       "qualifies": true,
-      "median_ok": null,
-      "pct_b": null,
-      "rsi": null,
+      "median_ok": true,
+      "pct_b": 0.28,
+      "rsi": 37.8,
       "above_200ma": false,
+      "timing_label": "\ud83d\udfe1 PARTIAL SETUP",
+      "timing_score": 5,
+      "timing_reasons": [
+        "Lower third (%B 0.28) +1",
+        "Turning up from depressed +1",
+        "RSI 38 depressed +1",
+        "IV rich vs realized \u2014 premium fat +2"
+      ],
       "earnings_date": "2026-11-09",
       "gates": [
         {
@@ -321,16 +340,16 @@
         },
         {
           "l": "median",
-          "s": "warn"
+          "s": "ok"
         },
         {
-          "l": "timing",
+          "l": "timing 5/12",
           "s": "warn"
         }
       ],
       "verdict": "caution",
-      "verdict_why": "setup unconfirmed",
-      "shortlist": false
+      "verdict_why": "setup 5/12 \u2014 analyze",
+      "shortlist": true
     },
     {
       "ticker": "SMR",
@@ -400,7 +419,7 @@
       ],
       "verdict": "caution",
       "verdict_why": "no setup yet (2/12) \u2014 analyze",
-      "shortlist": true
+      "shortlist": false
     },
     {
       "ticker": "IREN",
@@ -493,10 +512,16 @@
       "earnings_in_window": false,
       "strong": true,
       "qualifies": false,
-      "median_ok": null,
-      "pct_b": null,
-      "rsi": null,
-      "above_200ma": false,
+      "median_ok": true,
+      "pct_b": 0.33,
+      "rsi": 44.4,
+      "above_200ma": true,
+      "timing_label": "\ud83d\udd34 NO SETUP",
+      "timing_score": 1,
+      "timing_reasons": [
+        "Turning up from depressed +1",
+        "IV below realized \u2014 thin premium +0"
+      ],
       "earnings_date": "2026-11-05",
       "gates": [
         {
@@ -525,10 +550,10 @@
         },
         {
           "l": "median",
-          "s": "warn"
+          "s": "ok"
         },
         {
-          "l": "timing",
+          "l": "timing 1/12",
           "s": "warn"
         }
       ],
@@ -605,7 +630,7 @@
       ],
       "verdict": "caution",
       "verdict_why": "no setup yet (3/12) \u2014 analyze",
-      "shortlist": true
+      "shortlist": false
     },
     {
       "ticker": "CRWV",
@@ -628,10 +653,15 @@
       "earnings_in_window": false,
       "strong": true,
       "qualifies": true,
-      "median_ok": null,
-      "pct_b": null,
-      "rsi": null,
+      "median_ok": true,
+      "pct_b": 0.46,
+      "rsi": 50.0,
       "above_200ma": false,
+      "timing_label": "\ud83d\udd34 NO SETUP",
+      "timing_score": 0,
+      "timing_reasons": [
+        "IV below realized \u2014 thin premium +0"
+      ],
       "earnings_date": "2026-11-11",
       "gates": [
         {
@@ -660,16 +690,16 @@
         },
         {
           "l": "median",
-          "s": "warn"
+          "s": "ok"
         },
         {
-          "l": "timing",
+          "l": "timing 0/12",
           "s": "warn"
         }
       ],
       "verdict": "caution",
-      "verdict_why": "setup unconfirmed",
-      "shortlist": false
+      "verdict_why": "no setup yet (0/12) \u2014 analyze",
+      "shortlist": true
     },
     {
       "ticker": "BE",
@@ -762,10 +792,19 @@
       "earnings_in_window": false,
       "strong": true,
       "qualifies": false,
-      "median_ok": null,
-      "pct_b": null,
-      "rsi": null,
+      "median_ok": true,
+      "pct_b": 0.13,
+      "rsi": 33.8,
       "above_200ma": false,
+      "timing_label": "\ud83d\udfe2 FULL SETUP \u2014 sell put",
+      "timing_score": 8,
+      "timing_reasons": [
+        "Near the lower band (%B 0.13) +2",
+        "Turning up from depressed +1",
+        "RSI 34 <37 and turning up +2",
+        "Up-day off a lower low +1",
+        "IV rich vs realized \u2014 premium fat +2"
+      ],
       "earnings_date": "2026-11-04",
       "gates": [
         {
@@ -794,11 +833,11 @@
         },
         {
           "l": "median",
-          "s": "warn"
+          "s": "ok"
         },
         {
-          "l": "timing",
-          "s": "warn"
+          "l": "timing 8/12",
+          "s": "ok"
         }
       ],
       "verdict": "avoid",
@@ -826,10 +865,18 @@
       "earnings_in_window": false,
       "strong": true,
       "qualifies": true,
-      "median_ok": null,
-      "pct_b": null,
-      "rsi": null,
+      "median_ok": true,
+      "pct_b": -0.06,
+      "rsi": 37.6,
       "above_200ma": false,
+      "timing_label": "\ud83d\udfe1 PARTIAL SETUP",
+      "timing_score": 7,
+      "timing_reasons": [
+        "At/through the lower band (%B -0.06) +3",
+        "Dropped to a 3-day low then bounced +2",
+        "RSI 38 depressed +1",
+        "IV fair vs realized +1"
+      ],
       "earnings_date": "2026-11-05",
       "gates": [
         {
@@ -858,16 +905,16 @@
         },
         {
           "l": "median",
-          "s": "warn"
+          "s": "ok"
         },
         {
-          "l": "timing",
+          "l": "timing 7/12",
           "s": "warn"
         }
       ],
       "verdict": "caution",
-      "verdict_why": "setup unconfirmed",
-      "shortlist": false
+      "verdict_why": "setup 7/12 \u2014 analyze",
+      "shortlist": true
     },
     {
       "ticker": "RGTI",
@@ -890,10 +937,17 @@
       "earnings_in_window": false,
       "strong": true,
       "qualifies": true,
-      "median_ok": null,
-      "pct_b": null,
-      "rsi": null,
+      "median_ok": true,
+      "pct_b": 0.3,
+      "rsi": 44.3,
       "above_200ma": false,
+      "timing_label": "\ud83d\udd34 NO SETUP",
+      "timing_score": 2,
+      "timing_reasons": [
+        "Lower third (%B 0.30) +1",
+        "Turning up from depressed +1",
+        "IV below realized \u2014 thin premium +0"
+      ],
       "earnings_date": "2026-11-10",
       "gates": [
         {
@@ -922,16 +976,16 @@
         },
         {
           "l": "median",
-          "s": "warn"
+          "s": "ok"
         },
         {
-          "l": "timing",
+          "l": "timing 2/12",
           "s": "warn"
         }
       ],
       "verdict": "caution",
-      "verdict_why": "setup unconfirmed",
-      "shortlist": false
+      "verdict_why": "no setup yet (2/12) \u2014 analyze",
+      "shortlist": true
     },
     {
       "ticker": "NBIS",
@@ -1142,7 +1196,7 @@
       ],
       "verdict": "caution",
       "verdict_why": "setup 5/12 \u2014 analyze",
-      "shortlist": true
+      "shortlist": false
     },
     {
       "ticker": "HOOD",
@@ -1306,10 +1360,19 @@
       "earnings_in_window": false,
       "strong": true,
       "qualifies": false,
-      "median_ok": null,
-      "pct_b": null,
-      "rsi": null,
-      "above_200ma": false,
+      "median_ok": true,
+      "pct_b": 0.1,
+      "rsi": 38.9,
+      "above_200ma": true,
+      "timing_label": "\ud83d\udfe1 PARTIAL SETUP",
+      "timing_score": 7,
+      "timing_reasons": [
+        "Near the lower band (%B 0.10) +2",
+        "Dropped to a 3-day low then bounced +2",
+        "RSI 39 depressed +1",
+        "Piercing line +2",
+        "IV below realized \u2014 thin premium +0"
+      ],
       "earnings_date": "2026-12-02",
       "gates": [
         {
@@ -1338,10 +1401,10 @@
         },
         {
           "l": "median",
-          "s": "warn"
+          "s": "ok"
         },
         {
-          "l": "timing",
+          "l": "timing 7/12",
           "s": "warn"
         }
       ],
@@ -1418,7 +1481,7 @@
       ],
       "verdict": "caution",
       "verdict_why": "no setup yet (3/12) \u2014 analyze",
-      "shortlist": true
+      "shortlist": false
     },
     {
       "ticker": "SKHY",
@@ -1581,16 +1644,10 @@
       "earnings_in_window": false,
       "strong": true,
       "qualifies": true,
-      "median_ok": true,
-      "pct_b": 0.32,
-      "rsi": 45.1,
+      "median_ok": null,
+      "pct_b": null,
+      "rsi": null,
       "above_200ma": false,
-      "timing_label": "\ud83d\udd34 NO SETUP",
-      "timing_score": 1,
-      "timing_reasons": [
-        "Turning up from depressed +1",
-        "IV below realized \u2014 thin premium +0"
-      ],
       "earnings_date": "2026-10-21",
       "gates": [
         {
@@ -1619,15 +1676,15 @@
         },
         {
           "l": "median",
-          "s": "ok"
+          "s": "warn"
         },
         {
-          "l": "timing 1/12",
+          "l": "timing",
           "s": "warn"
         }
       ],
       "verdict": "caution",
-      "verdict_why": "no setup yet (1/12) \u2014 analyze",
+      "verdict_why": "setup unconfirmed",
       "shortlist": false
     },
     {
@@ -1721,10 +1778,18 @@
       "earnings_in_window": false,
       "strong": true,
       "qualifies": true,
-      "median_ok": null,
-      "pct_b": null,
-      "rsi": null,
+      "median_ok": true,
+      "pct_b": 0.25,
+      "rsi": 43.1,
       "above_200ma": false,
+      "timing_label": "\ud83d\udd34 NO SETUP",
+      "timing_score": 3,
+      "timing_reasons": [
+        "Lower third (%B 0.25) +1",
+        "Turning up from depressed +1",
+        "Up-day off a lower low +1",
+        "IV below realized \u2014 thin premium +0"
+      ],
       "earnings_date": "2026-11-09",
       "gates": [
         {
@@ -1753,16 +1818,16 @@
         },
         {
           "l": "median",
-          "s": "warn"
+          "s": "ok"
         },
         {
-          "l": "timing",
+          "l": "timing 3/12",
           "s": "warn"
         }
       ],
       "verdict": "caution",
-      "verdict_why": "setup unconfirmed",
-      "shortlist": false
+      "verdict_why": "no setup yet (3/12) \u2014 analyze",
+      "shortlist": true
     },
     {
       "ticker": "CRWD",
@@ -1785,10 +1850,15 @@
       "earnings_in_window": false,
       "strong": true,
       "qualifies": false,
-      "median_ok": null,
-      "pct_b": null,
-      "rsi": null,
-      "above_200ma": false,
+      "median_ok": true,
+      "pct_b": 0.48,
+      "rsi": 50.0,
+      "above_200ma": true,
+      "timing_label": "\ud83d\udd34 NO SETUP",
+      "timing_score": 0,
+      "timing_reasons": [
+        "IV below realized \u2014 thin premium +0"
+      ],
       "earnings_date": "2026-12-01",
       "gates": [
         {
@@ -1817,10 +1887,10 @@
         },
         {
           "l": "median",
-          "s": "warn"
+          "s": "ok"
         },
         {
-          "l": "timing",
+          "l": "timing 0/12",
           "s": "warn"
         }
       ],
@@ -2335,10 +2405,18 @@
       "earnings_in_window": false,
       "strong": true,
       "qualifies": true,
-      "median_ok": null,
-      "pct_b": null,
-      "rsi": null,
+      "median_ok": true,
+      "pct_b": -0.02,
+      "rsi": 41.7,
       "above_200ma": false,
+      "timing_label": "\ud83d\udfe1 PARTIAL SETUP",
+      "timing_score": 7,
+      "timing_reasons": [
+        "At/through the lower band (%B -0.02) +3",
+        "Dropped to a 3-day low then bounced +2",
+        "RSI 42 depressed +1",
+        "IV fair vs realized +1"
+      ],
       "earnings_date": "2026-11-05",
       "gates": [
         {
@@ -2367,16 +2445,16 @@
         },
         {
           "l": "median",
-          "s": "warn"
+          "s": "ok"
         },
         {
-          "l": "timing",
+          "l": "timing 7/12",
           "s": "warn"
         }
       ],
       "verdict": "caution",
-      "verdict_why": "setup unconfirmed",
-      "shortlist": false
+      "verdict_why": "setup 7/12 \u2014 analyze",
+      "shortlist": true
     },
     {
       "ticker": "CMG",
@@ -2534,10 +2612,16 @@
       "earnings_in_window": false,
       "strong": true,
       "qualifies": true,
-      "median_ok": null,
-      "pct_b": null,
-      "rsi": null,
-      "above_200ma": false,
+      "median_ok": false,
+      "pct_b": 0.58,
+      "rsi": 59.3,
+      "above_200ma": true,
+      "timing_label": "\ud83d\udd34 NO SETUP",
+      "timing_score": 0,
+      "timing_reasons": [
+        "IV below realized \u2014 thin premium +0",
+        "\u26d4 Above median (%B 0.58) \u2014 CSP needs below"
+      ],
       "earnings_date": null,
       "gates": [
         {
@@ -2569,12 +2653,12 @@
           "s": "warn"
         },
         {
-          "l": "timing",
+          "l": "timing 0/12",
           "s": "warn"
         }
       ],
       "verdict": "caution",
-      "verdict_why": "setup unconfirmed",
+      "verdict_why": "wrong side of median \u2014 analyze",
       "shortlist": false
     },
     {
@@ -2717,7 +2801,7 @@
       ],
       "verdict": "caution",
       "verdict_why": "no setup yet (3/12) \u2014 analyze",
-      "shortlist": true
+      "shortlist": false
     },
     {
       "ticker": "CEG",
@@ -2740,16 +2824,10 @@
       "earnings_in_window": false,
       "strong": true,
       "qualifies": false,
-      "median_ok": false,
-      "pct_b": 0.59,
-      "rsi": 53.7,
+      "median_ok": null,
+      "pct_b": null,
+      "rsi": null,
       "above_200ma": false,
-      "timing_label": "\ud83d\udd34 NO SETUP",
-      "timing_score": 1,
-      "timing_reasons": [
-        "IV fair vs realized +1",
-        "\u26d4 Above median (%B 0.59) \u2014 CSP needs below"
-      ],
       "earnings_date": "2026-11-09",
       "gates": [
         {
@@ -2781,7 +2859,7 @@
           "s": "warn"
         },
         {
-          "l": "timing 1/12",
+          "l": "timing",
           "s": "warn"
         }
       ],
@@ -3002,7 +3080,7 @@
       ],
       "verdict": "caution",
       "verdict_why": "no setup yet (2/12) \u2014 analyze",
-      "shortlist": true
+      "shortlist": false
     },
     {
       "ticker": "META",
@@ -3353,7 +3431,80 @@
       ],
       "verdict": "caution",
       "verdict_why": "no setup yet (2/12) \u2014 analyze",
-      "shortlist": true
+      "shortlist": false
+    },
+    {
+      "ticker": "UBER",
+      "strategy": "CSP",
+      "spot": 71.67,
+      "expiry": "2026-10-16",
+      "dte": 33,
+      "strike": 67.5,
+      "delta": -0.257,
+      "mid": 1.26,
+      "premium_pct": 1.76,
+      "pop": 74.3,
+      "iv": 34.5,
+      "iv_atm": 34.0,
+      "sector": "Technology",
+      "vol_bucket": "med",
+      "oi": 6156,
+      "spread_pct": 4.8,
+      "earnings_soon": false,
+      "earnings_in_window": false,
+      "strong": true,
+      "qualifies": true,
+      "median_ok": true,
+      "pct_b": 0.06,
+      "rsi": 41.4,
+      "above_200ma": false,
+      "timing_label": "\ud83d\udd34 NO SETUP",
+      "timing_score": 3,
+      "timing_reasons": [
+        "At/through the lower band (%B 0.06) +3",
+        "RSI 41 depressed +1",
+        "Piercing line +2",
+        "IV fair vs realized +1",
+        "Still walking the lower band, no bounce \u2014 breakdown, veto \u22124"
+      ],
+      "earnings_date": "2026-11-03",
+      "gates": [
+        {
+          "l": "\u0394 0.26",
+          "s": "ok"
+        },
+        {
+          "l": "DTE 33",
+          "s": "ok"
+        },
+        {
+          "l": "prem 1.8%",
+          "s": "ok"
+        },
+        {
+          "l": "OI 6156",
+          "s": "ok"
+        },
+        {
+          "l": "bid/ask 5%",
+          "s": "ok"
+        },
+        {
+          "l": "earnings",
+          "s": "ok"
+        },
+        {
+          "l": "median",
+          "s": "ok"
+        },
+        {
+          "l": "timing 3/12",
+          "s": "warn"
+        }
+      ],
+      "verdict": "caution",
+      "verdict_why": "no setup yet (3/12) \u2014 analyze",
+      "shortlist": false
     },
     {
       "ticker": "WMT",
@@ -3376,15 +3527,10 @@
       "earnings_in_window": false,
       "strong": true,
       "qualifies": true,
-      "median_ok": true,
-      "pct_b": 0.49,
-      "rsi": 47.0,
+      "median_ok": null,
+      "pct_b": null,
+      "rsi": null,
       "above_200ma": false,
-      "timing_label": "\ud83d\udd34 NO SETUP",
-      "timing_score": 0,
-      "timing_reasons": [
-        "IV below realized \u2014 thin premium +0"
-      ],
       "earnings_date": "2026-11-19",
       "gates": [
         {
@@ -3413,15 +3559,15 @@
         },
         {
           "l": "median",
-          "s": "ok"
+          "s": "warn"
         },
         {
-          "l": "timing 0/12",
+          "l": "timing",
           "s": "warn"
         }
       ],
       "verdict": "caution",
-      "verdict_why": "no setup yet (0/12) \u2014 analyze",
+      "verdict_why": "setup unconfirmed",
       "shortlist": false
     },
     {
@@ -3587,10 +3733,16 @@
       "earnings_in_window": false,
       "strong": true,
       "qualifies": true,
-      "median_ok": null,
-      "pct_b": null,
-      "rsi": null,
+      "median_ok": true,
+      "pct_b": 0.4,
+      "rsi": 44.9,
       "above_200ma": false,
+      "timing_label": "\ud83d\udfe1 PARTIAL SETUP",
+      "timing_score": 4,
+      "timing_reasons": [
+        "Morning star +2",
+        "IV rich vs realized \u2014 premium fat +2"
+      ],
       "earnings_date": "2026-10-28",
       "gates": [
         {
@@ -3619,15 +3771,15 @@
         },
         {
           "l": "median",
-          "s": "warn"
+          "s": "ok"
         },
         {
-          "l": "timing",
+          "l": "timing 4/12",
           "s": "warn"
         }
       ],
       "verdict": "caution",
-      "verdict_why": "setup unconfirmed",
+      "verdict_why": "setup 4/12 \u2014 analyze",
       "shortlist": false
     },
     {
@@ -3794,17 +3946,10 @@
       "earnings_in_window": false,
       "strong": false,
       "qualifies": true,
-      "median_ok": true,
-      "pct_b": 0.24,
-      "rsi": 47.5,
+      "median_ok": null,
+      "pct_b": null,
+      "rsi": null,
       "above_200ma": false,
-      "timing_label": "\ud83d\udd34 NO SETUP",
-      "timing_score": 2,
-      "timing_reasons": [
-        "Lower third (%B 0.24) +1",
-        "Turning up from depressed +1",
-        "IV below realized \u2014 thin premium +0"
-      ],
       "earnings_date": null,
       "gates": [
         {
@@ -3833,15 +3978,15 @@
         },
         {
           "l": "median",
-          "s": "ok"
+          "s": "warn"
         },
         {
-          "l": "timing 2/12",
+          "l": "timing",
           "s": "warn"
         }
       ],
       "verdict": "caution",
-      "verdict_why": "no setup yet (2/12) \u2014 analyze",
+      "verdict_why": "setup unconfirmed",
       "shortlist": false
     },
     {
@@ -4007,10 +4152,18 @@
       "earnings_in_window": false,
       "strong": false,
       "qualifies": false,
-      "median_ok": null,
-      "pct_b": null,
-      "rsi": null,
+      "median_ok": true,
+      "pct_b": 0.1,
+      "rsi": 32.2,
       "above_200ma": false,
+      "timing_label": "\ud83d\udfe2 FULL SETUP \u2014 sell put",
+      "timing_score": 9,
+      "timing_reasons": [
+        "At/through the lower band (%B 0.10) +3",
+        "Dropped to a 3-day low then bounced +2",
+        "RSI 32 <37 and turning up +2",
+        "IV rich vs realized \u2014 premium fat +2"
+      ],
       "earnings_date": null,
       "gates": [
         {
@@ -4039,11 +4192,11 @@
         },
         {
           "l": "median",
-          "s": "warn"
+          "s": "ok"
         },
         {
-          "l": "timing",
-          "s": "warn"
+          "l": "timing 9/12",
+          "s": "ok"
         }
       ],
       "verdict": "avoid",
@@ -4142,10 +4295,17 @@
       "earnings_in_window": false,
       "strong": true,
       "qualifies": false,
-      "median_ok": null,
-      "pct_b": null,
-      "rsi": null,
+      "median_ok": true,
+      "pct_b": 0.61,
+      "rsi": 58.8,
       "above_200ma": false,
+      "timing_label": "\ud83d\udd34 NO SETUP",
+      "timing_score": 3,
+      "timing_reasons": [
+        "IV below realized \u2014 thin premium +0",
+        "RSI 59 mildly up +2",
+        "At/above the 20-day median \u2014 good strike +1"
+      ],
       "earnings_date": "2026-11-16",
       "gates": [
         {
@@ -4174,10 +4334,10 @@
         },
         {
           "l": "median",
-          "s": "warn"
+          "s": "ok"
         },
         {
-          "l": "timing",
+          "l": "timing 3/12",
           "s": "warn"
         }
       ],
@@ -4491,10 +4651,16 @@
       "earnings_in_window": false,
       "strong": true,
       "qualifies": true,
-      "median_ok": null,
-      "pct_b": null,
-      "rsi": null,
-      "above_200ma": false,
+      "median_ok": false,
+      "pct_b": 0.33,
+      "rsi": 44.4,
+      "above_200ma": true,
+      "timing_label": "\ud83d\udfe1 PARTIAL SETUP",
+      "timing_score": 4,
+      "timing_reasons": [
+        "IV below realized \u2014 thin premium +0",
+        "RSI 44 weak/neutral \u2014 safe to write +4"
+      ],
       "earnings_date": "2026-11-05",
       "gates": [
         {
@@ -4526,12 +4692,12 @@
           "s": "warn"
         },
         {
-          "l": "timing",
+          "l": "timing 4/12",
           "s": "warn"
         }
       ],
       "verdict": "caution",
-      "verdict_why": "setup unconfirmed",
+      "verdict_why": "setup 4/12 \u2014 analyze",
       "shortlist": false
     },
     {
@@ -4625,10 +4791,16 @@
       "earnings_in_window": false,
       "strong": true,
       "qualifies": true,
-      "median_ok": null,
-      "pct_b": null,
-      "rsi": null,
+      "median_ok": false,
+      "pct_b": 0.28,
+      "rsi": 37.8,
       "above_200ma": false,
+      "timing_label": "\ud83d\udfe2 FULL SETUP \u2014 write now",
+      "timing_score": 8,
+      "timing_reasons": [
+        "IV rich vs realized \u2014 fat premium +4",
+        "RSI 38 weak/neutral \u2014 safe to write +4"
+      ],
       "earnings_date": "2026-11-09",
       "gates": [
         {
@@ -4660,12 +4832,12 @@
           "s": "warn"
         },
         {
-          "l": "timing",
-          "s": "warn"
+          "l": "timing 8/12",
+          "s": "ok"
         }
       ],
-      "verdict": "caution",
-      "verdict_why": "setup unconfirmed",
+      "verdict": "go",
+      "verdict_why": "setup 8/12",
       "shortlist": false
     },
     {
@@ -4689,10 +4861,16 @@
       "earnings_in_window": false,
       "strong": true,
       "qualifies": true,
-      "median_ok": null,
-      "pct_b": null,
-      "rsi": null,
+      "median_ok": false,
+      "pct_b": -0.06,
+      "rsi": 37.6,
       "above_200ma": false,
+      "timing_label": "\ud83d\udfe1 PARTIAL SETUP",
+      "timing_score": 6,
+      "timing_reasons": [
+        "IV fair vs realized +2",
+        "RSI 38 weak/neutral \u2014 safe to write +4"
+      ],
       "earnings_date": "2026-11-05",
       "gates": [
         {
@@ -4724,12 +4902,12 @@
           "s": "warn"
         },
         {
-          "l": "timing",
+          "l": "timing 6/12",
           "s": "warn"
         }
       ],
       "verdict": "caution",
-      "verdict_why": "setup unconfirmed",
+      "verdict_why": "setup 6/12 \u2014 analyze",
       "shortlist": false
     },
     {
@@ -4823,10 +5001,16 @@
       "earnings_in_window": false,
       "strong": true,
       "qualifies": true,
-      "median_ok": null,
-      "pct_b": null,
-      "rsi": null,
+      "median_ok": false,
+      "pct_b": 0.3,
+      "rsi": 44.7,
       "above_200ma": false,
+      "timing_label": "\ud83d\udfe2 FULL SETUP \u2014 write now",
+      "timing_score": 8,
+      "timing_reasons": [
+        "IV rich vs realized \u2014 fat premium +4",
+        "RSI 45 weak/neutral \u2014 safe to write +4"
+      ],
       "earnings_date": "2026-11-04",
       "gates": [
         {
@@ -4858,12 +5042,12 @@
           "s": "warn"
         },
         {
-          "l": "timing",
-          "s": "warn"
+          "l": "timing 8/12",
+          "s": "ok"
         }
       ],
-      "verdict": "caution",
-      "verdict_why": "setup unconfirmed",
+      "verdict": "go",
+      "verdict_why": "setup 8/12",
       "shortlist": false
     },
     {
@@ -4887,10 +5071,16 @@
       "earnings_in_window": false,
       "strong": true,
       "qualifies": true,
-      "median_ok": null,
-      "pct_b": null,
-      "rsi": null,
-      "above_200ma": false,
+      "median_ok": false,
+      "pct_b": 0.1,
+      "rsi": 38.9,
+      "above_200ma": true,
+      "timing_label": "\ud83d\udfe1 PARTIAL SETUP",
+      "timing_score": 4,
+      "timing_reasons": [
+        "IV below realized \u2014 thin premium +0",
+        "RSI 39 weak/neutral \u2014 safe to write +4"
+      ],
       "earnings_date": "2026-12-02",
       "gates": [
         {
@@ -4922,12 +5112,12 @@
           "s": "warn"
         },
         {
-          "l": "timing",
+          "l": "timing 4/12",
           "s": "warn"
         }
       ],
       "verdict": "caution",
-      "verdict_why": "setup unconfirmed",
+      "verdict_why": "setup 4/12 \u2014 analyze",
       "shortlist": false
     },
     {
@@ -4951,10 +5141,16 @@
       "earnings_in_window": false,
       "strong": true,
       "qualifies": true,
-      "median_ok": null,
-      "pct_b": null,
-      "rsi": null,
+      "median_ok": false,
+      "pct_b": 0.25,
+      "rsi": 43.1,
       "above_200ma": false,
+      "timing_label": "\ud83d\udfe1 PARTIAL SETUP",
+      "timing_score": 4,
+      "timing_reasons": [
+        "IV below realized \u2014 thin premium +0",
+        "RSI 43 weak/neutral \u2014 safe to write +4"
+      ],
       "earnings_date": "2026-11-09",
       "gates": [
         {
@@ -4986,12 +5182,12 @@
           "s": "warn"
         },
         {
-          "l": "timing",
+          "l": "timing 4/12",
           "s": "warn"
         }
       ],
       "verdict": "caution",
-      "verdict_why": "setup unconfirmed",
+      "verdict_why": "setup 4/12 \u2014 analyze",
       "shortlist": false
     },
     {
@@ -5085,10 +5281,16 @@
       "earnings_in_window": false,
       "strong": true,
       "qualifies": false,
-      "median_ok": null,
-      "pct_b": null,
-      "rsi": null,
+      "median_ok": false,
+      "pct_b": 0.13,
+      "rsi": 33.8,
       "above_200ma": false,
+      "timing_label": "\ud83d\udfe2 FULL SETUP \u2014 write now",
+      "timing_score": 8,
+      "timing_reasons": [
+        "IV rich vs realized \u2014 fat premium +4",
+        "RSI 34 weak/neutral \u2014 safe to write +4"
+      ],
       "earnings_date": "2026-11-04",
       "gates": [
         {
@@ -5120,8 +5322,8 @@
           "s": "warn"
         },
         {
-          "l": "timing",
-          "s": "warn"
+          "l": "timing 8/12",
+          "s": "ok"
         }
       ],
       "verdict": "avoid",
@@ -5434,10 +5636,16 @@
       "earnings_in_window": false,
       "strong": true,
       "qualifies": true,
-      "median_ok": null,
-      "pct_b": null,
-      "rsi": null,
+      "median_ok": false,
+      "pct_b": 0.3,
+      "rsi": 44.3,
       "above_200ma": false,
+      "timing_label": "\ud83d\udfe1 PARTIAL SETUP",
+      "timing_score": 5,
+      "timing_reasons": [
+        "IV a touch below realized +1",
+        "RSI 44 weak/neutral \u2014 safe to write +4"
+      ],
       "earnings_date": "2026-11-10",
       "gates": [
         {
@@ -5469,12 +5677,12 @@
           "s": "warn"
         },
         {
-          "l": "timing",
+          "l": "timing 5/12",
           "s": "warn"
         }
       ],
       "verdict": "caution",
-      "verdict_why": "setup unconfirmed",
+      "verdict_why": "setup 5/12 \u2014 analyze",
       "shortlist": false
     },
     {
@@ -5568,10 +5776,16 @@
       "earnings_in_window": false,
       "strong": true,
       "qualifies": true,
-      "median_ok": null,
-      "pct_b": null,
-      "rsi": null,
+      "median_ok": false,
+      "pct_b": 0.46,
+      "rsi": 50.0,
       "above_200ma": false,
+      "timing_label": "\ud83d\udfe1 PARTIAL SETUP",
+      "timing_score": 4,
+      "timing_reasons": [
+        "IV a touch below realized +1",
+        "RSI 50 neutral \u2014 safe to write +3"
+      ],
       "earnings_date": "2026-11-11",
       "gates": [
         {
@@ -5603,12 +5817,12 @@
           "s": "warn"
         },
         {
-          "l": "timing",
+          "l": "timing 4/12",
           "s": "warn"
         }
       ],
       "verdict": "caution",
-      "verdict_why": "setup unconfirmed",
+      "verdict_why": "setup 4/12 \u2014 analyze",
       "shortlist": false
     },
     {
@@ -6257,10 +6471,16 @@
       "earnings_in_window": false,
       "strong": true,
       "qualifies": false,
-      "median_ok": null,
-      "pct_b": null,
-      "rsi": null,
-      "above_200ma": false,
+      "median_ok": false,
+      "pct_b": 0.48,
+      "rsi": 50.0,
+      "above_200ma": true,
+      "timing_label": "\ud83d\udd34 NO SETUP",
+      "timing_score": 3,
+      "timing_reasons": [
+        "IV below realized \u2014 thin premium +0",
+        "RSI 50 neutral \u2014 safe to write +3"
+      ],
       "earnings_date": "2026-12-01",
       "gates": [
         {
@@ -6292,7 +6512,7 @@
           "s": "warn"
         },
         {
-          "l": "timing",
+          "l": "timing 3/12",
           "s": "warn"
         }
       ],
@@ -6535,16 +6755,10 @@
       "earnings_in_window": false,
       "strong": true,
       "qualifies": true,
-      "median_ok": false,
-      "pct_b": 0.32,
-      "rsi": 45.1,
+      "median_ok": null,
+      "pct_b": null,
+      "rsi": null,
       "above_200ma": false,
-      "timing_label": "\ud83d\udfe1 PARTIAL SETUP",
-      "timing_score": 4,
-      "timing_reasons": [
-        "IV a touch below realized +1",
-        "RSI 45 neutral \u2014 safe to write +3"
-      ],
       "earnings_date": "2026-10-21",
       "gates": [
         {
@@ -6576,12 +6790,12 @@
           "s": "warn"
         },
         {
-          "l": "timing 4/12",
+          "l": "timing",
           "s": "warn"
         }
       ],
       "verdict": "caution",
-      "verdict_why": "setup 4/12 \u2014 analyze",
+      "verdict_why": "setup unconfirmed",
       "shortlist": false
     },
     {
@@ -6605,10 +6819,16 @@
       "earnings_in_window": false,
       "strong": true,
       "qualifies": false,
-      "median_ok": null,
-      "pct_b": null,
-      "rsi": null,
+      "median_ok": false,
+      "pct_b": 0.1,
+      "rsi": 32.2,
       "above_200ma": false,
+      "timing_label": "\ud83d\udfe2 FULL SETUP \u2014 write now",
+      "timing_score": 8,
+      "timing_reasons": [
+        "IV rich vs realized \u2014 fat premium +4",
+        "RSI 32 weak/neutral \u2014 safe to write +4"
+      ],
       "earnings_date": null,
       "gates": [
         {
@@ -6640,8 +6860,8 @@
           "s": "warn"
         },
         {
-          "l": "timing",
-          "s": "warn"
+          "l": "timing 8/12",
+          "s": "ok"
         }
       ],
       "verdict": "avoid",
@@ -6739,10 +6959,16 @@
       "earnings_in_window": false,
       "strong": true,
       "qualifies": true,
-      "median_ok": null,
-      "pct_b": null,
-      "rsi": null,
+      "median_ok": false,
+      "pct_b": -0.02,
+      "rsi": 41.7,
       "above_200ma": false,
+      "timing_label": "\ud83d\udfe1 PARTIAL SETUP",
+      "timing_score": 6,
+      "timing_reasons": [
+        "IV fair vs realized +2",
+        "RSI 42 weak/neutral \u2014 safe to write +4"
+      ],
       "earnings_date": "2026-11-05",
       "gates": [
         {
@@ -6774,12 +7000,12 @@
           "s": "warn"
         },
         {
-          "l": "timing",
+          "l": "timing 6/12",
           "s": "warn"
         }
       ],
       "verdict": "caution",
-      "verdict_why": "setup unconfirmed",
+      "verdict_why": "setup 6/12 \u2014 analyze",
       "shortlist": false
     },
     {
@@ -7087,10 +7313,17 @@
       "earnings_in_window": false,
       "strong": true,
       "qualifies": true,
-      "median_ok": null,
-      "pct_b": null,
-      "rsi": null,
-      "above_200ma": false,
+      "median_ok": true,
+      "pct_b": 0.58,
+      "rsi": 59.3,
+      "above_200ma": true,
+      "timing_label": "\ud83d\udd34 NO SETUP",
+      "timing_score": 3,
+      "timing_reasons": [
+        "IV below realized \u2014 thin premium +0",
+        "RSI 59 mildly up +2",
+        "At/above the 20-day median \u2014 good strike +1"
+      ],
       "earnings_date": null,
       "gates": [
         {
@@ -7119,15 +7352,15 @@
         },
         {
           "l": "median",
-          "s": "warn"
+          "s": "ok"
         },
         {
-          "l": "timing",
+          "l": "timing 3/12",
           "s": "warn"
         }
       ],
       "verdict": "caution",
-      "verdict_why": "setup unconfirmed",
+      "verdict_why": "no setup yet (3/12) \u2014 analyze",
       "shortlist": false
     },
     {
@@ -7293,17 +7526,10 @@
       "earnings_in_window": false,
       "strong": true,
       "qualifies": true,
-      "median_ok": true,
-      "pct_b": 0.59,
-      "rsi": 53.7,
+      "median_ok": null,
+      "pct_b": null,
+      "rsi": null,
       "above_200ma": false,
-      "timing_label": "\ud83d\udfe1 PARTIAL SETUP",
-      "timing_score": 7,
-      "timing_reasons": [
-        "IV above realized \u2014 good premium +3",
-        "RSI 54 neutral \u2014 safe to write +3",
-        "At/above the 20-day median \u2014 good strike +1"
-      ],
       "earnings_date": "2026-11-09",
       "gates": [
         {
@@ -7332,15 +7558,15 @@
         },
         {
           "l": "median",
-          "s": "ok"
+          "s": "warn"
         },
         {
-          "l": "timing 7/12",
+          "l": "timing",
           "s": "warn"
         }
       ],
       "verdict": "caution",
-      "verdict_why": "setup 7/12 \u2014 analyze",
+      "verdict_why": "setup unconfirmed",
       "shortlist": false
     },
     {
@@ -7364,10 +7590,16 @@
       "earnings_in_window": false,
       "strong": true,
       "qualifies": true,
-      "median_ok": null,
-      "pct_b": null,
-      "rsi": null,
+      "median_ok": false,
+      "pct_b": 0.4,
+      "rsi": 44.9,
       "above_200ma": false,
+      "timing_label": "\ud83d\udfe2 FULL SETUP \u2014 write now",
+      "timing_score": 8,
+      "timing_reasons": [
+        "IV rich vs realized \u2014 fat premium +4",
+        "RSI 45 weak/neutral \u2014 safe to write +4"
+      ],
       "earnings_date": "2026-10-28",
       "gates": [
         {
@@ -7399,12 +7631,12 @@
           "s": "warn"
         },
         {
-          "l": "timing",
-          "s": "warn"
+          "l": "timing 8/12",
+          "s": "ok"
         }
       ],
-      "verdict": "caution",
-      "verdict_why": "setup unconfirmed",
+      "verdict": "go",
+      "verdict_why": "setup 8/12",
       "shortlist": false
     },
     {
@@ -7638,16 +7870,10 @@
       "earnings_in_window": false,
       "strong": true,
       "qualifies": true,
-      "median_ok": false,
-      "pct_b": 0.49,
-      "rsi": 47.0,
+      "median_ok": null,
+      "pct_b": null,
+      "rsi": null,
       "above_200ma": false,
-      "timing_label": "\ud83d\udd34 NO SETUP",
-      "timing_score": 3,
-      "timing_reasons": [
-        "IV below realized \u2014 thin premium +0",
-        "RSI 47 neutral \u2014 safe to write +3"
-      ],
       "earnings_date": "2026-11-19",
       "gates": [
         {
@@ -7679,12 +7905,12 @@
           "s": "warn"
         },
         {
-          "l": "timing 3/12",
+          "l": "timing",
           "s": "warn"
         }
       ],
       "verdict": "caution",
-      "verdict_why": "no setup yet (3/12) \u2014 analyze",
+      "verdict_why": "setup unconfirmed",
       "shortlist": false
     },
     {
@@ -7755,6 +7981,76 @@
       ],
       "verdict": "caution",
       "verdict_why": "setup 7/12 \u2014 analyze",
+      "shortlist": false
+    },
+    {
+      "ticker": "UBER",
+      "strategy": "CC",
+      "spot": 71.67,
+      "expiry": "2026-10-16",
+      "dte": 33,
+      "strike": 77.5,
+      "delta": 0.26,
+      "mid": 1.12,
+      "premium_pct": 1.56,
+      "pop": 74.0,
+      "iv": 34.1,
+      "iv_atm": 34.0,
+      "sector": "Technology",
+      "vol_bucket": "med",
+      "oi": 3509,
+      "spread_pct": 5.4,
+      "earnings_soon": false,
+      "earnings_in_window": false,
+      "strong": true,
+      "qualifies": true,
+      "median_ok": false,
+      "pct_b": 0.06,
+      "rsi": 41.4,
+      "above_200ma": false,
+      "timing_label": "\ud83d\udfe1 PARTIAL SETUP",
+      "timing_score": 6,
+      "timing_reasons": [
+        "IV fair vs realized +2",
+        "RSI 41 weak/neutral \u2014 safe to write +4"
+      ],
+      "earnings_date": "2026-11-03",
+      "gates": [
+        {
+          "l": "\u0394 0.26",
+          "s": "ok"
+        },
+        {
+          "l": "DTE 33",
+          "s": "ok"
+        },
+        {
+          "l": "prem 1.6%",
+          "s": "ok"
+        },
+        {
+          "l": "OI 3509",
+          "s": "ok"
+        },
+        {
+          "l": "bid/ask 5%",
+          "s": "ok"
+        },
+        {
+          "l": "earnings",
+          "s": "ok"
+        },
+        {
+          "l": "median",
+          "s": "warn"
+        },
+        {
+          "l": "timing 6/12",
+          "s": "warn"
+        }
+      ],
+      "verdict": "caution",
+      "verdict_why": "setup 6/12 \u2014 analyze",
       "shortlist": false
     },
     {
@@ -7848,16 +8144,10 @@
       "earnings_in_window": false,
       "strong": false,
       "qualifies": true,
-      "median_ok": false,
-      "pct_b": 0.24,
-      "rsi": 47.5,
+      "median_ok": null,
+      "pct_b": null,
+      "rsi": null,
       "above_200ma": false,
-      "timing_label": "\ud83d\udfe1 PARTIAL SETUP",
-      "timing_score": 4,
-      "timing_reasons": [
-        "IV a touch below realized +1",
-        "RSI 47 neutral \u2014 safe to write +3"
-      ],
       "earnings_date": null,
       "gates": [
         {
@@ -7889,12 +8179,12 @@
           "s": "warn"
         },
         {
-          "l": "timing 4/12",
+          "l": "timing",
           "s": "warn"
         }
       ],
       "verdict": "caution",
-      "verdict_why": "setup 4/12 \u2014 analyze",
+      "verdict_why": "setup unconfirmed",
       "shortlist": false
     },
     {
@@ -8594,6 +8884,37 @@
       "good_pmcc": true
     },
     {
+      "ticker": "CRWD",
+      "strategy": "LEAP",
+      "spot": 206.74,
+      "expiry": "2028-01-21",
+      "dte": 495,
+      "strike": 165.0,
+      "delta": 0.783,
+      "mid": 78.17,
+      "cost": 7818.0,
+      "intrinsic": 41.74,
+      "extrinsic": 36.43,
+      "extrinsic_pct": 46.6,
+      "carry_pct": 13.0,
+      "iv": 56.8,
+      "iv_ratio": 0.65,
+      "above_200ma": true,
+      "above_50ma": true,
+      "ma_aligned": true,
+      "rsi": 50.0,
+      "rsi_rising": false,
+      "ext_ok": true,
+      "trend_ok": true,
+      "qualifies": true,
+      "verdict": "caution",
+      "timing_label": "\ud83d\udfe1 DECENT ENTRY",
+      "timing_score": 7,
+      "score_max": 11,
+      "sector": "Technology",
+      "good_pmcc": true
+    },
+    {
       "ticker": "PLTR",
       "strategy": "LEAP",
       "spot": 167.23,
@@ -8613,6 +8934,37 @@
       "above_50ma": true,
       "ma_aligned": true,
       "rsi": 49.2,
+      "rsi_rising": false,
+      "ext_ok": true,
+      "trend_ok": true,
+      "qualifies": true,
+      "verdict": "caution",
+      "timing_label": "\ud83d\udfe1 DECENT ENTRY",
+      "timing_score": 6,
+      "score_max": 11,
+      "sector": "Technology",
+      "good_pmcc": true
+    },
+    {
+      "ticker": "PATH",
+      "strategy": "LEAP",
+      "spot": 13.75,
+      "expiry": "2028-01-21",
+      "dte": 495,
+      "strike": 10.0,
+      "delta": 0.813,
+      "mid": 6.35,
+      "cost": 635.0,
+      "intrinsic": 3.75,
+      "extrinsic": 2.6,
+      "extrinsic_pct": 40.9,
+      "carry_pct": 13.94,
+      "iv": 72.0,
+      "iv_ratio": 0.88,
+      "above_200ma": true,
+      "above_50ma": false,
+      "ma_aligned": true,
+      "rsi": 38.9,
       "rsi_rising": false,
       "ext_ok": true,
       "trend_ok": true,
@@ -8856,18 +9208,18 @@
       "extrinsic_pct": 41.6,
       "carry_pct": 7.17,
       "iv": 29.2,
-      "iv_ratio": 0.76,
+      "iv_ratio": null,
       "above_200ma": false,
       "above_50ma": false,
       "ma_aligned": false,
-      "rsi": 47.0,
+      "rsi": null,
       "rsi_rising": false,
       "ext_ok": true,
       "trend_ok": false,
       "qualifies": false,
       "verdict": "neutral",
-      "timing_label": "\ud83d\udfe1 DECENT ENTRY",
-      "timing_score": 7,
+      "timing_label": "\u26aa NEUTRAL",
+      "timing_score": 1,
       "score_max": 11,
       "sector": "Consumer Defensive",
       "good_pmcc": false
@@ -8887,18 +9239,18 @@
       "extrinsic_pct": 51.1,
       "carry_pct": 7.48,
       "iv": 24.5,
-      "iv_ratio": 0.9,
+      "iv_ratio": null,
       "above_200ma": false,
-      "above_50ma": true,
+      "above_50ma": false,
       "ma_aligned": false,
-      "rsi": 47.5,
+      "rsi": null,
       "rsi_rising": false,
       "ext_ok": true,
       "trend_ok": false,
       "qualifies": false,
       "verdict": "neutral",
-      "timing_label": "\ud83d\udfe1 DECENT ENTRY",
-      "timing_score": 7,
+      "timing_label": "\u26aa NEUTRAL",
+      "timing_score": 1,
       "score_max": 11,
       "sector": "\u2014",
       "good_pmcc": false
@@ -8949,11 +9301,11 @@
       "extrinsic_pct": 23.3,
       "carry_pct": 8.09,
       "iv": 54.1,
-      "iv_ratio": null,
+      "iv_ratio": 2.59,
       "above_200ma": false,
       "above_50ma": false,
       "ma_aligned": false,
-      "rsi": null,
+      "rsi": 32.2,
       "rsi_rising": false,
       "ext_ok": true,
       "trend_ok": false,
@@ -9011,18 +9363,18 @@
       "extrinsic_pct": 46.6,
       "carry_pct": 9.31,
       "iv": 35.9,
-      "iv_ratio": null,
+      "iv_ratio": 1.64,
       "above_200ma": false,
       "above_50ma": false,
       "ma_aligned": false,
-      "rsi": null,
-      "rsi_rising": false,
+      "rsi": 44.9,
+      "rsi_rising": true,
       "ext_ok": true,
       "trend_ok": false,
       "qualifies": false,
       "verdict": "neutral",
-      "timing_label": "\u26aa NEUTRAL",
-      "timing_score": 0,
+      "timing_label": "\ud83d\udfe0 MARGINAL",
+      "timing_score": 2,
       "score_max": 11,
       "sector": "Industrials",
       "good_pmcc": false
@@ -9104,18 +9456,18 @@
       "extrinsic_pct": 41.3,
       "carry_pct": 9.96,
       "iv": 45.7,
-      "iv_ratio": 1.36,
+      "iv_ratio": null,
       "above_200ma": false,
-      "above_50ma": true,
+      "above_50ma": false,
       "ma_aligned": false,
-      "rsi": 53.7,
+      "rsi": null,
       "rsi_rising": false,
       "ext_ok": true,
       "trend_ok": false,
       "qualifies": false,
       "verdict": "neutral",
-      "timing_label": "\ud83d\udfe0 MARGINAL",
-      "timing_score": 3,
+      "timing_label": "\u26aa NEUTRAL",
+      "timing_score": 0,
       "score_max": 11,
       "sector": "Utilities",
       "good_pmcc": false
@@ -9197,18 +9549,18 @@
       "extrinsic_pct": 42.4,
       "carry_pct": 10.87,
       "iv": 49.7,
-      "iv_ratio": null,
-      "above_200ma": false,
-      "above_50ma": false,
+      "iv_ratio": 1.11,
+      "above_200ma": true,
+      "above_50ma": true,
       "ma_aligned": false,
-      "rsi": null,
+      "rsi": 59.3,
       "rsi_rising": false,
       "ext_ok": true,
       "trend_ok": false,
       "qualifies": false,
       "verdict": "neutral",
-      "timing_label": "\u26aa NEUTRAL",
-      "timing_score": 0,
+      "timing_label": "\ud83d\udfe0 MARGINAL",
+      "timing_score": 3,
       "score_max": 11,
       "sector": "\u2014",
       "good_pmcc": false
@@ -9242,6 +9594,37 @@
       "timing_score": 3,
       "score_max": 11,
       "sector": "Utilities",
+      "good_pmcc": false
+    },
+    {
+      "ticker": "UBER",
+      "strategy": "LEAP",
+      "spot": 71.67,
+      "expiry": "2028-01-21",
+      "dte": 495,
+      "strike": 60.0,
+      "delta": 0.779,
+      "mid": 22.75,
+      "cost": 2275.0,
+      "intrinsic": 11.67,
+      "extrinsic": 11.08,
+      "extrinsic_pct": 48.7,
+      "carry_pct": 11.4,
+      "iv": 44.7,
+      "iv_ratio": 1.37,
+      "above_200ma": false,
+      "above_50ma": false,
+      "ma_aligned": false,
+      "rsi": 41.4,
+      "rsi_rising": false,
+      "ext_ok": true,
+      "trend_ok": false,
+      "qualifies": false,
+      "verdict": "neutral",
+      "timing_label": "\ud83d\udfe0 MARGINAL",
+      "timing_score": 2,
+      "score_max": 11,
+      "sector": "Technology",
       "good_pmcc": false
     },
     {
@@ -9369,37 +9752,6 @@
       "good_pmcc": false
     },
     {
-      "ticker": "CRWD",
-      "strategy": "LEAP",
-      "spot": 206.74,
-      "expiry": "2028-01-21",
-      "dte": 495,
-      "strike": 165.0,
-      "delta": 0.783,
-      "mid": 78.17,
-      "cost": 7818.0,
-      "intrinsic": 41.74,
-      "extrinsic": 36.43,
-      "extrinsic_pct": 46.6,
-      "carry_pct": 13.0,
-      "iv": 56.8,
-      "iv_ratio": null,
-      "above_200ma": false,
-      "above_50ma": false,
-      "ma_aligned": false,
-      "rsi": null,
-      "rsi_rising": false,
-      "ext_ok": true,
-      "trend_ok": false,
-      "qualifies": false,
-      "verdict": "neutral",
-      "timing_label": "\u26aa NEUTRAL",
-      "timing_score": 0,
-      "score_max": 11,
-      "sector": "Technology",
-      "good_pmcc": false
-    },
-    {
       "ticker": "VRT",
       "strategy": "LEAP",
       "spot": 257.06,
@@ -9414,37 +9766,6 @@
       "extrinsic_pct": 45.3,
       "carry_pct": 13.54,
       "iv": 62.7,
-      "iv_ratio": 0.99,
-      "above_200ma": false,
-      "above_50ma": false,
-      "ma_aligned": true,
-      "rsi": 45.1,
-      "rsi_rising": false,
-      "ext_ok": true,
-      "trend_ok": false,
-      "qualifies": false,
-      "verdict": "neutral",
-      "timing_label": "\ud83d\udfe1 DECENT ENTRY",
-      "timing_score": 6,
-      "score_max": 11,
-      "sector": "Industrials",
-      "good_pmcc": false
-    },
-    {
-      "ticker": "PATH",
-      "strategy": "LEAP",
-      "spot": 13.75,
-      "expiry": "2028-01-21",
-      "dte": 495,
-      "strike": 10.0,
-      "delta": 0.813,
-      "mid": 6.35,
-      "cost": 635.0,
-      "intrinsic": 3.75,
-      "extrinsic": 2.6,
-      "extrinsic_pct": 40.9,
-      "carry_pct": 13.94,
-      "iv": 72.0,
       "iv_ratio": null,
       "above_200ma": false,
       "above_50ma": false,
@@ -9458,7 +9779,7 @@
       "timing_label": "\u26aa NEUTRAL",
       "timing_score": 0,
       "score_max": 11,
-      "sector": "Technology",
+      "sector": "Industrials",
       "good_pmcc": false
     },
     {
@@ -9476,18 +9797,18 @@
       "extrinsic_pct": 48.5,
       "carry_pct": 14.44,
       "iv": 65.1,
-      "iv_ratio": null,
+      "iv_ratio": 1.17,
       "above_200ma": false,
       "above_50ma": false,
       "ma_aligned": false,
-      "rsi": null,
+      "rsi": 41.7,
       "rsi_rising": false,
       "ext_ok": true,
       "trend_ok": false,
       "qualifies": false,
       "verdict": "neutral",
-      "timing_label": "\u26aa NEUTRAL",
-      "timing_score": 0,
+      "timing_label": "\ud83d\udfe0 MARGINAL",
+      "timing_score": 4,
       "score_max": 11,
       "sector": "Basic Materials",
       "good_pmcc": false
@@ -9538,18 +9859,18 @@
       "extrinsic_pct": 52.2,
       "carry_pct": 17.54,
       "iv": 78.5,
-      "iv_ratio": null,
+      "iv_ratio": 2.29,
       "above_200ma": false,
       "above_50ma": false,
       "ma_aligned": false,
-      "rsi": null,
+      "rsi": 33.8,
       "rsi_rising": false,
       "ext_ok": true,
       "trend_ok": false,
       "qualifies": false,
       "verdict": "neutral",
-      "timing_label": "\u26aa NEUTRAL",
-      "timing_score": 0,
+      "timing_label": "\ud83d\udfe0 MARGINAL",
+      "timing_score": 2,
       "score_max": 11,
       "sector": "Industrials",
       "good_pmcc": false
@@ -9569,18 +9890,18 @@
       "extrinsic_pct": 54.0,
       "carry_pct": 17.78,
       "iv": 76.8,
-      "iv_ratio": null,
+      "iv_ratio": 1.89,
       "above_200ma": false,
       "above_50ma": false,
       "ma_aligned": false,
-      "rsi": null,
-      "rsi_rising": false,
+      "rsi": 37.8,
+      "rsi_rising": true,
       "ext_ok": true,
       "trend_ok": false,
       "qualifies": false,
       "verdict": "neutral",
-      "timing_label": "\u26aa NEUTRAL",
-      "timing_score": 0,
+      "timing_label": "\ud83d\udfe0 MARGINAL",
+      "timing_score": 2,
       "score_max": 11,
       "sector": "Industrials",
       "good_pmcc": false
@@ -9662,18 +9983,18 @@
       "extrinsic_pct": 53.0,
       "carry_pct": 19.03,
       "iv": 83.9,
-      "iv_ratio": null,
+      "iv_ratio": 1.12,
       "above_200ma": false,
       "above_50ma": false,
       "ma_aligned": false,
-      "rsi": null,
+      "rsi": 37.6,
       "rsi_rising": false,
       "ext_ok": true,
       "trend_ok": false,
       "qualifies": false,
       "verdict": "neutral",
-      "timing_label": "\u26aa NEUTRAL",
-      "timing_score": 0,
+      "timing_label": "\ud83d\udfe0 MARGINAL",
+      "timing_score": 4,
       "score_max": 11,
       "sector": "Basic Materials",
       "good_pmcc": false
@@ -9693,18 +10014,18 @@
       "extrinsic_pct": 59.1,
       "carry_pct": 19.73,
       "iv": 80.8,
-      "iv_ratio": null,
+      "iv_ratio": 1.09,
       "above_200ma": false,
-      "above_50ma": false,
+      "above_50ma": true,
       "ma_aligned": false,
-      "rsi": null,
-      "rsi_rising": false,
+      "rsi": 50.0,
+      "rsi_rising": true,
       "ext_ok": false,
       "trend_ok": false,
       "qualifies": false,
       "verdict": "neutral",
-      "timing_label": "\u26aa NEUTRAL",
-      "timing_score": 0,
+      "timing_label": "\ud83d\udfe1 DECENT ENTRY",
+      "timing_score": 5,
       "score_max": 11,
       "sector": "Technology",
       "good_pmcc": false
@@ -9724,18 +10045,18 @@
       "extrinsic_pct": 62.6,
       "carry_pct": 20.21,
       "iv": 77.9,
-      "iv_ratio": null,
+      "iv_ratio": 0.98,
       "above_200ma": false,
       "above_50ma": false,
-      "ma_aligned": false,
-      "rsi": null,
+      "ma_aligned": true,
+      "rsi": 43.1,
       "rsi_rising": false,
       "ext_ok": false,
       "trend_ok": false,
       "qualifies": false,
       "verdict": "neutral",
-      "timing_label": "\u26aa NEUTRAL",
-      "timing_score": 0,
+      "timing_label": "\ud83d\udfe1 DECENT ENTRY",
+      "timing_score": 5,
       "score_max": 11,
       "sector": "Healthcare",
       "good_pmcc": false
@@ -9817,18 +10138,18 @@
       "extrinsic_pct": 67.0,
       "carry_pct": 22.24,
       "iv": 83.3,
-      "iv_ratio": null,
+      "iv_ratio": 1.18,
       "above_200ma": false,
       "above_50ma": false,
       "ma_aligned": false,
-      "rsi": null,
-      "rsi_rising": false,
+      "rsi": 44.3,
+      "rsi_rising": true,
       "ext_ok": false,
       "trend_ok": false,
       "qualifies": false,
       "verdict": "neutral",
-      "timing_label": "\u26aa NEUTRAL",
-      "timing_score": 0,
+      "timing_label": "\ud83d\udfe0 MARGINAL",
+      "timing_score": 4,
       "score_max": 11,
       "sector": "Technology",
       "good_pmcc": false
@@ -10003,18 +10324,18 @@
       "extrinsic_pct": 71.5,
       "carry_pct": 25.66,
       "iv": 96.8,
-      "iv_ratio": null,
+      "iv_ratio": 0.73,
       "above_200ma": false,
-      "above_50ma": false,
+      "above_50ma": true,
       "ma_aligned": false,
-      "rsi": null,
+      "rsi": 58.8,
       "rsi_rising": false,
       "ext_ok": false,
       "trend_ok": false,
       "qualifies": false,
       "verdict": "neutral",
-      "timing_label": "\u26aa NEUTRAL",
-      "timing_score": 0,
+      "timing_label": "\ud83d\udfe0 MARGINAL",
+      "timing_score": 4,
       "score_max": 11,
       "sector": "Financial Services",
       "good_pmcc": false
@@ -10034,18 +10355,18 @@
       "extrinsic_pct": 70.8,
       "carry_pct": 26.03,
       "iv": 98.1,
-      "iv_ratio": null,
-      "above_200ma": false,
+      "iv_ratio": 0.89,
+      "above_200ma": true,
       "above_50ma": false,
-      "ma_aligned": false,
-      "rsi": null,
-      "rsi_rising": false,
+      "ma_aligned": true,
+      "rsi": 44.4,
+      "rsi_rising": true,
       "ext_ok": false,
-      "trend_ok": false,
+      "trend_ok": true,
       "qualifies": false,
       "verdict": "neutral",
-      "timing_label": "\u26aa NEUTRAL",
-      "timing_score": 0,
+      "timing_label": "\ud83d\udfe1 DECENT ENTRY",
+      "timing_score": 6,
       "score_max": 11,
       "sector": "Technology",
       "good_pmcc": false
@@ -10096,18 +10417,18 @@
       "extrinsic_pct": 86.9,
       "carry_pct": 28.68,
       "iv": 91.2,
-      "iv_ratio": null,
+      "iv_ratio": 1.86,
       "above_200ma": false,
       "above_50ma": false,
-      "ma_aligned": false,
-      "rsi": null,
-      "rsi_rising": false,
+      "ma_aligned": true,
+      "rsi": 44.7,
+      "rsi_rising": true,
       "ext_ok": false,
       "trend_ok": false,
       "qualifies": false,
       "verdict": "neutral",
-      "timing_label": "\u26aa NEUTRAL",
-      "timing_score": 0,
+      "timing_label": "\ud83d\udfe0 MARGINAL",
+      "timing_score": 2,
       "score_max": 11,
       "sector": "Industrials",
       "good_pmcc": false
@@ -10228,19 +10549,19 @@
       "ticker": "CEG",
       "sector": "Utilities",
       "price": 284.75,
-      "pct": -0.4,
-      "hv20": 33.7,
-      "hvpct": 9,
+      "pct": null,
+      "hv20": null,
+      "hvpct": null,
       "c_iv": 39,
       "p_iv": 39,
-      "iv_vs_hv": "fair",
-      "rsi": 54,
+      "iv_vs_hv": "\u2014",
+      "rsi": null,
       "above_200": false,
       "pcr": 0.36,
-      "pctb": 0.59,
-      "csp_timing": "\ud83d\udd34 NO SETUP",
-      "cc_timing": "\ud83d\udfe1 PARTIAL SETUP",
-      "leap_timing": "\ud83d\udfe0 MARGINAL",
+      "pctb": null,
+      "csp_timing": null,
+      "cc_timing": null,
+      "leap_timing": "\u26aa NEUTRAL",
       "csp_verdict": "avoid",
       "cc_verdict": "caution",
       "leap_verdict": "neutral",
@@ -10250,19 +10571,19 @@
       "ticker": "VRT",
       "sector": "Industrials",
       "price": 257.06,
-      "pct": 3.6,
-      "hv20": 63.1,
-      "hvpct": 66,
+      "pct": null,
+      "hv20": null,
+      "hvpct": null,
       "c_iv": 54,
       "p_iv": 54,
-      "iv_vs_hv": "cheap",
-      "rsi": 45,
+      "iv_vs_hv": "\u2014",
+      "rsi": null,
       "above_200": false,
       "pcr": 0.66,
-      "pctb": 0.32,
-      "csp_timing": "\ud83d\udd34 NO SETUP",
-      "cc_timing": "\ud83d\udfe1 PARTIAL SETUP",
-      "leap_timing": "\ud83d\udfe1 DECENT ENTRY",
+      "pctb": null,
+      "csp_timing": null,
+      "cc_timing": null,
+      "leap_timing": "\u26aa NEUTRAL",
       "csp_verdict": "caution",
       "cc_verdict": "caution",
       "leap_verdict": "neutral",
@@ -10294,19 +10615,19 @@
       "ticker": "GLD",
       "sector": "\u2014",
       "price": 398.77,
-      "pct": 0.6,
-      "hv20": 27.2,
-      "hvpct": 62,
+      "pct": null,
+      "hv20": null,
+      "hvpct": null,
       "c_iv": 23,
       "p_iv": 23,
-      "iv_vs_hv": "cheap",
-      "rsi": 47,
+      "iv_vs_hv": "\u2014",
+      "rsi": null,
       "above_200": false,
       "pcr": 0.5,
-      "pctb": 0.24,
-      "csp_timing": "\ud83d\udd34 NO SETUP",
-      "cc_timing": "\ud83d\udfe1 PARTIAL SETUP",
-      "leap_timing": "\ud83d\udfe1 DECENT ENTRY",
+      "pctb": null,
+      "csp_timing": null,
+      "cc_timing": null,
+      "leap_timing": "\u26aa NEUTRAL",
       "csp_verdict": "caution",
       "cc_verdict": "caution",
       "leap_verdict": "neutral",
@@ -10360,19 +10681,19 @@
       "ticker": "WMT",
       "sector": "Consumer Defensive",
       "price": 107.15,
-      "pct": 1.3,
-      "hv20": 38.3,
-      "hvpct": 97,
+      "pct": null,
+      "hv20": null,
+      "hvpct": null,
       "c_iv": 23,
       "p_iv": 22,
-      "iv_vs_hv": "cheap",
-      "rsi": 47,
+      "iv_vs_hv": "\u2014",
+      "rsi": null,
       "above_200": false,
       "pcr": 0.11,
-      "pctb": 0.49,
-      "csp_timing": "\ud83d\udd34 NO SETUP",
-      "cc_timing": "\ud83d\udd34 NO SETUP",
-      "leap_timing": "\ud83d\udfe1 DECENT ENTRY",
+      "pctb": null,
+      "csp_timing": null,
+      "cc_timing": null,
+      "leap_timing": "\u26aa NEUTRAL",
       "csp_verdict": "caution",
       "cc_verdict": "caution",
       "leap_verdict": "neutral",
@@ -10514,19 +10835,19 @@
       "ticker": "IBIT",
       "sector": "\u2014",
       "price": 43.77,
-      "pct": null,
-      "hv20": null,
-      "hvpct": null,
+      "pct": 0.2,
+      "hv20": 44.8,
+      "hvpct": 67,
       "c_iv": 37,
       "p_iv": 37,
-      "iv_vs_hv": "\u2014",
-      "rsi": null,
-      "above_200": false,
+      "iv_vs_hv": "cheap",
+      "rsi": 59,
+      "above_200": true,
       "pcr": 0.25,
-      "pctb": null,
-      "csp_timing": null,
-      "cc_timing": null,
-      "leap_timing": "\u26aa NEUTRAL",
+      "pctb": 0.58,
+      "csp_timing": "\ud83d\udd34 NO SETUP",
+      "cc_timing": "\ud83d\udd34 NO SETUP",
+      "leap_timing": "\ud83d\udfe0 MARGINAL",
       "csp_verdict": "caution",
       "cc_verdict": "caution",
       "leap_verdict": "neutral",
@@ -10602,21 +10923,21 @@
       "ticker": "RDW",
       "sector": "Industrials",
       "price": 10.62,
-      "pct": null,
-      "hv20": null,
-      "hvpct": null,
+      "pct": -2.3,
+      "hv20": 49.1,
+      "hvpct": 4,
       "c_iv": 79,
       "p_iv": 85,
-      "iv_vs_hv": "\u2014",
-      "rsi": null,
+      "iv_vs_hv": "rich",
+      "rsi": 45,
       "above_200": false,
       "pcr": 0.27,
-      "pctb": null,
-      "csp_timing": null,
-      "cc_timing": null,
-      "leap_timing": "\u26aa NEUTRAL",
+      "pctb": 0.3,
+      "csp_timing": "\ud83d\udd34 NO SETUP",
+      "cc_timing": "\ud83d\udfe2 FULL SETUP \u2014 write now",
+      "leap_timing": "\ud83d\udfe0 MARGINAL",
       "csp_verdict": "caution",
-      "cc_verdict": "caution",
+      "cc_verdict": "go",
       "leap_verdict": "neutral",
       "is_wheel": true
     },
@@ -10690,21 +11011,21 @@
       "ticker": "RKLB",
       "sector": "Industrials",
       "price": 62.95,
-      "pct": null,
-      "hv20": null,
-      "hvpct": null,
+      "pct": 1.6,
+      "hv20": 40.6,
+      "hvpct": 2,
       "c_iv": 66,
       "p_iv": 68,
-      "iv_vs_hv": "\u2014",
-      "rsi": null,
+      "iv_vs_hv": "rich",
+      "rsi": 38,
       "above_200": false,
       "pcr": 0.34,
-      "pctb": null,
-      "csp_timing": null,
-      "cc_timing": null,
-      "leap_timing": "\u26aa NEUTRAL",
+      "pctb": 0.28,
+      "csp_timing": "\ud83d\udfe1 PARTIAL SETUP",
+      "cc_timing": "\ud83d\udfe2 FULL SETUP \u2014 write now",
+      "leap_timing": "\ud83d\udfe0 MARGINAL",
       "csp_verdict": "caution",
-      "cc_verdict": "caution",
+      "cc_verdict": "go",
       "leap_verdict": "neutral",
       "is_wheel": true
     },
@@ -10712,19 +11033,19 @@
       "ticker": "RGTI",
       "sector": "Technology",
       "price": 15.27,
-      "pct": null,
-      "hv20": null,
-      "hvpct": null,
+      "pct": 0.7,
+      "hv20": 70.8,
+      "hvpct": 13,
       "c_iv": 72,
       "p_iv": 69,
-      "iv_vs_hv": "\u2014",
-      "rsi": null,
+      "iv_vs_hv": "cheap",
+      "rsi": 44,
       "above_200": false,
       "pcr": 0.17,
-      "pctb": null,
-      "csp_timing": null,
-      "cc_timing": null,
-      "leap_timing": "\u26aa NEUTRAL",
+      "pctb": 0.3,
+      "csp_timing": "\ud83d\udd34 NO SETUP",
+      "cc_timing": "\ud83d\udfe1 PARTIAL SETUP",
+      "leap_timing": "\ud83d\udfe0 MARGINAL",
       "csp_verdict": "caution",
       "cc_verdict": "caution",
       "leap_verdict": "neutral",
@@ -10756,19 +11077,19 @@
       "ticker": "USAR",
       "sector": "Basic Materials",
       "price": 15.56,
-      "pct": null,
-      "hv20": null,
-      "hvpct": null,
+      "pct": -3.0,
+      "hv20": 74.7,
+      "hvpct": 10,
       "c_iv": 72,
       "p_iv": 82,
-      "iv_vs_hv": "\u2014",
-      "rsi": null,
+      "iv_vs_hv": "fair",
+      "rsi": 38,
       "above_200": false,
       "pcr": 0.79,
-      "pctb": null,
-      "csp_timing": null,
-      "cc_timing": null,
-      "leap_timing": "\u26aa NEUTRAL",
+      "pctb": -0.06,
+      "csp_timing": "\ud83d\udfe1 PARTIAL SETUP",
+      "cc_timing": "\ud83d\udfe1 PARTIAL SETUP",
+      "leap_timing": "\ud83d\udfe0 MARGINAL",
       "csp_verdict": "caution",
       "cc_verdict": "caution",
       "leap_verdict": "neutral",
@@ -10778,19 +11099,19 @@
       "ticker": "MP",
       "sector": "Basic Materials",
       "price": 50.51,
-      "pct": null,
-      "hv20": null,
-      "hvpct": null,
+      "pct": -1.6,
+      "hv20": 55.8,
+      "hvpct": 17,
       "c_iv": 62,
       "p_iv": 60,
-      "iv_vs_hv": "\u2014",
-      "rsi": null,
+      "iv_vs_hv": "fair",
+      "rsi": 42,
       "above_200": false,
       "pcr": 0.56,
-      "pctb": null,
-      "csp_timing": null,
-      "cc_timing": null,
-      "leap_timing": "\u26aa NEUTRAL",
+      "pctb": -0.02,
+      "csp_timing": "\ud83d\udfe1 PARTIAL SETUP",
+      "cc_timing": "\ud83d\udfe1 PARTIAL SETUP",
+      "leap_timing": "\ud83d\udfe0 MARGINAL",
       "csp_verdict": "caution",
       "cc_verdict": "caution",
       "leap_verdict": "neutral",
@@ -10954,19 +11275,19 @@
       "ticker": "AAOI",
       "sector": "Technology",
       "price": 105.36,
-      "pct": null,
-      "hv20": null,
-      "hvpct": null,
+      "pct": 2.0,
+      "hv20": 110.1,
+      "hvpct": 21,
       "c_iv": 84,
       "p_iv": 84,
-      "iv_vs_hv": "\u2014",
-      "rsi": null,
-      "above_200": false,
+      "iv_vs_hv": "cheap",
+      "rsi": 44,
+      "above_200": true,
       "pcr": 1.04,
-      "pctb": null,
-      "csp_timing": null,
-      "cc_timing": null,
-      "leap_timing": "\u26aa NEUTRAL",
+      "pctb": 0.33,
+      "csp_timing": "\ud83d\udd34 NO SETUP",
+      "cc_timing": "\ud83d\udfe1 PARTIAL SETUP",
+      "leap_timing": "\ud83d\udfe1 DECENT ENTRY",
       "csp_verdict": "avoid",
       "cc_verdict": "caution",
       "leap_verdict": "neutral",
@@ -11020,21 +11341,21 @@
       "ticker": "BA",
       "sector": "Industrials",
       "price": 210.45,
-      "pct": null,
-      "hv20": null,
-      "hvpct": null,
+      "pct": 2.8,
+      "hv20": 21.9,
+      "hvpct": 8,
       "c_iv": 30,
       "p_iv": 29,
-      "iv_vs_hv": "\u2014",
-      "rsi": null,
+      "iv_vs_hv": "rich",
+      "rsi": 45,
       "above_200": false,
       "pcr": 0.55,
-      "pctb": null,
-      "csp_timing": null,
-      "cc_timing": null,
-      "leap_timing": "\u26aa NEUTRAL",
+      "pctb": 0.4,
+      "csp_timing": "\ud83d\udfe1 PARTIAL SETUP",
+      "cc_timing": "\ud83d\udfe2 FULL SETUP \u2014 write now",
+      "leap_timing": "\ud83d\udfe0 MARGINAL",
       "csp_verdict": "caution",
-      "cc_verdict": "caution",
+      "cc_verdict": "go",
       "leap_verdict": "neutral",
       "is_wheel": true
     },
@@ -11064,19 +11385,19 @@
       "ticker": "JOBY",
       "sector": "Industrials",
       "price": 6.39,
-      "pct": null,
-      "hv20": null,
-      "hvpct": null,
+      "pct": 1.3,
+      "hv20": 34.2,
+      "hvpct": 0,
       "c_iv": 64,
       "p_iv": 64,
-      "iv_vs_hv": "\u2014",
-      "rsi": null,
+      "iv_vs_hv": "rich",
+      "rsi": 34,
       "above_200": false,
       "pcr": 0.28,
-      "pctb": null,
-      "csp_timing": null,
-      "cc_timing": null,
-      "leap_timing": "\u26aa NEUTRAL",
+      "pctb": 0.13,
+      "csp_timing": "\ud83d\udfe2 FULL SETUP \u2014 sell put",
+      "cc_timing": "\ud83d\udfe2 FULL SETUP \u2014 write now",
+      "leap_timing": "\ud83d\udfe0 MARGINAL",
       "csp_verdict": "avoid",
       "cc_verdict": "avoid",
       "leap_verdict": "neutral",
@@ -11130,21 +11451,43 @@
       "ticker": "CRWD",
       "sector": "Technology",
       "price": 206.74,
-      "pct": null,
-      "hv20": null,
-      "hvpct": null,
+      "pct": -1.0,
+      "hv20": 87.3,
+      "hvpct": 98,
       "c_iv": 50,
       "p_iv": 49,
-      "iv_vs_hv": "\u2014",
-      "rsi": null,
-      "above_200": false,
+      "iv_vs_hv": "cheap",
+      "rsi": 50,
+      "above_200": true,
       "pcr": 0.73,
-      "pctb": null,
-      "csp_timing": null,
-      "cc_timing": null,
-      "leap_timing": "\u26aa NEUTRAL",
+      "pctb": 0.48,
+      "csp_timing": "\ud83d\udd34 NO SETUP",
+      "cc_timing": "\ud83d\udd34 NO SETUP",
+      "leap_timing": "\ud83d\udfe1 DECENT ENTRY",
       "csp_verdict": "avoid",
       "cc_verdict": "avoid",
+      "leap_verdict": "caution",
+      "is_wheel": true
+    },
+    {
+      "ticker": "UBER",
+      "sector": "Technology",
+      "price": 71.67,
+      "pct": -1.2,
+      "hv20": 32.6,
+      "hvpct": 40,
+      "c_iv": 34,
+      "p_iv": 34,
+      "iv_vs_hv": "fair",
+      "rsi": 41,
+      "above_200": false,
+      "pcr": 0.22,
+      "pctb": 0.06,
+      "csp_timing": "\ud83d\udd34 NO SETUP",
+      "cc_timing": "\ud83d\udfe1 PARTIAL SETUP",
+      "leap_timing": "\ud83d\udfe0 MARGINAL",
+      "csp_verdict": "caution",
+      "cc_verdict": "caution",
       "leap_verdict": "neutral",
       "is_wheel": true
     },
@@ -11218,18 +11561,18 @@
       "ticker": "CQQQ",
       "sector": "\u2014",
       "price": 46.33,
-      "pct": null,
-      "hv20": null,
-      "hvpct": null,
+      "pct": 0.7,
+      "hv20": 20.9,
+      "hvpct": 8,
       "c_iv": 26,
       "p_iv": 37,
-      "iv_vs_hv": "\u2014",
-      "rsi": null,
+      "iv_vs_hv": "rich",
+      "rsi": 32,
       "above_200": false,
       "pcr": 0.25,
-      "pctb": null,
-      "csp_timing": null,
-      "cc_timing": null,
+      "pctb": 0.1,
+      "csp_timing": "\ud83d\udfe2 FULL SETUP \u2014 sell put",
+      "cc_timing": "\ud83d\udfe2 FULL SETUP \u2014 write now",
       "leap_timing": "\ud83d\udfe0 MARGINAL",
       "csp_verdict": "avoid",
       "cc_verdict": "avoid",
@@ -11262,19 +11605,19 @@
       "ticker": "CRWV",
       "sector": "Technology",
       "price": 88.99,
-      "pct": null,
-      "hv20": null,
-      "hvpct": null,
+      "pct": -0.1,
+      "hv20": 74.1,
+      "hvpct": 13,
       "c_iv": 71,
       "p_iv": 72,
-      "iv_vs_hv": "\u2014",
-      "rsi": null,
+      "iv_vs_hv": "cheap",
+      "rsi": 50,
       "above_200": false,
       "pcr": 1.76,
-      "pctb": null,
-      "csp_timing": null,
-      "cc_timing": null,
-      "leap_timing": "\u26aa NEUTRAL",
+      "pctb": 0.46,
+      "csp_timing": "\ud83d\udd34 NO SETUP",
+      "cc_timing": "\ud83d\udfe1 PARTIAL SETUP",
+      "leap_timing": "\ud83d\udfe1 DECENT ENTRY",
       "csp_verdict": "caution",
       "cc_verdict": "caution",
       "leap_verdict": "neutral",
@@ -11328,19 +11671,19 @@
       "ticker": "PURR",
       "sector": "Financial Services",
       "price": 11.61,
-      "pct": null,
-      "hv20": null,
-      "hvpct": null,
+      "pct": 5.4,
+      "hv20": 132.3,
+      "hvpct": 93,
       "c_iv": 93,
       "p_iv": 106,
-      "iv_vs_hv": "\u2014",
-      "rsi": null,
+      "iv_vs_hv": "cheap",
+      "rsi": 59,
       "above_200": false,
       "pcr": 0.06,
-      "pctb": null,
-      "csp_timing": null,
-      "cc_timing": null,
-      "leap_timing": "\u26aa NEUTRAL",
+      "pctb": 0.61,
+      "csp_timing": "\ud83d\udd34 NO SETUP",
+      "cc_timing": "\ud83d\udd34 NO SETUP",
+      "leap_timing": "\ud83d\udfe0 MARGINAL",
       "csp_verdict": "avoid",
       "cc_verdict": "avoid",
       "leap_verdict": "neutral",
@@ -11350,22 +11693,22 @@
       "ticker": "PATH",
       "sector": "Technology",
       "price": 13.75,
-      "pct": null,
-      "hv20": null,
-      "hvpct": null,
+      "pct": -0.9,
+      "hv20": 81.7,
+      "hvpct": 83,
       "c_iv": 56,
       "p_iv": 56,
-      "iv_vs_hv": "\u2014",
-      "rsi": null,
-      "above_200": false,
+      "iv_vs_hv": "cheap",
+      "rsi": 39,
+      "above_200": true,
       "pcr": 0.54,
-      "pctb": null,
-      "csp_timing": null,
-      "cc_timing": null,
-      "leap_timing": "\u26aa NEUTRAL",
+      "pctb": 0.1,
+      "csp_timing": "\ud83d\udfe1 PARTIAL SETUP",
+      "cc_timing": "\ud83d\udfe1 PARTIAL SETUP",
+      "leap_timing": "\ud83d\udfe1 DECENT ENTRY",
       "csp_verdict": "avoid",
       "cc_verdict": "caution",
-      "leap_verdict": "neutral",
+      "leap_verdict": "caution",
       "is_wheel": false
     },
     {
@@ -11394,19 +11737,19 @@
       "ticker": "HIMS",
       "sector": "Healthcare",
       "price": 27.51,
-      "pct": null,
-      "hv20": null,
-      "hvpct": null,
+      "pct": 0.3,
+      "hv20": 79.4,
+      "hvpct": 41,
       "c_iv": 64,
       "p_iv": 62,
-      "iv_vs_hv": "\u2014",
-      "rsi": null,
+      "iv_vs_hv": "cheap",
+      "rsi": 43,
       "above_200": false,
       "pcr": 0.26,
-      "pctb": null,
-      "csp_timing": null,
-      "cc_timing": null,
-      "leap_timing": "\u26aa NEUTRAL",
+      "pctb": 0.25,
+      "csp_timing": "\ud83d\udd34 NO SETUP",
+      "cc_timing": "\ud83d\udfe1 PARTIAL SETUP",
+      "leap_timing": "\ud83d\udfe1 DECENT ENTRY",
       "csp_verdict": "caution",
       "cc_verdict": "caution",
       "leap_verdict": "neutral",
@@ -11473,8 +11816,8 @@
     "earnings_blackout": true,
     "earnings_blackout_days": 7
   },
-  "count": 120,
-  "leap_count": 60,
+  "count": 122,
+  "leap_count": 61,
   "market": {
     "vix": 15.84,
     "vix_label": "normal",
@@ -12245,8 +12588,8 @@
     },
     {
       "label": "Bitcoin",
-      "price": 76686.6015625,
-      "pct": -0.7556149159506642,
+      "price": 77060.7109375,
+      "pct": -0.27145922095884734,
       "prefix": "$",
       "is_yield": false,
       "hist": [
@@ -12339,13 +12682,13 @@
         76568,
         77174,
         77270,
-        76687
+        77061
       ]
     },
     {
       "label": "Ethereum",
-      "price": 2475.0400390625,
-      "pct": -2.015267532672893,
+      "price": 2488.8701171875,
+      "pct": -1.4677464890966996,
       "prefix": "$",
       "is_yield": false,
       "hist": [
@@ -12438,7 +12781,7 @@
         2437,
         2515,
         2526,
-        2475
+        2489
       ]
     }
   ],
@@ -12512,8 +12855,8 @@
     {
       "label": "Digital Assets",
       "ticker": "BTC",
-      "pct": -0.7556149159506642,
-      "price": 76686.6015625
+      "pct": -0.27145922095884734,
+      "price": 77060.7109375
     }
   ],
   "fundamentals": {
@@ -12584,12 +12927,6 @@
       ],
       "news": [
         {
-          "title": "Dow Jones Futures: Fed Meeting Ahead; Anthropic's Amodei, OpenAI's Altman, SpaceX's Musk Call For AI Slowdown",
-          "publisher": "Investor's Business Daily",
-          "link": "https://www.investors.com/market-trend/stock-market-today/dow-jones-futures-fed-meeting-anthropic-amodei-openai-altman-spacex-musk-ai-model-slowdown/?src=A00220&yptr=yahoo",
-          "when": "Sep 13"
-        },
-        {
           "title": "Amazon\u2019s Zoox Enters San Francisco\u2019s Crowded Robotaxi Market, Taking Direct Aim at Waymo and Tesla",
           "publisher": "Insider Monkey",
           "link": "https://finance.yahoo.com/technology/articles/amazon-zoox-enters-san-francisco-112558972.html",
@@ -12617,6 +12954,12 @@
           "title": "$10,000 in Tesla When It Joined the S&P 500 Would Be About $15,700 Today. An Index Fund Would Have Done Better.",
           "publisher": "Motley Fool",
           "link": "https://www.fool.com/investing/2026/09/12/usd10-000-in-tesla-when-it-joined-the-s-and-p-500-would-be-about-usd15-700-today-an-index-fund-would-have-done-better/",
+          "when": "Sep 12"
+        },
+        {
+          "title": "Ted Lieu Cites Poll, Says 'Blue Tsunami' Could Be Coming as Democrats Hold 11-Point Lead Over Republicans in 2026 House Election Poll",
+          "publisher": "Benzinga",
+          "link": "https://www.yahoo.com/news/politics/articles/ted-lieu-cites-poll-says-203020851.html",
           "when": "Sep 12"
         }
       ]
@@ -12800,39 +13143,39 @@
       ],
       "news": [
         {
-          "title": "Even With 10-Year Treasury Yields at a 20-Month High, I'd Still Rather Buy This S&P 500 Dividend Stock for Passive Income in September.",
+          "title": "Skipping Social Security Could Pay Off Big Time in This 1 Scenario",
           "publisher": "Motley Fool",
-          "link": "https://www.fool.com/investing/2026/09/13/even-with-10-year-treasury-yields-at-a-20-month-hi/",
+          "link": "https://www.fool.com/retirement/2026/09/13/skipping-social-security-could-pay-off-big-time-in/",
           "when": "Sep 13"
         },
         {
-          "title": "Dow Jones Futures: Fed Meeting Ahead; Anthropic's Amodei, OpenAI's Altman, SpaceX's Musk Call For AI Slowdown",
-          "publisher": "Investor's Business Daily",
-          "link": "https://www.investors.com/market-trend/stock-market-today/dow-jones-futures-fed-meeting-anthropic-amodei-openai-altman-spacex-musk-ai-model-slowdown/?src=A00220&yptr=yahoo",
+          "title": "Can New iPhone Duo Power Apple's Stock Higher?",
+          "publisher": "Motley Fool",
+          "link": "https://www.fool.com/investing/2026/09/13/can-new-iphone-duo-power-apples-stock-higher/",
           "when": "Sep 13"
         },
         {
-          "title": "Sundar Pichai Says Alphabet's Cloud Backlog Hit $514 Billion After 82% Revenue Growth Last Quarter. Is Google Cloud Becoming a Bigger Growth Driver Than Search?",
-          "publisher": "Motley Fool",
-          "link": "https://www.fool.com/investing/2026/09/13/sundar-pichai-alphabets-backlog-514-billion/",
+          "title": "NVIDIA\u2019s Older GPUs Still Earn Rent. What That Does and Doesn\u2019t Prove for CoreWeave",
+          "publisher": "Insider Monkey",
+          "link": "https://finance.yahoo.com/markets/stocks/articles/nvidia-older-gpus-still-earn-140210350.html",
           "when": "Sep 13"
         },
         {
-          "title": "1 Rising Cryptocurrency I'll Be Buying in September, and 1 I'll Definitely Avoid",
+          "title": "Costco Stock Price Forecast: Here's What a $10,000 Investment Today Could Be Worth by September 2027",
           "publisher": "Motley Fool",
-          "link": "https://www.fool.com/investing/2026/09/13/1-rising-cryptocurrency-ill-be-buying-in-september/",
+          "link": "https://www.fool.com/investing/2026/09/13/costco-stock-price-forecast-heres-what-a-10000-inv/",
           "when": "Sep 13"
         },
         {
-          "title": "Microsoft Stock: Is Now the Right Time to Buy or Should You Hold Off?",
+          "title": "Google Bought YouTube for $1.65 Billion in 2006. The Streaming Platform Is Now the Main Driver of a Roughly $93 Billion Business at Alphabet.",
           "publisher": "Motley Fool",
-          "link": "https://www.fool.com/investing/2026/09/13/microsoft-stock-is-now-the-right-time-to-buy-or-sh/",
+          "link": "https://www.fool.com/investing/2026/09/13/google-bought-youtube-for-165-billion-in-2006-the/",
           "when": "Sep 13"
         },
         {
-          "title": "XRP ETFs Continue to See Significant New Inflows. Does That Make XRP a Buy Right Now?",
+          "title": "Forget President Donald Trump's $5,000 Dividend Promise. Investors Can Start Earning Passive Income Right Now With These 3 Fantastic Dividend Stocks Yielding 3.3% to 5.5%.",
           "publisher": "Motley Fool",
-          "link": "https://www.fool.com/investing/2026/09/13/xrp-etfs-continue-to-see-significant-new-inflows-d/",
+          "link": "https://www.fool.com/investing/2026/09/13/forget-president-donald-trumps-5000-dividend-promi/",
           "when": "Sep 13"
         }
       ]
@@ -12895,6 +13238,18 @@
       "flags": [],
       "news": [
         {
+          "title": "Alibaba and Amazon Face the Same AI Spending Question: How Quickly Does Capacity Become Cash?",
+          "publisher": "Insider Monkey",
+          "link": "https://finance.yahoo.com/technology/ai/articles/alibaba-amazon-face-same-ai-140837189.html",
+          "when": "Sep 13"
+        },
+        {
+          "title": "Oklo vs. NuScale vs. TMC: 3 Speculative Bets, Ranked By Which One Pays Off First.",
+          "publisher": "Motley Fool",
+          "link": "https://www.fool.com/investing/2026/09/13/oklo-vs-nuscale-vs-tmc-3-speculative-bets-ranked-b/",
+          "when": "Sep 13"
+        },
+        {
           "title": "Amazon\u2019s Zoox Enters San Francisco\u2019s Crowded Robotaxi Market, Taking Direct Aim at Waymo and Tesla",
           "publisher": "Insider Monkey",
           "link": "https://finance.yahoo.com/technology/articles/amazon-zoox-enters-san-francisco-112558972.html",
@@ -12917,18 +13272,6 @@
           "publisher": "Motley Fool",
           "link": "https://www.fool.com/investing/2026/09/13/3-unstoppable-dow-stocks-worth-buying-right-now/",
           "when": "Sep 13"
-        },
-        {
-          "title": "Investing $20,000 in Apple Stock 10 Years Ago Paid Off More Than Investing the Same Amount in Amazon. Here's the Better Buy for the Next Decade.",
-          "publisher": "Motley Fool",
-          "link": "https://www.fool.com/investing/2026/09/13/investing-20000-in-apple-stock-10-years-ago-paid-o/",
-          "when": "Sep 13"
-        },
-        {
-          "title": "Nvidia vs. AMD: Elon Musk Picked a Side on the SpaceX Earnings Call",
-          "publisher": "Motley Fool",
-          "link": "https://www.fool.com/investing/2026/09/12/nvidia-vs-amd-elon-musk-picked-a-side-on-the-space/",
-          "when": "Sep 12"
         }
       ]
     },
@@ -12990,6 +13333,12 @@
       "flags": [],
       "news": [
         {
+          "title": "Oklo vs. NuScale vs. TMC: 3 Speculative Bets, Ranked By Which One Pays Off First.",
+          "publisher": "Motley Fool",
+          "link": "https://www.fool.com/investing/2026/09/13/oklo-vs-nuscale-vs-tmc-3-speculative-bets-ranked-b/",
+          "when": "Sep 13"
+        },
+        {
           "title": "Microsoft Stock: Is Now the Right Time to Buy or Should You Hold Off?",
           "publisher": "Motley Fool",
           "link": "https://www.fool.com/investing/2026/09/13/microsoft-stock-is-now-the-right-time-to-buy-or-sh/",
@@ -13018,12 +13367,6 @@
           "publisher": "Motley Fool",
           "link": "https://www.fool.com/investing/2026/09/13/3-unstoppable-dow-stocks-worth-buying-right-now/",
           "when": "Sep 13"
-        },
-        {
-          "title": "Nvidia vs. AMD: Elon Musk Picked a Side on the SpaceX Earnings Call",
-          "publisher": "Motley Fool",
-          "link": "https://www.fool.com/investing/2026/09/12/nvidia-vs-amd-elon-musk-picked-a-side-on-the-space/",
-          "when": "Sep 12"
         }
       ]
     },
@@ -13674,6 +14017,12 @@
       ],
       "news": [
         {
+          "title": "Kroger loses $12 billion as customer behavior takes a turn",
+          "publisher": "TheStreet",
+          "link": "https://www.thestreet.com/retail/kroger-loses-12-billion-cpg-spending-to-rivals",
+          "when": "Sep 13"
+        },
+        {
           "title": "Should You Buy Costco Stock Right Now With $2,000 and Hold for 5 Years?",
           "publisher": "Motley Fool",
           "link": "https://www.fool.com/investing/2026/09/13/buy-costco-stock-right-now-2000-and-hold-5-years/",
@@ -13701,12 +14050,6 @@
           "title": "Home Depot vs. Walmart: Which Consumer Stock Is a Better Buy in 2026?",
           "publisher": "Motley Fool",
           "link": "https://www.fool.com/coverage/better-buy/2026/09/12/home-depot-vs-walmart-which-consumer-stock-is-a-better-buy-in-2026/",
-          "when": "Sep 12"
-        },
-        {
-          "title": "Greystone Logistics Inc (GLGI) (Q4 2026) Earnings Call Highlights: Navigating the Loss of a ...",
-          "publisher": "GuruFocus.com",
-          "link": "https://finance.yahoo.com/markets/stocks/articles/greystone-logistics-inc-glgi-q4-030108976.html",
           "when": "Sep 12"
         }
       ]
@@ -13780,6 +14123,18 @@
           "when": "Sep 13"
         },
         {
+          "title": "Can New iPhone Duo Power Apple's Stock Higher?",
+          "publisher": "Motley Fool",
+          "link": "https://www.fool.com/investing/2026/09/13/can-new-iphone-duo-power-apples-stock-higher/",
+          "when": "Sep 13"
+        },
+        {
+          "title": "Oklo vs. NuScale vs. TMC: 3 Speculative Bets, Ranked By Which One Pays Off First.",
+          "publisher": "Motley Fool",
+          "link": "https://www.fool.com/investing/2026/09/13/oklo-vs-nuscale-vs-tmc-3-speculative-bets-ranked-b/",
+          "when": "Sep 13"
+        },
+        {
           "title": "Dow Jones Futures: Fed Meeting Ahead; Anthropic's Amodei, OpenAI's Altman, SpaceX's Musk Call For AI Slowdown",
           "publisher": "Investor's Business Daily",
           "link": "https://www.investors.com/market-trend/stock-market-today/dow-jones-futures-fed-meeting-anthropic-amodei-openai-altman-spacex-musk-ai-model-slowdown/?src=A00220&yptr=yahoo",
@@ -13795,18 +14150,6 @@
           "title": "She Gave the Grandkids Cash for Their Down Payments and Left Them the Stock in Her Will. Done the Other Way Around, the IRS Would Have Collected $120,000 on the Same Two Gifts",
           "publisher": "24/7 Wall St.",
           "link": "https://247wallst.com/personal-finance/2026/09/13/she-gave-the-grandkids-cash-for-their-down-payments-and-left-them-the-stock-in-her-will-done-the-other-way-around-the-irs-would-have-collected-120000-on-the-same-two-gifts/",
-          "when": "Sep 13"
-        },
-        {
-          "title": "3 Unstoppable Dow Stocks Worth Buying Right Now",
-          "publisher": "Motley Fool",
-          "link": "https://www.fool.com/investing/2026/09/13/3-unstoppable-dow-stocks-worth-buying-right-now/",
-          "when": "Sep 13"
-        },
-        {
-          "title": "Investing $20,000 in Apple Stock 10 Years Ago Paid Off More Than Investing the Same Amount in Amazon. Here's the Better Buy for the Next Decade.",
-          "publisher": "Motley Fool",
-          "link": "https://www.fool.com/investing/2026/09/13/investing-20000-in-apple-stock-10-years-ago-paid-o/",
           "when": "Sep 13"
         }
       ]
@@ -13869,6 +14212,12 @@
       "flags": [],
       "news": [
         {
+          "title": "Google Bought YouTube for $1.65 Billion in 2006. The Streaming Platform Is Now the Main Driver of a Roughly $93 Billion Business at Alphabet.",
+          "publisher": "Motley Fool",
+          "link": "https://www.fool.com/investing/2026/09/13/google-bought-youtube-for-165-billion-in-2006-the/",
+          "when": "Sep 13"
+        },
+        {
           "title": "Sundar Pichai Says Alphabet's Cloud Backlog Hit $514 Billion After 82% Revenue Growth Last Quarter. Is Google Cloud Becoming a Bigger Growth Driver Than Search?",
           "publisher": "Motley Fool",
           "link": "https://www.fool.com/investing/2026/09/13/sundar-pichai-alphabets-backlog-514-billion/",
@@ -13896,12 +14245,6 @@
           "title": "NFL\u2019s Sunday Ticket Is Getting Smaller. It Isn\u2019t Getting Cheaper.",
           "publisher": "The Wall Street Journal",
           "link": "https://www.wsj.com/business/media/nfls-sunday-ticket-is-getting-smaller-it-isnt-getting-cheaper-8a427606?siteid=yhoof2&yptr=yahoo",
-          "when": "Sep 13"
-        },
-        {
-          "title": "Can Alphabet Overtake Nvidia in 2027?",
-          "publisher": "Motley Fool",
-          "link": "https://www.fool.com/investing/2026/09/13/can-alphabet-overtake-nvidia-in-2027/",
           "when": "Sep 13"
         }
       ]
@@ -14980,6 +15323,12 @@
       ],
       "news": [
         {
+          "title": "Oklo vs. NuScale vs. TMC: 3 Speculative Bets, Ranked By Which One Pays Off First.",
+          "publisher": "Motley Fool",
+          "link": "https://www.fool.com/investing/2026/09/13/oklo-vs-nuscale-vs-tmc-3-speculative-bets-ranked-b/",
+          "when": "Sep 13"
+        },
+        {
           "title": "Prediction: NuScale Power Stock Doesn't Get Halfway Back to Its Old High Before 2029",
           "publisher": "Motley Fool",
           "link": "https://www.fool.com/investing/2026/09/13/prediction-nuscale-power-stock-doesn-t-get-halfway-back-to-its-old-high-before-2029/",
@@ -15008,12 +15357,6 @@
           "publisher": "Motley Fool",
           "link": "https://www.fool.com/investing/2026/09/12/nuscale-power-stock-jumps-nuclear-energy-invest/",
           "when": "Sep 12"
-        },
-        {
-          "title": "NuScale Stock Falls 14% as UBS Sees a $95 Million EBITDA Gap",
-          "publisher": "GuruFocus.com",
-          "link": "https://finance.yahoo.com/markets/stocks/articles/nuscale-stock-falls-14-ubs-195503018.html",
-          "when": "Sep 11"
         }
       ]
     },
@@ -15412,6 +15755,12 @@
       ],
       "news": [
         {
+          "title": "Prediction: This Artificial Intelligence (AI) Chip Stock Will Soar After Sept. 30 (Hint: It's Not Micron)",
+          "publisher": "Motley Fool",
+          "link": "https://www.fool.com/investing/2026/09/13/prediction-this-artificial-intelligence-ai-chip-st/",
+          "when": "Sep 13"
+        },
+        {
           "title": "DeepSeek Cut Its KV-Cache HBM Need 75% and SSD Need 87.5%. Micron and Sandisk Investors Should Pay Attention",
           "publisher": "Insider Monkey",
           "link": "https://finance.yahoo.com/technology/ai/articles/deepseek-cut-kv-cache-hbm-011603128.html",
@@ -15439,12 +15788,6 @@
           "title": "Where Will Micron Be in 10 Years?",
           "publisher": "Motley Fool",
           "link": "https://www.fool.com/investing/2026/09/12/where-will-micron-be-in-10-years/",
-          "when": "Sep 12"
-        },
-        {
-          "title": "Is Micron Stock the Next Nvidia? The Answer May Shock Investors.",
-          "publisher": "Motley Fool",
-          "link": "https://www.fool.com/investing/2026/09/12/micron-stock-next-nvidia-answer-may-shock-investors/",
           "when": "Sep 12"
         }
       ]
@@ -16030,6 +16373,24 @@
       ],
       "news": [
         {
+          "title": "Kroger loses $12 billion as customer behavior takes a turn",
+          "publisher": "TheStreet",
+          "link": "https://www.thestreet.com/retail/kroger-loses-12-billion-cpg-spending-to-rivals",
+          "when": "Sep 13"
+        },
+        {
+          "title": "Costco Stock Price Forecast: Here's What a $10,000 Investment Today Could Be Worth by September 2027",
+          "publisher": "Motley Fool",
+          "link": "https://www.fool.com/investing/2026/09/13/costco-stock-price-forecast-heres-what-a-10000-inv/",
+          "when": "Sep 13"
+        },
+        {
+          "title": "Virgin Group CEO scrolls TikTok daily to keep up with Gen Z: \u2018The zeitgeist is not with people in their 50s\u2019",
+          "publisher": "Fortune",
+          "link": "https://finance.yahoo.com/media-advertising/articles/virgin-group-ceo-scrolls-tiktok-111900688.html",
+          "when": "Sep 13"
+        },
+        {
           "title": "This 1 Costco item has skyrocketed 125% in price over just 2 years. And the retail behemoth is limiting member purchases",
           "publisher": "Moneywise",
           "link": "https://finance.yahoo.com/markets/commodities/articles/1-costco-item-skyrocketed-125-104500067.html",
@@ -16046,24 +16407,6 @@
           "publisher": "Insider Monkey",
           "link": "https://finance.yahoo.com/markets/stocks/articles/gold-com-gold-gold-rush-101442314.html",
           "when": "Sep 13"
-        },
-        {
-          "title": "Mama\u2019s Creations (MAMA) Just Proved Its Growth Spurt Wasn\u2019t A Fluke",
-          "publisher": "Insider Monkey",
-          "link": "https://finance.yahoo.com/markets/stocks/articles/mama-creations-mama-just-proved-162554673.html",
-          "when": "Sep 12"
-        },
-        {
-          "title": "Walmart and Sam's Club just gave shoppers a reason to ditch Costco",
-          "publisher": "TheStreet",
-          "link": "https://www.thestreet.com/retail/walmart-sams-club-add-tap-to-pay-technology",
-          "when": "Sep 12"
-        },
-        {
-          "title": "These 5 Boring Stocks Are Quietly Crushing the Market and Making Investors Rich",
-          "publisher": "24/7 Wall St.",
-          "link": "https://247wallst.com/investing/2026/09/12/these-5-boring-stocks-are-quietly-crushing-the-market-and-making-investors-rich/",
-          "when": "Sep 12"
         }
       ]
     },
@@ -17365,6 +17708,106 @@
         }
       ]
     },
+    "UBER": {
+      "ok": true,
+      "error": null,
+      "ticker": "UBER",
+      "company": "Uber Technologies, Inc",
+      "cik": "0001543151",
+      "source": "SEC EDGAR \u2014 10-K / 10-Q filings",
+      "profile": {
+        "summary": "Uber Technologies, Inc. develops and operates proprietary technology applications in the United States, Canada, Latin America, Europe, the Middle East, Africa, and the Asia Pacific. The company operates through three segments: Mobility, Delivery, and Freight. The Mobility segment connects consumers with a range of transportation modalities, such as ridesharing, carsharing, micromobility, rentals, public transit, taxis, and other modalities; and offers riders in a variety of vehicle types, as well as financial partnerships products and advertising services. The Delivery segment allows consumers to search for and discover restaurants to grocery, alcohol, convenience, and other retailers, as well as order a meal or other items, and either pick-up at the restaurant or have it delivered; and provides Uber direct, a white-label delivery-as-a-service for retailers and restaurants, as well as advertising services. The Freight segment manages transportation and logistics networks, which connects shippers and carriers in digital marketplace, including carriers upfronts, pricing, and shipment booking; and offers on-demand platform to automate logistics end-to-end transactions for small-and medium-sized businesses to global enterprises. Uber Technologies, Inc. has staetegic partnership with Mews to embed ride booking, real-time tracking and integrated billing directly into the Mews platform. The company was formerly known as Ubercab, Inc. and changed its name to Uber Technologies, Inc. in February 2011. Uber Technologies, Inc. was founded in 2009 and is headquartered in San Francisco, California.",
+        "sector": "Technology",
+        "industry": "Software - Application",
+        "country": "United States",
+        "employees": 36600,
+        "website": "https://www.uber.com",
+        "sic": "Services-Business Services, NEC",
+        "summary_short": "Uber Technologies, Inc. develops and operates proprietary technology applications in the United States, Canada, Latin America, Europe, the Middle East, Africa, and the Asia Pacific. The company operates through three segments: Mobility, Delivery, and Freight.",
+        "summary_ai": false
+      },
+      "metrics": {
+        "revenue": null,
+        "revenue_prev": null,
+        "net_income": 10053000000.0,
+        "net_income_prev": 9856000000.0,
+        "rev_growth": null,
+        "ni_growth": 0.019987824675324676,
+        "gross_margin": null,
+        "op_margin": null,
+        "net_margin": null,
+        "roe": 0.3680260653097086,
+        "fcf": 9763000000.0,
+        "fcf_margin": null,
+        "debt_to_equity": 0.3926636403572997,
+        "current_ratio": 0.8425122722076525,
+        "interest_coverage": 8.791469194312796,
+        "eps": 4.73,
+        "shares": 2039994000.0,
+        "share_change": -0.014331032481627598,
+        "capex": 336000000.0,
+        "rnd": 3402000000.0,
+        "market_cap": 146206369980.0,
+        "pe": 15.152219873150104,
+        "fcf_yield": 0.06677547634439943,
+        "peg": 7.580724825876518
+      },
+      "groups": {
+        "Valuation": {
+          "verdict": "\ud83d\udfe1"
+        },
+        "Quality": {
+          "verdict": "\ud83d\udfe2"
+        },
+        "Health": {
+          "verdict": "\ud83d\udd34"
+        }
+      },
+      "flags": [
+        {
+          "sev": "\ud83d\udd34",
+          "text": "Liquidity tight \u2014 current ratio 0.84"
+        }
+      ],
+      "news": [
+        {
+          "title": "MarketBeat Week in Review \u2013 09/07 - 09/11",
+          "publisher": "MarketBeat",
+          "link": "https://www.marketbeat.com/articles/marketbeat-week-in-review-09-07-09-11/?utm_source=yahoofinance&utm_medium=yahoofinance",
+          "when": "Sep 12"
+        },
+        {
+          "title": "Uber Cuts 10% of its Workforce to Fund a $10 Billion Robotaxi Bet",
+          "publisher": "Insider Monkey",
+          "link": "https://finance.yahoo.com/markets/stocks/articles/uber-cuts-10-workforce-fund-004236520.html",
+          "when": "Sep 12"
+        },
+        {
+          "title": "Is Uber Stock Cheap, Or Is The Cash Already Spent?",
+          "publisher": "Trefis",
+          "link": "https://www.trefis.com/articles/615041/is-uber-stock-cheap-or-is-the-cash-already-spent/2026-09-11",
+          "when": "Sep 11"
+        },
+        {
+          "title": "Jason Calacanis Warns Chinese EVs Could End US Auto Industry: \u2018Consumers Will Love to Buy These Cars\u2019",
+          "publisher": "Benzinga",
+          "link": "https://finance.yahoo.com/economy/policy/articles/jason-calacanis-warns-chinese-evs-203055040.html",
+          "when": "Sep 11"
+        },
+        {
+          "title": "Inside Tesla\u2019s Cybertruck and robotaxi experience",
+          "publisher": "Yahoo Finance Video",
+          "link": "https://finance.yahoo.com/video/inside-tesla-cybertruck-robotaxi-experience-202100555.html",
+          "when": "Sep 11"
+        },
+        {
+          "title": "Uber CEO makes shocking admission about layoffs",
+          "publisher": "TheStreet",
+          "link": "https://www.thestreet.com/employment/uber-ceo-makes-admission-about-layoffs-ride-fees",
+          "when": "Sep 11"
+        }
+      ]
+    },
     "SPCX": {
       "ok": true,
       "error": null,
@@ -17861,6 +18304,12 @@
       ],
       "news": [
         {
+          "title": "NVIDIA\u2019s Older GPUs Still Earn Rent. What That Does and Doesn\u2019t Prove for CoreWeave",
+          "publisher": "Insider Monkey",
+          "link": "https://finance.yahoo.com/markets/stocks/articles/nvidia-older-gpus-still-earn-140210350.html",
+          "when": "Sep 13"
+        },
+        {
           "title": "David Tepper makes surprising double bet on AI's biggest bottleneck",
           "publisher": "TheStreet",
           "link": "https://www.thestreet.com/investing/david-tepper-adds-coreweave-spacex-stock-ai-bottleneck",
@@ -17888,12 +18337,6 @@
           "title": "CoreWeave Is My Top IPO Pick Right Now: Over 75% of Its Revenue Is Locked In Through Contracts",
           "publisher": "Motley Fool",
           "link": "https://www.fool.com/investing/2026/09/11/coreweave-is-my-top-ipo-pick-right-now-x-of-its-re/",
-          "when": "Sep 11"
-        },
-        {
-          "title": "AMD, BE, CRWV In Focus: Situational Awareness Has Been Reportedly Buying Options Tied To These Stocks",
-          "publisher": "Stocktwits",
-          "link": "https://stocktwits.com/news-articles/markets/equity/amd-be-crwv-in-focus-situational-awareness-has-been-reportedly-buying-options-tied-to-these-stocks/cZtXVIiRBbT",
           "when": "Sep 11"
         }
       ]
@@ -214040,6 +214483,3715 @@
         }
       ]
     },
+    "UBER": {
+      "spot": 71.67,
+      "expiries": [
+        {
+          "exp": "2026-09-18",
+          "dte": 5,
+          "calls": [
+            {
+              "k": 55.0,
+              "d": 1.0,
+              "b": 16.0,
+              "a": 17.35,
+              "iv": 151.1,
+              "oi": 271
+            },
+            {
+              "k": 60.0,
+              "d": 1.0,
+              "b": 10.95,
+              "a": 12.2,
+              "iv": 103.7,
+              "oi": 720
+            },
+            {
+              "k": 62.5,
+              "d": 0.998,
+              "b": 8.4,
+              "a": 9.8,
+              "iv": 90.8,
+              "oi": 512
+            },
+            {
+              "k": 65.0,
+              "d": 0.98,
+              "b": 6.6,
+              "a": 7.0,
+              "iv": 47.2,
+              "oi": 1302
+            },
+            {
+              "k": 67.0,
+              "d": 0.926,
+              "b": 3.8,
+              "a": 5.15,
+              "iv": 50.6,
+              "oi": 1
+            },
+            {
+              "k": 67.5,
+              "d": 0.903,
+              "b": 4.25,
+              "a": 4.5,
+              "iv": 40.5,
+              "oi": 920
+            },
+            {
+              "k": 68.0,
+              "d": 0.874,
+              "b": 3.7,
+              "a": 4.15,
+              "iv": 43.2,
+              "oi": 8
+            },
+            {
+              "k": 69.0,
+              "d": 0.8,
+              "b": 2.94,
+              "a": 3.2,
+              "iv": 32.2,
+              "oi": 60
+            },
+            {
+              "k": 70.0,
+              "d": 0.705,
+              "b": 2.22,
+              "a": 2.55,
+              "iv": 32.2,
+              "oi": 3889
+            },
+            {
+              "k": 71.0,
+              "d": 0.592,
+              "b": 1.62,
+              "a": 1.76,
+              "iv": 33.3,
+              "oi": 328
+            },
+            {
+              "k": 72.0,
+              "d": 0.472,
+              "b": 1.11,
+              "a": 1.21,
+              "iv": 32.8,
+              "oi": 2968
+            },
+            {
+              "k": 72.5,
+              "d": 0.413,
+              "b": 0.91,
+              "a": 1.01,
+              "iv": 33.2,
+              "oi": 4342
+            },
+            {
+              "k": 73.0,
+              "d": 0.355,
+              "b": 0.77,
+              "a": 0.8,
+              "iv": 33.2,
+              "oi": 879
+            },
+            {
+              "k": 74.0,
+              "d": 0.252,
+              "b": 0.48,
+              "a": 0.55,
+              "iv": 33.7,
+              "oi": 2809
+            },
+            {
+              "k": 75.0,
+              "d": 0.17,
+              "b": 0.3,
+              "a": 0.33,
+              "iv": 34.1,
+              "oi": 12568
+            },
+            {
+              "k": 76.0,
+              "d": 0.11,
+              "b": 0.16,
+              "a": 0.24,
+              "iv": 34.9,
+              "oi": 1924
+            },
+            {
+              "k": 77.0,
+              "d": 0.069,
+              "b": 0.11,
+              "a": 0.14,
+              "iv": 35.9,
+              "oi": 1274
+            },
+            {
+              "k": 77.5,
+              "d": 0.054,
+              "b": 0.08,
+              "a": 0.11,
+              "iv": 36.0,
+              "oi": 4668
+            },
+            {
+              "k": 78.0,
+              "d": 0.043,
+              "b": 0.06,
+              "a": 0.09,
+              "iv": 36.5,
+              "oi": 2380
+            },
+            {
+              "k": 79.0,
+              "d": 0.023,
+              "b": 0.05,
+              "a": 0.07,
+              "iv": 39.9,
+              "oi": 2371
+            },
+            {
+              "k": 80.0,
+              "d": 0.014,
+              "b": 0.04,
+              "a": 0.05,
+              "iv": 41.2,
+              "oi": 29148
+            },
+            {
+              "k": 81.0,
+              "d": 0.005,
+              "b": 0.0,
+              "a": 0.04,
+              "iv": 51.8,
+              "oi": 663
+            },
+            {
+              "k": 82.0,
+              "d": 0.004,
+              "b": 0.01,
+              "a": 0.07,
+              "iv": 46.1,
+              "oi": 752
+            },
+            {
+              "k": 82.5,
+              "d": 0.003,
+              "b": 0.01,
+              "a": 0.03,
+              "iv": 45.5,
+              "oi": 18829
+            },
+            {
+              "k": 83.0,
+              "d": 0.002,
+              "b": 0.01,
+              "a": 0.08,
+              "iv": 50.2,
+              "oi": 317
+            },
+            {
+              "k": 84.0,
+              "d": 0.001,
+              "b": 0.01,
+              "a": 0.07,
+              "iv": 53.0,
+              "oi": 227
+            },
+            {
+              "k": 85.0,
+              "d": 0.001,
+              "b": 0.01,
+              "a": 0.02,
+              "iv": 51.0,
+              "oi": 13950
+            },
+            {
+              "k": 86.0,
+              "d": 0.0,
+              "b": 0.01,
+              "a": 0.07,
+              "iv": 59.5,
+              "oi": 294
+            },
+            {
+              "k": 87.0,
+              "d": 0.0,
+              "b": 0.0,
+              "a": 0.1,
+              "iv": 75.0,
+              "oi": 105
+            },
+            {
+              "k": 87.5,
+              "d": 0.0,
+              "b": 0.0,
+              "a": 0.01,
+              "iv": 56.2,
+              "oi": 6557
+            },
+            {
+              "k": 88.0,
+              "d": 0.0,
+              "b": 0.0,
+              "a": 0.01,
+              "iv": 57.6,
+              "oi": 400
+            },
+            {
+              "k": 89.0,
+              "d": 0.0,
+              "b": 0.0,
+              "a": 0.01,
+              "iv": 60.4,
+              "oi": 79
+            }
+          ],
+          "puts": [
+            {
+              "k": 55.0,
+              "d": -0.0,
+              "b": 0.0,
+              "a": 0.01,
+              "iv": 74.6,
+              "oi": 3483
+            },
+            {
+              "k": 60.0,
+              "d": -0.0,
+              "b": 0.0,
+              "a": 0.01,
+              "iv": 52.2,
+              "oi": 27023
+            },
+            {
+              "k": 62.5,
+              "d": -0.002,
+              "b": 0.0,
+              "a": 0.05,
+              "iv": 51.8,
+              "oi": 9636
+            },
+            {
+              "k": 65.0,
+              "d": -0.02,
+              "b": 0.02,
+              "a": 0.03,
+              "iv": 34.7,
+              "oi": 14886
+            },
+            {
+              "k": 67.0,
+              "d": -0.074,
+              "b": 0.09,
+              "a": 0.13,
+              "iv": 33.9,
+              "oi": 2614
+            },
+            {
+              "k": 67.5,
+              "d": -0.097,
+              "b": 0.14,
+              "a": 0.18,
+              "iv": 34.1,
+              "oi": 5858
+            },
+            {
+              "k": 68.0,
+              "d": -0.126,
+              "b": 0.2,
+              "a": 0.23,
+              "iv": 33.9,
+              "oi": 459
+            },
+            {
+              "k": 69.0,
+              "d": -0.2,
+              "b": 0.35,
+              "a": 0.38,
+              "iv": 33.7,
+              "oi": 4917
+            },
+            {
+              "k": 70.0,
+              "d": -0.295,
+              "b": 0.6,
+              "a": 0.67,
+              "iv": 33.7,
+              "oi": 12706
+            },
+            {
+              "k": 71.0,
+              "d": -0.408,
+              "b": 0.9,
+              "a": 1.05,
+              "iv": 34.0,
+              "oi": 1164
+            },
+            {
+              "k": 72.0,
+              "d": -0.528,
+              "b": 1.43,
+              "a": 1.56,
+              "iv": 33.8,
+              "oi": 1436
+            },
+            {
+              "k": 72.5,
+              "d": -0.587,
+              "b": 1.71,
+              "a": 1.9,
+              "iv": 34.3,
+              "oi": 5977
+            },
+            {
+              "k": 73.0,
+              "d": -0.645,
+              "b": 2.02,
+              "a": 2.15,
+              "iv": 33.5,
+              "oi": 6421
+            },
+            {
+              "k": 74.0,
+              "d": -0.748,
+              "b": 2.47,
+              "a": 2.98,
+              "iv": 30.3,
+              "oi": 1881
+            },
+            {
+              "k": 75.0,
+              "d": -0.83,
+              "b": 3.35,
+              "a": 3.9,
+              "iv": 32.1,
+              "oi": 11311
+            },
+            {
+              "k": 76.0,
+              "d": -0.89,
+              "b": 4.15,
+              "a": 4.65,
+              "iv": 42.4,
+              "oi": 1904
+            },
+            {
+              "k": 77.0,
+              "d": -0.931,
+              "b": 5.25,
+              "a": 6.7,
+              "iv": 83.8,
+              "oi": 431
+            },
+            {
+              "k": 77.5,
+              "d": -0.946,
+              "b": 4.65,
+              "a": 6.05,
+              "iv": 46.7,
+              "oi": 3877
+            },
+            {
+              "k": 78.0,
+              "d": -0.958,
+              "b": 6.1,
+              "a": 7.65,
+              "iv": 89.5,
+              "oi": 667
+            },
+            {
+              "k": 79.0,
+              "d": -0.977,
+              "b": 6.95,
+              "a": 7.6,
+              "iv": 57.2,
+              "oi": 409
+            },
+            {
+              "k": 80.0,
+              "d": -0.986,
+              "b": 7.65,
+              "a": 8.55,
+              "iv": 59.6,
+              "oi": 4316
+            },
+            {
+              "k": 81.0,
+              "d": -0.995,
+              "b": 8.85,
+              "a": 10.2,
+              "iv": 93.6,
+              "oi": 58
+            },
+            {
+              "k": 82.0,
+              "d": -0.996,
+              "b": 8.35,
+              "a": 11.45,
+              "iv": 108.7,
+              "oi": 39
+            },
+            {
+              "k": 82.5,
+              "d": -0.997,
+              "b": 10.4,
+              "a": 12.05,
+              "iv": 115.1,
+              "oi": 222
+            },
+            {
+              "k": 83.0,
+              "d": -0.998,
+              "b": 10.5,
+              "a": 12.55,
+              "iv": 118.0,
+              "oi": 0
+            },
+            {
+              "k": 84.0,
+              "d": -0.999,
+              "b": 11.5,
+              "a": 13.05,
+              "iv": 104.3,
+              "oi": 0
+            },
+            {
+              "k": 85.0,
+              "d": -1.0,
+              "b": 11.55,
+              "a": 14.85,
+              "iv": 139.8,
+              "oi": 284
+            },
+            {
+              "k": 86.0,
+              "d": -1.0,
+              "b": 13.6,
+              "a": 15.1,
+              "iv": 116.6,
+              "oi": 0
+            },
+            {
+              "k": 87.0,
+              "d": -1.0,
+              "b": 14.5,
+              "a": 16.15,
+              "iv": 123.7,
+              "oi": 0
+            },
+            {
+              "k": 87.5,
+              "d": -1.0,
+              "b": 15.15,
+              "a": 16.55,
+              "iv": 121.7,
+              "oi": 399
+            },
+            {
+              "k": 88.0,
+              "d": -1.0,
+              "b": 15.5,
+              "a": 17.3,
+              "iv": 135.1,
+              "oi": 0
+            },
+            {
+              "k": 89.0,
+              "d": -1.0,
+              "b": 16.5,
+              "a": 18.1,
+              "iv": 131.1,
+              "oi": 0
+            }
+          ]
+        },
+        {
+          "exp": "2026-09-25",
+          "dte": 12,
+          "calls": [
+            {
+              "k": 55.0,
+              "d": 1.0,
+              "b": 15.75,
+              "a": 17.35,
+              "iv": 104.8,
+              "oi": 0
+            },
+            {
+              "k": 56.0,
+              "d": 1.0,
+              "b": 15.0,
+              "a": 16.95,
+              "iv": 122.6,
+              "oi": 0
+            },
+            {
+              "k": 57.0,
+              "d": 1.0,
+              "b": 14.0,
+              "a": 15.95,
+              "iv": 116.4,
+              "oi": 0
+            },
+            {
+              "k": 58.0,
+              "d": 1.0,
+              "b": 13.0,
+              "a": 14.95,
+              "iv": 110.1,
+              "oi": 1
+            },
+            {
+              "k": 59.0,
+              "d": 0.999,
+              "b": 11.9,
+              "a": 13.95,
+              "iv": 103.9,
+              "oi": 1
+            },
+            {
+              "k": 60.0,
+              "d": 0.997,
+              "b": 11.0,
+              "a": 12.25,
+              "iv": 73.3,
+              "oi": 49
+            },
+            {
+              "k": 61.0,
+              "d": 0.994,
+              "b": 10.0,
+              "a": 12.0,
+              "iv": 93.2,
+              "oi": 2
+            },
+            {
+              "k": 62.0,
+              "d": 0.989,
+              "b": 9.05,
+              "a": 11.0,
+              "iv": 87.0,
+              "oi": 4
+            },
+            {
+              "k": 63.0,
+              "d": 0.978,
+              "b": 8.05,
+              "a": 10.0,
+              "iv": 80.8,
+              "oi": 21
+            },
+            {
+              "k": 64.0,
+              "d": 0.96,
+              "b": 7.0,
+              "a": 8.35,
+              "iv": 56.2,
+              "oi": 42
+            },
+            {
+              "k": 65.0,
+              "d": 0.937,
+              "b": 6.1,
+              "a": 7.55,
+              "iv": 56.7,
+              "oi": 1
+            },
+            {
+              "k": 66.0,
+              "d": 0.904,
+              "b": 5.6,
+              "a": 6.45,
+              "iv": 48.3,
+              "oi": 39
+            },
+            {
+              "k": 67.0,
+              "d": 0.861,
+              "b": 4.45,
+              "a": 5.6,
+              "iv": 46.5,
+              "oi": 22
+            },
+            {
+              "k": 68.0,
+              "d": 0.807,
+              "b": 4.0,
+              "a": 4.7,
+              "iv": 34.2,
+              "oi": 39
+            },
+            {
+              "k": 69.0,
+              "d": 0.74,
+              "b": 2.83,
+              "a": 5.3,
+              "iv": 40.9,
+              "oi": 106
+            },
+            {
+              "k": 70.0,
+              "d": 0.663,
+              "b": 2.76,
+              "a": 2.95,
+              "iv": 33.3,
+              "oi": 136
+            },
+            {
+              "k": 71.0,
+              "d": 0.579,
+              "b": 2.2,
+              "a": 2.34,
+              "iv": 33.5,
+              "oi": 89
+            },
+            {
+              "k": 72.0,
+              "d": 0.492,
+              "b": 1.74,
+              "a": 1.83,
+              "iv": 33.7,
+              "oi": 556
+            },
+            {
+              "k": 73.0,
+              "d": 0.407,
+              "b": 1.29,
+              "a": 1.42,
+              "iv": 33.8,
+              "oi": 474
+            },
+            {
+              "k": 74.0,
+              "d": 0.33,
+              "b": 0.95,
+              "a": 1.07,
+              "iv": 33.8,
+              "oi": 504
+            },
+            {
+              "k": 75.0,
+              "d": 0.261,
+              "b": 0.69,
+              "a": 0.79,
+              "iv": 33.5,
+              "oi": 1004
+            },
+            {
+              "k": 76.0,
+              "d": 0.204,
+              "b": 0.5,
+              "a": 0.6,
+              "iv": 34.5,
+              "oi": 516
+            },
+            {
+              "k": 77.0,
+              "d": 0.157,
+              "b": 0.37,
+              "a": 0.45,
+              "iv": 35.2,
+              "oi": 746
+            },
+            {
+              "k": 78.0,
+              "d": 0.121,
+              "b": 0.22,
+              "a": 0.34,
+              "iv": 35.0,
+              "oi": 330
+            },
+            {
+              "k": 79.0,
+              "d": 0.094,
+              "b": 0.14,
+              "a": 0.25,
+              "iv": 34.8,
+              "oi": 2953
+            },
+            {
+              "k": 80.0,
+              "d": 0.069,
+              "b": 0.13,
+              "a": 0.17,
+              "iv": 36.4,
+              "oi": 1969
+            },
+            {
+              "k": 81.0,
+              "d": 0.051,
+              "b": 0.1,
+              "a": 0.13,
+              "iv": 37.4,
+              "oi": 221
+            },
+            {
+              "k": 82.0,
+              "d": 0.041,
+              "b": 0.07,
+              "a": 0.13,
+              "iv": 37.9,
+              "oi": 395
+            },
+            {
+              "k": 83.0,
+              "d": 0.032,
+              "b": 0.01,
+              "a": 0.1,
+              "iv": 36.2,
+              "oi": 172
+            },
+            {
+              "k": 84.0,
+              "d": 0.02,
+              "b": 0.04,
+              "a": 0.1,
+              "iv": 41.9,
+              "oi": 423
+            },
+            {
+              "k": 85.0,
+              "d": 0.013,
+              "b": 0.03,
+              "a": 0.16,
+              "iv": 45.9,
+              "oi": 615
+            },
+            {
+              "k": 86.0,
+              "d": 0.009,
+              "b": 0.02,
+              "a": 0.15,
+              "iv": 46.9,
+              "oi": 138
+            },
+            {
+              "k": 87.0,
+              "d": 0.007,
+              "b": 0.02,
+              "a": 0.08,
+              "iv": 46.3,
+              "oi": 252
+            },
+            {
+              "k": 88.0,
+              "d": 0.003,
+              "b": 0.0,
+              "a": 0.11,
+              "iv": 56.3,
+              "oi": 125
+            },
+            {
+              "k": 89.0,
+              "d": 0.001,
+              "b": 0.0,
+              "a": 0.75,
+              "iv": 89.8,
+              "oi": 23
+            }
+          ],
+          "puts": [
+            {
+              "k": 55.0,
+              "d": -0.0,
+              "b": 0.0,
+              "a": 0.32,
+              "iv": 90.5,
+              "oi": 12
+            },
+            {
+              "k": 56.0,
+              "d": -0.0,
+              "b": 0.0,
+              "a": 0.75,
+              "iv": 106.4,
+              "oi": 44
+            },
+            {
+              "k": 57.0,
+              "d": -0.0,
+              "b": 0.0,
+              "a": 0.75,
+              "iv": 100.7,
+              "oi": 13
+            },
+            {
+              "k": 58.0,
+              "d": -0.001,
+              "b": 0.0,
+              "a": 0.75,
+              "iv": 95.0,
+              "oi": 3
+            },
+            {
+              "k": 59.0,
+              "d": -0.001,
+              "b": 0.0,
+              "a": 0.95,
+              "iv": 96.5,
+              "oi": 21
+            },
+            {
+              "k": 60.0,
+              "d": -0.003,
+              "b": 0.0,
+              "a": 0.1,
+              "iv": 51.6,
+              "oi": 42
+            },
+            {
+              "k": 61.0,
+              "d": -0.006,
+              "b": 0.0,
+              "a": 0.11,
+              "iv": 48.5,
+              "oi": 1
+            },
+            {
+              "k": 62.0,
+              "d": -0.011,
+              "b": 0.0,
+              "a": 0.62,
+              "iv": 68.5,
+              "oi": 73
+            },
+            {
+              "k": 63.0,
+              "d": -0.022,
+              "b": 0.0,
+              "a": 0.15,
+              "iv": 43.2,
+              "oi": 29
+            },
+            {
+              "k": 64.0,
+              "d": -0.04,
+              "b": 0.03,
+              "a": 0.12,
+              "iv": 33.0,
+              "oi": 37
+            },
+            {
+              "k": 65.0,
+              "d": -0.063,
+              "b": 0.08,
+              "a": 0.18,
+              "iv": 33.3,
+              "oi": 220
+            },
+            {
+              "k": 66.0,
+              "d": -0.096,
+              "b": 0.09,
+              "a": 0.28,
+              "iv": 31.6,
+              "oi": 97
+            },
+            {
+              "k": 67.0,
+              "d": -0.139,
+              "b": 0.2,
+              "a": 0.41,
+              "iv": 31.9,
+              "oi": 545
+            },
+            {
+              "k": 68.0,
+              "d": -0.193,
+              "b": 0.38,
+              "a": 0.56,
+              "iv": 31.8,
+              "oi": 351
+            },
+            {
+              "k": 69.0,
+              "d": -0.26,
+              "b": 0.72,
+              "a": 0.79,
+              "iv": 33.7,
+              "oi": 281
+            },
+            {
+              "k": 70.0,
+              "d": -0.337,
+              "b": 1.05,
+              "a": 1.15,
+              "iv": 33.3,
+              "oi": 621
+            },
+            {
+              "k": 71.0,
+              "d": -0.421,
+              "b": 1.45,
+              "a": 1.55,
+              "iv": 33.2,
+              "oi": 545
+            },
+            {
+              "k": 72.0,
+              "d": -0.508,
+              "b": 1.93,
+              "a": 2.1,
+              "iv": 33.6,
+              "oi": 489
+            },
+            {
+              "k": 73.0,
+              "d": -0.593,
+              "b": 2.37,
+              "a": 2.73,
+              "iv": 32.9,
+              "oi": 514
+            },
+            {
+              "k": 74.0,
+              "d": -0.67,
+              "b": 2.66,
+              "a": 3.35,
+              "iv": 29.0,
+              "oi": 248
+            },
+            {
+              "k": 75.0,
+              "d": -0.739,
+              "b": 3.75,
+              "a": 4.15,
+              "iv": 32.9,
+              "oi": 2479
+            },
+            {
+              "k": 76.0,
+              "d": -0.796,
+              "b": 4.55,
+              "a": 4.95,
+              "iv": 32.9,
+              "oi": 142
+            },
+            {
+              "k": 77.0,
+              "d": -0.843,
+              "b": 5.45,
+              "a": 6.75,
+              "iv": 70.1,
+              "oi": 203
+            },
+            {
+              "k": 78.0,
+              "d": -0.879,
+              "b": 6.25,
+              "a": 7.15,
+              "iv": 53.0,
+              "oi": 168
+            },
+            {
+              "k": 79.0,
+              "d": -0.906,
+              "b": 7.05,
+              "a": 8.0,
+              "iv": 53.7,
+              "oi": 54
+            },
+            {
+              "k": 80.0,
+              "d": -0.931,
+              "b": 8.15,
+              "a": 8.7,
+              "iv": 49.1,
+              "oi": 82
+            },
+            {
+              "k": 81.0,
+              "d": -0.949,
+              "b": 8.95,
+              "a": 10.1,
+              "iv": 64.8,
+              "oi": 5
+            },
+            {
+              "k": 82.0,
+              "d": -0.959,
+              "b": 9.55,
+              "a": 11.1,
+              "iv": 68.9,
+              "oi": 9
+            },
+            {
+              "k": 83.0,
+              "d": -0.968,
+              "b": 10.55,
+              "a": 12.2,
+              "iv": 75.6,
+              "oi": 0
+            },
+            {
+              "k": 84.0,
+              "d": -0.98,
+              "b": 11.55,
+              "a": 13.4,
+              "iv": 84.8,
+              "oi": 3
+            },
+            {
+              "k": 85.0,
+              "d": -0.987,
+              "b": 12.55,
+              "a": 14.35,
+              "iv": 87.4,
+              "oi": 0
+            },
+            {
+              "k": 86.0,
+              "d": -0.991,
+              "b": 13.5,
+              "a": 15.15,
+              "iv": 85.4,
+              "oi": 0
+            },
+            {
+              "k": 87.0,
+              "d": -0.993,
+              "b": 14.5,
+              "a": 16.4,
+              "iv": 96.2,
+              "oi": 0
+            },
+            {
+              "k": 88.0,
+              "d": -0.997,
+              "b": 15.7,
+              "a": 17.15,
+              "iv": 92.4,
+              "oi": 0
+            },
+            {
+              "k": 89.0,
+              "d": -0.999,
+              "b": 16.5,
+              "a": 18.35,
+              "iv": 101.9,
+              "oi": 0
+            }
+          ]
+        },
+        {
+          "exp": "2026-10-02",
+          "dte": 19,
+          "calls": [
+            {
+              "k": 55.0,
+              "d": 0.999,
+              "b": 14.85,
+              "a": 18.35,
+              "iv": 115.6,
+              "oi": 0
+            },
+            {
+              "k": 60.0,
+              "d": 0.987,
+              "b": 10.9,
+              "a": 12.45,
+              "iv": 65.2,
+              "oi": 1
+            },
+            {
+              "k": 61.0,
+              "d": 0.978,
+              "b": 10.05,
+              "a": 12.1,
+              "iv": 77.6,
+              "oi": 0
+            },
+            {
+              "k": 62.0,
+              "d": 0.966,
+              "b": 9.05,
+              "a": 10.45,
+              "iv": 56.4,
+              "oi": 1
+            },
+            {
+              "k": 63.0,
+              "d": 0.948,
+              "b": 8.1,
+              "a": 10.2,
+              "iv": 69.6,
+              "oi": 0
+            },
+            {
+              "k": 64.0,
+              "d": 0.924,
+              "b": 7.15,
+              "a": 8.95,
+              "iv": 59.2,
+              "oi": 0
+            },
+            {
+              "k": 65.0,
+              "d": 0.894,
+              "b": 6.7,
+              "a": 7.55,
+              "iv": 45.5,
+              "oi": 11
+            },
+            {
+              "k": 66.0,
+              "d": 0.856,
+              "b": 5.6,
+              "a": 6.8,
+              "iv": 46.1,
+              "oi": 21
+            },
+            {
+              "k": 67.0,
+              "d": 0.811,
+              "b": 4.8,
+              "a": 6.0,
+              "iv": 45.0,
+              "oi": 112
+            },
+            {
+              "k": 68.0,
+              "d": 0.758,
+              "b": 3.95,
+              "a": 5.3,
+              "iv": 30.3,
+              "oi": 13
+            },
+            {
+              "k": 69.0,
+              "d": 0.7,
+              "b": 3.85,
+              "a": 4.25,
+              "iv": 35.5,
+              "oi": 14
+            },
+            {
+              "k": 70.0,
+              "d": 0.637,
+              "b": 3.2,
+              "a": 3.5,
+              "iv": 34.5,
+              "oi": 245
+            },
+            {
+              "k": 71.0,
+              "d": 0.571,
+              "b": 2.61,
+              "a": 2.84,
+              "iv": 33.7,
+              "oi": 83
+            },
+            {
+              "k": 72.0,
+              "d": 0.504,
+              "b": 2.19,
+              "a": 2.35,
+              "iv": 33.9,
+              "oi": 358
+            },
+            {
+              "k": 73.0,
+              "d": 0.438,
+              "b": 1.75,
+              "a": 1.91,
+              "iv": 34.4,
+              "oi": 247
+            },
+            {
+              "k": 74.0,
+              "d": 0.374,
+              "b": 1.4,
+              "a": 1.55,
+              "iv": 34.5,
+              "oi": 877
+            },
+            {
+              "k": 75.0,
+              "d": 0.315,
+              "b": 1.09,
+              "a": 1.2,
+              "iv": 34.4,
+              "oi": 235
+            },
+            {
+              "k": 76.0,
+              "d": 0.26,
+              "b": 0.81,
+              "a": 0.94,
+              "iv": 34.2,
+              "oi": 291
+            },
+            {
+              "k": 77.0,
+              "d": 0.212,
+              "b": 0.67,
+              "a": 0.76,
+              "iv": 35.1,
+              "oi": 216
+            },
+            {
+              "k": 78.0,
+              "d": 0.169,
+              "b": 0.5,
+              "a": 0.6,
+              "iv": 35.3,
+              "oi": 260
+            },
+            {
+              "k": 79.0,
+              "d": 0.134,
+              "b": 0.24,
+              "a": 1.0,
+              "iv": 39.2,
+              "oi": 300
+            },
+            {
+              "k": 80.0,
+              "d": 0.103,
+              "b": 0.3,
+              "a": 0.37,
+              "iv": 36.1,
+              "oi": 2920
+            },
+            {
+              "k": 81.0,
+              "d": 0.079,
+              "b": 0.2,
+              "a": 0.27,
+              "iv": 35.7,
+              "oi": 281
+            },
+            {
+              "k": 82.0,
+              "d": 0.059,
+              "b": 0.01,
+              "a": 0.36,
+              "iv": 32.8,
+              "oi": 153
+            },
+            {
+              "k": 83.0,
+              "d": 0.044,
+              "b": 0.1,
+              "a": 0.16,
+              "iv": 36.0,
+              "oi": 139
+            },
+            {
+              "k": 84.0,
+              "d": 0.032,
+              "b": 0.11,
+              "a": 0.19,
+              "iv": 40.7,
+              "oi": 153
+            },
+            {
+              "k": 85.0,
+              "d": 0.023,
+              "b": 0.09,
+              "a": 0.11,
+              "iv": 38.8,
+              "oi": 186
+            },
+            {
+              "k": 86.0,
+              "d": 0.016,
+              "b": 0.0,
+              "a": 0.22,
+              "iv": 47.7,
+              "oi": 358
+            },
+            {
+              "k": 87.0,
+              "d": 0.011,
+              "b": 0.04,
+              "a": 0.2,
+              "iv": 43.2,
+              "oi": 2245
+            },
+            {
+              "k": 88.0,
+              "d": 0.008,
+              "b": 0.0,
+              "a": 0.17,
+              "iv": 49.6,
+              "oi": 69
+            },
+            {
+              "k": 89.0,
+              "d": 0.005,
+              "b": 0.0,
+              "a": 0.62,
+              "iv": 70.0,
+              "oi": 42
+            }
+          ],
+          "puts": [
+            {
+              "k": 55.0,
+              "d": -0.001,
+              "b": 0.0,
+              "a": 0.15,
+              "iv": 63.3,
+              "oi": 1
+            },
+            {
+              "k": 60.0,
+              "d": -0.013,
+              "b": 0.0,
+              "a": 0.12,
+              "iv": 43.8,
+              "oi": 3
+            },
+            {
+              "k": 61.0,
+              "d": -0.022,
+              "b": 0.0,
+              "a": 0.95,
+              "iv": 69.5,
+              "oi": 0
+            },
+            {
+              "k": 62.0,
+              "d": -0.034,
+              "b": 0.0,
+              "a": 0.4,
+              "iv": 49.2,
+              "oi": 82
+            },
+            {
+              "k": 63.0,
+              "d": -0.052,
+              "b": 0.0,
+              "a": 0.43,
+              "iv": 46.2,
+              "oi": 199
+            },
+            {
+              "k": 64.0,
+              "d": -0.076,
+              "b": 0.22,
+              "a": 0.29,
+              "iv": 37.6,
+              "oi": 38
+            },
+            {
+              "k": 65.0,
+              "d": -0.106,
+              "b": 0.3,
+              "a": 0.39,
+              "iv": 35.4,
+              "oi": 666
+            },
+            {
+              "k": 66.0,
+              "d": -0.144,
+              "b": 0.43,
+              "a": 0.51,
+              "iv": 34.8,
+              "oi": 314
+            },
+            {
+              "k": 67.0,
+              "d": -0.189,
+              "b": 0.61,
+              "a": 0.69,
+              "iv": 34.6,
+              "oi": 399
+            },
+            {
+              "k": 68.0,
+              "d": -0.242,
+              "b": 0.84,
+              "a": 0.95,
+              "iv": 34.6,
+              "oi": 238
+            },
+            {
+              "k": 69.0,
+              "d": -0.3,
+              "b": 1.1,
+              "a": 1.21,
+              "iv": 34.0,
+              "oi": 213
+            },
+            {
+              "k": 70.0,
+              "d": -0.363,
+              "b": 1.48,
+              "a": 1.58,
+              "iv": 34.4,
+              "oi": 447
+            },
+            {
+              "k": 71.0,
+              "d": -0.429,
+              "b": 1.86,
+              "a": 2.03,
+              "iv": 34.0,
+              "oi": 522
+            },
+            {
+              "k": 72.0,
+              "d": -0.496,
+              "b": 2.36,
+              "a": 2.51,
+              "iv": 33.9,
+              "oi": 261
+            },
+            {
+              "k": 73.0,
+              "d": -0.562,
+              "b": 2.86,
+              "a": 3.1,
+              "iv": 33.6,
+              "oi": 596
+            },
+            {
+              "k": 74.0,
+              "d": -0.626,
+              "b": 3.4,
+              "a": 5.1,
+              "iv": 43.1,
+              "oi": 121
+            },
+            {
+              "k": 75.0,
+              "d": -0.685,
+              "b": 3.8,
+              "a": 4.5,
+              "iv": 30.8,
+              "oi": 238
+            },
+            {
+              "k": 76.0,
+              "d": -0.74,
+              "b": 4.5,
+              "a": 5.7,
+              "iv": 33.4,
+              "oi": 63
+            },
+            {
+              "k": 77.0,
+              "d": -0.788,
+              "b": 5.5,
+              "a": 6.2,
+              "iv": 32.8,
+              "oi": 25
+            },
+            {
+              "k": 78.0,
+              "d": -0.831,
+              "b": 6.3,
+              "a": 7.5,
+              "iv": 50.3,
+              "oi": 73
+            },
+            {
+              "k": 79.0,
+              "d": -0.867,
+              "b": 7.2,
+              "a": 8.4,
+              "iv": 52.4,
+              "oi": 29
+            },
+            {
+              "k": 80.0,
+              "d": -0.896,
+              "b": 8.15,
+              "a": 9.35,
+              "iv": 55.2,
+              "oi": 25
+            },
+            {
+              "k": 81.0,
+              "d": -0.921,
+              "b": 8.65,
+              "a": 10.4,
+              "iv": 59.8,
+              "oi": 1
+            },
+            {
+              "k": 82.0,
+              "d": -0.941,
+              "b": 9.6,
+              "a": 11.35,
+              "iv": 62.3,
+              "oi": 2
+            },
+            {
+              "k": 83.0,
+              "d": -0.956,
+              "b": 10.65,
+              "a": 12.5,
+              "iv": 48.5,
+              "oi": 4
+            },
+            {
+              "k": 84.0,
+              "d": -0.968,
+              "b": 11.55,
+              "a": 13.45,
+              "iv": 71.0,
+              "oi": 21
+            },
+            {
+              "k": 85.0,
+              "d": -0.977,
+              "b": 12.55,
+              "a": 14.2,
+              "iv": 68.7,
+              "oi": 5
+            },
+            {
+              "k": 86.0,
+              "d": -0.984,
+              "b": 12.3,
+              "a": 15.85,
+              "iv": 81.6,
+              "oi": 2
+            },
+            {
+              "k": 87.0,
+              "d": -0.989,
+              "b": 14.05,
+              "a": 17.35,
+              "iv": 98.5,
+              "oi": 0
+            },
+            {
+              "k": 88.0,
+              "d": -0.992,
+              "b": 14.3,
+              "a": 18.35,
+              "iv": 101.7,
+              "oi": 0
+            },
+            {
+              "k": 89.0,
+              "d": -0.995,
+              "b": 15.3,
+              "a": 19.35,
+              "iv": 104.9,
+              "oi": 0
+            }
+          ]
+        },
+        {
+          "exp": "2026-10-09",
+          "dte": 26,
+          "calls": [
+            {
+              "k": 55.0,
+              "d": 0.998,
+              "b": 14.95,
+              "a": 18.95,
+              "iv": 112.1,
+              "oi": 0
+            },
+            {
+              "k": 60.0,
+              "d": 0.974,
+              "b": 11.05,
+              "a": 12.95,
+              "iv": 67.0,
+              "oi": 1
+            },
+            {
+              "k": 61.0,
+              "d": 0.962,
+              "b": 10.05,
+              "a": 11.9,
+              "iv": 61.6,
+              "oi": 0
+            },
+            {
+              "k": 62.0,
+              "d": 0.946,
+              "b": 9.05,
+              "a": 10.8,
+              "iv": 55.3,
+              "oi": 0
+            },
+            {
+              "k": 63.0,
+              "d": 0.924,
+              "b": 8.15,
+              "a": 10.4,
+              "iv": 62.7,
+              "oi": 0
+            },
+            {
+              "k": 64.0,
+              "d": 0.898,
+              "b": 7.3,
+              "a": 9.15,
+              "iv": 53.7,
+              "oi": 0
+            },
+            {
+              "k": 65.0,
+              "d": 0.866,
+              "b": 6.6,
+              "a": 8.15,
+              "iv": 49.3,
+              "oi": 0
+            },
+            {
+              "k": 66.0,
+              "d": 0.828,
+              "b": 5.85,
+              "a": 7.15,
+              "iv": 44.8,
+              "oi": 20
+            },
+            {
+              "k": 67.0,
+              "d": 0.785,
+              "b": 5.4,
+              "a": 7.1,
+              "iv": 40.0,
+              "oi": 1
+            },
+            {
+              "k": 68.0,
+              "d": 0.737,
+              "b": 4.4,
+              "a": 5.55,
+              "iv": 32.8,
+              "oi": 3
+            },
+            {
+              "k": 69.0,
+              "d": 0.685,
+              "b": 4.0,
+              "a": 4.65,
+              "iv": 33.8,
+              "oi": 12
+            },
+            {
+              "k": 70.0,
+              "d": 0.629,
+              "b": 3.4,
+              "a": 4.0,
+              "iv": 33.8,
+              "oi": 168
+            },
+            {
+              "k": 71.0,
+              "d": 0.572,
+              "b": 3.0,
+              "a": 3.45,
+              "iv": 35.6,
+              "oi": 35
+            },
+            {
+              "k": 72.0,
+              "d": 0.513,
+              "b": 2.5,
+              "a": 2.79,
+              "iv": 33.9,
+              "oi": 205
+            },
+            {
+              "k": 73.0,
+              "d": 0.456,
+              "b": 2.05,
+              "a": 2.45,
+              "iv": 34.6,
+              "oi": 49
+            },
+            {
+              "k": 74.0,
+              "d": 0.399,
+              "b": 1.55,
+              "a": 2.3,
+              "iv": 35.4,
+              "oi": 38
+            },
+            {
+              "k": 75.0,
+              "d": 0.346,
+              "b": 1.41,
+              "a": 1.59,
+              "iv": 34.3,
+              "oi": 139
+            },
+            {
+              "k": 76.0,
+              "d": 0.295,
+              "b": 0.99,
+              "a": 1.31,
+              "iv": 33.3,
+              "oi": 87
+            },
+            {
+              "k": 77.0,
+              "d": 0.25,
+              "b": 0.82,
+              "a": 1.0,
+              "iv": 32.6,
+              "oi": 101
+            },
+            {
+              "k": 78.0,
+              "d": 0.208,
+              "b": 0.62,
+              "a": 0.86,
+              "iv": 33.7,
+              "oi": 145
+            },
+            {
+              "k": 79.0,
+              "d": 0.171,
+              "b": 0.6,
+              "a": 0.7,
+              "iv": 35.1,
+              "oi": 362
+            },
+            {
+              "k": 80.0,
+              "d": 0.14,
+              "b": 0.25,
+              "a": 0.6,
+              "iv": 32.9,
+              "oi": 273
+            },
+            {
+              "k": 81.0,
+              "d": 0.112,
+              "b": 0.21,
+              "a": 0.55,
+              "iv": 34.3,
+              "oi": 18
+            },
+            {
+              "k": 82.0,
+              "d": 0.089,
+              "b": 0.17,
+              "a": 1.13,
+              "iv": 41.8,
+              "oi": 27
+            },
+            {
+              "k": 83.0,
+              "d": 0.07,
+              "b": 0.2,
+              "a": 0.28,
+              "iv": 35.4,
+              "oi": 49
+            },
+            {
+              "k": 84.0,
+              "d": 0.054,
+              "b": 0.13,
+              "a": 0.3,
+              "iv": 36.4,
+              "oi": 68
+            },
+            {
+              "k": 85.0,
+              "d": 0.042,
+              "b": 0.12,
+              "a": 0.21,
+              "iv": 35.4,
+              "oi": 79
+            },
+            {
+              "k": 86.0,
+              "d": 0.032,
+              "b": 0.05,
+              "a": 0.25,
+              "iv": 36.9,
+              "oi": 35
+            },
+            {
+              "k": 87.0,
+              "d": 0.024,
+              "b": 0.0,
+              "a": 0.18,
+              "iv": 41.4,
+              "oi": 2116
+            },
+            {
+              "k": 88.0,
+              "d": 0.018,
+              "b": 0.0,
+              "a": 1.0,
+              "iv": 66.3,
+              "oi": 4
+            },
+            {
+              "k": 89.0,
+              "d": 0.013,
+              "b": 0.0,
+              "a": 1.0,
+              "iv": 68.7,
+              "oi": 12
+            }
+          ],
+          "puts": [
+            {
+              "k": 55.0,
+              "d": -0.002,
+              "b": 0.0,
+              "a": 0.09,
+              "iv": 50.4,
+              "oi": 0
+            },
+            {
+              "k": 60.0,
+              "d": -0.026,
+              "b": 0.0,
+              "a": 0.22,
+              "iv": 43.2,
+              "oi": 98
+            },
+            {
+              "k": 61.0,
+              "d": -0.038,
+              "b": 0.07,
+              "a": 0.24,
+              "iv": 36.3,
+              "oi": 0
+            },
+            {
+              "k": 62.0,
+              "d": -0.054,
+              "b": 0.12,
+              "a": 0.4,
+              "iv": 37.6,
+              "oi": 13
+            },
+            {
+              "k": 63.0,
+              "d": -0.076,
+              "b": 0.0,
+              "a": 0.57,
+              "iv": 43.9,
+              "oi": 6
+            },
+            {
+              "k": 64.0,
+              "d": -0.102,
+              "b": 0.23,
+              "a": 0.47,
+              "iv": 34.3,
+              "oi": 34
+            },
+            {
+              "k": 65.0,
+              "d": -0.134,
+              "b": 0.43,
+              "a": 0.64,
+              "iv": 35.5,
+              "oi": 249
+            },
+            {
+              "k": 66.0,
+              "d": -0.172,
+              "b": 0.49,
+              "a": 0.81,
+              "iv": 34.1,
+              "oi": 88
+            },
+            {
+              "k": 67.0,
+              "d": -0.215,
+              "b": 0.7,
+              "a": 1.07,
+              "iv": 34.4,
+              "oi": 223
+            },
+            {
+              "k": 68.0,
+              "d": -0.263,
+              "b": 1.01,
+              "a": 1.2,
+              "iv": 33.7,
+              "oi": 193
+            },
+            {
+              "k": 69.0,
+              "d": -0.315,
+              "b": 1.36,
+              "a": 1.48,
+              "iv": 34.3,
+              "oi": 358
+            },
+            {
+              "k": 70.0,
+              "d": -0.371,
+              "b": 1.69,
+              "a": 2.09,
+              "iv": 34.8,
+              "oi": 405
+            },
+            {
+              "k": 71.0,
+              "d": -0.428,
+              "b": 2.08,
+              "a": 2.37,
+              "iv": 33.5,
+              "oi": 135
+            },
+            {
+              "k": 72.0,
+              "d": -0.486,
+              "b": 2.6,
+              "a": 2.91,
+              "iv": 33.9,
+              "oi": 164
+            },
+            {
+              "k": 73.0,
+              "d": -0.544,
+              "b": 2.9,
+              "a": 3.65,
+              "iv": 33.5,
+              "oi": 81
+            },
+            {
+              "k": 74.0,
+              "d": -0.601,
+              "b": 3.65,
+              "a": 4.55,
+              "iv": 36.2,
+              "oi": 32
+            },
+            {
+              "k": 75.0,
+              "d": -0.654,
+              "b": 3.3,
+              "a": 5.95,
+              "iv": 59.3,
+              "oi": 142
+            },
+            {
+              "k": 76.0,
+              "d": -0.705,
+              "b": 4.45,
+              "a": 6.0,
+              "iv": 31.3,
+              "oi": 29
+            },
+            {
+              "k": 77.0,
+              "d": -0.75,
+              "b": 4.7,
+              "a": 7.35,
+              "iv": 52.9,
+              "oi": 2
+            },
+            {
+              "k": 78.0,
+              "d": -0.792,
+              "b": 6.4,
+              "a": 7.8,
+              "iv": 35.8,
+              "oi": 9
+            },
+            {
+              "k": 79.0,
+              "d": -0.829,
+              "b": 7.3,
+              "a": 8.55,
+              "iv": 48.7,
+              "oi": 41
+            },
+            {
+              "k": 80.0,
+              "d": -0.861,
+              "b": 8.2,
+              "a": 9.55,
+              "iv": 52.1,
+              "oi": 13
+            },
+            {
+              "k": 81.0,
+              "d": -0.888,
+              "b": 8.8,
+              "a": 10.65,
+              "iv": 56.9,
+              "oi": 0
+            },
+            {
+              "k": 82.0,
+              "d": -0.911,
+              "b": 9.95,
+              "a": 11.45,
+              "iv": 56.8,
+              "oi": 0
+            },
+            {
+              "k": 83.0,
+              "d": -0.93,
+              "b": 10.85,
+              "a": 12.45,
+              "iv": 59.8,
+              "oi": 0
+            },
+            {
+              "k": 84.0,
+              "d": -0.946,
+              "b": 11.65,
+              "a": 13.4,
+              "iv": 61.8,
+              "oi": 0
+            },
+            {
+              "k": 85.0,
+              "d": -0.958,
+              "b": 12.55,
+              "a": 14.4,
+              "iv": 64.5,
+              "oi": 0
+            },
+            {
+              "k": 86.0,
+              "d": -0.968,
+              "b": 13.3,
+              "a": 15.35,
+              "iv": 66.4,
+              "oi": 0
+            },
+            {
+              "k": 87.0,
+              "d": -0.976,
+              "b": 13.5,
+              "a": 16.85,
+              "iv": 78.2,
+              "oi": 0
+            },
+            {
+              "k": 88.0,
+              "d": -0.982,
+              "b": 14.3,
+              "a": 18.35,
+              "iv": 89.2,
+              "oi": 0
+            },
+            {
+              "k": 89.0,
+              "d": -0.987,
+              "b": 15.3,
+              "a": 19.4,
+              "iv": 92.0,
+              "oi": 0
+            }
+          ]
+        },
+        {
+          "exp": "2026-10-16",
+          "dte": 33,
+          "calls": [
+            {
+              "k": 55.0,
+              "d": 0.994,
+              "b": 16.45,
+              "a": 18.25,
+              "iv": 101.3,
+              "oi": 22
+            },
+            {
+              "k": 60.0,
+              "d": 0.958,
+              "b": 11.8,
+              "a": 13.4,
+              "iv": 67.5,
+              "oi": 180
+            },
+            {
+              "k": 62.5,
+              "d": 0.914,
+              "b": 9.05,
+              "a": 10.35,
+              "iv": 47.6,
+              "oi": 79
+            },
+            {
+              "k": 65.0,
+              "d": 0.843,
+              "b": 7.35,
+              "a": 8.8,
+              "iv": 41.4,
+              "oi": 226
+            },
+            {
+              "k": 67.5,
+              "d": 0.743,
+              "b": 5.5,
+              "a": 6.1,
+              "iv": 35.7,
+              "oi": 333
+            },
+            {
+              "k": 70.0,
+              "d": 0.623,
+              "b": 4.0,
+              "a": 4.2,
+              "iv": 34.5,
+              "oi": 3688
+            },
+            {
+              "k": 72.5,
+              "d": 0.494,
+              "b": 2.72,
+              "a": 2.84,
+              "iv": 34.1,
+              "oi": 1351
+            },
+            {
+              "k": 75.0,
+              "d": 0.369,
+              "b": 1.76,
+              "a": 1.85,
+              "iv": 33.7,
+              "oi": 5812
+            },
+            {
+              "k": 77.5,
+              "d": 0.26,
+              "b": 1.09,
+              "a": 1.15,
+              "iv": 34.1,
+              "oi": 3509
+            },
+            {
+              "k": 80.0,
+              "d": 0.174,
+              "b": 0.68,
+              "a": 0.73,
+              "iv": 34.6,
+              "oi": 8293
+            },
+            {
+              "k": 82.5,
+              "d": 0.113,
+              "b": 0.41,
+              "a": 0.44,
+              "iv": 35.3,
+              "oi": 2406
+            },
+            {
+              "k": 85.0,
+              "d": 0.073,
+              "b": 0.26,
+              "a": 0.29,
+              "iv": 36.5,
+              "oi": 15007
+            },
+            {
+              "k": 87.5,
+              "d": 0.049,
+              "b": 0.05,
+              "a": 0.18,
+              "iv": 34.1,
+              "oi": 676
+            }
+          ],
+          "puts": [
+            {
+              "k": 55.0,
+              "d": -0.006,
+              "b": 0.01,
+              "a": 0.05,
+              "iv": 38.1,
+              "oi": 532
+            },
+            {
+              "k": 60.0,
+              "d": -0.042,
+              "b": 0.12,
+              "a": 0.19,
+              "iv": 35.8,
+              "oi": 4206
+            },
+            {
+              "k": 62.5,
+              "d": -0.086,
+              "b": 0.34,
+              "a": 0.38,
+              "iv": 35.9,
+              "oi": 1425
+            },
+            {
+              "k": 65.0,
+              "d": -0.157,
+              "b": 0.68,
+              "a": 0.72,
+              "iv": 35.2,
+              "oi": 22329
+            },
+            {
+              "k": 67.5,
+              "d": -0.257,
+              "b": 1.23,
+              "a": 1.29,
+              "iv": 34.5,
+              "oi": 6156
+            },
+            {
+              "k": 70.0,
+              "d": -0.377,
+              "b": 2.08,
+              "a": 2.17,
+              "iv": 34.3,
+              "oi": 5869
+            },
+            {
+              "k": 72.5,
+              "d": -0.506,
+              "b": 3.2,
+              "a": 3.4,
+              "iv": 33.9,
+              "oi": 10630
+            },
+            {
+              "k": 75.0,
+              "d": -0.631,
+              "b": 4.75,
+              "a": 4.95,
+              "iv": 34.3,
+              "oi": 3999
+            },
+            {
+              "k": 77.5,
+              "d": -0.74,
+              "b": 6.55,
+              "a": 6.9,
+              "iv": 34.6,
+              "oi": 1275
+            },
+            {
+              "k": 80.0,
+              "d": -0.826,
+              "b": 7.8,
+              "a": 9.35,
+              "iv": 44.3,
+              "oi": 1186
+            },
+            {
+              "k": 82.5,
+              "d": -0.887,
+              "b": 10.75,
+              "a": 11.8,
+              "iv": 50.5,
+              "oi": 341
+            },
+            {
+              "k": 85.0,
+              "d": -0.927,
+              "b": 13.0,
+              "a": 14.2,
+              "iv": 55.2,
+              "oi": 49
+            },
+            {
+              "k": 87.5,
+              "d": -0.951,
+              "b": 15.0,
+              "a": 16.8,
+              "iv": 62.9,
+              "oi": 21
+            }
+          ]
+        },
+        {
+          "exp": "2026-10-23",
+          "dte": 40,
+          "calls": [
+            {
+              "k": 55.0,
+              "d": 0.992,
+              "b": 15.6,
+              "a": 19.15,
+              "iv": 92.0,
+              "oi": 0
+            },
+            {
+              "k": 60.0,
+              "d": 0.952,
+              "b": 11.45,
+              "a": 13.2,
+              "iv": 55.6,
+              "oi": 1
+            },
+            {
+              "k": 61.0,
+              "d": 0.937,
+              "b": 10.35,
+              "a": 12.05,
+              "iv": 49.4,
+              "oi": 0
+            },
+            {
+              "k": 62.0,
+              "d": 0.916,
+              "b": 9.65,
+              "a": 11.1,
+              "iv": 46.8,
+              "oi": 0
+            },
+            {
+              "k": 63.0,
+              "d": 0.893,
+              "b": 8.6,
+              "a": 10.1,
+              "iv": 43.4,
+              "oi": 0
+            },
+            {
+              "k": 64.0,
+              "d": 0.865,
+              "b": 7.95,
+              "a": 9.95,
+              "iv": 52.5,
+              "oi": 0
+            },
+            {
+              "k": 65.0,
+              "d": 0.834,
+              "b": 7.5,
+              "a": 8.7,
+              "iv": 35.8,
+              "oi": 40
+            },
+            {
+              "k": 66.0,
+              "d": 0.798,
+              "b": 6.7,
+              "a": 7.65,
+              "iv": 34.0,
+              "oi": 5
+            },
+            {
+              "k": 67.0,
+              "d": 0.76,
+              "b": 5.8,
+              "a": 7.75,
+              "iv": 37.5,
+              "oi": 2
+            },
+            {
+              "k": 68.0,
+              "d": 0.718,
+              "b": 4.85,
+              "a": 6.1,
+              "iv": 30.8,
+              "oi": 1
+            },
+            {
+              "k": 69.0,
+              "d": 0.674,
+              "b": 4.55,
+              "a": 7.05,
+              "iv": 42.1,
+              "oi": 1
+            },
+            {
+              "k": 70.0,
+              "d": 0.628,
+              "b": 4.0,
+              "a": 4.8,
+              "iv": 33.4,
+              "oi": 10
+            },
+            {
+              "k": 71.0,
+              "d": 0.581,
+              "b": 3.8,
+              "a": 4.2,
+              "iv": 35.0,
+              "oi": 26
+            },
+            {
+              "k": 72.0,
+              "d": 0.532,
+              "b": 3.05,
+              "a": 4.5,
+              "iv": 37.9,
+              "oi": 7
+            },
+            {
+              "k": 73.0,
+              "d": 0.484,
+              "b": 2.63,
+              "a": 3.2,
+              "iv": 33.8,
+              "oi": 95
+            },
+            {
+              "k": 74.0,
+              "d": 0.437,
+              "b": 2.26,
+              "a": 2.75,
+              "iv": 33.8,
+              "oi": 17
+            },
+            {
+              "k": 75.0,
+              "d": 0.392,
+              "b": 2.0,
+              "a": 2.26,
+              "iv": 33.8,
+              "oi": 528
+            },
+            {
+              "k": 76.0,
+              "d": 0.348,
+              "b": 1.54,
+              "a": 2.15,
+              "iv": 34.2,
+              "oi": 59
+            },
+            {
+              "k": 77.0,
+              "d": 0.308,
+              "b": 1.24,
+              "a": 1.73,
+              "iv": 33.3,
+              "oi": 16
+            },
+            {
+              "k": 78.0,
+              "d": 0.27,
+              "b": 0.96,
+              "a": 2.38,
+              "iv": 38.2,
+              "oi": 73
+            },
+            {
+              "k": 79.0,
+              "d": 0.236,
+              "b": 0.63,
+              "a": 1.9,
+              "iv": 35.9,
+              "oi": 25
+            },
+            {
+              "k": 80.0,
+              "d": 0.205,
+              "b": 0.85,
+              "a": 1.0,
+              "iv": 34.3,
+              "oi": 660
+            },
+            {
+              "k": 81.0,
+              "d": 0.177,
+              "b": 0.51,
+              "a": 1.0,
+              "iv": 34.1,
+              "oi": 42
+            },
+            {
+              "k": 82.0,
+              "d": 0.153,
+              "b": 0.42,
+              "a": 0.8,
+              "iv": 34.0,
+              "oi": 28
+            },
+            {
+              "k": 83.0,
+              "d": 0.132,
+              "b": 0.28,
+              "a": 0.67,
+              "iv": 33.4,
+              "oi": 28
+            },
+            {
+              "k": 84.0,
+              "d": 0.11,
+              "b": 0.29,
+              "a": 1.08,
+              "iv": 38.9,
+              "oi": 21
+            },
+            {
+              "k": 85.0,
+              "d": 0.095,
+              "b": 0.35,
+              "a": 0.45,
+              "iv": 36.0,
+              "oi": 142
+            },
+            {
+              "k": 86.0,
+              "d": 0.081,
+              "b": 0.25,
+              "a": 0.42,
+              "iv": 36.1,
+              "oi": 7
+            },
+            {
+              "k": 87.0,
+              "d": 0.062,
+              "b": 0.0,
+              "a": 0.93,
+              "iv": 50.2,
+              "oi": 4
+            },
+            {
+              "k": 88.0,
+              "d": 0.051,
+              "b": 0.0,
+              "a": 1.07,
+              "iv": 54.6,
+              "oi": 71
+            },
+            {
+              "k": 89.0,
+              "d": 0.047,
+              "b": 0.01,
+              "a": 0.94,
+              "iv": 39.2,
+              "oi": 9
+            }
+          ],
+          "puts": [
+            {
+              "k": 55.0,
+              "d": -0.008,
+              "b": 0.0,
+              "a": 1.24,
+              "iv": 76.8,
+              "oi": 10
+            },
+            {
+              "k": 60.0,
+              "d": -0.048,
+              "b": 0.17,
+              "a": 0.37,
+              "iv": 37.2,
+              "oi": 81
+            },
+            {
+              "k": 61.0,
+              "d": -0.063,
+              "b": 0.01,
+              "a": 0.4,
+              "iv": 29.3,
+              "oi": 1
+            },
+            {
+              "k": 62.0,
+              "d": -0.084,
+              "b": 0.28,
+              "a": 0.57,
+              "iv": 36.0,
+              "oi": 1
+            },
+            {
+              "k": 63.0,
+              "d": -0.107,
+              "b": 0.1,
+              "a": 0.81,
+              "iv": 32.3,
+              "oi": 0
+            },
+            {
+              "k": 64.0,
+              "d": -0.135,
+              "b": 0.27,
+              "a": 0.8,
+              "iv": 32.2,
+              "oi": 7
+            },
+            {
+              "k": 65.0,
+              "d": -0.167,
+              "b": 0.59,
+              "a": 0.95,
+              "iv": 33.9,
+              "oi": 319
+            },
+            {
+              "k": 66.0,
+              "d": -0.202,
+              "b": 0.9,
+              "a": 1.19,
+              "iv": 34.7,
+              "oi": 165
+            },
+            {
+              "k": 67.0,
+              "d": -0.24,
+              "b": 1.14,
+              "a": 1.55,
+              "iv": 35.1,
+              "oi": 211
+            },
+            {
+              "k": 68.0,
+              "d": -0.282,
+              "b": 1.36,
+              "a": 1.82,
+              "iv": 34.4,
+              "oi": 83
+            },
+            {
+              "k": 69.0,
+              "d": -0.326,
+              "b": 1.51,
+              "a": 2.3,
+              "iv": 34.0,
+              "oi": 93
+            },
+            {
+              "k": 70.0,
+              "d": -0.372,
+              "b": 2.15,
+              "a": 2.5,
+              "iv": 34.3,
+              "oi": 138
+            },
+            {
+              "k": 71.0,
+              "d": -0.419,
+              "b": 2.5,
+              "a": 3.2,
+              "iv": 35.1,
+              "oi": 58
+            },
+            {
+              "k": 72.0,
+              "d": -0.468,
+              "b": 3.05,
+              "a": 3.45,
+              "iv": 34.1,
+              "oi": 20
+            },
+            {
+              "k": 73.0,
+              "d": -0.515,
+              "b": 3.25,
+              "a": 4.35,
+              "iv": 34.2,
+              "oi": 25
+            },
+            {
+              "k": 74.0,
+              "d": -0.563,
+              "b": 3.15,
+              "a": 4.75,
+              "iv": 29.3,
+              "oi": 7
+            },
+            {
+              "k": 75.0,
+              "d": -0.608,
+              "b": 4.85,
+              "a": 5.8,
+              "iv": 37.4,
+              "oi": 19
+            },
+            {
+              "k": 76.0,
+              "d": -0.652,
+              "b": 4.75,
+              "a": 6.7,
+              "iv": 33.8,
+              "oi": 4
+            },
+            {
+              "k": 77.0,
+              "d": -0.692,
+              "b": 6.15,
+              "a": 7.45,
+              "iv": 38.3,
+              "oi": 2
+            },
+            {
+              "k": 78.0,
+              "d": -0.73,
+              "b": 6.9,
+              "a": 8.65,
+              "iv": 40.7,
+              "oi": 1
+            },
+            {
+              "k": 79.0,
+              "d": -0.764,
+              "b": 6.8,
+              "a": 9.35,
+              "iv": 51.4,
+              "oi": 0
+            },
+            {
+              "k": 80.0,
+              "d": -0.795,
+              "b": 8.5,
+              "a": 9.75,
+              "iv": 37.6,
+              "oi": 20
+            },
+            {
+              "k": 81.0,
+              "d": -0.823,
+              "b": 8.95,
+              "a": 10.65,
+              "iv": 48.8,
+              "oi": 0
+            },
+            {
+              "k": 82.0,
+              "d": -0.847,
+              "b": 10.2,
+              "a": 11.65,
+              "iv": 51.4,
+              "oi": 0
+            },
+            {
+              "k": 83.0,
+              "d": -0.868,
+              "b": 11.05,
+              "a": 12.5,
+              "iv": 52.0,
+              "oi": 0
+            },
+            {
+              "k": 84.0,
+              "d": -0.89,
+              "b": 11.9,
+              "a": 13.5,
+              "iv": 54.5,
+              "oi": 0
+            },
+            {
+              "k": 85.0,
+              "d": -0.905,
+              "b": 12.8,
+              "a": 14.3,
+              "iv": 53.9,
+              "oi": 0
+            },
+            {
+              "k": 86.0,
+              "d": -0.919,
+              "b": 13.55,
+              "a": 15.6,
+              "iv": 60.7,
+              "oi": 0
+            },
+            {
+              "k": 87.0,
+              "d": -0.938,
+              "b": 14.55,
+              "a": 16.65,
+              "iv": 63.7,
+              "oi": 0
+            },
+            {
+              "k": 88.0,
+              "d": -0.949,
+              "b": 15.5,
+              "a": 17.65,
+              "iv": 66.0,
+              "oi": 0
+            },
+            {
+              "k": 89.0,
+              "d": -0.953,
+              "b": 15.7,
+              "a": 19.05,
+              "iv": 73.8,
+              "oi": 0
+            }
+          ]
+        },
+        {
+          "exp": "2026-10-30",
+          "dte": 47,
+          "calls": [
+            {
+              "k": 55.0,
+              "d": 0.979,
+              "b": 15.15,
+              "a": 19.2,
+              "iv": 84.8,
+              "oi": 0
+            },
+            {
+              "k": 60.0,
+              "d": 0.917,
+              "b": 12.0,
+              "a": 13.15,
+              "iv": 51.0,
+              "oi": 0
+            },
+            {
+              "k": 61.0,
+              "d": 0.897,
+              "b": 10.55,
+              "a": 12.45,
+              "iv": 51.7,
+              "oi": 0
+            },
+            {
+              "k": 62.0,
+              "d": 0.878,
+              "b": 9.8,
+              "a": 11.55,
+              "iv": 49.9,
+              "oi": 0
+            },
+            {
+              "k": 63.0,
+              "d": 0.854,
+              "b": 8.85,
+              "a": 11.4,
+              "iv": 57.8,
+              "oi": 0
+            },
+            {
+              "k": 64.0,
+              "d": 0.828,
+              "b": 8.05,
+              "a": 10.55,
+              "iv": 55.8,
+              "oi": 0
+            },
+            {
+              "k": 65.0,
+              "d": 0.799,
+              "b": 7.35,
+              "a": 9.85,
+              "iv": 37.6,
+              "oi": 0
+            },
+            {
+              "k": 66.0,
+              "d": 0.768,
+              "b": 6.55,
+              "a": 8.25,
+              "iv": 33.2,
+              "oi": 0
+            },
+            {
+              "k": 67.0,
+              "d": 0.734,
+              "b": 6.0,
+              "a": 7.65,
+              "iv": 35.7,
+              "oi": 0
+            },
+            {
+              "k": 68.0,
+              "d": 0.698,
+              "b": 5.45,
+              "a": 6.6,
+              "iv": 34.5,
+              "oi": 0
+            },
+            {
+              "k": 69.0,
+              "d": 0.66,
+              "b": 4.8,
+              "a": 6.05,
+              "iv": 34.9,
+              "oi": 52
+            },
+            {
+              "k": 70.0,
+              "d": 0.62,
+              "b": 4.3,
+              "a": 5.3,
+              "iv": 34.6,
+              "oi": 14
+            },
+            {
+              "k": 71.0,
+              "d": 0.579,
+              "b": 3.65,
+              "a": 4.8,
+              "iv": 34.4,
+              "oi": 0
+            },
+            {
+              "k": 72.0,
+              "d": 0.536,
+              "b": 3.15,
+              "a": 4.15,
+              "iv": 33.7,
+              "oi": 3
+            },
+            {
+              "k": 73.0,
+              "d": 0.493,
+              "b": 2.98,
+              "a": 3.8,
+              "iv": 35.6,
+              "oi": 40
+            },
+            {
+              "k": 74.0,
+              "d": 0.45,
+              "b": 2.37,
+              "a": 3.05,
+              "iv": 33.1,
+              "oi": 5
+            },
+            {
+              "k": 75.0,
+              "d": 0.406,
+              "b": 2.41,
+              "a": 2.9,
+              "iv": 36.2,
+              "oi": 58
+            },
+            {
+              "k": 76.0,
+              "d": 0.364,
+              "b": 1.59,
+              "a": 2.56,
+              "iv": 33.8,
+              "oi": 0
+            },
+            {
+              "k": 77.0,
+              "d": 0.323,
+              "b": 1.37,
+              "a": 2.34,
+              "iv": 34.6,
+              "oi": 1
+            },
+            {
+              "k": 78.0,
+              "d": 0.285,
+              "b": 1.06,
+              "a": 2.36,
+              "iv": 35.8,
+              "oi": 0
+            },
+            {
+              "k": 79.0,
+              "d": 0.246,
+              "b": 0.38,
+              "a": 1.85,
+              "iv": 30.9,
+              "oi": 0
+            },
+            {
+              "k": 80.0,
+              "d": 0.214,
+              "b": 0.91,
+              "a": 1.29,
+              "iv": 35.3,
+              "oi": 45
+            },
+            {
+              "k": 81.0,
+              "d": 0.184,
+              "b": 0.79,
+              "a": 1.53,
+              "iv": 37.0,
+              "oi": 0
+            },
+            {
+              "k": 82.0,
+              "d": 0.155,
+              "b": 0.69,
+              "a": 1.1,
+              "iv": 35.8,
+              "oi": 4
+            },
+            {
+              "k": 83.0,
+              "d": 0.128,
+              "b": 0.13,
+              "a": 1.06,
+              "iv": 31.6,
+              "oi": 0
+            },
+            {
+              "k": 84.0,
+              "d": 0.106,
+              "b": 0.09,
+              "a": 0.98,
+              "iv": 32.1,
+              "oi": 0
+            },
+            {
+              "k": 85.0,
+              "d": 0.089,
+              "b": 0.35,
+              "a": 0.6,
+              "iv": 34.7,
+              "oi": 0
+            }
+          ],
+          "puts": [
+            {
+              "k": 55.0,
+              "d": -0.021,
+              "b": 0.0,
+              "a": 2.19,
+              "iv": 87.5,
+              "oi": 0
+            },
+            {
+              "k": 60.0,
+              "d": -0.083,
+              "b": 0.22,
+              "a": 0.45,
+              "iv": 36.3,
+              "oi": 0
+            },
+            {
+              "k": 61.0,
+              "d": -0.103,
+              "b": 0.03,
+              "a": 0.72,
+              "iv": 32.0,
+              "oi": 0
+            },
+            {
+              "k": 62.0,
+              "d": -0.122,
+              "b": 0.55,
+              "a": 0.7,
+              "iv": 37.7,
+              "oi": 0
+            },
+            {
+              "k": 63.0,
+              "d": -0.146,
+              "b": 0.28,
+              "a": 1.32,
+              "iv": 36.7,
+              "oi": 5
+            },
+            {
+              "k": 64.0,
+              "d": -0.172,
+              "b": 0.77,
+              "a": 1.33,
+              "iv": 38.5,
+              "oi": 0
+            },
+            {
+              "k": 65.0,
+              "d": -0.201,
+              "b": 0.99,
+              "a": 1.25,
+              "iv": 36.5,
+              "oi": 22
+            },
+            {
+              "k": 66.0,
+              "d": -0.232,
+              "b": 1.22,
+              "a": 1.69,
+              "iv": 37.4,
+              "oi": 0
+            },
+            {
+              "k": 67.0,
+              "d": -0.266,
+              "b": 1.49,
+              "a": 1.8,
+              "iv": 36.2,
+              "oi": 2
+            },
+            {
+              "k": 68.0,
+              "d": -0.302,
+              "b": 1.89,
+              "a": 2.28,
+              "iv": 37.4,
+              "oi": 0
+            },
+            {
+              "k": 69.0,
+              "d": -0.34,
+              "b": 2.16,
+              "a": 2.74,
+              "iv": 37.3,
+              "oi": 3
+            },
+            {
+              "k": 70.0,
+              "d": -0.38,
+              "b": 2.58,
+              "a": 3.0,
+              "iv": 36.5,
+              "oi": 3
+            },
+            {
+              "k": 71.0,
+              "d": -0.421,
+              "b": 2.55,
+              "a": 3.5,
+              "iv": 34.4,
+              "oi": 2
+            },
+            {
+              "k": 72.0,
+              "d": -0.464,
+              "b": 3.1,
+              "a": 4.05,
+              "iv": 34.9,
+              "oi": 2
+            },
+            {
+              "k": 73.0,
+              "d": -0.507,
+              "b": 3.6,
+              "a": 5.0,
+              "iv": 36.6,
+              "oi": 1
+            },
+            {
+              "k": 74.0,
+              "d": -0.55,
+              "b": 3.35,
+              "a": 5.3,
+              "iv": 31.1,
+              "oi": 0
+            },
+            {
+              "k": 75.0,
+              "d": -0.594,
+              "b": 3.45,
+              "a": 5.95,
+              "iv": 27.6,
+              "oi": 1
+            },
+            {
+              "k": 76.0,
+              "d": -0.636,
+              "b": 5.05,
+              "a": 7.1,
+              "iv": 35.3,
+              "oi": 0
+            },
+            {
+              "k": 77.0,
+              "d": -0.677,
+              "b": 5.45,
+              "a": 7.9,
+              "iv": 33.1,
+              "oi": 0
+            },
+            {
+              "k": 78.0,
+              "d": -0.715,
+              "b": 6.85,
+              "a": 8.4,
+              "iv": 36.4,
+              "oi": 1
+            },
+            {
+              "k": 79.0,
+              "d": -0.754,
+              "b": 7.4,
+              "a": 9.55,
+              "iv": 36.0,
+              "oi": 0
+            },
+            {
+              "k": 80.0,
+              "d": -0.786,
+              "b": 7.2,
+              "a": 10.9,
+              "iv": 56.5,
+              "oi": 0
+            },
+            {
+              "k": 81.0,
+              "d": -0.816,
+              "b": 9.15,
+              "a": 10.85,
+              "iv": 47.8,
+              "oi": 0
+            },
+            {
+              "k": 82.0,
+              "d": -0.845,
+              "b": 9.2,
+              "a": 11.85,
+              "iv": 50.3,
+              "oi": 0
+            },
+            {
+              "k": 83.0,
+              "d": -0.872,
+              "b": 10.15,
+              "a": 12.8,
+              "iv": 52.2,
+              "oi": 0
+            },
+            {
+              "k": 84.0,
+              "d": -0.894,
+              "b": 11.05,
+              "a": 13.75,
+              "iv": 54.0,
+              "oi": 0
+            },
+            {
+              "k": 85.0,
+              "d": -0.911,
+              "b": 12.15,
+              "a": 15.2,
+              "iv": 61.7,
+              "oi": 0
+            }
+          ]
+        },
+        {
+          "exp": "2026-11-20",
+          "dte": 68,
+          "calls": [
+            {
+              "k": 55.0,
+              "d": 0.946,
+              "b": 17.0,
+              "a": 18.45,
+              "iv": 61.0,
+              "oi": 114
+            },
+            {
+              "k": 60.0,
+              "d": 0.871,
+              "b": 11.85,
+              "a": 13.3,
+              "iv": 57.5,
+              "oi": 426
+            },
+            {
+              "k": 62.5,
+              "d": 0.818,
+              "b": 11.0,
+              "a": 11.5,
+              "iv": 42.4,
+              "oi": 281
+            },
+            {
+              "k": 65.0,
+              "d": 0.755,
+              "b": 8.0,
+              "a": 9.9,
+              "iv": 36.5,
+              "oi": 412
+            },
+            {
+              "k": 67.5,
+              "d": 0.685,
+              "b": 7.35,
+              "a": 7.9,
+              "iv": 40.3,
+              "oi": 211
+            },
+            {
+              "k": 70.0,
+              "d": 0.608,
+              "b": 6.0,
+              "a": 6.2,
+              "iv": 39.5,
+              "oi": 1468
+            },
+            {
+              "k": 72.5,
+              "d": 0.528,
+              "b": 4.75,
+              "a": 4.9,
+              "iv": 39.2,
+              "oi": 2587
+            },
+            {
+              "k": 75.0,
+              "d": 0.447,
+              "b": 3.7,
+              "a": 3.85,
+              "iv": 39.2,
+              "oi": 3529
+            },
+            {
+              "k": 77.5,
+              "d": 0.37,
+              "b": 2.83,
+              "a": 2.98,
+              "iv": 39.1,
+              "oi": 1655
+            },
+            {
+              "k": 80.0,
+              "d": 0.301,
+              "b": 2.17,
+              "a": 2.29,
+              "iv": 39.3,
+              "oi": 3669
+            },
+            {
+              "k": 82.5,
+              "d": 0.243,
+              "b": 1.54,
+              "a": 1.73,
+              "iv": 38.9,
+              "oi": 2019
+            },
+            {
+              "k": 85.0,
+              "d": 0.194,
+              "b": 1.27,
+              "a": 1.29,
+              "iv": 39.6,
+              "oi": 3695
+            },
+            {
+              "k": 87.5,
+              "d": 0.156,
+              "b": 0.85,
+              "a": 1.01,
+              "iv": 39.5,
+              "oi": 3076
+            }
+          ],
+          "puts": [
+            {
+              "k": 55.0,
+              "d": -0.054,
+              "b": 0.29,
+              "a": 0.44,
+              "iv": 42.4,
+              "oi": 1116
+            },
+            {
+              "k": 60.0,
+              "d": -0.129,
+              "b": 0.72,
+              "a": 0.98,
+              "iv": 40.0,
+              "oi": 6046
+            },
+            {
+              "k": 62.5,
+              "d": -0.182,
+              "b": 1.29,
+              "a": 1.4,
+              "iv": 40.1,
+              "oi": 2711
+            },
+            {
+              "k": 65.0,
+              "d": -0.244,
+              "b": 1.86,
+              "a": 2.1,
+              "iv": 39.8,
+              "oi": 6868
+            },
+            {
+              "k": 67.5,
+              "d": -0.315,
+              "b": 2.72,
+              "a": 2.98,
+              "iv": 40.0,
+              "oi": 4107
+            },
+            {
+              "k": 70.0,
+              "d": -0.392,
+              "b": 3.7,
+              "a": 3.9,
+              "iv": 39.1,
+              "oi": 6201
+            },
+            {
+              "k": 72.5,
+              "d": -0.472,
+              "b": 4.8,
+              "a": 5.4,
+              "iv": 39.5,
+              "oi": 3037
+            },
+            {
+              "k": 75.0,
+              "d": -0.553,
+              "b": 6.25,
+              "a": 7.0,
+              "iv": 40.0,
+              "oi": 1723
+            },
+            {
+              "k": 77.5,
+              "d": -0.63,
+              "b": 6.2,
+              "a": 8.7,
+              "iv": 32.2,
+              "oi": 653
+            },
+            {
+              "k": 80.0,
+              "d": -0.699,
+              "b": 9.4,
+              "a": 10.15,
+              "iv": 37.1,
+              "oi": 1571
+            },
+            {
+              "k": 82.5,
+              "d": -0.757,
+              "b": 11.6,
+              "a": 12.55,
+              "iv": 40.2,
+              "oi": 225
+            },
+            {
+              "k": 85.0,
+              "d": -0.806,
+              "b": 13.7,
+              "a": 14.65,
+              "iv": 40.2,
+              "oi": 246
+            },
+            {
+              "k": 87.5,
+              "d": -0.844,
+              "b": 15.9,
+              "a": 17.05,
+              "iv": 40.8,
+              "oi": 44
+            }
+          ]
+        },
+        {
+          "exp": "2026-12-18",
+          "dte": 96,
+          "calls": [
+            {
+              "k": 55.0,
+              "d": 0.922,
+              "b": 17.15,
+              "a": 18.7,
+              "iv": 51.2,
+              "oi": 136
+            },
+            {
+              "k": 57.5,
+              "d": 0.89,
+              "b": 15.0,
+              "a": 17.05,
+              "iv": 36.9,
+              "oi": 360
+            },
+            {
+              "k": 60.0,
+              "d": 0.848,
+              "b": 13.5,
+              "a": 14.3,
+              "iv": 48.4,
+              "oi": 527
+            },
+            {
+              "k": 62.5,
+              "d": 0.798,
+              "b": 11.25,
+              "a": 12.0,
+              "iv": 45.0,
+              "oi": 133
+            },
+            {
+              "k": 65.0,
+              "d": 0.739,
+              "b": 9.6,
+              "a": 11.35,
+              "iv": 42.6,
+              "oi": 638
+            },
+            {
+              "k": 67.5,
+              "d": 0.676,
+              "b": 7.85,
+              "a": 9.75,
+              "iv": 41.7,
+              "oi": 419
+            },
+            {
+              "k": 70.0,
+              "d": 0.609,
+              "b": 6.9,
+              "a": 7.2,
+              "iv": 39.2,
+              "oi": 1343
+            },
+            {
+              "k": 72.5,
+              "d": 0.541,
+              "b": 5.5,
+              "a": 5.95,
+              "iv": 38.6,
+              "oi": 1613
+            },
+            {
+              "k": 75.0,
+              "d": 0.476,
+              "b": 4.5,
+              "a": 4.75,
+              "iv": 38.4,
+              "oi": 5340
+            },
+            {
+              "k": 77.5,
+              "d": 0.413,
+              "b": 3.55,
+              "a": 4.2,
+              "iv": 39.5,
+              "oi": 1681
+            },
+            {
+              "k": 80.0,
+              "d": 0.354,
+              "b": 2.95,
+              "a": 3.1,
+              "iv": 38.9,
+              "oi": 9835
+            },
+            {
+              "k": 82.5,
+              "d": 0.3,
+              "b": 2.33,
+              "a": 2.46,
+              "iv": 38.9,
+              "oi": 1805
+            },
+            {
+              "k": 85.0,
+              "d": 0.251,
+              "b": 1.83,
+              "a": 1.95,
+              "iv": 38.9,
+              "oi": 3543
+            },
+            {
+              "k": 87.5,
+              "d": 0.209,
+              "b": 1.45,
+              "a": 1.7,
+              "iv": 39.9,
+              "oi": 1425
+            }
+          ],
+          "puts": [
+            {
+              "k": 55.0,
+              "d": -0.078,
+              "b": 0.5,
+              "a": 0.7,
+              "iv": 41.1,
+              "oi": 3383
+            },
+            {
+              "k": 57.5,
+              "d": -0.11,
+              "b": 0.78,
+              "a": 1.06,
+              "iv": 40.8,
+              "oi": 4683
+            },
+            {
+              "k": 60.0,
+              "d": -0.152,
+              "b": 1.06,
+              "a": 1.4,
+              "iv": 39.0,
+              "oi": 9784
+            },
+            {
+              "k": 62.5,
+              "d": -0.202,
+              "b": 1.77,
+              "a": 2.14,
+              "iv": 40.5,
+              "oi": 1879
+            },
+            {
+              "k": 65.0,
+              "d": -0.261,
+              "b": 2.51,
+              "a": 2.65,
+              "iv": 39.3,
+              "oi": 8225
+            },
+            {
+              "k": 67.5,
+              "d": -0.324,
+              "b": 3.35,
+              "a": 3.6,
+              "iv": 39.1,
+              "oi": 2110
+            },
+            {
+              "k": 70.0,
+              "d": -0.391,
+              "b": 4.4,
+              "a": 4.75,
+              "iv": 39.1,
+              "oi": 4649
+            },
+            {
+              "k": 72.5,
+              "d": -0.459,
+              "b": 5.55,
+              "a": 5.85,
+              "iv": 38.0,
+              "oi": 3741
+            },
+            {
+              "k": 75.0,
+              "d": -0.524,
+              "b": 6.85,
+              "a": 7.95,
+              "iv": 39.7,
+              "oi": 3700
+            },
+            {
+              "k": 77.5,
+              "d": -0.587,
+              "b": 8.4,
+              "a": 9.25,
+              "iv": 38.3,
+              "oi": 2709
+            },
+            {
+              "k": 80.0,
+              "d": -0.646,
+              "b": 10.2,
+              "a": 11.05,
+              "iv": 38.5,
+              "oi": 6473
+            },
+            {
+              "k": 82.5,
+              "d": -0.7,
+              "b": 12.15,
+              "a": 13.0,
+              "iv": 38.8,
+              "oi": 819
+            },
+            {
+              "k": 85.0,
+              "d": -0.749,
+              "b": 14.0,
+              "a": 15.15,
+              "iv": 38.4,
+              "oi": 538
+            },
+            {
+              "k": 87.5,
+              "d": -0.791,
+              "b": 16.05,
+              "a": 17.35,
+              "iv": 37.8,
+              "oi": 1907
+            }
+          ]
+        }
+      ]
+    },
     "SPCX": {
       "spot": 151.21,
       "expiries": [
@@ -257012,7 +261164,7 @@
       "type": "closed"
     }
   ],
-  "generated_at": "2026-09-13T13:07:25+00:00",
+  "generated_at": "2026-09-13T14:34:40+00:00",
   "universe": {
     "wheel": 18,
     "growth": 19,
@@ -257087,7 +261239,8 @@
       "JOBY",
       "SNAP",
       "CIFR",
-      "CRWD"
+      "CRWD",
+      "UBER"
     ]
   }
 }
