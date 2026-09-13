@@ -12662,8 +12662,8 @@
     },
     {
       "label": "Bitcoin",
-      "price": 77347.6015625,
-      "pct": 0.09982185141073074,
+      "price": 77220.4296875,
+      "pct": -0.06475832657608649,
       "prefix": "$",
       "is_yield": false,
       "hist": [
@@ -12756,13 +12756,13 @@
         76568,
         77174,
         77270,
-        77348
+        77220
       ]
     },
     {
       "label": "Ethereum",
-      "price": 2510.699951171875,
-      "pct": -0.6035219072691778,
+      "price": 2505.260009765625,
+      "pct": -0.8188845660208499,
       "prefix": "$",
       "is_yield": false,
       "hist": [
@@ -12855,7 +12855,7 @@
         2437,
         2515,
         2526,
-        2511
+        2505
       ]
     }
   ],
@@ -12929,8 +12929,8 @@
     {
       "label": "Digital Assets",
       "ticker": "BTC",
-      "pct": 0.09982185141073074,
-      "price": 77347.6015625
+      "pct": -0.06475832657608649,
+      "price": 77220.4296875
     }
   ],
   "fundamentals": {
@@ -13217,6 +13217,30 @@
       ],
       "news": [
         {
+          "title": "Insiders Trim Positions in Five Below Stock After 39% Run-Up",
+          "publisher": "Motley Fool",
+          "link": "https://www.fool.com/investing/2026/09/13/insiders-trim-positions-in-five-below-stock-after/",
+          "when": "Sep 13"
+        },
+        {
+          "title": "Nvidia (NVDA) Looks Cheap on Piper\u2019s Forecasts, but the Earnings Assumptions Are the Real Test",
+          "publisher": "Insider Monkey",
+          "link": "https://finance.yahoo.com/markets/stocks/articles/nvidia-nvda-looks-cheap-piper-191328167.html",
+          "when": "Sep 13"
+        },
+        {
+          "title": "Meet the Magnificent Momentum-Driven ETF Obliterating the S&P 500 in 2026",
+          "publisher": "Motley Fool",
+          "link": "https://www.fool.com/investing/2026/09/13/meet-momentum-driven-etf-obliterating-sp-500-2026/",
+          "when": "Sep 13"
+        },
+        {
+          "title": "Prediction: Applied Materials Books Its First $10 Billion Quarter This Fall",
+          "publisher": "Motley Fool",
+          "link": "https://www.fool.com/investing/2026/09/13/prediction-applied-materials-books-its-first-usd10-billion-quarter-this-fall/",
+          "when": "Sep 13"
+        },
+        {
           "title": "The 10-Year Treasury Bond Yields Nearly 5% Right Now. Here's Why I'd Still Choose PepsiCo for Passive Income.",
           "publisher": "Motley Fool",
           "link": "https://www.fool.com/investing/2026/09/13/the-10-year-treasury-bond-yields-nearly-5-now/",
@@ -13226,30 +13250,6 @@
           "title": "Most Investors Think Netflix (NFLX) Is Too Expensive. I Think They're Wrong.",
           "publisher": "Motley Fool",
           "link": "https://www.fool.com/investing/2026/09/13/most-investors-think-netflix-nflx-is-too-expensive/",
-          "when": "Sep 13"
-        },
-        {
-          "title": "This Could Be the Biggest Problem With Retiring in Your 50s",
-          "publisher": "Motley Fool",
-          "link": "https://www.fool.com/retirement/2026/09/13/this-could-be-the-biggest-problem-with-retiring-in/",
-          "when": "Sep 13"
-        },
-        {
-          "title": "McDonald's Yields 3%, the Highest in Over 6 Years. Is the Dow Dividend Stock a Value Trap or Too Cheap to Ignore?",
-          "publisher": "Motley Fool",
-          "link": "https://www.fool.com/investing/2026/09/13/mcdonalds-yields-29-the-highest-in-over-6-years-is/",
-          "when": "Sep 13"
-        },
-        {
-          "title": "Goldman Sachs Says AI Is Driving Half of S&P 500 Earnings Growth. That Number Cuts Both Ways.",
-          "publisher": "24/7 Wall St.",
-          "link": "https://247wallst.com/investing/2026/09/13/goldman-sachs-says-ai-is-driving-half-of-sp-500-earnings-growth-that-number-cuts-both-ways/",
-          "when": "Sep 13"
-        },
-        {
-          "title": "Here Are the Companies in Nvidia's $99 Billion Artificial Intelligence (AI) Portfolio. These 3 Are the Best of the Bunch",
-          "publisher": "Motley Fool",
-          "link": "https://www.fool.com/investing/2026/09/13/here-are-all-the-companies-in-nvidias-99-billion/",
           "when": "Sep 13"
         }
       ]
@@ -14091,6 +14091,12 @@
       ],
       "news": [
         {
+          "title": "Trump Just Promised You $5,000. There\u2019s a Catch, and It Changes Everything About How You\u2019d Spend It.",
+          "publisher": "24/7 Wall St.",
+          "link": "https://247wallst.com/personal-finance/2026/09/13/trump-just-promised-you-5000-theres-a-catch-and-it-changes-everything-about-how-youd-spend-it/",
+          "when": "Sep 13"
+        },
+        {
           "title": "Kroger loses $12 billion as customer behavior takes a turn",
           "publisher": "TheStreet",
           "link": "https://www.thestreet.com/retail/kroger-loses-12-billion-cpg-spending-to-rivals",
@@ -14118,12 +14124,6 @@
           "title": "Mama\u2019s Creations (MAMA) Just Proved Its Growth Spurt Wasn\u2019t A Fluke",
           "publisher": "Insider Monkey",
           "link": "https://finance.yahoo.com/markets/stocks/articles/mama-creations-mama-just-proved-162554673.html",
-          "when": "Sep 12"
-        },
-        {
-          "title": "Walmart and Sam's Club just gave shoppers a reason to ditch Costco",
-          "publisher": "TheStreet",
-          "link": "https://www.thestreet.com/retail/walmart-sams-club-add-tap-to-pay-technology",
           "when": "Sep 12"
         }
       ]
@@ -15847,6 +15847,12 @@
           "when": "Sep 13"
         },
         {
+          "title": "GF Securities Says NAND Prices May Stabilize Later This Year. What This Means for Sandisk Stock.",
+          "publisher": "Barchart",
+          "link": "https://www.barchart.com/story/news/4578887/gf-securities-says-nand-prices-may-stabilize-later-this-year-what-this-means-for-sandisk-stock",
+          "when": "Sep 13"
+        },
+        {
           "title": "Prediction: This Artificial Intelligence (AI) Chip Stock Will Soar After Sept. 30 (Hint: It's Not Micron)",
           "publisher": "Motley Fool",
           "link": "https://www.fool.com/investing/2026/09/13/prediction-this-artificial-intelligence-ai-chip-st/",
@@ -15857,12 +15863,6 @@
           "publisher": "Insider Monkey",
           "link": "https://finance.yahoo.com/technology/ai/articles/deepseek-cut-kv-cache-hbm-011603128.html",
           "when": "Sep 13"
-        },
-        {
-          "title": "Not Nvidia. Not Micron. This Dirt Cheap \u201cMagnificent Seven\u201d Stock Could Be the Biggest Winner of the Trillion-Dollar AI Race \u2013 Here\u2019s the Case.",
-          "publisher": "Motley Fool",
-          "link": "https://www.fool.com/investing/2026/09/12/not-nvidia-not-micron-this-dirt-cheap-magnificent-seven-stock-could-be-the-biggest-winner-of-the-trillion-dollar-ai-race-here-s-the-case/",
-          "when": "Sep 12"
         }
       ]
     },
@@ -16140,6 +16140,12 @@
       "flags": [],
       "news": [
         {
+          "title": "Anthropic Said to Choose Nasdaq for Much-Anticipated IPO Listing",
+          "publisher": "Bloomberg",
+          "link": "https://finance.yahoo.com/markets/stocks/articles/anthropic-said-choose-nasdaq-much-180359465.html",
+          "when": "Sep 13"
+        },
+        {
           "title": "Prediction: This Memory Stock Could Surge 233% Over the Next 3 Years (Hint: It's not Micron or Sandisk)",
           "publisher": "Motley Fool",
           "link": "https://www.fool.com/investing/2026/09/13/prediction-this-memory-stock-could-surge-233-over/",
@@ -16167,12 +16173,6 @@
           "title": "Micron Takes Unexpected Step as Tensions Rise",
           "publisher": "GuruFocus.com",
           "link": "https://finance.yahoo.com/markets/stocks/articles/micron-takes-unexpected-step-tensions-211102373.html",
-          "when": "Sep 11"
-        },
-        {
-          "title": "Former OpenAI Researcher Bets on AI Stocks After $35 Billion Wipeout",
-          "publisher": "BeInCrypto",
-          "link": "https://beincrypto.com/former-openai-researcher-leopold-aschenbrenner-ai-bet/",
           "when": "Sep 11"
         }
       ]
@@ -16553,6 +16553,12 @@
           "when": "Sep 13"
         },
         {
+          "title": "GF Securities Says NAND Prices May Stabilize Later This Year. What This Means for Sandisk Stock.",
+          "publisher": "Barchart",
+          "link": "https://www.barchart.com/story/news/4578887/gf-securities-says-nand-prices-may-stabilize-later-this-year-what-this-means-for-sandisk-stock",
+          "when": "Sep 13"
+        },
+        {
           "title": "Prediction: This Artificial Intelligence (AI) Chip Stock Will Soar After Sept. 30 (Hint: It's Not Micron)",
           "publisher": "Motley Fool",
           "link": "https://www.fool.com/investing/2026/09/13/prediction-this-artificial-intelligence-ai-chip-st/",
@@ -16575,12 +16581,6 @@
           "publisher": "Motley Fool",
           "link": "https://www.fool.com/investing/2026/09/12/nike-just-got-deleted-from-the-sp-100-is-its-seat/",
           "when": "Sep 12"
-        },
-        {
-          "title": "Former OpenAI Researcher Bets on AI Stocks After $35 Billion Wipeout",
-          "publisher": "BeInCrypto",
-          "link": "https://beincrypto.com/former-openai-researcher-leopold-aschenbrenner-ai-bet/",
-          "when": "Sep 11"
         }
       ]
     },
@@ -16762,6 +16762,12 @@
       ],
       "news": [
         {
+          "title": "Intel (INTC) Is Winning From the CPU Shortage, but Its Foundry Valuation Needs More Proof",
+          "publisher": "Insider Monkey",
+          "link": "https://finance.yahoo.com/technology/ai/articles/intel-intc-winning-cpu-shortage-191052125.html",
+          "when": "Sep 13"
+        },
+        {
           "title": "AMD and Intel\u2019s Shared AI Instructions Reach GCC. Can Software Cooperation Strengthen Both Stocks?",
           "publisher": "Insider Monkey",
           "link": "https://finance.yahoo.com/technology/ai/articles/amd-intel-shared-ai-instructions-165917161.html",
@@ -16789,12 +16795,6 @@
           "title": "Billionaire Stanley Druckenmiller Dumped Broadcom, Intel, and Micron for This Chip Stock. Here's Why.",
           "publisher": "Motley Fool",
           "link": "https://www.fool.com/investing/2026/09/12/billionaire-stanley-druckenmiller-dumped-broadcom/",
-          "when": "Sep 12"
-        },
-        {
-          "title": "Why Power Integrations (POWI) Stock Is Trading Up Today",
-          "publisher": "StockStory",
-          "link": "https://finance.yahoo.com/markets/stocks/articles/why-power-integrations-powi-stock-045105470.html",
           "when": "Sep 12"
         }
       ]
@@ -17745,6 +17745,12 @@
       ],
       "news": [
         {
+          "title": "CrowdStrike Expands AI Capabilities With Autonomous Product Launch. What This Means for CRWD Stock.",
+          "publisher": "Barchart",
+          "link": "https://www.barchart.com/story/news/4578883/crowdstrike-expands-ai-capabilities-with-autonomous-product-launch-what-this-means-for-crwd-stock",
+          "when": "Sep 13"
+        },
+        {
           "title": "Zscaler Conference: AI Agents, Agentic SOC Fuel Zero-Trust Growth Ambitions",
           "publisher": "MarketBeat",
           "link": "https://www.marketbeat.com/instant-alerts/event-zscaler-conference-ai-agents-agentic-soc-fuel-zero-trust-growth-ambitions-2026-09-12/?utm_source=yahoofinance&utm_medium=yahoofinance",
@@ -17772,12 +17778,6 @@
           "title": "Wedbush Names CrowdStrike and Palo Alto Networks AI Cybersecurity Winners",
           "publisher": "GuruFocus.com",
           "link": "https://finance.yahoo.com/technology/ai/articles/wedbush-names-crowdstrike-palo-alto-154004806.html",
-          "when": "Sep 11"
-        },
-        {
-          "title": "CRWD Stock Leads Wedbush\u2019s Cybersecurity Bets: Check Point, Fortinet, Varonis, Telos Downgraded",
-          "publisher": "Stocktwits",
-          "link": "https://stocktwits.com/news-articles/markets/equity/crwd-stock-leads-wedbush-cybersecurity-bet-check-point-fortinet-downgraded/cZtXjr9RBGu",
           "when": "Sep 11"
         }
       ]
@@ -17946,6 +17946,12 @@
           "when": "Sep 13"
         },
         {
+          "title": "Anthropic Said to Choose Nasdaq for Much-Anticipated IPO Listing",
+          "publisher": "Bloomberg",
+          "link": "https://finance.yahoo.com/markets/stocks/articles/anthropic-said-choose-nasdaq-much-180359465.html",
+          "when": "Sep 13"
+        },
+        {
           "title": "New Tesla Roadster Uses SpaceX Tech. Will It Impact the Stock Price?",
           "publisher": "BeInCrypto",
           "link": "https://beincrypto.com/tesla-roadster-reveal-tsla-stock/",
@@ -17967,12 +17973,6 @@
           "title": "SpaceX and Rocket Lab Have a New Space Rival -- in Norway",
           "publisher": "Motley Fool",
           "link": "https://www.fool.com/investing/2026/09/13/spacex-and-rocket-lab-have-a-new-space-rival-in-no/",
-          "when": "Sep 13"
-        },
-        {
-          "title": "Got $1,000? An Investment in SpaceX Could Be Worth This Much by the End of 2027.",
-          "publisher": "Motley Fool",
-          "link": "https://www.fool.com/investing/2026/09/13/got-1000-an-investment-in-spacex-could-be-worth-th/",
           "when": "Sep 13"
         }
       ]
@@ -261238,7 +261238,7 @@
       "type": "closed"
     }
   ],
-  "generated_at": "2026-09-13T19:04:39+00:00",
+  "generated_at": "2026-09-13T19:33:17+00:00",
   "universe": {
     "wheel": 18,
     "growth": 19,
