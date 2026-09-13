@@ -12662,8 +12662,8 @@
     },
     {
       "label": "Bitcoin",
-      "price": 77226.5,
-      "pct": -0.05690239843406664,
+      "price": 77283.75,
+      "pct": 0.01718800236991669,
       "prefix": "$",
       "is_yield": false,
       "hist": [
@@ -12756,13 +12756,13 @@
         76568,
         77174,
         77270,
-        77226
+        77284
       ]
     },
     {
       "label": "Ethereum",
-      "price": 2501.280029296875,
-      "pct": -0.9764486115719562,
+      "price": 2504.169921875,
+      "pct": -0.8620402195226085,
       "prefix": "$",
       "is_yield": false,
       "hist": [
@@ -12855,7 +12855,7 @@
         2437,
         2515,
         2526,
-        2501
+        2504
       ]
     }
   ],
@@ -12929,8 +12929,8 @@
     {
       "label": "Digital Assets",
       "ticker": "BTC",
-      "pct": -0.05690239843406664,
-      "price": 77226.5
+      "pct": 0.01718800236991669,
+      "price": 77283.75
     }
   ],
   "fundamentals": {
@@ -13001,6 +13001,12 @@
       ],
       "news": [
         {
+          "title": "New Tesla Roadster Uses SpaceX Tech. Will It Impact the Stock Price?",
+          "publisher": "BeInCrypto",
+          "link": "https://beincrypto.com/tesla-roadster-reveal-tsla-stock/",
+          "when": "Sep 13"
+        },
+        {
           "title": "The Tesla Network Is Dead: JPMorgan\u2019s Bombshell Note Reveals Nearly All Robotaxi Billions Flow to TSLA, Not You",
           "publisher": "24/7 Wall St.",
           "link": "https://247wallst.com/investing/2026/09/13/the-tesla-network-is-dead-jpmorgans-bombshell-note-reveals-nearly-all-robotaxi-billions-flow-to-tsla-not-you/",
@@ -13028,12 +13034,6 @@
           "title": "Musk attacks Britain over \u2018stifling\u2019 driverless car rules",
           "publisher": "The Telegraph",
           "link": "https://uk.finance.yahoo.com/news/musk-attacks-britain-over-stifling-080000603.html",
-          "when": "Sep 13"
-        },
-        {
-          "title": "Tesla Is Reclaiming the U.S. EV Market as Legacy Automakers Retreat",
-          "publisher": "The Wall Street Journal",
-          "link": "https://www.wsj.com/business/autos/tesla-is-reclaiming-the-u-s-ev-market-as-legacy-automakers-retreat-71ec2053?siteid=yhoof2&yptr=yahoo",
           "when": "Sep 13"
         }
       ]
@@ -13217,39 +13217,39 @@
       ],
       "news": [
         {
-          "title": "If You'd Invested $5,000 in VGT 10 Years Ago, Here's Exactly How Much You'd Have Today",
+          "title": "Here Are the Companies in Nvidia's $99 Billion Artificial Intelligence (AI) Portfolio. These 3 Are the Best of the Bunch",
           "publisher": "Motley Fool",
-          "link": "https://www.fool.com/investing/2026/09/13/if-youd-invested-5000-in-vgt-10-years-ago-heres-ex/",
+          "link": "https://www.fool.com/investing/2026/09/13/here-are-all-the-companies-in-nvidias-99-billion/",
           "when": "Sep 13"
         },
         {
-          "title": "Could Upstart 10x From Here? The AI Fintech Platform Could Be the Most Misunderstood Stock on the Market",
+          "title": "Warren Buffett Made Apple Berkshire Hathaway's Single Largest Stock Position: $10,000 Invested 10 Years Ago Would Be Worth Roughly $122,400 Today",
           "publisher": "Motley Fool",
-          "link": "https://www.fool.com/investing/2026/09/13/could-upstart-10x-from-here-the-ai-fintech-platform-could-be-the-most-misunderstood-stock-on-the/",
+          "link": "https://www.fool.com/investing/2026/09/13/warren-buffett-made-apple-berkshire-hathaways-sing/",
           "when": "Sep 13"
         },
         {
-          "title": "Central Bank of AI: Analyst Says NVIDIA Could Sit on $1.4 Trillion \u2014 Dwarfing Hyperscalers and Wall Street",
-          "publisher": "24/7 Wall St.",
-          "link": "https://247wallst.com/investing/2026/09/13/central-bank-of-ai-analyst-says-nvidia-could-sit-on-1-4-trillion-dwarfing-hyperscalers-and-wall-street/",
+          "title": "Bank of America has strong message for Marvell stock investors",
+          "publisher": "TheStreet",
+          "link": "https://www.thestreet.com/investing/marvell-stock-bofa-ai-growth-outlook",
           "when": "Sep 13"
         },
         {
-          "title": "The Ultimate Growth Stock to Buy With $1,000 Right Now",
+          "title": "Nvidia vs. Broadcom: Which Trillion-Dollar AI Chip Stock Has More Upside After Their Latest Earnings?",
           "publisher": "Motley Fool",
-          "link": "https://www.fool.com/investing/2026/09/13/the-ultimate-growth-stock-to-buy-with-1000-right/",
+          "link": "https://www.fool.com/investing/2026/09/13/nvidia-vs-broadcom-which-trillion-dollar-ai-chip-s/",
           "when": "Sep 13"
         },
         {
-          "title": "Anthropic Locks Down $517 Billion in Compute Ahead of IPO \u2014 and It\u2019s Still Not Enough",
-          "publisher": "24/7 Wall St.",
-          "link": "https://247wallst.com/investing/2026/09/13/anthropic-locks-down-517-billion-in-compute-ahead-of-ipo-and-its-still-not-enough/",
-          "when": "Sep 13"
-        },
-        {
-          "title": "Rivian vs. Lucid: This Stock Is Clearly the Better Buy",
+          "title": "Forget Screeners and Hot Tips: Here's How I Actually Research a Stock Using Fundamentals That Matter",
           "publisher": "Motley Fool",
-          "link": "https://www.fool.com/investing/2026/09/13/rivian-vs-lucid-this-stock-is-clearly-the-better/",
+          "link": "https://www.fool.com/investing/2026/09/13/forget-screeners-and-hot-tips-heres-how-i-actually/",
+          "when": "Sep 13"
+        },
+        {
+          "title": "Billionaire Bill Ackman Trimmed This Big Tech Position to Back These 2 AI Contenders",
+          "publisher": "Motley Fool",
+          "link": "https://www.fool.com/investing/2026/09/13/ackman-trimmed-this-big-tech-position-to/",
           "when": "Sep 13"
         }
       ]
@@ -13312,6 +13312,12 @@
       "flags": [],
       "news": [
         {
+          "title": "Billionaire Bill Ackman Trimmed This Big Tech Position to Back These 2 AI Contenders",
+          "publisher": "Motley Fool",
+          "link": "https://www.fool.com/investing/2026/09/13/ackman-trimmed-this-big-tech-position-to/",
+          "when": "Sep 13"
+        },
+        {
           "title": "Anthropic Locks Down $517 Billion in Compute Ahead of IPO \u2014 and It\u2019s Still Not Enough",
           "publisher": "24/7 Wall St.",
           "link": "https://247wallst.com/investing/2026/09/13/anthropic-locks-down-517-billion-in-compute-ahead-of-ipo-and-its-still-not-enough/",
@@ -13339,12 +13345,6 @@
           "title": "Amazon\u2019s Zoox Enters San Francisco\u2019s Crowded Robotaxi Market, Taking Direct Aim at Waymo and Tesla",
           "publisher": "Insider Monkey",
           "link": "https://finance.yahoo.com/technology/articles/amazon-zoox-enters-san-francisco-112558972.html",
-          "when": "Sep 13"
-        },
-        {
-          "title": "Nvidia May Put $10 Billion Into Anthropic\u2019s $2 Trillion IPO. Amazon Already Has Much More Riding on It",
-          "publisher": "Insider Monkey",
-          "link": "https://finance.yahoo.com/technology/ai/articles/nvidia-may-put-10-billion-103618397.html",
           "when": "Sep 13"
         }
       ]
@@ -13407,6 +13407,12 @@
       "flags": [],
       "news": [
         {
+          "title": "Billionaire Bill Ackman Trimmed This Big Tech Position to Back These 2 AI Contenders",
+          "publisher": "Motley Fool",
+          "link": "https://www.fool.com/investing/2026/09/13/ackman-trimmed-this-big-tech-position-to/",
+          "when": "Sep 13"
+        },
+        {
           "title": "Anthropic Locks Down $517 Billion in Compute Ahead of IPO \u2014 and It\u2019s Still Not Enough",
           "publisher": "24/7 Wall St.",
           "link": "https://247wallst.com/investing/2026/09/13/anthropic-locks-down-517-billion-in-compute-ahead-of-ipo-and-its-still-not-enough/",
@@ -13434,12 +13440,6 @@
           "title": "Nvidia May Put $10 Billion Into Anthropic\u2019s $2 Trillion IPO. Amazon Already Has Much More Riding on It",
           "publisher": "Insider Monkey",
           "link": "https://finance.yahoo.com/technology/ai/articles/nvidia-may-put-10-billion-103618397.html",
-          "when": "Sep 13"
-        },
-        {
-          "title": "Xi pushes China\u2019s open-source AI vision at BRICS summit",
-          "publisher": "Investing.com",
-          "link": "https://www.yahoo.com/news/world/articles/xi-pushes-china-open-source-102711002.html",
           "when": "Sep 13"
         }
       ]
@@ -14197,6 +14197,18 @@
           "when": "Sep 13"
         },
         {
+          "title": "Apple CEO rejects biggest fear over iPhone Duo launch",
+          "publisher": "TheStreet",
+          "link": "https://www.thestreet.com/technology/apple-ternus-iphone-duo-ai-strategy",
+          "when": "Sep 13"
+        },
+        {
+          "title": "Warren Buffett Made Apple Berkshire Hathaway's Single Largest Stock Position: $10,000 Invested 10 Years Ago Would Be Worth Roughly $122,400 Today",
+          "publisher": "Motley Fool",
+          "link": "https://www.fool.com/investing/2026/09/13/warren-buffett-made-apple-berkshire-hathaways-sing/",
+          "when": "Sep 13"
+        },
+        {
           "title": "Dow Jones Futures: Fed Meeting Ahead; Anthropic's Amodei, OpenAI's Altman, SpaceX's Musk Call For AI Slowdown",
           "publisher": "Investor's Business Daily",
           "link": "https://www.investors.com/market-trend/stock-market-today/dow-jones-futures-fed-meeting-anthropic-amodei-openai-altman-spacex-musk-ai-model-slowdown/?src=A00220&yptr=yahoo",
@@ -14212,18 +14224,6 @@
           "title": "The Week Everybody Started Talking About AI Doomsday",
           "publisher": "The Wall Street Journal",
           "link": "https://www.wsj.com/tech/ai/the-week-everybody-started-talking-about-ai-doomsday-ab1fe116?siteid=yhoof2&yptr=yahoo",
-          "when": "Sep 13"
-        },
-        {
-          "title": "Apple wants AI to listen all day without creeping people out",
-          "publisher": "TheStreet",
-          "link": "https://www.thestreet.com/investing/apple-wants-ai-to-listen-all-day-without-creeping-people-out",
-          "when": "Sep 13"
-        },
-        {
-          "title": "Can New iPhone Duo Power Apple's Stock Higher?",
-          "publisher": "Motley Fool",
-          "link": "https://www.fool.com/investing/2026/09/13/can-new-iphone-duo-power-apples-stock-higher/",
           "when": "Sep 13"
         }
       ]
@@ -14286,6 +14286,18 @@
       "flags": [],
       "news": [
         {
+          "title": "Bank of America has strong message for Marvell stock investors",
+          "publisher": "TheStreet",
+          "link": "https://www.thestreet.com/investing/marvell-stock-bofa-ai-growth-outlook",
+          "when": "Sep 13"
+        },
+        {
+          "title": "Chamath Palihapitiya: Anthropic Employee\u2019s \u201cHuman Extinction\u201d AI Warning Risks $2.3 Trillion IPO",
+          "publisher": "24/7 Wall St.",
+          "link": "https://247wallst.com/investing/2026/09/13/chamath-palihapitiya-anthropic-employees-human-extinction-ai-warning-risks-2-3-trillion-ipo/",
+          "when": "Sep 13"
+        },
+        {
           "title": "Anthropic Locks Down $517 Billion in Compute Ahead of IPO \u2014 and It\u2019s Still Not Enough",
           "publisher": "24/7 Wall St.",
           "link": "https://247wallst.com/investing/2026/09/13/anthropic-locks-down-517-billion-in-compute-ahead-of-ipo-and-its-still-not-enough/",
@@ -14307,18 +14319,6 @@
           "title": "Broadcom\u2019s Anthropic Ramp Puts Google\u2019s TPU Business in a Different Light",
           "publisher": "Insider Monkey",
           "link": "https://finance.yahoo.com/technology/ai/articles/broadcom-anthropic-ramp-puts-google-113804111.html",
-          "when": "Sep 13"
-        },
-        {
-          "title": "SpaceX Says a Mystery AI Customer Adds $1.11 Billion a Month. Google Shows How Fast Compute Is Growing",
-          "publisher": "Insider Monkey",
-          "link": "https://finance.yahoo.com/technology/ai/articles/spacex-says-mystery-ai-customer-104230984.html",
-          "when": "Sep 13"
-        },
-        {
-          "title": "Is Superintelligence On The Horizon? Safety Fears Grip Industry Leaders As They Push For A Slowdown",
-          "publisher": "Insider Monkey",
-          "link": "https://finance.yahoo.com/technology/ai/articles/superintelligence-horizon-safety-fears-grip-104052728.html",
           "when": "Sep 13"
         }
       ]
@@ -14386,6 +14386,12 @@
       ],
       "news": [
         {
+          "title": "AMD and Intel\u2019s Shared AI Instructions Reach GCC. Can Software Cooperation Strengthen Both Stocks?",
+          "publisher": "Insider Monkey",
+          "link": "https://finance.yahoo.com/technology/ai/articles/amd-intel-shared-ai-instructions-165917161.html",
+          "when": "Sep 13"
+        },
+        {
           "title": "Anthropic Locks Down $517 Billion in Compute Ahead of IPO \u2014 and It\u2019s Still Not Enough",
           "publisher": "24/7 Wall St.",
           "link": "https://247wallst.com/investing/2026/09/13/anthropic-locks-down-517-billion-in-compute-ahead-of-ipo-and-its-still-not-enough/",
@@ -14413,12 +14419,6 @@
           "title": "Cramer Asked Who Was Buying Gigantic Bloom Energy Calls. A Pelosi Filing Named Two of the Same Stocks Weeks Earlier.",
           "publisher": "24/7 Wall St.",
           "link": "https://247wallst.com/investing/2026/09/12/cramer-asked-who-was-buying-gigantic-bloom-energy-calls-a-pelosi-filing-named-two-of-the-same-stocks-weeks-earlier/",
-          "when": "Sep 12"
-        },
-        {
-          "title": "Why AMD Stock Forecast Has Room to Run",
-          "publisher": "Barchart",
-          "link": "https://www.barchart.com/story/news/4573363/why-amd-stock-forecast-has-room-to-run",
           "when": "Sep 12"
         }
       ]
@@ -14689,6 +14689,12 @@
       "flags": [],
       "news": [
         {
+          "title": "Billionaire Bill Ackman Trimmed This Big Tech Position to Back These 2 AI Contenders",
+          "publisher": "Motley Fool",
+          "link": "https://www.fool.com/investing/2026/09/13/ackman-trimmed-this-big-tech-position-to/",
+          "when": "Sep 13"
+        },
+        {
           "title": "Jim Cramer says big tech stock could double in 3\u20135 years",
           "publisher": "TheStreet",
           "link": "https://www.thestreet.com/investing/stocks/meta-stock-cramer-doubling-outlook",
@@ -14716,12 +14722,6 @@
           "title": "Nvidia vs. AMD: Elon Musk Picked a Side on the SpaceX Earnings Call",
           "publisher": "Motley Fool",
           "link": "https://www.fool.com/investing/2026/09/12/nvidia-vs-amd-elon-musk-picked-a-side-on-the-space/",
-          "when": "Sep 12"
-        },
-        {
-          "title": "From LeBron James to Sydney Sweeney: Prediction Markets Launch NFL Ad Blitz",
-          "publisher": "Barrons.com",
-          "link": "https://www.barrons.com/articles/nfl-prediction-market-ads-sydney-sweeney-lebron-james-6df311c8?siteid=yhoof2&yptr=yahoo",
           "when": "Sep 12"
         }
       ]
@@ -15829,6 +15829,18 @@
       ],
       "news": [
         {
+          "title": "Will Micron Technology Stock Soar to $1,500 After Sept. 30?",
+          "publisher": "Motley Fool",
+          "link": "https://www.fool.com/investing/2026/09/13/will-micron-technology-stock-soar-to-1500-sept-30/",
+          "when": "Sep 13"
+        },
+        {
+          "title": "Prediction: This Memory Stock Could Surge 233% Over the Next 3 Years (Hint: It's not Micron or Sandisk)",
+          "publisher": "Motley Fool",
+          "link": "https://www.fool.com/investing/2026/09/13/prediction-this-memory-stock-could-surge-233-over/",
+          "when": "Sep 13"
+        },
+        {
           "title": "Prediction: 2 AI Semiconductor Stocks That Will Join Micron and Broadcom in the $1 Trillion Club by 2028",
           "publisher": "Motley Fool",
           "link": "https://www.fool.com/investing/2026/09/13/predict-ai-semiconductor-stocks-micron-broadcom/",
@@ -15850,18 +15862,6 @@
           "title": "Not Nvidia. Not Micron. This Dirt Cheap \u201cMagnificent Seven\u201d Stock Could Be the Biggest Winner of the Trillion-Dollar AI Race \u2013 Here\u2019s the Case.",
           "publisher": "Motley Fool",
           "link": "https://www.fool.com/investing/2026/09/12/not-nvidia-not-micron-this-dirt-cheap-magnificent-seven-stock-could-be-the-biggest-winner-of-the-trillion-dollar-ai-race-here-s-the-case/",
-          "when": "Sep 12"
-        },
-        {
-          "title": "Broadcom vs. Micron Technology: Which Technology Stock Is a Better Buy in 2026?",
-          "publisher": "Motley Fool",
-          "link": "https://www.fool.com/coverage/better-buy/2026/09/12/broadcom-vs-micron-technology-which-technology-stock-is-a-better-buy-in-2026/",
-          "when": "Sep 12"
-        },
-        {
-          "title": "Cramer Asked Who Was Buying Gigantic Bloom Energy Calls. A Pelosi Filing Named Two of the Same Stocks Weeks Earlier.",
-          "publisher": "24/7 Wall St.",
-          "link": "https://247wallst.com/investing/2026/09/12/cramer-asked-who-was-buying-gigantic-bloom-energy-calls-a-pelosi-filing-named-two-of-the-same-stocks-weeks-earlier/",
           "when": "Sep 12"
         }
       ]
@@ -16140,6 +16140,12 @@
       "flags": [],
       "news": [
         {
+          "title": "Prediction: This Memory Stock Could Surge 233% Over the Next 3 Years (Hint: It's not Micron or Sandisk)",
+          "publisher": "Motley Fool",
+          "link": "https://www.fool.com/investing/2026/09/13/prediction-this-memory-stock-could-surge-233-over/",
+          "when": "Sep 13"
+        },
+        {
           "title": "Prediction: 2 AI Semiconductor Stocks That Will Join Micron and Broadcom in the $1 Trillion Club by 2028",
           "publisher": "Motley Fool",
           "link": "https://www.fool.com/investing/2026/09/13/predict-ai-semiconductor-stocks-micron-broadcom/",
@@ -16167,12 +16173,6 @@
           "title": "Former OpenAI Researcher Bets on AI Stocks After $35 Billion Wipeout",
           "publisher": "BeInCrypto",
           "link": "https://beincrypto.com/former-openai-researcher-leopold-aschenbrenner-ai-bet/",
-          "when": "Sep 11"
-        },
-        {
-          "title": "Why Micron Stock Is on Pace for a Weekly Decline",
-          "publisher": "Barrons.com",
-          "link": "https://www.barrons.com/articles/micron-stock-oracle-ai-242830db?siteid=yhoof2&yptr=yahoo",
           "when": "Sep 11"
         }
       ]
@@ -16547,6 +16547,12 @@
       ],
       "news": [
         {
+          "title": "Prediction: This Memory Stock Could Surge 233% Over the Next 3 Years (Hint: It's not Micron or Sandisk)",
+          "publisher": "Motley Fool",
+          "link": "https://www.fool.com/investing/2026/09/13/prediction-this-memory-stock-could-surge-233-over/",
+          "when": "Sep 13"
+        },
+        {
           "title": "Prediction: This Artificial Intelligence (AI) Chip Stock Will Soar After Sept. 30 (Hint: It's Not Micron)",
           "publisher": "Motley Fool",
           "link": "https://www.fool.com/investing/2026/09/13/prediction-this-artificial-intelligence-ai-chip-st/",
@@ -16574,12 +16580,6 @@
           "title": "Former OpenAI Researcher Bets on AI Stocks After $35 Billion Wipeout",
           "publisher": "BeInCrypto",
           "link": "https://beincrypto.com/former-openai-researcher-leopold-aschenbrenner-ai-bet/",
-          "when": "Sep 11"
-        },
-        {
-          "title": "SanDisk Drops Over 3% as Oracle's AI Boom Fails to Lift Memory",
-          "publisher": "GuruFocus.com",
-          "link": "https://finance.yahoo.com/markets/stocks/articles/sandisk-drops-over-3-oracles-200757715.html",
           "when": "Sep 11"
         }
       ]
@@ -16762,6 +16762,12 @@
       ],
       "news": [
         {
+          "title": "AMD and Intel\u2019s Shared AI Instructions Reach GCC. Can Software Cooperation Strengthen Both Stocks?",
+          "publisher": "Insider Monkey",
+          "link": "https://finance.yahoo.com/technology/ai/articles/amd-intel-shared-ai-instructions-165917161.html",
+          "when": "Sep 13"
+        },
+        {
           "title": "Predicting Intel's Value by 2030 Could Make It Worth a Look Right Now",
           "publisher": "Motley Fool",
           "link": "https://www.fool.com/investing/2026/09/13/predicting-intels-value-by-2030-could-make-it-wort/",
@@ -16789,12 +16795,6 @@
           "title": "Why Power Integrations (POWI) Stock Is Trading Up Today",
           "publisher": "StockStory",
           "link": "https://finance.yahoo.com/markets/stocks/articles/why-power-integrations-powi-stock-045105470.html",
-          "when": "Sep 12"
-        },
-        {
-          "title": "Qorvo, Qualcomm, Texas Instruments, Vishay Intertechnology, and Impinj Stocks Trade Up, What You Need To Know",
-          "publisher": "StockStory",
-          "link": "https://finance.yahoo.com/markets/stocks/articles/qorvo-qualcomm-texas-instruments-vishay-041105294.html",
           "when": "Sep 12"
         }
       ]
@@ -17293,6 +17293,12 @@
       ],
       "news": [
         {
+          "title": "Arista Released Critical Security Advisories. Cisco Shows Why AI Network Growth Also Creates Repair Work",
+          "publisher": "Insider Monkey",
+          "link": "https://finance.yahoo.com/technology/ai/articles/arista-released-critical-security-advisories-165652596.html",
+          "when": "Sep 13"
+        },
+        {
           "title": "Dow Jones Futures: Fed Rate Hike Seen As Oil, Yields Pressure Stocks; Apple, Moderna Are New Buys",
           "publisher": "Investor's Business Daily",
           "link": "https://www.investors.com/market-trend/stock-market-today/dow-jones-futures-100-oil-surging-yields-pressure-stocks-with-fed-rate-hike-seen-apple-leads-new-buys/?src=A00220&yptr=yahoo",
@@ -17320,12 +17326,6 @@
           "title": "How Far Could Cisco Stock Swing On You As AI Networking Orders Grow?",
           "publisher": "Trefis",
           "link": "https://www.trefis.com/articles/615034/how-far-could-cisco-stock-swing-on-you-as-ai-networking-orders-grow/2026-09-11",
-          "when": "Sep 11"
-        },
-        {
-          "title": "Arista Networks Stock Rallied, But Is It Now A Bet On Its Suppliers?",
-          "publisher": "Trefis",
-          "link": "https://www.trefis.com/articles/615052/arista-networks-stock-rallied-but-is-it-now-a-bet-on-its-suppliers/2026-09-11",
           "when": "Sep 11"
         }
       ]
@@ -17940,6 +17940,18 @@
       "flags": [],
       "news": [
         {
+          "title": "New Tesla Roadster Uses SpaceX Tech. Will It Impact the Stock Price?",
+          "publisher": "BeInCrypto",
+          "link": "https://beincrypto.com/tesla-roadster-reveal-tsla-stock/",
+          "when": "Sep 13"
+        },
+        {
+          "title": "Boy, We Were Wrong About SpaceX",
+          "publisher": "Barrons.com",
+          "link": "https://www.barrons.com/articles/spacex-stock-valuation-ai-e1607713?siteid=yhoof2&yptr=yahoo",
+          "when": "Sep 13"
+        },
+        {
           "title": "Dow Jones Futures: Fed Meeting Ahead; Anthropic's Amodei, OpenAI's Altman, SpaceX's Musk Call For AI Slowdown",
           "publisher": "Investor's Business Daily",
           "link": "https://www.investors.com/market-trend/stock-market-today/dow-jones-futures-fed-meeting-anthropic-amodei-openai-altman-spacex-musk-ai-model-slowdown/?src=A00220&yptr=yahoo",
@@ -17961,18 +17973,6 @@
           "title": "Got $1,000? An Investment in SpaceX Could Be Worth This Much by the End of 2027.",
           "publisher": "Motley Fool",
           "link": "https://www.fool.com/investing/2026/09/13/got-1000-an-investment-in-spacex-could-be-worth-th/",
-          "when": "Sep 13"
-        },
-        {
-          "title": "SpaceX Says a Mystery AI Customer Adds $1.11 Billion a Month. Google Shows How Fast Compute Is Growing",
-          "publisher": "Insider Monkey",
-          "link": "https://finance.yahoo.com/technology/ai/articles/spacex-says-mystery-ai-customer-104230984.html",
-          "when": "Sep 13"
-        },
-        {
-          "title": "Wall Street Thinks SpaceX Stock Has 50% Upside. Here's Why I Don't Care.",
-          "publisher": "Motley Fool",
-          "link": "https://www.fool.com/investing/2026/09/13/wall-street-thinks-spacex-stock-has-50-upside-here/",
           "when": "Sep 13"
         }
       ]
@@ -18378,6 +18378,12 @@
       ],
       "news": [
         {
+          "title": "Nvidia CEO Jensen Huang doubles down on his big 2030 market bet",
+          "publisher": "TheStreet",
+          "link": "https://www.thestreet.com/markets/nvidia-ceo-jensen-huang-doubles-down-on-his-big-2030-market-bet",
+          "when": "Sep 13"
+        },
+        {
           "title": "Anthropic Locks Down $517 Billion in Compute Ahead of IPO \u2014 and It\u2019s Still Not Enough",
           "publisher": "24/7 Wall St.",
           "link": "https://247wallst.com/investing/2026/09/13/anthropic-locks-down-517-billion-in-compute-ahead-of-ipo-and-its-still-not-enough/",
@@ -18405,12 +18411,6 @@
           "title": "Oracle's AI Cloud Growth Lifts CoreWeave, Nebius and IREN",
           "publisher": "GuruFocus.com",
           "link": "https://finance.yahoo.com/technology/ai/articles/oracles-ai-cloud-growth-lifts-211041374.html",
-          "when": "Sep 11"
-        },
-        {
-          "title": "Former OpenAI Researcher Bets on AI Stocks After $35 Billion Wipeout",
-          "publisher": "BeInCrypto",
-          "link": "https://beincrypto.com/former-openai-researcher-leopold-aschenbrenner-ai-bet/",
           "when": "Sep 11"
         }
       ]
@@ -260427,14 +260427,6 @@
         "previous": "0.1%"
       },
       {
-        "title": "Foreign Direct Investment ytd/y",
-        "country": "CNY",
-        "date": "2026-09-14T02:02:00-04:00",
-        "impact": "Low",
-        "forecast": "",
-        "previous": "-6.2%"
-      },
-      {
         "title": "PPI m/m",
         "country": "CHF",
         "date": "2026-09-14T02:30:00-04:00",
@@ -260601,6 +260593,14 @@
         "impact": "Low",
         "forecast": "4.9%",
         "previous": "4.9%"
+      },
+      {
+        "title": "Foreign Direct Investment ytd/y",
+        "country": "CNY",
+        "date": "2026-09-15T02:02:00-04:00",
+        "impact": "Low",
+        "forecast": "",
+        "previous": "-6.2%"
       },
       {
         "title": "French Final CPI m/m",
@@ -260863,7 +260863,7 @@
         "country": "USD",
         "date": "2026-09-16T14:00:00-04:00",
         "impact": "High",
-        "forecast": "",
+        "forecast": "3.75%",
         "previous": "3.75%"
       },
       {
@@ -261238,7 +261238,7 @@
       "type": "closed"
     }
   ],
-  "generated_at": "2026-09-13T16:33:28+00:00",
+  "generated_at": "2026-09-13T18:03:52+00:00",
   "universe": {
     "wheel": 18,
     "growth": 19,
