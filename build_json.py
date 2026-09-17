@@ -208,6 +208,9 @@ def fetch_market():
     btc, btc_lbl, btc_hist = _btc_fng()
     vix_hist = [round(v, 1) for v in _yf_hist("^VIX", "3mo")][-90:]
     t10, t2, fed = _fred_last("DGS10"), _fred_last("DGS2"), _fred_last("DFF")
+    # Target RANGE (DFEDTARL/DFEDTARU) updates on the FOMC decision day, unlike the effective
+    # rate DFF which lags a hike ~1-2 business days. Headline the range; keep DFF as "effective".
+    fed_lo, fed_hi = _fred_last("DFEDTARL"), _fred_last("DFEDTARU")
     three_m = _yf_last("^IRX")               # 3M yield (for the 10Y−3M curve on Overview)
     skew = _yf_last("^SKEW")                  # CBOE SKEW (tail risk)
     vix9d = _yf_last("^VIX9D")               # 9-day VIX (vs 30-day → contango/backwardation)
@@ -222,6 +225,7 @@ def fetch_market():
             "btc_fng": btc, "btc_fng_label": btc_lbl,
             "fng_hist": fng_hist, "btc_fng_hist": btc_hist, "vix_hist": vix_hist,
             "ten_year": t10, "two_year": t2, "three_month": three_m, "curve": curve, "fed_funds": fed,
+            "fed_target_low": fed_lo, "fed_target_high": fed_hi,
             "skew": skew, "vix9d": vix9d}
 
 

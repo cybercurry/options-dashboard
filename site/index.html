@@ -635,7 +635,7 @@ th.thelp:hover{color:var(--text)} th.thelp:hover .thi{border-color:var(--accent)
 
 </main>
 
-<footer class="wrap"><b>optionintel.app</b> — one engine, every tab · real Tradier chains &amp; greeks · the same rules the <b>Rules</b> tab lists · <b>research only, not advice</b> · <span id="upd" style="opacity:.75">updated…</span> · <span class="pre" style="opacity:.6">build <span id="buildid">2026-09-04 · arch-A · weekly-chain+stamp</span></span></footer>
+<footer class="wrap"><b>optionintel.app</b> — one engine, every tab · real Tradier chains &amp; greeks · the same rules the <b>Rules</b> tab lists · <b>research only, not advice</b> · <span id="upd" style="opacity:.75">updated…</span> · <span class="pre" style="opacity:.6">build <span id="buildid">2026-09-17 · arch-A · fed-target-range</span></span></footer>
 
 <script>
 const KIND={csp:"CSP",cc:"CC",leap:"LEAP"};
@@ -955,11 +955,19 @@ function ledFor(kind,v){ if(v==null)return '';
   return 'g'; }
 function renderPulse(){
   const host=document.getElementById('pulse'); if(!host) return;   // strip removed from Signals — Market/Overview carry it
-  const m=MKT, cells=[
+  const m=MKT;
+  // Fed: headline the target range (updates on the FOMC day); effective rate (DFF) as subtitle.
+  const fedVal=(m.fed_target_low!=null&&m.fed_target_high!=null)
+    ? m.fed_target_low.toFixed(2)+'–'+m.fed_target_high.toFixed(2)+'%'
+    : num(m.fed_funds,2,'%');
+  const fedSub=(m.fed_target_low!=null&&m.fed_target_high!=null)
+    ? (m.fed_funds!=null?'eff '+m.fed_funds.toFixed(2)+'%':'target range')
+    : 'effective';
+  const cells=[
     ['vix','VIX',num(m.vix,1),m.vix_label||''],
     ['fng','Fear & Greed',num(m.fng,0),m.fng_label||''],
     ['t10','10Y Treasury',num(m.ten_year,2,'%'),m.curve||''],
-    ['fed','Fed Funds',num(m.fed_funds,2,'%'),'current target'],
+    ['fed','Fed Funds',fedVal,fedSub],
     ['btc','BTC F&G',num(m.btc_fng,0),m.btc_fng_label||''],
   ];
   const led={vix:ledFor('vix',m.vix),fng:ledFor('fng',m.fng),t10:'g',fed:'g',btc:ledFor('btc',m.btc_fng)};
@@ -1043,7 +1051,7 @@ function renderMarket(){
   const band=(v,lo,hi)=>v==null?'':v>=hi?'bad':v>=lo?'warn':'good';   // higher = worse (vol indices)
   const peTone=v=>v==null?'':v>24?'bad':v>19?'warn':'good';           // richer P/E = thinner cushion
   const rates=[
-    mtile('Fed funds',ms.fed!=null?ms.fed.toFixed(2)+'%':'—','effective',"The Fed's policy rate — the floor under all other rates. Hiking = tightening (headwind for stocks, vol up); cutting = easing."),
+    mtile('Fed funds',(ms.fed_target_low!=null&&ms.fed_target_high!=null)?ms.fed_target_low.toFixed(2)+'–'+ms.fed_target_high.toFixed(2)+'%':(ms.fed_funds!=null?ms.fed_funds.toFixed(2)+'%':'—'),(ms.fed_funds!=null?'target · eff '+ms.fed_funds.toFixed(2)+'%':'target range'),"The Fed's policy target range — the floor under all other rates; updates on the FOMC decision day. Subtitle shows the effective rate (DFF), which lags a hike 1–2 days. Hiking = tightening (headwind for stocks, vol up); cutting = easing."),
     mtile('2Y Treasury',ycMap['2Y']!=null?ycMap['2Y'].toFixed(2)+'%':'—','short end',"Tracks where the market expects the Fed to be in ~2 years."),
     mtile('10Y Treasury',ycMap['10Y']!=null?ycMap['10Y'].toFixed(2)+'%':'—','benchmark',"The benchmark long rate — growth & inflation expectations, and the discount rate equities are valued against. A rising 10Y pressures high-multiple stocks."),
     mtile('30Y Treasury',ycMap['30Y']!=null?ycMap['30Y'].toFixed(2)+'%':'—','long end',"The long bond — 30-year borrowing cost. Driven more by long-run inflation and term premium than by Fed policy. When the 30Y sells off faster than the short end (a 'bear steepener'), the market is demanding more to hold duration — usually on fiscal or inflation worries."),
