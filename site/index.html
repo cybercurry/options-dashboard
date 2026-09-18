@@ -31,7 +31,7 @@ body{margin:0; background:var(--ink); color:var(--text); font-family:"IBM Plex S
 .mono{font-family:"IBM Plex Mono",ui-monospace,monospace; font-variant-numeric:tabular-nums}
 .wrap{max-width:1200px; margin:0 auto; padding:0 22px}
 header{position:sticky; top:0; z-index:10; background:color-mix(in srgb,var(--ink) 90%,transparent); backdrop-filter:blur(10px); border-bottom:1px solid var(--line)}
-.bar{display:flex; align-items:center; gap:22px; min-height:66px}
+.bar{display:flex; align-items:center; gap:22px; height:66px}
 .brand{display:flex; align-items:center; gap:10px; font-family:"Archivo",sans-serif; font-weight:800; letter-spacing:-.02em; font-size:20px; cursor:pointer}
 .brand .dot{width:11px;height:11px;border-radius:50%;background:var(--accent); box-shadow:0 0 0 4px color-mix(in srgb,var(--accent) 22%,transparent)}
 .brand b{color:var(--text)} .brand span{color:var(--faint); font-weight:600}
@@ -51,11 +51,7 @@ nav a:hover{color:var(--text); background:var(--surface-2)} nav a.on{color:var(-
 .logo .logotype{font-family:"Archivo",sans-serif; font-weight:800; font-size:15px; letter-spacing:-.01em}
 .logo .logosub{font-family:"Archivo",sans-serif; font-weight:600; font-size:7px; letter-spacing:.15em; text-transform:uppercase; color:var(--faint)}
 .logo:hover{color:var(--accent)}
-/* brand column: logo + a discreet "data as of" freshness stamp beneath it (left side, no-scroll) */
-.brandcol{display:flex; flex-direction:column; align-items:flex-start; justify-content:center; gap:3px}
-.logostamp{font-family:"IBM Plex Mono",monospace; font-size:10.5px; color:var(--faint); letter-spacing:.02em; white-space:nowrap; padding-left:2px; line-height:1}
-.logostamp:empty{display:none}
-@media (max-width:640px){ .logo .logosub{display:none} .logostamp{font-size:10px} }
+@media (max-width:640px){ .logo .logosub{display:none} }
 .pulse{display:flex; gap:10px; flex-wrap:wrap; padding:18px 0 4px}
 .chip{flex:1 1 150px; background:var(--surface); border:1px solid var(--line); border-radius:12px; padding:11px 14px; box-shadow:var(--shadow)}
 .chip .k{display:flex; align-items:center; gap:7px; font-size:11px; letter-spacing:.06em; text-transform:uppercase; color:var(--faint); font-weight:600}
@@ -442,7 +438,6 @@ th.thelp:hover{color:var(--text)} th.thelp:hover .thi{border-color:var(--accent)
 </head>
 <body>
 <header><div class="wrap bar">
-  <div class="brandcol">
   <a class="logo" data-tab="overview" aria-label="OptionIntel — Wheel Strategy Signals — home">
     <svg class="logomark" viewBox="0 0 100 100" aria-hidden="true">
       <circle cx="50" cy="50" r="44" fill="none" stroke="currentColor" stroke-width="4"/>
@@ -451,8 +446,6 @@ th.thelp:hover{color:var(--text)} th.thelp:hover .thi{border-color:var(--accent)
     <span class="logotype">OptionIntel</span>
     <span class="logosub">Wheel Strategy Signals</span>
   </a>
-  <span class="logostamp" id="logostamp" title="Most recent data pull"></span>
-  </div>
   <nav id="nav">
     <a data-tab="overview" class="on">Overview</a>
     <a data-tab="market">Market</a>
@@ -789,15 +782,14 @@ let _lastGen=null, _refreshing=false;
 // scrolling). Both read generated_at — the instant build_json.py pulled Tradier and wrote the JSON.
 const _MON=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
 function setStamps(dt){
-  const upd=document.getElementById('upd'), fp=document.getElementById('freshpill'), ls=document.getElementById('logostamp');
-  if(!dt){ if(upd)upd.textContent='preview'; if(fp){fp.textContent='preview'; fp.title='';} if(ls)ls.textContent=''; return; }
+  const upd=document.getElementById('upd'), fp=document.getElementById('freshpill');
+  if(!dt){ if(upd)upd.textContent='preview'; if(fp){fp.textContent='preview'; fp.title='';} return; }
   const p=n=>String(n).padStart(2,'0');
   const hm=p(dt.getUTCHours())+':'+p(dt.getUTCMinutes());
   const full=_MON[dt.getUTCMonth()]+' '+dt.getUTCDate()+', '+dt.getUTCFullYear()+', '+hm+' UTC';
   const short='◷ '+_MON[dt.getUTCMonth()]+' '+dt.getUTCDate()+' · '+hm+' UTC';
   if(upd)upd.textContent='updated '+full;
   if(fp){ fp.textContent=short; fp.title='Most recent Tradier data pull: '+full; }
-  if(ls){ ls.textContent='data as of '+_MON[dt.getUTCMonth()]+' '+dt.getUTCDate()+' · '+hm+' UTC'; ls.title='Most recent Tradier data pull: '+full; }
 }
 function applyData(J, first){
   DATA=J; SIGS=J.signals||[]; LEAPS=J.leaps||[]; MKT=J.market||{};
