@@ -1653,7 +1653,27 @@ function renderFund(tk){
     fetchLive(tk);
     return;
   }
-  if(!f.ok){ host.innerHTML=`<div class="empty">No fundamentals for <b>${tk}</b> — ${f.error||'not a US-listed filer'}.</div>`; return; }
+  if(!f.ok){
+    // Escape untrusted strings (fund name comes from Yahoo).
+    const esc=s=>String(s==null?'':s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+    const url=f.detailUrl||('https://finance.yahoo.com/quote/'+encodeURIComponent(tk));
+    const nm=f.name?esc(f.name):tk;
+    const meta=[f.exchange?esc(f.exchange):null, (f.price!=null)?('$'+(+f.price).toFixed(2)):null].filter(Boolean).join(' · ');
+    if(f.kind==='fund'||f.kind==='nonfiler'){
+      const lead=f.kind==='fund'
+        ? '<b>ETF/ETN</b> — no company filings.'
+        : '<b>Listed</b>, but files no SEC company reports (foreign listing or OTC).';
+      const linkLabel=f.kind==='fund'?'Fund details':'More info';
+      host.innerHTML=`<div class="empty" style="text-align:left">
+        <div style="font-weight:700;color:var(--fg)">${tk}${f.name?' — '+nm:''}</div>
+        <div style="margin-top:6px">${lead}${meta?' <span class="dim">· '+meta+'</span>':''}</div>
+        <div style="margin-top:8px">${linkLabel}: <a href="${url}" target="_blank" rel="noopener noreferrer" style="color:var(--accent);text-decoration:underline;font-weight:600">${nm} &#8599;</a></div>
+      </div>`;
+      return;
+    }
+    host.innerHTML=`<div class="empty">No fundamentals for <b>${tk}</b> — ${esc(f.error)||'not a US-listed filer'}. <a href="${url}" target="_blank" rel="noopener noreferrer" style="color:var(--accent);text-decoration:underline;font-weight:600">Look up ${tk} &#8599;</a></div>`;
+    return;
+  }
   const g=f.groups||{}, m=f.metrics||{}, p=f.profile||{};
   const V=['Valuation','Quality','Health'].map(k=>(g[k]||{}).verdict||'⚪');
   const ov = V.includes('🔴')?['🔴','FRAGILE','#7f1d1d'] : V.includes('🟡')?['🟡','MIXED','#a16207'] : V.includes('🟢')?['🟢','SOUND','#166534'] : ['⚪','NO DATA','#475569'];

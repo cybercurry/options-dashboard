@@ -142,14 +142,23 @@ function assess(m) {
   return { flags, groups };
 }
 
-async function priceOf(ticker) {
+// One Yahoo v8 chart call (the only open Yahoo endpoint — v7/v10 now require a crumb) gives us the
+// live price AND the instrument metadata we use to explain non-filers (ETFs/ETNs, foreign/OTC).
+async function assetMeta(ticker) {
   try {
     const r = await fetch(`https://query1.finance.yahoo.com/v8/finance/chart/${encodeURIComponent(ticker)}?interval=1d&range=1d`,
       { headers: { "User-Agent": UA }, cf: { cacheTtl: 600, cacheEverything: true } });
     if (!r.ok) return null;
     const j = await r.json();
-    const p = j?.chart?.result?.[0]?.meta?.regularMarketPrice;
-    return (typeof p === "number") ? p : null;
+    const meta = j?.chart?.result?.[0]?.meta;
+    if (!meta) return null;
+    const p = meta.regularMarketPrice;
+    return {
+      price: (typeof p === "number") ? p : null,
+      type: meta.instrumentType || null,               // EQUITY | ETF | MUTUALFUND | CRYPTOCURRENCY | ...
+      name: meta.shortName || meta.longName || null,
+      exchange: meta.fullExchangeName || meta.exchangeName || null,
+    };
   } catch (e) { return null; }
 }
 
@@ -166,9 +175,27 @@ export async function onRequestGet(context) {
       const row = map[k];
       if (String(row.ticker || "").toUpperCase() === tk) { cik = String(row.cik_str).padStart(10, "0"); company = row.title || tk; break; }
     }
-    if (!cik) return J({ ok: false, ticker: tk, error: `${tk} not in SEC's ticker list (US-listed filers only).` });
+    if (!cik) {
+      // Not an SEC company filer. Use the Yahoo chart metadata to explain WHY, instead of a blank
+      // "not US-listed" error: an ETF/ETN has no company filings by nature; a foreign/OTC name may
+      // trade here yet file no US company reports. Always hand the user a working details link.
+      const meta = await assetMeta(tk);
+      const detailUrl = `https://finance.yahoo.com/quote/${encodeURIComponent(tk)}`;
+      if (meta) {
+        const fundLike = /^(ETF|MUTUALFUND)$/i.test(meta.type || "")
+          || /\b(ETF|ETN|ETP|Fund|Trust)\b/i.test(meta.name || "");
+        return J({
+          ok: false, kind: fundLike ? "fund" : "nonfiler", ticker: tk,
+          name: meta.name || tk, exchange: meta.exchange, price: meta.price, detailUrl,
+          error: fundLike ? "ETF/ETN — no company filings."
+                          : "Listed, but files no SEC company reports (foreign listing or OTC).",
+        });
+      }
+      return J({ ok: false, kind: "unknown", ticker: tk, detailUrl,
+        error: `${tk} — no SEC filing and no market data found. Check the symbol.` });
+    }
     const facts = await secGet(`https://data.sec.gov/api/xbrl/companyfacts/CIK${cik}.json`, 3600);
-    const price = await priceOf(tk);
+    const price = (await assetMeta(tk))?.price ?? null;
     const m = metricsFromSec(facts, price);
     const { flags, groups } = assess(m);
     let sic = null;
