@@ -66,7 +66,11 @@ def curve_spread_2s10s(curve):
 
 def econ_calendar():
     """This week's economic events from ForexFactory's public JSON feed. Returns a list of dicts:
-    {title, country, date, impact, forecast, previous}. [] on any failure."""
+    {title, country, date, impact, forecast, previous}. [] on any failure.
+
+    NOTE: only the *this-week* feed is published for free (nextweek/lastweek 404). The feed rolls
+    to the new week each weekend, so by Thu/Fri the current week's releases are largely spent —
+    the front-end filters to today-and-later and shows an explanatory empty state in that gap."""
     try:
         r = requests.get(_FF_CAL, headers=_UA, timeout=_TIMEOUT)
         r.raise_for_status()
