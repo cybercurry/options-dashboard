@@ -14471,8 +14471,8 @@
     },
     {
       "label": "Bitcoin",
-      "price": 81311.5,
-      "pct": 0.5068376488488457,
+      "price": 81237.3671875,
+      "pct": 0.4152041830981279,
       "prefix": "$",
       "is_yield": false,
       "hist": [
@@ -14565,13 +14565,13 @@
         76150,
         76404,
         80901,
-        81312
+        81237
       ]
     },
     {
       "label": "Ethereum",
-      "price": 2642.5,
-      "pct": 1.1929793331723948,
+      "price": 2634.739990234375,
+      "pct": 0.8958143349365955,
       "prefix": "$",
       "is_yield": false,
       "hist": [
@@ -14664,7 +14664,7 @@
         2416,
         2447,
         2611,
-        2642
+        2635
       ]
     }
   ],
@@ -14738,8 +14738,8 @@
     {
       "label": "Digital Assets",
       "ticker": "BTC",
-      "pct": 0.5068376488488457,
-      "price": 81311.5
+      "pct": 0.4152041830981279,
+      "price": 81237.3671875
     }
   ],
   "fundamentals": {
@@ -15032,6 +15032,24 @@
           "when": "Sep 18"
         },
         {
+          "title": "Fed Chair Kevin Warsh and the FOMC Just Hiked Interest Rates, and 36 Years of History Make Clear What Comes Next for Stocks",
+          "publisher": "Motley Fool",
+          "link": "https://www.fool.com/investing/2026/09/19/fed-chair-kevin-warsh-fomc-hiked-interest-rates-36-years-history-make-clear-what-next-for-stocks/",
+          "when": "Sep 19"
+        },
+        {
+          "title": "History Says This Investment Strategy Can Build a $1 Million Portfolio. Here's How.",
+          "publisher": "Motley Fool",
+          "link": "https://www.fool.com/investing/2026/09/19/history-investment-build-million-portfolio-vti/",
+          "when": "Sep 19"
+        },
+        {
+          "title": "Is Micron's 9% Dip a Warning Sign or Buying Opportunity?",
+          "publisher": "Motley Fool",
+          "link": "https://www.fool.com/investing/2026/09/19/is-microns-9-dip-a-warning-sign-or-buying-opportun/",
+          "when": "Sep 19"
+        },
+        {
           "title": "John Ternus's First iPhone Launch Prompted a Bank of America Price Target Cut. Is Apple Stock a Buy?",
           "publisher": "Motley Fool",
           "link": "https://www.fool.com/investing/2026/09/19/john-ternuss-first-iphone-launch-prompted-a-bank-o/",
@@ -15041,24 +15059,6 @@
           "title": "Can Bitcoin Reclaim $100,000 in 2026? One Factor Could Decide Everything.",
           "publisher": "Motley Fool",
           "link": "https://www.fool.com/investing/2026/09/19/can-bitcoin-reclaim-x-in-2026-one-factor-could-dec/",
-          "when": "Sep 19"
-        },
-        {
-          "title": "Ray Dalio Just Explained Why He's Cautious on AI Stocks. Here's What He Said.",
-          "publisher": "Motley Fool",
-          "link": "https://www.fool.com/investing/2026/09/19/ray-dalio-just-explained-why-hes-cautious-on-ai-st/",
-          "when": "Sep 19"
-        },
-        {
-          "title": "Could IonQ (IONQ) AI Written Quantum Circuits Unlock More Real World Workloads?",
-          "publisher": "Simply Wall St.",
-          "link": "https://finance.yahoo.com/technology/ai/articles/could-ionq-ionq-ai-written-121108000.html",
-          "when": "Sep 19"
-        },
-        {
-          "title": "Is Walt Disney Stock a Buy, Sell, or Hold 47% Below Its All-Time High?",
-          "publisher": "Motley Fool",
-          "link": "https://www.fool.com/investing/2026/09/19/walt-disney-stock-buy-sell-hold-all-time-high/",
           "when": "Sep 19"
         }
       ]
@@ -15800,6 +15800,12 @@
       ],
       "news": [
         {
+          "title": "What Will $5,000 Invested in Palantir Stock Be Worth in 5 Years?",
+          "publisher": "24/7 Wall St.",
+          "link": "https://247wallst.com/investing/2026/09/19/what-will-5000-invested-in-palantir-stock-be-worth-in-5-years/",
+          "when": "Sep 19"
+        },
+        {
           "title": "Jim Cramer Says His Palantir Technologies Inc. (NASDAQ:PLTR) Price Target Is $250",
           "publisher": "Insider Monkey",
           "link": "https://finance.yahoo.com/markets/stocks/articles/jim-cramer-says-palantir-technologies-230154955.html",
@@ -15827,12 +15833,6 @@
           "title": "Is Palantir's Lead Over Its Peers Already Priced In?",
           "publisher": "Trefis",
           "link": "https://www.trefis.com/articles/615840/is-palantirs-lead-over-its-peers-already-priced-in/2026-09-18",
-          "when": "Sep 18"
-        },
-        {
-          "title": "PLTR's 110% Commercial Revenue Surge Defines Its Q2 Growth",
-          "publisher": "Zacks",
-          "link": "https://finance.yahoo.com/markets/stocks/articles/pltrs-110-commercial-revenue-surge-175000477.html",
           "when": "Sep 18"
         }
       ]
@@ -16195,7 +16195,7 @@
       ],
       "news": [
         {
-          "title": "Dow Jones Futures: Nasdaq, S&P 500 Hold; Robinhood, Sandisk, AMD, Moderna Surge Into Buy Areas",
+          "title": "Dow Jones Futures: Will The Market Rally Take Flight? Robinhood, Sandisk, AMD, Moderna Surge Into Buy Areas",
           "publisher": "Investor's Business Daily",
           "link": "https://www.investors.com/market-trend/stock-market-today/dow-jones-futures-robinhood-sandisk-amd-moderna-surge-buy-areas/?src=A00220&yptr=yahoo",
           "when": "Sep 19"
@@ -16403,7 +16403,7 @@
       ],
       "news": [
         {
-          "title": "Dow Jones Futures: Nasdaq, S&P 500 Hold; Robinhood, Sandisk, AMD, Moderna Surge Into Buy Areas",
+          "title": "Dow Jones Futures: Will The Market Rally Take Flight? Robinhood, Sandisk, AMD, Moderna Surge Into Buy Areas",
           "publisher": "Investor's Business Daily",
           "link": "https://www.investors.com/market-trend/stock-market-today/dow-jones-futures-robinhood-sandisk-amd-moderna-surge-buy-areas/?src=A00220&yptr=yahoo",
           "when": "Sep 19"
@@ -16920,7 +16920,7 @@
       "flags": [],
       "news": [
         {
-          "title": "Dow Jones Futures: Nasdaq, S&P 500 Hold; Robinhood, Sandisk, AMD, Moderna Surge Into Buy Areas",
+          "title": "Dow Jones Futures: Will The Market Rally Take Flight? Robinhood, Sandisk, AMD, Moderna Surge Into Buy Areas",
           "publisher": "Investor's Business Daily",
           "link": "https://www.investors.com/market-trend/stock-market-today/dow-jones-futures-robinhood-sandisk-amd-moderna-surge-buy-areas/?src=A00220&yptr=yahoo",
           "when": "Sep 19"
@@ -18065,6 +18065,12 @@
       ],
       "news": [
         {
+          "title": "Is Micron's 9% Dip a Warning Sign or Buying Opportunity?",
+          "publisher": "Motley Fool",
+          "link": "https://www.fool.com/investing/2026/09/19/is-microns-9-dip-a-warning-sign-or-buying-opportun/",
+          "when": "Sep 19"
+        },
+        {
           "title": "Semiconductor Stocks to Buy and Hold Through 2030",
           "publisher": "Motley Fool",
           "link": "https://www.fool.com/investing/2026/09/19/semiconductor-stocks-to-buy-and-hold-through-2030/",
@@ -18092,12 +18098,6 @@
           "title": "Q3 Earnings Season Preview: What Can Investors Expect?",
           "publisher": "Zacks",
           "link": "https://finance.yahoo.com/markets/stocks/articles/q3-earnings-season-preview-investors-223700771.html",
-          "when": "Sep 18"
-        },
-        {
-          "title": "Micron Turned $10,000 Into About $130,000 in 5 Years. Most of It Came in the Past 12 Months.",
-          "publisher": "Motley Fool",
-          "link": "https://www.fool.com/investing/2026/09/18/micron-turned-usd10-000-into-about-usd130-000-in-5-years-most-of-it-came-in-the-past-12-months/",
           "when": "Sep 18"
         }
       ]
@@ -18376,6 +18376,12 @@
       "flags": [],
       "news": [
         {
+          "title": "Is Micron's 9% Dip a Warning Sign or Buying Opportunity?",
+          "publisher": "Motley Fool",
+          "link": "https://www.fool.com/investing/2026/09/19/is-microns-9-dip-a-warning-sign-or-buying-opportun/",
+          "when": "Sep 19"
+        },
+        {
           "title": "Nvidia, SK Hynix send strong signal to Micron investors",
           "publisher": "TheStreet",
           "link": "https://www.thestreet.com/investing/stocks/nvidia-sk-hynix-warning-memory-prices-micron-investors",
@@ -18403,12 +18409,6 @@
           "title": "SKHQ Is Losing Money Fast: What Traders Need to Know About This 2X Short SK Hynix ETF",
           "publisher": "24/7 Wall St.",
           "link": "https://247wallst.com/investing/etf/2026/09/18/portfolio-fit-skhq/",
-          "when": "Sep 18"
-        },
-        {
-          "title": "KCHP\u2019s 0.65% Fee Is Steep, but Only If You Already Own EWY",
-          "publisher": "24/7 Wall St.",
-          "link": "https://247wallst.com/investing/etf/2026/09/18/portfolio-fit-kchp/",
           "when": "Sep 18"
         }
       ]
@@ -18783,7 +18783,7 @@
       ],
       "news": [
         {
-          "title": "Dow Jones Futures: Nasdaq, S&P 500 Hold; Robinhood, Sandisk, AMD, Moderna Surge Into Buy Areas",
+          "title": "Dow Jones Futures: Will The Market Rally Take Flight? Robinhood, Sandisk, AMD, Moderna Surge Into Buy Areas",
           "publisher": "Investor's Business Daily",
           "link": "https://www.investors.com/market-trend/stock-market-today/dow-jones-futures-robinhood-sandisk-amd-moderna-surge-buy-areas/?src=A00220&yptr=yahoo",
           "when": "Sep 19"
@@ -261037,7 +261037,7 @@
       "type": "closed"
     }
   ],
-  "generated_at": "2026-09-19T13:05:21+00:00",
+  "generated_at": "2026-09-19T13:34:01+00:00",
   "universe": {
     "wheel": 21,
     "growth": 18,
