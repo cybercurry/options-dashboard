@@ -14471,8 +14471,8 @@
     },
     {
       "label": "Bitcoin",
-      "price": 81617.5234375,
-      "pct": 0.8851045354461462,
+      "price": 81579.1015625,
+      "pct": 0.8376123461151241,
       "prefix": "$",
       "is_yield": false,
       "hist": [
@@ -14565,13 +14565,13 @@
         76150,
         76404,
         80901,
-        81618
+        81579
       ]
     },
     {
       "label": "Ethereum",
-      "price": 2641.35009765625,
-      "pct": 1.1489445009656762,
+      "price": 2637.239990234375,
+      "pct": 0.9915503607957898,
       "prefix": "$",
       "is_yield": false,
       "hist": [
@@ -14664,7 +14664,7 @@
         2416,
         2447,
         2611,
-        2641
+        2637
       ]
     }
   ],
@@ -14738,8 +14738,8 @@
     {
       "label": "Digital Assets",
       "ticker": "BTC",
-      "pct": 0.8851045354461462,
-      "price": 81617.5234375
+      "pct": 0.8376123461151241,
+      "price": 81579.1015625
     }
   ],
   "fundamentals": {
@@ -14822,6 +14822,18 @@
           "when": "Sep 18"
         },
         {
+          "title": "Coinbase Files With CFTC To List US Single-Stock Perpetual Futures, Including AAPL And TSLA Contracts",
+          "publisher": "Stocktwits",
+          "link": "https://stocktwits.com/news-articles/markets/equity/coinbase-apple-tesla-perpetual-futures-coin-tsla-aapl/cZtxEhbRBEs",
+          "when": "Sep 19"
+        },
+        {
+          "title": "The Stock Market's Biggest Companies Are Losing Their Grip. Here's the ETF I'd Buy If History Repeats.",
+          "publisher": "Motley Fool",
+          "link": "https://www.fool.com/investing/2026/09/19/stock-market-biggest-companies-losing-etf-to-buy/",
+          "when": "Sep 19"
+        },
+        {
           "title": "The S&P 500 Has Returned About 11% Annually Since 1958. Here's the ETF I'd Trust for the Next 30 Years.",
           "publisher": "Motley Fool",
           "link": "https://www.fool.com/investing/2026/09/19/sp-500-returned-annually-etf-trust-30-years-vti/",
@@ -14831,18 +14843,6 @@
           "title": "Intel Corporation (INTC)\u2019s Terafab Partnership Could Give Its AI Foundry Ambitions a Major Boost",
           "publisher": "Insider Monkey",
           "link": "https://finance.yahoo.com/technology/ai/articles/intel-corporation-intc-terafab-partnership-081341477.html",
-          "when": "Sep 19"
-        },
-        {
-          "title": "Why Tesla's Robotaxi/Cybercab Bet Just Got Complicated. What It Means to Investors.",
-          "publisher": "Motley Fool",
-          "link": "https://www.fool.com/investing/2026/09/19/why-teslas-robotaxicybercab-bet-just-got-complicat/",
-          "when": "Sep 19"
-        },
-        {
-          "title": "A Nine-Year-Late Sports Car, An Unpriced Robotaxi Pact, Supplier Snags And GM\u2019s Hybrid Gap: The EV Wrap",
-          "publisher": "Stocktwits",
-          "link": "https://stocktwits.com/news-articles/markets/equity/a-nine-year-late-sports-car-an-unpriced-robotaxi-pact-supplier-snags-and-gm-s-hybrid-gap-the-ev-wrap/cZtDZLFRBE1",
           "when": "Sep 19"
         }
       ]
@@ -15026,6 +15026,18 @@
       ],
       "news": [
         {
+          "title": "If There's Just 1 Move All Investors Should Make Right Now, History Says It's This",
+          "publisher": "Motley Fool",
+          "link": "https://www.fool.com/investing/2026/09/19/if-theres-just-1-move-all-investors-should-make/",
+          "when": "Sep 19"
+        },
+        {
+          "title": "The Stock Market's Biggest Companies Are Losing Their Grip. Here's the ETF I'd Buy If History Repeats.",
+          "publisher": "Motley Fool",
+          "link": "https://www.fool.com/investing/2026/09/19/stock-market-biggest-companies-losing-etf-to-buy/",
+          "when": "Sep 19"
+        },
+        {
           "title": "Warren Buffett Watched Alphabet's Stock Price Climb 9,000% Before He Decided to Invest. Here's Why He and Greg Abel Are Making It One of Berkshire Hathaway's Biggest Investments Now.",
           "publisher": "Motley Fool",
           "link": "https://www.fool.com/investing/2026/09/19/warren-buffett-watched-alphabets-stock-price-climb/",
@@ -15047,18 +15059,6 @@
           "title": "Anthropic's IPO Is Coming. Here's What That Means for S&P 500 Investors.",
           "publisher": "Motley Fool",
           "link": "https://www.fool.com/investing/2026/09/19/anthropic-ipo-coming-what-means-sp-500/",
-          "when": "Sep 19"
-        },
-        {
-          "title": "Has AGNC's Monthly Dividend Made Up for What Its Share Price Did?",
-          "publisher": "Motley Fool",
-          "link": "https://www.fool.com/investing/2026/09/19/has-agncs-monthly-dividend-made-up-for-what-its-sh/",
-          "when": "Sep 19"
-        },
-        {
-          "title": "Is Arm Holdings Still a Hidden Winner of the AI Chip Race?",
-          "publisher": "Motley Fool",
-          "link": "https://www.fool.com/investing/2026/09/19/is-arm-holdings-still-a-hidden-winner-ai-chip-race/",
           "when": "Sep 19"
         }
       ]
@@ -15121,6 +15121,12 @@
       "flags": [],
       "news": [
         {
+          "title": "The Stock Market's Biggest Companies Are Losing Their Grip. Here's the ETF I'd Buy If History Repeats.",
+          "publisher": "Motley Fool",
+          "link": "https://www.fool.com/investing/2026/09/19/stock-market-biggest-companies-losing-etf-to-buy/",
+          "when": "Sep 19"
+        },
+        {
           "title": "CVS division completes Chapter 11 bankruptcy liquidation",
           "publisher": "TheStreet",
           "link": "https://www.thestreet.com/retail/cvs-omnicare-completes-chapter-11-bankruptcy-liquidation",
@@ -15148,12 +15154,6 @@
           "title": "These 15 Words From Amazon\u2019s Andy Jassy May Eliminate Nvidia\u2019s Biggest Risk",
           "publisher": "Motley Fool",
           "link": "https://www.fool.com/investing/2026/09/19/these-15-words-from-amazon-s-andy-jassy-may-eliminate-nvidia-s-biggest-risk/",
-          "when": "Sep 19"
-        },
-        {
-          "title": "Is Affirm Holdings, Inc. (AFRM) Stock a Buy After Goldman Sachs Raised Its Price Target?",
-          "publisher": "Insider Monkey",
-          "link": "https://finance.yahoo.com/markets/stocks/articles/affirm-holdings-inc-afrm-stock-080841812.html",
           "when": "Sep 19"
         }
       ]
@@ -15216,6 +15216,12 @@
       "flags": [],
       "news": [
         {
+          "title": "The Stock Market's Biggest Companies Are Losing Their Grip. Here's the ETF I'd Buy If History Repeats.",
+          "publisher": "Motley Fool",
+          "link": "https://www.fool.com/investing/2026/09/19/stock-market-biggest-companies-losing-etf-to-buy/",
+          "when": "Sep 19"
+        },
+        {
           "title": "How Investors Are Reacting To Ultragenyx Pharmaceutical (RARE) First-In-Disease Gene Therapy Approval For FAYUVI",
           "publisher": "Simply Wall St.",
           "link": "https://finance.yahoo.com/healthcare/articles/investors-reacting-ultragenyx-pharmaceutical-rare-141033462.html",
@@ -15243,12 +15249,6 @@
           "title": "The S&P 500 Has Returned About 11% Annually Since 1958. Here's the ETF I'd Trust for the Next 30 Years.",
           "publisher": "Motley Fool",
           "link": "https://www.fool.com/investing/2026/09/19/sp-500-returned-annually-etf-trust-30-years-vti/",
-          "when": "Sep 19"
-        },
-        {
-          "title": "Sam Altman Admits the AI Industry Has Done \"a Terrible Job\" Explaining Its Benefits Amid Growing Backlash. Should That Worry Nvidia and Microsoft Investors?",
-          "publisher": "Motley Fool",
-          "link": "https://www.fool.com/investing/2026/09/19/sam-altman-ai-industry-worry-nvidia-microsoft/",
           "when": "Sep 19"
         }
       ]
@@ -16024,15 +16024,15 @@
           "when": "Sep 18"
         },
         {
-          "title": "John Ternus's First iPhone Launch Prompted a Bank of America Price Target Cut. Is Apple Stock a Buy?",
-          "publisher": "Motley Fool",
-          "link": "https://www.fool.com/investing/2026/09/19/john-ternuss-first-iphone-launch-prompted-a-bank-o/",
+          "title": "Coinbase Files With CFTC To List US Single-Stock Perpetual Futures, Including AAPL And TSLA Contracts",
+          "publisher": "Stocktwits",
+          "link": "https://stocktwits.com/news-articles/markets/equity/coinbase-apple-tesla-perpetual-futures-coin-tsla-aapl/cZtxEhbRBEs",
           "when": "Sep 19"
         },
         {
-          "title": "History Says You Should Know These 3 Things Before Buying Apple Stock (AAPL)",
+          "title": "The Stock Market's Biggest Companies Are Losing Their Grip. Here's the ETF I'd Buy If History Repeats.",
           "publisher": "Motley Fool",
-          "link": "https://www.fool.com/investing/2026/09/19/history-says-3-things-before-buy-apple-stock-aapl/",
+          "link": "https://www.fool.com/investing/2026/09/19/stock-market-biggest-companies-losing-etf-to-buy/",
           "when": "Sep 19"
         }
       ]
@@ -16107,6 +16107,12 @@
           "when": "Sep 18"
         },
         {
+          "title": "The Stock Market's Biggest Companies Are Losing Their Grip. Here's the ETF I'd Buy If History Repeats.",
+          "publisher": "Motley Fool",
+          "link": "https://www.fool.com/investing/2026/09/19/stock-market-biggest-companies-losing-etf-to-buy/",
+          "when": "Sep 19"
+        },
+        {
           "title": "Warren Buffett Watched Alphabet's Stock Price Climb 9,000% Before He Decided to Invest. Here's Why He and Greg Abel Are Making It One of Berkshire Hathaway's Biggest Investments Now.",
           "publisher": "Motley Fool",
           "link": "https://www.fool.com/investing/2026/09/19/warren-buffett-watched-alphabets-stock-price-climb/",
@@ -16122,12 +16128,6 @@
           "title": "Cathie Wood Is Selling 2 Magnificent Seven Stocks, but Piling Into Another",
           "publisher": "Motley Fool",
           "link": "https://www.fool.com/investing/2026/09/19/cathie-wood-is-selling-2-magnificent-seven-stocks/",
-          "when": "Sep 19"
-        },
-        {
-          "title": "The S&P 500 Has Returned About 11% Annually Since 1958. Here's the ETF I'd Trust for the Next 30 Years.",
-          "publisher": "Motley Fool",
-          "link": "https://www.fool.com/investing/2026/09/19/sp-500-returned-annually-etf-trust-30-years-vti/",
           "when": "Sep 19"
         }
       ]
@@ -16498,6 +16498,12 @@
       "flags": [],
       "news": [
         {
+          "title": "The Stock Market's Biggest Companies Are Losing Their Grip. Here's the ETF I'd Buy If History Repeats.",
+          "publisher": "Motley Fool",
+          "link": "https://www.fool.com/investing/2026/09/19/stock-market-biggest-companies-losing-etf-to-buy/",
+          "when": "Sep 19"
+        },
+        {
           "title": "Bill Ackman's Pershing Square IPO Breaks Out",
           "publisher": "Investor's Business Daily",
           "link": "https://www.investors.com/news/bill-ackman-pershing-square-ipo-stock-setting-up/?src=A00220&yptr=yahoo",
@@ -16525,12 +16531,6 @@
           "title": "CleanSpark reveals Meta as the tenant behind $6.6B Sandersville lease",
           "publisher": "Blockspace",
           "link": "https://blockspace.media/short/cleanspark-reveals-meta-as-the-tenant-behind-6-6b-sandersville-lease/",
-          "when": "Sep 18"
-        },
-        {
-          "title": "What Happens To Reddit Stock If Search Keeps Sending Fewer People?",
-          "publisher": "Trefis",
-          "link": "https://www.trefis.com/articles/615859/what-happens-to-reddit-stock-if-search-keeps-sending-fewer-people/2026-09-18",
           "when": "Sep 18"
         }
       ]
@@ -16732,6 +16732,12 @@
           "when": "Sep 18"
         },
         {
+          "title": "These 3 Stocks Are Drawing Insider Buyers for Very Different Reasons",
+          "publisher": "MarketBeat",
+          "link": "https://www.marketbeat.com/articles/these-3-stocks-are-drawing-insider-buyers-for-very-different-reasons/?utm_source=yahoofinance&utm_medium=yahoofinance",
+          "when": "Sep 18"
+        },
+        {
           "title": "Uber Ordered to Pay $40 Million in Wrongful Death Lawsuit",
           "publisher": "The Wall Street Journal",
           "link": "https://www.wsj.com/business/uber-ordered-to-pay-40-million-in-wrongful-death-lawsuit-29590cc4?siteid=yhoof2&yptr=yahoo",
@@ -16741,12 +16747,6 @@
           "title": "2 Cash-Producing Stocks to Target This Week and 1 We Avoid",
           "publisher": "StockStory",
           "link": "https://finance.yahoo.com/markets/stocks/articles/2-cash-producing-stocks-target-113640870.html",
-          "when": "Sep 18"
-        },
-        {
-          "title": "U.S. to Launch AI-Powered Tool for Air-Traffic Control",
-          "publisher": "The Wall Street Journal",
-          "link": "https://www.wsj.com/logistics-report/u-s-to-launch-ai-powered-tool-for-air-traffic-control-4b6adef2?siteid=yhoof2&yptr=yahoo",
           "when": "Sep 18"
         }
       ]
@@ -20200,6 +20200,12 @@
           "when": "Sep 18"
         },
         {
+          "title": "The Stock Market's Biggest Companies Are Losing Their Grip. Here's the ETF I'd Buy If History Repeats.",
+          "publisher": "Motley Fool",
+          "link": "https://www.fool.com/investing/2026/09/19/stock-market-biggest-companies-losing-etf-to-buy/",
+          "when": "Sep 19"
+        },
+        {
           "title": "Warren Buffett Watched Alphabet's Stock Price Climb 9,000% Before He Decided to Invest. Here's Why He and Greg Abel Are Making It One of Berkshire Hathaway's Biggest Investments Now.",
           "publisher": "Motley Fool",
           "link": "https://www.fool.com/investing/2026/09/19/warren-buffett-watched-alphabets-stock-price-climb/",
@@ -20215,12 +20221,6 @@
           "title": "Cathie Wood Is Selling 2 Magnificent Seven Stocks, but Piling Into Another",
           "publisher": "Motley Fool",
           "link": "https://www.fool.com/investing/2026/09/19/cathie-wood-is-selling-2-magnificent-seven-stocks/",
-          "when": "Sep 19"
-        },
-        {
-          "title": "The S&P 500 Has Returned About 11% Annually Since 1958. Here's the ETF I'd Trust for the Next 30 Years.",
-          "publisher": "Motley Fool",
-          "link": "https://www.fool.com/investing/2026/09/19/sp-500-returned-annually-etf-trust-30-years-vti/",
           "when": "Sep 19"
         }
       ]
@@ -261037,7 +261037,7 @@
       "type": "closed"
     }
   ],
-  "generated_at": "2026-09-19T15:05:44+00:00",
+  "generated_at": "2026-09-19T15:34:14+00:00",
   "universe": {
     "wheel": 21,
     "growth": 18,
