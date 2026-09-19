@@ -14471,8 +14471,8 @@
     },
     {
       "label": "Bitcoin",
-      "price": 81370.6484375,
-      "pct": 0.5799493538966694,
+      "price": 81339.90625,
+      "pct": 0.5419498083461205,
       "prefix": "$",
       "is_yield": false,
       "hist": [
@@ -14565,13 +14565,13 @@
         76150,
         76404,
         80901,
-        81371
+        81340
       ]
     },
     {
       "label": "Ethereum",
-      "price": 2637.090087890625,
-      "pct": 0.9858099389327579,
+      "price": 2633.1298828125,
+      "pct": 0.8341562206259256,
       "prefix": "$",
       "is_yield": false,
       "hist": [
@@ -14664,7 +14664,7 @@
         2416,
         2447,
         2611,
-        2637
+        2633
       ]
     }
   ],
@@ -14738,8 +14738,8 @@
     {
       "label": "Digital Assets",
       "ticker": "BTC",
-      "pct": 0.5799493538966694,
-      "price": 81370.6484375
+      "pct": 0.5419498083461205,
+      "price": 81339.90625
     }
   ],
   "fundamentals": {
@@ -16101,6 +16101,12 @@
           "when": "Sep 19"
         },
         {
+          "title": "Three Frontier Labs Are Building a FINRA-Style Safety Body. History Suggests It Won\u2019t Be a Brake.",
+          "publisher": "Forkast News",
+          "link": "https://finance.yahoo.com/technology/ai/articles/three-frontier-labs-building-finra-194134029.html",
+          "when": "Sep 19"
+        },
+        {
           "title": "Forget Buying All Seven: The \"Magnificent Seven\" Stock Most Likely to Double by 2028",
           "publisher": "Motley Fool",
           "link": "https://www.fool.com/investing/2026/09/19/forget-buying-all-seven-the-magnificent-seven-stoc/",
@@ -16122,12 +16128,6 @@
           "title": "Warren Buffett found the most boring way to bet on AI",
           "publisher": "CNN Business",
           "link": "https://www.cnn.com/2026/09/19/investing/warren-buffett-berkshire-ai-energy",
-          "when": "Sep 19"
-        },
-        {
-          "title": "Cathie Wood Is Selling 2 Magnificent Seven Stocks, but Piling Into Another",
-          "publisher": "Motley Fool",
-          "link": "https://www.fool.com/investing/2026/09/19/cathie-wood-is-selling-2-magnificent-seven-stocks/",
           "when": "Sep 19"
         }
       ]
@@ -20194,6 +20194,12 @@
           "when": "Sep 19"
         },
         {
+          "title": "Three Frontier Labs Are Building a FINRA-Style Safety Body. History Suggests It Won\u2019t Be a Brake.",
+          "publisher": "Forkast News",
+          "link": "https://finance.yahoo.com/technology/ai/articles/three-frontier-labs-building-finra-194134029.html",
+          "when": "Sep 19"
+        },
+        {
           "title": "Forget Buying All Seven: The \"Magnificent Seven\" Stock Most Likely to Double by 2028",
           "publisher": "Motley Fool",
           "link": "https://www.fool.com/investing/2026/09/19/forget-buying-all-seven-the-magnificent-seven-stoc/",
@@ -20215,12 +20221,6 @@
           "title": "Warren Buffett found the most boring way to bet on AI",
           "publisher": "CNN Business",
           "link": "https://www.cnn.com/2026/09/19/investing/warren-buffett-berkshire-ai-energy",
-          "when": "Sep 19"
-        },
-        {
-          "title": "Cathie Wood Is Selling 2 Magnificent Seven Stocks, but Piling Into Another",
-          "publisher": "Motley Fool",
-          "link": "https://www.fool.com/investing/2026/09/19/cathie-wood-is-selling-2-magnificent-seven-stocks/",
           "when": "Sep 19"
         }
       ]
@@ -21288,6 +21288,12 @@
       ],
       "news": [
         {
+          "title": "CoreWeave (CRWV) Is Charging More for AI Compute, and Customers Keep Paying",
+          "publisher": "Insider Monkey",
+          "link": "https://finance.yahoo.com/technology/ai/articles/coreweave-crwv-charging-more-ai-193252050.html",
+          "when": "Sep 19"
+        },
+        {
           "title": "The Unexpected Rival Threatening to Shake Up CoreWeave's Market",
           "publisher": "Motley Fool",
           "link": "https://www.fool.com/investing/2026/09/19/surprise-rival-threatening-to-shake-up-coreweave/",
@@ -21315,12 +21321,6 @@
           "title": "Jim Cramer on CoreWeave (CRWV): \u201cI Think It\u2019s Going to Be Okay to Buy\u201d",
           "publisher": "Insider Monkey",
           "link": "https://finance.yahoo.com/markets/stocks/articles/jim-cramer-coreweave-crwv-think-172910718.html",
-          "when": "Sep 18"
-        },
-        {
-          "title": "Nebius Offers Fresh Clue About AI's Spending Boom",
-          "publisher": "GuruFocus.com",
-          "link": "https://finance.yahoo.com/technology/ai/articles/nebius-offers-fresh-clue-ais-161936309.html",
           "when": "Sep 18"
         }
       ]
@@ -261037,7 +261037,7 @@
       "type": "closed"
     }
   ],
-  "generated_at": "2026-09-19T19:35:30+00:00",
+  "generated_at": "2026-09-19T20:05:14+00:00",
   "universe": {
     "wheel": 21,
     "growth": 18,
