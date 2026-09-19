@@ -14471,8 +14471,8 @@
     },
     {
       "label": "Bitcoin",
-      "price": 81237.3671875,
-      "pct": 0.4152041830981279,
+      "price": 81325.453125,
+      "pct": 0.5240847106921187,
       "prefix": "$",
       "is_yield": false,
       "hist": [
@@ -14565,13 +14565,13 @@
         76150,
         76404,
         80901,
-        81237
+        81325
       ]
     },
     {
       "label": "Ethereum",
-      "price": 2634.739990234375,
-      "pct": 0.8958143349365955,
+      "price": 2639.159912109375,
+      "pct": 1.0650726369048513,
       "prefix": "$",
       "is_yield": false,
       "hist": [
@@ -14664,7 +14664,7 @@
         2416,
         2447,
         2611,
-        2635
+        2639
       ]
     }
   ],
@@ -14738,8 +14738,8 @@
     {
       "label": "Digital Assets",
       "ticker": "BTC",
-      "pct": 0.4152041830981279,
-      "price": 81237.3671875
+      "pct": 0.5240847106921187,
+      "price": 81325.453125
     }
   ],
   "fundamentals": {
@@ -15032,6 +15032,18 @@
           "when": "Sep 18"
         },
         {
+          "title": "Is Arm Holdings Still a Hidden Winner of the AI Chip Race?",
+          "publisher": "Motley Fool",
+          "link": "https://www.fool.com/investing/2026/09/19/is-arm-holdings-still-a-hidden-winner-ai-chip-race/",
+          "when": "Sep 19"
+        },
+        {
+          "title": "What History Says About Owning Berkshire Hathaway Through a Recession",
+          "publisher": "Motley Fool",
+          "link": "https://www.fool.com/investing/2026/09/19/what-history-says-about-owning-berkshire-hathaway/",
+          "when": "Sep 19"
+        },
+        {
           "title": "Fed Chair Kevin Warsh and the FOMC Just Hiked Interest Rates, and 36 Years of History Make Clear What Comes Next for Stocks",
           "publisher": "Motley Fool",
           "link": "https://www.fool.com/investing/2026/09/19/fed-chair-kevin-warsh-fomc-hiked-interest-rates-36-years-history-make-clear-what-next-for-stocks/",
@@ -15047,18 +15059,6 @@
           "title": "Is Micron's 9% Dip a Warning Sign or Buying Opportunity?",
           "publisher": "Motley Fool",
           "link": "https://www.fool.com/investing/2026/09/19/is-microns-9-dip-a-warning-sign-or-buying-opportun/",
-          "when": "Sep 19"
-        },
-        {
-          "title": "John Ternus's First iPhone Launch Prompted a Bank of America Price Target Cut. Is Apple Stock a Buy?",
-          "publisher": "Motley Fool",
-          "link": "https://www.fool.com/investing/2026/09/19/john-ternuss-first-iphone-launch-prompted-a-bank-o/",
-          "when": "Sep 19"
-        },
-        {
-          "title": "Can Bitcoin Reclaim $100,000 in 2026? One Factor Could Decide Everything.",
-          "publisher": "Motley Fool",
-          "link": "https://www.fool.com/investing/2026/09/19/can-bitcoin-reclaim-x-in-2026-one-factor-could-dec/",
           "when": "Sep 19"
         }
       ]
@@ -15216,12 +15216,6 @@
       "flags": [],
       "news": [
         {
-          "title": "'Astonishing theft of unprecedented proportions': NYT vs. OpenAI, Microsoft lawsuit",
-          "publisher": "Yahoo Finance Video",
-          "link": "https://finance.yahoo.com/video/astonishing-theft-unprecedented-proportions-nyt-134822530.html",
-          "when": "Sep 18"
-        },
-        {
           "title": "Bill Ackman's Pershing Square IPO Breaks Out",
           "publisher": "Investor's Business Daily",
           "link": "https://www.investors.com/news/bill-ackman-pershing-square-ipo-stock-setting-up/?src=A00220&yptr=yahoo",
@@ -15250,6 +15244,12 @@
           "publisher": "Investing.com",
           "link": "https://finance.yahoo.com/technology/ai/articles/position-next-wave-ai-led-013630980.html",
           "when": "Sep 19"
+        },
+        {
+          "title": "CRWD Stock Keeps Climbing. Should You Climb On?",
+          "publisher": "Trefis",
+          "link": "https://www.trefis.com/articles/615810/crwd-stock-keeps-climbing-should-you-climb-on/2026-09-18",
+          "when": "Sep 18"
         }
       ]
     },
@@ -16195,6 +16195,12 @@
       ],
       "news": [
         {
+          "title": "Is Arm Holdings Still a Hidden Winner of the AI Chip Race?",
+          "publisher": "Motley Fool",
+          "link": "https://www.fool.com/investing/2026/09/19/is-arm-holdings-still-a-hidden-winner-ai-chip-race/",
+          "when": "Sep 19"
+        },
+        {
           "title": "Dow Jones Futures: Will The Market Rally Take Flight? Robinhood, Sandisk, AMD, Moderna Surge Into Buy Areas",
           "publisher": "Investor's Business Daily",
           "link": "https://www.investors.com/market-trend/stock-market-today/dow-jones-futures-robinhood-sandisk-amd-moderna-surge-buy-areas/?src=A00220&yptr=yahoo",
@@ -16222,12 +16228,6 @@
           "title": "Chip Stocks Break Through Ceiling As Sector Rebounds. Macom Is A Standout.",
           "publisher": "Investor's Business Daily",
           "link": "https://www.investors.com/news/technology/chip-stocks-hit-ceiling-macom-technology-solutions-mtsi/?src=A00220&yptr=yahoo",
-          "when": "Sep 18"
-        },
-        {
-          "title": "Top Research Reports for AMD, Linde & Amgen",
-          "publisher": "Zacks",
-          "link": "https://finance.yahoo.com/markets/stocks/articles/top-research-reports-amd-linde-202800486.html",
           "when": "Sep 18"
         }
       ]
@@ -16498,12 +16498,6 @@
       "flags": [],
       "news": [
         {
-          "title": "'Astonishing theft of unprecedented proportions': NYT vs. OpenAI, Microsoft lawsuit",
-          "publisher": "Yahoo Finance Video",
-          "link": "https://finance.yahoo.com/video/astonishing-theft-unprecedented-proportions-nyt-134822530.html",
-          "when": "Sep 18"
-        },
-        {
           "title": "Bill Ackman's Pershing Square IPO Breaks Out",
           "publisher": "Investor's Business Daily",
           "link": "https://www.investors.com/news/bill-ackman-pershing-square-ipo-stock-setting-up/?src=A00220&yptr=yahoo",
@@ -16531,6 +16525,12 @@
           "title": "What Happens To Reddit Stock If Search Keeps Sending Fewer People?",
           "publisher": "Trefis",
           "link": "https://www.trefis.com/articles/615859/what-happens-to-reddit-stock-if-search-keeps-sending-fewer-people/2026-09-18",
+          "when": "Sep 18"
+        },
+        {
+          "title": "S&P 500 Posts Slight Weekly Decline as Utilities Weigh",
+          "publisher": "MT Newswires",
+          "link": "https://finance.yahoo.com/markets/stocks/articles/p-500-posts-slight-weekly-204640571.html",
           "when": "Sep 18"
         }
       ]
@@ -261037,7 +261037,7 @@
       "type": "closed"
     }
   ],
-  "generated_at": "2026-09-19T13:34:01+00:00",
+  "generated_at": "2026-09-19T14:05:37+00:00",
   "universe": {
     "wheel": 21,
     "growth": 18,
