@@ -14471,8 +14471,8 @@
     },
     {
       "label": "Bitcoin",
-      "price": 81235.671875,
-      "pct": 0.4131086554273633,
+      "price": 81311.5,
+      "pct": 0.5068376488488457,
       "prefix": "$",
       "is_yield": false,
       "hist": [
@@ -14565,13 +14565,13 @@
         76150,
         76404,
         80901,
-        81236
+        81312
       ]
     },
     {
       "label": "Ethereum",
-      "price": 2639.760009765625,
-      "pct": 1.0880530227995733,
+      "price": 2642.5,
+      "pct": 1.1929793331723948,
       "prefix": "$",
       "is_yield": false,
       "hist": [
@@ -14664,7 +14664,7 @@
         2416,
         2447,
         2611,
-        2640
+        2642
       ]
     }
   ],
@@ -14738,8 +14738,8 @@
     {
       "label": "Digital Assets",
       "ticker": "BTC",
-      "pct": 0.4131086554273633,
-      "price": 81235.671875
+      "pct": 0.5068376488488457,
+      "price": 81311.5
     }
   ],
   "fundamentals": {
@@ -15032,33 +15032,33 @@
           "when": "Sep 18"
         },
         {
+          "title": "John Ternus's First iPhone Launch Prompted a Bank of America Price Target Cut. Is Apple Stock a Buy?",
+          "publisher": "Motley Fool",
+          "link": "https://www.fool.com/investing/2026/09/19/john-ternuss-first-iphone-launch-prompted-a-bank-o/",
+          "when": "Sep 19"
+        },
+        {
+          "title": "Can Bitcoin Reclaim $100,000 in 2026? One Factor Could Decide Everything.",
+          "publisher": "Motley Fool",
+          "link": "https://www.fool.com/investing/2026/09/19/can-bitcoin-reclaim-x-in-2026-one-factor-could-dec/",
+          "when": "Sep 19"
+        },
+        {
           "title": "Ray Dalio Just Explained Why He's Cautious on AI Stocks. Here's What He Said.",
           "publisher": "Motley Fool",
           "link": "https://www.fool.com/investing/2026/09/19/ray-dalio-just-explained-why-hes-cautious-on-ai-st/",
           "when": "Sep 19"
         },
         {
+          "title": "Could IonQ (IONQ) AI Written Quantum Circuits Unlock More Real World Workloads?",
+          "publisher": "Simply Wall St.",
+          "link": "https://finance.yahoo.com/technology/ai/articles/could-ionq-ionq-ai-written-121108000.html",
+          "when": "Sep 19"
+        },
+        {
           "title": "Is Walt Disney Stock a Buy, Sell, or Hold 47% Below Its All-Time High?",
           "publisher": "Motley Fool",
           "link": "https://www.fool.com/investing/2026/09/19/walt-disney-stock-buy-sell-hold-all-time-high/",
-          "when": "Sep 19"
-        },
-        {
-          "title": "If You Invest $2,500 in the Vanguard Morningstar Growth ETF (VUG) Right Now and Hold for 20 Years, Here's How Much Wealth History Suggests You Could Generate",
-          "publisher": "Motley Fool",
-          "link": "https://www.fool.com/investing/2026/09/19/if-invest-2500-vug-right-now-hold-wealth/",
-          "when": "Sep 19"
-        },
-        {
-          "title": "Breakfast News: The Art of Losing Less",
-          "publisher": "Motley Fool",
-          "link": "https://www.fool.com/investing/breakfast-news/2026/09/19/breakfast-news/",
-          "when": "Sep 19"
-        },
-        {
-          "title": "Here's Why Walmart Won't Reclaim a $1 Trillion Market Cap Anytime Soon",
-          "publisher": "Motley Fool",
-          "link": "https://www.fool.com/investing/2026/09/19/heres-why-walmart-wont-reclaim-a-1-trillion-market/",
           "when": "Sep 19"
         }
       ]
@@ -16024,15 +16024,15 @@
           "when": "Sep 18"
         },
         {
-          "title": "History Says You Should Know These 3 Things Before Buying Apple Stock (AAPL)",
+          "title": "John Ternus's First iPhone Launch Prompted a Bank of America Price Target Cut. Is Apple Stock a Buy?",
           "publisher": "Motley Fool",
-          "link": "https://www.fool.com/investing/2026/09/19/history-says-3-things-before-buy-apple-stock-aapl/",
+          "link": "https://www.fool.com/investing/2026/09/19/john-ternuss-first-iphone-launch-prompted-a-bank-o/",
           "when": "Sep 19"
         },
         {
-          "title": "Warren Buffett found the most boring way to bet on AI",
-          "publisher": "CNN Business",
-          "link": "https://www.cnn.com/2026/09/19/investing/warren-buffett-berkshire-ai-energy",
+          "title": "History Says You Should Know These 3 Things Before Buying Apple Stock (AAPL)",
+          "publisher": "Motley Fool",
+          "link": "https://www.fool.com/investing/2026/09/19/history-says-3-things-before-buy-apple-stock-aapl/",
           "when": "Sep 19"
         }
       ]
@@ -16714,6 +16714,12 @@
       ],
       "news": [
         {
+          "title": "Uber CEO Dara Khosrowshahi fled Iran at 9 \u2014 and watched the government seize his family's business that made them rich",
+          "publisher": "Moneywise",
+          "link": "https://finance.yahoo.com/small-business/articles/uber-ceo-dara-khosrowshahi-fled-123000963.html",
+          "when": "Sep 19"
+        },
+        {
           "title": "Sector Update: Consumer Stocks Softer Late Afternoon",
           "publisher": "MT Newswires",
           "link": "https://finance.yahoo.com/markets/stocks/articles/sector-consumer-stocks-softer-afternoon-195143538.html",
@@ -16741,12 +16747,6 @@
           "title": "U.S. to Launch AI-Powered Tool for Air-Traffic Control",
           "publisher": "The Wall Street Journal",
           "link": "https://www.wsj.com/logistics-report/u-s-to-launch-ai-powered-tool-for-air-traffic-control-4b6adef2?siteid=yhoof2&yptr=yahoo",
-          "when": "Sep 18"
-        },
-        {
-          "title": "Costco now offers nationwide delivery on Uber and DoorDash",
-          "publisher": "Grocery Dive",
-          "link": "https://www.grocerydive.com/news/costco-uber-doordash-nationwide-same-day-delivery-ecommerce/830722/",
           "when": "Sep 18"
         }
       ]
@@ -261037,7 +261037,7 @@
       "type": "closed"
     }
   ],
-  "generated_at": "2026-09-19T12:34:58+00:00",
+  "generated_at": "2026-09-19T13:05:21+00:00",
   "universe": {
     "wheel": 21,
     "growth": 18,
