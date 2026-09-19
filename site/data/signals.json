@@ -14471,8 +14471,8 @@
     },
     {
       "label": "Bitcoin",
-      "price": 81846.5390625,
-      "pct": 1.168184250380988,
+      "price": 81555.0234375,
+      "pct": 0.807850059104509,
       "prefix": "$",
       "is_yield": false,
       "hist": [
@@ -14565,13 +14565,13 @@
         76150,
         76404,
         80901,
-        81847
+        81555
       ]
     },
     {
       "label": "Ethereum",
-      "price": 2647.2900390625,
-      "pct": 1.376411054594029,
+      "price": 2637.7099609375,
+      "pct": 1.009547611750783,
       "prefix": "$",
       "is_yield": false,
       "hist": [
@@ -14664,7 +14664,7 @@
         2416,
         2447,
         2611,
-        2647
+        2638
       ]
     }
   ],
@@ -14738,8 +14738,8 @@
     {
       "label": "Digital Assets",
       "ticker": "BTC",
-      "pct": 1.168184250380988,
-      "price": 81846.5390625
+      "pct": 0.807850059104509,
+      "price": 81555.0234375
     }
   ],
   "fundamentals": {
@@ -15026,6 +15026,18 @@
       ],
       "news": [
         {
+          "title": "Federal Reserve Inflation Outlook Signals a Critical Warning for Investors",
+          "publisher": "Motley Fool",
+          "link": "https://www.fool.com/investing/2026/09/19/federal-reserve-inflation-outlook-is-a-warning/",
+          "when": "Sep 19"
+        },
+        {
+          "title": "Better Artificial Intelligence (AI) Stock Pick for 2027: Nvidia versus Micron",
+          "publisher": "Motley Fool",
+          "link": "https://www.fool.com/investing/2026/09/19/better-artificial-intelligence-ai-stock-pick-for-2/",
+          "when": "Sep 19"
+        },
+        {
           "title": "Anthropic IPO: 1 Key Lesson Investors Can Learn From SpaceX",
           "publisher": "Motley Fool",
           "link": "https://www.fool.com/investing/2026/09/19/anthropic-ipo-lesson-investors-learn-spacex/",
@@ -15047,18 +15059,6 @@
           "title": "Warren Buffett Watched Alphabet's Stock Price Climb 9,000% Before He Decided to Invest. Here's Why He and Greg Abel Are Making It One of Berkshire Hathaway's Biggest Investments Now.",
           "publisher": "Motley Fool",
           "link": "https://www.fool.com/investing/2026/09/19/warren-buffett-watched-alphabets-stock-price-climb/",
-          "when": "Sep 19"
-        },
-        {
-          "title": "Upstart, Affirm, and SoFi All Lend to the Same Borrowers. Only One of Them Funds With Deposits.",
-          "publisher": "Motley Fool",
-          "link": "https://www.fool.com/investing/2026/09/19/upstart-affirm-and-sofi-all-lend-to-the-same-borro/",
-          "when": "Sep 19"
-        },
-        {
-          "title": "How Investors Are Reacting To Ultragenyx Pharmaceutical (RARE) First-In-Disease Gene Therapy Approval For FAYUVI",
-          "publisher": "Simply Wall St.",
-          "link": "https://finance.yahoo.com/healthcare/articles/investors-reacting-ultragenyx-pharmaceutical-rare-141033462.html",
           "when": "Sep 19"
         }
       ]
@@ -16018,12 +16018,6 @@
           "when": "Sep 18"
         },
         {
-          "title": "Apple's iPhone 18 Pro line hits stores with a $100 price bump amid memory crunch, AI pressure",
-          "publisher": "Yahoo Finance",
-          "link": "https://finance.yahoo.com/technology/article/apples-iphone-18-pro-line-hits-stores-with-a-100-price-bump-amid-memory-crunch-ai-pressure-155709106.html",
-          "when": "Sep 18"
-        },
-        {
           "title": "Coinbase Files With CFTC To List US Single-Stock Perpetual Futures, Including AAPL And TSLA Contracts",
           "publisher": "Stocktwits",
           "link": "https://stocktwits.com/news-articles/markets/equity/coinbase-apple-tesla-perpetual-futures-coin-tsla-aapl/cZtxEhbRBEs",
@@ -16033,6 +16027,12 @@
           "title": "The Stock Market's Biggest Companies Are Losing Their Grip. Here's the ETF I'd Buy If History Repeats.",
           "publisher": "Motley Fool",
           "link": "https://www.fool.com/investing/2026/09/19/stock-market-biggest-companies-losing-etf-to-buy/",
+          "when": "Sep 19"
+        },
+        {
+          "title": "John Ternus's First iPhone Launch Prompted a Bank of America Price Target Cut. Is Apple Stock a Buy?",
+          "publisher": "Motley Fool",
+          "link": "https://www.fool.com/investing/2026/09/19/john-ternuss-first-iphone-launch-prompted-a-bank-o/",
           "when": "Sep 19"
         }
       ]
@@ -18065,6 +18065,12 @@
       ],
       "news": [
         {
+          "title": "Better Artificial Intelligence (AI) Stock Pick for 2027: Nvidia versus Micron",
+          "publisher": "Motley Fool",
+          "link": "https://www.fool.com/investing/2026/09/19/better-artificial-intelligence-ai-stock-pick-for-2/",
+          "when": "Sep 19"
+        },
+        {
           "title": "Is Micron's 9% Dip a Warning Sign or Buying Opportunity?",
           "publisher": "Motley Fool",
           "link": "https://www.fool.com/investing/2026/09/19/is-microns-9-dip-a-warning-sign-or-buying-opportun/",
@@ -18093,12 +18099,6 @@
           "publisher": "Simply Wall St.",
           "link": "https://finance.yahoo.com/markets/stocks/articles/does-micron-technology-mu-warning-001915512.html",
           "when": "Sep 19"
-        },
-        {
-          "title": "Q3 Earnings Season Preview: What Can Investors Expect?",
-          "publisher": "Zacks",
-          "link": "https://finance.yahoo.com/markets/stocks/articles/q3-earnings-season-preview-investors-223700771.html",
-          "when": "Sep 18"
         }
       ]
     },
@@ -18878,6 +18878,12 @@
       "flags": [],
       "news": [
         {
+          "title": "Netflix (NFLX) Gets a Bullish $110 Target: What\u2019s Driving the Outlook?",
+          "publisher": "Insider Monkey",
+          "link": "https://finance.yahoo.com/markets/stocks/articles/netflix-nflx-gets-bullish-110-155252131.html",
+          "when": "Sep 19"
+        },
+        {
           "title": "Netflix Has $27 Billion Left to Buy Back Its Own Stock -- About 8% of the Whole Company",
           "publisher": "Motley Fool",
           "link": "https://www.fool.com/investing/2026/09/18/netflix-has-usd27-billion-left-to-buy-back-its-own-stock-about-8-of-the-whole-company/",
@@ -18905,12 +18911,6 @@
           "title": "Wells Fargo Brutally Revamps Netflix Stock Price Target",
           "publisher": "GuruFocus.com",
           "link": "https://finance.yahoo.com/markets/stocks/articles/wells-fargo-brutally-revamps-netflix-202122052.html",
-          "when": "Sep 18"
-        },
-        {
-          "title": "Netflix Drops 4.8% as Wells Fargo Cuts Its Target to $57",
-          "publisher": "GuruFocus.com",
-          "link": "https://finance.yahoo.com/markets/stocks/articles/netflix-drops-4-8-wells-202111557.html",
           "when": "Sep 18"
         }
       ]
@@ -261037,7 +261037,7 @@
       "type": "closed"
     }
   ],
-  "generated_at": "2026-09-19T15:46:08+00:00",
+  "generated_at": "2026-09-19T16:06:04+00:00",
   "universe": {
     "wheel": 21,
     "growth": 18,
