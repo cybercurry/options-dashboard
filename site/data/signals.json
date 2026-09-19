@@ -14471,8 +14471,8 @@
     },
     {
       "label": "Bitcoin",
-      "price": 81555.0234375,
-      "pct": 0.807850059104509,
+      "price": 81844.25,
+      "pct": 1.1653548051849816,
       "prefix": "$",
       "is_yield": false,
       "hist": [
@@ -14565,13 +14565,13 @@
         76150,
         76404,
         80901,
-        81555
+        81844
       ]
     },
     {
       "label": "Ethereum",
-      "price": 2637.7099609375,
-      "pct": 1.009547611750783,
+      "price": 2649.489990234375,
+      "pct": 1.4606568875058734,
       "prefix": "$",
       "is_yield": false,
       "hist": [
@@ -14664,7 +14664,7 @@
         2416,
         2447,
         2611,
-        2638
+        2649
       ]
     }
   ],
@@ -14738,8 +14738,8 @@
     {
       "label": "Digital Assets",
       "ticker": "BTC",
-      "pct": 0.807850059104509,
-      "price": 81555.0234375
+      "pct": 1.1653548051849816,
+      "price": 81844.25
     }
   ],
   "fundamentals": {
@@ -14816,12 +14816,6 @@
           "when": "Sep 18"
         },
         {
-          "title": "Trump takes aim at Warsh after Fed hike",
-          "publisher": "Yahoo Finance Video",
-          "link": "https://finance.yahoo.com/video/trump-takes-aim-warsh-fed-163036956.html",
-          "when": "Sep 18"
-        },
-        {
           "title": "Coinbase Files With CFTC To List US Single-Stock Perpetual Futures, Including AAPL And TSLA Contracts",
           "publisher": "Stocktwits",
           "link": "https://stocktwits.com/news-articles/markets/equity/coinbase-apple-tesla-perpetual-futures-coin-tsla-aapl/cZtxEhbRBEs",
@@ -14843,6 +14837,12 @@
           "title": "Intel Corporation (INTC)\u2019s Terafab Partnership Could Give Its AI Foundry Ambitions a Major Boost",
           "publisher": "Insider Monkey",
           "link": "https://finance.yahoo.com/technology/ai/articles/intel-corporation-intc-terafab-partnership-081341477.html",
+          "when": "Sep 19"
+        },
+        {
+          "title": "Why Tesla's Robotaxi/Cybercab Bet Just Got Complicated. What It Means to Investors.",
+          "publisher": "Motley Fool",
+          "link": "https://www.fool.com/investing/2026/09/19/why-teslas-robotaxicybercab-bet-just-got-complicat/",
           "when": "Sep 19"
         }
       ]
@@ -14926,6 +14926,12 @@
       ],
       "news": [
         {
+          "title": "What SoFi Technologies (SOFI)'s Record Q2 2026 Cross-Buy Momentum Means For Shareholders",
+          "publisher": "Simply Wall St.",
+          "link": "https://finance.yahoo.com/markets/stocks/articles/sofi-technologies-sofi-record-q2-161145148.html",
+          "when": "Sep 19"
+        },
+        {
           "title": "Upstart, Affirm, and SoFi All Lend to the Same Borrowers. Only One of Them Funds With Deposits.",
           "publisher": "Motley Fool",
           "link": "https://www.fool.com/investing/2026/09/19/upstart-affirm-and-sofi-all-lend-to-the-same-borro/",
@@ -14953,12 +14959,6 @@
           "title": "SoFi Could Be Building Something Wall Street Hasn\u2019t Fully Priced In",
           "publisher": "24/7 Wall St.",
           "link": "https://247wallst.com/investing/2026/09/17/sofi-could-be-building-something-wall-street-hasnt-fully-priced-in/",
-          "when": "Sep 17"
-        },
-        {
-          "title": "You Don't Have To Beat The Market To Retire In Style",
-          "publisher": "Investor's Business Daily",
-          "link": "https://www.investors.com/etfs-and-funds/retirement/index-fund-you-dont-have-to-beat-the-market-to-build-wealth/?src=A00220&yptr=yahoo",
           "when": "Sep 17"
         }
       ]
@@ -15026,6 +15026,18 @@
       ],
       "news": [
         {
+          "title": "Celsius Executives Have Been Buying the Stock. Should Investors Join Them?",
+          "publisher": "Motley Fool",
+          "link": "https://www.fool.com/investing/2026/09/19/celsius-executives-have-been-buying-the-stock/",
+          "when": "Sep 19"
+        },
+        {
+          "title": "Is Berkshire Hathaway Stock a Better Buy Than an S&P 500 Index Fund?",
+          "publisher": "Motley Fool",
+          "link": "https://www.fool.com/investing/2026/09/19/is-berkshire-hathaway-stock-a-better-buy-than-an/",
+          "when": "Sep 19"
+        },
+        {
           "title": "Federal Reserve Inflation Outlook Signals a Critical Warning for Investors",
           "publisher": "Motley Fool",
           "link": "https://www.fool.com/investing/2026/09/19/federal-reserve-inflation-outlook-is-a-warning/",
@@ -15047,18 +15059,6 @@
           "title": "If There's Just 1 Move All Investors Should Make Right Now, History Says It's This",
           "publisher": "Motley Fool",
           "link": "https://www.fool.com/investing/2026/09/19/if-theres-just-1-move-all-investors-should-make/",
-          "when": "Sep 19"
-        },
-        {
-          "title": "The Stock Market's Biggest Companies Are Losing Their Grip. Here's the ETF I'd Buy If History Repeats.",
-          "publisher": "Motley Fool",
-          "link": "https://www.fool.com/investing/2026/09/19/stock-market-biggest-companies-losing-etf-to-buy/",
-          "when": "Sep 19"
-        },
-        {
-          "title": "Warren Buffett Watched Alphabet's Stock Price Climb 9,000% Before He Decided to Invest. Here's Why He and Greg Abel Are Making It One of Berkshire Hathaway's Biggest Investments Now.",
-          "publisher": "Motley Fool",
-          "link": "https://www.fool.com/investing/2026/09/19/warren-buffett-watched-alphabets-stock-price-climb/",
           "when": "Sep 19"
         }
       ]
@@ -15900,6 +15900,12 @@
       ],
       "news": [
         {
+          "title": "Walmart (WMT) Debuts Predictive Precision Targeting At Sam's Club",
+          "publisher": "Simply Wall St.",
+          "link": "https://finance.yahoo.com/media-advertising/articles/walmart-wmt-debuts-predictive-precision-161140696.html",
+          "when": "Sep 19"
+        },
+        {
           "title": "Here's Why Walmart Won't Reclaim a $1 Trillion Market Cap Anytime Soon",
           "publisher": "Motley Fool",
           "link": "https://www.fool.com/investing/2026/09/19/heres-why-walmart-wont-reclaim-a-1-trillion-market/",
@@ -15927,12 +15933,6 @@
           "title": "How Big A Swing In eBay Stock Are You Actually Holding?",
           "publisher": "Trefis",
           "link": "https://www.trefis.com/articles/615874/how-big-a-swing-in-ebay-stock-are-you-actually-holding/2026-09-18",
-          "when": "Sep 18"
-        },
-        {
-          "title": "Costco expands ultra-fast delivery through DoorDash, Uber",
-          "publisher": "FreightWaves",
-          "link": "https://finance.yahoo.com/small-business/articles/costco-expands-ultra-fast-delivery-185042149.html",
           "when": "Sep 18"
         }
       ]
@@ -16012,10 +16012,10 @@
           "when": "Sep 18"
         },
         {
-          "title": "Trump takes aim at Warsh after Fed hike",
-          "publisher": "Yahoo Finance Video",
-          "link": "https://finance.yahoo.com/video/trump-takes-aim-warsh-fed-163036956.html",
-          "when": "Sep 18"
+          "title": "Apple gets bullish Wall Street call as iPhone demand jumps",
+          "publisher": "TheStreet",
+          "link": "https://www.thestreet.com/investing/apple-gets-bullish-wall-street-call-as-iphone-demand-jumps",
+          "when": "Sep 19"
         },
         {
           "title": "Coinbase Files With CFTC To List US Single-Stock Perpetual Futures, Including AAPL And TSLA Contracts",
@@ -16498,6 +16498,12 @@
       "flags": [],
       "news": [
         {
+          "title": "Meta stock delivers a bold case for a $900 target",
+          "publisher": "TheStreet",
+          "link": "https://www.thestreet.com/investing/meta-stock-900-price-target-ai-ad-engine",
+          "when": "Sep 19"
+        },
+        {
           "title": "The Stock Market's Biggest Companies Are Losing Their Grip. Here's the ETF I'd Buy If History Repeats.",
           "publisher": "Motley Fool",
           "link": "https://www.fool.com/investing/2026/09/19/stock-market-biggest-companies-losing-etf-to-buy/",
@@ -16526,12 +16532,6 @@
           "publisher": "Insider Monkey",
           "link": "https://finance.yahoo.com/technology/ai/articles/meta-meta-stilla-ai-deal-075756581.html",
           "when": "Sep 19"
-        },
-        {
-          "title": "CleanSpark reveals Meta as the tenant behind $6.6B Sandersville lease",
-          "publisher": "Blockspace",
-          "link": "https://blockspace.media/short/cleanspark-reveals-meta-as-the-tenant-behind-6-6b-sandersville-lease/",
-          "when": "Sep 18"
         }
       ]
     },
@@ -261037,7 +261037,7 @@
       "type": "closed"
     }
   ],
-  "generated_at": "2026-09-19T16:06:04+00:00",
+  "generated_at": "2026-09-19T16:35:45+00:00",
   "universe": {
     "wheel": 21,
     "growth": 18,
