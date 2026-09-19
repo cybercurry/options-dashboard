@@ -14471,8 +14471,8 @@
     },
     {
       "label": "Bitcoin",
-      "price": 81423.75,
-      "pct": 0.6455866883584349,
+      "price": 81427.4921875,
+      "pct": 0.6502123001293825,
       "prefix": "$",
       "is_yield": false,
       "hist": [
@@ -14565,13 +14565,13 @@
         76150,
         76404,
         80901,
-        81424
+        81427
       ]
     },
     {
       "label": "Ethereum",
-      "price": 2638.75,
-      "pct": 1.0493752943836032,
+      "price": 2638.919921875,
+      "pct": 1.0558823523912242,
       "prefix": "$",
       "is_yield": false,
       "hist": [
@@ -14738,8 +14738,8 @@
     {
       "label": "Digital Assets",
       "ticker": "BTC",
-      "pct": 0.6455866883584349,
-      "price": 81423.75
+      "pct": 0.6502123001293825,
+      "price": 81427.4921875
     }
   ],
   "fundamentals": {
@@ -15309,44 +15309,7 @@
         }
       },
       "flags": [],
-      "news": [
-        {
-          "title": "3 Stocks to Buy Before Wall Street Catches On Before September Ends",
-          "publisher": "24/7 Wall St.",
-          "link": "https://247wallst.com/investing/2026/09/19/3-stocks-to-buy-before-wall-street-catches-on-before-september-ends/",
-          "when": "Sep 19"
-        },
-        {
-          "title": "S&P 500 Posts Slight Weekly Decline as Utilities Weigh",
-          "publisher": "MT Newswires",
-          "link": "https://finance.yahoo.com/markets/stocks/articles/p-500-posts-slight-weekly-204640571.html",
-          "when": "Sep 18"
-        },
-        {
-          "title": "DTE Could Be One of the Quiet Winners of the Data Center Boom",
-          "publisher": "24/7 Wall St.",
-          "link": "https://247wallst.com/investing/2026/09/18/dte-could-be-one-of-the-quiet-winners-of-the-data-center-boom/",
-          "when": "Sep 18"
-        },
-        {
-          "title": "Equity Overhang Weighs on Constellation Energy (CEG) Despite Solid Core Fundamentals",
-          "publisher": "Insider Monkey",
-          "link": "https://finance.yahoo.com/markets/stocks/articles/equity-overhang-weighs-constellation-energy-125043483.html",
-          "when": "Sep 18"
-        },
-        {
-          "title": "Constellation Energy Is Down 29% From Its Peak. Is the Nuclear Bull Case Still Intact?",
-          "publisher": "TIKR",
-          "link": "https://www.tikr.com/blog/constellation-energy-is-down-29-from-its-peak-is-the-nuclear-bull-case-still-intact?ref=yahoofinance",
-          "when": "Sep 17"
-        },
-        {
-          "title": "Jim Cramer Turns on the Two Kings of AI: \u201cIf You Want to Destroy Trust, You Couldn\u2019t Find a Better Way\u201d",
-          "publisher": "24/7 Wall St.",
-          "link": "https://247wallst.com/investing/2026/09/17/jim-cramer-turns-on-the-two-kings-of-ai-if-you-want-to-destroy-trust-you-couldnt-find-a-better-way/",
-          "when": "Sep 17"
-        }
-      ]
+      "news": []
     },
     "VRT": {
       "ok": true,
@@ -16510,6 +16473,12 @@
           "when": "Sep 19"
         },
         {
+          "title": "Meta Stock Could Hit $800 This Year -- And It All Begins on Sept. 23",
+          "publisher": "Barchart",
+          "link": "https://www.barchart.com/story/news/4694310/meta-stock-could-hit-800-this-year-and-it-all-begins-on-sept-23",
+          "when": "Sep 19"
+        },
+        {
           "title": "Bill Ackman's Pershing Square IPO Breaks Out",
           "publisher": "Investor's Business Daily",
           "link": "https://www.investors.com/news/bill-ackman-pershing-square-ipo-stock-setting-up/?src=A00220&yptr=yahoo",
@@ -16525,12 +16494,6 @@
           "title": "How AI concerns moved to the center of the midterm debate",
           "publisher": "Investing.com",
           "link": "https://finance.yahoo.com/technology/ai/articles/ai-concerns-moved-center-midterm-085642768.html",
-          "when": "Sep 19"
-        },
-        {
-          "title": "Meta (META)\u2019s Stilla.ai Deal Could Turn Business Agent Into a New Monetization Engine",
-          "publisher": "Insider Monkey",
-          "link": "https://finance.yahoo.com/technology/ai/articles/meta-meta-stilla-ai-deal-075756581.html",
           "when": "Sep 19"
         }
       ]
@@ -261000,7 +260963,7 @@
       "type": "closed"
     }
   ],
-  "generated_at": "2026-09-19T18:33:15+00:00",
+  "generated_at": "2026-09-19T18:35:53+00:00",
   "universe": {
     "wheel": 21,
     "growth": 18,
