@@ -14471,8 +14471,8 @@
     },
     {
       "label": "Bitcoin",
-      "price": 81768.8671875,
-      "pct": 1.0721762499074083,
+      "price": 81499.578125,
+      "pct": 0.7393156817799174,
       "prefix": "$",
       "is_yield": false,
       "hist": [
@@ -14565,13 +14565,13 @@
         76150,
         76404,
         80901,
-        81766
+        81500
       ]
     },
     {
       "label": "Ethereum",
-      "price": 2649.699951171875,
-      "pct": 1.468697217802628,
+      "price": 2646.77001953125,
+      "pct": 1.3564972132776187,
       "prefix": "$",
       "is_yield": false,
       "hist": [
@@ -14664,7 +14664,7 @@
         2416,
         2447,
         2611,
-        2650
+        2647
       ]
     }
   ],
@@ -14738,8 +14738,8 @@
     {
       "label": "Digital Assets",
       "ticker": "BTC",
-      "pct": 1.0721762499074083,
-      "price": 81768.8671875
+      "pct": 0.7393156817799174,
+      "price": 81499.578125
     }
   ],
   "fundamentals": {
@@ -14816,6 +14816,12 @@
           "when": "Sep 18"
         },
         {
+          "title": "Delivery Outlook Shows Tesla (TSLA)\u2019s Core Business Under Pressure. Its Next Growth Engine Must Deliver",
+          "publisher": "Insider Monkey",
+          "link": "https://finance.yahoo.com/markets/stocks/articles/delivery-outlook-shows-tesla-tsla-171443015.html",
+          "when": "Sep 19"
+        },
+        {
           "title": "Coinbase Files With CFTC To List US Single-Stock Perpetual Futures, Including AAPL And TSLA Contracts",
           "publisher": "Stocktwits",
           "link": "https://stocktwits.com/news-articles/markets/equity/coinbase-apple-tesla-perpetual-futures-coin-tsla-aapl/cZtxEhbRBEs",
@@ -14837,12 +14843,6 @@
           "title": "Intel Corporation (INTC)\u2019s Terafab Partnership Could Give Its AI Foundry Ambitions a Major Boost",
           "publisher": "Insider Monkey",
           "link": "https://finance.yahoo.com/technology/ai/articles/intel-corporation-intc-terafab-partnership-081341477.html",
-          "when": "Sep 19"
-        },
-        {
-          "title": "Why Tesla's Robotaxi/Cybercab Bet Just Got Complicated. What It Means to Investors.",
-          "publisher": "Motley Fool",
-          "link": "https://www.fool.com/investing/2026/09/19/why-teslas-robotaxicybercab-bet-just-got-complicat/",
           "when": "Sep 19"
         }
       ]
@@ -15026,6 +15026,30 @@
       ],
       "news": [
         {
+          "title": "Warren Buffett Is No Longer Berkshire's Chairman. Here\u2019s Why I'm Buying the Stock Anyway.",
+          "publisher": "Motley Fool",
+          "link": "https://www.fool.com/investing/2026/09/19/warren-buffett-is-no-longer-berkshire-s-chairman-here-s-why-i-m-buying-the-stock-anyway/",
+          "when": "Sep 19"
+        },
+        {
+          "title": "Cisco (CSCO) Leans on Splunk to Broaden Its Share of Enterprise AI Spending. It Faces a Big Test",
+          "publisher": "Insider Monkey",
+          "link": "https://finance.yahoo.com/technology/ai/articles/cisco-csco-leans-splunk-broaden-171200277.html",
+          "when": "Sep 19"
+        },
+        {
+          "title": "Huang just doubled his chip forecast and blocked a regulator",
+          "publisher": "TheStreet",
+          "link": "https://www.thestreet.com/technology/huang-just-doubled-his-chip-forecast-and-blocked-a-regulator",
+          "when": "Sep 19"
+        },
+        {
+          "title": "Prediction: This Nvidia-Backed Artificial Intelligence (AI) Stock Could 10X by 2033",
+          "publisher": "Motley Fool",
+          "link": "https://www.fool.com/investing/2026/09/19/prediction-this-nvidia-backed-artificial-intellige/",
+          "when": "Sep 19"
+        },
+        {
           "title": "From Hustle to Hypervigilance: Is Fear of Running Out of Money Stealing Your Retirement Joy?",
           "publisher": "Motley Fool",
           "link": "https://www.fool.com/investing/2026/09/19/from-hustle-to-hypervigilance-is-fear-of-running/",
@@ -15035,30 +15059,6 @@
           "title": "There Are Only a Handful of Nasdaq-100 Stocks That Yield Over 3%. Here's My Top Pick to Buy in September.",
           "publisher": "Motley Fool",
           "link": "https://www.fool.com/investing/2026/09/19/there-are-only-a-handful-of-nasdaq-100-stocks-that/",
-          "when": "Sep 19"
-        },
-        {
-          "title": "Celsius Executives Have Been Buying the Stock. Should Investors Join Them?",
-          "publisher": "Motley Fool",
-          "link": "https://www.fool.com/investing/2026/09/19/celsius-executives-have-been-buying-the-stock/",
-          "when": "Sep 19"
-        },
-        {
-          "title": "Is Berkshire Hathaway Stock a Better Buy Than an S&P 500 Index Fund?",
-          "publisher": "Motley Fool",
-          "link": "https://www.fool.com/investing/2026/09/19/is-berkshire-hathaway-stock-a-better-buy-than-an/",
-          "when": "Sep 19"
-        },
-        {
-          "title": "Federal Reserve Inflation Outlook Signals a Critical Warning for Investors",
-          "publisher": "Motley Fool",
-          "link": "https://www.fool.com/investing/2026/09/19/federal-reserve-inflation-outlook-is-a-warning/",
-          "when": "Sep 19"
-        },
-        {
-          "title": "Better Artificial Intelligence (AI) Stock Pick for 2027: Nvidia versus Micron",
-          "publisher": "Motley Fool",
-          "link": "https://www.fool.com/investing/2026/09/19/better-artificial-intelligence-ai-stock-pick-for-2/",
           "when": "Sep 19"
         }
       ]
@@ -16195,6 +16195,12 @@
       ],
       "news": [
         {
+          "title": "Micron (MU) Unveils Breakthrough Memory Product. It Says Much About the Memory Market",
+          "publisher": "Insider Monkey",
+          "link": "https://finance.yahoo.com/technology/articles/micron-mu-unveils-breakthrough-memory-171152232.html",
+          "when": "Sep 19"
+        },
+        {
           "title": "Dow Jones Futures: Can The Market Rally Take Flight? Robinhood, Sandisk, AMD, Moderna Surge Into Buy Areas",
           "publisher": "Investor's Business Daily",
           "link": "https://www.investors.com/market-trend/stock-market-today/dow-jones-futures-robinhood-sandisk-amd-moderna-surge-buy-areas/?src=A00220&yptr=yahoo",
@@ -16222,12 +16228,6 @@
           "title": "Stock Market Today: Nasdaq, S&P Reverse Slightly Higher; Sandisk, Lumentum Lead This Tech Rally",
           "publisher": "Investor's Business Daily",
           "link": "https://www.investors.com/market-trend/stock-market-today/dow-jones-sp500-nasdaq-oil-prices-apple-amd-micron-sandisk/?src=A00220&yptr=yahoo",
-          "when": "Sep 18"
-        },
-        {
-          "title": "Chip Stocks Break Through Ceiling As Sector Rebounds. Macom Is A Standout.",
-          "publisher": "Investor's Business Daily",
-          "link": "https://www.investors.com/news/technology/chip-stocks-hit-ceiling-macom-technology-solutions-mtsi/?src=A00220&yptr=yahoo",
           "when": "Sep 18"
         }
       ]
@@ -18065,6 +18065,12 @@
       ],
       "news": [
         {
+          "title": "Micron (MU) Unveils Breakthrough Memory Product. It Says Much About the Memory Market",
+          "publisher": "Insider Monkey",
+          "link": "https://finance.yahoo.com/technology/articles/micron-mu-unveils-breakthrough-memory-171152232.html",
+          "when": "Sep 19"
+        },
+        {
           "title": "Better Artificial Intelligence (AI) Stock Pick for 2027: Nvidia versus Micron",
           "publisher": "Motley Fool",
           "link": "https://www.fool.com/investing/2026/09/19/better-artificial-intelligence-ai-stock-pick-for-2/",
@@ -18092,12 +18098,6 @@
           "title": "Nvidia, SK Hynix send strong signal to Micron investors",
           "publisher": "TheStreet",
           "link": "https://www.thestreet.com/investing/stocks/nvidia-sk-hynix-warning-memory-prices-micron-investors",
-          "when": "Sep 19"
-        },
-        {
-          "title": "What Does Micron Technology (MU) Warning Of Shortages Through 2027 Mean?",
-          "publisher": "Simply Wall St.",
-          "link": "https://finance.yahoo.com/markets/stocks/articles/does-micron-technology-mu-warning-001915512.html",
           "when": "Sep 19"
         }
       ]
@@ -18998,6 +18998,12 @@
       ],
       "news": [
         {
+          "title": "Micron (MU) Unveils Breakthrough Memory Product. It Says Much About the Memory Market",
+          "publisher": "Insider Monkey",
+          "link": "https://finance.yahoo.com/technology/articles/micron-mu-unveils-breakthrough-memory-171152232.html",
+          "when": "Sep 19"
+        },
+        {
           "title": "The S&P 500 Has Returned About 11% Annually Since 1958. Here's the ETF I'd Trust for the Next 30 Years.",
           "publisher": "Motley Fool",
           "link": "https://www.fool.com/investing/2026/09/19/sp-500-returned-annually-etf-trust-30-years-vti/",
@@ -19026,12 +19032,6 @@
           "publisher": "Simply Wall St.",
           "link": "https://finance.yahoo.com/markets/stocks/articles/does-micron-technology-mu-warning-001915512.html",
           "when": "Sep 19"
-        },
-        {
-          "title": "NVIDIA Vs Intel Corporation (NASDAQ:INTC): Here\u2019s The One Jim Cramer Likes",
-          "publisher": "Insider Monkey",
-          "link": "https://finance.yahoo.com/markets/stocks/articles/nvidia-vs-intel-corporation-nasdaq-230352152.html",
-          "when": "Sep 18"
         }
       ]
     },
@@ -20540,6 +20540,12 @@
       "flags": [],
       "news": [
         {
+          "title": "BofA drops stunning warning about Fed rate hikes",
+          "publisher": "TheStreet",
+          "link": "https://www.thestreet.com/fed/bofa-fed-rate-hikes-inflation",
+          "when": "Sep 19"
+        },
+        {
           "title": "Bank of America Sets 12-Month S&P 500 Target at 7,800, Sees 2% Upside",
           "publisher": "InvestorsHub",
           "link": "https://investorshub.advfn.com/market-news/article/36524/bank-of-america-sets-12-month-sp-500-target-at-7800-sees-2-upside",
@@ -20567,12 +20573,6 @@
           "title": "Bank of America resets Costco stock target ahead of earnings",
           "publisher": "TheStreet",
           "link": "https://www.thestreet.com/investing/costco-stock-lower-price-target-bank-of-america-earnings",
-          "when": "Sep 18"
-        },
-        {
-          "title": "BofA Warns of Warsh\u2019s Fed Raising Rates Above 5% in 2022 Redux",
-          "publisher": "Bloomberg",
-          "link": "https://finance.yahoo.com/economy/policy/articles/bofa-warns-warsh-fed-raising-152120842.html",
           "when": "Sep 18"
         }
       ]
@@ -261037,7 +261037,7 @@
       "type": "closed"
     }
   ],
-  "generated_at": "2026-09-19T17:05:22+00:00",
+  "generated_at": "2026-09-19T17:34:13+00:00",
   "universe": {
     "wheel": 21,
     "growth": 18,
