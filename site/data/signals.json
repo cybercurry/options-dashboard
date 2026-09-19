@@ -14471,8 +14471,8 @@
     },
     {
       "label": "Bitcoin",
-      "price": 81499.578125,
-      "pct": 0.7393156817799174,
+      "price": 81479.9921875,
+      "pct": 0.7151060602563764,
       "prefix": "$",
       "is_yield": false,
       "hist": [
@@ -14565,13 +14565,13 @@
         76150,
         76404,
         80901,
-        81500
+        81480
       ]
     },
     {
       "label": "Ethereum",
-      "price": 2646.77001953125,
-      "pct": 1.3564972132776187,
+      "price": 2646.389892578125,
+      "pct": 1.341940475751957,
       "prefix": "$",
       "is_yield": false,
       "hist": [
@@ -14664,7 +14664,7 @@
         2416,
         2447,
         2611,
-        2647
+        2646
       ]
     }
   ],
@@ -14738,8 +14738,8 @@
     {
       "label": "Digital Assets",
       "ticker": "BTC",
-      "pct": 0.7393156817799174,
-      "price": 81499.578125
+      "pct": 0.7151060602563764,
+      "price": 81479.9921875
     }
   ],
   "fundamentals": {
@@ -14810,12 +14810,6 @@
       ],
       "news": [
         {
-          "title": "The SEC is bringing tokenized stocks to markets: 7 key details you need to know",
-          "publisher": "Yahoo Finance Video",
-          "link": "https://finance.yahoo.com/video/sec-bringing-tokenized-stocks-markets-180000283.html",
-          "when": "Sep 18"
-        },
-        {
           "title": "Delivery Outlook Shows Tesla (TSLA)\u2019s Core Business Under Pressure. Its Next Growth Engine Must Deliver",
           "publisher": "Insider Monkey",
           "link": "https://finance.yahoo.com/markets/stocks/articles/delivery-outlook-shows-tesla-tsla-171443015.html",
@@ -14843,6 +14837,12 @@
           "title": "Intel Corporation (INTC)\u2019s Terafab Partnership Could Give Its AI Foundry Ambitions a Major Boost",
           "publisher": "Insider Monkey",
           "link": "https://finance.yahoo.com/technology/ai/articles/intel-corporation-intc-terafab-partnership-081341477.html",
+          "when": "Sep 19"
+        },
+        {
+          "title": "Why Tesla's Robotaxi/Cybercab Bet Just Got Complicated. What It Means to Investors.",
+          "publisher": "Motley Fool",
+          "link": "https://www.fool.com/investing/2026/09/19/why-teslas-robotaxicybercab-bet-just-got-complicat/",
           "when": "Sep 19"
         }
       ]
@@ -15026,39 +15026,39 @@
       ],
       "news": [
         {
+          "title": "Anthropic Reportedly Delays IPO; OpenAI Expects Massive Cash Burn",
+          "publisher": "Investor's Business Daily",
+          "link": "https://www.investors.com/news/technology/anthropic-ipo-delayed-openai-expects-massive-cash-burn/?src=A00220&yptr=yahoo",
+          "when": "Sep 19"
+        },
+        {
+          "title": "The Unexpected Rival Threatening to Shake Up CoreWeave's Market",
+          "publisher": "Motley Fool",
+          "link": "https://www.fool.com/investing/2026/09/19/surprise-rival-threatening-to-shake-up-coreweave/",
+          "when": "Sep 19"
+        },
+        {
+          "title": "Thinking of the Impact Fed Rate Hikes Will Have on Your Portfolio? It's Time to Consider Buying This Perennial Winner That Turned $10,000 Into $86,000 in 10 Years.",
+          "publisher": "Motley Fool",
+          "link": "https://www.fool.com/investing/2026/09/19/fed-rate-hikes-portfolio-buy-perennial-winner/",
+          "when": "Sep 19"
+        },
+        {
           "title": "Warren Buffett Is No Longer Berkshire's Chairman. Here\u2019s Why I'm Buying the Stock Anyway.",
           "publisher": "Motley Fool",
           "link": "https://www.fool.com/investing/2026/09/19/warren-buffett-is-no-longer-berkshire-s-chairman-here-s-why-i-m-buying-the-stock-anyway/",
           "when": "Sep 19"
         },
         {
+          "title": "3 ETFs That Work Better Together for Dividend Investors",
+          "publisher": "Motley Fool",
+          "link": "https://www.fool.com/investing/2026/09/19/3-etfs-work-better-together-for-dividend-investors/",
+          "when": "Sep 19"
+        },
+        {
           "title": "Cisco (CSCO) Leans on Splunk to Broaden Its Share of Enterprise AI Spending. It Faces a Big Test",
           "publisher": "Insider Monkey",
           "link": "https://finance.yahoo.com/technology/ai/articles/cisco-csco-leans-splunk-broaden-171200277.html",
-          "when": "Sep 19"
-        },
-        {
-          "title": "Huang just doubled his chip forecast and blocked a regulator",
-          "publisher": "TheStreet",
-          "link": "https://www.thestreet.com/technology/huang-just-doubled-his-chip-forecast-and-blocked-a-regulator",
-          "when": "Sep 19"
-        },
-        {
-          "title": "Prediction: This Nvidia-Backed Artificial Intelligence (AI) Stock Could 10X by 2033",
-          "publisher": "Motley Fool",
-          "link": "https://www.fool.com/investing/2026/09/19/prediction-this-nvidia-backed-artificial-intellige/",
-          "when": "Sep 19"
-        },
-        {
-          "title": "From Hustle to Hypervigilance: Is Fear of Running Out of Money Stealing Your Retirement Joy?",
-          "publisher": "Motley Fool",
-          "link": "https://www.fool.com/investing/2026/09/19/from-hustle-to-hypervigilance-is-fear-of-running/",
-          "when": "Sep 19"
-        },
-        {
-          "title": "There Are Only a Handful of Nasdaq-100 Stocks That Yield Over 3%. Here's My Top Pick to Buy in September.",
-          "publisher": "Motley Fool",
-          "link": "https://www.fool.com/investing/2026/09/19/there-are-only-a-handful-of-nasdaq-100-stocks-that/",
           "when": "Sep 19"
         }
       ]
@@ -16012,6 +16012,12 @@
           "when": "Sep 18"
         },
         {
+          "title": "Tech stocks today: Apple's iPhone 18 Pro goes on sale, AI safety debate continues",
+          "publisher": "Yahoo Finance",
+          "link": "https://finance.yahoo.com/technology/live/tech-stocks-today-apples-iphone-18-pro-goes-on-sale-ai-safety-debate-continues-140134624.html",
+          "when": "Sep 14"
+        },
+        {
           "title": "Apple gets bullish Wall Street call as iPhone demand jumps",
           "publisher": "TheStreet",
           "link": "https://www.thestreet.com/investing/apple-gets-bullish-wall-street-call-as-iphone-demand-jumps",
@@ -16027,12 +16033,6 @@
           "title": "The Stock Market's Biggest Companies Are Losing Their Grip. Here's the ETF I'd Buy If History Repeats.",
           "publisher": "Motley Fool",
           "link": "https://www.fool.com/investing/2026/09/19/stock-market-biggest-companies-losing-etf-to-buy/",
-          "when": "Sep 19"
-        },
-        {
-          "title": "John Ternus's First iPhone Launch Prompted a Bank of America Price Target Cut. Is Apple Stock a Buy?",
-          "publisher": "Motley Fool",
-          "link": "https://www.fool.com/investing/2026/09/19/john-ternuss-first-iphone-launch-prompted-a-bank-o/",
           "when": "Sep 19"
         }
       ]
@@ -16830,6 +16830,12 @@
       ],
       "news": [
         {
+          "title": "The Unexpected Rival Threatening to Shake Up CoreWeave's Market",
+          "publisher": "Motley Fool",
+          "link": "https://www.fool.com/investing/2026/09/19/surprise-rival-threatening-to-shake-up-coreweave/",
+          "when": "Sep 19"
+        },
+        {
           "title": "JPMorgan, Goldman Sachs issue bullish stock price targets for IREN, Cipher Digital",
           "publisher": "Blockspace",
           "link": "https://blockspace.media/short/jpmorgan-goldman-sachs-issue-bullish-stock-price-targets-for-iren-cipher-digital/",
@@ -16857,12 +16863,6 @@
           "title": "Wolfspeed Climbs 6%, IREN Rises 4% as Buyers Pick Single Names Over the AI Infrastructure Sector; TeraWulf Sits Tight",
           "publisher": "24/7 Wall St.",
           "link": "https://247wallst.com/investing/2026/09/18/wolfspeed-climbs-6-iren-rises-4-as-buyers-pick-single-names-over-the-ai-infrastructure-sector-terawulf-sits-tight/",
-          "when": "Sep 18"
-        },
-        {
-          "title": "IREN Shares Rise as Northland Targets $99",
-          "publisher": "GuruFocus.com",
-          "link": "https://finance.yahoo.com/markets/stocks/articles/iren-shares-rise-northland-targets-162451738.html",
           "when": "Sep 18"
         }
       ]
@@ -17057,10 +17057,10 @@
       "flags": [],
       "news": [
         {
-          "title": "Big Tech\u2019s sudden millionaires experience growing pains settling into new wealth",
-          "publisher": "Yahoo Finance Video",
-          "link": "https://finance.yahoo.com/video/big-tech-sudden-millionaires-experience-180000718.html",
-          "when": "Sep 18"
+          "title": "Anthropic Reportedly Delays IPO; OpenAI Expects Massive Cash Burn",
+          "publisher": "Investor's Business Daily",
+          "link": "https://www.investors.com/news/technology/anthropic-ipo-delayed-openai-expects-massive-cash-burn/?src=A00220&yptr=yahoo",
+          "when": "Sep 19"
         },
         {
           "title": "Anthropic IPO: 1 Key Lesson Investors Can Learn From SpaceX",
@@ -21288,6 +21288,12 @@
       ],
       "news": [
         {
+          "title": "The Unexpected Rival Threatening to Shake Up CoreWeave's Market",
+          "publisher": "Motley Fool",
+          "link": "https://www.fool.com/investing/2026/09/19/surprise-rival-threatening-to-shake-up-coreweave/",
+          "when": "Sep 19"
+        },
+        {
           "title": "Cathie Wood buys $19.2 million of tumbling AI stock",
           "publisher": "TheStreet",
           "link": "https://www.thestreet.com/investing/stocks/cathie-wood-buys-coreweave-19-2-million-of-tumbling-ai-stock",
@@ -21315,12 +21321,6 @@
           "title": "Nebius Offers Fresh Clue About AI's Spending Boom",
           "publisher": "GuruFocus.com",
           "link": "https://finance.yahoo.com/technology/ai/articles/nebius-offers-fresh-clue-ais-161936309.html",
-          "when": "Sep 18"
-        },
-        {
-          "title": "Is CoreWeave (CRWV) Fully Valued After Its US$3.7b Convertible Note Offering?",
-          "publisher": "Simply Wall St.",
-          "link": "https://finance.yahoo.com/markets/stocks/articles/coreweave-crwv-fully-valued-us-151247629.html",
           "when": "Sep 18"
         }
       ]
@@ -261037,7 +261037,7 @@
       "type": "closed"
     }
   ],
-  "generated_at": "2026-09-19T17:34:13+00:00",
+  "generated_at": "2026-09-19T18:05:20+00:00",
   "universe": {
     "wheel": 21,
     "growth": 18,
