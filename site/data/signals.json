@@ -14471,8 +14471,8 @@
     },
     {
       "label": "Bitcoin",
-      "price": 81420.6484375,
-      "pct": 0.6417529349699747,
+      "price": 81370.6484375,
+      "pct": 0.5799493538966694,
       "prefix": "$",
       "is_yield": false,
       "hist": [
@@ -14565,13 +14565,13 @@
         76150,
         76404,
         80901,
-        81421
+        81371
       ]
     },
     {
       "label": "Ethereum",
-      "price": 2639.1201171875,
-      "pct": 1.0635487138369815,
+      "price": 2637.090087890625,
+      "pct": 0.9858099389327579,
       "prefix": "$",
       "is_yield": false,
       "hist": [
@@ -14664,7 +14664,7 @@
         2416,
         2447,
         2611,
-        2639
+        2637
       ]
     }
   ],
@@ -14738,8 +14738,8 @@
     {
       "label": "Digital Assets",
       "ticker": "BTC",
-      "pct": 0.6417529349699747,
-      "price": 81420.6484375
+      "pct": 0.5799493538966694,
+      "price": 81370.6484375
     }
   ],
   "fundamentals": {
@@ -15026,6 +15026,12 @@
       ],
       "news": [
         {
+          "title": "AbbVie's Migraine Franchise Scored a Big Win. Is This Dividend King a No-Brainer Buy Right Now?",
+          "publisher": "Motley Fool",
+          "link": "https://www.fool.com/investing/2026/09/19/abbvies-migraine-franchise-scored-a-big-win-is-thi/",
+          "when": "Sep 19"
+        },
+        {
           "title": "Forget Buying All Seven: The \"Magnificent Seven\" Stock Most Likely to Double by 2028",
           "publisher": "Motley Fool",
           "link": "https://www.fool.com/investing/2026/09/19/forget-buying-all-seven-the-magnificent-seven-stoc/",
@@ -15053,12 +15059,6 @@
           "title": "The Unexpected Rival Threatening to Shake Up CoreWeave's Market",
           "publisher": "Motley Fool",
           "link": "https://www.fool.com/investing/2026/09/19/surprise-rival-threatening-to-shake-up-coreweave/",
-          "when": "Sep 19"
-        },
-        {
-          "title": "Thinking of the Impact Fed Rate Hikes Will Have on Your Portfolio? It's Time to Consider Buying This Perennial Winner That Turned $10,000 Into $86,000 in 10 Years.",
-          "publisher": "Motley Fool",
-          "link": "https://www.fool.com/investing/2026/09/19/fed-rate-hikes-portfolio-buy-perennial-winner/",
           "when": "Sep 19"
         }
       ]
@@ -16012,6 +16012,12 @@
           "when": "Sep 18"
         },
         {
+          "title": "Cramer strongly recommends buying beaten-down 90s tech legend",
+          "publisher": "TheStreet",
+          "link": "https://www.thestreet.com/investing/stocks/cramer-recommends-nokia-beaten-down-90s-ai-tech",
+          "when": "Sep 19"
+        },
+        {
           "title": "Forget Buying All Seven: The \"Magnificent Seven\" Stock Most Likely to Double by 2028",
           "publisher": "Motley Fool",
           "link": "https://www.fool.com/investing/2026/09/19/forget-buying-all-seven-the-magnificent-seven-stoc/",
@@ -16027,12 +16033,6 @@
           "title": "Coinbase Files With CFTC To List US Single-Stock Perpetual Futures, Including AAPL And TSLA Contracts",
           "publisher": "Stocktwits",
           "link": "https://stocktwits.com/news-articles/markets/equity/coinbase-apple-tesla-perpetual-futures-coin-tsla-aapl/cZtxEhbRBEs",
-          "when": "Sep 19"
-        },
-        {
-          "title": "The Stock Market's Biggest Companies Are Losing Their Grip. Here's the ETF I'd Buy If History Repeats.",
-          "publisher": "Motley Fool",
-          "link": "https://www.fool.com/investing/2026/09/19/stock-market-biggest-companies-losing-etf-to-buy/",
           "when": "Sep 19"
         }
       ]
@@ -17057,6 +17057,18 @@
       "flags": [],
       "news": [
         {
+          "title": "SpaceX Nasdaq 100 weight to jump to 2.82% in quarterly rebalance -Bloomberg",
+          "publisher": "Investing.com",
+          "link": "https://finance.yahoo.com/markets/stocks/articles/spacex-nasdaq-100-weight-jump-192658519.html",
+          "when": "Sep 19"
+        },
+        {
+          "title": "Elon Musk Warns Rocket Startups: Don\u2019t Try to Copy SpaceX\u2019s Raptor 3 \u2014 \u2018Very Complex Geometry\u2019 Inside",
+          "publisher": "Benzinga",
+          "link": "https://tech.yahoo.com/science/articles/elon-musk-warns-rocket-startups-180030718.html",
+          "when": "Sep 19"
+        },
+        {
           "title": "Anthropic Reportedly Delays IPO; OpenAI Expects Massive Cash Burn",
           "publisher": "Investor's Business Daily",
           "link": "https://www.investors.com/news/technology/anthropic-ipo-delayed-openai-expects-massive-cash-burn/?src=A00220&yptr=yahoo",
@@ -17078,18 +17090,6 @@
           "title": "Anthropic's IPO Is Coming. Here's What That Means for S&P 500 Investors.",
           "publisher": "Motley Fool",
           "link": "https://www.fool.com/investing/2026/09/19/anthropic-ipo-coming-what-means-sp-500/",
-          "when": "Sep 19"
-        },
-        {
-          "title": "Robinhood Soars, SpaceX Orbits Entry: Five Stocks Near Buy Points",
-          "publisher": "Investor's Business Daily",
-          "link": "https://www.investors.com/news/robinhood-stock-spacex-stocks-near-buy-points/?src=A00220&yptr=yahoo",
-          "when": "Sep 19"
-        },
-        {
-          "title": "Could Anthropic's IPO Be Bigger Than SpaceX's?",
-          "publisher": "Motley Fool",
-          "link": "https://www.fool.com/investing/2026/09/19/could-anthropics-ipo-be-bigger-than-spacexs/",
           "when": "Sep 19"
         }
       ]
@@ -18878,6 +18878,12 @@
       "flags": [],
       "news": [
         {
+          "title": "Netflix Content Chief Shrugs Off YouTube Threat: \u2018Young People Only Watch Short Things\u2019 Isn\u2019t True",
+          "publisher": "Benzinga",
+          "link": "https://finance.yahoo.com/media-advertising/articles/netflix-content-chief-shrugs-off-183118185.html",
+          "when": "Sep 19"
+        },
+        {
           "title": "Netflix (NFLX) Gets a Bullish $110 Target: What\u2019s Driving the Outlook?",
           "publisher": "Insider Monkey",
           "link": "https://finance.yahoo.com/markets/stocks/articles/netflix-nflx-gets-bullish-110-155252131.html",
@@ -18905,12 +18911,6 @@
           "title": "Netflix Stock Gets Downgraded by Wells Fargo on \u2018Worrying\u2019 Engagement Trends",
           "publisher": "Investopedia",
           "link": "https://www.investopedia.com/market-update-netflix-stock-gets-downgraded-by-wells-fargo-on-worrying-engagement-trends-nflx-12128200",
-          "when": "Sep 18"
-        },
-        {
-          "title": "Wells Fargo Brutally Revamps Netflix Stock Price Target",
-          "publisher": "GuruFocus.com",
-          "link": "https://finance.yahoo.com/markets/stocks/articles/wells-fargo-brutally-revamps-netflix-202122052.html",
           "when": "Sep 18"
         }
       ]
@@ -19984,6 +19984,36 @@
           "title": "Crowdstrike, Palo Alto Networks, and cybersecurity stocks post strong weekly gains after AI freak-out moment",
           "publisher": "Yahoo Finance",
           "link": "https://finance.yahoo.com/markets/article/crowdstrike-palo-alto-networks-and-cybersecurity-stocks-post-strong-weekly-gains-after-ai-freak-out-moment-142352398.html",
+          "when": "Sep 18"
+        },
+        {
+          "title": "CrowdStrike CEO sends strong six-word message on AI cyber safety",
+          "publisher": "TheStreet",
+          "link": "https://www.thestreet.com/investing/stocks/crwd-crowdstrike-ceo-ai-safety-genie-out-of-the-bottle",
+          "when": "Sep 19"
+        },
+        {
+          "title": "CrowdStrike (CRWD) Lands Forrester Leadership Nod As AI Security Ties Deepen",
+          "publisher": "Simply Wall St.",
+          "link": "https://finance.yahoo.com/technology/ai/articles/crowdstrike-crwd-lands-forrester-leadership-141102892.html",
+          "when": "Sep 19"
+        },
+        {
+          "title": "CrowdStrike, HubSpot, Intuit, Cloudflare, and Okta Shares Plummet, What You Need To Know",
+          "publisher": "StockStory",
+          "link": "https://finance.yahoo.com/markets/stocks/articles/crowdstrike-hubspot-intuit-cloudflare-okta-000040098.html",
+          "when": "Sep 19"
+        },
+        {
+          "title": "Jim Cramer Shared What CrowdStrike Holdings, Inc. (NASDAQ:CRWD)\u2019s CEO Told Him About AI \u201cDoomsaying\u201d",
+          "publisher": "Insider Monkey",
+          "link": "https://finance.yahoo.com/technology/ai/articles/jim-cramer-shared-crowdstrike-holdings-232242655.html",
+          "when": "Sep 18"
+        },
+        {
+          "title": "CRWD Stock Keeps Climbing. Should You Climb On?",
+          "publisher": "Trefis",
+          "link": "https://www.trefis.com/articles/615810/crwd-stock-keeps-climbing-should-you-climb-on/2026-09-18",
           "when": "Sep 18"
         }
       ]
@@ -261007,7 +261037,7 @@
       "type": "closed"
     }
   ],
-  "generated_at": "2026-09-19T19:05:43+00:00",
+  "generated_at": "2026-09-19T19:35:30+00:00",
   "universe": {
     "wheel": 21,
     "growth": 18,
