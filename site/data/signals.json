@@ -14471,8 +14471,8 @@
     },
     {
       "label": "Bitcoin",
-      "price": 81605.9765625,
-      "pct": 0.8708317709420266,
+      "price": 81617.5234375,
+      "pct": 0.8851045354461462,
       "prefix": "$",
       "is_yield": false,
       "hist": [
@@ -14565,13 +14565,13 @@
         76150,
         76404,
         80901,
-        81606
+        81618
       ]
     },
     {
       "label": "Ethereum",
-      "price": 2643.320068359375,
-      "pct": 1.224383367436177,
+      "price": 2641.35009765625,
+      "pct": 1.1489445009656762,
       "prefix": "$",
       "is_yield": false,
       "hist": [
@@ -14664,7 +14664,7 @@
         2416,
         2447,
         2611,
-        2643
+        2641
       ]
     }
   ],
@@ -14738,8 +14738,8 @@
     {
       "label": "Digital Assets",
       "ticker": "BTC",
-      "pct": 0.8708317709420266,
-      "price": 81605.9765625
+      "pct": 0.8851045354461462,
+      "price": 81617.5234375
     }
   ],
   "fundamentals": {
@@ -14926,6 +14926,12 @@
       ],
       "news": [
         {
+          "title": "Upstart, Affirm, and SoFi All Lend to the Same Borrowers. Only One of Them Funds With Deposits.",
+          "publisher": "Motley Fool",
+          "link": "https://www.fool.com/investing/2026/09/19/upstart-affirm-and-sofi-all-lend-to-the-same-borro/",
+          "when": "Sep 19"
+        },
+        {
           "title": "Is SoFi Technologies Stock a Buy, Sell, or Hold 49% Below Its 52-Week High?",
           "publisher": "Motley Fool",
           "link": "https://www.fool.com/investing/2026/09/19/sofi-technologies-stock-buy-sell-hold-52-week-high/",
@@ -14953,12 +14959,6 @@
           "title": "You Don't Have To Beat The Market To Retire In Style",
           "publisher": "Investor's Business Daily",
           "link": "https://www.investors.com/etfs-and-funds/retirement/index-fund-you-dont-have-to-beat-the-market-to-build-wealth/?src=A00220&yptr=yahoo",
-          "when": "Sep 17"
-        },
-        {
-          "title": "SOFI Stock Rises Overnight Despite Rate Cut: Retail Sentiment Improves As Investors Argue Rate Hike Already Priced In",
-          "publisher": "Stocktwits",
-          "link": "https://stocktwits.com/news-articles/markets/equity/sofi-stock-rises-overnight-despite-rate-cut-retail-sentiment-improves-as-investors-argue-rate-hike-already-priced-in/cZtrJTcRB5b",
           "when": "Sep 17"
         }
       ]
@@ -15026,6 +15026,24 @@
       ],
       "news": [
         {
+          "title": "Warren Buffett Watched Alphabet's Stock Price Climb 9,000% Before He Decided to Invest. Here's Why He and Greg Abel Are Making It One of Berkshire Hathaway's Biggest Investments Now.",
+          "publisher": "Motley Fool",
+          "link": "https://www.fool.com/investing/2026/09/19/warren-buffett-watched-alphabets-stock-price-climb/",
+          "when": "Sep 19"
+        },
+        {
+          "title": "Upstart, Affirm, and SoFi All Lend to the Same Borrowers. Only One of Them Funds With Deposits.",
+          "publisher": "Motley Fool",
+          "link": "https://www.fool.com/investing/2026/09/19/upstart-affirm-and-sofi-all-lend-to-the-same-borro/",
+          "when": "Sep 19"
+        },
+        {
+          "title": "How Investors Are Reacting To Ultragenyx Pharmaceutical (RARE) First-In-Disease Gene Therapy Approval For FAYUVI",
+          "publisher": "Simply Wall St.",
+          "link": "https://finance.yahoo.com/healthcare/articles/investors-reacting-ultragenyx-pharmaceutical-rare-141033462.html",
+          "when": "Sep 19"
+        },
+        {
           "title": "Anthropic's IPO Is Coming. Here's What That Means for S&P 500 Investors.",
           "publisher": "Motley Fool",
           "link": "https://www.fool.com/investing/2026/09/19/anthropic-ipo-coming-what-means-sp-500/",
@@ -15041,24 +15059,6 @@
           "title": "Is Arm Holdings Still a Hidden Winner of the AI Chip Race?",
           "publisher": "Motley Fool",
           "link": "https://www.fool.com/investing/2026/09/19/is-arm-holdings-still-a-hidden-winner-ai-chip-race/",
-          "when": "Sep 19"
-        },
-        {
-          "title": "What History Says About Owning Berkshire Hathaway Through a Recession",
-          "publisher": "Motley Fool",
-          "link": "https://www.fool.com/investing/2026/09/19/what-history-says-about-owning-berkshire-hathaway/",
-          "when": "Sep 19"
-        },
-        {
-          "title": "Fed Chair Kevin Warsh and the FOMC Just Hiked Interest Rates, and 36 Years of History Make Clear What Comes Next for Stocks",
-          "publisher": "Motley Fool",
-          "link": "https://www.fool.com/investing/2026/09/19/fed-chair-kevin-warsh-fomc-hiked-interest-rates-36-years-history-make-clear-what-next-for-stocks/",
-          "when": "Sep 19"
-        },
-        {
-          "title": "History Says This Investment Strategy Can Build a $1 Million Portfolio. Here's How.",
-          "publisher": "Motley Fool",
-          "link": "https://www.fool.com/investing/2026/09/19/history-investment-build-million-portfolio-vti/",
           "when": "Sep 19"
         }
       ]
@@ -15121,6 +15121,12 @@
       "flags": [],
       "news": [
         {
+          "title": "CVS division completes Chapter 11 bankruptcy liquidation",
+          "publisher": "TheStreet",
+          "link": "https://www.thestreet.com/retail/cvs-omnicare-completes-chapter-11-bankruptcy-liquidation",
+          "when": "Sep 19"
+        },
+        {
           "title": "Cathie Wood Is Selling 2 Magnificent Seven Stocks, but Piling Into Another",
           "publisher": "Motley Fool",
           "link": "https://www.fool.com/investing/2026/09/19/cathie-wood-is-selling-2-magnificent-seven-stocks/",
@@ -15148,12 +15154,6 @@
           "title": "Is Affirm Holdings, Inc. (AFRM) Stock a Buy After Goldman Sachs Raised Its Price Target?",
           "publisher": "Insider Monkey",
           "link": "https://finance.yahoo.com/markets/stocks/articles/affirm-holdings-inc-afrm-stock-080841812.html",
-          "when": "Sep 19"
-        },
-        {
-          "title": "Amazon (AMZN) Is Reworking Its Air Fleet With 30 A330 Freighters By 2027",
-          "publisher": "Simply Wall St.",
-          "link": "https://finance.yahoo.com/markets/stocks/articles/amazon-amzn-reworking-air-fleet-041803486.html",
           "when": "Sep 19"
         }
       ]
@@ -15511,6 +15511,12 @@
       ],
       "news": [
         {
+          "title": "Kroger shoppers stopped trusting one key part of the store",
+          "publisher": "TheStreet",
+          "link": "https://www.thestreet.com/retail/kroger-shoppers-stopped-trusting-one-key-part-of-the-store",
+          "when": "Sep 19"
+        },
+        {
           "title": "Do You Want Gains With That?",
           "publisher": "Barrons.com",
           "link": "https://www.barrons.com/articles/do-you-want-gains-with-that-3954bc69?siteid=yhoof2&yptr=yahoo",
@@ -15538,12 +15544,6 @@
           "title": "Why Has McDonald's Gone Quiet On Its Low-Income Customer?",
           "publisher": "Trefis",
           "link": "https://www.trefis.com/articles/615678/why-has-mcdonalds-gone-quiet-on-its-low-income-customer/2026-09-17",
-          "when": "Sep 17"
-        },
-        {
-          "title": "Why Is Chipotle Now Working With the CIA-Funded Palantir?",
-          "publisher": "decrypt",
-          "link": "https://decrypt.co/378553/why-chipotle-working-with-palantir",
           "when": "Sep 17"
         }
       ]
@@ -16107,6 +16107,12 @@
           "when": "Sep 18"
         },
         {
+          "title": "Warren Buffett Watched Alphabet's Stock Price Climb 9,000% Before He Decided to Invest. Here's Why He and Greg Abel Are Making It One of Berkshire Hathaway's Biggest Investments Now.",
+          "publisher": "Motley Fool",
+          "link": "https://www.fool.com/investing/2026/09/19/warren-buffett-watched-alphabets-stock-price-climb/",
+          "when": "Sep 19"
+        },
+        {
           "title": "Warren Buffett found the most boring way to bet on AI",
           "publisher": "CNN Business",
           "link": "https://www.cnn.com/2026/09/19/investing/warren-buffett-berkshire-ai-energy",
@@ -16122,12 +16128,6 @@
           "title": "The S&P 500 Has Returned About 11% Annually Since 1958. Here's the ETF I'd Trust for the Next 30 Years.",
           "publisher": "Motley Fool",
           "link": "https://www.fool.com/investing/2026/09/19/sp-500-returned-annually-etf-trust-30-years-vti/",
-          "when": "Sep 19"
-        },
-        {
-          "title": "Sam Altman Admits the AI Industry Has Done \"a Terrible Job\" Explaining Its Benefits Amid Growing Backlash. Should That Worry Nvidia and Microsoft Investors?",
-          "publisher": "Motley Fool",
-          "link": "https://www.fool.com/investing/2026/09/19/sam-altman-ai-industry-worry-nvidia-microsoft/",
           "when": "Sep 19"
         }
       ]
@@ -16522,15 +16522,15 @@
           "when": "Sep 19"
         },
         {
-          "title": "What Happens To Reddit Stock If Search Keeps Sending Fewer People?",
-          "publisher": "Trefis",
-          "link": "https://www.trefis.com/articles/615859/what-happens-to-reddit-stock-if-search-keeps-sending-fewer-people/2026-09-18",
+          "title": "CleanSpark reveals Meta as the tenant behind $6.6B Sandersville lease",
+          "publisher": "Blockspace",
+          "link": "https://blockspace.media/short/cleanspark-reveals-meta-as-the-tenant-behind-6-6b-sandersville-lease/",
           "when": "Sep 18"
         },
         {
-          "title": "S&P 500 Posts Slight Weekly Decline as Utilities Weigh",
-          "publisher": "MT Newswires",
-          "link": "https://finance.yahoo.com/markets/stocks/articles/p-500-posts-slight-weekly-204640571.html",
+          "title": "What Happens To Reddit Stock If Search Keeps Sending Fewer People?",
+          "publisher": "Trefis",
+          "link": "https://www.trefis.com/articles/615859/what-happens-to-reddit-stock-if-search-keeps-sending-fewer-people/2026-09-18",
           "when": "Sep 18"
         }
       ]
@@ -16830,6 +16830,12 @@
       ],
       "news": [
         {
+          "title": "JPMorgan, Goldman Sachs issue bullish stock price targets for IREN, Cipher Digital",
+          "publisher": "Blockspace",
+          "link": "https://blockspace.media/short/jpmorgan-goldman-sachs-issue-bullish-stock-price-targets-for-iren-cipher-digital/",
+          "when": "Sep 18"
+        },
+        {
           "title": "IREN (IREN) Stock Fair Value Edges Lower As AI Cloud Wins Meet Build Out Risks",
           "publisher": "Simply Wall St.",
           "link": "https://finance.yahoo.com/markets/stocks/articles/iren-iren-stock-fair-value-211402157.html",
@@ -16857,12 +16863,6 @@
           "title": "IREN Shares Rise as Northland Targets $99",
           "publisher": "GuruFocus.com",
           "link": "https://finance.yahoo.com/markets/stocks/articles/iren-shares-rise-northland-targets-162451738.html",
-          "when": "Sep 18"
-        },
-        {
-          "title": "Northland starts IREN at Outperform with $99 target, implying 128% upside",
-          "publisher": "Blockspace",
-          "link": "https://blockspace.media/insight/iren-northland-outperform-99-target/",
           "when": "Sep 18"
         }
       ]
@@ -18878,12 +18878,6 @@
       "flags": [],
       "news": [
         {
-          "title": "Netflix downgraded as \u2018worrying\u2019 engagement trends emerge",
-          "publisher": "Yahoo Finance Video",
-          "link": "https://finance.yahoo.com/video/netflix-downgraded-worrying-engagement-trends-144000514.html",
-          "when": "Sep 18"
-        },
-        {
           "title": "Netflix Has $27 Billion Left to Buy Back Its Own Stock -- About 8% of the Whole Company",
           "publisher": "Motley Fool",
           "link": "https://www.fool.com/investing/2026/09/18/netflix-has-usd27-billion-left-to-buy-back-its-own-stock-about-8-of-the-whole-company/",
@@ -18911,6 +18905,12 @@
           "title": "Wells Fargo Brutally Revamps Netflix Stock Price Target",
           "publisher": "GuruFocus.com",
           "link": "https://finance.yahoo.com/markets/stocks/articles/wells-fargo-brutally-revamps-netflix-202122052.html",
+          "when": "Sep 18"
+        },
+        {
+          "title": "Netflix Drops 4.8% as Wells Fargo Cuts Its Target to $57",
+          "publisher": "GuruFocus.com",
+          "link": "https://finance.yahoo.com/markets/stocks/articles/netflix-drops-4-8-wells-202111557.html",
           "when": "Sep 18"
         }
       ]
@@ -19873,6 +19873,12 @@
       ],
       "news": [
         {
+          "title": "JPMorgan, Goldman Sachs issue bullish stock price targets for IREN, Cipher Digital",
+          "publisher": "Blockspace",
+          "link": "https://blockspace.media/short/jpmorgan-goldman-sachs-issue-bullish-stock-price-targets-for-iren-cipher-digital/",
+          "when": "Sep 18"
+        },
+        {
           "title": "Morgan Stanley raises Cipher price target to $54, keeps Overweight rating",
           "publisher": "Blockspace",
           "link": "https://blockspace.media/insight/morgan-stanley-raises-cipher-price-target-54/",
@@ -19900,12 +19906,6 @@
           "title": "Is Cipher Digital\u2019s Gigawatt-Scale Gas Power Strategy Altering The Investment Case For CIFR?",
           "publisher": "Simply Wall St.",
           "link": "https://finance.yahoo.com/energy/articles/cipher-digital-gigawatt-scale-gas-181429797.html",
-          "when": "Sep 17"
-        },
-        {
-          "title": "Wells Fargo starts Cipher at Overweight, sees 49.5% upside",
-          "publisher": "Blockspace",
-          "link": "https://blockspace.media/insight/wells-fargo-starts-cipher-overweight-upside/",
           "when": "Sep 17"
         }
       ]
@@ -20200,6 +20200,12 @@
           "when": "Sep 18"
         },
         {
+          "title": "Warren Buffett Watched Alphabet's Stock Price Climb 9,000% Before He Decided to Invest. Here's Why He and Greg Abel Are Making It One of Berkshire Hathaway's Biggest Investments Now.",
+          "publisher": "Motley Fool",
+          "link": "https://www.fool.com/investing/2026/09/19/warren-buffett-watched-alphabets-stock-price-climb/",
+          "when": "Sep 19"
+        },
+        {
           "title": "Warren Buffett found the most boring way to bet on AI",
           "publisher": "CNN Business",
           "link": "https://www.cnn.com/2026/09/19/investing/warren-buffett-berkshire-ai-energy",
@@ -20215,12 +20221,6 @@
           "title": "The S&P 500 Has Returned About 11% Annually Since 1958. Here's the ETF I'd Trust for the Next 30 Years.",
           "publisher": "Motley Fool",
           "link": "https://www.fool.com/investing/2026/09/19/sp-500-returned-annually-etf-trust-30-years-vti/",
-          "when": "Sep 19"
-        },
-        {
-          "title": "Sam Altman Admits the AI Industry Has Done \"a Terrible Job\" Explaining Its Benefits Amid Growing Backlash. Should That Worry Nvidia and Microsoft Investors?",
-          "publisher": "Motley Fool",
-          "link": "https://www.fool.com/investing/2026/09/19/sam-altman-ai-industry-worry-nvidia-microsoft/",
           "when": "Sep 19"
         }
       ]
@@ -261037,7 +261037,7 @@
       "type": "closed"
     }
   ],
-  "generated_at": "2026-09-19T14:35:24+00:00",
+  "generated_at": "2026-09-19T15:05:44+00:00",
   "universe": {
     "wheel": 21,
     "growth": 18,
