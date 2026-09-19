@@ -14471,8 +14471,8 @@
     },
     {
       "label": "Bitcoin",
-      "price": 81479.9921875,
-      "pct": 0.7151060602563764,
+      "price": 81423.75,
+      "pct": 0.6455866883584349,
       "prefix": "$",
       "is_yield": false,
       "hist": [
@@ -14565,13 +14565,13 @@
         76150,
         76404,
         80901,
-        81480
+        81424
       ]
     },
     {
       "label": "Ethereum",
-      "price": 2646.389892578125,
-      "pct": 1.341940475751957,
+      "price": 2638.75,
+      "pct": 1.0493752943836032,
       "prefix": "$",
       "is_yield": false,
       "hist": [
@@ -14664,7 +14664,7 @@
         2416,
         2447,
         2611,
-        2646
+        2639
       ]
     }
   ],
@@ -14738,8 +14738,8 @@
     {
       "label": "Digital Assets",
       "ticker": "BTC",
-      "pct": 0.7151060602563764,
-      "price": 81479.9921875
+      "pct": 0.6455866883584349,
+      "price": 81423.75
     }
   ],
   "fundamentals": {
@@ -15026,6 +15026,18 @@
       ],
       "news": [
         {
+          "title": "Boeing Isn't Perfect -- but It's Still a Compelling Value Buy Right Now",
+          "publisher": "Motley Fool",
+          "link": "https://www.fool.com/investing/2026/09/19/boeing-isnt-perfect-but-its-still-a-compelling-val/",
+          "when": "Sep 19"
+        },
+        {
+          "title": "Prediction: Iamgold Will Start Paying a Dividend Before the End of 2027. Here's Why That Would Change Everything.",
+          "publisher": "Motley Fool",
+          "link": "https://www.fool.com/investing/2026/09/19/prediction-iamgold-starts-paying-a-dividend-before/",
+          "when": "Sep 19"
+        },
+        {
           "title": "Anthropic Reportedly Delays IPO; OpenAI Expects Massive Cash Burn",
           "publisher": "Investor's Business Daily",
           "link": "https://www.investors.com/news/technology/anthropic-ipo-delayed-openai-expects-massive-cash-burn/?src=A00220&yptr=yahoo",
@@ -15047,18 +15059,6 @@
           "title": "Warren Buffett Is No Longer Berkshire's Chairman. Here\u2019s Why I'm Buying the Stock Anyway.",
           "publisher": "Motley Fool",
           "link": "https://www.fool.com/investing/2026/09/19/warren-buffett-is-no-longer-berkshire-s-chairman-here-s-why-i-m-buying-the-stock-anyway/",
-          "when": "Sep 19"
-        },
-        {
-          "title": "3 ETFs That Work Better Together for Dividend Investors",
-          "publisher": "Motley Fool",
-          "link": "https://www.fool.com/investing/2026/09/19/3-etfs-work-better-together-for-dividend-investors/",
-          "when": "Sep 19"
-        },
-        {
-          "title": "Cisco (CSCO) Leans on Splunk to Broaden Its Share of Enterprise AI Spending. It Faces a Big Test",
-          "publisher": "Insider Monkey",
-          "link": "https://finance.yahoo.com/technology/ai/articles/cisco-csco-leans-splunk-broaden-171200277.html",
           "when": "Sep 19"
         }
       ]
@@ -18876,44 +18876,7 @@
         }
       },
       "flags": [],
-      "news": [
-        {
-          "title": "Netflix (NFLX) Gets a Bullish $110 Target: What\u2019s Driving the Outlook?",
-          "publisher": "Insider Monkey",
-          "link": "https://finance.yahoo.com/markets/stocks/articles/netflix-nflx-gets-bullish-110-155252131.html",
-          "when": "Sep 19"
-        },
-        {
-          "title": "Netflix Has $27 Billion Left to Buy Back Its Own Stock -- About 8% of the Whole Company",
-          "publisher": "Motley Fool",
-          "link": "https://www.fool.com/investing/2026/09/18/netflix-has-usd27-billion-left-to-buy-back-its-own-stock-about-8-of-the-whole-company/",
-          "when": "Sep 19"
-        },
-        {
-          "title": "Netflix (NFLX) Stock Trades Down, Here Is Why",
-          "publisher": "StockStory",
-          "link": "https://finance.yahoo.com/markets/stocks/articles/netflix-nflx-stock-trades-down-223240493.html",
-          "when": "Sep 18"
-        },
-        {
-          "title": "Stock Market Today, Sept. 18: Netflix Falls on Analyst Downgrade and Slashed Price Target",
-          "publisher": "Motley Fool",
-          "link": "https://www.fool.com/coverage/stock-market-today/2026/09/18/stock-market-today-sept-18-netflix-falls-on-analyst-downgrade-and-slashed-price-target/",
-          "when": "Sep 18"
-        },
-        {
-          "title": "Netflix Stock Gets Downgraded by Wells Fargo on \u2018Worrying\u2019 Engagement Trends",
-          "publisher": "Investopedia",
-          "link": "https://www.investopedia.com/market-update-netflix-stock-gets-downgraded-by-wells-fargo-on-worrying-engagement-trends-nflx-12128200",
-          "when": "Sep 18"
-        },
-        {
-          "title": "Wells Fargo Brutally Revamps Netflix Stock Price Target",
-          "publisher": "GuruFocus.com",
-          "link": "https://finance.yahoo.com/markets/stocks/articles/wells-fargo-brutally-revamps-netflix-202122052.html",
-          "when": "Sep 18"
-        }
-      ]
+      "news": []
     },
     "INTC": {
       "ok": true,
@@ -19429,6 +19392,12 @@
       ],
       "news": [
         {
+          "title": "Boeing Isn't Perfect -- but It's Still a Compelling Value Buy Right Now",
+          "publisher": "Motley Fool",
+          "link": "https://www.fool.com/investing/2026/09/19/boeing-isnt-perfect-but-its-still-a-compelling-val/",
+          "when": "Sep 19"
+        },
+        {
           "title": "Laser Weapons Are Real Now -- and You Can Invest in Them With AeroVironment Stock",
           "publisher": "Motley Fool",
           "link": "https://www.fool.com/investing/2026/09/19/laser-weapons-are-real-and-you-can-invest-in-them/",
@@ -19456,12 +19425,6 @@
           "title": "Can A Faster Factory Lift Boeing Stock?",
           "publisher": "Trefis",
           "link": "https://www.trefis.com/articles/615836/can-a-faster-factory-lift-boeing-stock/2026-09-18",
-          "when": "Sep 18"
-        },
-        {
-          "title": "Boeing Starliner May Get a Bigger NASA Role Despite Leaving Crew Behind As SpaceX Looks Past Dragon, Says Report",
-          "publisher": "Stocktwits",
-          "link": "https://stocktwits.com/news-articles/markets/equity/boeing-starliner-may-get-a-bigger-nasa-role-despite-leaving-crew-behind-as-space-x-looks-past-dragon-says-report/cZtHIQ2RBEf",
           "when": "Sep 18"
         }
       ]
@@ -261037,7 +261000,7 @@
       "type": "closed"
     }
   ],
-  "generated_at": "2026-09-19T18:05:20+00:00",
+  "generated_at": "2026-09-19T18:33:15+00:00",
   "universe": {
     "wheel": 21,
     "growth": 18,
