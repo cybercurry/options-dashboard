@@ -14471,8 +14471,8 @@
     },
     {
       "label": "Bitcoin",
-      "price": 81427.4921875,
-      "pct": 0.6502123001293825,
+      "price": 81420.6484375,
+      "pct": 0.6417529349699747,
       "prefix": "$",
       "is_yield": false,
       "hist": [
@@ -14565,13 +14565,13 @@
         76150,
         76404,
         80901,
-        81427
+        81421
       ]
     },
     {
       "label": "Ethereum",
-      "price": 2638.919921875,
-      "pct": 1.0558823523912242,
+      "price": 2639.1201171875,
+      "pct": 1.0635487138369815,
       "prefix": "$",
       "is_yield": false,
       "hist": [
@@ -14738,8 +14738,8 @@
     {
       "label": "Digital Assets",
       "ticker": "BTC",
-      "pct": 0.6502123001293825,
-      "price": 81427.4921875
+      "pct": 0.6417529349699747,
+      "price": 81420.6484375
     }
   ],
   "fundamentals": {
@@ -14810,6 +14810,12 @@
       ],
       "news": [
         {
+          "title": "Forget Buying All Seven: The \"Magnificent Seven\" Stock Most Likely to Double by 2028",
+          "publisher": "Motley Fool",
+          "link": "https://www.fool.com/investing/2026/09/19/forget-buying-all-seven-the-magnificent-seven-stoc/",
+          "when": "Sep 19"
+        },
+        {
           "title": "Delivery Outlook Shows Tesla (TSLA)\u2019s Core Business Under Pressure. Its Next Growth Engine Must Deliver",
           "publisher": "Insider Monkey",
           "link": "https://finance.yahoo.com/markets/stocks/articles/delivery-outlook-shows-tesla-tsla-171443015.html",
@@ -14837,12 +14843,6 @@
           "title": "Intel Corporation (INTC)\u2019s Terafab Partnership Could Give Its AI Foundry Ambitions a Major Boost",
           "publisher": "Insider Monkey",
           "link": "https://finance.yahoo.com/technology/ai/articles/intel-corporation-intc-terafab-partnership-081341477.html",
-          "when": "Sep 19"
-        },
-        {
-          "title": "Why Tesla's Robotaxi/Cybercab Bet Just Got Complicated. What It Means to Investors.",
-          "publisher": "Motley Fool",
-          "link": "https://www.fool.com/investing/2026/09/19/why-teslas-robotaxicybercab-bet-just-got-complicat/",
           "when": "Sep 19"
         }
       ]
@@ -15026,6 +15026,12 @@
       ],
       "news": [
         {
+          "title": "Forget Buying All Seven: The \"Magnificent Seven\" Stock Most Likely to Double by 2028",
+          "publisher": "Motley Fool",
+          "link": "https://www.fool.com/investing/2026/09/19/forget-buying-all-seven-the-magnificent-seven-stoc/",
+          "when": "Sep 19"
+        },
+        {
           "title": "Boeing Isn't Perfect -- but It's Still a Compelling Value Buy Right Now",
           "publisher": "Motley Fool",
           "link": "https://www.fool.com/investing/2026/09/19/boeing-isnt-perfect-but-its-still-a-compelling-val/",
@@ -15053,12 +15059,6 @@
           "title": "Thinking of the Impact Fed Rate Hikes Will Have on Your Portfolio? It's Time to Consider Buying This Perennial Winner That Turned $10,000 Into $86,000 in 10 Years.",
           "publisher": "Motley Fool",
           "link": "https://www.fool.com/investing/2026/09/19/fed-rate-hikes-portfolio-buy-perennial-winner/",
-          "when": "Sep 19"
-        },
-        {
-          "title": "Warren Buffett Is No Longer Berkshire's Chairman. Here\u2019s Why I'm Buying the Stock Anyway.",
-          "publisher": "Motley Fool",
-          "link": "https://www.fool.com/investing/2026/09/19/warren-buffett-is-no-longer-berkshire-s-chairman-here-s-why-i-m-buying-the-stock-anyway/",
           "when": "Sep 19"
         }
       ]
@@ -15121,6 +15121,18 @@
       "flags": [],
       "news": [
         {
+          "title": "Forget Buying All Seven: The \"Magnificent Seven\" Stock Most Likely to Double by 2028",
+          "publisher": "Motley Fool",
+          "link": "https://www.fool.com/investing/2026/09/19/forget-buying-all-seven-the-magnificent-seven-stoc/",
+          "when": "Sep 19"
+        },
+        {
+          "title": "$949 million fraud verdict costs CVS a business in Chapter 11",
+          "publisher": "TheStreet",
+          "link": "https://www.thestreet.com/retail/cvs-omnicare-completes-chapter-11-bankruptcy-liquidation",
+          "when": "Sep 19"
+        },
+        {
           "title": "Bank of America resets Amazon stock forecast on delivery plan",
           "publisher": "TheStreet",
           "link": "https://www.thestreet.com/investing/stocks/bank-of-america-reiterates-buy-amazon-stock-delivery-plan",
@@ -15139,21 +15151,9 @@
           "when": "Sep 19"
         },
         {
-          "title": "CVS division completes Chapter 11 bankruptcy liquidation",
-          "publisher": "TheStreet",
-          "link": "https://www.thestreet.com/retail/cvs-omnicare-completes-chapter-11-bankruptcy-liquidation",
-          "when": "Sep 19"
-        },
-        {
           "title": "Cathie Wood Is Selling 2 Magnificent Seven Stocks, but Piling Into Another",
           "publisher": "Motley Fool",
           "link": "https://www.fool.com/investing/2026/09/19/cathie-wood-is-selling-2-magnificent-seven-stocks/",
-          "when": "Sep 19"
-        },
-        {
-          "title": "The S&P 500 Has Returned About 11% Annually Since 1958. Here's the ETF I'd Trust for the Next 30 Years.",
-          "publisher": "Motley Fool",
-          "link": "https://www.fool.com/investing/2026/09/19/sp-500-returned-annually-etf-trust-30-years-vti/",
           "when": "Sep 19"
         }
       ]
@@ -15216,6 +15216,12 @@
       "flags": [],
       "news": [
         {
+          "title": "Forget Buying All Seven: The \"Magnificent Seven\" Stock Most Likely to Double by 2028",
+          "publisher": "Motley Fool",
+          "link": "https://www.fool.com/investing/2026/09/19/forget-buying-all-seven-the-magnificent-seven-stoc/",
+          "when": "Sep 19"
+        },
+        {
           "title": "The Stock Market's Biggest Companies Are Losing Their Grip. Here's the ETF I'd Buy If History Repeats.",
           "publisher": "Motley Fool",
           "link": "https://www.fool.com/investing/2026/09/19/stock-market-biggest-companies-losing-etf-to-buy/",
@@ -15243,12 +15249,6 @@
           "title": "The Agent Economy Runs on Concrete: Why $660 Billion Is Pouring Into Physical Infrastructure",
           "publisher": "Forkast News",
           "link": "https://finance.yahoo.com/technology/articles/agent-economy-runs-concrete-why-101127688.html",
-          "when": "Sep 19"
-        },
-        {
-          "title": "The S&P 500 Has Returned About 11% Annually Since 1958. Here's the ETF I'd Trust for the Next 30 Years.",
-          "publisher": "Motley Fool",
-          "link": "https://www.fool.com/investing/2026/09/19/sp-500-returned-annually-etf-trust-30-years-vti/",
           "when": "Sep 19"
         }
       ]
@@ -15309,7 +15309,44 @@
         }
       },
       "flags": [],
-      "news": []
+      "news": [
+        {
+          "title": "3 Stocks to Buy Before Wall Street Catches On Before September Ends",
+          "publisher": "24/7 Wall St.",
+          "link": "https://247wallst.com/investing/2026/09/19/3-stocks-to-buy-before-wall-street-catches-on-before-september-ends/",
+          "when": "Sep 19"
+        },
+        {
+          "title": "S&P 500 Posts Slight Weekly Decline as Utilities Weigh",
+          "publisher": "MT Newswires",
+          "link": "https://finance.yahoo.com/markets/stocks/articles/p-500-posts-slight-weekly-204640571.html",
+          "when": "Sep 18"
+        },
+        {
+          "title": "DTE Could Be One of the Quiet Winners of the Data Center Boom",
+          "publisher": "24/7 Wall St.",
+          "link": "https://247wallst.com/investing/2026/09/18/dte-could-be-one-of-the-quiet-winners-of-the-data-center-boom/",
+          "when": "Sep 18"
+        },
+        {
+          "title": "Equity Overhang Weighs on Constellation Energy (CEG) Despite Solid Core Fundamentals",
+          "publisher": "Insider Monkey",
+          "link": "https://finance.yahoo.com/markets/stocks/articles/equity-overhang-weighs-constellation-energy-125043483.html",
+          "when": "Sep 18"
+        },
+        {
+          "title": "Constellation Energy Is Down 29% From Its Peak. Is the Nuclear Bull Case Still Intact?",
+          "publisher": "TIKR",
+          "link": "https://www.tikr.com/blog/constellation-energy-is-down-29-from-its-peak-is-the-nuclear-bull-case-still-intact?ref=yahoofinance",
+          "when": "Sep 17"
+        },
+        {
+          "title": "Jim Cramer Turns on the Two Kings of AI: \u201cIf You Want to Destroy Trust, You Couldn\u2019t Find a Better Way\u201d",
+          "publisher": "24/7 Wall St.",
+          "link": "https://247wallst.com/investing/2026/09/17/jim-cramer-turns-on-the-two-kings-of-ai-if-you-want-to-destroy-trust-you-couldnt-find-a-better-way/",
+          "when": "Sep 17"
+        }
+      ]
     },
     "VRT": {
       "ok": true,
@@ -15975,10 +16012,10 @@
           "when": "Sep 18"
         },
         {
-          "title": "Tech stocks today: Apple's iPhone 18 Pro goes on sale, AI safety debate continues",
-          "publisher": "Yahoo Finance",
-          "link": "https://finance.yahoo.com/technology/live/tech-stocks-today-apples-iphone-18-pro-goes-on-sale-ai-safety-debate-continues-140134624.html",
-          "when": "Sep 14"
+          "title": "Forget Buying All Seven: The \"Magnificent Seven\" Stock Most Likely to Double by 2028",
+          "publisher": "Motley Fool",
+          "link": "https://www.fool.com/investing/2026/09/19/forget-buying-all-seven-the-magnificent-seven-stoc/",
+          "when": "Sep 19"
         },
         {
           "title": "Apple gets bullish Wall Street call as iPhone demand jumps",
@@ -16064,6 +16101,12 @@
           "when": "Sep 19"
         },
         {
+          "title": "Forget Buying All Seven: The \"Magnificent Seven\" Stock Most Likely to Double by 2028",
+          "publisher": "Motley Fool",
+          "link": "https://www.fool.com/investing/2026/09/19/forget-buying-all-seven-the-magnificent-seven-stoc/",
+          "when": "Sep 19"
+        },
+        {
           "title": "The Stock Market's Biggest Companies Are Losing Their Grip. Here's the ETF I'd Buy If History Repeats.",
           "publisher": "Motley Fool",
           "link": "https://www.fool.com/investing/2026/09/19/stock-market-biggest-companies-losing-etf-to-buy/",
@@ -16085,12 +16128,6 @@
           "title": "Cathie Wood Is Selling 2 Magnificent Seven Stocks, but Piling Into Another",
           "publisher": "Motley Fool",
           "link": "https://www.fool.com/investing/2026/09/19/cathie-wood-is-selling-2-magnificent-seven-stocks/",
-          "when": "Sep 19"
-        },
-        {
-          "title": "The S&P 500 Has Returned About 11% Annually Since 1958. Here's the ETF I'd Trust for the Next 30 Years.",
-          "publisher": "Motley Fool",
-          "link": "https://www.fool.com/investing/2026/09/19/sp-500-returned-annually-etf-trust-30-years-vti/",
           "when": "Sep 19"
         }
       ]
@@ -16461,6 +16498,12 @@
       "flags": [],
       "news": [
         {
+          "title": "Forget Buying All Seven: The \"Magnificent Seven\" Stock Most Likely to Double by 2028",
+          "publisher": "Motley Fool",
+          "link": "https://www.fool.com/investing/2026/09/19/forget-buying-all-seven-the-magnificent-seven-stoc/",
+          "when": "Sep 19"
+        },
+        {
           "title": "Meta stock delivers a bold case for a $900 target",
           "publisher": "TheStreet",
           "link": "https://www.thestreet.com/investing/meta-stock-900-price-target-ai-ad-engine",
@@ -16488,12 +16531,6 @@
           "title": "The S&P 500 Has Returned About 11% Annually Since 1958. Here's the ETF I'd Trust for the Next 30 Years.",
           "publisher": "Motley Fool",
           "link": "https://www.fool.com/investing/2026/09/19/sp-500-returned-annually-etf-trust-30-years-vti/",
-          "when": "Sep 19"
-        },
-        {
-          "title": "How AI concerns moved to the center of the midterm debate",
-          "publisher": "Investing.com",
-          "link": "https://finance.yahoo.com/technology/ai/articles/ai-concerns-moved-center-midterm-085642768.html",
           "when": "Sep 19"
         }
       ]
@@ -17032,6 +17069,12 @@
           "when": "Sep 19"
         },
         {
+          "title": "SpaceX\u2019s Nasdaq 100 Weight Is Confirmed at 2.82% in Rebalance",
+          "publisher": "Bloomberg",
+          "link": "https://finance.yahoo.com/markets/stocks/articles/spacex-nasdaq-100-weight-confirmed-141701836.html",
+          "when": "Sep 19"
+        },
+        {
           "title": "Anthropic's IPO Is Coming. Here's What That Means for S&P 500 Investors.",
           "publisher": "Motley Fool",
           "link": "https://www.fool.com/investing/2026/09/19/anthropic-ipo-coming-what-means-sp-500/",
@@ -17047,12 +17090,6 @@
           "title": "Could Anthropic's IPO Be Bigger Than SpaceX's?",
           "publisher": "Motley Fool",
           "link": "https://www.fool.com/investing/2026/09/19/could-anthropics-ipo-be-bigger-than-spacexs/",
-          "when": "Sep 19"
-        },
-        {
-          "title": "26 Analysts Covering SpaceX Stock Rate It a Buy. Here's Why 8 Analysts Disagree",
-          "publisher": "Motley Fool",
-          "link": "https://www.fool.com/investing/2026/09/19/26-analysts-covering-spacex-rate-it-a-buy/",
           "when": "Sep 19"
         }
       ]
@@ -17368,6 +17405,12 @@
       ],
       "news": [
         {
+          "title": "Jim Cramer Suggests Avoiding Redwire (RDW) In A Rate Tightening Cycle",
+          "publisher": "Insider Monkey",
+          "link": "https://finance.yahoo.com/markets/stocks/articles/jim-cramer-suggests-avoiding-redwire-183604424.html",
+          "when": "Sep 19"
+        },
+        {
           "title": "Is RKLB Stock Paying You Enough For The Swings?",
           "publisher": "Trefis",
           "link": "https://www.trefis.com/articles/615858/is-rklb-stock-paying-you-enough-for-the-swings/2026-09-18",
@@ -17395,12 +17438,6 @@
           "title": "What Are You Actually Buying In RKLB Stock?",
           "publisher": "Trefis",
           "link": "https://www.trefis.com/articles/615543/what-are-you-actually-buying-in-rklb-stock/2026-09-16",
-          "when": "Sep 16"
-        },
-        {
-          "title": "RKLB, ASTS, SPCX, RDW Stocks Set For A Boost? Pentagon Confirms Orbital Weapons Use, Ramps Up Golden Dome Plans",
-          "publisher": "Stocktwits",
-          "link": "https://stocktwits.com/news-articles/markets/equity/rklb-asts-spcx-rdw-stocks-pentagon-orbital-weapons-golden-dome-plans/cZtYcxMRB2P",
           "when": "Sep 16"
         }
       ]
@@ -18839,7 +18876,44 @@
         }
       },
       "flags": [],
-      "news": []
+      "news": [
+        {
+          "title": "Netflix (NFLX) Gets a Bullish $110 Target: What\u2019s Driving the Outlook?",
+          "publisher": "Insider Monkey",
+          "link": "https://finance.yahoo.com/markets/stocks/articles/netflix-nflx-gets-bullish-110-155252131.html",
+          "when": "Sep 19"
+        },
+        {
+          "title": "Netflix Has $27 Billion Left to Buy Back Its Own Stock -- About 8% of the Whole Company",
+          "publisher": "Motley Fool",
+          "link": "https://www.fool.com/investing/2026/09/18/netflix-has-usd27-billion-left-to-buy-back-its-own-stock-about-8-of-the-whole-company/",
+          "when": "Sep 19"
+        },
+        {
+          "title": "Netflix (NFLX) Stock Trades Down, Here Is Why",
+          "publisher": "StockStory",
+          "link": "https://finance.yahoo.com/markets/stocks/articles/netflix-nflx-stock-trades-down-223240493.html",
+          "when": "Sep 18"
+        },
+        {
+          "title": "Stock Market Today, Sept. 18: Netflix Falls on Analyst Downgrade and Slashed Price Target",
+          "publisher": "Motley Fool",
+          "link": "https://www.fool.com/coverage/stock-market-today/2026/09/18/stock-market-today-sept-18-netflix-falls-on-analyst-downgrade-and-slashed-price-target/",
+          "when": "Sep 18"
+        },
+        {
+          "title": "Netflix Stock Gets Downgraded by Wells Fargo on \u2018Worrying\u2019 Engagement Trends",
+          "publisher": "Investopedia",
+          "link": "https://www.investopedia.com/market-update-netflix-stock-gets-downgraded-by-wells-fargo-on-worrying-engagement-trends-nflx-12128200",
+          "when": "Sep 18"
+        },
+        {
+          "title": "Wells Fargo Brutally Revamps Netflix Stock Price Target",
+          "publisher": "GuruFocus.com",
+          "link": "https://finance.yahoo.com/markets/stocks/articles/wells-fargo-brutally-revamps-netflix-202122052.html",
+          "when": "Sep 18"
+        }
+      ]
     },
     "INTC": {
       "ok": true,
@@ -19911,36 +19985,6 @@
           "publisher": "Yahoo Finance",
           "link": "https://finance.yahoo.com/markets/article/crowdstrike-palo-alto-networks-and-cybersecurity-stocks-post-strong-weekly-gains-after-ai-freak-out-moment-142352398.html",
           "when": "Sep 18"
-        },
-        {
-          "title": "CrowdStrike (CRWD) Lands Forrester Leadership Nod As AI Security Ties Deepen",
-          "publisher": "Simply Wall St.",
-          "link": "https://finance.yahoo.com/technology/ai/articles/crowdstrike-crwd-lands-forrester-leadership-141102892.html",
-          "when": "Sep 19"
-        },
-        {
-          "title": "CrowdStrike, HubSpot, Intuit, Cloudflare, and Okta Shares Plummet, What You Need To Know",
-          "publisher": "StockStory",
-          "link": "https://finance.yahoo.com/markets/stocks/articles/crowdstrike-hubspot-intuit-cloudflare-okta-000040098.html",
-          "when": "Sep 19"
-        },
-        {
-          "title": "Jim Cramer Shared What CrowdStrike Holdings, Inc. (NASDAQ:CRWD)\u2019s CEO Told Him About AI \u201cDoomsaying\u201d",
-          "publisher": "Insider Monkey",
-          "link": "https://finance.yahoo.com/technology/ai/articles/jim-cramer-shared-crowdstrike-holdings-232242655.html",
-          "when": "Sep 18"
-        },
-        {
-          "title": "CRWD Stock Keeps Climbing. Should You Climb On?",
-          "publisher": "Trefis",
-          "link": "https://www.trefis.com/articles/615810/crwd-stock-keeps-climbing-should-you-climb-on/2026-09-18",
-          "when": "Sep 18"
-        },
-        {
-          "title": "Cybersecurity Stock Fortinet Forms Rare Pattern, Flirts With Buy Point",
-          "publisher": "Investor's Business Daily",
-          "link": "https://www.investors.com/stock-lists/ibd-big-cap-20/fortinet-ftnt-stock-cybersecurity-openai/?src=A00220&yptr=yahoo",
-          "when": "Sep 18"
         }
       ]
     },
@@ -20120,6 +20164,12 @@
           "when": "Sep 19"
         },
         {
+          "title": "Forget Buying All Seven: The \"Magnificent Seven\" Stock Most Likely to Double by 2028",
+          "publisher": "Motley Fool",
+          "link": "https://www.fool.com/investing/2026/09/19/forget-buying-all-seven-the-magnificent-seven-stoc/",
+          "when": "Sep 19"
+        },
+        {
           "title": "The Stock Market's Biggest Companies Are Losing Their Grip. Here's the ETF I'd Buy If History Repeats.",
           "publisher": "Motley Fool",
           "link": "https://www.fool.com/investing/2026/09/19/stock-market-biggest-companies-losing-etf-to-buy/",
@@ -20141,12 +20191,6 @@
           "title": "Cathie Wood Is Selling 2 Magnificent Seven Stocks, but Piling Into Another",
           "publisher": "Motley Fool",
           "link": "https://www.fool.com/investing/2026/09/19/cathie-wood-is-selling-2-magnificent-seven-stocks/",
-          "when": "Sep 19"
-        },
-        {
-          "title": "The S&P 500 Has Returned About 11% Annually Since 1958. Here's the ETF I'd Trust for the Next 30 Years.",
-          "publisher": "Motley Fool",
-          "link": "https://www.fool.com/investing/2026/09/19/sp-500-returned-annually-etf-trust-30-years-vti/",
           "when": "Sep 19"
         }
       ]
@@ -260963,7 +261007,7 @@
       "type": "closed"
     }
   ],
-  "generated_at": "2026-09-19T18:35:53+00:00",
+  "generated_at": "2026-09-19T19:05:43+00:00",
   "universe": {
     "wheel": 21,
     "growth": 18,
