@@ -14471,8 +14471,8 @@
     },
     {
       "label": "Bitcoin",
-      "price": 81195.3203125,
-      "pct": -0.047221023530596984,
+      "price": 81090.2421875,
+      "pct": -0.17657392912865388,
       "prefix": "$",
       "is_yield": false,
       "hist": [
@@ -14565,13 +14565,13 @@
         76404,
         80901,
         81234,
-        81195
+        81090
       ]
     },
     {
       "label": "Ethereum",
-      "price": 2633.64990234375,
-      "pct": 0.06410637558358356,
+      "price": 2628.10009765625,
+      "pct": -0.1467554576917829,
       "prefix": "$",
       "is_yield": false,
       "hist": [
@@ -14664,7 +14664,7 @@
         2447,
         2611,
         2632,
-        2634
+        2628
       ]
     }
   ],
@@ -14738,8 +14738,8 @@
     {
       "label": "Digital Assets",
       "ticker": "BTC",
-      "pct": -0.047221023530596984,
-      "price": 81195.3203125
+      "pct": -0.17657392912865388,
+      "price": 81090.2421875
     }
   ],
   "fundamentals": {
@@ -15026,6 +15026,12 @@
       ],
       "news": [
         {
+          "title": "I Own Constellation for the Nuclear Fleet, Not the AI Headlines. Here's Why That Matters Now.",
+          "publisher": "Motley Fool",
+          "link": "https://www.fool.com/investing/2026/09/20/i-own-constellation-for-the-nuclear-fleet-not-the/",
+          "when": "Sep 20"
+        },
+        {
           "title": "Dutch Bros and McDonald's Hit 52-Week Lows on the Same Day. Here's Why Only One Is a Buy Now.",
           "publisher": "Motley Fool",
           "link": "https://www.fool.com/investing/2026/09/20/dutch-bros-mcdonalds-52-week-low-why-buy/",
@@ -15053,12 +15059,6 @@
           "title": "Nvidia CEO has a blunt message for Americans fearing AI",
           "publisher": "TheStreet",
           "link": "https://www.thestreet.com/technology/nvidia-jensen-huang-ai-apocalypse-warnings",
-          "when": "Sep 20"
-        },
-        {
-          "title": "Billionaire Bill Ackman Dumps Alphabet and Loads Up On a Mega-Cap Stock Down 15% From Its Peak",
-          "publisher": "Motley Fool",
-          "link": "https://www.fool.com/investing/2026/09/20/billionaire-bill-ackman-dumps-alphabet-loads-meta/",
           "when": "Sep 20"
         }
       ]
@@ -15216,6 +15216,12 @@
       "flags": [],
       "news": [
         {
+          "title": "I Own Constellation for the Nuclear Fleet, Not the AI Headlines. Here's Why That Matters Now.",
+          "publisher": "Motley Fool",
+          "link": "https://www.fool.com/investing/2026/09/20/i-own-constellation-for-the-nuclear-fleet-not-the/",
+          "when": "Sep 20"
+        },
+        {
           "title": "Prediction: Micron Will Earn More Profit Than Microsoft in Fiscal 2027",
           "publisher": "Motley Fool",
           "link": "https://www.fool.com/investing/2026/09/20/prediction-micron-will-earn-more-profit-than-microsoft-in-fiscal-2027/",
@@ -15243,12 +15249,6 @@
           "title": "Forget Buying All Seven: The \"Magnificent Seven\" Stock Most Likely to Double by 2028",
           "publisher": "Motley Fool",
           "link": "https://www.fool.com/investing/2026/09/19/forget-buying-all-seven-the-magnificent-seven-stoc/",
-          "when": "Sep 19"
-        },
-        {
-          "title": "AI Made Execution Easier. It Also Changed the Founder\u2019s Most Important Job.",
-          "publisher": "Entrepreneur",
-          "link": "https://www.entrepreneur.com/business-news/ai-made-execution-easier-it-also-changed-the-founders-most-important-job",
           "when": "Sep 19"
         }
       ]
@@ -15311,6 +15311,12 @@
       "flags": [],
       "news": [
         {
+          "title": "I Own Constellation for the Nuclear Fleet, Not the AI Headlines. Here's Why That Matters Now.",
+          "publisher": "Motley Fool",
+          "link": "https://www.fool.com/investing/2026/09/20/i-own-constellation-for-the-nuclear-fleet-not-the/",
+          "when": "Sep 20"
+        },
+        {
           "title": "3 Stocks to Buy Before Wall Street Catches On Before September Ends",
           "publisher": "24/7 Wall St.",
           "link": "https://247wallst.com/investing/2026/09/19/3-stocks-to-buy-before-wall-street-catches-on-before-september-ends/",
@@ -15338,12 +15344,6 @@
           "title": "Constellation Energy Is Down 29% From Its Peak. Is the Nuclear Bull Case Still Intact?",
           "publisher": "TIKR",
           "link": "https://www.tikr.com/blog/constellation-energy-is-down-29-from-its-peak-is-the-nuclear-bull-case-still-intact?ref=yahoofinance",
-          "when": "Sep 17"
-        },
-        {
-          "title": "Jim Cramer Turns on the Two Kings of AI: \u201cIf You Want to Destroy Trust, You Couldn\u2019t Find a Better Way\u201d",
-          "publisher": "24/7 Wall St.",
-          "link": "https://247wallst.com/investing/2026/09/17/jim-cramer-turns-on-the-two-kings-of-ai-if-you-want-to-destroy-trust-you-couldnt-find-a-better-way/",
           "when": "Sep 17"
         }
       ]
@@ -15509,7 +15509,44 @@
           "text": "Liquidity tight \u2014 current ratio 0.72"
         }
       ],
-      "news": []
+      "news": [
+        {
+          "title": "Kroger shoppers stopped trusting one key part of the store",
+          "publisher": "TheStreet",
+          "link": "https://www.thestreet.com/retail/kroger-shoppers-stopped-trusting-one-key-part-of-the-store",
+          "when": "Sep 19"
+        },
+        {
+          "title": "Do You Want Gains With That?",
+          "publisher": "Barrons.com",
+          "link": "https://www.barrons.com/articles/do-you-want-gains-with-that-3954bc69?siteid=yhoof2&yptr=yahoo",
+          "when": "Sep 18"
+        },
+        {
+          "title": "Chipotle makes a key change to make your meals better",
+          "publisher": "TheStreet",
+          "link": "https://www.thestreet.com/restaurants/chipotle-makes-a-key-in-store-change-customers-will-love",
+          "when": "Sep 18"
+        },
+        {
+          "title": "CMG Stock Slips 15% in a Year: Can Growth Catalysts Spark a Rebound?",
+          "publisher": "Zacks",
+          "link": "https://finance.yahoo.com/markets/stocks/articles/cmg-stock-slips-15-growth-133600984.html",
+          "when": "Sep 18"
+        },
+        {
+          "title": "Is Most-Watched Stock Chipotle Mexican Grill, Inc. (CMG) Worth Betting on Now?",
+          "publisher": "Zacks",
+          "link": "https://finance.yahoo.com/markets/stocks/articles/most-watched-stock-chipotle-mexican-130002700.html",
+          "when": "Sep 18"
+        },
+        {
+          "title": "Why Has McDonald's Gone Quiet On Its Low-Income Customer?",
+          "publisher": "Trefis",
+          "link": "https://www.trefis.com/articles/615678/why-has-mcdonalds-gone-quiet-on-its-low-income-customer/2026-09-17",
+          "when": "Sep 17"
+        }
+      ]
     },
     "GLD": {
       "ok": true,
@@ -15963,7 +16000,7 @@
       ],
       "news": [
         {
-          "title": "Apple's new CEO wants the most private details of your life",
+          "title": "Apple's new CEO says its AI already has your personal info",
           "publisher": "TheStreet",
           "link": "https://www.thestreet.com/technology/apples-new-ceo-reveals-how-ai-will-change-your-life",
           "when": "Sep 20"
@@ -16461,6 +16498,12 @@
       "flags": [],
       "news": [
         {
+          "title": "I Own Constellation for the Nuclear Fleet, Not the AI Headlines. Here's Why That Matters Now.",
+          "publisher": "Motley Fool",
+          "link": "https://www.fool.com/investing/2026/09/20/i-own-constellation-for-the-nuclear-fleet-not-the/",
+          "when": "Sep 20"
+        },
+        {
           "title": "Billionaire Bill Ackman Dumps Alphabet and Loads Up On a Mega-Cap Stock Down 15% From Its Peak",
           "publisher": "Motley Fool",
           "link": "https://www.fool.com/investing/2026/09/20/billionaire-bill-ackman-dumps-alphabet-loads-meta/",
@@ -16488,12 +16531,6 @@
           "title": "The Caterpillar Correction Shouldn't Last Much Longer",
           "publisher": "Motley Fool",
           "link": "https://www.fool.com/investing/2026/09/20/the-caterpillar-correction-shouldnt-last-much-long/",
-          "when": "Sep 20"
-        },
-        {
-          "title": "OpenAI Just Beat Google, Meta, and Amazon To This Key Milestone. Is It Bullish for AI Stocks.",
-          "publisher": "Motley Fool",
-          "link": "https://www.fool.com/investing/2026/09/20/openai-just-beat-google-meta-and-amazon-to-this-key-milestone-why-it-s-bullish-for-ai-stocks/",
           "when": "Sep 20"
         }
       ]
@@ -261288,7 +261325,7 @@
       "type": "closed"
     }
   ],
-  "generated_at": "2026-09-20T18:38:39+00:00",
+  "generated_at": "2026-09-20T19:04:06+00:00",
   "universe": {
     "wheel": 21,
     "growth": 18,
