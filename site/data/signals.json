@@ -14471,8 +14471,8 @@
     },
     {
       "label": "Bitcoin",
-      "price": 80523.578125,
-      "pct": -0.8741467396672253,
+      "price": 80762.640625,
+      "pct": -0.5798568577861429,
       "prefix": "$",
       "is_yield": false,
       "hist": [
@@ -14565,13 +14565,13 @@
         76404,
         80901,
         81234,
-        80524
+        80787
       ]
     },
     {
       "label": "Ethereum",
-      "price": 2578.919921875,
-      "pct": -2.0153296886726846,
+      "price": 2600.25,
+      "pct": -1.2049048844494425,
       "prefix": "$",
       "is_yield": false,
       "hist": [
@@ -14664,7 +14664,7 @@
         2447,
         2611,
         2632,
-        2579
+        2600
       ]
     }
   ],
@@ -14738,8 +14738,8 @@
     {
       "label": "Digital Assets",
       "ticker": "BTC",
-      "pct": -0.8741467396672253,
-      "price": 80523.578125
+      "pct": -0.5798568577861429,
+      "price": 80762.640625
     }
   ],
   "fundamentals": {
@@ -15026,6 +15026,24 @@
       ],
       "news": [
         {
+          "title": "Delta's Non-Main-Cabin Revenue Hits 61% in 2026 -- Why It Matters for Earnings",
+          "publisher": "Motley Fool",
+          "link": "https://www.fool.com/investing/2026/09/20/deltas-non-main-cabin-revenue-hits-61-in-2026-why/",
+          "when": "Sep 20"
+        },
+        {
+          "title": "OpenAI Just Beat Google, Meta, and Amazon To This Key Milestone. Is It Bullish for AI Stocks.",
+          "publisher": "Motley Fool",
+          "link": "https://www.fool.com/investing/2026/09/20/openai-just-beat-google-meta-and-amazon-to-this-key-milestone-why-it-s-bullish-for-ai-stocks/",
+          "when": "Sep 20"
+        },
+        {
+          "title": "The Bond Market Is Rattled, and History Says That Could Be a Warning Signal to Investors",
+          "publisher": "Motley Fool",
+          "link": "https://www.fool.com/investing/2026/09/20/the-bond-market-is-rattled-and-history-says-that-c/",
+          "when": "Sep 20"
+        },
+        {
           "title": "Is American Express Stock a Buy, Sell, or Hold With Shares Trading 20% Below Their 52-Week High?",
           "publisher": "Motley Fool",
           "link": "https://www.fool.com/investing/2026/09/20/american-express-stock-buy-sell-hold-discount/",
@@ -15041,24 +15059,6 @@
           "title": "Could $5,000 Invested in SpaceX Help You Retire a Millionaire?",
           "publisher": "Motley Fool",
           "link": "https://www.fool.com/investing/2026/09/20/could-5000-invested-in-spacex-help-you-retire-a-mi/",
-          "when": "Sep 20"
-        },
-        {
-          "title": "Billionaire David Tepper Has 40% of His Fund in Just 3 AI Stocks. Are They Still Buys?",
-          "publisher": "Motley Fool",
-          "link": "https://www.fool.com/investing/2026/09/20/billionaire-david-tepper-has-40-of-his-fund-in-jus/",
-          "when": "Sep 20"
-        },
-        {
-          "title": "Wall Street's Bull Case for Bristol Myers Squibb Is Getting Louder",
-          "publisher": "Motley Fool",
-          "link": "https://www.fool.com/investing/2026/09/20/wall-streets-bull-case-for-bristol-myers-squibb-is/",
-          "when": "Sep 20"
-        },
-        {
-          "title": "Why You Should Avoid Palantir and Buy These 2 Defense Stocks Instead",
-          "publisher": "Motley Fool",
-          "link": "https://www.fool.com/investing/2026/09/20/why-you-should-avoid-palantir-and-buy-these-2-defe/",
           "when": "Sep 20"
         }
       ]
@@ -15121,6 +15121,12 @@
       "flags": [],
       "news": [
         {
+          "title": "OpenAI Just Beat Google, Meta, and Amazon To This Key Milestone. Is It Bullish for AI Stocks.",
+          "publisher": "Motley Fool",
+          "link": "https://www.fool.com/investing/2026/09/20/openai-just-beat-google-meta-and-amazon-to-this-key-milestone-why-it-s-bullish-for-ai-stocks/",
+          "when": "Sep 20"
+        },
+        {
           "title": "Billionaire David Tepper Has 40% of His Fund in Just 3 AI Stocks. Are They Still Buys?",
           "publisher": "Motley Fool",
           "link": "https://www.fool.com/investing/2026/09/20/billionaire-david-tepper-has-40-of-his-fund-in-jus/",
@@ -15148,12 +15154,6 @@
           "title": "Forget Buying All Seven: The \"Magnificent Seven\" Stock Most Likely to Double by 2028",
           "publisher": "Motley Fool",
           "link": "https://www.fool.com/investing/2026/09/19/forget-buying-all-seven-the-magnificent-seven-stoc/",
-          "when": "Sep 19"
-        },
-        {
-          "title": "$949 million fraud verdict costs CVS a business in Chapter 11",
-          "publisher": "TheStreet",
-          "link": "https://www.thestreet.com/retail/cvs-omnicare-completes-chapter-11-bankruptcy-liquidation",
           "when": "Sep 19"
         }
       ]
@@ -16101,6 +16101,12 @@
           "when": "Sep 20"
         },
         {
+          "title": "OpenAI Just Beat Google, Meta, and Amazon To This Key Milestone. Is It Bullish for AI Stocks.",
+          "publisher": "Motley Fool",
+          "link": "https://www.fool.com/investing/2026/09/20/openai-just-beat-google-meta-and-amazon-to-this-key-milestone-why-it-s-bullish-for-ai-stocks/",
+          "when": "Sep 20"
+        },
+        {
           "title": "Berkshire Hathaway's Favorite Artificial Intelligence (AI) Stock Looks Like a Genius Buy Now",
           "publisher": "Motley Fool",
           "link": "https://www.fool.com/investing/2026/09/20/berkshire-hathaways-favorite-artificial-intelligen/",
@@ -16122,12 +16128,6 @@
           "title": "Prediction: Anthropic's IPO Will Be a Big Winner for Alphabet and Amazon Investors",
           "publisher": "Motley Fool",
           "link": "https://www.fool.com/investing/2026/09/20/prediction-anthropics-ipo-will-be-a-big-winner-for/",
-          "when": "Sep 20"
-        },
-        {
-          "title": "Four Paid Subscribers Are Suing the Biggest AI Labs for Coordinating a Slowdown",
-          "publisher": "Forkast News",
-          "link": "https://finance.yahoo.com/technology/ai/articles/four-paid-subscribers-suing-biggest-092804842.html",
           "when": "Sep 20"
         }
       ]
@@ -16498,6 +16498,12 @@
       "flags": [],
       "news": [
         {
+          "title": "OpenAI Just Beat Google, Meta, and Amazon To This Key Milestone. Is It Bullish for AI Stocks.",
+          "publisher": "Motley Fool",
+          "link": "https://www.fool.com/investing/2026/09/20/openai-just-beat-google-meta-and-amazon-to-this-key-milestone-why-it-s-bullish-for-ai-stocks/",
+          "when": "Sep 20"
+        },
+        {
           "title": "Forget Buying All Seven: The \"Magnificent Seven\" Stock Most Likely to Double by 2028",
           "publisher": "Motley Fool",
           "link": "https://www.fool.com/investing/2026/09/19/forget-buying-all-seven-the-magnificent-seven-stoc/",
@@ -16525,12 +16531,6 @@
           "title": "Meta Stock Could Hit $800 This Year -- And It All Begins on Sept. 23",
           "publisher": "Barchart",
           "link": "https://www.barchart.com/story/news/4694310/meta-stock-could-hit-800-this-year-and-it-all-begins-on-sept-23",
-          "when": "Sep 19"
-        },
-        {
-          "title": "Bill Ackman's Pershing Square IPO Breaks Out",
-          "publisher": "Investor's Business Daily",
-          "link": "https://www.investors.com/news/bill-ackman-pershing-square-ipo-stock-setting-up/?src=A00220&yptr=yahoo",
           "when": "Sep 19"
         }
       ]
@@ -19981,6 +19981,12 @@
       ],
       "news": [
         {
+          "title": "Piper Sandler Flags Weakening Market Breadth as S&P 500 Declines 0.48%",
+          "publisher": "InvestorsHub",
+          "link": "https://investorshub.advfn.com/market-news/article/36530/piper-sandler-flags-weakening-market-breadth-as-sp-500-declines-0-48",
+          "when": "Sep 20"
+        },
+        {
           "title": "CrowdStrike CEO sends strong six-word message on AI cyber safety",
           "publisher": "TheStreet",
           "link": "https://www.thestreet.com/investing/stocks/crwd-crowdstrike-ceo-ai-safety-genie-out-of-the-bottle",
@@ -20008,12 +20014,6 @@
           "title": "Jim Cramer Shared What CrowdStrike Holdings, Inc. (NASDAQ:CRWD)\u2019s CEO Told Him About AI \u201cDoomsaying\u201d",
           "publisher": "Insider Monkey",
           "link": "https://finance.yahoo.com/technology/ai/articles/jim-cramer-shared-crowdstrike-holdings-232242655.html",
-          "when": "Sep 18"
-        },
-        {
-          "title": "CRWD Stock Keeps Climbing. Should You Climb On?",
-          "publisher": "Trefis",
-          "link": "https://www.trefis.com/articles/615810/crwd-stock-keeps-climbing-should-you-climb-on/2026-09-18",
           "when": "Sep 18"
         }
       ]
@@ -20194,6 +20194,12 @@
           "when": "Sep 20"
         },
         {
+          "title": "OpenAI Just Beat Google, Meta, and Amazon To This Key Milestone. Is It Bullish for AI Stocks.",
+          "publisher": "Motley Fool",
+          "link": "https://www.fool.com/investing/2026/09/20/openai-just-beat-google-meta-and-amazon-to-this-key-milestone-why-it-s-bullish-for-ai-stocks/",
+          "when": "Sep 20"
+        },
+        {
           "title": "Berkshire Hathaway's Favorite Artificial Intelligence (AI) Stock Looks Like a Genius Buy Now",
           "publisher": "Motley Fool",
           "link": "https://www.fool.com/investing/2026/09/20/berkshire-hathaways-favorite-artificial-intelligen/",
@@ -20215,12 +20221,6 @@
           "title": "Prediction: Anthropic's IPO Will Be a Big Winner for Alphabet and Amazon Investors",
           "publisher": "Motley Fool",
           "link": "https://www.fool.com/investing/2026/09/20/prediction-anthropics-ipo-will-be-a-big-winner-for/",
-          "when": "Sep 20"
-        },
-        {
-          "title": "Four Paid Subscribers Are Suing the Biggest AI Labs for Coordinating a Slowdown",
-          "publisher": "Forkast News",
-          "link": "https://finance.yahoo.com/technology/ai/articles/four-paid-subscribers-suing-biggest-092804842.html",
           "when": "Sep 20"
         }
       ]
@@ -261325,7 +261325,7 @@
       "type": "closed"
     }
   ],
-  "generated_at": "2026-09-20T14:33:53+00:00",
+  "generated_at": "2026-09-20T15:05:33+00:00",
   "universe": {
     "wheel": 21,
     "growth": 18,
