@@ -14471,8 +14471,8 @@
     },
     {
       "label": "Bitcoin",
-      "price": 81068.5,
-      "pct": -0.20333892067359027,
+      "price": 81248.96875,
+      "pct": 0.018821088197418234,
       "prefix": "$",
       "is_yield": false,
       "hist": [
@@ -14565,13 +14565,13 @@
         76404,
         80901,
         81234,
-        81068
+        81249
       ]
     },
     {
       "label": "Ethereum",
-      "price": 2625.360107421875,
-      "pct": -0.25085990757959253,
+      "price": 2635.5400390625,
+      "pct": 0.1359210999025251,
       "prefix": "$",
       "is_yield": false,
       "hist": [
@@ -14664,7 +14664,7 @@
         2447,
         2611,
         2632,
-        2625
+        2636
       ]
     }
   ],
@@ -14738,8 +14738,8 @@
     {
       "label": "Digital Assets",
       "ticker": "BTC",
-      "pct": -0.20333892067359027,
-      "price": 81068.5
+      "pct": 0.018821088197418234,
+      "price": 81248.96875
     }
   ],
   "fundamentals": {
@@ -15026,6 +15026,12 @@
       ],
       "news": [
         {
+          "title": "Dutch Bros and McDonald's Hit 52-Week Lows on the Same Day. Here's Why Only One Is a Buy Now.",
+          "publisher": "Motley Fool",
+          "link": "https://www.fool.com/investing/2026/09/20/dutch-bros-mcdonalds-52-week-low-why-buy/",
+          "when": "Sep 20"
+        },
+        {
           "title": "Rigetti Turned $10,000 Into Over $81,000 in 3 Years -- and It's Still 73% Off Its High. Here's Why I Still Wouldn't Touch It.",
           "publisher": "Motley Fool",
           "link": "https://www.fool.com/investing/2026/09/20/rigetti-turned-usd10-000-into-over-usd81-000-in-3-years-and-it-s-still-73-off-its-high-here-s-why-i-wouldn-t-touch-it/",
@@ -15053,12 +15059,6 @@
           "title": "Billionaire Bill Ackman Dumps Alphabet and Loads Up On a Mega-Cap Stock Down 15% From Its Peak",
           "publisher": "Motley Fool",
           "link": "https://www.fool.com/investing/2026/09/20/billionaire-bill-ackman-dumps-alphabet-loads-meta/",
-          "when": "Sep 20"
-        },
-        {
-          "title": "Is This Cryptocurrency Still a Millionaire Maker?",
-          "publisher": "Motley Fool",
-          "link": "https://www.fool.com/investing/2026/09/20/is-this-cryptocurrency-still-a-millionaire-maker/",
           "when": "Sep 20"
         }
       ]
@@ -15900,6 +15900,12 @@
       ],
       "news": [
         {
+          "title": "Synchrony Financial Sees Resilient Spending, Reaffirms Receivables Growth Outlook",
+          "publisher": "MarketBeat",
+          "link": "https://www.marketbeat.com/instant-alerts/event-synchrony-financial-sees-resilient-spending-reaffirms-receivables-growth-outlook-2026-09-20/?utm_source=yahoofinance&utm_medium=yahoofinance",
+          "when": "Sep 20"
+        },
+        {
           "title": "Dollar General CEO raises major red flag about consumers",
           "publisher": "TheStreet",
           "link": "https://www.thestreet.com/retail/dollar-general-sees-more-higher-income-shoppers",
@@ -15928,12 +15934,6 @@
           "publisher": "Motley Fool",
           "link": "https://www.fool.com/investing/2026/09/19/sp-500-returned-annually-etf-trust-30-years-vti/",
           "when": "Sep 19"
-        },
-        {
-          "title": "Walmart Vs Kroger: Jim Cramer Couldn\u2019t Figure Out Why Only One\u2019s Shares Went Up",
-          "publisher": "Insider Monkey",
-          "link": "https://finance.yahoo.com/markets/stocks/articles/walmart-vs-kroger-jim-cramer-231954802.html",
-          "when": "Sep 18"
         }
       ]
     },
@@ -16000,6 +16000,12 @@
       ],
       "news": [
         {
+          "title": "Apple's new CEO wants the most private details of your life",
+          "publisher": "TheStreet",
+          "link": "https://www.thestreet.com/technology/apples-new-ceo-reveals-how-ai-will-change-your-life",
+          "when": "Sep 20"
+        },
+        {
           "title": "Prediction: Even With the $1,999 Price Tag, Apple's Foldable iPhone Duo Will Be a Hit and Apple Will Join Nvidia in the $5 Trillion Club.",
           "publisher": "Motley Fool",
           "link": "https://www.fool.com/investing/2026/09/20/prediction-even-with-the-1999-price-tag-apples-fol/",
@@ -16027,12 +16033,6 @@
           "title": "Greg Abel Recently Plowed $4.2 Billion Into Warren Buffett's Favorite Stock, and It Wasn't Apple",
           "publisher": "Motley Fool",
           "link": "https://www.fool.com/investing/2026/09/20/greg-abel-42-billion-warren-buffetts-stock-apple/",
-          "when": "Sep 20"
-        },
-        {
-          "title": "If You Had Invested $500 a Month in VOO Since Its 2010 Launch, You Would Have About $330,000 Today",
-          "publisher": "24/7 Wall St.",
-          "link": "https://247wallst.com/investing/etf/2026/09/20/if-you-had-invested-500-a-month-in-voo-since-its-2010-launch-you-would-have-about-330000-today/",
           "when": "Sep 20"
         }
       ]
@@ -20758,44 +20758,7 @@
           "text": "Rich valuation \u2014 P/E 62"
         }
       ],
-      "news": [
-        {
-          "title": "Cerebras Systems vs. Innodata: Which AI-Driven Tech Stock Is a Better Buy in 2026?",
-          "publisher": "Motley Fool",
-          "link": "https://www.fool.com/coverage/better-buy/2026/09/18/cerebras-systems-vs-innodata-which-ai-driven-tech-stock-is-a-better-buy-in-2026/",
-          "when": "Sep 18"
-        },
-        {
-          "title": "Innodata's Customer Diversification Effort: Is It Finally Paying Off?",
-          "publisher": "Zacks",
-          "link": "https://finance.yahoo.com/technology/ai/articles/innodatas-customer-diversification-effort-finally-151200402.html",
-          "when": "Sep 16"
-        },
-        {
-          "title": "3 AI Stocks Poised to Outperform Micron and Sandisk as the Next Infrastructure Bottleneck Builds",
-          "publisher": "Motley Fool",
-          "link": "https://www.fool.com/investing/2026/09/15/x-ai-stock-poised-to-outperform-micron-and-sandisk/",
-          "when": "Sep 15"
-        },
-        {
-          "title": "Innodata Stock Plunges 47% in 3 Months: Is a Recovery Ahead?",
-          "publisher": "Zacks",
-          "link": "https://finance.yahoo.com/markets/stocks/articles/innodata-stock-plunges-47-3-165200180.html",
-          "when": "Sep 14"
-        },
-        {
-          "title": "BigBear.ai vs. Innodata: Which Technology Stock Is a Better Buy in 2026?",
-          "publisher": "Motley Fool",
-          "link": "https://www.fool.com/coverage/better-buy/2026/09/10/bigbearai-vs-innodata-which-technology-stock-is-a-better-buy-in-2026/",
-          "when": "Sep 10"
-        },
-        {
-          "title": "Prosper Stars & Stripes Covered Innodata (INOD) Short Position in Q2",
-          "publisher": "Insider Monkey",
-          "link": "https://finance.yahoo.com/markets/stocks/articles/prosper-stars-stripes-covered-innodata-131934072.html",
-          "when": "Sep 10"
-        }
-      ]
+      "news": []
     },
     "SILC": {
       "ok": true,
@@ -261325,7 +261288,7 @@
       "type": "closed"
     }
   ],
-  "generated_at": "2026-09-20T18:05:44+00:00",
+  "generated_at": "2026-09-20T18:35:19+00:00",
   "universe": {
     "wheel": 21,
     "growth": 18,
