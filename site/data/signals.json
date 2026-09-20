@@ -14471,8 +14471,8 @@
     },
     {
       "label": "Bitcoin",
-      "price": 80830.046875,
-      "pct": -0.4968786518753654,
+      "price": 80812.6171875,
+      "pct": -0.5183348847667579,
       "prefix": "$",
       "is_yield": false,
       "hist": [
@@ -14565,13 +14565,13 @@
         76404,
         80901,
         81234,
-        80830
+        80813
       ]
     },
     {
       "label": "Ethereum",
-      "price": 2605.969970703125,
-      "pct": -0.9875776852672824,
+      "price": 2606.7900390625,
+      "pct": -0.9564196306318884,
       "prefix": "$",
       "is_yield": false,
       "hist": [
@@ -14664,7 +14664,7 @@
         2447,
         2611,
         2632,
-        2606
+        2607
       ]
     }
   ],
@@ -14738,8 +14738,8 @@
     {
       "label": "Digital Assets",
       "ticker": "BTC",
-      "pct": -0.4968786518753654,
-      "price": 80830.046875
+      "pct": -0.5183348847667579,
+      "price": 80812.6171875
     }
   ],
   "fundamentals": {
@@ -14926,6 +14926,12 @@
       ],
       "news": [
         {
+          "title": "Prediction: The Best-Performing Big Bank Stock of the Next 2 Years Is Not JPMorgan Chase",
+          "publisher": "Motley Fool",
+          "link": "https://www.fool.com/investing/2026/09/20/prediction-the-best-performing-big-bank-stock-of/",
+          "when": "Sep 20"
+        },
+        {
           "title": "What SoFi Technologies (SOFI)'s Record Q2 2026 Cross-Buy Momentum Means For Shareholders",
           "publisher": "Simply Wall St.",
           "link": "https://finance.yahoo.com/markets/stocks/articles/sofi-technologies-sofi-record-q2-161145148.html",
@@ -14953,12 +14959,6 @@
           "title": "SOFI Technologies Cross-Buy Accelerates: Can Engagement Stay Strong?",
           "publisher": "Zacks",
           "link": "https://finance.yahoo.com/markets/stocks/articles/sofi-technologies-cross-buy-accelerates-165600556.html",
-          "when": "Sep 17"
-        },
-        {
-          "title": "SoFi Could Be Building Something Wall Street Hasn\u2019t Fully Priced In",
-          "publisher": "24/7 Wall St.",
-          "link": "https://247wallst.com/investing/2026/09/17/sofi-could-be-building-something-wall-street-hasnt-fully-priced-in/",
           "when": "Sep 17"
         }
       ]
@@ -15026,6 +15026,12 @@
       ],
       "news": [
         {
+          "title": "Prediction: The Best-Performing Big Bank Stock of the Next 2 Years Is Not JPMorgan Chase",
+          "publisher": "Motley Fool",
+          "link": "https://www.fool.com/investing/2026/09/20/prediction-the-best-performing-big-bank-stock-of/",
+          "when": "Sep 20"
+        },
+        {
           "title": "Joby Aviation Stock Is Down 54% This Year. Here's Why I'd Buy It Before 2027.",
           "publisher": "Motley Fool",
           "link": "https://www.fool.com/investing/2026/09/20/joby-aviation-stock-is-down-54-this-year-heres-why/",
@@ -15053,12 +15059,6 @@
           "title": "The S&P 500 Is Approaching a Valuation Not Seen in 26 Years, and History Suggests a Crash Could Follow",
           "publisher": "Motley Fool",
           "link": "https://www.fool.com/investing/2026/09/20/sp-500-valuation-26-years-history-suggests-crash/",
-          "when": "Sep 20"
-        },
-        {
-          "title": "Delta's Non-Main-Cabin Revenue Hits 61% in 2026 -- Why It Matters for Earnings",
-          "publisher": "Motley Fool",
-          "link": "https://www.fool.com/investing/2026/09/20/deltas-non-main-cabin-revenue-hits-61-in-2026-why/",
           "when": "Sep 20"
         }
       ]
@@ -17173,6 +17173,12 @@
       ],
       "news": [
         {
+          "title": "Elon Musk Predicts Starlink Satellites Could Rewrite the Rules of Global Connectivity",
+          "publisher": "24/7 Wall St.",
+          "link": "https://247wallst.com/investing/2026/09/20/elon-musk-predicts-starlink-satellites-could-rewrite-the-rules-of-global-connectivity/",
+          "when": "Sep 20"
+        },
+        {
           "title": "American Airlines CEO delivers stark warning on rising fuel costs",
           "publisher": "TheStreet",
           "link": "https://www.thestreet.com/investing/stocks/american-airlines-ceo-blunt-message-fuel-costs",
@@ -17200,12 +17206,6 @@
           "title": "Trump Accounts Face Dec. 31 Deadline \u2014 But Employer Contributions Could Create New Tax Planning Trap",
           "publisher": "Benzinga",
           "link": "https://finance.yahoo.com/economy/policy/articles/trump-accounts-face-dec-31-153013834.html",
-          "when": "Sep 17"
-        },
-        {
-          "title": "Does Surging Fuel Costs And Capacity Discipline Change The Bull Case For American Airlines (AAL)?",
-          "publisher": "Simply Wall St.",
-          "link": "https://finance.yahoo.com/markets/stocks/articles/does-surging-fuel-costs-capacity-042839753.html",
           "when": "Sep 17"
         }
       ]
@@ -261325,7 +261325,7 @@
       "type": "closed"
     }
   ],
-  "generated_at": "2026-09-20T15:52:35+00:00",
+  "generated_at": "2026-09-20T16:05:39+00:00",
   "universe": {
     "wheel": 21,
     "growth": 18,
