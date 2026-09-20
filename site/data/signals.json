@@ -14471,8 +14471,8 @@
     },
     {
       "label": "Bitcoin",
-      "price": 80812.6171875,
-      "pct": -0.5183348847667579,
+      "price": 81209.390625,
+      "pct": -0.02990023669177111,
       "prefix": "$",
       "is_yield": false,
       "hist": [
@@ -14565,13 +14565,13 @@
         76404,
         80901,
         81234,
-        80813
+        81209
       ]
     },
     {
       "label": "Ethereum",
-      "price": 2606.7900390625,
-      "pct": -0.9564196306318884,
+      "price": 2624.9599609375,
+      "pct": -0.2660632572513477,
       "prefix": "$",
       "is_yield": false,
       "hist": [
@@ -14664,7 +14664,7 @@
         2447,
         2611,
         2632,
-        2607
+        2625
       ]
     }
   ],
@@ -14738,8 +14738,8 @@
     {
       "label": "Digital Assets",
       "ticker": "BTC",
-      "pct": -0.5183348847667579,
-      "price": 80812.6171875
+      "pct": -0.02990023669177111,
+      "price": 81209.390625
     }
   ],
   "fundamentals": {
@@ -15026,6 +15026,30 @@
       ],
       "news": [
         {
+          "title": "I'm Watching PG&E Closely, but Here's Why I Haven't Bought the Dip",
+          "publisher": "Motley Fool",
+          "link": "https://www.fool.com/investing/2026/09/20/im-watching-pge-closely-but-heres-why-i-havent-bou/",
+          "when": "Sep 20"
+        },
+        {
+          "title": "Musk Says NVIDIA (NVDA) AI Chips Are Headed to Space With SpaceX (SPCX) Next Year",
+          "publisher": "Insider Monkey",
+          "link": "https://finance.yahoo.com/technology/ai/articles/musk-says-nvidia-nvda-ai-162008359.html",
+          "when": "Sep 20"
+        },
+        {
+          "title": "3 Reasons CRISPR Therapeutics Stock Is Still a Buy After a Rocky 2026",
+          "publisher": "Motley Fool",
+          "link": "https://www.fool.com/investing/2026/09/20/3-reasons-crispr-therapeutics-stock-is-still-a-buy/",
+          "when": "Sep 20"
+        },
+        {
+          "title": "Buying This Hidden Software Stock Might Just Give You Massive Exposure to the Anthropic IPO",
+          "publisher": "Motley Fool",
+          "link": "https://www.fool.com/investing/2026/09/20/buying-this-hidden-software-stock-might-just-give/",
+          "when": "Sep 20"
+        },
+        {
           "title": "Prediction: The Best-Performing Big Bank Stock of the Next 2 Years Is Not JPMorgan Chase",
           "publisher": "Motley Fool",
           "link": "https://www.fool.com/investing/2026/09/20/prediction-the-best-performing-big-bank-stock-of/",
@@ -15035,30 +15059,6 @@
           "title": "Joby Aviation Stock Is Down 54% This Year. Here's Why I'd Buy It Before 2027.",
           "publisher": "Motley Fool",
           "link": "https://www.fool.com/investing/2026/09/20/joby-aviation-stock-is-down-54-this-year-heres-why/",
-          "when": "Sep 20"
-        },
-        {
-          "title": "This Analyst Has a $450 Price Target on SpaceX Stock. Does That Make it a Buy?",
-          "publisher": "Motley Fool",
-          "link": "https://www.fool.com/investing/2026/09/20/this-analyst-has-a-450-price-target-on-spacex-stoc/",
-          "when": "Sep 20"
-        },
-        {
-          "title": "The Caterpillar Correction Shouldn't Last Much Longer",
-          "publisher": "Motley Fool",
-          "link": "https://www.fool.com/investing/2026/09/20/the-caterpillar-correction-shouldnt-last-much-long/",
-          "when": "Sep 20"
-        },
-        {
-          "title": "3 AI Hardware Stocks Linked To Nvidia And US China Trade Talks",
-          "publisher": "Simply Wall St.",
-          "link": "https://finance.yahoo.com/technology/ai/articles/3-ai-hardware-stocks-linked-151344773.html",
-          "when": "Sep 20"
-        },
-        {
-          "title": "The S&P 500 Is Approaching a Valuation Not Seen in 26 Years, and History Suggests a Crash Could Follow",
-          "publisher": "Motley Fool",
-          "link": "https://www.fool.com/investing/2026/09/20/sp-500-valuation-26-years-history-suggests-crash/",
           "when": "Sep 20"
         }
       ]
@@ -16101,6 +16101,12 @@
           "when": "Sep 20"
         },
         {
+          "title": "The AI Agent Wars Just Got Personal: Google\u2019s CC vs. Meta\u2019s Muse",
+          "publisher": "24/7 Wall St.",
+          "link": "https://247wallst.com/investing/2026/09/20/the-ai-agent-wars-just-got-personal-googles-cc-vs-metas-muse/",
+          "when": "Sep 20"
+        },
+        {
           "title": "OpenAI Just Beat Google, Meta, and Amazon To This Key Milestone. Is It Bullish for AI Stocks.",
           "publisher": "Motley Fool",
           "link": "https://www.fool.com/investing/2026/09/20/openai-just-beat-google-meta-and-amazon-to-this-key-milestone-why-it-s-bullish-for-ai-stocks/",
@@ -16122,12 +16128,6 @@
           "title": "Ross Gerber Says He Found \u2018Secret\u2019 Lot With Hundreds of Waymo Robotaxis: \u2018Something Crazy Is About to Happen\u2019",
           "publisher": "Benzinga",
           "link": "https://finance.yahoo.com/technology/ai/articles/ross-gerber-says-found-secret-094509032.html",
-          "when": "Sep 20"
-        },
-        {
-          "title": "Prediction: Anthropic's IPO Will Be a Big Winner for Alphabet and Amazon Investors",
-          "publisher": "Motley Fool",
-          "link": "https://www.fool.com/investing/2026/09/20/prediction-anthropics-ipo-will-be-a-big-winner-for/",
           "when": "Sep 20"
         }
       ]
@@ -16498,6 +16498,18 @@
       "flags": [],
       "news": [
         {
+          "title": "The AI Agent Wars Just Got Personal: Google\u2019s CC vs. Meta\u2019s Muse",
+          "publisher": "24/7 Wall St.",
+          "link": "https://247wallst.com/investing/2026/09/20/the-ai-agent-wars-just-got-personal-googles-cc-vs-metas-muse/",
+          "when": "Sep 20"
+        },
+        {
+          "title": "Analyst: Meta Needs Just 115 Million Users to Ignite a $28 Billion AI Gold Rush \u2014 But It\u2019s Not Likely to Happen",
+          "publisher": "24/7 Wall St.",
+          "link": "https://247wallst.com/investing/2026/09/20/analyst-meta-needs-just-115-million-users-to-ignite-a-28-billion-ai-gold-rush-but-its-not-likely-to-happen/",
+          "when": "Sep 20"
+        },
+        {
           "title": "The Caterpillar Correction Shouldn't Last Much Longer",
           "publisher": "Motley Fool",
           "link": "https://www.fool.com/investing/2026/09/20/the-caterpillar-correction-shouldnt-last-much-long/",
@@ -16519,18 +16531,6 @@
           "title": "Meta stock delivers a bold case for a $900 target",
           "publisher": "TheStreet",
           "link": "https://www.thestreet.com/investing/meta-stock-900-price-target-ai-ad-engine",
-          "when": "Sep 19"
-        },
-        {
-          "title": "The Stock Market's Biggest Companies Are Losing Their Grip. Here's the ETF I'd Buy If History Repeats.",
-          "publisher": "Motley Fool",
-          "link": "https://www.fool.com/investing/2026/09/19/stock-market-biggest-companies-losing-etf-to-buy/",
-          "when": "Sep 19"
-        },
-        {
-          "title": "JPMorgan Changed Its Mind on Meta Stock After This Major AI Breakthrough",
-          "publisher": "Barchart",
-          "link": "https://www.barchart.com/story/news/4695238/jpmorgan-changed-its-mind-on-meta-stock-after-this-major-ai-breakthrough",
           "when": "Sep 19"
         }
       ]
@@ -17063,6 +17063,24 @@
           "when": "Sep 20"
         },
         {
+          "title": "Musk Says NVIDIA (NVDA) AI Chips Are Headed to Space With SpaceX (SPCX) Next Year",
+          "publisher": "Insider Monkey",
+          "link": "https://finance.yahoo.com/technology/ai/articles/musk-says-nvidia-nvda-ai-162008359.html",
+          "when": "Sep 20"
+        },
+        {
+          "title": "Howmet Aerospace (HWM) Stock Sees Modest Fair Value Lift As Analysts Raise Targets",
+          "publisher": "Simply Wall St.",
+          "link": "https://finance.yahoo.com/markets/stocks/articles/howmet-aerospace-hwm-stock-sees-161337661.html",
+          "when": "Sep 20"
+        },
+        {
+          "title": "Elon Musk Predicts Starlink Satellites Could Rewrite the Rules of Global Connectivity",
+          "publisher": "24/7 Wall St.",
+          "link": "https://247wallst.com/investing/2026/09/20/elon-musk-predicts-starlink-satellites-could-rewrite-the-rules-of-global-connectivity/",
+          "when": "Sep 20"
+        },
+        {
           "title": "This Analyst Has a $450 Price Target on SpaceX Stock. Does That Make it a Buy?",
           "publisher": "Motley Fool",
           "link": "https://www.fool.com/investing/2026/09/20/this-analyst-has-a-450-price-target-on-spacex-stoc/",
@@ -17072,24 +17090,6 @@
           "title": "Could $5,000 Invested in SpaceX Help You Retire a Millionaire?",
           "publisher": "Motley Fool",
           "link": "https://www.fool.com/investing/2026/09/20/could-5000-invested-in-spacex-help-you-retire-a-mi/",
-          "when": "Sep 20"
-        },
-        {
-          "title": "\u2018High on Coke\u2019: Elon Musk stunned by Berkshire\u2019s dividend payout. Learn how to build your own passive income stream now",
-          "publisher": "Moneywise",
-          "link": "https://finance.yahoo.com/markets/stocks/articles/high-coke-elon-musk-stunned-113500789.html",
-          "when": "Sep 20"
-        },
-        {
-          "title": "SpaceX Stock: 3 Things to Watch Before the December Lock-Up Cliff",
-          "publisher": "Motley Fool",
-          "link": "https://www.fool.com/investing/2026/09/20/spacex-stock-3-things-to-watch-before-the-december/",
-          "when": "Sep 20"
-        },
-        {
-          "title": "Prediction: Anthropic's IPO Will Be a Big Winner for Alphabet and Amazon Investors",
-          "publisher": "Motley Fool",
-          "link": "https://www.fool.com/investing/2026/09/20/prediction-anthropics-ipo-will-be-a-big-winner-for/",
           "when": "Sep 20"
         }
       ]
@@ -20194,6 +20194,12 @@
           "when": "Sep 20"
         },
         {
+          "title": "The AI Agent Wars Just Got Personal: Google\u2019s CC vs. Meta\u2019s Muse",
+          "publisher": "24/7 Wall St.",
+          "link": "https://247wallst.com/investing/2026/09/20/the-ai-agent-wars-just-got-personal-googles-cc-vs-metas-muse/",
+          "when": "Sep 20"
+        },
+        {
           "title": "OpenAI Just Beat Google, Meta, and Amazon To This Key Milestone. Is It Bullish for AI Stocks.",
           "publisher": "Motley Fool",
           "link": "https://www.fool.com/investing/2026/09/20/openai-just-beat-google-meta-and-amazon-to-this-key-milestone-why-it-s-bullish-for-ai-stocks/",
@@ -20215,12 +20221,6 @@
           "title": "Ross Gerber Says He Found \u2018Secret\u2019 Lot With Hundreds of Waymo Robotaxis: \u2018Something Crazy Is About to Happen\u2019",
           "publisher": "Benzinga",
           "link": "https://finance.yahoo.com/technology/ai/articles/ross-gerber-says-found-secret-094509032.html",
-          "when": "Sep 20"
-        },
-        {
-          "title": "Prediction: Anthropic's IPO Will Be a Big Winner for Alphabet and Amazon Investors",
-          "publisher": "Motley Fool",
-          "link": "https://www.fool.com/investing/2026/09/20/prediction-anthropics-ipo-will-be-a-big-winner-for/",
           "when": "Sep 20"
         }
       ]
@@ -261325,7 +261325,7 @@
       "type": "closed"
     }
   ],
-  "generated_at": "2026-09-20T16:05:39+00:00",
+  "generated_at": "2026-09-20T16:35:01+00:00",
   "universe": {
     "wheel": 21,
     "growth": 18,
