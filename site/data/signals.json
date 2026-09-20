@@ -14471,8 +14471,8 @@
     },
     {
       "label": "Bitcoin",
-      "price": 81209.390625,
-      "pct": -0.02990023669177111,
+      "price": 81276.9765625,
+      "pct": 0.053299167496234645,
       "prefix": "$",
       "is_yield": false,
       "hist": [
@@ -14565,13 +14565,13 @@
         76404,
         80901,
         81234,
-        81209
+        81277
       ]
     },
     {
       "label": "Ethereum",
-      "price": 2624.9599609375,
-      "pct": -0.2660632572513477,
+      "price": 2639.449951171875,
+      "pct": 0.2844760998983453,
       "prefix": "$",
       "is_yield": false,
       "hist": [
@@ -14664,7 +14664,7 @@
         2447,
         2611,
         2632,
-        2625
+        2639
       ]
     }
   ],
@@ -14738,8 +14738,8 @@
     {
       "label": "Digital Assets",
       "ticker": "BTC",
-      "pct": -0.02990023669177111,
-      "price": 81209.390625
+      "pct": 0.053299167496234645,
+      "price": 81276.9765625
     }
   ],
   "fundamentals": {
@@ -15026,6 +15026,18 @@
       ],
       "news": [
         {
+          "title": "Prediction: Even With the $1,999 Price Tag, Apple's Foldable iPhone Duo Will Be a Hit and Apple Will Join Nvidia in the $5 Trillion Club.",
+          "publisher": "Motley Fool",
+          "link": "https://www.fool.com/investing/2026/09/20/prediction-even-with-the-1999-price-tag-apples-fol/",
+          "when": "Sep 20"
+        },
+        {
+          "title": "Jensen Huang Just Announced Fantastic News for Nvidia Shareholders",
+          "publisher": "Motley Fool",
+          "link": "https://www.fool.com/investing/2026/09/20/jensen-huang-just-announced-fantastic-news-for-nvidia-shareholders/",
+          "when": "Sep 20"
+        },
+        {
           "title": "I'm Watching PG&E Closely, but Here's Why I Haven't Bought the Dip",
           "publisher": "Motley Fool",
           "link": "https://www.fool.com/investing/2026/09/20/im-watching-pge-closely-but-heres-why-i-havent-bou/",
@@ -15047,18 +15059,6 @@
           "title": "Buying This Hidden Software Stock Might Just Give You Massive Exposure to the Anthropic IPO",
           "publisher": "Motley Fool",
           "link": "https://www.fool.com/investing/2026/09/20/buying-this-hidden-software-stock-might-just-give/",
-          "when": "Sep 20"
-        },
-        {
-          "title": "Prediction: The Best-Performing Big Bank Stock of the Next 2 Years Is Not JPMorgan Chase",
-          "publisher": "Motley Fool",
-          "link": "https://www.fool.com/investing/2026/09/20/prediction-the-best-performing-big-bank-stock-of/",
-          "when": "Sep 20"
-        },
-        {
-          "title": "Joby Aviation Stock Is Down 54% This Year. Here's Why I'd Buy It Before 2027.",
-          "publisher": "Motley Fool",
-          "link": "https://www.fool.com/investing/2026/09/20/joby-aviation-stock-is-down-54-this-year-heres-why/",
           "when": "Sep 20"
         }
       ]
@@ -16000,6 +16000,18 @@
       ],
       "news": [
         {
+          "title": "Prediction: Even With the $1,999 Price Tag, Apple's Foldable iPhone Duo Will Be a Hit and Apple Will Join Nvidia in the $5 Trillion Club.",
+          "publisher": "Motley Fool",
+          "link": "https://www.fool.com/investing/2026/09/20/prediction-even-with-the-1999-price-tag-apples-fol/",
+          "when": "Sep 20"
+        },
+        {
+          "title": "Jim Cramer sends strong signal to Apple stock investors",
+          "publisher": "TheStreet",
+          "link": "https://www.thestreet.com/investing/stocks/apple-stock-jim-cramer-iphone-duo",
+          "when": "Sep 20"
+        },
+        {
           "title": "Turning 73 Forces a Withdrawal From This Stock Whether the Owner Wants the Cash or Not",
           "publisher": "24/7 Wall St.",
           "link": "https://247wallst.com/personal-finance/2026/09/20/turning-73-forces-a-withdrawal-from-this-stock-whether-the-owner-wants-the-cash-or-not/",
@@ -16022,18 +16034,6 @@
           "publisher": "Motley Fool",
           "link": "https://www.fool.com/investing/2026/09/20/taiwan-semiconductor-manufacturings-foundry-market/",
           "when": "Sep 20"
-        },
-        {
-          "title": "Apple\u2019s Cook calls Australia\u2019s social media curbs \u2018world-leading,\u2019 PM says",
-          "publisher": "Investing.com",
-          "link": "https://www.yahoo.com/news/world/articles/apple-cook-calls-australia-social-015818585.html",
-          "when": "Sep 20"
-        },
-        {
-          "title": "Bank of America does the math on Apple's $1,200 iPhone offer",
-          "publisher": "TheStreet",
-          "link": "https://www.thestreet.com/markets/bank-of-america-does-the-math-on-apples-1200-iphone-offer",
-          "when": "Sep 19"
         }
       ]
     },
@@ -16614,6 +16614,12 @@
       ],
       "news": [
         {
+          "title": "Bloom Energy (BE) Unveils a New Power Play for the AI Boom",
+          "publisher": "Insider Monkey",
+          "link": "https://finance.yahoo.com/technology/ai/articles/bloom-energy-unveils-power-play-164510735.html",
+          "when": "Sep 20"
+        },
+        {
           "title": "Plug Power vs. Bloom Energy: Which Hydrogen-Adjacent Stock Actually Has a Real Business Model?",
           "publisher": "Motley Fool",
           "link": "https://www.fool.com/investing/2026/09/20/plug-power-vs-bloom-energy-which-hydrogen-adjacent/",
@@ -16641,12 +16647,6 @@
           "title": "The Anthropic IPO Could Be Bigger Than SpaceX. Here's What That Means for Vistra, Bloom Energy, and Oklo.",
           "publisher": "Motley Fool",
           "link": "https://www.fool.com/investing/2026/09/18/the-anthropic-ipo-could-be-bigger-than-spacex-here/",
-          "when": "Sep 18"
-        },
-        {
-          "title": "These 5 Green Stocks Have Crushed Clean Energy ETFs, S&P 500 And AI Funds In 2026",
-          "publisher": "Stocktwits",
-          "link": "https://stocktwits.com/news-articles/markets/equity/these-5-green-stocks-have-crushed-clean-energy-et-fs-s-and-p-500-and-ai-funds-in-2026/cZtuNbNRB3J",
           "when": "Sep 18"
         }
       ]
@@ -16926,7 +16926,7 @@
           "when": "Sep 20"
         },
         {
-          "title": "Bitcoin holds above $80,000 as ETF inflows revive institutional demand",
+          "title": "Bitcoin slips 1% but above $80,000 as ETF inflows revive institutional demand",
           "publisher": "Investing.com",
           "link": "https://finance.yahoo.com/markets/crypto/articles/bitcoin-holds-above-80-000-053636303.html",
           "when": "Sep 20"
@@ -20390,44 +20390,7 @@
           "text": "Revenue shrinking \u2014 -45% YoY"
         }
       ],
-      "news": [
-        {
-          "title": "Pfizer to Share Revenue With HHS in Deal on Overseas Drug Prices",
-          "publisher": "Bloomberg",
-          "link": "https://finance.yahoo.com/healthcare/articles/pfizer-share-revenue-hhs-deal-211251182.html",
-          "when": "Sep 19"
-        },
-        {
-          "title": "3 Dividend Stocks to Buy and Hold for 10 Years",
-          "publisher": "Motley Fool",
-          "link": "https://www.fool.com/investing/2026/09/18/3-dividend-stocks-to-buy-and-hold-for-10-years/",
-          "when": "Sep 18"
-        },
-        {
-          "title": "All 50 States Joining Medicaid Drug Pricing Model After Pharma Deals, Trump Says",
-          "publisher": "Barrons.com",
-          "link": "https://www.barrons.com/articles/medicaid-drug-prices-pharma-trump-c3081e3e?siteid=yhoof2&yptr=yahoo",
-          "when": "Sep 18"
-        },
-        {
-          "title": "What Would It Take For Eli Lilly Stock To Keep Climbing?",
-          "publisher": "Trefis",
-          "link": "https://www.trefis.com/articles/615857/what-would-it-take-for-eli-lilly-stock-to-keep-climbing/2026-09-18",
-          "when": "Sep 18"
-        },
-        {
-          "title": "2 High-Yield Dividend Stocks to Buy and 1 to Avoid",
-          "publisher": "Motley Fool",
-          "link": "https://www.fool.com/investing/2026/09/18/2-high-yield-dividend-stocks-to-buy-and-1-to-avoid/",
-          "when": "Sep 18"
-        },
-        {
-          "title": "Is Johnson & Johnson Stock Expensive, Or Is STELARA Hiding The Real Price?",
-          "publisher": "Trefis",
-          "link": "https://www.trefis.com/articles/615892/is-johnson-johnson-stock-expensive-or-is-stelara-hiding-the-real-price/2026-09-18",
-          "when": "Sep 18"
-        }
-      ]
+      "news": []
     },
     "HYPG": {
       "ok": true,
@@ -261325,7 +261288,7 @@
       "type": "closed"
     }
   ],
-  "generated_at": "2026-09-20T16:35:01+00:00",
+  "generated_at": "2026-09-20T17:03:55+00:00",
   "universe": {
     "wheel": 21,
     "growth": 18,
