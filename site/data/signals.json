@@ -14471,8 +14471,8 @@
     },
     {
       "label": "Bitcoin",
-      "price": 81211.6328125,
-      "pct": -0.02714006688459003,
+      "price": 81068.5,
+      "pct": -0.20333892067359027,
       "prefix": "$",
       "is_yield": false,
       "hist": [
@@ -14565,13 +14565,13 @@
         76404,
         80901,
         81234,
-        81212
+        81068
       ]
     },
     {
       "label": "Ethereum",
-      "price": 2624.239990234375,
-      "pct": -0.2934181554709925,
+      "price": 2625.360107421875,
+      "pct": -0.25085990757959253,
       "prefix": "$",
       "is_yield": false,
       "hist": [
@@ -14664,7 +14664,7 @@
         2447,
         2611,
         2632,
-        2624
+        2625
       ]
     }
   ],
@@ -14738,8 +14738,8 @@
     {
       "label": "Digital Assets",
       "ticker": "BTC",
-      "pct": -0.02714006688459003,
-      "price": 81211.6328125
+      "pct": -0.20333892067359027,
+      "price": 81068.5
     }
   ],
   "fundamentals": {
@@ -15026,39 +15026,39 @@
       ],
       "news": [
         {
+          "title": "Rigetti Turned $10,000 Into Over $81,000 in 3 Years -- and It's Still 73% Off Its High. Here's Why I Still Wouldn't Touch It.",
+          "publisher": "Motley Fool",
+          "link": "https://www.fool.com/investing/2026/09/20/rigetti-turned-usd10-000-into-over-usd81-000-in-3-years-and-it-s-still-73-off-its-high-here-s-why-i-wouldn-t-touch-it/",
+          "when": "Sep 20"
+        },
+        {
+          "title": "Can Your Retirement Plan Stand Up to Inflation? These 2 Tweaks Might Help.",
+          "publisher": "Motley Fool",
+          "link": "https://www.fool.com/retirement/2026/09/20/can-your-retirement-plan-stand-up-to-inflation-the/",
+          "when": "Sep 20"
+        },
+        {
+          "title": "Prediction: Micron Will Earn More Profit Than Microsoft in Fiscal 2027",
+          "publisher": "Motley Fool",
+          "link": "https://www.fool.com/investing/2026/09/20/prediction-micron-will-earn-more-profit-than-microsoft-in-fiscal-2027/",
+          "when": "Sep 20"
+        },
+        {
+          "title": "Nvidia CEO has a blunt message for Americans fearing AI",
+          "publisher": "TheStreet",
+          "link": "https://www.thestreet.com/technology/nvidia-jensen-huang-ai-apocalypse-warnings",
+          "when": "Sep 20"
+        },
+        {
+          "title": "Billionaire Bill Ackman Dumps Alphabet and Loads Up On a Mega-Cap Stock Down 15% From Its Peak",
+          "publisher": "Motley Fool",
+          "link": "https://www.fool.com/investing/2026/09/20/billionaire-bill-ackman-dumps-alphabet-loads-meta/",
+          "when": "Sep 20"
+        },
+        {
           "title": "Is This Cryptocurrency Still a Millionaire Maker?",
           "publisher": "Motley Fool",
           "link": "https://www.fool.com/investing/2026/09/20/is-this-cryptocurrency-still-a-millionaire-maker/",
-          "when": "Sep 20"
-        },
-        {
-          "title": "President Trump to Create an \u201cAI Force,\u201d Appoint an AI Czar as AI Fears Grow",
-          "publisher": "24/7 Wall St.",
-          "link": "https://247wallst.com/investing/2026/09/20/president-trump-to-create-an-ai-force-appoint-an-ai-czar-as-ai-fears-grow/",
-          "when": "Sep 20"
-        },
-        {
-          "title": "If You Invest $10,000 in This Bond ETF Today, Here's What History Says It Could Deliver in 20 Years",
-          "publisher": "Motley Fool",
-          "link": "https://www.fool.com/investing/2026/09/20/if-you-invest-usd10-000-in-this-bond-etf-today-here-s-what-history-says-it-could-deliver-in-20-years/",
-          "when": "Sep 20"
-        },
-        {
-          "title": "Prediction: Even With the $1,999 Price Tag, Apple's Foldable iPhone Duo Will Be a Hit and Apple Will Join Nvidia in the $5 Trillion Club.",
-          "publisher": "Motley Fool",
-          "link": "https://www.fool.com/investing/2026/09/20/prediction-even-with-the-1999-price-tag-apples-fol/",
-          "when": "Sep 20"
-        },
-        {
-          "title": "Jensen Huang Just Announced Fantastic News for Nvidia Shareholders",
-          "publisher": "Motley Fool",
-          "link": "https://www.fool.com/investing/2026/09/20/jensen-huang-just-announced-fantastic-news-for-nvidia-shareholders/",
-          "when": "Sep 20"
-        },
-        {
-          "title": "I'm Watching PG&E Closely, but Here's Why I Haven't Bought the Dip",
-          "publisher": "Motley Fool",
-          "link": "https://www.fool.com/investing/2026/09/20/im-watching-pge-closely-but-heres-why-i-havent-bou/",
           "when": "Sep 20"
         }
       ]
@@ -15216,6 +15216,12 @@
       "flags": [],
       "news": [
         {
+          "title": "Prediction: Micron Will Earn More Profit Than Microsoft in Fiscal 2027",
+          "publisher": "Motley Fool",
+          "link": "https://www.fool.com/investing/2026/09/20/prediction-micron-will-earn-more-profit-than-microsoft-in-fiscal-2027/",
+          "when": "Sep 20"
+        },
+        {
           "title": "Can Nokia Oyj (HLSE:NOKIA) Speed Up Telecom AI With Its New Data Push?",
           "publisher": "Simply Wall St.",
           "link": "https://finance.yahoo.com/technology/ai/articles/nokia-oyj-hlse-nokia-speed-031933816.html",
@@ -15243,12 +15249,6 @@
           "title": "AI Made Execution Easier. It Also Changed the Founder\u2019s Most Important Job.",
           "publisher": "Entrepreneur",
           "link": "https://www.entrepreneur.com/business-news/ai-made-execution-easier-it-also-changed-the-founders-most-important-job",
-          "when": "Sep 19"
-        },
-        {
-          "title": "The Stock Market's Biggest Companies Are Losing Their Grip. Here's the ETF I'd Buy If History Repeats.",
-          "publisher": "Motley Fool",
-          "link": "https://www.fool.com/investing/2026/09/19/stock-market-biggest-companies-losing-etf-to-buy/",
           "when": "Sep 19"
         }
       ]
@@ -16101,6 +16101,12 @@
           "when": "Sep 20"
         },
         {
+          "title": "Billionaire Bill Ackman Dumps Alphabet and Loads Up On a Mega-Cap Stock Down 15% From Its Peak",
+          "publisher": "Motley Fool",
+          "link": "https://www.fool.com/investing/2026/09/20/billionaire-bill-ackman-dumps-alphabet-loads-meta/",
+          "when": "Sep 20"
+        },
+        {
           "title": "The AI Agent Wars Just Got Personal: Google\u2019s CC vs. Meta\u2019s Muse",
           "publisher": "24/7 Wall St.",
           "link": "https://247wallst.com/investing/2026/09/20/the-ai-agent-wars-just-got-personal-googles-cc-vs-metas-muse/",
@@ -16122,12 +16128,6 @@
           "title": "Warren Buffett Steps Down as Berkshire's Chair \u2014 Son Howard Takes to Succeed: 'Father Time Always Wins' (UPDATED)",
           "publisher": "Benzinga",
           "link": "https://finance.yahoo.com/markets/stocks/articles/warren-buffett-steps-down-berkshires-104508734.html",
-          "when": "Sep 20"
-        },
-        {
-          "title": "Ross Gerber Says He Found \u2018Secret\u2019 Lot With Hundreds of Waymo Robotaxis: \u2018Something Crazy Is About to Happen\u2019",
-          "publisher": "Benzinga",
-          "link": "https://finance.yahoo.com/technology/ai/articles/ross-gerber-says-found-secret-094509032.html",
           "when": "Sep 20"
         }
       ]
@@ -16498,6 +16498,12 @@
       "flags": [],
       "news": [
         {
+          "title": "Billionaire Bill Ackman Dumps Alphabet and Loads Up On a Mega-Cap Stock Down 15% From Its Peak",
+          "publisher": "Motley Fool",
+          "link": "https://www.fool.com/investing/2026/09/20/billionaire-bill-ackman-dumps-alphabet-loads-meta/",
+          "when": "Sep 20"
+        },
+        {
           "title": "Why India's Big Tech Companies Are Betting on Hyderabad",
           "publisher": "Bloomberg",
           "link": "https://finance.yahoo.com/video/why-indias-big-tech-companies-162028038.html",
@@ -16525,12 +16531,6 @@
           "title": "OpenAI Just Beat Google, Meta, and Amazon To This Key Milestone. Is It Bullish for AI Stocks.",
           "publisher": "Motley Fool",
           "link": "https://www.fool.com/investing/2026/09/20/openai-just-beat-google-meta-and-amazon-to-this-key-milestone-why-it-s-bullish-for-ai-stocks/",
-          "when": "Sep 20"
-        },
-        {
-          "title": "Dear Meta Platforms Stock Fans, Mark Your Calendars for Sept. 23",
-          "publisher": "Barchart",
-          "link": "https://www.barchart.com/story/news/4700255/dear-meta-platforms-stock-fans-mark-your-calendars-for-sept-23",
           "when": "Sep 20"
         }
       ]
@@ -17965,6 +17965,12 @@
       ],
       "news": [
         {
+          "title": "Rigetti Turned $10,000 Into Over $81,000 in 3 Years -- and It's Still 73% Off Its High. Here's Why I Still Wouldn't Touch It.",
+          "publisher": "Motley Fool",
+          "link": "https://www.fool.com/investing/2026/09/20/rigetti-turned-usd10-000-into-over-usd81-000-in-3-years-and-it-s-still-73-off-its-high-here-s-why-i-wouldn-t-touch-it/",
+          "when": "Sep 20"
+        },
+        {
           "title": "IONQ Stock Surges On Tech Wins, But The Heavy Burn Persists",
           "publisher": "Trefis",
           "link": "https://www.trefis.com/articles/615831/ionq-stock-surges-on-tech-wins-but-the-heavy-burn-persists/2026-09-18",
@@ -17992,12 +17998,6 @@
           "title": "IonQ's Quantum Growth Under Pressure: Is it Time to Sell the Stock?",
           "publisher": "Zacks",
           "link": "https://finance.yahoo.com/markets/stocks/articles/ionqs-quantum-growth-under-pressure-190000009.html",
-          "when": "Sep 17"
-        },
-        {
-          "title": "IonQ Climbs 9% on Quantum Optimization Work With NVIDIA; D-Wave Rises 8%, Rigetti Gains 7%",
-          "publisher": "24/7 Wall St.",
-          "link": "https://247wallst.com/investing/2026/09/17/ionq-climbs-9-on-quantum-optimization-work-with-nvidia-d-wave-rises-8-rigetti-gains-7/",
           "when": "Sep 17"
         }
       ]
@@ -18065,6 +18065,12 @@
       ],
       "news": [
         {
+          "title": "Prediction: Micron Will Earn More Profit Than Microsoft in Fiscal 2027",
+          "publisher": "Motley Fool",
+          "link": "https://www.fool.com/investing/2026/09/20/prediction-micron-will-earn-more-profit-than-microsoft-in-fiscal-2027/",
+          "when": "Sep 20"
+        },
+        {
           "title": "Billionaire David Tepper Has 40% of His Fund in Just 3 AI Stocks. Are They Still Buys?",
           "publisher": "Motley Fool",
           "link": "https://www.fool.com/investing/2026/09/20/billionaire-david-tepper-has-40-of-his-fund-in-jus/",
@@ -18092,12 +18098,6 @@
           "title": "3 AI Infrastructure Stocks Riding The White House Push Into Data Centers",
           "publisher": "Simply Wall St.",
           "link": "https://finance.yahoo.com/technology/ai/articles/3-ai-infrastructure-stocks-riding-061415618.html",
-          "when": "Sep 20"
-        },
-        {
-          "title": "Prediction: These 3 Stocks Will 10x in the Next 10 Years",
-          "publisher": "Motley Fool",
-          "link": "https://www.fool.com/investing/2026/09/20/prediction-these-3-stocks-will-10x-in-the-next-10-years/",
           "when": "Sep 20"
         }
       ]
@@ -20194,6 +20194,12 @@
           "when": "Sep 20"
         },
         {
+          "title": "Billionaire Bill Ackman Dumps Alphabet and Loads Up On a Mega-Cap Stock Down 15% From Its Peak",
+          "publisher": "Motley Fool",
+          "link": "https://www.fool.com/investing/2026/09/20/billionaire-bill-ackman-dumps-alphabet-loads-meta/",
+          "when": "Sep 20"
+        },
+        {
           "title": "The AI Agent Wars Just Got Personal: Google\u2019s CC vs. Meta\u2019s Muse",
           "publisher": "24/7 Wall St.",
           "link": "https://247wallst.com/investing/2026/09/20/the-ai-agent-wars-just-got-personal-googles-cc-vs-metas-muse/",
@@ -20215,12 +20221,6 @@
           "title": "Warren Buffett Steps Down as Berkshire's Chair \u2014 Son Howard Takes to Succeed: 'Father Time Always Wins' (UPDATED)",
           "publisher": "Benzinga",
           "link": "https://finance.yahoo.com/markets/stocks/articles/warren-buffett-steps-down-berkshires-104508734.html",
-          "when": "Sep 20"
-        },
-        {
-          "title": "Ross Gerber Says He Found \u2018Secret\u2019 Lot With Hundreds of Waymo Robotaxis: \u2018Something Crazy Is About to Happen\u2019",
-          "publisher": "Benzinga",
-          "link": "https://finance.yahoo.com/technology/ai/articles/ross-gerber-says-found-secret-094509032.html",
           "when": "Sep 20"
         }
       ]
@@ -20292,6 +20292,12 @@
       ],
       "news": [
         {
+          "title": "Jim Cramer shares a strong verdict on Broadcom stock for investors",
+          "publisher": "TheStreet",
+          "link": "https://www.thestreet.com/investing/stocks/jim-cramer-just-sent-a-strong-message-to-broadcom-stock-investors-sell-off",
+          "when": "Sep 20"
+        },
+        {
           "title": "3 Stocks Bound to Ignore The September Effect",
           "publisher": "Motley Fool",
           "link": "https://www.fool.com/investing/2026/09/20/3-stocks-bound-to-ignore-the-september-effect/",
@@ -20320,12 +20326,6 @@
           "publisher": "Motley Fool",
           "link": "https://www.fool.com/coverage/charts/2026/09/19/applied-materials-vs-broadcom-comparing-sales-growth-trajectories-for-these-artificial-intelligence-companies/",
           "when": "Sep 19"
-        },
-        {
-          "title": "Jim Cramer Said This AI Firm Has More Orders Than \u201cAlmost Anybody\u201d Other Than NVIDIA",
-          "publisher": "Insider Monkey",
-          "link": "https://finance.yahoo.com/technology/ai/articles/jim-cramer-said-ai-firm-232154601.html",
-          "when": "Sep 18"
         }
       ]
     },
@@ -261325,7 +261325,7 @@
       "type": "closed"
     }
   ],
-  "generated_at": "2026-09-20T17:35:14+00:00",
+  "generated_at": "2026-09-20T18:05:44+00:00",
   "universe": {
     "wheel": 21,
     "growth": 18,
