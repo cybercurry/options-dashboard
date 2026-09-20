@@ -14471,8 +14471,8 @@
     },
     {
       "label": "Bitcoin",
-      "price": 80411.1796875,
-      "pct": -1.0125110707333462,
+      "price": 80718.2109375,
+      "pct": -0.634550536160583,
       "prefix": "$",
       "is_yield": false,
       "hist": [
@@ -14565,13 +14565,13 @@
         76404,
         80901,
         81234,
-        80414
+        80718
       ]
     },
     {
       "label": "Ethereum",
-      "price": 2577.070068359375,
-      "pct": -2.0856138744340558,
+      "price": 2585.7099609375,
+      "pct": -1.7573458198070102,
       "prefix": "$",
       "is_yield": false,
       "hist": [
@@ -14664,7 +14664,7 @@
         2447,
         2611,
         2632,
-        2577
+        2586
       ]
     }
   ],
@@ -14738,8 +14738,8 @@
     {
       "label": "Digital Assets",
       "ticker": "BTC",
-      "pct": -1.0125110707333462,
-      "price": 80411.1796875
+      "pct": -0.634550536160583,
+      "price": 80718.2109375
     }
   ],
   "fundamentals": {
@@ -15026,6 +15026,18 @@
       ],
       "news": [
         {
+          "title": "Is a Recession Coming in 2026? History Has Good and Bad News for Investors.",
+          "publisher": "Motley Fool",
+          "link": "https://www.fool.com/investing/2026/09/20/is-a-recession-coming-in-2026-history-has-good-and/",
+          "when": "Sep 20"
+        },
+        {
+          "title": "Could $5,000 Invested in SpaceX Help You Retire a Millionaire?",
+          "publisher": "Motley Fool",
+          "link": "https://www.fool.com/investing/2026/09/20/could-5000-invested-in-spacex-help-you-retire-a-mi/",
+          "when": "Sep 20"
+        },
+        {
           "title": "Billionaire David Tepper Has 40% of His Fund in Just 3 AI Stocks. Are They Still Buys?",
           "publisher": "Motley Fool",
           "link": "https://www.fool.com/investing/2026/09/20/billionaire-david-tepper-has-40-of-his-fund-in-jus/",
@@ -15047,18 +15059,6 @@
           "title": "Billionaire Bill Ackman Has 13% of Pershing Square Capital Management's $19 Billion Hedge Fund in 1 Stock That's 31% Below Its 52-Week High",
           "publisher": "Motley Fool",
           "link": "https://www.fool.com/investing/2026/09/20/billionaire-bill-ackman-1-stock-52-week-high/",
-          "when": "Sep 20"
-        },
-        {
-          "title": "Archer Aviation Trades Near $5. Could a $5,000 Investment Set You Up for Life?",
-          "publisher": "Motley Fool",
-          "link": "https://www.fool.com/investing/2026/09/20/archer-aviation-trades-near-5-could-a-5000-investm/",
-          "when": "Sep 20"
-        },
-        {
-          "title": "If You're a Retiree, Here's How Your 2027 Budget Will Look Different After a Big Social Security COLA",
-          "publisher": "Motley Fool",
-          "link": "https://www.fool.com/retirement/2026/09/20/if-youre-a-retiree-heres-how-your-2027-budget-will/",
           "when": "Sep 20"
         }
       ]
@@ -17063,6 +17063,12 @@
           "when": "Sep 20"
         },
         {
+          "title": "Could $5,000 Invested in SpaceX Help You Retire a Millionaire?",
+          "publisher": "Motley Fool",
+          "link": "https://www.fool.com/investing/2026/09/20/could-5000-invested-in-spacex-help-you-retire-a-mi/",
+          "when": "Sep 20"
+        },
+        {
           "title": "\u2018High on Coke\u2019: Elon Musk stunned by Berkshire\u2019s dividend payout. Learn how to build your own passive income stream now",
           "publisher": "Moneywise",
           "link": "https://finance.yahoo.com/markets/stocks/articles/high-coke-elon-musk-stunned-113500789.html",
@@ -17084,12 +17090,6 @@
           "title": "Elon Musk totaled a $1 million McLaren with Peter Thiel riding shotgun \u2014 and hadn't bought insurance",
           "publisher": "Moneywise",
           "link": "https://finance.yahoo.com/small-business/articles/elon-musk-totaled-1-million-090000791.html",
-          "when": "Sep 20"
-        },
-        {
-          "title": "Elon Musk Says SPCX's Starship Could Deliver Up to 10 Million Tons to Orbit Every Year",
-          "publisher": "Benzinga",
-          "link": "https://tech.yahoo.com/science/articles/elon-musk-says-spcxs-starship-023009218.html",
           "when": "Sep 20"
         }
       ]
@@ -261325,7 +261325,7 @@
       "type": "closed"
     }
   ],
-  "generated_at": "2026-09-20T13:36:33+00:00",
+  "generated_at": "2026-09-20T14:05:33+00:00",
   "universe": {
     "wheel": 21,
     "growth": 18,
