@@ -14471,8 +14471,8 @@
     },
     {
       "label": "Bitcoin",
-      "price": 81189.71875,
-      "pct": -0.054116639390355825,
+      "price": 81112.3125,
+      "pct": -0.1494050102948563,
       "prefix": "$",
       "is_yield": false,
       "hist": [
@@ -14565,13 +14565,13 @@
         76404,
         80901,
         81234,
-        81190
+        81112
       ]
     },
     {
       "label": "Ethereum",
-      "price": 2634.489990234375,
-      "pct": 0.0960250615021474,
+      "price": 2634.530029296875,
+      "pct": 0.09754632406844266,
       "prefix": "$",
       "is_yield": false,
       "hist": [
@@ -14664,7 +14664,7 @@
         2447,
         2611,
         2632,
-        2634
+        2635
       ]
     }
   ],
@@ -14738,8 +14738,8 @@
     {
       "label": "Digital Assets",
       "ticker": "BTC",
-      "pct": -0.054116639390355825,
-      "price": 81189.71875
+      "pct": -0.1494050102948563,
+      "price": 81112.3125
     }
   ],
   "fundamentals": {
@@ -14816,6 +14816,12 @@
           "when": "Sep 20"
         },
         {
+          "title": "Dear Tesla Stock Fans, Mark Your Calendars for September 30",
+          "publisher": "Barchart",
+          "link": "https://www.barchart.com/story/news/4701207/dear-tesla-stock-fans-mark-your-calendars-for-september-30",
+          "when": "Sep 20"
+        },
+        {
           "title": "Tesla's new Cybercab has no steering wheel, pedals or sensors \u2014 and NHTSA wants answers by Sept. 30",
           "publisher": "Moneywise",
           "link": "https://finance.yahoo.com/technology/ai/articles/teslas-cybercab-no-steering-wheel-140000210.html",
@@ -14837,12 +14843,6 @@
           "title": "A Florida Car Dealer Family Spent $60 Million on a Paris Wedding. Here\u2019s How Dealerships Make That Kind of Money",
           "publisher": "24/7 Wall St.",
           "link": "https://247wallst.com/investing/2026/09/20/a-florida-car-dealer-family-spent-60-million-on-a-paris-wedding-heres-how-dealerships-make-that-kind-of-money/",
-          "when": "Sep 20"
-        },
-        {
-          "title": "Elon Musk totaled a $1 million McLaren with Peter Thiel riding shotgun \u2014 and hadn't bought insurance",
-          "publisher": "Moneywise",
-          "link": "https://finance.yahoo.com/small-business/articles/elon-musk-totaled-1-million-090000791.html",
           "when": "Sep 20"
         }
       ]
@@ -15026,6 +15026,24 @@
       ],
       "news": [
         {
+          "title": "2 Monster Stocks to Buy and Hold for at Least the Next 5 Years",
+          "publisher": "Motley Fool",
+          "link": "https://www.fool.com/investing/2026/09/20/2-monster-stocks-buy-hold-next-5-years/",
+          "when": "Sep 20"
+        },
+        {
+          "title": "GE Aerospace Goes Vertical (Integration)",
+          "publisher": "Motley Fool",
+          "link": "https://www.fool.com/investing/2026/09/20/ge-aerospace-goes-vertical-integration/",
+          "when": "Sep 20"
+        },
+        {
+          "title": "What Mitsui High-tec (TSE:6966)'s Upgraded 2026 Forecast and Dividend Hike Means For Shareholders",
+          "publisher": "Simply Wall St.",
+          "link": "https://finance.yahoo.com/markets/stocks/articles/mitsui-high-tec-tse-6966-200942133.html",
+          "when": "Sep 20"
+        },
+        {
           "title": "Investors Can Now Invest in the Surging Tron Cryptocurrency Via an ETF. Here's What Crypto Investors Need to Know.",
           "publisher": "Motley Fool",
           "link": "https://www.fool.com/investing/2026/09/20/you-can-invest-in-the-surging-tron-crypto-etf/",
@@ -15041,24 +15059,6 @@
           "title": "Why I'm Avoiding This Popular AI Stock Despite Its Growth Story",
           "publisher": "Motley Fool",
           "link": "https://www.fool.com/investing/2026/09/20/why-im-avoiding-this-popular-ai-stock-despite-its/",
-          "when": "Sep 20"
-        },
-        {
-          "title": "Main Street Capital Went Public at $15 a Share. $10,000 Invested Then Now Collects About $177 a Month in Regular Dividends.",
-          "publisher": "Motley Fool",
-          "link": "https://www.fool.com/investing/2026/09/20/main-street-capital-went-public-at-15-a-share-1000/",
-          "when": "Sep 20"
-        },
-        {
-          "title": "Is the AI industry really ready to slow down?",
-          "publisher": "TechCrunch",
-          "link": "https://finance.yahoo.com/technology/ai/articles/ai-industry-really-ready-slow-185604514.html",
-          "when": "Sep 20"
-        },
-        {
-          "title": "I Own Constellation for the Nuclear Fleet, Not the AI Headlines. Here's Why That Matters Now.",
-          "publisher": "Motley Fool",
-          "link": "https://www.fool.com/investing/2026/09/20/i-own-constellation-for-the-nuclear-fleet-not-the/",
           "when": "Sep 20"
         }
       ]
@@ -15121,6 +15121,18 @@
       "flags": [],
       "news": [
         {
+          "title": "Streaming\u2019s Biggest Rivals Just Became Allies in Washington",
+          "publisher": "Insider Monkey",
+          "link": "https://finance.yahoo.com/media-advertising/articles/streaming-biggest-rivals-just-became-202114144.html",
+          "when": "Sep 20"
+        },
+        {
+          "title": "Amazon has some good news for its employees on minimum wage",
+          "publisher": "TheStreet",
+          "link": "https://www.thestreet.com/employment/amazon-has-some-good-news-for-its-employees-on-minimum-wage",
+          "when": "Sep 20"
+        },
+        {
           "title": "President Trump to Create an \u201cAI Force,\u201d Appoint an AI Czar as AI Fears Grow",
           "publisher": "24/7 Wall St.",
           "link": "https://247wallst.com/investing/2026/09/20/president-trump-to-create-an-ai-force-appoint-an-ai-czar-as-ai-fears-grow/",
@@ -15142,18 +15154,6 @@
           "title": "Billionaire David Tepper Has 40% of His Fund in Just 3 AI Stocks. Are They Still Buys?",
           "publisher": "Motley Fool",
           "link": "https://www.fool.com/investing/2026/09/20/billionaire-david-tepper-has-40-of-his-fund-in-jus/",
-          "when": "Sep 20"
-        },
-        {
-          "title": "FedEx Lease Rollover Raises Industrial CMBS Refi Risk",
-          "publisher": "CRE Daily",
-          "link": "https://www.credaily.com/briefs/fedex-lease-rollover-raises-industrial-cmbs-refi-risk/",
-          "when": "Sep 20"
-        },
-        {
-          "title": "Prediction: Here's What a $5,000 Investment in Amazon (AMZN) Stock Could Be Worth by 2036.",
-          "publisher": "Motley Fool",
-          "link": "https://www.fool.com/investing/2026/09/20/prediction-a-5000-investment-in-amazon-amzn-stock/",
           "when": "Sep 20"
         }
       ]
@@ -15216,6 +15216,12 @@
       "flags": [],
       "news": [
         {
+          "title": "What Mitsui High-tec (TSE:6966)'s Upgraded 2026 Forecast and Dividend Hike Means For Shareholders",
+          "publisher": "Simply Wall St.",
+          "link": "https://finance.yahoo.com/markets/stocks/articles/mitsui-high-tec-tse-6966-200942133.html",
+          "when": "Sep 20"
+        },
+        {
           "title": "Better Artificial Intelligence Stock: Advanced Micro Devices vs. SK Hynix",
           "publisher": "Motley Fool",
           "link": "https://www.fool.com/coverage/better-buy/2026/09/20/better-artificial-intelligence-stock-advanced-micro-devices-vs-sk-hynix/",
@@ -15244,12 +15250,6 @@
           "publisher": "Benzinga",
           "link": "https://tech.yahoo.com/ai/claude/articles/anthropic-made-mistake-teaching-claude-003110200.html",
           "when": "Sep 20"
-        },
-        {
-          "title": "DGRW Pays Dividends Every Month. Its Biggest Stocks Look Nothing Like a High-Yield ETF",
-          "publisher": "24/7 Wall St.",
-          "link": "https://247wallst.com/investing/etf/2026/09/19/dgrw-pays-dividends-every-month-its-biggest-stocks-look-nothing-like-a-high-yield-etf/",
-          "when": "Sep 19"
         }
       ]
     },
@@ -16101,6 +16101,12 @@
           "when": "Sep 20"
         },
         {
+          "title": "Streaming\u2019s Biggest Rivals Just Became Allies in Washington",
+          "publisher": "Insider Monkey",
+          "link": "https://finance.yahoo.com/media-advertising/articles/streaming-biggest-rivals-just-became-202114144.html",
+          "when": "Sep 20"
+        },
+        {
           "title": "Billionaire Bill Ackman Dumps Alphabet and Loads Up On a Mega-Cap Stock Down 15% From Its Peak",
           "publisher": "Motley Fool",
           "link": "https://www.fool.com/investing/2026/09/20/billionaire-bill-ackman-dumps-alphabet-loads-meta/",
@@ -16122,12 +16128,6 @@
           "title": "Berkshire Hathaway's Favorite Artificial Intelligence (AI) Stock Looks Like a Genius Buy Now",
           "publisher": "Motley Fool",
           "link": "https://www.fool.com/investing/2026/09/20/berkshire-hathaways-favorite-artificial-intelligen/",
-          "when": "Sep 20"
-        },
-        {
-          "title": "Warren Buffett Steps Down as Berkshire's Chair \u2014 Son Howard Takes to Succeed: 'Father Time Always Wins' (UPDATED)",
-          "publisher": "Benzinga",
-          "link": "https://finance.yahoo.com/markets/stocks/articles/warren-buffett-steps-down-berkshires-104508734.html",
           "when": "Sep 20"
         }
       ]
@@ -18878,6 +18878,12 @@
       "flags": [],
       "news": [
         {
+          "title": "Streaming\u2019s Biggest Rivals Just Became Allies in Washington",
+          "publisher": "Insider Monkey",
+          "link": "https://finance.yahoo.com/media-advertising/articles/streaming-biggest-rivals-just-became-202114144.html",
+          "when": "Sep 20"
+        },
+        {
           "title": "Netflix Content Chief Shrugs Off YouTube Threat: \u2018Young People Only Watch Short Things\u2019 Isn\u2019t True",
           "publisher": "Benzinga",
           "link": "https://finance.yahoo.com/media-advertising/articles/netflix-content-chief-shrugs-off-183118185.html",
@@ -18905,12 +18911,6 @@
           "title": "Stock Market Today, Sept. 18: Netflix Falls on Analyst Downgrade and Slashed Price Target",
           "publisher": "Motley Fool",
           "link": "https://www.fool.com/coverage/stock-market-today/2026/09/18/stock-market-today-sept-18-netflix-falls-on-analyst-downgrade-and-slashed-price-target/",
-          "when": "Sep 18"
-        },
-        {
-          "title": "Netflix Stock Gets Downgraded by Wells Fargo on \u2018Worrying\u2019 Engagement Trends",
-          "publisher": "Investopedia",
-          "link": "https://www.investopedia.com/market-update-netflix-stock-gets-downgraded-by-wells-fargo-on-worrying-engagement-trends-nflx-12128200",
           "when": "Sep 18"
         }
       ]
@@ -20194,6 +20194,12 @@
           "when": "Sep 20"
         },
         {
+          "title": "Streaming\u2019s Biggest Rivals Just Became Allies in Washington",
+          "publisher": "Insider Monkey",
+          "link": "https://finance.yahoo.com/media-advertising/articles/streaming-biggest-rivals-just-became-202114144.html",
+          "when": "Sep 20"
+        },
+        {
           "title": "Billionaire Bill Ackman Dumps Alphabet and Loads Up On a Mega-Cap Stock Down 15% From Its Peak",
           "publisher": "Motley Fool",
           "link": "https://www.fool.com/investing/2026/09/20/billionaire-bill-ackman-dumps-alphabet-loads-meta/",
@@ -20215,12 +20221,6 @@
           "title": "Berkshire Hathaway's Favorite Artificial Intelligence (AI) Stock Looks Like a Genius Buy Now",
           "publisher": "Motley Fool",
           "link": "https://www.fool.com/investing/2026/09/20/berkshire-hathaways-favorite-artificial-intelligen/",
-          "when": "Sep 20"
-        },
-        {
-          "title": "Warren Buffett Steps Down as Berkshire's Chair \u2014 Son Howard Takes to Succeed: 'Father Time Always Wins' (UPDATED)",
-          "publisher": "Benzinga",
-          "link": "https://finance.yahoo.com/markets/stocks/articles/warren-buffett-steps-down-berkshires-104508734.html",
           "when": "Sep 20"
         }
       ]
@@ -21288,6 +21288,12 @@
       ],
       "news": [
         {
+          "title": "Nebius\u2019s Price Hike Suggests Michael Burry Made a Mistake and Is Shorting the Best Neocloud Stock",
+          "publisher": "Barchart",
+          "link": "https://www.barchart.com/story/news/4701308/nebiuss-price-hike-suggests-michael-burry-made-a-mistake-and-is-shorting-the-best-neocloud-stock",
+          "when": "Sep 20"
+        },
+        {
           "title": "CoreWeave (CRWV) Is Charging More for AI Compute, and Customers Keep Paying",
           "publisher": "Insider Monkey",
           "link": "https://finance.yahoo.com/technology/ai/articles/coreweave-crwv-charging-more-ai-193252050.html",
@@ -21315,12 +21321,6 @@
           "title": "A $25 Billion Reason to Buy CoreWeave Stock",
           "publisher": "Barchart",
           "link": "https://www.barchart.com/story/news/4684161/a-25-billion-reason-to-buy-coreweave-stock",
-          "when": "Sep 18"
-        },
-        {
-          "title": "Jim Cramer on CoreWeave (CRWV): \u201cI Think It\u2019s Going to Be Okay to Buy\u201d",
-          "publisher": "Insider Monkey",
-          "link": "https://finance.yahoo.com/markets/stocks/articles/jim-cramer-coreweave-crwv-think-172910718.html",
           "when": "Sep 18"
         }
       ]
@@ -21689,6 +21689,12 @@
       "flags": [],
       "news": [
         {
+          "title": "Nebius\u2019s Price Hike Suggests Michael Burry Made a Mistake and Is Shorting the Best Neocloud Stock",
+          "publisher": "Barchart",
+          "link": "https://www.barchart.com/story/news/4701308/nebiuss-price-hike-suggests-michael-burry-made-a-mistake-and-is-shorting-the-best-neocloud-stock",
+          "when": "Sep 20"
+        },
+        {
           "title": "Nebius Offers Fresh Clue About AI's Spending Boom",
           "publisher": "GuruFocus.com",
           "link": "https://finance.yahoo.com/technology/ai/articles/nebius-offers-fresh-clue-ais-161936309.html",
@@ -21716,12 +21722,6 @@
           "title": "Stock Market Today, Sept. 17: CoreWeave Falls on Convertible Debt and Share Sale Announcement",
           "publisher": "Motley Fool",
           "link": "https://www.fool.com/coverage/stock-market-today/2026/09/17/stock-market-today-sept-17-coreweave-falls-on-convertible-debt-and-share-sale-announcement/",
-          "when": "Sep 17"
-        },
-        {
-          "title": "NBIS Stock Jumps on Nebius Price Hike Rumors",
-          "publisher": "Barchart",
-          "link": "https://www.barchart.com/story/news/4667380/nbis-stock-jumps-on-nebius-price-hike-rumors",
           "when": "Sep 17"
         }
       ]
@@ -261325,7 +261325,7 @@
       "type": "closed"
     }
   ],
-  "generated_at": "2026-09-20T20:05:38+00:00",
+  "generated_at": "2026-09-20T20:34:05+00:00",
   "universe": {
     "wheel": 21,
     "growth": 18,
