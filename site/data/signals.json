@@ -14471,8 +14471,8 @@
     },
     {
       "label": "Bitcoin",
-      "price": 81276.9765625,
-      "pct": 0.053299167496234645,
+      "price": 81211.6328125,
+      "pct": -0.02714006688459003,
       "prefix": "$",
       "is_yield": false,
       "hist": [
@@ -14565,13 +14565,13 @@
         76404,
         80901,
         81234,
-        81277
+        81212
       ]
     },
     {
       "label": "Ethereum",
-      "price": 2639.449951171875,
-      "pct": 0.2844760998983453,
+      "price": 2624.239990234375,
+      "pct": -0.2934181554709925,
       "prefix": "$",
       "is_yield": false,
       "hist": [
@@ -14664,7 +14664,7 @@
         2447,
         2611,
         2632,
-        2639
+        2624
       ]
     }
   ],
@@ -14738,8 +14738,8 @@
     {
       "label": "Digital Assets",
       "ticker": "BTC",
-      "pct": 0.053299167496234645,
-      "price": 81276.9765625
+      "pct": -0.02714006688459003,
+      "price": 81211.6328125
     }
   ],
   "fundamentals": {
@@ -15026,6 +15026,24 @@
       ],
       "news": [
         {
+          "title": "Is This Cryptocurrency Still a Millionaire Maker?",
+          "publisher": "Motley Fool",
+          "link": "https://www.fool.com/investing/2026/09/20/is-this-cryptocurrency-still-a-millionaire-maker/",
+          "when": "Sep 20"
+        },
+        {
+          "title": "President Trump to Create an \u201cAI Force,\u201d Appoint an AI Czar as AI Fears Grow",
+          "publisher": "24/7 Wall St.",
+          "link": "https://247wallst.com/investing/2026/09/20/president-trump-to-create-an-ai-force-appoint-an-ai-czar-as-ai-fears-grow/",
+          "when": "Sep 20"
+        },
+        {
+          "title": "If You Invest $10,000 in This Bond ETF Today, Here's What History Says It Could Deliver in 20 Years",
+          "publisher": "Motley Fool",
+          "link": "https://www.fool.com/investing/2026/09/20/if-you-invest-usd10-000-in-this-bond-etf-today-here-s-what-history-says-it-could-deliver-in-20-years/",
+          "when": "Sep 20"
+        },
+        {
           "title": "Prediction: Even With the $1,999 Price Tag, Apple's Foldable iPhone Duo Will Be a Hit and Apple Will Join Nvidia in the $5 Trillion Club.",
           "publisher": "Motley Fool",
           "link": "https://www.fool.com/investing/2026/09/20/prediction-even-with-the-1999-price-tag-apples-fol/",
@@ -15041,24 +15059,6 @@
           "title": "I'm Watching PG&E Closely, but Here's Why I Haven't Bought the Dip",
           "publisher": "Motley Fool",
           "link": "https://www.fool.com/investing/2026/09/20/im-watching-pge-closely-but-heres-why-i-havent-bou/",
-          "when": "Sep 20"
-        },
-        {
-          "title": "Musk Says NVIDIA (NVDA) AI Chips Are Headed to Space With SpaceX (SPCX) Next Year",
-          "publisher": "Insider Monkey",
-          "link": "https://finance.yahoo.com/technology/ai/articles/musk-says-nvidia-nvda-ai-162008359.html",
-          "when": "Sep 20"
-        },
-        {
-          "title": "3 Reasons CRISPR Therapeutics Stock Is Still a Buy After a Rocky 2026",
-          "publisher": "Motley Fool",
-          "link": "https://www.fool.com/investing/2026/09/20/3-reasons-crispr-therapeutics-stock-is-still-a-buy/",
-          "when": "Sep 20"
-        },
-        {
-          "title": "Buying This Hidden Software Stock Might Just Give You Massive Exposure to the Anthropic IPO",
-          "publisher": "Motley Fool",
-          "link": "https://www.fool.com/investing/2026/09/20/buying-this-hidden-software-stock-might-just-give/",
           "when": "Sep 20"
         }
       ]
@@ -15121,6 +15121,18 @@
       "flags": [],
       "news": [
         {
+          "title": "President Trump to Create an \u201cAI Force,\u201d Appoint an AI Czar as AI Fears Grow",
+          "publisher": "24/7 Wall St.",
+          "link": "https://247wallst.com/investing/2026/09/20/president-trump-to-create-an-ai-force-appoint-an-ai-czar-as-ai-fears-grow/",
+          "when": "Sep 20"
+        },
+        {
+          "title": "Why India's Big Tech Companies Are Betting on Hyderabad",
+          "publisher": "Bloomberg",
+          "link": "https://finance.yahoo.com/video/why-indias-big-tech-companies-162028038.html",
+          "when": "Sep 20"
+        },
+        {
           "title": "OpenAI Just Beat Google, Meta, and Amazon To This Key Milestone. Is It Bullish for AI Stocks.",
           "publisher": "Motley Fool",
           "link": "https://www.fool.com/investing/2026/09/20/openai-just-beat-google-meta-and-amazon-to-this-key-milestone-why-it-s-bullish-for-ai-stocks/",
@@ -15143,18 +15155,6 @@
           "publisher": "Motley Fool",
           "link": "https://www.fool.com/investing/2026/09/20/prediction-a-5000-investment-in-amazon-amzn-stock/",
           "when": "Sep 20"
-        },
-        {
-          "title": "Prediction: Anthropic's IPO Will Be a Big Winner for Alphabet and Amazon Investors",
-          "publisher": "Motley Fool",
-          "link": "https://www.fool.com/investing/2026/09/20/prediction-anthropics-ipo-will-be-a-big-winner-for/",
-          "when": "Sep 20"
-        },
-        {
-          "title": "Forget Buying All Seven: The \"Magnificent Seven\" Stock Most Likely to Double by 2028",
-          "publisher": "Motley Fool",
-          "link": "https://www.fool.com/investing/2026/09/19/forget-buying-all-seven-the-magnificent-seven-stoc/",
-          "when": "Sep 19"
         }
       ]
     },
@@ -16012,6 +16012,12 @@
           "when": "Sep 20"
         },
         {
+          "title": "Why India's Big Tech Companies Are Betting on Hyderabad",
+          "publisher": "Bloomberg",
+          "link": "https://finance.yahoo.com/video/why-indias-big-tech-companies-162028038.html",
+          "when": "Sep 20"
+        },
+        {
           "title": "Turning 73 Forces a Withdrawal From This Stock Whether the Owner Wants the Cash or Not",
           "publisher": "24/7 Wall St.",
           "link": "https://247wallst.com/personal-finance/2026/09/20/turning-73-forces-a-withdrawal-from-this-stock-whether-the-owner-wants-the-cash-or-not/",
@@ -16027,12 +16033,6 @@
           "title": "If You Had Invested $500 a Month in VOO Since Its 2010 Launch, You Would Have About $330,000 Today",
           "publisher": "24/7 Wall St.",
           "link": "https://247wallst.com/investing/etf/2026/09/20/if-you-had-invested-500-a-month-in-voo-since-its-2010-launch-you-would-have-about-330000-today/",
-          "when": "Sep 20"
-        },
-        {
-          "title": "Taiwan Semiconductor Manufacturing's Foundry Market Share Is a Massive Moat Nobody Talks About",
-          "publisher": "Motley Fool",
-          "link": "https://www.fool.com/investing/2026/09/20/taiwan-semiconductor-manufacturings-foundry-market/",
           "when": "Sep 20"
         }
       ]
@@ -16195,7 +16195,7 @@
       ],
       "news": [
         {
-          "title": "Dow Jones Futures: Can The Market Rally Take Flight? Robinhood, Sandisk, AMD, Moderna Surge Into Buy Areas",
+          "title": "Dow Jones Futures Due: Can The Market Take Flight? Robinhood, Sandisk, AMD, Moderna Surge Into Buy Areas",
           "publisher": "Investor's Business Daily",
           "link": "https://www.investors.com/market-trend/stock-market-today/dow-jones-futures-robinhood-sandisk-amd-moderna-surge-buy-areas/?src=A00220&yptr=yahoo",
           "when": "Sep 20"
@@ -16403,7 +16403,7 @@
       ],
       "news": [
         {
-          "title": "Dow Jones Futures: Can The Market Rally Take Flight? Robinhood, Sandisk, AMD, Moderna Surge Into Buy Areas",
+          "title": "Dow Jones Futures Due: Can The Market Take Flight? Robinhood, Sandisk, AMD, Moderna Surge Into Buy Areas",
           "publisher": "Investor's Business Daily",
           "link": "https://www.investors.com/market-trend/stock-market-today/dow-jones-futures-robinhood-sandisk-amd-moderna-surge-buy-areas/?src=A00220&yptr=yahoo",
           "when": "Sep 20"
@@ -16498,6 +16498,12 @@
       "flags": [],
       "news": [
         {
+          "title": "Why India's Big Tech Companies Are Betting on Hyderabad",
+          "publisher": "Bloomberg",
+          "link": "https://finance.yahoo.com/video/why-indias-big-tech-companies-162028038.html",
+          "when": "Sep 20"
+        },
+        {
           "title": "The AI Agent Wars Just Got Personal: Google\u2019s CC vs. Meta\u2019s Muse",
           "publisher": "24/7 Wall St.",
           "link": "https://247wallst.com/investing/2026/09/20/the-ai-agent-wars-just-got-personal-googles-cc-vs-metas-muse/",
@@ -16522,16 +16528,10 @@
           "when": "Sep 20"
         },
         {
-          "title": "Forget Buying All Seven: The \"Magnificent Seven\" Stock Most Likely to Double by 2028",
-          "publisher": "Motley Fool",
-          "link": "https://www.fool.com/investing/2026/09/19/forget-buying-all-seven-the-magnificent-seven-stoc/",
-          "when": "Sep 19"
-        },
-        {
-          "title": "Meta stock delivers a bold case for a $900 target",
-          "publisher": "TheStreet",
-          "link": "https://www.thestreet.com/investing/meta-stock-900-price-target-ai-ad-engine",
-          "when": "Sep 19"
+          "title": "Dear Meta Platforms Stock Fans, Mark Your Calendars for Sept. 23",
+          "publisher": "Barchart",
+          "link": "https://www.barchart.com/story/news/4700255/dear-meta-platforms-stock-fans-mark-your-calendars-for-sept-23",
+          "when": "Sep 20"
         }
       ]
     },
@@ -16920,7 +16920,7 @@
       "flags": [],
       "news": [
         {
-          "title": "Dow Jones Futures: Can The Market Rally Take Flight? Robinhood, Sandisk, AMD, Moderna Surge Into Buy Areas",
+          "title": "Dow Jones Futures Due: Can The Market Take Flight? Robinhood, Sandisk, AMD, Moderna Surge Into Buy Areas",
           "publisher": "Investor's Business Daily",
           "link": "https://www.investors.com/market-trend/stock-market-today/dow-jones-futures-robinhood-sandisk-amd-moderna-surge-buy-areas/?src=A00220&yptr=yahoo",
           "when": "Sep 20"
@@ -18783,7 +18783,7 @@
       ],
       "news": [
         {
-          "title": "Dow Jones Futures: Can The Market Rally Take Flight? Robinhood, Sandisk, AMD, Moderna Surge Into Buy Areas",
+          "title": "Dow Jones Futures Due: Can The Market Take Flight? Robinhood, Sandisk, AMD, Moderna Surge Into Buy Areas",
           "publisher": "Investor's Business Daily",
           "link": "https://www.investors.com/market-trend/stock-market-today/dow-jones-futures-robinhood-sandisk-amd-moderna-surge-buy-areas/?src=A00220&yptr=yahoo",
           "when": "Sep 20"
@@ -20390,7 +20390,44 @@
           "text": "Revenue shrinking \u2014 -45% YoY"
         }
       ],
-      "news": []
+      "news": [
+        {
+          "title": "Pfizer to Share Revenue With HHS in Deal on Overseas Drug Prices",
+          "publisher": "Bloomberg",
+          "link": "https://finance.yahoo.com/healthcare/articles/pfizer-share-revenue-hhs-deal-211251182.html",
+          "when": "Sep 19"
+        },
+        {
+          "title": "3 Dividend Stocks to Buy and Hold for 10 Years",
+          "publisher": "Motley Fool",
+          "link": "https://www.fool.com/investing/2026/09/18/3-dividend-stocks-to-buy-and-hold-for-10-years/",
+          "when": "Sep 18"
+        },
+        {
+          "title": "All 50 States Joining Medicaid Drug Pricing Model After Pharma Deals, Trump Says",
+          "publisher": "Barrons.com",
+          "link": "https://www.barrons.com/articles/medicaid-drug-prices-pharma-trump-c3081e3e?siteid=yhoof2&yptr=yahoo",
+          "when": "Sep 18"
+        },
+        {
+          "title": "What Would It Take For Eli Lilly Stock To Keep Climbing?",
+          "publisher": "Trefis",
+          "link": "https://www.trefis.com/articles/615857/what-would-it-take-for-eli-lilly-stock-to-keep-climbing/2026-09-18",
+          "when": "Sep 18"
+        },
+        {
+          "title": "2 High-Yield Dividend Stocks to Buy and 1 to Avoid",
+          "publisher": "Motley Fool",
+          "link": "https://www.fool.com/investing/2026/09/18/2-high-yield-dividend-stocks-to-buy-and-1-to-avoid/",
+          "when": "Sep 18"
+        },
+        {
+          "title": "Is Johnson & Johnson Stock Expensive, Or Is STELARA Hiding The Real Price?",
+          "publisher": "Trefis",
+          "link": "https://www.trefis.com/articles/615892/is-johnson-johnson-stock-expensive-or-is-stelara-hiding-the-real-price/2026-09-18",
+          "when": "Sep 18"
+        }
+      ]
     },
     "HYPG": {
       "ok": true,
@@ -261288,7 +261325,7 @@
       "type": "closed"
     }
   ],
-  "generated_at": "2026-09-20T17:03:55+00:00",
+  "generated_at": "2026-09-20T17:35:14+00:00",
   "universe": {
     "wheel": 21,
     "growth": 18,
