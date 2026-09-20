@@ -14471,8 +14471,8 @@
     },
     {
       "label": "Bitcoin",
-      "price": 80762.640625,
-      "pct": -0.5798568577861429,
+      "price": 80745.0,
+      "pct": -0.6015727582203811,
       "prefix": "$",
       "is_yield": false,
       "hist": [
@@ -14565,13 +14565,13 @@
         76404,
         80901,
         81234,
-        80787
+        80745
       ]
     },
     {
       "label": "Ethereum",
-      "price": 2600.25,
-      "pct": -1.2049048844494425,
+      "price": 2598.320068359375,
+      "pct": -1.2782315953434153,
       "prefix": "$",
       "is_yield": false,
       "hist": [
@@ -14664,7 +14664,7 @@
         2447,
         2611,
         2632,
-        2600
+        2598
       ]
     }
   ],
@@ -14738,8 +14738,8 @@
     {
       "label": "Digital Assets",
       "ticker": "BTC",
-      "pct": -0.5798568577861429,
-      "price": 80762.640625
+      "pct": -0.6015727582203811,
+      "price": 80745.0
     }
   ],
   "fundamentals": {
@@ -15026,6 +15026,18 @@
       ],
       "news": [
         {
+          "title": "The Caterpillar Correction Shouldn't Last Much Longer",
+          "publisher": "Motley Fool",
+          "link": "https://www.fool.com/investing/2026/09/20/the-caterpillar-correction-shouldnt-last-much-long/",
+          "when": "Sep 20"
+        },
+        {
+          "title": "The S&P 500 Is Approaching a Valuation Not Seen in 26 Years, and History Suggests a Crash Could Follow",
+          "publisher": "Motley Fool",
+          "link": "https://www.fool.com/investing/2026/09/20/sp-500-valuation-26-years-history-suggests-crash/",
+          "when": "Sep 20"
+        },
+        {
           "title": "Delta's Non-Main-Cabin Revenue Hits 61% in 2026 -- Why It Matters for Earnings",
           "publisher": "Motley Fool",
           "link": "https://www.fool.com/investing/2026/09/20/deltas-non-main-cabin-revenue-hits-61-in-2026-why/",
@@ -15047,18 +15059,6 @@
           "title": "Is American Express Stock a Buy, Sell, or Hold With Shares Trading 20% Below Their 52-Week High?",
           "publisher": "Motley Fool",
           "link": "https://www.fool.com/investing/2026/09/20/american-express-stock-buy-sell-hold-discount/",
-          "when": "Sep 20"
-        },
-        {
-          "title": "Is a Recession Coming in 2026? History Has Good and Bad News for Investors.",
-          "publisher": "Motley Fool",
-          "link": "https://www.fool.com/investing/2026/09/20/is-a-recession-coming-in-2026-history-has-good-and/",
-          "when": "Sep 20"
-        },
-        {
-          "title": "Could $5,000 Invested in SpaceX Help You Retire a Millionaire?",
-          "publisher": "Motley Fool",
-          "link": "https://www.fool.com/investing/2026/09/20/could-5000-invested-in-spacex-help-you-retire-a-mi/",
           "when": "Sep 20"
         }
       ]
@@ -15900,6 +15900,12 @@
       ],
       "news": [
         {
+          "title": "Dollar General CEO raises major red flag about consumers",
+          "publisher": "TheStreet",
+          "link": "https://www.thestreet.com/retail/dollar-general-sees-more-higher-income-shoppers",
+          "when": "Sep 20"
+        },
+        {
           "title": "Bank of America resets Amazon stock forecast on delivery plan",
           "publisher": "TheStreet",
           "link": "https://www.thestreet.com/investing/stocks/bank-of-america-reiterates-buy-amazon-stock-delivery-plan",
@@ -15927,12 +15933,6 @@
           "title": "Walmart Vs Kroger: Jim Cramer Couldn\u2019t Figure Out Why Only One\u2019s Shares Went Up",
           "publisher": "Insider Monkey",
           "link": "https://finance.yahoo.com/markets/stocks/articles/walmart-vs-kroger-jim-cramer-231954802.html",
-          "when": "Sep 18"
-        },
-        {
-          "title": "Sir Lynton Crosby, CT Group Executive Chairman, on the Case for Capitalism",
-          "publisher": "Exec Edge",
-          "link": "https://finance.yahoo.com/economy/policy/articles/sir-lynton-crosby-ct-group-210625339.html",
           "when": "Sep 18"
         }
       ]
@@ -16498,6 +16498,12 @@
       "flags": [],
       "news": [
         {
+          "title": "The Caterpillar Correction Shouldn't Last Much Longer",
+          "publisher": "Motley Fool",
+          "link": "https://www.fool.com/investing/2026/09/20/the-caterpillar-correction-shouldnt-last-much-long/",
+          "when": "Sep 20"
+        },
+        {
           "title": "OpenAI Just Beat Google, Meta, and Amazon To This Key Milestone. Is It Bullish for AI Stocks.",
           "publisher": "Motley Fool",
           "link": "https://www.fool.com/investing/2026/09/20/openai-just-beat-google-meta-and-amazon-to-this-key-milestone-why-it-s-bullish-for-ai-stocks/",
@@ -16525,12 +16531,6 @@
           "title": "JPMorgan Changed Its Mind on Meta Stock After This Major AI Breakthrough",
           "publisher": "Barchart",
           "link": "https://www.barchart.com/story/news/4695238/jpmorgan-changed-its-mind-on-meta-stock-after-this-major-ai-breakthrough",
-          "when": "Sep 19"
-        },
-        {
-          "title": "Meta Stock Could Hit $800 This Year -- And It All Begins on Sept. 23",
-          "publisher": "Barchart",
-          "link": "https://www.barchart.com/story/news/4694310/meta-stock-could-hit-800-this-year-and-it-all-begins-on-sept-23",
           "when": "Sep 19"
         }
       ]
@@ -261325,7 +261325,7 @@
       "type": "closed"
     }
   ],
-  "generated_at": "2026-09-20T15:05:33+00:00",
+  "generated_at": "2026-09-20T15:34:18+00:00",
   "universe": {
     "wheel": 21,
     "growth": 18,
