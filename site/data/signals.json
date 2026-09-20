@@ -14471,8 +14471,8 @@
     },
     {
       "label": "Bitcoin",
-      "price": 80331.25,
-      "pct": -1.110905834835474,
+      "price": 80508.03125,
+      "pct": -0.8932851993059043,
       "prefix": "$",
       "is_yield": false,
       "hist": [
@@ -14565,13 +14565,13 @@
         76404,
         80901,
         81234,
-        80318
+        80508
       ]
     },
     {
       "label": "Ethereum",
-      "price": 2573.2900390625,
-      "pct": -2.2292340470806637,
+      "price": 2581.050048828125,
+      "pct": -1.9343966649472022,
       "prefix": "$",
       "is_yield": false,
       "hist": [
@@ -14664,7 +14664,7 @@
         2447,
         2611,
         2632,
-        2573
+        2581
       ]
     }
   ],
@@ -14738,8 +14738,8 @@
     {
       "label": "Digital Assets",
       "ticker": "BTC",
-      "pct": -1.110905834835474,
-      "price": 80331.25
+      "pct": -0.8932851993059043,
+      "price": 80508.03125
     }
   ],
   "fundamentals": {
@@ -15026,6 +15026,18 @@
       ],
       "news": [
         {
+          "title": "Wall Street's Bull Case for Bristol Myers Squibb Is Getting Louder",
+          "publisher": "Motley Fool",
+          "link": "https://www.fool.com/investing/2026/09/20/wall-streets-bull-case-for-bristol-myers-squibb-is/",
+          "when": "Sep 20"
+        },
+        {
+          "title": "Why You Should Avoid Palantir and Buy These 2 Defense Stocks Instead",
+          "publisher": "Motley Fool",
+          "link": "https://www.fool.com/investing/2026/09/20/why-you-should-avoid-palantir-and-buy-these-2-defe/",
+          "when": "Sep 20"
+        },
+        {
           "title": "Billionaire Bill Ackman Has 13% of Pershing Square Capital Management's $19 Billion Hedge Fund in 1 Stock That's 31% Below Its 52-Week High",
           "publisher": "Motley Fool",
           "link": "https://www.fool.com/investing/2026/09/20/billionaire-bill-ackman-1-stock-52-week-high/",
@@ -15047,18 +15059,6 @@
           "title": "Breakfast News: The Sunday Edition",
           "publisher": "Motley Fool",
           "link": "https://www.fool.com/investing/breakfast-news/2026/09/20/breakfast-news/",
-          "when": "Sep 20"
-        },
-        {
-          "title": "3 AI Stocks to Buy Before the Next Fed Rate Decision",
-          "publisher": "Motley Fool",
-          "link": "https://www.fool.com/investing/2026/09/20/3-ai-stocks-to-buy-before-the-next-fed-rate-decisi/",
-          "when": "Sep 20"
-        },
-        {
-          "title": "AMC Stock Is Up 73% This Year. Why Are You Still Laughing?",
-          "publisher": "Motley Fool",
-          "link": "https://www.fool.com/investing/2026/09/20/amc-stock-is-up-73-this-year-why-are-you-still-lau/",
           "when": "Sep 20"
         }
       ]
@@ -15800,6 +15800,12 @@
       ],
       "news": [
         {
+          "title": "Why You Should Avoid Palantir and Buy These 2 Defense Stocks Instead",
+          "publisher": "Motley Fool",
+          "link": "https://www.fool.com/investing/2026/09/20/why-you-should-avoid-palantir-and-buy-these-2-defe/",
+          "when": "Sep 20"
+        },
+        {
           "title": "Cathie Wood Sold Palantir and AMD, Then Poured $3.35 Million Into Archer Aviation. Is ARK Betting Big on Flying Taxis?",
           "publisher": "Motley Fool",
           "link": "https://www.fool.com/investing/2026/09/19/cathie-wood-sold-palantir-and-amd-then-poured-335/",
@@ -15827,12 +15833,6 @@
           "title": "Palantir CEO offers surprising solution to AI threats that involves Washington, D.C.",
           "publisher": "TheStreet",
           "link": "https://www.thestreet.com/technology/palantir-karp-ai-liability-warning-nationalization",
-          "when": "Sep 18"
-        },
-        {
-          "title": "The 3 Tech Laggards Are Top Stock Picks, UBS Says",
-          "publisher": "Barrons.com",
-          "link": "https://www.barrons.com/articles/palantir-at-t-spotify-stocks-ubs-b8b42890?siteid=yhoof2&yptr=yahoo",
           "when": "Sep 18"
         }
       ]
@@ -19993,6 +19993,12 @@
           "when": "Sep 19"
         },
         {
+          "title": "These 3 Agentic AI Stocks Have More Than Hype Behind Their Growth Stories",
+          "publisher": "MarketBeat",
+          "link": "https://www.marketbeat.com/articles/these-3-agentic-ai-stocks-have-more-than-hype-behind-their-growth-stories/?utm_source=yahoofinance&utm_medium=yahoofinance",
+          "when": "Sep 19"
+        },
+        {
           "title": "CrowdStrike, HubSpot, Intuit, Cloudflare, and Okta Shares Plummet, What You Need To Know",
           "publisher": "StockStory",
           "link": "https://finance.yahoo.com/markets/stocks/articles/crowdstrike-hubspot-intuit-cloudflare-okta-000040098.html",
@@ -20008,12 +20014,6 @@
           "title": "CRWD Stock Keeps Climbing. Should You Climb On?",
           "publisher": "Trefis",
           "link": "https://www.trefis.com/articles/615810/crwd-stock-keeps-climbing-should-you-climb-on/2026-09-18",
-          "when": "Sep 18"
-        },
-        {
-          "title": "Cybersecurity Stock Fortinet Forms Rare Pattern, Flirts With Buy Point",
-          "publisher": "Investor's Business Daily",
-          "link": "https://www.investors.com/stock-lists/ibd-big-cap-20/fortinet-ftnt-stock-cybersecurity-openai/?src=A00220&yptr=yahoo",
           "when": "Sep 18"
         }
       ]
@@ -21070,6 +21070,12 @@
       ],
       "news": [
         {
+          "title": "These 3 Agentic AI Stocks Have More Than Hype Behind Their Growth Stories",
+          "publisher": "MarketBeat",
+          "link": "https://www.marketbeat.com/articles/these-3-agentic-ai-stocks-have-more-than-hype-behind-their-growth-stories/?utm_source=yahoofinance&utm_medium=yahoofinance",
+          "when": "Sep 19"
+        },
+        {
           "title": "How Low Can UiPath Stock Go When Its Numbers Are Not The Problem?",
           "publisher": "Trefis",
           "link": "https://www.trefis.com/articles/615833/how-low-can-uipath-stock-go-when-its-numbers-are-not-the-problem/2026-09-18",
@@ -21097,12 +21103,6 @@
           "title": "Would You Want CRM Stock Back At The Price It Just Left?",
           "publisher": "Trefis",
           "link": "https://www.trefis.com/articles/615696/would-you-want-crm-stock-back-at-the-price-it-just-left/2026-09-17",
-          "when": "Sep 17"
-        },
-        {
-          "title": "This ServiceNow Bear Signal Has Never Been Wrong",
-          "publisher": "Schaeffer's Investment Research",
-          "link": "https://finance.yahoo.com/markets/stocks/articles/servicenow-bear-signal-never-wrong-175805864.html",
           "when": "Sep 17"
         }
       ]
@@ -21594,6 +21594,12 @@
       "flags": [],
       "news": [
         {
+          "title": "These 3 Agentic AI Stocks Have More Than Hype Behind Their Growth Stories",
+          "publisher": "MarketBeat",
+          "link": "https://www.marketbeat.com/articles/these-3-agentic-ai-stocks-have-more-than-hype-behind-their-growth-stories/?utm_source=yahoofinance&utm_medium=yahoofinance",
+          "when": "Sep 19"
+        },
+        {
           "title": "How Low Can UiPath Stock Go When Its Numbers Are Not The Problem?",
           "publisher": "Trefis",
           "link": "https://www.trefis.com/articles/615833/how-low-can-uipath-stock-go-when-its-numbers-are-not-the-problem/2026-09-18",
@@ -21621,12 +21627,6 @@
           "title": "PATH's 21% Rise in Million-Dollar Customers is the Number to Watch",
           "publisher": "Zacks",
           "link": "https://finance.yahoo.com/markets/stocks/articles/paths-21-rise-million-dollar-162400622.html",
-          "when": "Sep 15"
-        },
-        {
-          "title": "UiPath (PATH) Is A Gartner Leader For A Second Straight Year",
-          "publisher": "Simply Wall St.",
-          "link": "https://finance.yahoo.com/technology/ai/articles/uipath-path-gartner-leader-second-051625897.html",
           "when": "Sep 15"
         }
       ]
@@ -261325,7 +261325,7 @@
       "type": "closed"
     }
   ],
-  "generated_at": "2026-09-20T12:36:07+00:00",
+  "generated_at": "2026-09-20T13:05:18+00:00",
   "universe": {
     "wheel": 21,
     "growth": 18,
