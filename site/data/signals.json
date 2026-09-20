@@ -14471,8 +14471,8 @@
     },
     {
       "label": "Bitcoin",
-      "price": 81090.2421875,
-      "pct": -0.17657392912865388,
+      "price": 81208.46875,
+      "pct": -0.031035080027130846,
       "prefix": "$",
       "is_yield": false,
       "hist": [
@@ -14565,13 +14565,13 @@
         76404,
         80901,
         81234,
-        81090
+        81208
       ]
     },
     {
       "label": "Ethereum",
-      "price": 2628.10009765625,
-      "pct": -0.1467554576917829,
+      "price": 2633.050048828125,
+      "pct": 0.04131526506283567,
       "prefix": "$",
       "is_yield": false,
       "hist": [
@@ -14664,7 +14664,7 @@
         2447,
         2611,
         2632,
-        2628
+        2633
       ]
     }
   ],
@@ -14738,8 +14738,8 @@
     {
       "label": "Digital Assets",
       "ticker": "BTC",
-      "pct": -0.17657392912865388,
-      "price": 81090.2421875
+      "pct": -0.031035080027130846,
+      "price": 81208.46875
     }
   ],
   "fundamentals": {
@@ -15026,6 +15026,12 @@
       ],
       "news": [
         {
+          "title": "Main Street Capital Went Public at $15 a Share. $10,000 Invested Then Now Collects About $177 a Month in Regular Dividends.",
+          "publisher": "Motley Fool",
+          "link": "https://www.fool.com/investing/2026/09/20/main-street-capital-went-public-at-15-a-share-1000/",
+          "when": "Sep 20"
+        },
+        {
           "title": "I Own Constellation for the Nuclear Fleet, Not the AI Headlines. Here's Why That Matters Now.",
           "publisher": "Motley Fool",
           "link": "https://www.fool.com/investing/2026/09/20/i-own-constellation-for-the-nuclear-fleet-not-the/",
@@ -15053,12 +15059,6 @@
           "title": "Prediction: Micron Will Earn More Profit Than Microsoft in Fiscal 2027",
           "publisher": "Motley Fool",
           "link": "https://www.fool.com/investing/2026/09/20/prediction-micron-will-earn-more-profit-than-microsoft-in-fiscal-2027/",
-          "when": "Sep 20"
-        },
-        {
-          "title": "Nvidia CEO has a blunt message for Americans fearing AI",
-          "publisher": "TheStreet",
-          "link": "https://www.thestreet.com/technology/nvidia-jensen-huang-ai-apocalypse-warnings",
           "when": "Sep 20"
         }
       ]
@@ -16024,15 +16024,15 @@
           "when": "Sep 20"
         },
         {
-          "title": "Turning 73 Forces a Withdrawal From This Stock Whether the Owner Wants the Cash or Not",
-          "publisher": "24/7 Wall St.",
-          "link": "https://247wallst.com/personal-finance/2026/09/20/turning-73-forces-a-withdrawal-from-this-stock-whether-the-owner-wants-the-cash-or-not/",
+          "title": "How to Play AAPL Stock Amid Reports Apple Is Building Its Own AI Server",
+          "publisher": "Barchart",
+          "link": "https://www.barchart.com/story/news/4701024/how-to-play-aapl-stock-amid-reports-apple-is-building-its-own-ai-server",
           "when": "Sep 20"
         },
         {
-          "title": "Greg Abel Recently Plowed $4.2 Billion Into Warren Buffett's Favorite Stock, and It Wasn't Apple",
-          "publisher": "Motley Fool",
-          "link": "https://www.fool.com/investing/2026/09/20/greg-abel-42-billion-warren-buffetts-stock-apple/",
+          "title": "Turning 73 Forces a Withdrawal From This Stock Whether the Owner Wants the Cash or Not",
+          "publisher": "24/7 Wall St.",
+          "link": "https://247wallst.com/personal-finance/2026/09/20/turning-73-forces-a-withdrawal-from-this-stock-whether-the-owner-wants-the-cash-or-not/",
           "when": "Sep 20"
         }
       ]
@@ -18683,6 +18683,12 @@
       ],
       "news": [
         {
+          "title": "Trump-Xi Summit, Costco, Autozone, General Mills, and More to Watch This Week",
+          "publisher": "Barrons.com",
+          "link": "https://www.barrons.com/articles/trump-xi-summit-costco-autozone-general-mills-stocks-9394b2ba?siteid=yhoof2&yptr=yahoo",
+          "when": "Sep 20"
+        },
+        {
           "title": "Costco quietly drops brand-new Pepsi soda from its warehouses",
           "publisher": "TheStreet",
           "link": "https://www.thestreet.com/retail/costco-quietly-drops-brand-new-pepsi-soda-from-its-warehouses",
@@ -18710,12 +18716,6 @@
           "title": "Here\u2019s When Jim Cramer Thinks Costco Wholesale Corporation (NASDAQ:COST) Will Cut Prices",
           "publisher": "Insider Monkey",
           "link": "https://finance.yahoo.com/markets/stocks/articles/jim-cramer-thinks-costco-wholesale-231228388.html",
-          "when": "Sep 18"
-        },
-        {
-          "title": "Sir Lynton Crosby, CT Group Executive Chairman, on the Case for Capitalism",
-          "publisher": "Exec Edge",
-          "link": "https://finance.yahoo.com/economy/policy/articles/sir-lynton-crosby-ct-group-210625339.html",
           "when": "Sep 18"
         }
       ]
@@ -261325,7 +261325,7 @@
       "type": "closed"
     }
   ],
-  "generated_at": "2026-09-20T19:04:06+00:00",
+  "generated_at": "2026-09-20T19:34:05+00:00",
   "universe": {
     "wheel": 21,
     "growth": 18,
