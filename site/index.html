@@ -466,7 +466,7 @@ th.thelp:hover{color:var(--text)} th.thelp:hover .thi{border-color:var(--accent)
 
   <!-- ══════════ SIGNALS ══════════ -->
   <section id="v-signals" class="view" hidden>
-    <div class="head"><h1>Suggested entries</h1><div class="meta" id="meta">scanning…</div></div>
+    <div class="head"><h1>Suggested entries</h1><div class="meta" id="meta">scanning…</div><span class="js-snap snap"></span></div>
 
     <div class="subhead">Sell now — CSP / CC <span class="n" id="n-ready"></span></div>
     <p class="note">Confirmed mean-reversion setups on the right side of the 20-day median (score ≥ 6). Nothing here means no clean entry today — that's the point.</p>
@@ -502,7 +502,7 @@ th.thelp:hover{color:var(--text)} th.thelp:hover .thi{border-color:var(--accent)
 
   <!-- ══════════ DEEP DIVE ══════════ -->
   <section id="v-deep" class="view" hidden>
-    <div class="head"><h1>Technical Analysis</h1><div class="meta">One name, every leg — the CSP, CC and LEAP the engine found, with the full reasoning behind each verdict.</div></div>
+    <div class="head"><h1>Technical Analysis</h1><div class="meta">One name, every leg — the CSP, CC and LEAP the engine found, with the full reasoning behind each verdict.</div><span class="js-snap snap"></span></div>
     <div class="picker" style="border:0;padding:14px 0"><input id="deep-in" placeholder="ticker…" aria-label="Deep dive ticker"><span id="deep-chips"></span></div>
     <div id="deep-body"></div>
     <section class="chart" aria-label="Chart" style="margin-top:150px">
@@ -514,13 +514,13 @@ th.thelp:hover{color:var(--text)} th.thelp:hover .thi{border-color:var(--accent)
 
   <!-- ══════════ MARKET STATS ══════════ -->
   <section id="v-market" class="view" hidden>
-    <div class="head"><h1>Market Stats</h1><div class="meta">Rates, valuation, the seller's edge, the volatility regime, and this week's events. Hover any tile (look for the ⍰) for what the term means and its regime bands.</div></div>
+    <div class="head"><h1>Market Stats</h1><div class="meta">Rates, valuation, the seller's edge, the volatility regime, and this week's events. Hover any tile (look for the ⍰) for what the term means and its regime bands.</div><span class="js-snap snap"></span></div>
     <div id="mkt-body"></div>
   </section>
 
   <!-- ══════════ FUNDAMENTALS ══════════ -->
   <section id="v-fund" class="view" hidden>
-    <div class="head"><h1>Fundamentals</h1><div class="meta">Straight from the company's SEC filings (10-K / 10-Q) — valuation, quality, balance-sheet health, red flags. No prices, no technicals. US-listed filers.</div></div>
+    <div class="head"><h1>Fundamentals</h1><div class="meta">Straight from the company's SEC filings (10-K / 10-Q) — valuation, quality, balance-sheet health, red flags. No prices, no technicals. US-listed filers.</div><span class="js-snap snap"></span></div>
     <div class="picker" style="border:0;padding:14px 0"><input id="fund-in" placeholder="ticker…" aria-label="Fundamentals ticker"><span id="fund-chips"></span></div>
     <div id="fund-body"></div>
   </section>
@@ -773,7 +773,7 @@ function relAge(iso){ if(!iso) return ''; const s=Math.max(0,(Date.now()-new Dat
   return Math.floor(h/24)+'d ago'; }
 function snapHTML(){ const g=DATA&&DATA.generated_at; if(!g) return '';
   const utc=new Date(g).toUTCString().slice(17,22);
-  return `<span title="Overview &amp; Options Chain prices are a snapshot from the last scan — every 30 min during US market hours (08:30–17:00 ET). The TA chart is live and independent.">&#9719; Quotes: snapshot &middot; ${relAge(g)} <span class="snapdim">(${utc} UTC)</span></span>`; }
+  return `<span title="Scan-derived data (prices, signals, market stats, fundamentals) is a snapshot from the last data pull, refreshed through the trading day (premarket–postmarket, ET). The TA chart is live and independent.">&#9719; Data snapshot &middot; ${relAge(g)} <span class="snapdim">(${utc} UTC)</span></span>`; }
 function renderSnap(){ const h=snapHTML(); document.querySelectorAll('.js-snap').forEach(e=>e.innerHTML=h); }
 
 let _lastGen=null, _refreshing=false;
