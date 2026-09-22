@@ -19,9 +19,13 @@ on:
     # EST; the ET gate below is the single source of truth that keeps every run inside the real window.
     # Runs every day (incl. weekends) so BTC/ETH quotes and the data-pull stamp stay current when
     # crypto trades 24/7 — stock/options data simply re-shows Friday's close while markets are shut.
-    - cron: "*/10 8-23 * * 1-5"   # backup trigger, ~every 10 min on weekdays; the DST-aware ET gate
-                                  # below is the real bound (04:00–20:00 ET). The Cloudflare Worker
-                                  # is the PRIMARY, reliable 10-min trigger — this cron is a fallback.
+    - cron: "*/10 0-1,8-23 * * *"   # PRIMARY trigger: every ~10 min across the UTC hours that can
+                                    # hold 04:00–20:00 ET in either DST season (EDT 08:00–00:00 UTC,
+                                    # EST 09:00–01:00 UTC). The DST-aware ET gate below is the exact
+                                    # bound (04:00–20:00 ET, Mon–Fri); off-window / weekend runs just
+                                    # gate out. Self-sufficient — needs no external scheduler. (A
+                                    # Cloudflare Worker MAY also dispatch this workflow for tighter
+                                    # timing, but is optional — the pipeline no longer depends on it.)
   workflow_dispatch:                # manual / external dispatch
     inputs:
       force:
