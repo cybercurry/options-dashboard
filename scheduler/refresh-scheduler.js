@@ -1,13 +1,13 @@
 // optionintel.app — reliable refresh heartbeat (Cloudflare Worker).
 //
 // GitHub's own cron throttles/skips high-frequency schedules, so it can't be trusted for a
-// dependable 30-min heartbeat. This Worker's Cron Trigger fires reliably and dispatches the
+// dependable 10-min heartbeat. This Worker's Cron Trigger fires reliably and dispatches the
 // `refresh-optionintel.yml` workflow via the GitHub API.
 //
 // Timing: the workflow itself is the source of truth for the ET market window (a DST-aware
 // zoneinfo gate). This Worker ALSO checks the window before dispatching — purely to avoid spending
 // GitHub Actions minutes on runs that would just gate out — using Intl with America/New_York, which
-// tracks EDT/EST automatically. Window = 08:30–17:00 ET (open −1h … close +1h), every day.
+// tracks EDT/EST automatically. Window = 04:00–20:00 ET (premarket → post-market), Mon–Fri.
 //
 // Secrets (set in the Worker, never in this file):
 //   GH_TOKEN     fine-grained GitHub PAT — repo cybercurry/options-dashboard, Actions: Read & write

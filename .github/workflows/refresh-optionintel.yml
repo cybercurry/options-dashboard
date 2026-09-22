@@ -100,6 +100,8 @@ jobs:
           # copy bundled in the last deploy if GitHub raw is briefly unreachable.
           blob=$(git hash-object -w site/data/signals.json)
           tree=$(printf '100644 blob %s\tsignals.json\n' "$blob" | git mktree)
-          commit=$(git commit-tree "$tree" -m "data refresh $(date -u +%FT%TZ)")
+          # "[skip ci]" tells Cloudflare Pages AND Workers Builds to ignore this commit — the data
+          # branch has no site/Worker to build, so without it every refresh triggers a failed build.
+          commit=$(git commit-tree "$tree" -m "data refresh $(date -u +%FT%TZ) [skip ci]")
           git push --force origin "$commit:refs/heads/data"
           echo "Published → https://raw.githubusercontent.com/cybercurry/options-dashboard/data/signals.json"
