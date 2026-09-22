@@ -2,11 +2,11 @@ name = "optionintel-refresh-scheduler"
 main = "refresh-scheduler.js"
 compatibility_date = "2026-09-01"
 
-# UTC. The band 12–22 covers 08:30–17:00 ET in BOTH EDT and EST; the Worker code refines the exact
-# edges and DST. Fires on :00 and :30 → a 30-min heartbeat aligned to the market half-hours.
-# Every day incl. weekends — keeps BTC/ETH quotes and the data-pull stamp current (crypto is 24/7).
+# Every 10 min, all hours. The Worker code (inEtWindow) refines this to 04:00–20:00 ET, Mon–Fri
+# (premarket → post-market) with DST handling, so off-window / weekend ticks simply no-op.
+# This file is the source of truth for the cron — `wrangler deploy` overwrites the dashboard value.
 [triggers]
-crons = ["0,30 12-22 * * *"]
+crons = ["*/10 * * * *"]
 
 # GH_TOKEN and REFRESH_KEY are secrets — set them with `wrangler secret put …` or in the dashboard,
 # never in this file.
