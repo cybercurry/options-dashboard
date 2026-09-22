@@ -13,8 +13,8 @@
 //   GH_TOKEN     fine-grained GitHub PAT — repo cybercurry/options-dashboard, Actions: Read & write
 //   REFRESH_KEY  any random string — guards the manual /dispatch test endpoint
 //
-// Cron trigger (UTC; the band covers the ET window in both seasons, the code refines the edges):
-//   0,30 12-22 * * *   (every day incl. weekends — keeps 24/7 crypto quotes + the stamp current)
+// Cron trigger (set in the Cloudflare dashboard):
+//   */10 * * * *   (every 10 min; the inEtWindow() gate below refines it to 04:00–20:00 ET, Mon–Fri)
 
 const OWNER = "cybercurry";
 const REPO = "options-dashboard";
@@ -23,15 +23,16 @@ const WORKFLOW = "refresh-optionintel.yml";
 function inEtWindow(now = new Date()) {
   const parts = new Intl.DateTimeFormat("en-US", {
     timeZone: "America/New_York",
-    hour: "2-digit", minute: "2-digit", hour12: false,
+    weekday: "short", hour: "2-digit", minute: "2-digit", hour12: false,
   }).formatToParts(now);
   const val = (t) => parts.find((p) => p.type === t)?.value;
+  const dow = val("weekday");                       // Mon, Tue, … Sun (in ET)
+  if (dow === "Sat" || dow === "Sun") return false; // weekdays only — markets closed
   let hh = parseInt(val("hour"), 10);
   if (hh === 24) hh = 0;                           // some ICU builds emit "24" at midnight
   const mins = hh * 60 + parseInt(val("minute"), 10);
-  // Every day incl. weekends — crypto (BTC/ETH) trades 24/7 and we want the data-pull stamp
-  // current; stock/options data simply re-shows Friday's close while those markets are shut.
-  const inWindow = mins >= 8 * 60 + 30 && mins <= 17 * 60;   // 08:30 … 17:00 ET (inclusive)
+  // Premarket → post-market: 04:00 … 20:00 ET (inclusive). DST-aware via America/New_York.
+  const inWindow = mins >= 4 * 60 && mins <= 20 * 60;
   return inWindow;
 }
 

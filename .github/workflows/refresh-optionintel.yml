@@ -19,7 +19,9 @@ on:
     # EST; the ET gate below is the single source of truth that keeps every run inside the real window.
     # Runs every day (incl. weekends) so BTC/ETH quotes and the data-pull stamp stay current when
     # crypto trades 24/7 — stock/options data simply re-shows Friday's close while markets are shut.
-    - cron: "*/30 12-22 * * *"
+    - cron: "*/10 8-23 * * 1-5"   # backup trigger, ~every 10 min on weekdays; the DST-aware ET gate
+                                  # below is the real bound (04:00–20:00 ET). The Cloudflare Worker
+                                  # is the PRIMARY, reliable 10-min trigger — this cron is a fallback.
   workflow_dispatch:                # manual / external dispatch
     inputs:
       force:
@@ -52,10 +54,9 @@ jobs:
           python-version: "3.12"
           cache: pip
 
-      # Single source of truth for WHEN the heartbeat runs: every 30 min, 08:30–17:00 ET
-      # (market open −1h … close +1h), EVERY day incl. weekends (crypto is 24/7 and we want the
-      # data-pull stamp current). Uses America/New_York, so it tracks EDT/EST automatically.
-      # A code push always runs (fresh deploy); a manual dispatch can force off-window.
+      # Single source of truth for WHEN the heartbeat runs: every ~10 min, 04:00–20:00 ET
+      # (premarket → post-market), Mon–Fri only. Uses America/New_York, so it tracks EDT/EST
+      # automatically. A code push always runs (fresh deploy); a manual dispatch can force off-window.
       - id: gate
         name: Gate to the ET market window (DST-aware)
         env:
@@ -70,7 +71,7 @@ jobs:
           force= (os.environ.get("FORCE") or "").lower() == "true"
           now  = datetime.now(ZoneInfo("America/New_York"))
           mins     = now.hour * 60 + now.minute
-          in_window= (8*60 + 30) <= mins <= (17*60)    # 08:30 … 17:00 ET, every day
+          in_window= (now.weekday() < 5) and (4*60) <= mins <= (20*60)   # 04:00–20:00 ET, Mon–Fri (pre→post-market)
           go = (ev == "push") or force or in_window
           print(f"{now:%a %Y-%m-%d %H:%M} ET | in_window={in_window} "
                 f"event={ev} force={force} -> go={go}")
