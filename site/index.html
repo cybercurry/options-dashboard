@@ -809,9 +809,18 @@ function applyData(J, first){
 }
 // Cache-bust the URL (a query param defeats any browser/edge cache more reliably than cache:'no-store'
 // alone — iOS Safari has honoured no-store inconsistently), so a device always gets the live build.
+// Live data is published to a tiny `data` branch (overwritten each refresh) and served straight
+// from GitHub — so the refresh cadence is fully independent of Cloudflare deploys. If GitHub raw is
+// briefly unreachable, fall back to the copy bundled in this deploy (stale, but never blank).
+const DATA_URL='https://raw.githubusercontent.com/cybercurry/options-dashboard/data/signals.json';
+function fetchSignals(){
+  const bust='?t='+Date.now();
+  return fetch(DATA_URL+bust,{cache:'no-store'})
+    .then(r=>{ if(!r.ok) throw new Error('gh '+r.status); return r.json(); })
+    .catch(()=>fetch('data/signals.json'+bust,{cache:'no-store'}).then(r=>r.json()));
+}
 function loadData(first){
-  return fetch('data/signals.json?t='+Date.now(),{cache:'no-store'})
-    .then(r=>r.json()).then(J=>applyData(J, first))
+  return fetchSignals().then(J=>applyData(J, first))
     .catch(e=>{ if(first) document.getElementById('meta').textContent='could not load signals ('+e+')'; });
 }
 loadData(true);
@@ -821,8 +830,7 @@ loadData(true);
 // (generated_at changed) — cheap when idle, and the 'updated' stamp keeps itself current on its own.
 function maybeRefresh(){
   if(_refreshing || document.hidden) return; _refreshing=true;
-  fetch('data/signals.json?t='+Date.now(),{cache:'no-store'})
-    .then(r=>r.json())
+  fetchSignals()
     .then(J=>{ if(J && J.generated_at && J.generated_at!==_lastGen) applyData(J, false); })
     .catch(()=>{})
     .finally(()=>{ _refreshing=false; });

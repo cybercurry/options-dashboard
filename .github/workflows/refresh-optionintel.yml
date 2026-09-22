@@ -86,32 +86,19 @@ jobs:
         if: steps.gate.outputs.go == 'true'
         run: python build_json.py
 
-      - name: Commit fresh data (only if it changed)
+      - name: Publish data to the `data` branch (served to the site; keeps main small)
         if: steps.gate.outputs.go == 'true'
         run: |
-          if git diff --quiet -- site/data/signals.json; then
-            echo "No change — skipping commit."
-          else
-            git config user.name  "optionintel-bot"
-            git config user.email "optionintel-bot@users.noreply.github.com"
-            git add site/data/signals.json
-            # NOTE: no "[skip ci]" — Cloudflare Pages SKIPS commits with that marker, which was
-            # silently stopping every data refresh from deploying to optionintel.app (the site only
-            # updated on code pushes). No GitHub workflow triggers on the site/data path, so a plain
-            # commit here causes no Actions loop — it just lets Cloudflare publish the fresh data.
-            git commit -m "data: refresh signals"
-            # Race-safe push: a code-push-triggered refresh and the 30-min cron can overlap, so
-            # another run may land first. On rejection, rebase our data commit onto the latest
-            # main (favouring our freshly-generated file) and retry, instead of failing the run.
-            pushed=0
-            for i in 1 2 3 4 5; do
-              if git push; then pushed=1; break; fi
-              echo "push rejected — rebasing on latest origin/main (attempt $i)"
-              git fetch origin main
-              git rebase -X theirs origin/main || git rebase --abort
-              sleep $((i * 3))
-            done
-            if [ "$pushed" != "1" ]; then
-              echo "::error::could not push refreshed data after 5 attempts"; exit 1
-            fi
-          fi
+          git config user.name  "optionintel-bot"
+          git config user.email "optionintel-bot@users.noreply.github.com"
+          # Publish signals.json as a ONE-FILE, PARENT-LESS commit forced onto the `data` branch.
+          # No parent → the branch never accumulates history (old blobs get GC'd), so even a 10-min
+          # cadence never bloats the repo. Cloudflare Pages watches `main`, so this NEVER triggers a
+          # site rebuild — data refresh is fully decoupled from the 500-build/month cap. The page
+          # fetches this file from raw.githubusercontent (…/data/signals.json) and falls back to the
+          # copy bundled in the last deploy if GitHub raw is briefly unreachable.
+          blob=$(git hash-object -w site/data/signals.json)
+          tree=$(printf '100644 blob %s\tsignals.json\n' "$blob" | git mktree)
+          commit=$(git commit-tree "$tree" -m "data refresh $(date -u +%FT%TZ)")
+          git push --force origin "$commit:refs/heads/data"
+          echo "Published → https://raw.githubusercontent.com/cybercurry/options-dashboard/data/signals.json"
