@@ -384,6 +384,13 @@ def fetch_market_stats():
         yc = macro.yield_curve()
         ms["yield_curve"] = yc
         ms["fed"] = macro.fed_funds_rate()
+        # The Market-Stats fed tile expects the same shape as the Overview pulse: FOMC
+        # target range (DFEDTARL/DFEDTARU) as the headline, effective DFF as the subtitle.
+        # These were only emitted on the `market` block, so the tile read undefined
+        # `ms.fed_funds`/`ms.fed_target_*` and fell through to "—". (`fed` kept for back-compat.)
+        ms["fed_funds"] = ms["fed"]
+        ms["fed_target_low"] = _fred_last("DFEDTARL")
+        ms["fed_target_high"] = _fred_last("DFEDTARU")
         ms["spread_2s10s"] = macro.curve_spread_2s10s(yc)
     except Exception:
         pass
