@@ -185,6 +185,14 @@ th.sortable:hover{color:var(--mine)}
 #deep-chips, #fund-chips{display:flex; flex-wrap:wrap; gap:7px; min-width:0}
 table{width:100%; border-collapse:collapse}
 .tablewrap table{min-width:760px}   /* only scrollable tables are forced wide; popups/regime/rules stay fluid */
+/* Options Chain ladder (Strike·Δ·Bid·Ask·IV·OI): fit the container at ANY width with a
+   fixed, even-column layout. Overrides the 760px min-width that otherwise left a big empty
+   gap after Strike and pushed IV/OI into a sideways scroll. Strike gets a touch more room
+   for the ▸/🎯 marker; the five data columns share the rest. No horizontal scrolling. */
+.ch2 .tablewrap{overflow-x:auto}
+.ch2 .tablewrap table{min-width:0; width:100%; table-layout:fixed}
+.ch2 .tablewrap th:first-child, .ch2 .tablewrap td:first-child{width:21%}
+.ch2 .tablewrap th, .ch2 .tablewrap td{overflow:hidden; text-overflow:ellipsis}
 thead th{position:sticky; top:0; text-align:right; font-size:11px; letter-spacing:.05em; text-transform:uppercase; color:var(--faint); font-weight:600; padding:12px 14px; background:var(--surface-2); border-bottom:1px solid var(--line); white-space:nowrap}
 thead th.l{text-align:left} thead th.sortable{cursor:pointer; user-select:none} thead th.sortable:hover{color:var(--text)} thead th .ar{opacity:.5; font-size:9px}
 tbody td{text-align:right; padding:12px 14px; border-bottom:1px solid var(--line-soft); white-space:nowrap; vertical-align:middle}
@@ -445,6 +453,11 @@ th.thelp:hover{color:var(--text)} th.thelp:hover .thi{border-color:var(--accent)
   #chain-chips, #chain-exps{flex-wrap:nowrap; overflow-x:auto; -webkit-overflow-scrolling:touch; scrollbar-width:none; padding-bottom:6px}
   #chain-chips::-webkit-scrollbar, #chain-exps::-webkit-scrollbar{display:none}
   #chain-chips>*, #chain-exps>*{flex:0 0 auto}
+  /* Options Chain ladder on phones: tighter cells + drop the (i) help dots so all six
+     columns stay legible in the stacked single-column layout. */
+  .ch2 .tablewrap thead th{padding:9px 5px; font-size:10px; letter-spacing:.02em}
+  .ch2 .tablewrap tbody td{padding:9px 5px; font-size:12px}
+  .ch2 .tablewrap thead th .thi{display:none}
 }
 @media (prefers-reduced-motion:reduce){ *{transition:none!important} }
 </style>
@@ -648,7 +661,7 @@ th.thelp:hover{color:var(--text)} th.thelp:hover .thi{border-color:var(--accent)
 
 </main>
 
-<footer class="wrap"><b>optionintel.app</b> — one engine, every tab · real Tradier chains &amp; greeks · the same rules the <b>Rules</b> tab lists · <b>research only, not advice</b> · <span id="upd" style="opacity:.75">updated…</span> · <span class="pre" style="opacity:.6">build <span id="buildid">2026-10-02 · arch-A · ov-sort+ivr+earnings</span></span></footer>
+<footer class="wrap"><b>optionintel.app</b> — one engine, every tab · real Tradier chains &amp; greeks · the same rules the <b>Rules</b> tab lists · <b>research only, not advice</b> · <span id="upd" style="opacity:.75">updated…</span> · <span class="pre" style="opacity:.6">build <span id="buildid">2026-10-02 · arch-A · ov-sort+ivr+earnings · chain-fit</span></span></footer>
 
 <script>
 const KIND={csp:"CSP",cc:"CC",leap:"LEAP"};
