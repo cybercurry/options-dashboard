@@ -549,6 +549,63 @@ def fetch_chains(names, prices):
     return out
 
 
+def _iv_rank_stats():
+    """Per-ticker (low, high, n) of ATM-IV history from data/iv_history.csv, plus the span in weeks.
+    This CSV is appended daily by scripts/log_iv.py, so IV Rank widens toward a full year over time."""
+    import csv as _csv
+    import datetime as _dt
+    path = HERE / "data" / "iv_history.csv"
+    vals, dates = {}, []
+    try:
+        with open(path, newline="") as f:
+            for r in _csv.DictReader(f):
+                try:
+                    v = float(r["atm_iv"])
+                except (TypeError, ValueError, KeyError):
+                    continue
+                t = (r.get("ticker") or "").strip().upper()
+                if t:
+                    vals.setdefault(t, []).append(v)
+                if r.get("date"):
+                    dates.append(r["date"])
+    except FileNotFoundError:
+        return {}, 0
+    weeks = 0
+    if dates:
+        try:
+            weeks = max((_dt.date.fromisoformat(max(dates)) - _dt.date.fromisoformat(min(dates))).days // 7, 0)
+        except Exception:
+            weeks = 0
+    stats = {t: (min(v), max(v), len(v)) for t, v in vals.items() if len(v) >= 10}
+    return stats, weeks
+
+
+def enrich_overview(data):
+    """Add two columns to each Watchlist-Overview row, from data already in hand:
+      • earnings_date — the next earnings date the engine already computed per ticker (signals).
+      • ivr           — IV Rank of the current avg ATM IV within the logged IV history (0–100)."""
+    earn = {}
+    for s in data.get("signals", []):
+        t, ed = s.get("ticker"), s.get("earnings_date")
+        if t and ed and t not in earn:
+            earn[t] = ed
+    stats, weeks = _iv_rank_stats()
+    data["iv_rank_weeks"] = weeks
+    for o in data.get("overview", []):
+        t = o.get("ticker")
+        if t in earn and not o.get("earnings_date"):
+            o["earnings_date"] = earn[t]
+        c, p = o.get("c_iv"), o.get("p_iv")
+        cur = (c + p) / 2 if (c is not None and p is not None) else (c if c is not None else p)
+        st = stats.get(t)
+        if st and cur is not None and st[1] > st[0]:
+            lo, hi, _n = st
+            o["ivr"] = round(max(0.0, min(100.0, (cur - lo) / (hi - lo) * 100)))
+        else:
+            o["ivr"] = None
+    return data
+
+
 def main():
     uni = load_universe()
     # Default universe (what every anonymous visitor sees) — captured before we fold in users'
@@ -563,6 +620,7 @@ def main():
     if extra:
         uni["wheel"] = list(uni.get("wheel", [])) + extra
     data = signals.scan(uni)                       # {"signals": [...], "leaps": [...], "params": {...}}
+    enrich_overview(data)                           # + earnings_date & IV Rank onto the overview rows
     data["market"] = fetch_market()
     data["pulse"] = fetch_pulse()
     data["sectors"] = fetch_sectors()

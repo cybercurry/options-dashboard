@@ -46,6 +46,19 @@ nav a:hover{color:var(--text); background:var(--surface-2)} nav a.on{color:var(-
 .hdr-right{margin-left:auto; display:flex; align-items:center; gap:14px; flex-wrap:wrap; justify-content:flex-end}
 /* compact "last Tradier data pull" pill — always visible so staleness is caught without scrolling to the footer */
 .freshpill{font-family:"IBM Plex Mono",monospace; font-size:11.5px; color:var(--muted); background:var(--line-soft); border:1px solid var(--line); border-radius:999px; padding:3px 9px; white-space:nowrap}
+/* ticker-entry boxes — cyan frame (matches the selectable-data cyan); the Overview one is the prominent primary */
+#wl-add,#deep-in,#fund-in{border:2px solid var(--mine); border-radius:9px; outline:none}
+#wl-add:focus,#deep-in:focus,#fund-in:focus{box-shadow:0 0 0 3px var(--mine-line)}
+#wl-add{padding:9px 12px; font-size:15px; min-width:190px}
+/* sortable Overview headers */
+th.sortable{cursor:pointer; user-select:none}
+th.sortable:hover{color:var(--mine)}
+.sarr{font-style:normal; font-size:9px; margin-left:3px; color:var(--mine)}
+/* next-earnings cell + chain "after earnings" marker */
+.earn .edim{color:var(--muted); font-size:11px}
+.earn.esoon{color:var(--warn); font-weight:600}
+.earn.edone{color:var(--muted)}
+.postearn{color:var(--warn); margin-left:3px}
 .logo{flex:0 0 auto; display:flex; flex-direction:column; align-items:center; gap:2px; color:var(--text); cursor:pointer; line-height:1; text-decoration:none; transition:color .15s}
 .logo .logomark{width:33px; height:33px; display:block}
 .logo .logotype{font-family:"Archivo",sans-serif; font-weight:800; font-size:15px; letter-spacing:-.01em}
@@ -635,7 +648,7 @@ th.thelp:hover{color:var(--text)} th.thelp:hover .thi{border-color:var(--accent)
 
 </main>
 
-<footer class="wrap"><b>optionintel.app</b> — one engine, every tab · real Tradier chains &amp; greeks · the same rules the <b>Rules</b> tab lists · <b>research only, not advice</b> · <span id="upd" style="opacity:.75">updated…</span> · <span class="pre" style="opacity:.6">build <span id="buildid">2026-09-17 · arch-A · fed-target-range</span></span></footer>
+<footer class="wrap"><b>optionintel.app</b> — one engine, every tab · real Tradier chains &amp; greeks · the same rules the <b>Rules</b> tab lists · <b>research only, not advice</b> · <span id="upd" style="opacity:.75">updated…</span> · <span class="pre" style="opacity:.6">build <span id="buildid">2026-10-02 · arch-A · ov-sort+ivr+earnings</span></span></footer>
 
 <script>
 const KIND={csp:"CSP",cc:"CC",leap:"LEAP"};
@@ -1349,14 +1362,41 @@ function fundWL(tk){ tk=(tk||'').toUpperCase(); if(!tk) return;
   if(MYWL.picks.has(tk)) wlToggle(tk); else wlAdd(tk);
   renderFund(tk); }
 
+/* ---- Overview table: click-to-sort + earnings/IVR cells ---- */
+let OV_SORT={key:null, dir:-1};   // null = default ticker A→Z · dir -1 = high→low, +1 = low→high
+const _MONA=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+function _earnDays(iso){ if(!iso) return null;
+  const d=new Date(iso+'T00:00:00Z'); if(isNaN(d)) return null;
+  const n=new Date(); const t0=Date.UTC(n.getUTCFullYear(),n.getUTCMonth(),n.getUTCDate());
+  return Math.round((d.getTime()-t0)/86400000); }
+function earnCell(iso){ const days=_earnDays(iso); if(days==null) return '—';
+  const d=new Date(iso+'T00:00:00Z'); const lbl=_MONA[d.getUTCMonth()]+' '+d.getUTCDate();
+  const cls=days<0?'edone':days<=7?'esoon':days<=21?'enear':'';
+  return `<span class="earn ${cls}">${lbl} <span class="edim">(${days<0?'past':days+'d'})</span></span>`; }
+function ovVal(o,k){
+  if(k==='iv_avg') return (o.c_iv!=null&&o.p_iv!=null)?(o.c_iv+o.p_iv)/2:(o.c_iv!=null?o.c_iv:(o.p_iv!=null?o.p_iv:null));
+  if(k==='earn')   return _earnDays(o.earnings_date);
+  if(k==='above_200') return o.above_200?1:0;
+  if(k==='iv_vs_hv'){ const r={cheap:0,fair:1,rich:2}; return (o.iv_vs_hv in r)?r[o.iv_vs_hv]:null; }
+  if(k==='ticker') return o.ticker||'';
+  const v=o[k]; return v===undefined?null:v; }
+function sortOv(arr){
+  if(!OV_SORT.key) return arr.slice().sort((a,b)=> a.ticker<b.ticker?-1:a.ticker>b.ticker?1:0);
+  const k=OV_SORT.key, dir=OV_SORT.dir, blank=x=> x==null||x===''||(typeof x==='number'&&isNaN(x));
+  return arr.slice().sort((a,b)=>{ let x=ovVal(a,k), y=ovVal(b,k); const xb=blank(x), yb=blank(y);
+    if(xb&&yb) return a.ticker<b.ticker?-1:1; if(xb) return 1; if(yb) return -1;
+    if(typeof x==='string'||typeof y==='string'){ x=String(x).toUpperCase(); y=String(y).toUpperCase(); return dir*(x<y?-1:x>y?1:0); }
+    return dir*(x-y); }); }
+
 function renderWatchTable(){
   const host=document.getElementById('ov-watch'); if(!host) return;
   const omap={}; (DATA.overview||[]).forEach(o=>omap[o.ticker]=o);
   // "Default" rows = only the hand-curated watchlist (never the user-union that the scan folds in).
   const u=(DATA.universe||{});
   const dset=new Set([...(u.wheel_names||[]),...(u.growth_names||[])].map(t=>String(t).toUpperCase()));
-  const all=(DATA.overview||[]).filter(o=>dset.has(String(o.ticker||'').toUpperCase())).sort((a,b)=>a.ticker<b.ticker?-1:1);
+  const all=sortOv((DATA.overview||[]).filter(o=>dset.has(String(o.ticker||'').toUpperCase())));
   const mine=UNIV==='mine';
+  const ivrW=DATA.iv_rank_weeks||0;
   document.getElementById('ov-count').textContent = mine ? (MYWL.picks.size+' in my list') : (all.length+' default names');
   // Account/sign-in lives in the header now (top-right). Here we keep only the watchlist action:
   // add any ticker. Signed out → a hint pointing to the header to make the list portable.
@@ -1377,38 +1417,47 @@ function renderWatchTable(){
     <td class="mono">${o.hvpct==null?'—':o.hvpct}</td>
     <td class="mono">${o.hv20==null?'—':o.hv20.toFixed(1)+'%'}</td>
     <td class="mono">${o.c_iv==null||o.p_iv==null?'—':o.c_iv+'/'+o.p_iv+'%'}</td>
+    <td class="mono">${o.ivr==null?'—':o.ivr}</td>
     <td class="l">${ivvsTag(o.iv_vs_hv)}</td>
     <td class="mono">${o.rsi==null?'—':o.rsi}</td>
     <td>${o.above_200?'<span class="ok">✅</span>':'<span class="no">❌</span>'}</td>
-    <td class="mono">${o.pcr==null?'—':o.pcr.toFixed(2)}</td></tr>`;
+    <td class="mono">${o.pcr==null?'—':o.pcr.toFixed(2)}</td>
+    <td class="l">${earnCell(o.earnings_date)}</td></tr>`;
   const compactRow=tk=>`<tr class="clk" data-tk="${tk}">
     <td class="l star-c">${star(tk)}</td>
     <td class="l"><span class="tk">${tk}</span></td>
-    <td class="dim" colspan="9">not in the options scan — click to open its chart, or research it in <b>Fundamentals</b> →</td></tr>`;
+    <td class="dim" colspan="11">not in the options scan — click to open its chart, or research it in <b>Fundamentals</b> →</td></tr>`;
   const rows = mine
-    ? [...MYWL.picks].sort().map(tk=> omap[tk]?fullRow(omap[tk]):compactRow(tk)).join('')
+    ? (sortOv([...MYWL.picks].filter(tk=>omap[tk]).map(tk=>omap[tk])).map(fullRow).join('')
+       + [...MYWL.picks].filter(tk=>!omap[tk]).sort().map(compactRow).join(''))
     : all.map(fullRow).join('');
-  const TH=(cls,lbl,tip)=>`<th class="${cls} thelp" data-tip="${tip.replace(/"/g,'&quot;')}">${lbl}<i class="thi">i</i></th>`;
+  const car=k=> OV_SORT.key===k ? `<i class="sarr">${OV_SORT.dir<0?'▼':'▲'}</i>` : '';
+  const TH=(cls,lbl,tip,key)=>`<th class="${cls} thelp${key?' sortable':''}"${key?` data-sort="${key}"`:''} data-tip="${tip.replace(/"/g,'&quot;')}">${lbl}${key?car(key):''}<i class="thi">i</i></th>`;
   const table = (mine && MYWL.picks.size===0)
-    ? `<div class="empty">Your list is empty — tap the <b>☆</b> on any ticker in <b>All</b>, or type any symbol into <b>add any ticker</b> above.</div>`
+    ? `<div class="empty">Your list is empty — tap the <b>☆</b> on any ticker in <b>Default</b>, or type any symbol into <b>add any ticker</b> above.</div>`
     : `<div class="tablewrap"><table><thead><tr>
         <th class="l star-c" aria-label="favourite"></th>
-        ${TH('l','Ticker','The underlying symbol. Click a row to open it in TA. Tap the star to add/remove it from your list.')}
-        ${TH('','Price','Latest price for the underlying.')}
-        ${TH('','Chg %','Percent change on the session.')}
-        ${TH('','HV%ile','Where current 20-day realized volatility sits in its own 1-year range.')}
-        ${TH('','HV20','20-day historical (realized) volatility, annualized.')}
-        ${TH('','ATM IV C/P','At-the-money implied volatility, call / put.')}
-        ${TH('l','IV vs HV','Is implied vol rich or cheap versus realized?')}
-        ${TH('','RSI','14-day Relative Strength Index. &lt;30 oversold · &gt;70 overbought.')}
-        ${TH('','200MA','Is price above its 200-day moving average?')}
-        ${TH('','PCR','Put/Call ratio of open interest.')}
+        ${TH('l','Ticker','The underlying symbol. Click a row to open it in TA. Tap the star to add/remove it from your list. Click the header to sort.','ticker')}
+        ${TH('','Price','Latest price for the underlying.','price')}
+        ${TH('','Chg %','Percent change on the session.','pct')}
+        ${TH('','HV%ile','Where current 20-day realized volatility sits in its own 1-year range.','hvpct')}
+        ${TH('','HV20','20-day historical (realized) volatility, annualized.','hv20')}
+        ${TH('','ATM IV C/P','At-the-money implied volatility, call / put.','iv_avg')}
+        ${TH('',`IVR·${ivrW}w`,`IV Rank — where the average ATM IV sits between its low and high over the IV history logged so far (${ivrW} weeks). 0 = cheapest, 100 = richest. Widens toward a full year as history accrues.`,'ivr')}
+        ${TH('l','IV vs HV','Is implied vol rich or cheap versus realized?','iv_vs_hv')}
+        ${TH('','RSI','14-day Relative Strength Index. &lt;30 oversold · &gt;70 overbought.','rsi')}
+        ${TH('','200MA','Is price above its 200-day moving average?','above_200')}
+        ${TH('','PCR','Put/Call ratio of open interest.','pcr')}
+        ${TH('l','Earnings','Next earnings date and days until. Highlighted when ≤7 days (entry blackout). In the Options Chain, expiries that fall AFTER this date are marked ⚐.','earn')}
       </tr></thead><tbody>${rows}</tbody></table></div>`;
   const note = mine ? `<div class="wlnote">Your private list — it now drives <b>every tab</b> (Signals, Chain, TA, Fundamentals). The public <b>Default</b> list is untouched; switch back any time from the header or here. Add any ticker above; it syncs to your account.</div>` : '';
   host.innerHTML = `<div class="acctwrap">${acct}${acctmsg}</div>` + seg + note + table;
   host.querySelectorAll('.wlseg button').forEach(b=>b.onclick=()=>setUniv(b.dataset.v));
   host.querySelectorAll('.star').forEach(s=>{ const go=e=>{e.stopPropagation(); wlToggle(s.dataset.star);};
     s.onclick=go; s.onkeydown=e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();go(e);}};});
+  host.querySelectorAll('th.sortable').forEach(th=>th.onclick=()=>{ const k=th.dataset.sort;
+    if(OV_SORT.key===k) OV_SORT.dir=-OV_SORT.dir; else { OV_SORT.key=k; OV_SORT.dir=-1; }
+    renderWatchTable(); });
   host.querySelectorAll('tr.clk').forEach(tr=>tr.onclick=()=>{setSym(tr.dataset.tk); go('deep');});
   const addI=host.querySelector('#wl-add');
   const doAdd=()=>{ if(addI) wlAdd(addI.value); };
@@ -1459,7 +1508,11 @@ function renderChainTk(tk){
   const c=(DATA.chains||{})[tk]; const exps=(c&&c.expiries)||[];
   const et=document.getElementById('chain-exps');
   if(!exps.length){ et.innerHTML=''; document.getElementById('chain-body').innerHTML=`<div class="empty">No chain embedded for ${tk} yet — it populates on the next scan.</div>`; return; }
-  et.innerHTML=exps.map(x=>`<span class="etile" data-e="${x.exp}">${fmtDMY(x.exp)} · ${x.dte}d</span>`).join('');
+  const _ovE=(DATA.overview||[]).find(o=>String(o.ticker||'').toUpperCase()===String(tk).toUpperCase());
+  const _edate=_ovE&&_ovE.earnings_date;   // mark expiries that fall AFTER the next earnings date
+  et.innerHTML=exps.map(x=>{ const after=_edate && x.exp>_edate;
+    return `<span class="etile" data-e="${x.exp}"${after?' title="expiry is after the next earnings date"':''}>${fmtDMY(x.exp)} · ${x.dte}d${after?'<span class="postearn">⚐</span>':''}</span>`;
+  }).join('');
   et.querySelectorAll('.etile').forEach(el=>el.onclick=()=>renderChainExp(tk, el.dataset.e));
   let pick=exps[0].exp, best=1e9; exps.forEach(x=>{const e=Math.abs((x.dte||0)-30); if(e<best){best=e;pick=x.exp;}});
   renderChainExp(tk, pick);
