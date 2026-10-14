@@ -30,7 +30,7 @@ OUT = HERE / "site" / "data"
 # tab to whichever universe (default vs. the signed-in user's own list) is active. This never
 # exposes who owns which ticker (the union is unattributed) and never touches the default list.
 SUPABASE_URL = os.environ.get("SUPABASE_URL", "https://asxwbjrripzbkcxbkect.supabase.co")
-USER_TICKER_CAP = 40   # safety ceiling on extra scan load beyond the default universe
+USER_TICKER_CAP = 60   # safety ceiling on extra scan load beyond the default universe (raised 40->60; the union of users' blue-list tickers was hitting 40 and dropping extras like ORCL)
 
 
 def load_universe():
