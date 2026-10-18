@@ -1,0 +1,32 @@
+name: probe-ff-feeds
+on:
+  push:
+    branches: [probe/ff-feeds]
+permissions:
+  contents: read
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Probe ForexFactory weekly feeds
+        run: |
+          python - <<'PY'
+          import urllib.request, json, datetime
+          UA = {"User-Agent": "options-dashboard (macro fetch)"}
+          for wk in ("thisweek", "nextweek", "lastweek"):
+              url = f"https://nfs.faireconomy.media/ff_calendar_{wk}.json"
+              try:
+                  req = urllib.request.Request(url, headers=UA)
+                  with urllib.request.urlopen(req, timeout=20) as r:
+                      code = r.status
+                      data = json.load(r)
+                  ds = sorted({x.get("date", "")[:10] for x in data})
+                  print(f"{wk}: HTTP {code} events={len(data)} range={ds[0]}..{ds[-1]}")
+                  samp = [x for x in data if x.get("impact") == "High" and x.get("country") == "USD"][:6]
+                  for s in samp:
+                      print(f"    {s.get('date','')[:16]}  {s.get('country')}  {s.get('title')}")
+              except Exception as e:
+                  print(f"{wk}: ERROR {type(e).__name__}: {e}")
+          print("today(UTC):", datetime.date.today().isoformat())
+          PY
