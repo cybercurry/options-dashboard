@@ -31,6 +31,23 @@ This repo is **PUBLIC and anonymous**. The hard rule (never put IBKR account dat
 
 **Device-independent:** laptop off/asleep = refresh still runs.
 
+**Weekend — Sunday refresh (calendar flip + crypto):**
+- **cron-job.org** job "Optionintel Sunday (calendar + crypto)":
+  - Every **Sunday** at **02:15** and **18:15**, timezone **America/New_York** (DST-aware).
+  - Crontab: `15 2,18 * * 0`
+  - Same `POST …/dispatches` as the weekday job, but body
+    **`{"ref":"main","inputs":{"force":"true"}}`** — `force` bypasses the ET gate, which
+    otherwise no-ops every weekend fire. (`force` must be the quoted string `"true"`.)
+- **Why these two times:** 02:15 ET is just after ForexFactory's weekly econ-calendar feed rolls
+  to the new trading week (it flips ~**00:00 ET Sun**; probe confirmed already flipped by 01:33 ET).
+  There is **no free `nextweek` feed** — `ff_calendar_nextweek.json`/`lastweek` return **404**
+  (verified), so the only way to show next week on the weekend is to refresh after the `thisweek`
+  feed rolls. 18:15 ET is a late weekend crypto snapshot as CME futures reopen. Stock/options data
+  just re-shows Friday's close (markets shut) — what updates is **crypto + calendar + FRED tiles**.
+- **GitHub-native fallback:** the workflow's ET gate also admits two Sunday bands —
+  **02:00–02:29** and **18:00–18:29 ET** — so the built-in `schedule: */10` catches the flip even
+  if cron-job.org misses. Idempotent, so the extra fires just re-publish the same JSON.
+
 ### Why this design (history — so we don't repeat mistakes)
 - A **Cloudflare Worker** heartbeat was used before but **lost its runtime secrets on every
   deploy** (every push to `main` redeployed it via Workers Builds "Include paths = `*`"),
@@ -49,6 +66,12 @@ This repo is **PUBLIC and anonymous**. The hard rule (never put IBKR account dat
 ---
 
 ## Recent work log
+- **2026-10-18** — Added a **Sunday refresh** (2× — 02:15 + 18:15 ET) so the economic calendar
+  shows the new trading week over the weekend and crypto stays current. ForexFactory's `thisweek`
+  feed rolls to the new week ~00:00 ET Sun; there is **no free `nextweek` feed** (confirmed 404),
+  so we refresh just after the roll. Driven by a new **cron-job.org** Sunday job (forced dispatch,
+  body `{"ref":"main","inputs":{"force":"true"}}`); the workflow gate also gained two Sunday ET
+  bands (02:00–02:29, 18:00–18:29) as a GitHub-native fallback. (commit `1b44357`)
 - **2026-10-07** — Refresh heartbeat moved to **cron-job.org** (10-min, device-independent,
   single engine). Retired the Cloudflare worker and an interim hourly Claude Routine. Deleted
   2 stale GitHub PATs; `optionintel-cron` is the live one.
