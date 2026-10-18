@@ -56,9 +56,16 @@ jobs:
           python-version: "3.12"
           cache: pip
 
-      # Single source of truth for WHEN the heartbeat runs: every ~10 min, 04:00–20:00 ET
-      # (premarket → post-market), Mon–Fri only. Uses America/New_York, so it tracks EDT/EST
-      # automatically. A code push always runs (fresh deploy); a manual dispatch can force off-window.
+      # Single source of truth for WHEN the heartbeat runs. Uses America/New_York, so every window
+      # below tracks EDT/EST automatically. A code push always runs (fresh deploy); a manual/external
+      # dispatch can force off-window.
+      #   • Weekdays: every ~10 min, 04:00–20:00 ET (premarket → post-market).
+      #   • Sundays:  two short bands only — ~02:00–02:29 ET (just after ForexFactory's weekly econ
+      #     calendar rolls to the new week, which happens ~00:00 ET Sun) and ~18:00–18:29 ET (a late
+      #     weekend crypto snapshot as CME futures reopen). The */10 schedule already fires Sundays;
+      #     these bands are the only weekend slots the gate lets through. Runs are idempotent, so the
+      #     2–3 fires inside each band simply re-publish the same JSON — insurance against GitHub
+      #     dropping a weekend cron tick.
       - id: gate
         name: Gate to the ET market window (DST-aware)
         env:
@@ -73,9 +80,14 @@ jobs:
           force= (os.environ.get("FORCE") or "").lower() == "true"
           now  = datetime.now(ZoneInfo("America/New_York"))
           mins     = now.hour * 60 + now.minute
-          in_window= (now.weekday() < 5) and (4*60) <= mins <= (20*60)   # 04:00–20:00 ET, Mon–Fri (pre→post-market)
+          wd   = now.weekday()                                          # Mon=0 … Sun=6
+          weekday_win = (wd < 5) and (4*60) <= mins <= (20*60)          # 04:00–20:00 ET, Mon–Fri (pre→post-market)
+          sunday_win  = (wd == 6) and (                                 # Sunday calendar-flip + crypto bands (ET)
+              (2*60)  <= mins <= (2*60 + 29) or                         #   02:00–02:29 ET — after the econ-calendar roll
+              (18*60) <= mins <= (18*60 + 29))                          #   18:00–18:29 ET — weekend crypto snapshot
+          in_window = weekday_win or sunday_win
           go = (ev == "push") or force or in_window
-          print(f"{now:%a %Y-%m-%d %H:%M} ET | in_window={in_window} "
+          print(f"{now:%a %Y-%m-%d %H:%M} ET | weekday_win={weekday_win} sunday_win={sunday_win} "
                 f"event={ev} force={force} -> go={go}")
           with open(os.environ["GITHUB_OUTPUT"], "a") as f:
               f.write(f"go={'true' if go else 'false'}\n")
