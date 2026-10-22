@@ -197,7 +197,7 @@ def _cg_hist(cg_id, days=90):
 # The 10Y/3M yields live on the Market tab (yield curve) instead, so they're not duplicated here.
 PULSE = [("^GSPC", "S&P 500", "", False), ("^NDX", "Nasdaq 100", "", False), ("^DJI", "Dow Jones", "", False),
          ("^RUT", "R2000", "", False), ("^GDAXI", "DAX", "", False), ("^FTSE", "FTSE 100", "", False),
-         ("^N225", "Nikkei", "", False), ("^KS11", "KOSPI", "", False)]
+         ("^N225", "Nikkei", "", False), ("^HSI", "Hang Seng", "", False), ("^KS11", "KOSPI", "", False)]
 # Second pulse line — commodities, then crypto, then forex (a separate row on desktop; on mobile it
 # merges with line 1 into one continuous grid). Both oils sit together; BTC/ETH/HYPE sit together.
 PULSE2 = [("CL=F", "WTI Oil", "$", False), ("BZ=F", "Brent Oil", "$", False), ("GC=F", "Gold", "$", False),
