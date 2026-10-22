@@ -151,6 +151,16 @@ th.sortable:hover{color:var(--mine)}
 .ptile{background:var(--surface); border:1px solid var(--line); border-radius:10px; padding:9px 11px}
 .ptile .pl{font-size:12px; letter-spacing:.03em; text-transform:uppercase; color:var(--muted); font-weight:600; white-space:nowrap; overflow:hidden; text-overflow:ellipsis}
 .ptile .pv{font-size:19px; font-weight:600; margin-top:4px} .ptile .pc{font-size:13.5px; margin-top:2px}
+/* Desktop: .pulsewrap is a plain container — the two .pulse10 grids stack as separate lines.
+   Mobile (<=760px): merge BOTH pulse lines into ONE flush, gap-less grid that packs straight
+   down, 2 tiles/row with hairline dividers. Only the very last cell is ever blank (odd count). */
+@media (max-width:760px){
+  .pulsewrap{display:grid; grid-template-columns:repeat(2,1fr); gap:1px;
+    background:var(--line); border:1px solid var(--line); border-radius:10px;
+    overflow:hidden; margin:14px 0 6px}
+  .pulsewrap > .pulse10{display:contents}            /* dissolve inner grids → children join the wrapper grid */
+  .pulsewrap .ptile{border:0; border-radius:0; margin:0; background:var(--surface)}
+}
 .gauges{display:grid; grid-template-columns:repeat(auto-fit,minmax(210px,1fr)); gap:18px; margin:10px 0 4px}
 .gcard{background:var(--surface); border:1px solid var(--line); border-radius:12px; padding:14px 16px; box-shadow:var(--shadow)}
 .gcard .gl{font-size:13.5px; letter-spacing:.04em; text-transform:uppercase; color:var(--muted); font-weight:700}
@@ -506,8 +516,10 @@ th.thelp:hover{color:var(--text)} th.thelp:hover .thi{border-color:var(--accent)
   <!-- ══════════ OVERVIEW ══════════ -->
   <section id="v-overview" class="view">
     <div class="head"><h1>Market Pulse</h1><div class="meta" id="ov-upd">Live market backdrop, sector rotation, and the full watchlist read.</div><span class="js-snap snap"></span></div>
-    <div class="pulse10" id="ov-pulse"></div>
-    <div class="pulse10" id="ov-pulse2" style="margin-top:0"></div>
+    <div class="pulsewrap">
+      <div class="pulse10" id="ov-pulse"></div>
+      <div class="pulse10" id="ov-pulse2" style="margin-top:0"></div>
+    </div>
     <div class="gauges" id="ov-gauges"></div>
     <div class="subhead">Sector Heatmap <span class="n">SPDR sectors + BTC · colour = move strength</span></div>
     <div class="heat" id="ov-heat"></div>
@@ -662,7 +674,7 @@ th.thelp:hover{color:var(--text)} th.thelp:hover .thi{border-color:var(--accent)
 
 </main>
 
-<footer class="wrap"><b>optionintel.app</b> — one engine, every tab · real Tradier chains &amp; greeks · the same rules the <b>Rules</b> tab lists · <b>research only, not advice</b> · <span id="upd" style="opacity:.75">updated…</span> · <span class="pre" style="opacity:.6">build <span id="buildid">2026-10-22 · pulse2 (WTI/Brent, HYPE, DAX/FTSE/Nikkei/KOSPI, EURUSD)</span></span></footer>
+<footer class="wrap"><b>optionintel.app</b> — one engine, every tab · real Tradier chains &amp; greeks · the same rules the <b>Rules</b> tab lists · <b>research only, not advice</b> · <span id="upd" style="opacity:.75">updated…</span> · <span class="pre" style="opacity:.6">build <span id="buildid">2026-10-22 · pulse2 + mobile flush grid</span></span></footer>
 
 <script>
 const KIND={csp:"CSP",cc:"CC",leap:"LEAP"};
