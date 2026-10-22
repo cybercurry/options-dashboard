@@ -192,17 +192,17 @@ def _cg_hist(cg_id, days=90):
 
 
 # The app's PULSE_TICKERS / SECTOR_TICKERS, verbatim.
-# Overview pulse line: indices, dollar, and the two majors' crypto. The 10Y/3M yields live on the
-# Market tab (yield curve) instead, so here BTC is joined by ETH to round out the line.
+# Overview pulse — grouped by asset class in a fixed sequence: Indices → Commodities → Crypto → Forex.
+# Line 1 (PULSE) is the index row. Line 2 (PULSE2) carries commodities, then crypto, then forex.
+# The 10Y/3M yields live on the Market tab (yield curve) instead, so they're not duplicated here.
 PULSE = [("^GSPC", "S&P 500", "", False), ("^NDX", "Nasdaq 100", "", False), ("^DJI", "Dow Jones", "", False),
-         ("^RUT", "R2000", "", False), ("DX-Y.NYB", "DXY", "", False), ("CL=F", "WTI Oil", "$", False),
-         ("GC=F", "Gold", "$", False), ("BTC-USD", "Bitcoin", "$", False), ("ETH-USD", "Ethereum", "$", False)]
-# Second pulse line — global/alt markets (rendered as a separate row under the main pulse).
-# More can be appended here later; the front-end lays them out on their own line.
-PULSE2 = [("BZ=F", "Brent Oil", "$", False), ("cg:hyperliquid", "HYPE", "$", False),
-          ("^GDAXI", "DAX", "", False), ("^FTSE", "FTSE 100", "", False),
-          ("^N225", "Nikkei", "", False), ("^KS11", "KOSPI", "", False),
-          ("EURUSD=X", "EUR/USD", "", False)]
+         ("^RUT", "R2000", "", False), ("^GDAXI", "DAX", "", False), ("^FTSE", "FTSE 100", "", False),
+         ("^N225", "Nikkei", "", False), ("^KS11", "KOSPI", "", False)]
+# Second pulse line — commodities, then crypto, then forex (a separate row on desktop; on mobile it
+# merges with line 1 into one continuous grid). Both oils sit together; BTC/ETH/HYPE sit together.
+PULSE2 = [("CL=F", "WTI Oil", "$", False), ("BZ=F", "Brent Oil", "$", False), ("GC=F", "Gold", "$", False),
+          ("BTC-USD", "Bitcoin", "$", False), ("ETH-USD", "Ethereum", "$", False), ("cg:hyperliquid", "HYPE", "$", False),
+          ("DX-Y.NYB", "DXY", "", False), ("EURUSD=X", "EUR/USD", "", False)]
 SECTORS = [("XLK", "Technology"), ("XLF", "Financials"), ("XLV", "Health Care"), ("XLE", "Energy"),
            ("XLI", "Industrials"), ("XLC", "Comm. Services"), ("XLY", "Consumer Disc."),
            ("XLP", "Consumer Staples"), ("XLU", "Utilities"), ("XLRE", "Real Estate"),
