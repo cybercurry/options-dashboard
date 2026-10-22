@@ -200,7 +200,8 @@ PULSE = [("^GSPC", "S&P 500", "", False), ("^NDX", "Nasdaq 100", "", False), ("^
          ("^N225", "Nikkei", "", False), ("^HSI", "Hang Seng", "", False), ("^KS11", "KOSPI", "", False)]
 # Second pulse line — commodities, then crypto, then forex (a separate row on desktop; on mobile it
 # merges with line 1 into one continuous grid). Both oils sit together; BTC/ETH/HYPE sit together.
-PULSE2 = [("CL=F", "WTI Oil", "$", False), ("BZ=F", "Brent Oil", "$", False), ("GC=F", "Gold", "$", False),
+PULSE2 = [("CL=F", "WTI Oil", "$", False), ("BZ=F", "Brent Oil", "$", False),
+          ("GC=F", "Gold", "$", False), ("SI=F", "Silver", "$", False),
           ("BTC-USD", "Bitcoin", "$", False), ("ETH-USD", "Ethereum", "$", False), ("cg:hyperliquid", "HYPE", "$", False),
           ("DX-Y.NYB", "DXY", "", False), ("EURUSD=X", "EUR/USD", "", False)]
 SECTORS = [("XLK", "Technology"), ("XLF", "Financials"), ("XLV", "Health Care"), ("XLE", "Energy"),
