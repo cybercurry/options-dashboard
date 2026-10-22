@@ -163,6 +163,34 @@ def _yf_last(sym):
     return round(p, 2) if p is not None else None
 
 
+def _cg_quote(cg_id):
+    """(price, 24h %-change) for a CoinGecko coin id — covers tokens Yahoo doesn't list (e.g. HYPE)."""
+    try:
+        r = requests.get("https://api.coingecko.com/api/v3/simple/price",
+                         params={"ids": cg_id, "vs_currencies": "usd", "include_24hr_change": "true"},
+                         timeout=15)
+        r.raise_for_status()
+        j = r.json().get(cg_id, {}) or {}
+        p, pct = j.get("usd"), j.get("usd_24h_change")
+        return (float(p) if p is not None else None,
+                float(pct) if pct is not None else None)
+    except Exception:
+        return None, None
+
+
+def _cg_hist(cg_id, days=90):
+    """~90-day daily close history for a CoinGecko coin id (for the hover sparkline)."""
+    try:
+        r = requests.get("https://api.coingecko.com/api/v3/coins/%s/market_chart" % cg_id,
+                         params={"vs_currency": "usd", "days": days, "interval": "daily"},
+                         timeout=20)
+        r.raise_for_status()
+        prices = r.json().get("prices") or []
+        return [float(pt[1]) for pt in prices if pt and pt[1] is not None]
+    except Exception:
+        return []
+
+
 # The app's PULSE_TICKERS / SECTOR_TICKERS, verbatim.
 # Overview pulse line: indices, dollar, and the two majors' crypto. The 10Y/3M yields live on the
 # Market tab (yield curve) instead, so here BTC is joined by ETH to round out the line.
@@ -171,7 +199,7 @@ PULSE = [("^GSPC", "S&P 500", "", False), ("^NDX", "Nasdaq 100", "", False), ("^
          ("GC=F", "Gold", "$", False), ("BTC-USD", "Bitcoin", "$", False), ("ETH-USD", "Ethereum", "$", False)]
 # Second pulse line — global/alt markets (rendered as a separate row under the main pulse).
 # More can be appended here later; the front-end lays them out on their own line.
-PULSE2 = [("BZ=F", "Brent Oil", "$", False), ("HYPE-USD", "HYPE", "$", False),
+PULSE2 = [("BZ=F", "Brent Oil", "$", False), ("cg:hyperliquid", "HYPE", "$", False),
           ("^GDAXI", "DAX", "", False), ("^FTSE", "FTSE 100", "", False),
           ("^N225", "Nikkei", "", False), ("^KS11", "KOSPI", "", False),
           ("EURUSD=X", "EUR/USD", "", False)]
@@ -192,9 +220,15 @@ def _spark(vals, n=90):
 def fetch_pulse(lst=PULSE):
     out = []
     for sym, label, prefix, is_yield in lst:
-        p, pct = _yf_quote(sym)
+        if sym.startswith("cg:"):                      # CoinGecko-sourced (tokens Yahoo lacks)
+            cg_id = sym[3:]
+            p, pct = _cg_quote(cg_id)
+            hist = _spark(_cg_hist(cg_id, 90))
+        else:
+            p, pct = _yf_quote(sym)
+            hist = _spark(_yf_hist(sym, "3mo"))
         out.append({"label": label, "price": p, "pct": pct, "prefix": prefix,
-                    "is_yield": is_yield, "hist": _spark(_yf_hist(sym, "3mo"))})
+                    "is_yield": is_yield, "hist": hist})
     return out
 
 
