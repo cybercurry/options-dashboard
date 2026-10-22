@@ -507,6 +507,7 @@ th.thelp:hover{color:var(--text)} th.thelp:hover .thi{border-color:var(--accent)
   <section id="v-overview" class="view">
     <div class="head"><h1>Market Pulse</h1><div class="meta" id="ov-upd">Live market backdrop, sector rotation, and the full watchlist read.</div><span class="js-snap snap"></span></div>
     <div class="pulse10" id="ov-pulse"></div>
+    <div class="pulse10" id="ov-pulse2" style="margin-top:0"></div>
     <div class="gauges" id="ov-gauges"></div>
     <div class="subhead">Sector Heatmap <span class="n">SPDR sectors + BTC · colour = move strength</span></div>
     <div class="heat" id="ov-heat"></div>
@@ -661,7 +662,7 @@ th.thelp:hover{color:var(--text)} th.thelp:hover .thi{border-color:var(--accent)
 
 </main>
 
-<footer class="wrap"><b>optionintel.app</b> — one engine, every tab · real Tradier chains &amp; greeks · the same rules the <b>Rules</b> tab lists · <b>research only, not advice</b> · <span id="upd" style="opacity:.75">updated…</span> · <span class="pre" style="opacity:.6">build <span id="buildid">2026-10-02 · arch-A · ov-sort+ivr+earnings · chain-fit</span></span></footer>
+<footer class="wrap"><b>optionintel.app</b> — one engine, every tab · real Tradier chains &amp; greeks · the same rules the <b>Rules</b> tab lists · <b>research only, not advice</b> · <span id="upd" style="opacity:.75">updated…</span> · <span class="pre" style="opacity:.6">build <span id="buildid">2026-10-22 · pulse2 (WTI/Brent, HYPE, DAX/FTSE/Nikkei/KOSPI, EURUSD)</span></span></footer>
 
 <script>
 const KIND={csp:"CSP",cc:"CC",leap:"LEAP"};
@@ -780,7 +781,8 @@ function miniChart(vals){
 function sparkPopup(key){
   const m=DATA.market||{};
   let title,hist,now,dp=0,suffix='';
-  if(key.slice(0,3)==='px:'){ const p=(DATA.pulse||[])[+key.slice(3)]||{}; title=p.label||'Index'; hist=p.hist; now=p.price; dp=(p.is_yield||p.price<10)?2:0; suffix=p.is_yield?'%':''; }
+  if(key.slice(0,4)==='px2:'){ const p=(DATA.pulse2||[])[+key.slice(4)]||{}; title=p.label||'Index'; hist=p.hist; now=p.price; dp=(p.is_yield||p.price<10)?2:0; suffix=p.is_yield?'%':''; }
+  else if(key.slice(0,3)==='px:'){ const p=(DATA.pulse||[])[+key.slice(3)]||{}; title=p.label||'Index'; hist=p.hist; now=p.price; dp=(p.is_yield||p.price<10)?2:0; suffix=p.is_yield?'%':''; }
   else { const C={fng:['Stocks Fear & Greed',m.fng_hist,m.fng,0],btc:['Crypto Fear & Greed',m.btc_fng_hist,m.btc_fng,0],vix:['VIX',m.vix_hist,m.vix,1]}[key];
     if(!C) return ''; title=C[0]; hist=C[1]; now=C[2]; dp=C[3]; }
   const head=`<div class="sptitle">${title} · <span class="dim">90-day trend</span></div>`;
@@ -1264,11 +1266,15 @@ function renderOverview(){
     const up=p.pct==null?'':(p.pct>=0?'up':'down');
     return `<div class="ptile spk" data-spark="px:${i}" tabindex="0"><div class="pl">${p.label}</div><div class="pv mono">${fmtPrice(p.price,p.prefix,p.is_yield)}</div>
       <div class="pc mono ${up}">${p.pct==null?'—':(p.pct>=0?'+':'')+p.pct.toFixed(2)+'%'}</div></div>`;}).join('');
+  document.getElementById('ov-pulse2').innerHTML=(DATA.pulse2||[]).map((p,i)=>{
+    const up=p.pct==null?'':(p.pct>=0?'up':'down');
+    return `<div class="ptile spk" data-spark="px2:${i}" tabindex="0"><div class="pl">${p.label}</div><div class="pv mono">${fmtPrice(p.price,p.prefix,p.is_yield)}</div>
+      <div class="pc mono ${up}">${p.pct==null?'—':(p.pct>=0?'+':'')+p.pct.toFixed(2)+'%'}</div></div>`;}).join('');
   document.getElementById('ov-gauges').innerHTML=
     gauge('Stocks Fear &amp; Greed',m.fng,m.fng_label,'CNN','fng')+
     gauge('Crypto Fear &amp; Greed',m.btc_fng,m.btc_fng_label,'Alternative.me','btc')+
     vixGaugeCard(m.vix,m.vix_label);
-  wireTips(document.getElementById('ov-gauges')); wireTips(document.getElementById('ov-pulse'));
+  wireTips(document.getElementById('ov-gauges')); wireTips(document.getElementById('ov-pulse')); wireTips(document.getElementById('ov-pulse2'));
   document.getElementById('ov-heat').innerHTML=(DATA.sectors||[]).map(s=>
     `<div class="hcell" style="background:${heatColor(s.pct)}">${secIcon(s.label)}<div class="hl">${s.label}</div>
       <div class="hp mono">${s.pct==null?'—':(s.pct>=0?'+':'')+s.pct.toFixed(2)+'%'}</div></div>`).join('');

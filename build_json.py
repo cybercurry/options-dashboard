@@ -167,8 +167,14 @@ def _yf_last(sym):
 # Overview pulse line: indices, dollar, and the two majors' crypto. The 10Y/3M yields live on the
 # Market tab (yield curve) instead, so here BTC is joined by ETH to round out the line.
 PULSE = [("^GSPC", "S&P 500", "", False), ("^NDX", "Nasdaq 100", "", False), ("^DJI", "Dow Jones", "", False),
-         ("^RUT", "R2000", "", False), ("DX-Y.NYB", "DXY", "", False), ("CL=F", "Crude Oil", "$", False),
+         ("^RUT", "R2000", "", False), ("DX-Y.NYB", "DXY", "", False), ("CL=F", "WTI Oil", "$", False),
          ("GC=F", "Gold", "$", False), ("BTC-USD", "Bitcoin", "$", False), ("ETH-USD", "Ethereum", "$", False)]
+# Second pulse line — global/alt markets (rendered as a separate row under the main pulse).
+# More can be appended here later; the front-end lays them out on their own line.
+PULSE2 = [("BZ=F", "Brent Oil", "$", False), ("HYPE-USD", "HYPE", "$", False),
+          ("^GDAXI", "DAX", "", False), ("^FTSE", "FTSE 100", "", False),
+          ("^N225", "Nikkei", "", False), ("^KS11", "KOSPI", "", False),
+          ("EURUSD=X", "EUR/USD", "", False)]
 SECTORS = [("XLK", "Technology"), ("XLF", "Financials"), ("XLV", "Health Care"), ("XLE", "Energy"),
            ("XLI", "Industrials"), ("XLC", "Comm. Services"), ("XLY", "Consumer Disc."),
            ("XLP", "Consumer Staples"), ("XLU", "Utilities"), ("XLRE", "Real Estate"),
@@ -183,9 +189,9 @@ def _spark(vals, n=90):
     return out
 
 
-def fetch_pulse():
+def fetch_pulse(lst=PULSE):
     out = []
-    for sym, label, prefix, is_yield in PULSE:
+    for sym, label, prefix, is_yield in lst:
         p, pct = _yf_quote(sym)
         out.append({"label": label, "price": p, "pct": pct, "prefix": prefix,
                     "is_yield": is_yield, "hist": _spark(_yf_hist(sym, "3mo"))})
@@ -623,6 +629,7 @@ def main():
     enrich_overview(data)                           # + earnings_date & IV Rank onto the overview rows
     data["market"] = fetch_market()
     data["pulse"] = fetch_pulse()
+    data["pulse2"] = fetch_pulse(PULSE2)            # global/alt second line
     data["sectors"] = fetch_sectors()
     _names = [o.get("ticker") for o in data.get("overview", []) if o.get("ticker")]
     _prices = {o.get("ticker"): o.get("price") for o in data.get("overview", [])}
