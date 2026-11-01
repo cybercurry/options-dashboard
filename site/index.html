@@ -180,6 +180,7 @@ th.sortable:hover{color:var(--mine)}
 @media (max-width:440px){.heat{grid-template-columns:repeat(2,1fr)}}
 .hcell{border-radius:9px; padding:12px 13px; color:#fff; position:relative; overflow:hidden; min-height:96px; display:flex; flex-direction:column; justify-content:center}
 .hcell .hl{font-size:13.5px; font-weight:600; padding-right:30px} .hcell .hp{font-size:16px; margin-top:4px; font-weight:600}
+.hcell .hk{font-weight:500; opacity:.78; font-size:12px} /* ETF ticker reference, e.g. [XLE] */
 .hcell .hicon{position:absolute; top:9px; right:9px; width:34px; height:34px; opacity:.5; fill:#fff}
 .twocol{display:grid; grid-template-columns:1fr; gap:8px; margin-top:4px}
 .barbox{border:1px solid var(--line); border-radius:12px; background:var(--surface); padding:16px 14px 10px; margin-top:12px; overflow-x:auto}
@@ -678,7 +679,7 @@ th.thelp:hover{color:var(--text)} th.thelp:hover .thi{border-color:var(--accent)
 
 </main>
 
-<footer class="wrap"><b>optionintel.app</b> — one engine, every tab · real Tradier chains &amp; greeks · the same rules the <b>Rules</b> tab lists · <b>research only, not advice</b> · <span id="upd" style="opacity:.75">updated…</span> · <span class="pre" style="opacity:.6">build <span id="buildid">2026-10-22 · pulse 3×3 groups + Silver</span></span></footer>
+<footer class="wrap"><b>optionintel.app</b> — one engine, every tab · real Tradier chains &amp; greeks · the same rules the <b>Rules</b> tab lists · <b>research only, not advice</b> · <span id="upd" style="opacity:.75">updated…</span> · <span class="pre" style="opacity:.6">build <span id="buildid">2026-11-01 · sector tiles show ETF ticker</span></span></footer>
 
 <script>
 const KIND={csp:"CSP",cc:"CC",leap:"LEAP"};
@@ -1292,7 +1293,7 @@ function renderOverview(){
     vixGaugeCard(m.vix,m.vix_label);
   wireTips(document.getElementById('ov-gauges')); wireTips(document.getElementById('ov-pulse')); wireTips(document.getElementById('ov-pulse2'));
   document.getElementById('ov-heat').innerHTML=(DATA.sectors||[]).map(s=>
-    `<div class="hcell" style="background:${heatColor(s.pct)}">${secIcon(s.label)}<div class="hl">${s.label}</div>
+    `<div class="hcell" style="background:${heatColor(s.pct)}">${secIcon(s.label)}<div class="hl">${s.label}${s.ticker?` <span class="hk">[${s.ticker}]</span>`:''}</div>
       <div class="hp mono">${s.pct==null?'—':(s.pct>=0?'+':'')+s.pct.toFixed(2)+'%'}</div></div>`).join('');
   renderWatchTable();
   // IV / RSI snapshots follow the active universe too (default names, or the user's own list).
