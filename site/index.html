@@ -193,26 +193,31 @@ th.sortable:hover{color:var(--mine)}
 .brefl{position:absolute; right:0; top:-8px; font-size:11px; font-weight:600; font-family:"IBM Plex Mono"; letter-spacing:.02em; background:var(--surface); padding:0 5px; border-radius:5px; white-space:nowrap}
 .baxis{display:flex; gap:6px; min-width:min-content; margin-top:6px}
 .baxis .btk{flex:1 0 26px; text-align:center; font-size:12.5px; font-weight:600; color:var(--text); font-family:"IBM Plex Mono"; writing-mode:vertical-rl; transform:rotate(180deg); white-space:nowrap; height:46px; margin:0 auto}
-.tablewrap{overflow-x:auto; border:1px solid var(--line); border-radius:14px; box-shadow:var(--shadow); margin-top:14px; background:var(--surface)}
+.tablewrap{overflow-x:auto; border:1px solid var(--line); border-radius:14px; box-shadow:var(--shadow); margin-top:14px; background:var(--surface); width:fit-content; max-width:100%}
 /* grid/flex items must be allowed to shrink below content (min-width:auto) so their inner
    overflow-x:auto scroll containers work instead of blowing the page wide on mobile. */
 .twocol>div, .barbox, .ch2>div{min-width:0}
 #deep-chips, #fund-chips{display:flex; flex-wrap:wrap; gap:7px; min-width:0}
 table{width:100%; border-collapse:collapse}
-.tablewrap table{min-width:760px}   /* only scrollable tables are forced wide; popups/regime/rules stay fluid */
+.tablewrap table{min-width:0; width:auto}   /* columns fit their text (no full-width stretch, no 760px floor) */
 /* Options Chain ladder (Strike·Δ·Bid·Ask·IV·OI): fit the container at ANY width with a
    fixed, even-column layout. Overrides the 760px min-width that otherwise left a big empty
    gap after Strike and pushed IV/OI into a sideways scroll. Strike gets a touch more room
    for the ▸/🎯 marker; the five data columns share the rest. No horizontal scrolling. */
-.ch2 .tablewrap{overflow-x:auto}
+.ch2 .tablewrap{overflow-x:auto; width:100%}   /* chain fills the width (fixed layout) */
 .ch2 .tablewrap table{min-width:0; width:100%; table-layout:fixed}
 .ch2 .tablewrap th:first-child, .ch2 .tablewrap td:first-child{width:21%}
 .ch2 .tablewrap th, .ch2 .tablewrap td{overflow:hidden; text-overflow:ellipsis}
-thead th{position:sticky; top:0; text-align:right; font-size:11px; letter-spacing:.05em; text-transform:uppercase; color:var(--faint); font-weight:600; padding:12px 14px; background:var(--surface-2); border-bottom:1px solid var(--line); white-space:nowrap}
+thead th{position:sticky; top:0; text-align:right; font-size:11px; letter-spacing:.05em; text-transform:uppercase; color:var(--faint); font-weight:600; padding:12px 11px; background:var(--surface-2); border-bottom:1px solid var(--line); white-space:nowrap}
 thead th.l{text-align:left} thead th.sortable{cursor:pointer; user-select:none} thead th.sortable:hover{color:var(--text)} thead th .ar{opacity:.5; font-size:9px}
-tbody td{text-align:right; padding:12px 14px; border-bottom:1px solid var(--line-soft); white-space:nowrap; vertical-align:middle}
+tbody td{text-align:right; padding:12px 11px; border-bottom:1px solid var(--line-soft); white-space:nowrap; vertical-align:middle}
 tbody tr.clk{cursor:pointer} tbody tr:last-child td{border-bottom:0} tbody tr:hover{background:var(--surface-2)} tbody tr.sel{background:var(--accent-soft)}
 td.l{text-align:left}
+/* Mobile: tighten data-table cells so content-width tables need little/no sideways scroll. */
+@media (max-width:760px){
+  .tablewrap thead th{padding:9px 8px; font-size:10px; letter-spacing:.02em}
+  .tablewrap tbody td{padding:9px 8px; font-size:12px}
+}
 .tk{font-family:"Archivo",sans-serif; font-weight:700; font-size:15px}
 /* Phase-0 personal watchlist — star + filter, saved per browser (localStorage) */
 .acctwrap{margin:2px 0 10px}
@@ -420,7 +425,7 @@ td.star-c,th.star-c{width:1%; text-align:center; padding-left:12px; padding-righ
 .ycpt.key span:first-child{color:var(--accent)} .ycpt.key span:last-child{color:var(--muted); font-weight:600}
 .regime{width:100%; border-collapse:collapse; font-size:13px}
 .regime th{background:var(--surface-2); color:var(--muted); text-align:left; padding:9px 12px; font-size:11px; text-transform:uppercase; letter-spacing:.04em}
-.regime td{padding:8px 12px; border-top:1px solid var(--line-soft); color:var(--muted)} .regime td:first-child,.regime td:nth-child(2){color:var(--text)}
+.regime td{padding:8px 12px; border-top:1px solid var(--line-soft); color:var(--muted); text-align:left} .regime td:first-child,.regime td:nth-child(2){color:var(--text)}
 .regime tr.reg-good td{background:color-mix(in srgb,var(--good) 9%,transparent)}
 .regime tr.reg-warn td{background:color-mix(in srgb,var(--warn) 10%,transparent)}
 .regime tr.reg-bad td{background:color-mix(in srgb,var(--bad) 11%,transparent)}
@@ -679,7 +684,7 @@ th.thelp:hover{color:var(--text)} th.thelp:hover .thi{border-color:var(--accent)
 
 </main>
 
-<footer class="wrap"><b>optionintel.app</b> — one engine, every tab · real Tradier chains &amp; greeks · the same rules the <b>Rules</b> tab lists · <b>research only, not advice</b> · <span id="upd" style="opacity:.75">updated…</span> · <span class="pre" style="opacity:.6">build <span id="buildid">2026-11-01 · sector tiles show ETF ticker</span></span></footer>
+<footer class="wrap"><b>optionintel.app</b> — one engine, every tab · real Tradier chains &amp; greeks · the same rules the <b>Rules</b> tab lists · <b>research only, not advice</b> · <span id="upd" style="opacity:.75">updated…</span> · <span class="pre" style="opacity:.6">build <span id="buildid">2026-11-01 · tables fit content (less wasted space / scroll)</span></span></footer>
 
 <script>
 const KIND={csp:"CSP",cc:"CC",leap:"LEAP"};
