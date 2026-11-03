@@ -681,14 +681,17 @@ function shortSetup(lbl){if(!lbl)return '<span class="dim">—</span>';const c=s
 const VMETA={go:{c:'lt-go',t:'STRONG'},caution:{c:'lt-caution',t:'ANALYZE'},neutral:{c:'lt-neutral',t:'OFF-TREND'},avoid:{c:'lt-avoid',t:'WEAK'}};
 function verdictOf(s){
   if(!s) return null;
-  if(s.verdict) return s.verdict;                       // engine-computed (authoritative)
+  // Baked verdict is authoritative — EXCEPT a stale earnings "avoid" whose print is now behind us in
+  // ET: fall through and recompute (earnings re-derived below) so it clears at ET midnight, not on the
+  // next data refresh.
+  if(s.verdict && !(s.verdict==='avoid' && s.earnings_soon===true && _erPast(s.earnings_date))) return s.verdict;
   // Fallback mirrors signals.py _leg_verdict from raw fields, so it's correct even on data
   // written before `verdict` existed (thresholds = the Rules tab). Ignored once verdict lands.
   if(s.strategy==='LEAP') return !s.qualifies ? 'neutral' : ((s.timing_score||0)>=8?'go':'caution');
   // HARD NO (red) only: earnings inside the trade, thin premium, or no liquidity (OI/spread).
   // Fit (delta/DTE), the median side and a weak timing score cap at amber — never red.
   const d=Math.abs(s.delta||0), dte=s.dte||0, prem=s.premium_pct||0, oi=s.oi||0, spr=s.spread_pct;
-  if(s.earnings_soon===true) return 'avoid';
+  if(erBlock(s)) return 'avoid';
   if(prem<1.2) return 'avoid';
   if(oi<100) return 'avoid';
   if(!(spr==null||spr<=15)) return 'avoid';
@@ -1128,7 +1131,7 @@ function renderMarket(){
 
 /* ---------- signals: ready CSP/CC ---------- */
 function noteFlags(s){let x=''; if(s.strong)x+='<span class="fl fl-strong">🔥 strong</span>';
-  if(s.earnings_in_window)x+='<span class="fl fl-er">⚠ earnings</span>'; return x; }
+  if(s.earnings_in_window && !_erPast(s.earnings_date))x+='<span class="fl fl-er">⚠ earnings</span>'; return x; }
 function renderReady(){
   document.getElementById('n-ready').textContent=READY.length?READY.length+' ready':'';
   if(!READY.length){ document.getElementById('ready-wrap').innerHTML=
@@ -1378,6 +1381,13 @@ function fundWL(tk){ tk=(tk||'').toUpperCase(); if(!tk) return;
 /* ---- Overview table: click-to-sort + earnings/IVR cells ---- */
 let OV_SORT={key:null, dir:-1};   // null = default ticker A→Z · dir -1 = high→low, +1 = low→high
 const _MONA=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+// Earnings block re-derived against the CURRENT Eastern-time day, so it clears at ET midnight the
+// day AFTER the print — independent of when signals.json last refreshed (the baked `earnings_soon`
+// is frozen at generation time, so overnight it would otherwise stay "blocked" until the next run).
+// A past earnings date never blocks; otherwise we trust the engine's within-7-days flag.
+function _etTodayISO(){ try{ return new Intl.DateTimeFormat('en-CA',{timeZone:'America/New_York',year:'numeric',month:'2-digit',day:'2-digit'}).format(new Date()); }catch(e){ return new Date().toISOString().slice(0,10); } }
+function _erPast(iso){ return !!iso && iso < _etTodayISO(); }   // ISO yyyy-mm-dd compares chronologically
+function erBlock(s){ return !!s && s.earnings_soon===true && !_erPast(s.earnings_date); }
 function _earnDays(iso){ if(!iso) return null;
   const d=new Date(iso+'T00:00:00Z'); if(isNaN(d)) return null;
   const n=new Date(); const t0=Date.UTC(n.getUTCFullYear(),n.getUTCMonth(),n.getUTCDate());
@@ -1580,7 +1590,7 @@ function legTile(s){const k=s.strategy.toLowerCase();
     (k==='cc' ? 'timing = income-write score (0–12): premium + safe tape + top bonus' : 'timing = mean-reversion setup score (0–12)'),
   ].map(l=>`<div>${l}</div>`).join('');
   const v = verdictOf(s);
-  const earnRed = s.earnings_soon===true;
+  const earnRed = erBlock(s);
   const why = s.verdict_why || '';
   const medside = s.pct_b==null?'—':(s.pct_b>=0.5?'above':'below');
   const chips = `<div class="fchips">${chip('Δ ',num(s.delta,2),true)}${chip('prem ',num(s.premium_pct,1,'%'))}</div>`
