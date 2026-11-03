@@ -595,9 +595,9 @@ def fetch_company_news(ticker):
 
 @st.cache_data(ttl=1800, show_spinner=False)
 def load_signal_universe():
-    """Signal universe (wheel + growth). LIVE from the published Google-Sheet CSV each scan;
-    falls back to the committed wheel_universe.json (then the watchlist) if the sheet is
-    unreachable, so a Google hiccup never blanks the scan."""
+    """Signal universe (wheel + growth) = the hand-curated committed wheel_universe.json
+    (no live external source since 2026-11-03), then the watchlist if that file is missing.
+    An optional `source_url` key would re-enable the old published-CSV read."""
     cfg = {}
     try:
         cfg = json.loads((Path(__file__).parent / "wheel_universe.json").read_text())

@@ -8,7 +8,7 @@
 
 This is the **Options Intelligence (OI) Dashboard** — a **PUBLIC** Streamlit app,
 deployed to **https://options-dashboard-jay.streamlit.app** (anyone with the link
-can view it, and its published-sheet CSV is a public URL).
+can view it).
 
 ### The one rule that overrides everything
 
@@ -34,7 +34,7 @@ here.** That capability lives only in the private tracker.
 |---|---|---|
 | Audience | **PUBLIC** — shareable, anonymous | **PRIVATE** — owner only |
 | Purpose | Options research / education on a hand-picked watchlist | Plan & manage the owner's real IBKR portfolio |
-| Data in | Tradier + yfinance + a **published watchlist** CSV (tickers only) | IBKR Flex (positions, trades, cash) → private Google Sheet |
+| Data in | Tradier + yfinance + a **hand-curated watchlist** (tickers only, committed in the repo) | IBKR Flex (positions, trades, cash) → private Google Sheet |
 | Contains IBKR account data? | **NEVER** | Yes, by design |
 | Deploy | Streamlit Cloud (public) | Local cron + private Sheet + GitHub Action |
 
@@ -42,8 +42,7 @@ They may share **engine code** (rules + market data), but **never a live data li
 and never account data**. The owner jumps between the two from the same machine —
 keep them cleanly separated.
 
-- Watchlist tickers are **hand-curated** (watchlist.json / sidebar / the published
-  sheet's WHEEL+GROWTH columns). They must **never** auto-populate from IBKR
+- Watchlist tickers are **hand-curated** (watchlist.json / sidebar / wheel_universe.json). They must **never** auto-populate from IBKR
   holdings — that would make the public watchlist equal the portfolio.
 
 ---
@@ -51,7 +50,7 @@ keep them cleanly separated.
 ## What this app is (quick orient)
 
 Single-file `app.py` + `tradier.py` (data) + `signals.py` (wheel engine) +
-`sheets.py` (published-CSV **watchlist** reader — tickers only, no positions) +
+`sheets.py` (legacy published-CSV reader, UNUSED since 2026-11-03 — no external sheet feeds this app) +
 `Selection_Trade_Criteria_v1.md` (rules spec) + `wheel_universe.json` +
 `watchlist.json`.
 

@@ -24,9 +24,9 @@ OUT       = ROOT / "data" / "signals.json"
 
 
 def _load_universe():
-    """Signal universe = wheel + growth. LIVE from the published Google-Sheet CSV each run;
-    refreshes the committed wheel_universe.json cache so it stays a good fallback. Falls back to
-    that cache (then the watchlist) if the sheet is unreachable."""
+    """Signal universe = wheel + growth, from the hand-curated committed wheel_universe.json
+    (no live external source since 2026-11-03). Falls back to watchlist.json if it is missing.
+    A `source_url` key, if someone adds one back, still enables the old published-CSV refresh."""
     cfg = {}
     try:
         cfg = json.loads(UNIVERSE.read_text())
@@ -42,7 +42,7 @@ def _load_universe():
         print(f"Universe from sheet: {len(live['wheel'])} wheel, {len(live.get('growth',[]))} growth")
         return merged
     if cfg.get("wheel"):
-        print("Sheet unreachable — using committed wheel_universe.json cache")
+        print("Using committed wheel_universe.json (hand-curated)")
         return cfg
     print("No universe file — using watchlist.json")
     return {"wheel": json.loads(WATCHLIST.read_text()), "growth": []}

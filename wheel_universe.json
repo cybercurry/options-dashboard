@@ -1,6 +1,5 @@
 {
-  "note": "Signal universe. LIVE source is the published Google Sheet CSV below (assetsincome tab, WHEEL + GROWTH columns) \u2014 read every scan. The wheel/growth lists here are a committed fallback cache used only if the sheet is unreachable; the cron refreshes them. Duplicates are deduped at read time.",
-  "source_url": "https://docs.google.com/spreadsheets/d/e/2PACX-1vRoZ_Tr1ndKMbK4dbmBDvz5q2TeI83KW1A1m6vlMCdN-qfzHdlnErBxIk4IvW3eN2m0qpJOW4-RNiWq/pub?gid=1408572587&single=true&output=csv",
+  "note": "Signal universe \u2014 HAND-CURATED. Edit the wheel/growth lists below directly; there is no live external source (the published Google Sheet link was retired 2026-11-03). Tickers only; never populated from any brokerage account. Duplicates are deduped at read time.",
   "wheel": [
     "TSLA",
     "SOFI",
