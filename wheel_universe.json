@@ -15,23 +15,22 @@
     "WMT",
     "AAPL",
     "GOOG",
-    "LLY"
+    "AMD",
+    "ZS",
+    "SPCX",
+    "META",
+    "HIMS"
   ],
   "growth": [
-    "TSLA",
-    "SPCX",
+    "PATH",
     "NVTS",
-    "NVDA",
-    "AMZN",
     "NOW",
     "CQQQ",
-    "QANT",
-    "CRWV",
-    "BE",
-    "VRT",
-    "IREN",
-    "PLTR",
+    "ARM",
+    "APP",
     "PURR",
-    "NBIS"
+    "IREN",
+    "LITE",
+    "BE"
   ]
 }
