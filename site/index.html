@@ -330,6 +330,16 @@ td.star-c,th.star-c{width:1%; text-align:center; padding-left:12px; padding-righ
 #v-chain tbody tr.atm td:first-child{border-left:3px solid var(--warn); font-weight:700; color:var(--text)}
 .chainpx{font-family:"Archivo",sans-serif; font-size:19px; font-weight:700; margin:4px 0 2px}
 .chainpx b{font-size:25px; color:var(--text)} .chainpx .dim{font-family:"IBM Plex Sans"; font-size:12px; font-weight:400}
+/* VIX-band → target-delta guide at the top of the Options Chain tab */
+#chain-voltarget{margin:2px 0 12px}
+.vtcard{border:1px solid var(--line); border-radius:12px; background:var(--surface); padding:12px 15px; display:flex; flex-wrap:wrap; gap:12px 22px; align-items:center; box-shadow:var(--shadow)}
+.vtcard .vtnow{font-size:14px; font-weight:600; color:var(--muted)} .vtcard .vtnow b{color:var(--text)}
+.vtcard.vt-calm{border-left:3px solid var(--good)} .vtcard.vt-elev{border-left:3px solid var(--warn)} .vtcard.vt-high{border-left:3px solid var(--bad)}
+.vttable{border-collapse:collapse; font-size:12.5px}
+.vttable th,.vttable td{padding:4px 14px; text-align:center; border:1px solid var(--line-soft); font-family:"IBM Plex Mono",monospace}
+.vttable th{color:var(--faint); text-transform:uppercase; font-size:10.5px; letter-spacing:.04em; font-family:"IBM Plex Sans",sans-serif}
+.vttable tr.on td{background:var(--accent-soft); font-weight:700; color:var(--text)}
+.vtwhy{flex-basis:100%; font-size:12px; color:var(--muted)}
 .bidcell{cursor:pointer; color:var(--accent); border-bottom:1px dotted var(--accent)}
 /* Bid → profit calculator popover */
 .calcpop{position:fixed; z-index:200; background:var(--surface); border:1px solid var(--accent); border-radius:12px; box-shadow:var(--glow); padding:13px 20px}
@@ -545,7 +555,8 @@ th.thelp:hover{color:var(--text)} th.thelp:hover .thi{border-color:var(--accent)
 
   <!-- ══════════ OPTIONS CHAIN ══════════ -->
   <section id="v-chain" class="view" hidden>
-    <div class="head"><h1>Options Chain</h1><div class="meta">Pick a ticker, then an expiry (DTE) — the full calls &amp; puts ladder with Δ, bid/ask, IV and OI. 🎯 marks the ≈30Δ strike (the usual CSP/CC sell target).</div><span class="js-snap snap"></span></div>
+    <div class="head"><h1>Options Chain</h1><div class="meta">Pick a ticker, then an expiry (DTE) — the full calls &amp; puts ladder with Δ, bid/ask, IV and OI. 🎯 marks the VIX-band sell target (calls ~5Δ below puts); the table below shows the rule.</div><span class="js-snap snap"></span></div>
+    <div id="chain-voltarget"></div>
     <div id="chain-chips" class="chips"></div>
     <div id="chain-exps" class="etiles"></div>
     <div id="chain-body"></div>
@@ -686,7 +697,7 @@ th.thelp:hover{color:var(--text)} th.thelp:hover .thi{border-color:var(--accent)
 
 </main>
 
-<footer class="wrap"><b>optionintel.app</b> — one engine, every tab · real Tradier chains &amp; greeks · the same rules the <b>Rules</b> tab lists · <b>research only, not advice</b> · <span id="upd" style="opacity:.75">updated…</span> · <span class="pre" style="opacity:.6">build <span id="buildid">2026-11-12 · amber stale-data alarm + publish guard</span></span></footer>
+<footer class="wrap"><b>optionintel.app</b> — one engine, every tab · real Tradier chains &amp; greeks · the same rules the <b>Rules</b> tab lists · <b>research only, not advice</b> · <span id="upd" style="opacity:.75">updated…</span> · <span class="pre" style="opacity:.6">build <span id="buildid">2026-11-12 · chain VIX→Δ sell-target guide</span></span></footer>
 
 <script>
 const KIND={csp:"CSP",cc:"CC",leap:"LEAP"};
@@ -1531,7 +1542,8 @@ function renderWatchTable(){
 /* ---------- options chain ---------- */
 function _ladder(rows, title, type, spot){
   if(!rows||!rows.length) return `<div><div class="subhead">${title}</div><div class="dim" style="font-size:13px">no strikes in range</div></div>`;
-  let ti=-1, best=9; rows.forEach((r,i)=>{ if(r.d!=null){const e=Math.abs(Math.abs(r.d)-0.30); if(e<best){best=e;ti=i;}} });
+  const _B=vixBand(), _TGT=(type==='call')?_B.callD:_B.putD;   // VIX-band target Δ (calls ~5Δ below puts)
+  let ti=-1, best=9; rows.forEach((r,i)=>{ if(r.d!=null){const e=Math.abs(Math.abs(r.d)-_TGT); if(e<best){best=e;ti=i;}} });
   let ai=-1, ab=Infinity; if(spot) rows.forEach((r,i)=>{const e=Math.abs(r.k-spot); if(e<ab){ab=e;ai=i;}});
   const body=rows.map((r,i)=>`<tr class="${i===ti?'tgt ':''}${i===ai?'atm':''}">
     <td class="l mono">${i===ai?'▸ ':(i===ti?'🎯 ':'')}$${r.k}</td>
@@ -1543,7 +1555,7 @@ function _ladder(rows, title, type, spot){
   const TH=(cls,lbl,tip)=>`<th class="${cls} thelp" data-tip="${tip.replace(/"/g,'&quot;')}">${lbl}<i class="thi">i</i></th>`;
   return `<div><div class="subhead">${title}</div>
     <div class="tablewrap"><table><thead><tr>
-    ${TH('l','Strike','The contract strike price. ▸ marks the strike nearest the live price (ATM); 🎯 marks the ≈30Δ strike — the usual CSP/CC sell target.')}
+    ${TH('l','Strike','The contract strike price. ▸ = nearest the live price (ATM); 🎯 = the VIX-band sell target (puts at the band delta, calls ~5Δ lower for the market&#39;s upward drift).')}
     ${TH('','Δ','Delta — approximate probability the option finishes in-the-money, and its share-equivalent exposure (0–1). ~0.30 is the wheel sweet spot.')}
     ${TH('','Bid','Highest price a buyer will pay — what you RECEIVE if you sell at market. Tap a bid to size the trade.')}
     ${TH('','Ask','Lowest price a seller will accept — what you PAY to buy. The bid/ask gap is the spread (tighter = more liquid).')}
@@ -1579,7 +1591,31 @@ function renderChainTk(tk){
   let pick=exps[0].exp, best=1e9; exps.forEach(x=>{const e=Math.abs((x.dte||0)-30); if(e<best){best=e;pick=x.exp;}});
   renderChainExp(tk, pick);
 }
+// VIX-band → target delta (Philosophy A: higher VIX → sell further out). Calls sit ~5Δ below puts
+// to account for the market's average upward drift. A starting point — discretion + live quotes decide.
+function vixBand(){
+  const v=(DATA&&DATA.market&&typeof DATA.market.vix==='number')?DATA.market.vix:null;
+  const mk=(label,pd,cls)=>({vix:v,label,putD:pd,callD:Math.max(pd-0.05,0.01),cls});
+  if(v==null)  return mk('—',0.30,'');
+  if(v<20)     return mk('Normal',0.30,'vt-calm');
+  if(v<=25)    return mk('Elevated',0.20,'vt-elev');
+  return               mk('High',0.15,'vt-high');
+}
+function renderVolTarget(){
+  const host=document.getElementById('chain-voltarget'); if(!host) return;
+  const b=vixBand(), pd=(b.putD*100).toFixed(0), cd=(b.callD*100).toFixed(0);
+  const rows=[['&lt; 20','30Δ','25Δ', b.vix!=null&&b.vix<20],
+              ['20–25','20Δ','15Δ', b.vix!=null&&b.vix>=20&&b.vix<=25],
+              ['&gt; 25','15Δ','10Δ', b.vix!=null&&b.vix>25]]
+    .map(r=>`<tr class="${r[3]?'on':''}"><td>${r[0]}</td><td>${r[1]}</td><td>${r[2]}</td></tr>`).join('');
+  host.innerHTML=`<div class="vtcard ${b.cls}">
+    <div class="vtnow">VIX <b>${b.vix==null?'—':b.vix.toFixed(1)}</b> → <b>${b.label}</b> → sell put <b>~${pd}Δ</b> · call <b>~${cd}Δ</b></div>
+    <table class="vttable"><thead><tr><th>VIX</th><th>Put&nbsp;Δ</th><th>Call&nbsp;Δ</th></tr></thead><tbody>${rows}</tbody></table>
+    <div class="vtwhy">Higher VIX → sell further out (lower delta); calls sit ~5Δ below puts for the market's average upward drift. The 🎯 in each ladder auto-marks this strike — a starting point; your discretion and the live quotes set the final one.</div>
+  </div>`;
+}
 function renderChain(){
+  renderVolTarget();
   const chains=DATA.chains||{}; const tks=selTks();
   const cc=document.getElementById('chain-chips');
   cc.innerHTML=tks.map(t=>`<span class="cchip${chains[t]?'':' noch'}${MYWL.picks.has(t)?' mine':''}" data-t="${t}">${t}</span>`).join('');
