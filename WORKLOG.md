@@ -31,6 +31,20 @@ This repo is **PUBLIC and anonymous**. The hard rule (never put IBKR account dat
 
 **Device-independent:** laptop off/asleep = refresh still runs.
 
+**24/7 market tiles (light refresh — off-hours):**
+- The indices / metals / crypto / FX pulse, the sector heatmap and the Market-tab stats come from
+  **yfinance / CoinGecko / FRED — never Tradier** — so they can refresh around the clock.
+- **Off-hours** (outside 04:00–20:00 ET weekdays), every workflow fire runs `build_json.py --light`:
+  it seeds the base from the `data` branch (the last full scan), re-pulls ONLY those tiles, and
+  **preserves `generated_at`** — so the Signals/Overview Tradier data is kept exactly as the last
+  market-hours scan left it (the Signals tab still shows the last read to plan the open), while the
+  tiles move. The light build stamps its own `market_at`; the front-end re-renders open tabs when
+  either `generated_at` (full scan) **or** `market_at` (tiles) changes.
+- Cadence off-hours is GitHub's native `*/10` schedule (best-effort). For a guaranteed hourly beat,
+  add a cron-job.org job that POSTs the same dispatch with body
+  `{"ref":"main","inputs":{"light":"true"}}` — the gate runs it light off-hours and skips it in-hours
+  (the full scan already covers the tiles then).
+
 **Weekend — Sunday refresh (calendar flip + crypto):**
 - **cron-job.org** job "Optionintel Sunday (calendar + crypto)":
   - Every **Sunday** at **02:15** and **18:15**, timezone **America/New_York** (DST-aware).

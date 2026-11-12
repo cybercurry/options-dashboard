@@ -30,6 +30,10 @@ on:
         description: "Run even outside the ET market window"
         type: boolean
         default: false
+      light:
+        description: "Tiles-only refresh (indices/metals/crypto/FX) — preserves the last Tradier scan"
+        type: boolean
+        default: false
 
 permissions:
   contents: write                   # allow the bot to push the refreshed JSON
@@ -67,30 +71,50 @@ jobs:
       #     2–3 fires inside each band simply re-publish the same JSON — insurance against GitHub
       #     dropping a weekend cron tick.
       - id: gate
-        name: Gate to the ET market window (DST-aware)
+        name: Decide whether to run, and in which mode (DST-aware ET gate)
         env:
           EVENT: ${{ github.event_name }}
           FORCE: ${{ github.event.inputs.force }}
+          LIGHT: ${{ github.event.inputs.light }}
         run: |
           python - <<'PY'
           import os
           from datetime import datetime
           from zoneinfo import ZoneInfo
-          ev   = os.environ.get("EVENT", "")
-          force= (os.environ.get("FORCE") or "").lower() == "true"
-          now  = datetime.now(ZoneInfo("America/New_York"))
-          mins     = now.hour * 60 + now.minute
-          wd   = now.weekday()                                          # Mon=0 … Sun=6
+          ev    = os.environ.get("EVENT", "")
+          force = (os.environ.get("FORCE") or "").lower() == "true"
+          light = (os.environ.get("LIGHT") or "").lower() == "true"
+          now   = datetime.now(ZoneInfo("America/New_York"))
+          mins  = now.hour * 60 + now.minute
+          wd    = now.weekday()                                         # Mon=0 … Sun=6
           weekday_win = (wd < 5) and (4*60) <= mins <= (20*60)          # 04:00–20:00 ET, Mon–Fri (pre→post-market)
           sunday_win  = (wd == 6) and (                                 # Sunday calendar-flip + crypto bands (ET)
               (2*60)  <= mins <= (2*60 + 29) or                         #   02:00–02:29 ET — after the econ-calendar roll
               (18*60) <= mins <= (18*60 + 29))                          #   18:00–18:29 ET — weekend crypto snapshot
-          in_window = weekday_win or sunday_win
-          go = (ev == "push") or force or in_window
-          print(f"{now:%a %Y-%m-%d %H:%M} ET | weekday_win={weekday_win} sunday_win={sunday_win} "
-                f"event={ev} force={force} -> go={go}")
+          in_full = weekday_win or sunday_win                           # when the FULL Tradier scan runs
+          # Mode:
+          #   • code push               → full (fresh deploy)
+          #   • explicit light dispatch → light, but ONLY off-hours (in-hours the full scan covers tiles)
+          #   • force                   → full (off-window allowed)
+          #   • inside the full window  → full (market-hours Tradier scan)
+          #   • otherwise (off-hours)   → LIGHT: refresh only the 24/7 tiles (indices/metals/crypto/FX),
+          #                               preserving the last full scan's signals so the Signals tab
+          #                               still shows the last market-hours read to plan the open.
+          if ev == "push":
+              go, mode = True, "full"
+          elif light:
+              go, mode = (not in_full), "light"
+          elif force:
+              go, mode = True, "full"
+          elif in_full:
+              go, mode = True, "full"
+          else:
+              go, mode = True, "light"
+          print(f"{now:%a %Y-%m-%d %H:%M} ET | in_full={in_full} event={ev} force={force} light={light} "
+                f"-> go={go} mode={mode}")
           with open(os.environ["GITHUB_OUTPUT"], "a") as f:
               f.write(f"go={'true' if go else 'false'}\n")
+              f.write(f"mode={mode}\n")
           PY
 
       - name: Install engine deps
@@ -99,7 +123,16 @@ jobs:
 
       - name: Run engine → JSON
         if: steps.gate.outputs.go == 'true'
-        run: python build_json.py
+        run: |
+          if [ "${{ steps.gate.outputs.mode }}" = "light" ]; then
+            echo "LIGHT refresh — tiles only; keeping the last full Tradier scan."
+            # Seed the base from the freshest published scan (the data branch), then merge tiles into it.
+            git fetch --depth=1 origin data
+            git cat-file -p FETCH_HEAD:signals.json > site/data/signals.json
+            python build_json.py --light
+          else
+            python build_json.py
+          fi
 
       - name: Publish data to the `data` branch (served to the site; keeps main small)
         if: steps.gate.outputs.go == 'true'

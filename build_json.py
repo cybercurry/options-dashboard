@@ -647,6 +647,54 @@ def enrich_overview(data):
     return data
 
 
+def refresh_tiles(data):
+    """Refresh ONLY the always-moving, non-Tradier tiles — indices/metals/crypto/FX (pulse),
+    the sector heatmap, and the Market-tab stats. These come from yfinance / CoinGecko / FRED,
+    so they're safe to run 24/7 and never touch Tradier. Stamps the tiles with their own
+    `market_at` so the front-end can tell tile freshness from the Tradier scan age."""
+    data["market"] = fetch_market()
+    data["pulse"] = fetch_pulse()
+    data["pulse2"] = fetch_pulse(PULSE2)            # global/alt second line
+    data["sectors"] = fetch_sectors()
+    data["market_stats"] = fetch_market_stats()
+    data["market_holidays"] = fetch_market_holidays()
+    data["market_at"] = datetime.datetime.now(datetime.timezone.utc).isoformat(timespec="seconds")
+    return data
+
+
+def _load_base():
+    """The last published signals.json that a light refresh merges into. The workflow pre-populates
+    site/data/signals.json from the `data` branch (the freshest full scan); fall back to fetching it
+    from raw if that local copy is missing."""
+    try:
+        return json.loads((OUT / "signals.json").read_text())
+    except Exception:
+        pass
+    try:
+        r = requests.get("https://raw.githubusercontent.com/cybercurry/options-dashboard/data/signals.json",
+                         timeout=20)
+        r.raise_for_status()
+        return r.json()
+    except Exception:
+        return None
+
+
+def light_refresh():
+    """Tiles-only refresh (24/7). Keeps the last full scan's Tradier data — signals, overview,
+    chains, fundamentals, universe — exactly as-is, so the Signals tab still shows the last
+    market-hours read to plan the open, and re-pulls ONLY the market tiles. Deliberately preserves
+    `generated_at` (the Tradier-scan age) so stale stock data never looks fresh."""
+    data = _load_base()
+    if data is None:
+        raise SystemExit("light refresh: no base signals.json to merge into — nothing written")
+    refresh_tiles(data)
+    data.setdefault("generated_at", data["market_at"])   # keep the Tradier-scan age; seed only if absent
+    OUT.mkdir(parents=True, exist_ok=True)
+    (OUT / "signals.json").write_text(json.dumps(data, indent=2, default=str))
+    print("light refresh — tiles updated; {} signals / {} overview rows preserved (generated_at={})".format(
+        len(data.get("signals", [])), len(data.get("overview", [])), data.get("generated_at")))
+
+
 def main():
     uni = load_universe()
     # Default universe (what every anonymous visitor sees) — captured before we fold in users'
@@ -662,16 +710,11 @@ def main():
         uni["wheel"] = list(uni.get("wheel", [])) + extra
     data = signals.scan(uni)                       # {"signals": [...], "leaps": [...], "params": {...}}
     enrich_overview(data)                           # + earnings_date & IV Rank onto the overview rows
-    data["market"] = fetch_market()
-    data["pulse"] = fetch_pulse()
-    data["pulse2"] = fetch_pulse(PULSE2)            # global/alt second line
-    data["sectors"] = fetch_sectors()
+    refresh_tiles(data)                             # market/pulse/pulse2/sectors/market_stats/holidays (+ market_at)
     _names = [o.get("ticker") for o in data.get("overview", []) if o.get("ticker")]
     _prices = {o.get("ticker"): o.get("price") for o in data.get("overview", [])}
     data["fundamentals"] = fetch_fundamentals_all(_names, _prices)
     data["chains"] = fetch_chains(_names, _prices)
-    data["market_stats"] = fetch_market_stats()
-    data["market_holidays"] = fetch_market_holidays()
     data["generated_at"] = datetime.datetime.now(datetime.timezone.utc).isoformat(timespec="seconds")
     # universe payload keeps the DEFAULT list distinct from the user-added extras, so the
     # front-end renders the default watchlist by default and can filter to a signed-in user's own
@@ -689,4 +732,8 @@ def main():
 
 
 if __name__ == "__main__":
-    main()
+    import sys
+    if "--light" in sys.argv[1:]:
+        light_refresh()
+    else:
+        main()
