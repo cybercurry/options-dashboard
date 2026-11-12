@@ -126,8 +126,43 @@ jobs:
             python build_json.py
           fi
 
-      - name: Publish data to the `data` branch (served to the site; keeps main small)
+      - name: Guard — never publish a degenerate full scan
         if: steps.gate.outputs.go == 'true'
+        id: guard
+        env:
+          MODE: ${{ steps.gate.outputs.mode }}
+        run: |
+          python - <<'PY'
+          import json, os, urllib.request
+          mode = os.environ.get("MODE", "full")
+          new  = json.load(open("site/data/signals.json"))
+          n_ov, n_sig = len(new.get("overview", []) or []), len(new.get("signals", []) or [])
+          if mode == "light":
+              # Tradier data is preserved from the base; tiles may blank (honest) but never degrade.
+              ok, why = True, "light refresh (Tradier data preserved)"
+          else:
+              base_ov = None
+              try:
+                  with urllib.request.urlopen(
+                      "https://raw.githubusercontent.com/cybercurry/options-dashboard/data/signals.json",
+                      timeout=20) as r:
+                      base_ov = len((json.load(r).get("overview", []) or []))
+              except Exception as e:
+                  print("base unreachable (treat as first publish):", e)
+              ok, why = True, "ok"
+              if n_ov == 0:
+                  ok, why = False, "overview EMPTY — refusing to blank the site"
+              elif base_ov and n_ov < base_ov * 0.5:
+                  ok, why = False, f"overview collapsed ({n_ov} vs last-good {base_ov}, <50%)"
+          print(f"mode={mode} overview={n_ov} signals={n_sig} -> publish={ok} ({why})")
+          if not ok:
+              print(f"::warning::Refusing to publish — {why}. Keeping the last good data branch (its older timestamp stays visible).")
+          with open(os.environ["GITHUB_OUTPUT"], "a") as f:
+              f.write(f"publish={'true' if ok else 'false'}\n")
+          PY
+
+      - name: Publish data to the `data` branch (served to the site; keeps main small)
+        if: steps.gate.outputs.go == 'true' && steps.guard.outputs.publish == 'true'
         run: |
           git config user.name  "optionintel-bot"
           git config user.email "optionintel-bot@users.noreply.github.com"
