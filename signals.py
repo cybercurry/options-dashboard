@@ -1,8 +1,9 @@
 """
 Signals engine — a headless, Streamlit-free scan that finds wheel-strategy premium-selling
 opportunities across the watchlist and ranks them. Used by BOTH:
-  • scripts/scan_signals.py  (the GitHub Actions cron → writes data/signals.json), and
-  • the Signals tab in app.py (a live "Scan now" button).
+  • build_json.py  (the cron-job.org-driven GitHub Actions build → writes site/data/signals.json
+    and publishes to the `data` branch; this is the LIVE optionintel.app pipeline), and
+  • the Signals tab in app.py (the kept-as-backup Streamlit app; a live "Scan now" button).
 
 Design (per Jay, watchlist-only mode — no IBKR portfolio):
   • Universe  = watchlist.json (the established names of interest).

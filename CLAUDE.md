@@ -49,10 +49,18 @@ keep them cleanly separated.
 
 ## What this app is (quick orient)
 
-Single-file `app.py` + `tradier.py` (data) + `signals.py` (wheel engine) +
-`sheets.py` (legacy published-CSV reader, UNUSED since 2026-11-03 — no external sheet feeds this app) +
-`Selection_Trade_Criteria_v1.md` (rules spec) + `wheel_universe.json` +
-`watchlist.json`.
+**The LIVE product is the static site** `site/index.html`, built by **`build_json.py`** (engine
+`signals.py` → `tradier.py`) → `site/data/signals.json`, published to the **`data` branch** and
+deployed by **Cloudflare Pages** to **optionintel.app**. Refresh is driven **solely by cron-job.org**
+(every 10 min, 24/7). See **`WORKLOG.md`** for the full refresh + reliability architecture.
+
+`app.py` is the **old Streamlit app, KEPT as a manual backup** (not the live product). It still
+imports `sheets.py` (legacy published-CSV reader — the external sheet source was retired 2026-11-03,
+so the committed `wheel_universe.json` lists are always used), so **do not delete `sheets.py`**.
+
+Other key files: `tradier.py` (data) · `signals.py` (wheel engine) · `build_fundamentals.py` +
+`fundamentals.py` (SEC/Yahoo fundamentals) · `macro.py` (FRED/calendar) ·
+`Selection_Trade_Criteria_v1.md` (rules spec) · `wheel_universe.json` · `watchlist.json`.
 
 - **Data layer:** Tradier-first (real quotes/chains/IV/greeks via `tradier.py`);
   yfinance is the fallback (crypto, `^`-indices, misses). Black-Scholes

@@ -6,7 +6,31 @@ This repo is **PUBLIC and anonymous**. The hard rule (never put IBKR account dat
 
 ---
 
-## Data refresh — how it works (as of 2026-10-07)
+## Where we stand (updated 2026-11-12)
+
+- **The live product is the static site** `site/index.html` (deployed by **Cloudflare Pages** to
+  **optionintel.app**). It is built by **`build_json.py`** (engine `signals.py` → `tradier.py`),
+  which writes `site/data/signals.json`.
+- **`app.py`** is the **old Streamlit app, KEPT as a manual backup** (deploy: Streamlit Cloud,
+  `options-dashboard-jay.streamlit.app`). It is not the live product but must keep working — it
+  still imports `sheets.py`, so **do not delete `sheets.py`** even though the static build no longer
+  uses it (the Google-sheet universe source was retired 2026-11-03; `wheel_universe.json` has no
+  `source_url`, so the committed hand-curated lists are always used).
+- **Refresh is driven SOLELY by cron-job.org** (every 10 min, 24/7) → GitHub `workflow_dispatch` →
+  `refresh-optionintel.yml`. **No GitHub `schedule:` anywhere in this workflow** (GitHub's free cron
+  is unreliable — it fired once in ~4h overnight on 2026-11-12).
+- **Two freshness clocks** in `signals.json`: `generated_at` = the last **full Tradier scan**
+  (prices/signals/chains/fundamentals); `market_at` = the last **tiles refresh** (indices/metals/
+  crypto/FX/sector/market-stats). The UI's amber stale-alarm watches `market_at`.
+- **Active GitHub workflows:** `refresh-optionintel.yml` (main, cron-job.org-driven),
+  `log-iv.yml` (daily ATM-IV log → `data/iv_history.csv`, still GitHub cron `0 21 * * 1-5`),
+  `refresh-fundamentals.yml` (daily → `fundamentals.json`, still GitHub cron `0 16 * * *`),
+  `selftest.yml` (manual). *Removed 2026-11-12:* `scan-signals.yml` (legacy) and the `scheduler/`
+  Cloudflare Worker dir.
+
+---
+
+## Data refresh — how it works (as of 2026-11-12)
 
 **Pipeline (100% cloud — nothing runs on a local machine):**
 1. A scheduler sends a `workflow_dispatch` to GitHub.
@@ -47,22 +71,16 @@ This repo is **PUBLIC and anonymous**. The hard rule (never put IBKR account dat
   as full scans. (An explicit `{"inputs":{"light":"true"}}` dispatch forces light and is honored only
   off-hours; it's optional and unused now that the main job runs 24/7.)
 
-**Weekend — Sunday refresh (calendar flip + crypto):**
-- **cron-job.org** job "Optionintel Sunday (calendar + crypto)":
-  - Every **Sunday** at **02:15** and **18:15**, timezone **America/New_York** (DST-aware).
-  - Crontab: `15 2,18 * * 0`
-  - Same `POST …/dispatches` as the weekday job, but body
-    **`{"ref":"main","inputs":{"force":"true"}}`** — `force` bypasses the ET gate, which
-    otherwise no-ops every weekend fire. (`force` must be the quoted string `"true"`.)
-- **Why these two times:** 02:15 ET is just after ForexFactory's weekly econ-calendar feed rolls
-  to the new trading week (it flips ~**00:00 ET Sun**; probe confirmed already flipped by 01:33 ET).
-  There is **no free `nextweek` feed** — `ff_calendar_nextweek.json`/`lastweek` return **404**
-  (verified), so the only way to show next week on the weekend is to refresh after the `thisweek`
-  feed rolls. 18:15 ET is a late weekend crypto snapshot as CME futures reopen. Stock/options data
-  just re-shows Friday's close (markets shut) — what updates is **crypto + calendar + FRED tiles**.
-- **GitHub-native fallback:** the workflow's ET gate also admits two Sunday bands —
-  **02:00–02:29** and **18:00–18:29 ET** — so the built-in `schedule: */10` catches the flip even
-  if cron-job.org misses. Idempotent, so the extra fires just re-publish the same JSON.
+**Weekend (calendar flip + crypto) — now covered by the 24/7 job:**
+- Since the main cron-job.org job runs `*/10 * * * *` (24/7), **Saturday and Sunday get a light
+  refresh every 10 min** — which re-pulls `fetch_market_stats` (the ForexFactory econ calendar) and
+  crypto/metals tiles. So the weekend calendar + crypto stay current automatically.
+- The ET gate still admits two **Sunday full-scan bands** — **02:00–02:29 ET** (just after
+  ForexFactory's weekly feed rolls to the new trading week, ~00:00 ET Sun) and **18:00–18:29 ET**.
+  (There is **no free `nextweek` feed** — `ff_calendar_nextweek.json`/`lastweek` return **404** —
+  so the only way to show next week on the weekend is to refresh after the `thisweek` feed rolls.)
+- **The old dedicated cron-job.org "Optionintel Sunday" job (`15 2,18 * * 0`, force=true) is now
+  redundant** and can be deleted — the 24/7 job + the Sunday gate bands cover it. (Harmless if left.)
 
 ### Why this design (history — so we don't repeat mistakes)
 - A **Cloudflare Worker** heartbeat was used before but **lost its runtime secrets on every
@@ -72,16 +90,78 @@ This repo is **PUBLIC and anonymous**. The hard rule (never put IBKR account dat
 - **cron-job.org** is the bulletproof replacement: external, free, cloud, nothing to wipe.
 
 ### If the refresh ever stops
+**Symptom:** the top-right freshness pill on optionintel.app turns **amber** with a ⚠ (fires when
+`market_at` is >30 min old — the UI's built-in alarm).
 1. Check GitHub Actions history for `refresh-optionintel.yml` — are there `workflow_dispatch`
-   runs every ~10 min during 7–18 ET weekdays?
+   runs every ~10 min, 24/7? (If they stopped, cron-job.org isn't firing.)
 2. If not, open the cron-job.org job → **Test run** (expect **HTTP 204**).
    `401/403` = token problem · `404` = URL/workflow name · `422` = missing/bad body (must be `{"ref":"main"}`).
+   Also confirm the job's schedule is still `*/10 * * * *` (24/7) and the Bearer token + body survived
+   the last edit.
 3. Manual kick anytime:
    `gh api -X POST repos/cybercurry/options-dashboard/actions/workflows/refresh-optionintel.yml/dispatches -f ref=main`
+   (add `-F 'inputs[light]=true'` to force a tiles-only refresh off-hours; `-F 'inputs[force]=true'`
+   to force a full scan off-hours.)
+4. If a run **succeeds but nothing publishes**, the **publish guard** refused a degenerate scan —
+   look for a `::warning::Refusing to publish` annotation (Tradier likely returned empty). The last
+   good data is intentionally kept; the next healthy scan republishes.
 
 ---
 
+## Data sources & reliability (audited 2026-11-12)
+
+Every external source has an explicit `requests` timeout (12–20s) and catches failures, returning
+`None`/`[]`. The tile builder (`refresh_tiles`) **replaces** each key wholesale every run (never a
+field-merge), so a failed fetch shows an honest blank "—" — **it can never silently show a stale
+value**. In `--light` mode the Tradier block (`signals`/`overview`/`chains`/`fundamentals`/
+`universe`) is deliberately preserved from the base with its original `generated_at`, so its age is
+always visible.
+
+| Source | Feeds | In light build? |
+|---|---|---|
+| **Tradier** (api/sandbox) | overview, signals, leaps, chains (prices/IV/greeks) | full scan only |
+| **yfinance** | pulse (indices/metals/FX/BTC/ETH), sectors, VIX, HV/RSI history, earnings, fundamentals fallback | both (tiles 24/7) |
+| **CoinGecko** | HYPE (`cg:hyperliquid`) | tiles 24/7 |
+| **FRED** (keyless) | yields, Fed funds/target | tiles 24/7 |
+| **CNN** (dataviz.cnn.io) | stocks Fear & Greed | tiles 24/7 |
+| **alternative.me** | crypto Fear & Greed | tiles 24/7 |
+| **ForexFactory** (faireconomy.media) | econ calendar (`thisweek`) | tiles 24/7 |
+| **SEC EDGAR** | fundamentals | full scan + daily `build_fundamentals.py` |
+| **historyofmarket.com → Finviz** | S&P fwd P/E (fallback chain) | tiles 24/7 |
+| **Supabase** (`SUPABASE_SERVICE_KEY` env) | folds registered users' watchlist tickers into the scan | full scan only |
+| **raw.githubusercontent** (`data` branch) | the light-build base + the site's live data fetch | — |
+
+**Secrets:** `TRADIER_TOKEN`, `SUPABASE_SERVICE_KEY` (service_role — reads all users' watchlists,
+unattributed), `ANTHROPIC_API_KEY` are env/Actions secrets, never committed. SEC User-Agent carries
+a neutral contact email (required by SEC). *Open TODO (CLAUDE.md):* the git remote reportedly still
+embeds a plaintext GitHub PAT — rotate + switch to SSH.
+
+## Reliability hardening (2026-11-12)
+
+Goal: the site is trustworthy **to its last displayed timestamp** — never fresh-looking-but-wrong.
+1. **Publish guard** (`refresh-optionintel.yml`, "Guard" step) — a full scan that returns an **empty
+   or >50%-collapsed** overview vs the last-good copy (e.g. a Tradier outage) is **refused**; the
+   last good `data` branch is kept (with its honest older timestamp) and a `::warning::` is logged.
+   Light refreshes always publish (Tradier data preserved). Prevents blanking the site at a fresh stamp.
+2. **Amber stale-alarm** (`index.html`, `updateFreshness()`) — the freshness pill flips **amber + ⚠**
+   when `market_at` is >30 min old (heartbeat expected every ~10 min). Re-checked every minute. Keyed
+   on `market_at`, NOT `generated_at` (which is meant to sit old off-hours).
+3. **yfinance timeout** (`build_json.py`) — `socket.setdefaulttimeout(30)`; yfinance takes no
+   `timeout=`, so this bounds a Yahoo hang. The `requests` calls keep their own tighter timeouts.
+4. **SEC guard** (`build_fundamentals._cik_map`) — returns `{}` on a SEC failure instead of raising,
+   so the daily fundamentals script hits its `_MIN_OK` guard and leaves the good file untouched.
+
 ## Recent work log
+- **2026-11-12** — **24/7 freshness + reliability pass.** (1) Added a `build_json.py --light` mode
+  (tiles-only, preserves the Tradier scan) and routed off-hours fires to it via the ET gate.
+  (2) **Removed the GitHub `schedule:`** from `refresh-optionintel.yml` — cron-job.org is now the
+  sole trigger; widened its job to `*/10 * * * *` (24/7) so indices/metals/crypto refresh every
+  10 min around the clock (GitHub's cron had frozen data ~1h40m overnight). (3) Hardening: publish
+  guard, amber stale-alarm (`market_at`), yfinance socket timeout, `build_fundamentals` SEC guard.
+  (4) Cleanup: deleted the retired `scheduler/` Cloudflare Worker and the legacy `scan-signals.yml`
+  + `scripts/scan_signals.py` + stale root `data/signals.json`. (5) Audited all 11 external sources.
+  Overview tables fitted to content (less wasted width); sector tiles show their ETF ticker; pulse
+  regrouped (indices / commodities / crypto / forex) incl. Hang Seng + Silver.
 - **2026-10-18** — Added a **Sunday refresh** (2× — 02:15 + 18:15 ET) so the economic calendar
   shows the new trading week over the weekend and crypto stays current. ForexFactory's `thisweek`
   feed rolls to the new week ~00:00 ET Sun; there is **no free `nextweek` feed** (confirmed 404),
