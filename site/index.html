@@ -46,6 +46,8 @@ nav a:hover{color:var(--text); background:var(--surface-2)} nav a.on{color:var(-
 .hdr-right{margin-left:auto; display:flex; align-items:center; gap:14px; flex-wrap:wrap; justify-content:flex-end}
 /* compact "last Tradier data pull" pill — always visible so staleness is caught without scrolling to the footer */
 .freshpill{font-family:"IBM Plex Mono",monospace; font-size:11.5px; color:var(--muted); background:var(--line-soft); border:1px solid var(--line); border-radius:999px; padding:3px 9px; white-space:nowrap}
+/* Amber alarm when the 24/7 refresh heartbeat (market_at) has stalled — caught at a glance. */
+.freshpill.stale{color:var(--warn); background:color-mix(in srgb,var(--warn) 15%,transparent); border-color:color-mix(in srgb,var(--warn) 50%,transparent); font-weight:700}
 /* ticker-entry boxes — cyan frame (matches the selectable-data cyan); the Overview one is the prominent primary */
 #wl-add,#deep-in,#fund-in{border:2px solid var(--mine); border-radius:9px; outline:none}
 #wl-add:focus,#deep-in:focus,#fund-in:focus{box-shadow:0 0 0 3px var(--mine-line)}
@@ -684,7 +686,7 @@ th.thelp:hover{color:var(--text)} th.thelp:hover .thi{border-color:var(--accent)
 
 </main>
 
-<footer class="wrap"><b>optionintel.app</b> — one engine, every tab · real Tradier chains &amp; greeks · the same rules the <b>Rules</b> tab lists · <b>research only, not advice</b> · <span id="upd" style="opacity:.75">updated…</span> · <span class="pre" style="opacity:.6">build <span id="buildid">2026-11-12 · 24/7 light tiles refresh (off-hours)</span></span></footer>
+<footer class="wrap"><b>optionintel.app</b> — one engine, every tab · real Tradier chains &amp; greeks · the same rules the <b>Rules</b> tab lists · <b>research only, not advice</b> · <span id="upd" style="opacity:.75">updated…</span> · <span class="pre" style="opacity:.6">build <span id="buildid">2026-11-12 · amber stale-data alarm + publish guard</span></span></footer>
 
 <script>
 const KIND={csp:"CSP",cc:"CC",leap:"LEAP"};
@@ -824,7 +826,24 @@ function relAge(iso){ if(!iso) return ''; const s=Math.max(0,(Date.now()-new Dat
 function snapHTML(){ const g=DATA&&DATA.generated_at; if(!g) return '';
   const utc=new Date(g).toUTCString().slice(17,22);
   return `<span title="Scan-derived data (prices, signals, market stats, fundamentals) is a snapshot from the last data pull, refreshed through the trading day (premarket–postmarket, ET). The TA chart is live and independent.">&#9719; Data snapshot &middot; ${relAge(g)} <span class="snapdim">(${utc} UTC)</span></span>`; }
-function renderSnap(){ const h=snapHTML(); document.querySelectorAll('.js-snap').forEach(e=>e.innerHTML=h); }
+function renderSnap(){ const h=snapHTML(); document.querySelectorAll('.js-snap').forEach(e=>e.innerHTML=h); updateFreshness(); }
+// The 24/7 tiles heartbeat (market_at) advances every ~10 min in both full and light refreshes.
+// If it hasn't moved in >30 min the refresh pipeline is down — flip the pill amber so a stall is
+// obvious without reading the timestamp. (generated_at is NOT used here: it is meant to sit old
+// off-hours, so it would false-alarm every night.) Re-evaluated every minute by renderSnap's timer.
+const _STALE_MIN=30;
+function updateFreshness(){
+  const fp=document.getElementById('freshpill'); if(!fp) return;
+  const t=DATA&&(DATA.market_at||DATA.generated_at);
+  if(!t){ fp.classList.remove('stale'); return; }
+  const ageMin=(Date.now()-new Date(t).getTime())/60000, stale=ageMin>_STALE_MIN;
+  fp.classList.toggle('stale', stale);
+  if(stale){
+    const m=Math.round(ageMin), txt=m<120?m+' min':Math.floor(m/60)+'h'+(m%60?' '+(m%60)+'m':'');
+    fp.title='⚠ Data has not refreshed in '+txt+' — the refresh pipeline may be down (expected every ~10 min).';
+    if(fp.textContent.indexOf('⚠')<0) fp.textContent='⚠ '+fp.textContent;
+  }
+}
 
 let _lastGen=null, _lastMarket=null, _refreshing=false;
 // Stamp the most recent Tradier data-pull time in two places: the footer (full date + time,
