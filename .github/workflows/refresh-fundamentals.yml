@@ -5,9 +5,9 @@ name: Refresh fundamentals (S&P 500)
 # quarterly, and this keeps ~500 SEC requests out of the 30-minute options scan and well within
 # SEC's fair-access limit. Cloudflare Pages auto-deploys on the push.
 on:
-  schedule:
-    - cron: "0 16 * * *"        # 16:00 UTC = 12:00 ET (EDT) / 11:00 ET (EST)
-  workflow_dispatch: {}         # manual "Run workflow" button
+  # No GitHub `schedule:` — driven SOLELY by cron-job.org (daily 16:00 UTC) via workflow_dispatch,
+  # the same reliable scheduler as the main refresh. GitHub's free cron is unreliable.
+  workflow_dispatch: {}         # external dispatch (cron-job.org) / manual
 
 permissions:
   contents: write

@@ -3,9 +3,9 @@ name: Log daily ATM IV
 # Appends one ATM-IV reading per watchlist ticker to data/iv_history.csv each weekday,
 # building the history that powers IV Rank. Needs the repo secret TRADIER_TOKEN.
 on:
-  schedule:
-    - cron: "0 21 * * 1-5"     # 21:00 UTC, Mon–Fri (after the US cash close)
-  workflow_dispatch: {}         # allow manual "Run workflow" for a first data point
+  # No GitHub `schedule:` — driven SOLELY by cron-job.org (daily 21:00 UTC, Mon–Fri) via
+  # workflow_dispatch, the same reliable scheduler as the main refresh. GitHub's free cron is unreliable.
+  workflow_dispatch: {}         # external dispatch (cron-job.org) / manual
 
 permissions:
   contents: write               # so the job can commit the updated CSV
