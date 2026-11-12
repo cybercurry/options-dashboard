@@ -18,16 +18,18 @@ This repo is **PUBLIC and anonymous**. The hard rule (never put IBKR account dat
    `https://raw.githubusercontent.com/cybercurry/options-dashboard/data/signals.json`
    (cache-busted), falling back to the bundled `site/data/signals.json` if raw is briefly down.
 
-**Scheduler — the 10-minute heartbeat (single source of truth):**
+**Scheduler — the 10-minute heartbeat (cron-job.org is the ONLY trigger):**
 - **cron-job.org** job "Optionintel 10 min scheduler":
-  - Every 10 min, hours **7–18**, **Mon–Fri**, timezone **America/New_York** (DST-aware).
-  - Crontab: `*/10 7-18 * * 1-5`
+  - Every 10 min, **all hours, all days (24/7)**, timezone **America/New_York** (DST-aware).
+  - Crontab: `*/10 * * * *`
   - `POST` to `…/actions/workflows/refresh-optionintel.yml/dispatches`, body `{"ref":"main"}`.
   - Auth header: `Authorization: Bearer <optionintel-cron PAT>` — a **fine-grained** token
     scoped to **this repo only**, **Actions: Read & write**. (Token value is NOT stored here.)
-- The workflow also has a built-in `schedule: */10` (GitHub-native) as a sparse passive
-  fallback, plus its own DST-aware **ET gate (04:00–20:00 ET)** that safely no-ops any
-  off-window fire. `concurrency: optionintel-data` prevents overlapping runs.
+- The workflow has **no GitHub `schedule:`** — GitHub's free cron throttles/skips runs badly (it
+  fired once in ~4h overnight), so it is not used. cron-job.org is the sole heartbeat. The DST-aware
+  **ET gate** routes each fire: weekday **04:00–20:00 ET → full Tradier scan**; everything else
+  (nights, weekends, pre/post-market) **→ light tiles-only refresh**. `concurrency: optionintel-data`
+  prevents overlapping runs.
 
 **Device-independent:** laptop off/asleep = refresh still runs.
 
@@ -40,10 +42,10 @@ This repo is **PUBLIC and anonymous**. The hard rule (never put IBKR account dat
   market-hours scan left it (the Signals tab still shows the last read to plan the open), while the
   tiles move. The light build stamps its own `market_at`; the front-end re-renders open tabs when
   either `generated_at` (full scan) **or** `market_at` (tiles) changes.
-- Cadence off-hours is GitHub's native `*/10` schedule (best-effort). For a guaranteed hourly beat,
-  add a cron-job.org job that POSTs the same dispatch with body
-  `{"ref":"main","inputs":{"light":"true"}}` — the gate runs it light off-hours and skips it in-hours
-  (the full scan already covers the tiles then).
+- Cadence is the **same 24/7 cron-job.org heartbeat** (`*/10 * * * *`) — no second job needed. The
+  gate auto-routes each fire by time, so off-hours fires land as light refreshes and in-hours fires
+  as full scans. (An explicit `{"inputs":{"light":"true"}}` dispatch forces light and is honored only
+  off-hours; it's optional and unused now that the main job runs 24/7.)
 
 **Weekend — Sunday refresh (calendar flip + crypto):**
 - **cron-job.org** job "Optionintel Sunday (calendar + crypto)":

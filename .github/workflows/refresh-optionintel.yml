@@ -12,19 +12,11 @@ on:
       - "sheets.py"
       - "wheel_universe.json"
       - ".github/workflows/refresh-optionintel.yml"
-  schedule:
-    # Best-effort FALLBACK only. GitHub throttles/skips high-frequency cron, so this alone does NOT
-    # give a dependable 30-min heartbeat — an external scheduler (Cloudflare Worker / cron-job.org)
-    # dispatches this workflow reliably. The band 12–22 UTC covers 08:30–17:00 ET in BOTH EDT and
-    # EST; the ET gate below is the single source of truth that keeps every run inside the real window.
-    # Runs every day (incl. weekends) so BTC/ETH quotes and the data-pull stamp stay current when
-    # crypto trades 24/7 — stock/options data simply re-shows Friday's close while markets are shut.
-    - cron: "*/10 * * * *"   # every 10 min (bulletproof syntax); the DST-aware ET gate below is the
-                             # exact bound (04:00–20:00 ET, Mon–Fri) — off-window/weekend runs gate
-                             # out. NOTE: GitHub's free scheduler throttles/skips high-frequency cron,
-                             # so this alone is NOT a dependable 10-min beat — the Cloudflare Worker
-                             # (reliable Cron Trigger → workflow_dispatch) is what makes it punctual.
-  workflow_dispatch:                # manual / external dispatch
+  # NO GitHub `schedule:` — GitHub's free cron throttles/skips runs badly (it fired once in ~4h
+  # overnight), so it is NOT used. The heartbeat is driven SOLELY by an external scheduler
+  # (cron-job.org) hitting workflow_dispatch below, every 10 min, 24/7. The DST-aware ET gate then
+  # routes each fire: weekday 04:00–20:00 ET → full Tradier scan; everything else → light tiles-only.
+  workflow_dispatch:                # external dispatch (cron-job.org) / manual
     inputs:
       force:
         description: "Run even outside the ET market window"
