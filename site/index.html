@@ -330,16 +330,18 @@ td.star-c,th.star-c{width:1%; text-align:center; padding-left:12px; padding-righ
 #v-chain tbody tr.atm td:first-child{border-left:3px solid var(--warn); font-weight:700; color:var(--text)}
 .chainpx{font-family:"Archivo",sans-serif; font-size:19px; font-weight:700; margin:4px 0 2px}
 .chainpx b{font-size:25px; color:var(--text)} .chainpx .dim{font-family:"IBM Plex Sans"; font-size:12px; font-weight:400}
-/* VIX-band → target-delta guide at the top of the Options Chain tab */
+/* VIX-band → target-delta guide at the top of the Options Chain tab (compact, horizontal) */
 #chain-voltarget{margin:2px 0 12px}
-.vtcard{border:1px solid var(--line); border-radius:12px; background:var(--surface); padding:12px 15px; display:flex; flex-wrap:wrap; gap:12px 22px; align-items:center; box-shadow:var(--shadow)}
-.vtcard .vtnow{font-size:14px; font-weight:600; color:var(--muted)} .vtcard .vtnow b{color:var(--text)}
+.vtcard{border:1px solid var(--line); border-radius:12px; background:var(--surface); padding:7px 14px; display:flex; flex-wrap:wrap; gap:6px 20px; align-items:center; box-shadow:var(--shadow)}
+.vtcard .vtnow{font-size:13.5px; font-weight:600; color:var(--muted)} .vtcard .vtnow b{color:var(--text)}
 .vtcard.vt-calm{border-left:3px solid var(--good)} .vtcard.vt-elev{border-left:3px solid var(--warn)} .vtcard.vt-high{border-left:3px solid var(--bad)}
-.vttable{border-collapse:collapse; font-size:12.5px}
-.vttable th,.vttable td{padding:4px 14px; text-align:center; border:1px solid var(--line-soft); font-family:"IBM Plex Mono",monospace}
-.vttable th{color:var(--faint); text-transform:uppercase; font-size:10.5px; letter-spacing:.04em; font-family:"IBM Plex Sans",sans-serif}
-.vttable tr.on td{background:var(--accent-soft); font-weight:700; color:var(--text)}
-.vtwhy{flex-basis:100%; font-size:12px; color:var(--muted)}
+.vttable{border-collapse:collapse; font-size:12.5px; font-family:"IBM Plex Mono",monospace}
+.vttable th,.vttable td{padding:2px 12px; text-align:center; border:1px solid var(--line-soft)}
+.vttable th{color:var(--muted); text-transform:uppercase; font-size:11px; letter-spacing:.03em; font-weight:700}   /* header: fat */
+.vttable td{color:var(--text); font-weight:400}                                                                   /* data: normal */
+.vttable .vtlbl{border:0; text-align:right; color:var(--text); text-transform:uppercase; font-size:11px; font-weight:700; letter-spacing:.02em; font-family:"IBM Plex Sans",sans-serif}   /* VIX / Put Δ / Call Δ labels: noticeable */
+.vttable th.on,.vttable td.on{background:var(--accent-soft); color:var(--text)}
+.vtwhy{font-size:11px; color:var(--muted)}
 .bidcell{cursor:pointer; color:var(--accent); border-bottom:1px dotted var(--accent)}
 /* Bid → profit calculator popover */
 .calcpop{position:fixed; z-index:200; background:var(--surface); border:1px solid var(--accent); border-radius:12px; box-shadow:var(--glow); padding:13px 20px}
@@ -1604,14 +1606,17 @@ function vixBand(){
 function renderVolTarget(){
   const host=document.getElementById('chain-voltarget'); if(!host) return;
   const b=vixBand(), pd=(b.putD*100).toFixed(0), cd=(b.callD*100).toFixed(0);
-  const rows=[['&lt; 20','30Δ','25Δ', b.vix!=null&&b.vix<20],
-              ['20–25','20Δ','15Δ', b.vix!=null&&b.vix>=20&&b.vix<=25],
-              ['&gt; 25','15Δ','10Δ', b.vix!=null&&b.vix>25]]
-    .map(r=>`<tr class="${r[3]?'on':''}"><td>${r[0]}</td><td>${r[1]}</td><td>${r[2]}</td></tr>`).join('');
-  host.innerHTML=`<div class="vtcard ${b.cls}">
-    <div class="vtnow">VIX <b>${b.vix==null?'—':b.vix.toFixed(1)}</b> → <b>${b.label}</b> → sell put <b>~${pd}Δ</b> · call <b>~${cd}Δ</b></div>
-    <table class="vttable"><thead><tr><th>VIX</th><th>Put&nbsp;Δ</th><th>Call&nbsp;Δ</th></tr></thead><tbody>${rows}</tbody></table>
-    <div class="vtwhy">Higher VIX → sell further out (lower delta); calls sit ~5Δ below puts for the market's average upward drift. The 🎯 in each ladder auto-marks this strike — a starting point; your discretion and the live quotes set the final one.</div>
+  const bands=[['&lt; 20', b.vix!=null&&b.vix<20],
+               ['20–25',   b.vix!=null&&b.vix>=20&&b.vix<=25],
+               ['&gt; 25', b.vix!=null&&b.vix>25]];
+  const put=['30','20','15'], call=['25','15','10'];
+  const head=bands.map(r=>`<th class="${r[1]?'on':''}">${r[0]}</th>`).join('');
+  const prow=bands.map((r,i)=>`<td class="${r[1]?'on':''}">${put[i]}Δ</td>`).join('');
+  const crow=bands.map((r,i)=>`<td class="${r[1]?'on':''}">${call[i]}Δ</td>`).join('');
+  host.innerHTML=`<div class="vtcard ${b.cls}" title="Higher VIX → sell further out (lower delta); calls sit ~5Δ below puts for the market's average upward drift. The 🎯 in each ladder auto-marks this strike — a starting point; your discretion and the live quotes set the final one.">
+    <div class="vtnow">VIX <b>${b.vix==null?'—':b.vix.toFixed(1)}</b> → <b>${b.label}</b> → put <b>~${pd}Δ</b> · call <b>~${cd}Δ</b></div>
+    <table class="vttable"><thead><tr><th class="vtlbl">VIX</th>${head}</tr></thead>
+      <tbody><tr><th class="vtlbl">Put Δ</th>${prow}</tr><tr><th class="vtlbl">Call Δ</th>${crow}</tr></tbody></table>
   </div>`;
 }
 function renderChain(){
