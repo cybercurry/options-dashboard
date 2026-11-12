@@ -57,7 +57,13 @@ def _sp500_symbols():
 def _cik_map():
     """SEC ticker→(cik10, title) — fetched ONCE for the whole batch (analyze() would re-pull
     this ~1 MB map per ticker, so we cache it and resolve locally instead)."""
-    data = fundamentals._get("https://www.sec.gov/files/company_tickers.json")
+    try:
+        data = fundamentals._get("https://www.sec.gov/files/company_tickers.json")
+    except Exception as e:
+        # SEC hiccup must not crash the daily script — return empty so main() hits the _MIN_OK
+        # guard and leaves the existing fundamentals.json untouched.
+        print("  CIK map fetch failed (%s) — leaving fundamentals.json untouched." % e)
+        return {}
     m = {}
     for row in data.values():
         t = str(row.get("ticker", "")).upper()
