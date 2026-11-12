@@ -16,10 +16,16 @@ import statistics
 import requests
 
 import os
+import socket
 
 import macro
 import signals
 import sheets
+
+# yfinance accepts no per-call timeout, so a Yahoo hang would otherwise be unbounded and could stall
+# the whole build. A process-wide socket default bounds it. The requests.get calls all set their own
+# explicit (tighter) timeouts, which override this per-request, so they are unaffected.
+socket.setdefaulttimeout(30)
 
 HERE = pathlib.Path(__file__).parent
 OUT = HERE / "site" / "data"
