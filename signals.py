@@ -48,7 +48,7 @@ P = {
     "leap_dte_lo": 180, "leap_dte_hi": 900, "leap_dte_opt": 542,
     "leap_delta_opt": 0.78, "leap_delta_lo": 0.70, "leap_delta_hi": 0.85,
     "leap_backstop_ext_share": 0.55,  # hard backstop: extrinsic ≤55% of premium (reject rented-time buys)
-    # Below the backstop, extrinsic (≤25%→2, ≤40%→1) and carry (≤5%→2, ≤8%→1) are SCORE points,
+    # Below the backstop, extrinsic (≤40→4·≤45→3·≤50→2·≤55→1) and carry (≤8→3·≤12→2·≤16→1) are SCORE points,
     # not gates (Jay 27 Aug). Trend gate = price>200MA AND 50>200 only — below the 50-MA is fine
     # (a pullback inside the uptrend, criteria §2). Score is graded 0-11; a LEAP never reads red.
 }
@@ -771,7 +771,7 @@ def scan_leap_ticker(ticker):
         rsi_rising = bool(rsi_now is not None and rsi_5ago is not None and rsi_now > rsi_5ago)
         hv20 = ind.get("hv20")
         iv_ratio = (iv / hv20) if (iv and hv20) else None       # IV cheap-vs-realized = buy timing
-        # ── Entry-quality score (0-11 laddered, every point has a criterion; nothing scores
+        # ── Entry-quality score (0-14 laddered, every point has a criterion; nothing scores
         # negative, so a LEAP never reads red). Cheap IV + §2 RSI accumulation zone + contract
         # quality (extrinsic/carry) + long-trend confirmed.
         tscore = 0
@@ -780,15 +780,16 @@ def scan_leap_ticker(ticker):
         if rsi_now is not None:                                      # §2 dip-accumulation zone
             tscore += (3 if 45 <= rsi_now <= 55 else 2 if 33 <= rsi_now < 45
                        else 1 if 55 < rsi_now <= 65 else 0)
-        if ext_share is not None:                                    # contract quality (time value)
-            tscore += 2 if ext_share <= 0.25 else 1 if ext_share <= 0.40 else 0
-        if carry is not None:                                        # cost of the rented time
-            tscore += 2 if carry <= 0.05 else 1 if carry <= 0.08 else 0
+        if ext_share is not None:                                    # contract quality (time value) — 0–4
+            tscore += (4 if ext_share <= 0.40 else 3 if ext_share <= 0.45
+                       else 2 if ext_share <= 0.50 else 1 if ext_share <= 0.55 else 0)
+        if carry is not None:                                        # cost of the rented time — 0–3
+            tscore += (3 if carry <= 0.08 else 2 if carry <= 0.12 else 1 if carry <= 0.16 else 0)
         if trend_ok:                                                 # long-term trend confirmed
             tscore += 1
-        # bands out of 11 — no red: worst is ⚪ neutral / 🟠 marginal
-        tlabel = ("🟢 STRONG ENTRY" if tscore >= 8 else "🟡 DECENT ENTRY" if tscore >= 5
-                  else "🟠 MARGINAL" if tscore >= 2 else "⚪ NEUTRAL")
+        # bands out of 14 — no red: worst is ⚪ neutral / 🟠 marginal
+        tlabel = ("🟢 STRONG ENTRY" if tscore >= 10 else "🟡 DECENT ENTRY" if tscore >= 6
+                  else "🟠 MARGINAL" if tscore >= 3 else "⚪ NEUTRAL")
         return {
             "ticker": ticker, "strategy": "LEAP", "spot": round(spot, 2),
             "expiry": expiry, "dte": dte, "strike": strike,
@@ -806,8 +807,8 @@ def scan_leap_ticker(ticker):
             "qualifies": qualifies,
             # Traffic light: qualify (uptrend + contract backstop) then the graded score splits
             # green/amber; a non-qualifier is 'neutral' (grey, OFF-TREND), never red.
-            "verdict": ("neutral" if not qualifies else ("go" if tscore >= 8 else "caution")),
-            "timing_label": tlabel, "timing_score": tscore, "score_max": 11,
+            "verdict": ("neutral" if not qualifies else ("go" if tscore >= 10 else "caution")),
+            "timing_label": tlabel, "timing_score": tscore, "score_max": 14,
             "sector": _sector(ticker),
             "good_pmcc": qualifies,   # back-compat alias for any UI still reading good_pmcc
         }
