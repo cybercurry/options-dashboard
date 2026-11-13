@@ -83,9 +83,17 @@ def _get(url):
     return r.json()
 
 
+_CIK_MAP_CACHE = None
+
+
 def ticker_to_cik(ticker):
-    """Map a ticker to its zero-padded 10-digit CIK via SEC's public map."""
-    data = _get("https://www.sec.gov/files/company_tickers.json")
+    """Map a ticker to its zero-padded 10-digit CIK via SEC's public map. The ~1 MB map is fetched
+    once per process and reused (a concurrent batch would otherwise pull it once per name — needless
+    load on SEC). A thread race just re-fetches the same bytes, so no lock is needed."""
+    global _CIK_MAP_CACHE
+    if _CIK_MAP_CACHE is None:
+        _CIK_MAP_CACHE = _get("https://www.sec.gov/files/company_tickers.json")
+    data = _CIK_MAP_CACHE
     tk = ticker.strip().upper()
     for row in data.values():
         if str(row.get("ticker", "")).upper() == tk:

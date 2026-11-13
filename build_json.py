@@ -278,22 +278,35 @@ def fetch_market():
 
 def fetch_fundamentals_all(names, prices):
     """SEC-filing fundamentals per name (the app's Fundamentals tab), via the same pure
-    `fundamentals.analyze()` module. Each ticker degrades to ok:False on its own error."""
+    `fundamentals.analyze()` module. Each ticker degrades to ok:False on its own error.
+
+    Fetched CONCURRENTLY: every name does several independent network round-trips (SEC facts,
+    quarter-end prices, yfinance forward-P/E + news), so a serial loop would blow the 10-minute
+    refresh budget. A small worker pool keeps the whole batch well under a minute while staying
+    within SEC's fair-access rate (≈2 SEC GETs/name × 5 workers ≈ 10 req/s peak). The global
+    socket timeout bounds any one hung call without stalling the rest."""
     try:
         import fundamentals
     except Exception:
         return {}
-    out = {}
-    for t in names:
+    from concurrent.futures import ThreadPoolExecutor, as_completed
+
+    def one(t):
         try:
             res = fundamentals.analyze(t, prices.get(t))
             try:
                 res["news"] = fundamentals.company_news(t)
             except Exception:
                 res["news"] = []
-            out[t] = res
+            return t, res
         except Exception as e:
-            out[t] = {"ok": False, "error": "%s: %s" % (type(e).__name__, e), "ticker": t}
+            return t, {"ok": False, "error": "%s: %s" % (type(e).__name__, e), "ticker": t}
+
+    out = {}
+    with ThreadPoolExecutor(max_workers=5) as ex:
+        for fut in as_completed([ex.submit(one, t) for t in names]):
+            t, res = fut.result()
+            out[t] = res
     return out
 
 
