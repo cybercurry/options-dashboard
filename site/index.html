@@ -663,6 +663,7 @@ th.thelp:hover{color:var(--text)} th.thelp:hover .thi{border-color:var(--accent)
         <tr><td><b>Gate 2</b> — Contract backstop</td><td class="mono">time value (premium − intrinsic) ≤ 55% of premium — reject a mostly-rented-time call</td></tr>
       </tbody></table>
       <p class="rnote"><b>Score (0–11), all transparent:</b> IV vs realized (&lt;1.0 → 3 · &lt;1.25 → 2) · RSI §2 zone (45–55 → 3 · 33–45 → 2 · 55–65 → 1) · time value (≤25% → 2 · ≤40% → 1) · carry = (time value ÷ spot)×365/DTE (≤5% → 2 · ≤8% → 1) · uptrend confirmed → 1. Carry and time value <b>cost points but no longer gate</b> — only the 55% backstop can reject a contract.</p>
+      <p class="rnote"><b>What "carry" means:</b> a LEAP costs extra for its <b>time value</b> (premium above intrinsic), which decays over the option's life. <b>Carry</b> annualizes that decay — <b>(time value ÷ share price) × 365/DTE</b> — i.e. how much the stock must rise <b>per year</b> just to offset the time you're renting instead of owning shares outright. <b>Lower = cheaper to hold</b>; think of it as the LEAP's financing cost vs. buying the stock.</p>
     </div>
 
     <div class="rules-sec">
@@ -699,7 +700,7 @@ th.thelp:hover{color:var(--text)} th.thelp:hover .thi{border-color:var(--accent)
 
 </main>
 
-<footer class="wrap"><b>optionintel.app</b> — one engine, every tab · real Tradier chains &amp; greeks · the same rules the <b>Rules</b> tab lists · <b>research only, not advice</b> · <span id="upd" style="opacity:.75">updated…</span> · <span class="pre" style="opacity:.6">build <span id="buildid">2026-11-12 · chain VIX→Δ sell-target guide</span></span></footer>
+<footer class="wrap"><b>optionintel.app</b> — one engine, every tab · real Tradier chains &amp; greeks · the same rules the <b>Rules</b> tab lists · <b>research only, not advice</b> · <span id="upd" style="opacity:.75">updated…</span> · <span class="pre" style="opacity:.6">build <span id="buildid">2026-11-13 · LEAP carry explainer in Rules</span></span></footer>
 
 <script>
 const KIND={csp:"CSP",cc:"CC",leap:"LEAP"};
