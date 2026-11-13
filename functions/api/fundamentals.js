@@ -111,6 +111,105 @@ function latestPoint(facts, concepts) {
 
 const div = (a, b) => (a != null && b != null && b !== 0) ? a / b : null;
 
+// ── per-quarter series (mirrors fundamentals.py _discrete_quarters / _quarters) ──
+function discreteQuarters(facts, concepts) {
+  const pd = s => { const p = String(s).split("-"); return Date.UTC(+p[0], +p[1] - 1, +p[2]); };
+  const DAY = 86400000;
+  const days = (s, e) => Math.round((pd(e) - pd(s)) / DAY);
+  const seen = {};
+  for (const r of rows(facts, concepts)) {
+    const s = r.start, e = r.end, v = r.val, f = r.filed || "";
+    if (!(s && e && v != null)) continue;
+    const k = s + "|" + e;
+    if (!(k in seen) || f > seen[k][1]) seen[k] = [Number(v), f];
+  }
+  const fs = Object.keys(seen).map(k => { const [s, e] = k.split("|"); return [s, e, seen[k][0], days(s, e)]; }).filter(x => x[3] > 0);
+  const disc = {};
+  for (const [, e, v, d] of fs) if (d >= 80 && d <= 100) disc[e] = v;   // explicit quarters win
+  const bystart = {};
+  for (const [s, e, v, d] of fs) if (d <= 385) (bystart[s] = bystart[s] || []).push([e, v, d]);
+  for (const s in bystart) {
+    const lst = bystart[s].sort((a, b) => a[0] < b[0] ? -1 : 1);
+    let pv = 0, pdv = 0;
+    for (const [e, v, d] of lst) { const seg = d - pdv; if (!(e in disc) && seg >= 80 && seg <= 100) disc[e] = v - pv; pv = v; pdv = d; }
+  }
+  return disc;
+}
+function pointsByEnd(facts, concepts) {
+  const seen = {};
+  for (const r of rows(facts, concepts)) { const e = r.end, v = r.val, f = r.filed || ""; if (e == null || v == null) continue; if (!(e in seen) || f > seen[e][1]) seen[e] = [Number(v), f]; }
+  const out = {}; for (const e in seen) out[e] = seen[e][0]; return out;
+}
+const QMON = ["", "Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+function qLabel(end) { const p = String(end).split("-"); if (p.length < 3) return String(end); const mo = +p[1], q = Math.floor((mo - 1) / 3) + 1; return `Q${q} · ${QMON[mo]} ’${String(+p[0] % 100).padStart(2, "0")}`; }
+function recentQuarterEnds(facts, want) {
+  const rev = discreteQuarters(facts, C.revenue), ni = discreteQuarters(facts, C.net_income);
+  return [...new Set([...Object.keys(rev), ...Object.keys(ni)])].filter(Boolean).sort().slice(-want);
+}
+function quarters(facts, prices, want = 3, lookback = 7) {
+  prices = prices || {};
+  const rev_d = discreteQuarters(facts, C.revenue), ni_d = discreteQuarters(facts, C.net_income),
+    gp_d = discreteQuarters(facts, C.gross_profit), opi_d = discreteQuarters(facts, C.op_income),
+    cfo_d = discreteQuarters(facts, C.cfo), cap_d = discreteQuarters(facts, C.capex),
+    rnd_d = discreteQuarters(facts, C.rnd), eps_d = discreteQuarters(facts, C.eps);
+  const eq_p = pointsByEnd(facts, C.equity), ca_p = pointsByEnd(facts, C.cur_assets), cl_p = pointsByEnd(facts, C.cur_liab),
+    ltd_p = pointsByEnd(facts, C.lt_debt), dc_p = pointsByEnd(facts, C.debt_cur), sh_p = pointsByEnd(facts, C.shares_out);
+  const ends = [...new Set([...Object.keys(rev_d), ...Object.keys(ni_d)])].filter(Boolean).sort();
+  const recent = ends.slice(-lookback);
+  const ttmNi = e => { const i = recent.indexOf(e); const legs = recent.slice(Math.max(0, i - 3), i + 1); const vals = legs.map(x => ni_d[x]); return (legs.length === 4 && vals.every(v => v != null)) ? vals.reduce((a, b) => a + b, 0) : null; };
+  const atOrBefore = (pts, e) => { const c = Object.keys(pts).filter(d => d <= e).sort(); return c.length ? pts[c[c.length - 1]] : null; };
+  const out = [];
+  for (const e of recent.slice(-want)) {
+    const rev = rev_d[e] ?? null, ni = ni_d[e] ?? null;
+    const equity = atOrBefore(eq_p, e), shares = atOrBefore(sh_p, e), ca = atOrBefore(ca_p, e), cl = atOrBefore(cl_p, e), ltd = atOrBefore(ltd_p, e), dc = atOrBefore(dc_p, e);
+    const total_debt = (ltd != null || dc != null) ? ((ltd || 0) + (dc || 0)) : null;
+    const cfo = cfo_d[e], cap = cap_d[e];
+    const fcf = (cfo != null && cap != null) ? (cfo - cap) : null;
+    const tn = ttmNi(e), px = prices[e] ?? null;
+    const mcap = (px && shares) ? px * shares : null;
+    const pe = (mcap && tn && tn > 0) ? mcap / tn : null;
+    out.push({
+      label: qLabel(e), end: e, revenue: rev, net_income: ni, eps: eps_d[e] ?? null,
+      gross_margin: div(gp_d[e], rev), op_margin: div(opi_d[e], rev), net_margin: div(ni, rev),
+      fcf: fcf, fcf_margin: div(fcf, rev), capex: cap ?? null, rnd: rnd_d[e] ?? null,
+      debt_to_equity: div(total_debt, equity), current_ratio: div(ca, cl),
+      market_cap: mcap, pe: pe, price: px,
+    });
+  }
+  return out;
+}
+// Quarter-end closes from the open Yahoo v8 chart (monthly bars) — one call, no crumb.
+async function quarterEndPrices(ticker, ends) {
+  const out = {};
+  if (!ends || !ends.length) return out;
+  try {
+    const r = await fetch(`https://query1.finance.yahoo.com/v8/finance/chart/${encodeURIComponent(ticker)}?interval=1mo&range=3y`,
+      { headers: { "User-Agent": UA }, cf: { cacheTtl: 86400, cacheEverything: true } });
+    if (!r.ok) return out;
+    const j = await r.json();
+    const res = j && j.chart && j.chart.result && j.chart.result[0];
+    if (!res) return out;
+    const ts = res.timestamp || [], closes = (res.indicators && res.indicators.quote && res.indicators.quote[0] && res.indicators.quote[0].close) || [];
+    const byYm = {};
+    for (let i = 0; i < ts.length; i++) { const d = new Date(ts[i] * 1000); const ym = d.getUTCFullYear() + "-" + String(d.getUTCMonth() + 1).padStart(2, "0"); if (closes[i] != null) byYm[ym] = closes[i]; }
+    for (const e of ends) { const ym = String(e).slice(0, 7); if (byYm[ym] != null) out[e] = byYm[ym]; }
+  } catch (e) { return {}; }
+  return out;
+}
+// Forward P/E is best-effort on the live path (Yahoo's estimate endpoint is crumb-gated and flaky);
+// the authoritative source is yfinance in the server-side build. Degrades to null (shown n/a).
+async function fwdPe(ticker) {
+  try {
+    const r = await fetch(`https://query1.finance.yahoo.com/v7/finance/quote?symbols=${encodeURIComponent(ticker)}`,
+      { headers: { "User-Agent": UA }, cf: { cacheTtl: 3600, cacheEverything: true } });
+    if (!r.ok) return null;
+    const j = await r.json();
+    const q = j && j.quoteResponse && j.quoteResponse.result && j.quoteResponse.result[0];
+    const v = q && q.forwardPE;
+    return (typeof v === "number" && v > 0) ? v : null;
+  } catch (e) { return null; }
+}
+
 function metricsFromSec(facts, price) {
   // Annual latest/prior — drives clean full-year-vs-full-year growth
   const [rev_a, rev_ap] = annualLastTwo(facts, C.revenue);
@@ -235,6 +334,10 @@ export async function onRequestGet(context) {
     const facts = await secGet(`https://data.sec.gov/api/xbrl/companyfacts/CIK${cik}.json`, 3600);
     const price = (await assetMeta(tk))?.price ?? null;
     const m = metricsFromSec(facts, price);
+    const qEnds = recentQuarterEnds(facts, 3);
+    const [qPrices, fpe] = await Promise.all([quarterEndPrices(tk, qEnds), fwdPe(tk)]);
+    m.quarters = quarters(facts, qPrices);
+    m.fwd_pe = fpe;
     const { flags, groups } = assess(m);
     let sic = null;
     try { const sub = await secGet(`https://data.sec.gov/submissions/CIK${cik}.json`, 86400); sic = sub.sicDescription || null; } catch (e) {}
@@ -245,4 +348,4 @@ export async function onRequestGet(context) {
   }
 }
 
-export { rows, annualLastTwo, ttm, latestPoint, metricsFromSec, assess };
+export { rows, annualLastTwo, ttm, latestPoint, metricsFromSec, assess, discreteQuarters, quarters, recentQuarterEnds };

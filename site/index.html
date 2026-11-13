@@ -133,6 +133,17 @@ th.sortable:hover{color:var(--mine)}
 .fxnum{width:100%; border-collapse:collapse; font-size:13.5px; margin-top:2px}
 .fxnum td{padding:8px 10px; border-bottom:1px solid var(--line-soft)} .fxnum tr:last-child td{border-bottom:0}
 .fxnum .k{color:var(--muted)} .fxnum .v{font-family:"IBM Plex Mono"; text-align:right; color:var(--text)}
+.fxnum.fxq{font-size:12.5px} .fxnum.fxq td{padding:6px 9px}
+.fxnum.fxq th{padding:6px 9px; border-bottom:1px solid var(--line)}
+.fxnum.fxq .qh{font-family:"IBM Plex Mono"; text-align:right; color:var(--text); font-weight:700; font-size:11.5px; white-space:nowrap}
+.fxnum.fxq .sv{text-align:right}
+.fxnum.fxq tr.sep td{padding:0; height:0; border-bottom:2px solid var(--line)}
+@media (max-width:560px){
+  .fxnum.fxq{font-size:10px}
+  .fxnum.fxq td,.fxnum.fxq th{padding:5px 4px}
+  .fxnum.fxq .qh{font-size:9.5px; white-space:normal; line-height:1.2}
+  .fxnum.fxq .k{font-size:10px}
+}
 .fxnews{display:block; text-decoration:none; background:var(--surface-2); border:1px solid var(--line); border-left:3px solid var(--accent); border-radius:10px; padding:10px 14px; margin:8px 0; transition:transform .12s}
 .fxnews:hover{transform:translateX(3px)}
 .fxnews .t{color:var(--text); font-weight:600; font-size:14px; line-height:1.4} .fxnews .m{color:var(--faint); font-size:12px; margin-top:4px}
@@ -1864,18 +1875,49 @@ function renderFund(tk){
   if(m.ni_growth!=null) tr.push(cs(`Net income ${(m.ni_growth*100>=0?'+':'')+(m.ni_growth*100).toFixed(0)}% YoY`, m.ni_growth>=0));
   if(m.fcf!=null) tr.push(cs(m.fcf>=0?'FCF positive':'FCF negative', m.fcf>=0));
   const inv=[]; if(m.rnd)inv.push('R&D '+fxMoney(m.rnd)+'/yr'); if(m.capex)inv.push('Capex '+fxMoney(m.capex)+'/yr');
-  const numRows=[
-    ['Revenue',fxMoney(m.revenue),'Prior yr',fxMoney(m.revenue_prev)],
-    ['Net income',fxMoney(m.net_income),'Prior yr',fxMoney(m.net_income_prev)],
-    ['EPS (diluted)',fxNum(m.eps),'Shares out',fxMoney(m.shares).replace('$','')],
-    ['Gross margin',fxPct(m.gross_margin),'Op margin',fxPct(m.op_margin)],
-    ['Net margin',fxPct(m.net_margin),'ROE',fxPct(m.roe)],
-    ['Free cash flow',fxMoney(m.fcf),'FCF margin',fxPct(m.fcf_margin)],
-    ['R&D spend',fxMoney(m.rnd),'Capex',fxMoney(m.capex)],
-    ['Debt / Equity',fxX(m.debt_to_equity),'Current ratio',fxNum(m.current_ratio)],
-    ['Interest coverage',fxX(m.interest_coverage),'Market cap',fxMoney(m.market_cap)],
-    ['P/E',fxNum(m.pe,1),'FCF yield',fxPct(m.fcf_yield)]];
-  const numTable=`<table class="fxnum">${numRows.map(r=>`<tr><td class="k">${r[0]}</td><td class="v">${r[1]}</td><td class="k">${r[2]}</td><td class="v">${r[3]}</td></tr>`).join('')}</table>`;
+  const Q=Array.isArray(m.quarters)?m.quarters:[];
+  let numTable, numCap;
+  if(Q.length){                               // 3 most recent quarters side by side
+    const cols=Q.length;
+    const hdr=`<tr><th class="k"></th>${Q.map(q=>`<th class="qh">${q.label}</th>`).join('')}</tr>`;
+    const qrow=(lbl,fmt,key)=>`<tr><td class="k">${lbl}</td>${Q.map(q=>`<td class="v">${fmt(q[key])}</td>`).join('')}</tr>`;
+    const body=[
+      qrow('Revenue',fxMoney,'revenue'),
+      qrow('Net income',fxMoney,'net_income'),
+      qrow('EPS (diluted)',v=>fxNum(v,2),'eps'),
+      qrow('Gross margin',fxPct,'gross_margin'),
+      qrow('Op margin',fxPct,'op_margin'),
+      qrow('Net margin',fxPct,'net_margin'),
+      qrow('Free cash flow',fxMoney,'fcf'),
+      qrow('FCF margin',fxPct,'fcf_margin'),
+      qrow('Capex',fxMoney,'capex'),
+      qrow('R&D',fxMoney,'rnd'),
+      qrow('Debt / Equity',fxX,'debt_to_equity'),
+      qrow('Current ratio',v=>fxNum(v,2),'current_ratio'),
+      qrow('P/E',v=>fxNum(v,1),'pe'),
+      qrow('Market cap',fxMoney,'market_cap')].join('');
+    const single=[
+      ['Revenue YoY',fxPct(m.rev_growth)],
+      ['Net income YoY',fxPct(m.ni_growth)],
+      ['ROE (TTM)',fxPct(m.roe)],
+      ['Forward P/E',m.fwd_pe!=null?fxNum(m.fwd_pe,1):'n/a']
+    ].map(r=>`<tr><td class="k">${r[0]}</td><td class="v sv" colspan="${cols}">${r[1]}</td></tr>`).join('');
+    numTable=`<table class="fxnum fxq"><thead>${hdr}</thead><tbody>${body}<tr class="sep"><td colspan="${cols+1}"></td></tr>${single}</tbody></table>`;
+    numCap='Discrete quarters from 10-Q/10-K filings · per-quarter P/E &amp; market cap at that quarter’s close · YoY &amp; ROE are trailing-12-months · Forward P/E = price ÷ consensus forward-EPS estimate (n/a when unavailable).';
+  }else{                                       // fallback: older data without a quarterly series
+    const numRows=[
+      ['Revenue',fxMoney(m.revenue),'Net income',fxMoney(m.net_income)],
+      ['EPS (diluted)',fxNum(m.eps),'Shares out',fxMoney(m.shares).replace('$','')],
+      ['Gross margin',fxPct(m.gross_margin),'Op margin',fxPct(m.op_margin)],
+      ['Net margin',fxPct(m.net_margin),'ROE',fxPct(m.roe)],
+      ['Free cash flow',fxMoney(m.fcf),'FCF margin',fxPct(m.fcf_margin)],
+      ['R&D spend',fxMoney(m.rnd),'Capex',fxMoney(m.capex)],
+      ['Debt / Equity',fxX(m.debt_to_equity),'Current ratio',fxNum(m.current_ratio)],
+      ['Interest coverage',fxX(m.interest_coverage),'Market cap',fxMoney(m.market_cap)],
+      ['P/E',fxNum(m.pe,1),'FCF yield',fxPct(m.fcf_yield)]];
+    numTable=`<table class="fxnum">${numRows.map(r=>`<tr><td class="k">${r[0]}</td><td class="v">${r[1]}</td><td class="k">${r[2]}</td><td class="v">${r[3]}</td></tr>`).join('')}</table>`;
+    numCap='Balance-sheet items from the most recent 10-Q/10-K; flows are trailing-twelve-months.';
+  }
   const profCap=[p.website,p.sic?('SEC industry: '+p.sic):''].filter(Boolean).join('  ·  ');
   const news=(f.news||[]);
   const newsHtml=news.length?news.map(n=>`<a class="fxnews" href="${n.link}" target="_blank" rel="noopener"><div class="t">${n.title||''}</div><div class="m">${[n.publisher,n.when].filter(Boolean).join(' · ')}</div></a>`).join(''):'<div class="dim">No recent headlines found.</div>';
@@ -1883,8 +1925,8 @@ function renderFund(tk){
   const tiles=`<div class="fxtiles">
     <div class="fxtile" tabindex="0">${FXICON.profile}<div class="fxtile-lbl">Company profile</div><div class="fxtile-hint">full business description</div>
       <div class="fxtile-panel"><div class="fxtile-inner">${fxParas(p.summary)||'<div class="dim">No description on file.</div>'}${cap1}</div></div></div>
-    <div class="fxtile" tabindex="0">${FXICON.numbers}<div class="fxtile-lbl">The numbers</div><div class="fxtile-hint">latest annual filing</div>
-      <div class="fxtile-panel"><div class="fxtile-inner">${numTable}<div class="fxdd-cap">Balance-sheet items from the most recent 10-Q/10-K; flows from the latest full fiscal year.</div></div></div></div>
+    <div class="fxtile" tabindex="0">${FXICON.numbers}<div class="fxtile-lbl">The numbers</div><div class="fxtile-hint">${Q.length?'last 3 quarters':'latest filing'}</div>
+      <div class="fxtile-panel"><div class="fxtile-inner">${numTable}<div class="fxdd-cap">${numCap}</div></div></div></div>
     <div class="fxtile" tabindex="0">${FXICON.news}<div class="fxtile-lbl">Recent headlines</div><div class="fxtile-hint">via Yahoo Finance</div>
       <div class="fxtile-panel"><div class="fxtile-inner">${newsHtml}<div class="fxdd-cap">Headlines via Yahoo Finance — click to open the original article.</div></div></div></div>
   </div>`;

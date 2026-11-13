@@ -104,6 +104,10 @@ def _lean_analyze(sym, title, cik, price):
     """SEC-only fundamentals entry (no yfinance, no AI). Same shape the app renders."""
     facts = fundamentals.company_facts(cik)                 # SEC GET
     m = fundamentals._metrics_from_sec(facts, price)
+    # Per-quarter table (operating metrics only here — this batch path stays lean: no per-name price
+    # history and no yfinance, so quarterly P/E / market cap and forward P/E show n/a in the baked set).
+    m["quarters"] = fundamentals._quarters(facts)
+    m["fwd_pe"] = None
     flags, groups = fundamentals._assess(m)
     sic = fundamentals._sec_sic(cik)                        # SEC GET
     prof = {}

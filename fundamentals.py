@@ -17,7 +17,7 @@ chips (Valuation / Quality / Health) + a red-flag list; every raw number rides i
 
 import os
 import requests
-from datetime import date
+from datetime import date, timedelta
 
 try:                       # streamlit is present in the app; keep this importable standalone.
     import streamlit as _st
@@ -138,6 +138,18 @@ def _annual_last_two(facts, concepts):
     return latest, prior
 
 
+def _pdate(s):
+    try:
+        y, mo, d = str(s).split("-"); return date(int(y), int(mo), int(d))
+    except Exception:
+        return None
+
+
+def _ddays(s, e):
+    ds, de = _pdate(s), _pdate(e)
+    return (de - ds).days if (ds and de) else 0
+
+
 def _ttm(facts, concepts):
     """Trailing-twelve-months for a FLOW item (revenue, net income, EPS, cash flow): latest full
     fiscal year + current-year YTD − the prior-year matching YTD. Dedupes restatements (latest-filed
@@ -146,15 +158,7 @@ def _ttm(facts, concepts):
 
     This is what keeps P/E current: a fast grower that has filed three 2026 quarters is valued on its
     trailing 12 months, not on a stale FY-2025 that under-counts earnings and inflates P/E."""
-    def pdate(s):
-        try:
-            y, mo, d = s.split("-"); return date(int(y), int(mo), int(d))
-        except Exception:
-            return None
-    def dur(s, e):
-        ds, de = pdate(s), pdate(e)
-        return (de - ds).days if (ds and de) else 0
-
+    pdate, dur = _pdate, _ddays
     seen = {}                                     # dedupe duration facts by (start,end)
     for r in _rows(facts, concepts):
         s, e, v, f = r.get("start"), r.get("end"), r.get("val"), r.get("filed", "")
@@ -191,6 +195,184 @@ def _ttm(facts, concepts):
         return fy_v                               # can't match prior YTD → annual (never a wrong TTM)
     p_v = max(pri, key=lambda x: pdate(x[1]))[2]
     return fy_v + c_v - p_v
+
+
+# ── per-quarter series (the Fundamentals tab's 3-quarters-side-by-side table) ─────
+def _dur_facts(facts, concepts):
+    """Deduped duration facts (latest-filed per start/end) as (start, end, val, days)."""
+    seen = {}
+    for r in _rows(facts, concepts):
+        s, e, v, f = r.get("start"), r.get("end"), r.get("val"), r.get("filed", "")
+        if not (s and e and v is not None):
+            continue
+        k = (s, e)
+        if k not in seen or f > seen[k][1]:
+            seen[k] = (float(v), f)
+    out = []
+    for (s, e), (v, _f) in seen.items():
+        d = _ddays(s, e)
+        if d > 0:
+            out.append((s, e, v, d))
+    return out
+
+
+def _discrete_quarters(facts, concepts):
+    """Map each fiscal-quarter END date → that quarter's DISCRETE (3-month) flow value.
+
+    SEC files flows two ways: some as explicit ~90-day quarters, most as year-to-date cumulatives
+    (Q1=3mo, Q2=6mo, Q3=9mo, FY=12mo, all sharing the fiscal-year start). We take explicit quarters
+    directly, then fill any gap by differencing the cumulative chain — each increment is accepted only
+    when it spans ~90 days, so a standalone annual (no YTD chain) never masquerades as a quarter and
+    Q4 falls out cleanly as FY − 9-month."""
+    fs = _dur_facts(facts, concepts)
+    disc = {}
+    for (s, e, v, d) in fs:                        # explicit ~quarter facts win
+        if 80 <= d <= 100:
+            disc[e] = v
+    bystart = {}
+    for (s, e, v, d) in fs:
+        if d <= 385:                               # within a fiscal year (YTD legs + annual)
+            bystart.setdefault(s, []).append((e, v, d))
+    for s, lst in bystart.items():
+        lst.sort(key=lambda x: x[0])               # by end date
+        prev_v, prev_d = 0.0, 0
+        for (e, v, d) in lst:
+            seg = d - prev_d                        # implied length of this increment
+            if e not in disc and 80 <= seg <= 100:  # ~one quarter → a real discrete value
+                disc[e] = v - prev_v
+            prev_v, prev_d = v, d
+    return disc
+
+
+def _points_by_end(facts, concepts):
+    """Balance-sheet (point-in-time) value at each reported period end (latest-filed per end)."""
+    seen = {}
+    for r in _rows(facts, concepts):
+        e, v, f = r.get("end"), r.get("val"), r.get("filed", "")
+        if e is None or v is None:
+            continue
+        if e not in seen or f > seen[e][1]:
+            seen[e] = (float(v), f)
+    return {e: v for e, (v, _f) in seen.items()}
+
+
+_QLBL_MON = ["", "Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
+
+
+def _q_label(end):
+    """Short column header for a quarter-END date: fiscal-quarter guess + the period end, e.g.
+    'Q3 ·Sep ’26'. Calendar-based quarter is an approximation for off-calendar fiscal years, but the
+    month+year is exact, so the header is never misleading."""
+    d = _pdate(end)
+    if not d:
+        return str(end)
+    q = (d.month - 1) // 3 + 1
+    return "Q%d · %s ’%02d" % (q, _QLBL_MON[d.month], d.year % 100)
+
+
+def _recent_quarter_ends(facts, want=3):
+    """The most recent `want` fiscal-quarter end dates we can form a discrete value for."""
+    rev = _discrete_quarters(facts, _C["revenue"])
+    ni = _discrete_quarters(facts, _C["net_income"])
+    ends = sorted(e for e in set(list(rev) + list(ni)) if e)
+    return ends[-want:]
+
+
+def _quarters(facts, prices=None, want=3, lookback=7):
+    """Build the per-quarter rows for the table. `prices` maps quarter-END date → closing price
+    (used for that quarter's P/E and market cap); omit for no valuation columns. Per-quarter P/E uses
+    trailing-twelve-months net income AT that quarter (the same basis as the headline P/E), so the
+    valuation trend is apples-to-apples across the three columns."""
+    prices = prices or {}
+    rev_d = _discrete_quarters(facts, _C["revenue"])
+    ni_d = _discrete_quarters(facts, _C["net_income"])
+    gp_d = _discrete_quarters(facts, _C["gross_profit"])
+    opi_d = _discrete_quarters(facts, _C["op_income"])
+    cfo_d = _discrete_quarters(facts, _C["cfo"])
+    cap_d = _discrete_quarters(facts, _C["capex"])
+    rnd_d = _discrete_quarters(facts, _C["rnd"])
+    eps_d = _discrete_quarters(facts, _C["eps"])
+    eq_p = _points_by_end(facts, _C["equity"])
+    ca_p = _points_by_end(facts, _C["cur_assets"])
+    cl_p = _points_by_end(facts, _C["cur_liab"])
+    ltd_p = _points_by_end(facts, _C["lt_debt"])
+    dc_p = _points_by_end(facts, _C["debt_cur"])
+    sh_p = _points_by_end(facts, _C["shares_out"])
+
+    ends = sorted(e for e in set(list(rev_d) + list(ni_d)) if e)
+    recent = ends[-lookback:]
+
+    def ttm_ni(e):                                 # rolling 4-quarter NI ending at e (for ROE/PE)
+        idx = recent.index(e)
+        legs = recent[max(0, idx - 3): idx + 1]
+        vals = [ni_d.get(x) for x in legs]
+        return sum(vals) if (len(legs) == 4 and all(v is not None for v in vals)) else None
+
+    def at_or_before(pts, e):                       # latest balance-sheet point ≤ e
+        cand = [d for d in pts if d <= e]
+        return pts[max(cand)] if cand else None
+
+    rows = []
+    for e in recent[-want:]:
+        rev, ni = rev_d.get(e), ni_d.get(e)
+        equity = at_or_before(eq_p, e); shares = at_or_before(sh_p, e)
+        ca = at_or_before(ca_p, e); cl = at_or_before(cl_p, e)
+        ltd = at_or_before(ltd_p, e); dc = at_or_before(dc_p, e)
+        total_debt = ((ltd or 0) + (dc or 0)) if (ltd is not None or dc is not None) else None
+        cfo, cap = cfo_d.get(e), cap_d.get(e)
+        fcf = (cfo - cap) if (cfo is not None and cap is not None) else None
+        tn = ttm_ni(e)
+        px = prices.get(e)
+        mcap = (px * shares) if (px and shares) else None
+        pe = (mcap / tn) if (mcap and tn and tn > 0) else None
+        rows.append({
+            "label": _q_label(e), "end": e,
+            "revenue": rev, "net_income": ni, "eps": eps_d.get(e),
+            "gross_margin": _div(gp_d.get(e), rev), "op_margin": _div(opi_d.get(e), rev),
+            "net_margin": _div(ni, rev), "fcf": fcf, "fcf_margin": _div(fcf, rev),
+            "capex": cap, "rnd": rnd_d.get(e),
+            "debt_to_equity": _div(total_debt, equity), "current_ratio": _div(ca, cl),
+            "market_cap": mcap, "pe": pe, "price": px,
+        })
+    return rows
+
+
+def _quarter_end_prices(symbol, ends):
+    """Closing price near each quarter-END date, via Tradier monthly history (one lightweight call).
+    {end_date: close}. Empty on any failure — valuation columns then show n/a, never a wrong price."""
+    out = {}
+    if not ends:
+        return out
+    try:
+        import tradier
+        if not tradier.is_configured():
+            return out
+        start = (min(_pdate(e) for e in ends) - timedelta(days=40)).isoformat()
+        hist = tradier.get_history(symbol, interval="monthly", start=start)
+        by_ym = {}
+        for bar in hist:
+            d = str(bar.get("date", ""))[:7]        # YYYY-MM
+            c = bar.get("close")
+            if d and isinstance(c, (int, float)):
+                by_ym[d] = float(c)
+        for e in ends:
+            out[e] = by_ym.get(str(e)[:7])
+    except Exception:
+        return {}
+    return {e: v for e, v in out.items() if v is not None}
+
+
+def _fwd_pe(ticker):
+    """Forward P/E from yfinance (price ÷ consensus forward EPS). It's the one estimate-based figure
+    in the tab — SEC filings have no forward number — so it degrades to None (shown n/a) rather than
+    ever guessing. Runs server-side per refresh, so Yahoo rate limits aren't hit per viewer."""
+    try:
+        import yfinance as yf
+        info = yf.Ticker(ticker).info or {}
+        v = info.get("forwardPE")
+        return float(v) if isinstance(v, (int, float)) and v > 0 else None
+    except Exception:
+        return None
 
 
 def _latest_point(facts, concepts):
@@ -537,6 +719,9 @@ def analyze(ticker, price=None):
         if cik:
             facts = company_facts(cik)
             m = _metrics_from_sec(facts, price)
+            ends = _recent_quarter_ends(facts, want=3)
+            m["quarters"] = _quarters(facts, _quarter_end_prices(ticker, ends))
+            m["fwd_pe"] = _fwd_pe(ticker)
             flags, groups = _assess(m)
             return {"ok": True, "error": None, "ticker": ticker.upper(), "company": name,
                     "cik": cik, "source": "SEC EDGAR — 10-K / 10-Q filings",
