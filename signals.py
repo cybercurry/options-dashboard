@@ -302,6 +302,7 @@ def _indicators(ticker):
             "pctb_3": pctb_c[-3:] if len(pctb_c) >= 3 else pctb_c,
             "rsi": rsi_c[-1] if rsi_c else None,
             "rsi_prev": rsi_c[-2] if len(rsi_c) >= 2 else None,
+            "rsi_2ago": rsi_c[-3] if len(rsi_c) >= 3 else (rsi_c[0] if rsi_c else None),
             "rsi_5": rsi_c[-5:] if len(rsi_c) >= 5 else rsi_c,
             "rsi_5ago": rsi_c[-6] if len(rsi_c) >= 6 else (rsi_c[0] if rsi_c else None),
             "sma20": _sma(closes, 20), "ma50": ma50, "ma200": ma200, "hv20": _hv20(closes),
@@ -769,9 +770,15 @@ def scan_leap_ticker(ticker):
         qualifies = bool(trend_ok and ext_ok)
         rsi_now = ind.get("rsi"); rsi_5ago = ind.get("rsi_5ago")
         rsi_rising = bool(rsi_now is not None and rsi_5ago is not None and rsi_now > rsi_5ago)
+        # Component F · dip-reversal timing — INDEPENDENT of the 200/50-MA trend gate. Reward a pullback
+        # below the 20-day BB median (%B < 0.5) that is turning up (RSI rising over the last 2 sessions).
+        pctb = ind.get("pctb")                                        # Bollinger %B (0.5 = the 20-day median)
+        rsi_2ago = ind.get("rsi_2ago")
+        below_median = bool(pctb is not None and pctb < 0.5)          # price under the 20-day midline
+        dip_rising = bool(below_median and rsi_now is not None and rsi_2ago is not None and rsi_now > rsi_2ago)
         hv20 = ind.get("hv20")
         iv_ratio = (iv / hv20) if (iv and hv20) else None       # IV cheap-vs-realized = buy timing
-        # ── Entry-quality score (0-14 laddered, every point has a criterion; nothing scores
+        # ── Entry-quality score (0-16 laddered, every point has a criterion; nothing scores
         # negative, so a LEAP never reads red). Cheap IV + §2 RSI accumulation zone + contract
         # quality (extrinsic/carry) + long-trend confirmed.
         tscore = 0
@@ -787,8 +794,10 @@ def scan_leap_ticker(ticker):
             tscore += (3 if carry <= 0.08 else 2 if carry <= 0.12 else 1 if carry <= 0.16 else 0)
         if trend_ok:                                                 # long-term trend confirmed
             tscore += 1
-        # bands out of 14 — no red: worst is ⚪ neutral / 🟠 marginal
-        tlabel = ("🟢 STRONG ENTRY" if tscore >= 10 else "🟡 DECENT ENTRY" if tscore >= 6
+        if dip_rising:                                               # F · dip-reversal timing (0 or 2)
+            tscore += 2
+        # bands out of 16 — no red: worst is ⚪ neutral / 🟠 marginal
+        tlabel = ("🟢 STRONG ENTRY" if tscore >= 11 else "🟡 DECENT ENTRY" if tscore >= 7
                   else "🟠 MARGINAL" if tscore >= 3 else "⚪ NEUTRAL")
         return {
             "ticker": ticker, "strategy": "LEAP", "spot": round(spot, 2),
@@ -803,12 +812,14 @@ def scan_leap_ticker(ticker):
             "above_200ma": bool(above_200), "above_50ma": bool(above_50), "ma_aligned": aligned,
             "rsi": round(rsi_now, 1) if rsi_now is not None else None,
             "rsi_rising": rsi_rising,
+            "pctb": round(pctb, 3) if pctb is not None else None,     # Bollinger %B (0.5 = 20-day median)
+            "dip_timing": 2 if dip_rising else 0,                     # F · below median + RSI rising (2 sessions)
             "ext_ok": ext_ok, "trend_ok": trend_ok,
             "qualifies": qualifies,
             # Traffic light: qualify (uptrend + contract backstop) then the graded score splits
             # green/amber; a non-qualifier is 'neutral' (grey, OFF-TREND), never red.
-            "verdict": ("neutral" if not qualifies else ("go" if tscore >= 10 else "caution")),
-            "timing_label": tlabel, "timing_score": tscore, "score_max": 14,
+            "verdict": ("neutral" if not qualifies else ("go" if tscore >= 11 else "caution")),
+            "timing_label": tlabel, "timing_score": tscore, "score_max": 16,
             "sector": _sector(ticker),
             "good_pmcc": qualifies,   # back-compat alias for any UI still reading good_pmcc
         }
