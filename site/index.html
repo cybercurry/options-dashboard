@@ -1708,7 +1708,7 @@ function leapTile(l){
   const foot=`<span class="pre">Exp ${l.expiry}</span> · <span class="pre">DTE ${l.dte}</span> · cost $${l.cost} · time value $${num(l.extrinsic,0)} · carry ${num(l.carry_pct,1,'%/yr')} · ${ma}`;
   const key=[
     kdot('good')+'STRONG — in uptrend, score ≥ 10',
-    kdot('warn')+'ANALYZE — in uptrend, score 5–7 · your call',
+    kdot('warn')+'ANALYZE — in uptrend, score 6–9 · your call',
     '<span class="kdot" style="background:var(--faint)"></span>OFF-TREND — below 200-MA or 50<200 · not a buy zone',
     'below the 50-MA is fine — a pullback inside the uptrend still qualifies',
   ].map(l=>`<div>${l}</div>`).join('');
