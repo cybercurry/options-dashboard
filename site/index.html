@@ -975,11 +975,13 @@ function activeSet(){
   const u=(DATA&&DATA.universe)||{};
   return new Set([...(u.wheel_names||[]),...(u.growth_names||[])].map(t=>String(t).toUpperCase()));
 }
+function activeCount(){ return activeSet().size; }   // real DISTINCT ticker count of the active universe
+function defaultCount(){ const u=(DATA&&DATA.universe)||{};
+  return new Set([...(u.wheel_names||[]),...(u.growth_names||[])].map(t=>String(t).toUpperCase())).size; }
 function setUniv(v){ v=(v==='mine'?'mine':'default'); if(v===UNIV) return;
   UNIV=v; try{localStorage.setItem('oi_univ',v);}catch(e){} rebuild(); }
 function updateMeta(){
-  const u=(DATA&&DATA.universe)||{};
-  const total=(UNIV==='mine')?MYWL.picks.size:((u.wheel||0)+(u.growth||0));
+  const total=activeCount();                          // distinct tickers in the active universe (dedupe-safe)
   const scope=(UNIV==='mine')?'your list':'default watchlist';
   const el=document.getElementById('meta'); if(el)
     el.innerHTML=`<b>${READY.length} setup${READY.length===1?'':'s'} ready</b> + <b>${LEAPQ.length} LEAP${LEAPQ.length===1?'':'s'}</b> from ${total} name${total===1?'':'s'} · ${scope}`;
@@ -1015,7 +1017,7 @@ function renderUnivToggle(){
   if(!(MYWL.picks.size>0 || USER)){ host.innerHTML=''; return; }
   const mine=UNIV==='mine';
   host.innerHTML=`<span class="univlbl">Watchlist</span><span class="seg">`
-               + `<button class="${mine?'':'on'}" data-u="default">Default</button>`
+               + `<button class="${mine?'':'on'}" data-u="default">Default <span class="mono">${defaultCount()}</span></button>`
                + `<button class="${mine?'on':''}" data-u="mine">★ My&nbsp;List <span class="mono">${MYWL.picks.size}</span></button>`
                + `</span>`;
   host.querySelectorAll('.seg button').forEach(b=>b.onclick=()=>setUniv(b.dataset.u));
@@ -1201,8 +1203,9 @@ function noteFlags(s){let x=''; if(s.strong)x+='<span class="fl fl-strong">🔥 
   if(s.earnings_in_window)x+='<span class="fl fl-er">⚠ earnings</span>'; return x; }
 function renderReady(){
   document.getElementById('n-ready').textContent=READY.length?READY.length+' ready':'';
-  if(!READY.length){ document.getElementById('ready-wrap').innerHTML=
-    `<div class="empty">No fresh CSP/CC setup right now — nothing on a confirmed turnaround. <b>${SIGS.length} names</b> scanned; see them all in <a data-tab="overview" style="color:var(--accent);cursor:pointer">Overview</a>.</div>`;
+  if(!READY.length){ const n=activeCount();
+    document.getElementById('ready-wrap').innerHTML=
+    `<div class="empty">No fresh CSP/CC setup right now — nothing on a confirmed turnaround. <b>${n} name${n===1?'':'s'}</b> in ${UNIV==='mine'?'your list':'the default watchlist'}; see them all in <a data-tab="overview" style="color:var(--accent);cursor:pointer">Overview</a>.</div>`;
     document.querySelector('#ready-wrap [data-tab]')?.addEventListener('click',()=>go('overview')); return; }
   const rows=READY.map(s=>{const k=s.strategy.toLowerCase();return `<tr class="clk" data-tk="${s.ticker}">
     <td class="l"><span class="tk">${s.ticker}</span></td>
