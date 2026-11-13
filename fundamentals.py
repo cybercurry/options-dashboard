@@ -17,6 +17,7 @@ chips (Valuation / Quality / Health) + a red-flag list; every raw number rides i
 
 import os
 import requests
+from datetime import date
 
 try:                       # streamlit is present in the app; keep this importable standalone.
     import streamlit as _st
@@ -137,6 +138,61 @@ def _annual_last_two(facts, concepts):
     return latest, prior
 
 
+def _ttm(facts, concepts):
+    """Trailing-twelve-months for a FLOW item (revenue, net income, EPS, cash flow): latest full
+    fiscal year + current-year YTD − the prior-year matching YTD. Dedupes restatements (latest-filed
+    per period). Degrades to the latest annual value when no newer quarter is on file, so annual-only
+    / slow filers come out exactly as before. Returns a single float (or None).
+
+    This is what keeps P/E current: a fast grower that has filed three 2026 quarters is valued on its
+    trailing 12 months, not on a stale FY-2025 that under-counts earnings and inflates P/E."""
+    def pdate(s):
+        try:
+            y, mo, d = s.split("-"); return date(int(y), int(mo), int(d))
+        except Exception:
+            return None
+    def dur(s, e):
+        ds, de = pdate(s), pdate(e)
+        return (de - ds).days if (ds and de) else 0
+
+    seen = {}                                     # dedupe duration facts by (start,end)
+    for r in _rows(facts, concepts):
+        s, e, v, f = r.get("start"), r.get("end"), r.get("val"), r.get("filed", "")
+        if not (s and e and v is not None):
+            continue
+        k = (s, e)
+        if k not in seen or f > seen[k][1]:
+            seen[k] = (float(v), f)
+    items = [(s, e, v) for (s, e), (v, _f) in seen.items()]
+    if not items:
+        return None
+
+    annuals = sorted([(s, e, v) for (s, e, v) in items if 350 <= dur(s, e) <= 380],
+                     key=lambda x: x[1])
+    if not annuals:                               # no annual on file → sum last 4 discrete quarters
+        q = sorted([(s, e, v) for (s, e, v) in items if 80 <= dur(s, e) <= 100],
+                   key=lambda x: x[1])
+        return sum(v for _, _, v in q[-4:]) if len(q) >= 4 else None
+
+    fy_s, fy_e, fy_v = annuals[-1]
+    fye = pdate(fy_e)
+    # current-year YTD: a cumulative period ending AFTER the FY end, within ~1 year of it
+    cur = [(s, e, v) for (s, e, v) in items
+           if pdate(e) and fye and pdate(e) > fye and (pdate(e) - fye).days <= 370
+           and 60 <= dur(s, e) < 350]
+    if not cur:
+        return fy_v                               # no newer quarter → latest annual stands
+    c_s, c_e, c_v = max(cur, key=lambda x: dur(x[0], x[1]))   # longest YTD (e.g. 9-month)
+    clen, cend = dur(c_s, c_e), pdate(c_e)
+    # prior-year matching YTD: same length, ending ~1 year before the current YTD
+    pri = [(s, e, v) for (s, e, v) in items
+           if abs(dur(s, e) - clen) <= 20 and pdate(e) and 330 <= (cend - pdate(e)).days <= 400]
+    if not pri:
+        return fy_v                               # can't match prior YTD → annual (never a wrong TTM)
+    p_v = max(pri, key=lambda x: pdate(x[1]))[2]
+    return fy_v + c_v - p_v
+
+
 def _latest_point(facts, concepts):
     """Most recently reported value for a balance-sheet (point-in-time) item, any form — so a
     fresh 10-Q updates the balance sheet between annual reports."""
@@ -219,18 +275,25 @@ def _assess(m):
 
 
 def _metrics_from_sec(facts, price):
-    """Build the metrics dict from SEC companyfacts. Flows use the latest full fiscal year;
-    balance-sheet items use the most recent reported period."""
-    rev,  rev_p  = _annual_last_two(facts, _C["revenue"])
-    ni,   ni_p   = _annual_last_two(facts, _C["net_income"])
-    gp,   _      = _annual_last_two(facts, _C["gross_profit"])
-    opi,  _      = _annual_last_two(facts, _C["op_income"])
-    cfo,  _      = _annual_last_two(facts, _C["cfo"])
-    capex, _     = _annual_last_two(facts, _C["capex"])
-    rnd,  _      = _annual_last_two(facts, _C["rnd"])
-    intr, _      = _annual_last_two(facts, _C["interest"])
-    eps,  _      = _annual_last_two(facts, _C["eps"])
-    shd,  shd_p  = _annual_last_two(facts, _C["sh_diluted"])
+    """Build the metrics dict from SEC companyfacts. Point metrics (P/E, EPS, margins, FCF) use
+    TRAILING-TWELVE-MONTHS (latest full fiscal year + current-year YTD − prior-year YTD) so fast
+    growers aren't valued on a stale annual EPS; year-over-year growth stays full-year-vs-full-year;
+    balance-sheet items use the most recent reported period. The displayed net income is the same
+    TTM figure the P/E is built from, so market-cap ÷ net income reconciles to the shown P/E."""
+    # Annual latest/prior — drives clean full-year-vs-full-year growth
+    rev_a, rev_ap = _annual_last_two(facts, _C["revenue"])
+    ni_a,  ni_ap  = _annual_last_two(facts, _C["net_income"])
+    shd,   shd_p  = _annual_last_two(facts, _C["sh_diluted"])
+
+    # TTM for the point metrics; fall back to the annual figure where a TTM can't be formed
+    rev   = _ttm(facts, _C["revenue"])      or rev_a
+    ni    = _ttm(facts, _C["net_income"])   or ni_a
+    gp    = _ttm(facts, _C["gross_profit"]) or _annual_last_two(facts, _C["gross_profit"])[0]
+    opi   = _ttm(facts, _C["op_income"])    or _annual_last_two(facts, _C["op_income"])[0]
+    cfo   = _ttm(facts, _C["cfo"])          or _annual_last_two(facts, _C["cfo"])[0]
+    capex = _ttm(facts, _C["capex"])        or _annual_last_two(facts, _C["capex"])[0]
+    rnd   = _ttm(facts, _C["rnd"])          or _annual_last_two(facts, _C["rnd"])[0]
+    intr  = _ttm(facts, _C["interest"])     or _annual_last_two(facts, _C["interest"])[0]
 
     equity   = _latest_point(facts, _C["equity"])
     cur_a    = _latest_point(facts, _C["cur_assets"])
@@ -243,12 +306,14 @@ def _metrics_from_sec(facts, price):
     if lt_debt is not None or debt_cur is not None:
         total_debt = (lt_debt or 0) + (debt_cur or 0)
     fcf = (cfo - capex) if (cfo is not None and capex is not None) else None
+    # EPS from TTM net income ÷ current shares (robust against quarterly-EPS rounding drift)
+    eps = _div(ni, shares) if (ni is not None and shares) else _ttm(facts, _C["eps"])
 
     m = {
-        "revenue": rev, "revenue_prev": rev_p,
-        "net_income": ni, "net_income_prev": ni_p,
-        "rev_growth": _div(rev - rev_p, rev_p) if (rev is not None and rev_p) else None,
-        "ni_growth":  _div(ni - ni_p, abs(ni_p)) if (ni is not None and ni_p) else None,
+        "revenue": rev, "revenue_prev": rev_a,            # headline revenue is TTM; prior = last full FY
+        "net_income": ni, "net_income_prev": ni_a,
+        "rev_growth": _div(rev_a - rev_ap, rev_ap) if (rev_a is not None and rev_ap) else None,
+        "ni_growth":  _div(ni_a - ni_ap, abs(ni_ap)) if (ni_a is not None and ni_ap) else None,
         "gross_margin": _div(gp, rev),
         "op_margin":    _div(opi, rev),
         "net_margin":   _div(ni, rev),
@@ -262,7 +327,7 @@ def _metrics_from_sec(facts, price):
         "capex": capex, "rnd": rnd,
     }
     m["market_cap"] = (price * shares) if (price and shares) else None
-    m["pe"] = _div(price, eps) if (price and eps and eps > 0) else None
+    m["pe"] = _div(m["market_cap"], ni) if (m["market_cap"] and ni and ni > 0) else None
     m["fcf_yield"] = _div(fcf, m["market_cap"])
     m["peg"] = (m["pe"] / (m["ni_growth"] * 100)) if (m["pe"] and m["ni_growth"] and m["ni_growth"] > 0) else None
     return m

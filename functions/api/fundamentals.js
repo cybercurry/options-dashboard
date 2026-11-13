@@ -65,6 +65,39 @@ function annualLastTwo(facts, concepts) {
   return [latest, prior];
 }
 
+// Trailing-twelve-months for a FLOW item: latest full fiscal year + current-year YTD − prior-year
+// matching YTD. Degrades to the latest annual when no newer quarter is on file (slow filers
+// unchanged). Mirrors fundamentals.py _ttm exactly so the live path and the baked JSON agree.
+function ttm(facts, concepts) {
+  const pdate = s => { const p = String(s).split("-"); const d = Date.UTC(+p[0], +p[1] - 1, +p[2]); return isNaN(d) ? null : d; };
+  const DAY = 86400000;
+  const days = (s, e) => { const ds = pdate(s), de = pdate(e); return (ds != null && de != null) ? Math.round((de - ds) / DAY) : 0; };
+  const seen = {};
+  for (const r of rows(facts, concepts)) {
+    const s = r.start, e = r.end, v = r.val, f = r.filed || "";
+    if (!(s && e && v != null)) continue;
+    const k = s + "|" + e;
+    if (!(k in seen) || f > seen[k][1]) seen[k] = [Number(v), f];
+  }
+  const items = Object.keys(seen).map(k => { const [s, e] = k.split("|"); return [s, e, seen[k][0]]; });
+  if (!items.length) return null;
+  const annuals = items.filter(([s, e]) => days(s, e) >= 350 && days(s, e) <= 380).sort((a, b) => a[1] < b[1] ? -1 : 1);
+  if (!annuals.length) {                       // no annual → sum last 4 discrete quarters
+    const q = items.filter(([s, e]) => days(s, e) >= 80 && days(s, e) <= 100).sort((a, b) => a[1] < b[1] ? -1 : 1);
+    return q.length >= 4 ? q.slice(-4).reduce((t, x) => t + x[2], 0) : null;
+  }
+  const [, fy_e, fy_v] = annuals[annuals.length - 1];
+  const fye = pdate(fy_e);
+  const cur = items.filter(([s, e]) => { const pe = pdate(e); return pe != null && fye != null && pe > fye && (pe - fye) / DAY <= 370 && days(s, e) >= 60 && days(s, e) < 350; });
+  if (!cur.length) return fy_v;
+  const c = cur.reduce((best, x) => days(x[0], x[1]) > days(best[0], best[1]) ? x : best);
+  const clen = days(c[0], c[1]), cend = pdate(c[1]);
+  const pri = items.filter(([s, e]) => { const pe = pdate(e); return pe != null && Math.abs(days(s, e) - clen) <= 20 && (cend - pe) / DAY >= 330 && (cend - pe) / DAY <= 400; });
+  if (!pri.length) return fy_v;
+  const p = pri.reduce((best, x) => pdate(x[1]) > pdate(best[1]) ? x : best);
+  return fy_v + c[2] - p[2];
+}
+
 function latestPoint(facts, concepts) {
   const byEnd = {};
   for (const r of rows(facts, concepts)) {
@@ -79,25 +112,30 @@ function latestPoint(facts, concepts) {
 const div = (a, b) => (a != null && b != null && b !== 0) ? a / b : null;
 
 function metricsFromSec(facts, price) {
-  const [rev, rev_p] = annualLastTwo(facts, C.revenue);
-  const [ni, ni_p] = annualLastTwo(facts, C.net_income);
-  const [gp] = annualLastTwo(facts, C.gross_profit);
-  const [opi] = annualLastTwo(facts, C.op_income);
-  const [cfo] = annualLastTwo(facts, C.cfo);
-  const [capex] = annualLastTwo(facts, C.capex);
-  const [rnd] = annualLastTwo(facts, C.rnd);
-  const [intr] = annualLastTwo(facts, C.interest);
-  const [eps] = annualLastTwo(facts, C.eps);
+  // Annual latest/prior — drives clean full-year-vs-full-year growth
+  const [rev_a, rev_ap] = annualLastTwo(facts, C.revenue);
+  const [ni_a, ni_ap] = annualLastTwo(facts, C.net_income);
   const [shd, shd_p] = annualLastTwo(facts, C.sh_diluted);
+  // TTM for the point metrics (P/E, EPS, margins, FCF); fall back to the annual figure
+  const rev = ttm(facts, C.revenue) ?? rev_a;
+  const ni = ttm(facts, C.net_income) ?? ni_a;
+  const gp = ttm(facts, C.gross_profit) ?? annualLastTwo(facts, C.gross_profit)[0];
+  const opi = ttm(facts, C.op_income) ?? annualLastTwo(facts, C.op_income)[0];
+  const cfo = ttm(facts, C.cfo) ?? annualLastTwo(facts, C.cfo)[0];
+  const capex = ttm(facts, C.capex) ?? annualLastTwo(facts, C.capex)[0];
+  const rnd = ttm(facts, C.rnd) ?? annualLastTwo(facts, C.rnd)[0];
+  const intr = ttm(facts, C.interest) ?? annualLastTwo(facts, C.interest)[0];
   const equity = latestPoint(facts, C.equity), cur_a = latestPoint(facts, C.cur_assets), cur_l = latestPoint(facts, C.cur_liab);
   const lt_debt = latestPoint(facts, C.lt_debt), debt_cur = latestPoint(facts, C.debt_cur), shares = latestPoint(facts, C.shares_out);
   let total_debt = null;
   if (lt_debt != null || debt_cur != null) total_debt = (lt_debt || 0) + (debt_cur || 0);
   const fcf = (cfo != null && capex != null) ? (cfo - capex) : null;
+  // EPS from TTM net income ÷ current shares (robust against quarterly-EPS rounding drift)
+  const eps = (ni != null && shares) ? div(ni, shares) : ttm(facts, C.eps);
   const m = {
-    revenue: rev, revenue_prev: rev_p, net_income: ni, net_income_prev: ni_p,
-    rev_growth: (rev != null && rev_p) ? div(rev - rev_p, rev_p) : null,
-    ni_growth: (ni != null && ni_p) ? div(ni - ni_p, Math.abs(ni_p)) : null,
+    revenue: rev, revenue_prev: rev_a, net_income: ni, net_income_prev: ni_a,
+    rev_growth: (rev_a != null && rev_ap) ? div(rev_a - rev_ap, rev_ap) : null,
+    ni_growth: (ni_a != null && ni_ap) ? div(ni_a - ni_ap, Math.abs(ni_ap)) : null,
     gross_margin: div(gp, rev), op_margin: div(opi, rev), net_margin: div(ni, rev),
     roe: div(ni, equity), fcf: fcf, fcf_margin: div(fcf, rev),
     debt_to_equity: div(total_debt, equity), current_ratio: div(cur_a, cur_l),
@@ -105,7 +143,7 @@ function metricsFromSec(facts, price) {
     share_change: (shd != null && shd_p) ? div(shd - shd_p, shd_p) : null, capex: capex, rnd: rnd,
   };
   m.market_cap = (price && shares) ? price * shares : null;
-  m.pe = (price && eps && eps > 0) ? div(price, eps) : null;
+  m.pe = (m.market_cap && ni && ni > 0) ? div(m.market_cap, ni) : null;
   m.fcf_yield = div(fcf, m.market_cap);
   m.peg = (m.pe && m.ni_growth && m.ni_growth > 0) ? (m.pe / (m.ni_growth * 100)) : null;
   return m;
@@ -207,4 +245,4 @@ export async function onRequestGet(context) {
   }
 }
 
-export { rows, annualLastTwo, latestPoint, metricsFromSec, assess };
+export { rows, annualLastTwo, ttm, latestPoint, metricsFromSec, assess };
