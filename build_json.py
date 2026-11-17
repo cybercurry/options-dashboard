@@ -18,7 +18,7 @@ import requests
 import os
 import sys
 import socket
-import signal as _signal
+import threading
 
 import macro
 import signals
@@ -40,8 +40,15 @@ OUT = HERE / "site" / "data"
 # wall-clock deadline, with whatever enrichment finished in time. One mechanism bounds EVERY
 # downstream call — nothing can ever hang the publish again.
 _PENDING = {"data": None}            # latest publishable snapshot (set once the core scan is complete)
+_DONE = threading.Event()            # main() sets this when it finishes in time → watchdog stands down
 
-def _deadline_handler(signum, frame):
+def _deadline_watchdog(deadline_s):
+    # A plain timer thread, NOT a signal handler: it fires no matter what the main thread is blocked
+    # on (a SIGALRM can be swallowed by a worker thread while the main thread sits in a socket read —
+    # which is exactly why the first attempt at this never fired). On timeout it publishes the core
+    # scan and hard-exits the whole process.
+    if _DONE.wait(deadline_s):
+        return                       # main thread finished in time
     d = _PENDING["data"]
     if d and d.get("overview"):      # core is ready → publish it; enrichment stays partial
         try:
@@ -756,8 +763,7 @@ def light_refresh():
 
 def main():
     ENGINE_DEADLINE_S = 240          # hard ceiling for the whole engine; core scan needs only ~75s
-    _signal.signal(_signal.SIGALRM, _deadline_handler)
-    _signal.alarm(ENGINE_DEADLINE_S)
+    threading.Thread(target=_deadline_watchdog, args=(ENGINE_DEADLINE_S,), daemon=True).start()
     uni = load_universe()
     # Default universe (what every anonymous visitor sees) — captured before we fold in users'
     # picks, so the front-end can always tell the two apart.
@@ -792,7 +798,7 @@ def main():
     _prices = {o.get("ticker"): o.get("price") for o in data.get("overview", [])}
     data["fundamentals"] = fetch_fundamentals_all(_names, _prices)   # best-effort (Yahoo; batch-bounded)
     data["chains"] = fetch_chains(_names, _prices)                   # best-effort (Tradier option chains)
-    _signal.alarm(0)                                # finished in time — stand the watchdog down
+    _DONE.set()                                     # finished in time — stand the watchdog down
     OUT.mkdir(parents=True, exist_ok=True)
     (OUT / "signals.json").write_text(json.dumps(data, indent=2, default=str))
     print("wrote {} — {} signals, {} leaps (universe: {})".format(
