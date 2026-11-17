@@ -762,7 +762,9 @@ def light_refresh():
 
 
 def main():
-    ENGINE_DEADLINE_S = 240          # hard ceiling for the whole engine; core scan needs only ~75s
+    ENGINE_DEADLINE_S = 300          # hard ceiling for the whole engine (healthy full scan ~210s; this
+                                     # gives the Tradier core room to finish on a degraded day, and sits
+                                     # under the workflow's 330s per-attempt timeout)
     threading.Thread(target=_deadline_watchdog, args=(ENGINE_DEADLINE_S,), daemon=True).start()
     uni = load_universe()
     # Default universe (what every anonymous visitor sees) — captured before we fold in users'
