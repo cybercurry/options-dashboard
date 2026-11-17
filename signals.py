@@ -443,19 +443,43 @@ def _timing(ind, iv_ratio, direction):
     return _setup_label(score, "csp", blocked), score, reasons
 
 
-def _sector(ticker):
+# Yahoo (yfinance) rate-limits hard at times and its client then retries for MINUTES per call. These
+# per-ticker context lookups (sector, earnings date) run INSIDE the scan, so a throttled Yahoo must
+# never stall the Tradier trade scan — that froze the live site at the 2026-11-17 open. Bound every
+# call, and after a short run of failures trip a breaker so the rest of the scan skips Yahoo and
+# finishes on Tradier alone (context just degrades to "—"/None for that cycle).
+import concurrent.futures as _cf
+_YF_FAILS = {"n": 0}
+_YF_BREAK = 4            # consecutive failures after which Yahoo is skipped for the rest of the run
+_YF_TIMEOUT = 6          # hard seconds-per-call ceiling
+
+def _yf_bounded(fn, fallback):
+    if _YF_FAILS["n"] >= _YF_BREAK:
+        return fallback
+    ex = _cf.ThreadPoolExecutor(max_workers=1)
     try:
+        v = ex.submit(fn).result(timeout=_YF_TIMEOUT)
+        _YF_FAILS["n"] = 0
+        return v
+    except Exception:
+        _YF_FAILS["n"] += 1
+        return fallback
+    finally:
+        ex.shutdown(wait=False)   # abandon any slow straggler; the headless runner os._exit()s at the end
+
+
+def _sector(ticker):
+    def _go():
         import yfinance as yf
         return (yf.Ticker(ticker).info or {}).get("sector") or "—"
-    except Exception:
-        return "—"
+    return _yf_bounded(_go, "—")
 
 
 def _earnings_date(ticker):
-    """Next earnings date (a date) or None. Best-effort via Yahoo's earnings calendar (yfinance);
-    None on any failure or when Yahoo has no confirmed date (fail-open — we don't block or warn on
-    data we don't have)."""
-    try:
+    """Next earnings date (a date) or None. Best-effort via Yahoo's earnings calendar (yfinance),
+    bounded by _yf_bounded; None on any failure/timeout or when Yahoo has no confirmed date (fail-open
+    — we don't block or warn on data we don't have)."""
+    def _go():
         import yfinance as yf
         cal = yf.Ticker(ticker).calendar
         dt = None
@@ -470,8 +494,7 @@ def _earnings_date(ticker):
         if hasattr(dt, "date"):
             dt = dt.date()
         return dt
-    except Exception:
-        return None
+    return _yf_bounded(_go, None)
 
 
 def _nearest_delta(options, opt_type, target=0.30):
