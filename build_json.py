@@ -776,9 +776,7 @@ def main():
     extra = [t for t in _user_tickers() if t not in default_set][:USER_TICKER_CAP]
     if extra:
         uni["wheel"] = list(uni.get("wheel", [])) + extra
-    data = signals.scan(uni)                       # {"signals": [...], "leaps": [...], "params": {...}}
-    enrich_overview(data)                           # + earnings_date & IV Rank onto the overview rows
-    refresh_tiles(data)                             # market/pulse/pulse2/sectors/market_stats/holidays (+ market_at)
+    data = signals.scan(uni)                       # {"signals": [...], "leaps": [...], "params": {...}}  (Tradier)
     data["generated_at"] = datetime.datetime.now(datetime.timezone.utc).isoformat(timespec="seconds")
     # universe payload keeps the DEFAULT list distinct from the user-added extras, so the
     # front-end renders the default watchlist by default and can filter to a signed-in user's own
@@ -789,13 +787,24 @@ def main():
                         "wheel_names": default_wheel,
                         "growth_names": default_growth,
                         "user_names": extra}
+    # Seed the non-Tradier context (market tiles, chains, fundamentals) from the LAST GOOD publish so the
+    # core is COMPLETE and publishable the instant the Tradier scan is done. If the heavy best-effort
+    # refresh below is cut by the deadline (a degraded Yahoo/Tradier day), these stay — stale but present
+    # and honestly stamped (market_at keeps its old time) — so no tab blanks.
+    _base = _load_base() or {}
+    for _k in ("market", "pulse", "pulse2", "sectors", "market_stats", "market_holidays", "market_at",
+               "chains", "fundamentals"):
+        if _k in _base:
+            data[_k] = _base[_k]
     data.setdefault("fundamentals", {})
     data.setdefault("chains", {})
-    # Core scan is complete and publishable from here. Register it so the deadline watchdog can ship
-    # it if the heavy best-effort enrichment below overruns (a degraded Yahoo or Tradier-chains day).
+    # Fresh Tradier signals + overview are ready → register NOW so the watchdog can ship them even if the
+    # yfinance-heavy tiles/enrichment below stall (refresh_tiles was the 2026-11-17 open's real blocker).
     _PENDING["data"] = data
     _names = [o.get("ticker") for o in data.get("overview", []) if o.get("ticker")]
     _prices = {o.get("ticker"): o.get("price") for o in data.get("overview", [])}
+    enrich_overview(data)                           # best-effort: earnings_date & IV Rank onto overview rows
+    refresh_tiles(data)                             # best-effort: fresh market/pulse/sectors/market_stats tiles
     data["fundamentals"] = fetch_fundamentals_all(_names, _prices)   # best-effort (Yahoo; batch-bounded)
     data["chains"] = fetch_chains(_names, _prices)                   # best-effort (Tradier option chains)
     _DONE.set()                                     # finished in time — stand the watchdog down
