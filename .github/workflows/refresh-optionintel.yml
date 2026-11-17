@@ -37,7 +37,7 @@ concurrency:
 jobs:
   refresh:
     runs-on: ubuntu-latest
-    timeout-minutes: 10
+    timeout-minutes: 13          # fits the engine-step retry: up to 2 attempts × 330s + a 60s cooloff
     env:
       TRADIER_TOKEN: ${{ secrets.TRADIER_TOKEN }}
       TRADIER_ENV:   ${{ secrets.TRADIER_ENV }}
@@ -113,18 +113,34 @@ jobs:
         if: steps.gate.outputs.go == 'true'
         run: pip install requests yfinance
 
-      - name: Run engine → JSON
+      - name: Run engine → JSON (retry on hang/failure, 60s cooloff)
         if: steps.gate.outputs.go == 'true'
         run: |
-          if [ "${{ steps.gate.outputs.mode }}" = "light" ]; then
-            echo "LIGHT refresh — tiles only; keeping the last full Tradier scan."
-            # Seed the base from the freshest published scan (the data branch), then merge tiles into it.
-            git fetch --depth=1 origin data
-            git cat-file -p FETCH_HEAD:signals.json > site/data/signals.json
-            python build_json.py --light
-          else
-            python build_json.py
-          fi
+          set +e
+          run_engine() {
+            if [ "${{ steps.gate.outputs.mode }}" = "light" ]; then
+              echo "LIGHT refresh — tiles only; keeping the last full Tradier scan."
+              # Seed the base from the freshest published scan (the data branch), then merge tiles into it.
+              git fetch --depth=1 origin data
+              git cat-file -p FETCH_HEAD:signals.json > site/data/signals.json
+              timeout --signal=SIGKILL 330s python build_json.py --light
+            else
+              timeout --signal=SIGKILL 330s python build_json.py
+            fi
+          }
+          # Fallback for a hung/failed run: retry once after a 60s cooloff, each attempt capped at 330s
+          # so one stuck upstream fetch can't burn the whole budget and leave the site stale at the open
+          # (2026-11-17 incident). First success publishes; two failures leave the last good data branch
+          # untouched (the guard/publish steps are skipped because this step exits non-zero).
+          for attempt in 1 2; do
+            echo "::group::engine attempt ${attempt}/2 (mode=${{ steps.gate.outputs.mode }})"
+            run_engine; rc=$?
+            echo "::endgroup::"
+            if [ $rc -eq 0 ]; then echo "engine OK on attempt ${attempt}"; exit 0; fi
+            echo "::warning::engine attempt ${attempt} failed (rc=${rc})"
+            if [ $attempt -lt 2 ]; then echo "60s cooloff, then retry…"; sleep 60; fi
+          done
+          echo "::error::engine failed after 2 attempts"; exit 1
 
       - name: Guard — never publish a degenerate full scan
         if: steps.gate.outputs.go == 'true'

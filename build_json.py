@@ -289,7 +289,7 @@ def fetch_fundamentals_all(names, prices):
         import fundamentals
     except Exception:
         return {}
-    from concurrent.futures import ThreadPoolExecutor, as_completed
+    from concurrent.futures import ThreadPoolExecutor, as_completed, TimeoutError as _FutTimeout
 
     def one(t):
         try:
@@ -302,11 +302,25 @@ def fetch_fundamentals_all(names, prices):
         except Exception as e:
             return t, {"ok": False, "error": "%s: %s" % (type(e).__name__, e), "ticker": t}
 
+    # Overall wall-clock ceiling for the WHOLE batch. The 30s socket timeout bounds a SINGLE call,
+    # but each name makes several (SEC facts + yfinance forward-P/E + news) and yfinance throttles
+    # hard at the open, so without this cap a slow Yahoo pushes the batch past the 10-min refresh
+    # timeout — which froze the live site on 2026-11-17 (two runs killed mid-fundamentals). Fundamentals
+    # are context, not the trade, so on timeout we return what completed and publish on schedule;
+    # the rest render as "—" until the next refresh fills them in. (__main__ force-exits after the
+    # write so the ≤5 straggler threads can never delay the publish.)
+    FUND_BUDGET_S = 150
     out = {}
-    with ThreadPoolExecutor(max_workers=5) as ex:
-        for fut in as_completed([ex.submit(one, t) for t in names]):
+    ex = ThreadPoolExecutor(max_workers=5)
+    futs = [ex.submit(one, t) for t in names]
+    try:
+        for fut in as_completed(futs, timeout=FUND_BUDGET_S):
             t, res = fut.result()
             out[t] = res
+    except _FutTimeout:
+        print("fundamentals: %ds budget hit — %d/%d done; publishing partial (rest degrade to '—')"
+              % (FUND_BUDGET_S, len(out), len(names)))
+    ex.shutdown(wait=False, cancel_futures=True)
     return out
 
 
@@ -756,3 +770,7 @@ if __name__ == "__main__":
         light_refresh()
     else:
         main()
+        # signals.json is written and closed inside main(); exit NOW so any still-running
+        # fundamentals worker thread (a slow yfinance call) can never delay the publish step.
+        sys.stdout.flush()
+        os._exit(0)
