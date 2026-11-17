@@ -16,7 +16,9 @@ import statistics
 import requests
 
 import os
+import sys
 import socket
+import signal as _signal
 
 import macro
 import signals
@@ -29,6 +31,30 @@ socket.setdefaulttimeout(30)
 
 HERE = pathlib.Path(__file__).parent
 OUT = HERE / "site" / "data"
+
+# ── Hard engine deadline ──────────────────────────────────────────────────────────────────────
+# The trade-critical scan (signals + overview + tiles) finishes in ~75s; the heavy best-effort
+# enrichment (Yahoo fundamentals, Tradier option chains) can hang when an upstream is degraded
+# (the 2026-11-17 open: yfinance throttled AND Tradier chains stalled → the run blew its timeout and
+# the site froze). This watchdog guarantees the refresh ALWAYS publishes the core scan by a fixed
+# wall-clock deadline, with whatever enrichment finished in time. One mechanism bounds EVERY
+# downstream call — nothing can ever hang the publish again.
+_PENDING = {"data": None}            # latest publishable snapshot (set once the core scan is complete)
+
+def _deadline_handler(signum, frame):
+    d = _PENDING["data"]
+    if d and d.get("overview"):      # core is ready → publish it; enrichment stays partial
+        try:
+            OUT.mkdir(parents=True, exist_ok=True)
+            (OUT / "signals.json").write_text(json.dumps(d, indent=2, default=str))
+            print("DEADLINE reached — published core scan ({} signals, {} overview rows); "
+                  "fundamentals/chains left partial this cycle".format(
+                      len(d.get("signals", [])), len(d.get("overview", []))))
+        except Exception as e:
+            print("DEADLINE publish failed:", e); sys.stdout.flush(); os._exit(1)
+        sys.stdout.flush(); os._exit(0)
+    print("DEADLINE reached before the core scan was ready — not publishing (last good data kept)")
+    sys.stdout.flush(); os._exit(1)
 
 # Registered users' private watchlists live in Supabase (per-user, row-level-security). The
 # public site is anonymous, but the cron folds the *deduped union* of every user's tickers into
@@ -729,6 +755,9 @@ def light_refresh():
 
 
 def main():
+    ENGINE_DEADLINE_S = 240          # hard ceiling for the whole engine; core scan needs only ~75s
+    _signal.signal(_signal.SIGALRM, _deadline_handler)
+    _signal.alarm(ENGINE_DEADLINE_S)
     uni = load_universe()
     # Default universe (what every anonymous visitor sees) — captured before we fold in users'
     # picks, so the front-end can always tell the two apart.
@@ -744,10 +773,6 @@ def main():
     data = signals.scan(uni)                       # {"signals": [...], "leaps": [...], "params": {...}}
     enrich_overview(data)                           # + earnings_date & IV Rank onto the overview rows
     refresh_tiles(data)                             # market/pulse/pulse2/sectors/market_stats/holidays (+ market_at)
-    _names = [o.get("ticker") for o in data.get("overview", []) if o.get("ticker")]
-    _prices = {o.get("ticker"): o.get("price") for o in data.get("overview", [])}
-    data["fundamentals"] = fetch_fundamentals_all(_names, _prices)
-    data["chains"] = fetch_chains(_names, _prices)
     data["generated_at"] = datetime.datetime.now(datetime.timezone.utc).isoformat(timespec="seconds")
     # universe payload keeps the DEFAULT list distinct from the user-added extras, so the
     # front-end renders the default watchlist by default and can filter to a signed-in user's own
@@ -758,6 +783,16 @@ def main():
                         "wheel_names": default_wheel,
                         "growth_names": default_growth,
                         "user_names": extra}
+    data.setdefault("fundamentals", {})
+    data.setdefault("chains", {})
+    # Core scan is complete and publishable from here. Register it so the deadline watchdog can ship
+    # it if the heavy best-effort enrichment below overruns (a degraded Yahoo or Tradier-chains day).
+    _PENDING["data"] = data
+    _names = [o.get("ticker") for o in data.get("overview", []) if o.get("ticker")]
+    _prices = {o.get("ticker"): o.get("price") for o in data.get("overview", [])}
+    data["fundamentals"] = fetch_fundamentals_all(_names, _prices)   # best-effort (Yahoo; batch-bounded)
+    data["chains"] = fetch_chains(_names, _prices)                   # best-effort (Tradier option chains)
+    _signal.alarm(0)                                # finished in time — stand the watchdog down
     OUT.mkdir(parents=True, exist_ok=True)
     (OUT / "signals.json").write_text(json.dumps(data, indent=2, default=str))
     print("wrote {} — {} signals, {} leaps (universe: {})".format(
