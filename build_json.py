@@ -750,6 +750,44 @@ def _load_base():
         return None
 
 
+def _load_published():
+    """The freshest published signals.json from the `data` branch (raw), used to carry the context
+    cache (sector + earnings) forward across cycles. One quick GET; {} on any failure (cold start)."""
+    try:
+        r = requests.get("https://raw.githubusercontent.com/cybercurry/options-dashboard/data/signals.json",
+                         timeout=10)
+        r.raise_for_status()
+        j = r.json()
+        return j if isinstance(j, dict) else {}
+    except Exception:
+        return {}
+
+
+def _seed_context(published):
+    """The context cache to inject into THIS scan. Prefer the published 'context' block; if it's not
+    there yet (first run after the split), reconstruct it from the last publish's overview (sector) and
+    signals (earnings_date) so the switch-over starts WARM — no cold cycle of blank sectors. asof=now
+    marks the carried values current, so the post-publish top-up re-validates them gradually (once/day),
+    not all at once."""
+    if not isinstance(published, dict):
+        return {}
+    ctx = published.get("context")
+    if isinstance(ctx, dict) and ctx:
+        return ctx
+    now = datetime.datetime.now(datetime.timezone.utc).isoformat(timespec="seconds")
+    out = {}
+    for o in published.get("overview", []) or []:
+        t = str(o.get("ticker") or "").upper()
+        if t:
+            out[t] = {"sector": o.get("sector") or "—", "earnings": o.get("earnings_date"), "asof": now}
+    for s in published.get("signals", []) or []:
+        t = str(s.get("ticker") or "").upper()
+        ed = s.get("earnings_date")
+        if t and ed and t in out and not out[t].get("earnings"):
+            out[t]["earnings"] = ed
+    return out
+
+
 def light_refresh():
     """Tiles-only refresh (24/7). Keeps the last full scan's Tradier data — signals, overview,
     chains, fundamentals, universe — exactly as-is, so the Signals tab still shows the last
@@ -783,6 +821,11 @@ def main():
     extra = [t for t in _user_tickers() if t not in default_set][:USER_TICKER_CAP]
     if extra:
         uni["wheel"] = list(uni.get("wheel", [])) + extra
+    # Context (sector + earnings) is SEPARATE from the trade scan: carry it forward from the last
+    # publish and inject it so the scan reads it from memory — zero Yahoo calls, so the Tradier scan
+    # always finishes fast and publishes, no matter what Yahoo is doing. (Topped up after publish, below.)
+    ctx_seed = _seed_context(_load_published())
+    signals.load_context(ctx_seed)
     data = signals.scan(uni)                       # {"signals": [...], "leaps": [...], "params": {...}}  (Tradier)
     data["generated_at"] = datetime.datetime.now(datetime.timezone.utc).isoformat(timespec="seconds")
     # universe payload keeps the DEFAULT list distinct from the user-added extras, so the
@@ -805,6 +848,7 @@ def main():
             data[_k] = _base[_k]
     data.setdefault("fundamentals", {})
     data.setdefault("chains", {})
+    data["context"] = ctx_seed                      # carry the context cache forward (replaced post-publish below)
     # Fresh Tradier signals + overview are ready → register NOW so the watchdog can ship them even if the
     # yfinance-heavy tiles/enrichment below stall (refresh_tiles was the 2026-11-17 open's real blocker).
     _PENDING["data"] = data
@@ -814,6 +858,9 @@ def main():
     refresh_tiles(data)                             # best-effort: fresh market/pulse/sectors/market_stats tiles
     data["fundamentals"] = fetch_fundamentals_all(_names, _prices)   # best-effort (Yahoo; batch-bounded)
     data["chains"] = fetch_chains(_names, _prices)                   # best-effort (Tradier option chains)
+    # Top up the context cache from Yahoo for NEXT cycle — LOWEST priority, after everything else, so a
+    # slow Yahoo only ever costs some tickers a later refresh. Budget-bounded; refetches only stale/missing.
+    data["context"] = signals.refresh_context(_names, ctx_seed, budget_s=60, max_age_h=20)
     _DONE.set()                                     # finished in time — stand the watchdog down
     OUT.mkdir(parents=True, exist_ok=True)
     (OUT / "signals.json").write_text(json.dumps(data, indent=2, default=str))

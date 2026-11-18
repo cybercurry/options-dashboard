@@ -443,17 +443,58 @@ def _timing(ind, iv_ratio, direction):
     return _setup_label(score, "csp", blocked), score, reasons
 
 
-# Yahoo (yfinance) rate-limits hard at times and its client then retries for MINUTES per call. These
-# per-ticker context lookups (sector, earnings date) run INSIDE the scan, so a throttled Yahoo must
-# never stall the Tradier trade scan — that froze the live site at the 2026-11-17 open. Bound every
-# call, and after a short run of failures trip a breaker so the rest of the scan skips Yahoo and
-# finishes on Tradier alone (context just degrades to "—"/None for that cycle).
+# ─── Context cache: sector + next-earnings-date ────────────────────────────────────────────────
+# Sector and the earnings date are CONTEXT, not the trade. They come from Yahoo (yfinance), which
+# rate-limits/stalls for minutes at a time. They used to be fetched INSIDE this scan, per ticker —
+# so a slow Yahoo stalled the whole Tradier trade scan and nothing published (the 2026-11-17 freeze
+# and the days of stale data after it).
+#
+# They are now fully SEPARATED from the trade scan:
+#   • the scan reads them from an in-memory cache (_CTX) — zero network, so it ALWAYS finishes fast;
+#   • build_json injects that cache from the last publish and, AFTER the Tradier core is published,
+#     calls refresh_context() to top the cache up from Yahoo for the next cycle.
+# A slow/throttled Yahoo can now only make context go stale ("—"/None for a cycle) — it can NEVER
+# block a trade or a publish again.
 import concurrent.futures as _cf
 _YF_FAILS = {"n": 0}
-_YF_BREAK = 4            # consecutive failures after which Yahoo is skipped for the rest of the run
-_YF_TIMEOUT = 6          # hard seconds-per-call ceiling
+_YF_BREAK = 4            # consecutive failures after which Yahoo is skipped for the rest of the top-up
+_YF_TIMEOUT = 6          # hard seconds-per-call ceiling (used ONLY by the post-publish top-up)
+
+_CTX = {}                # ticker -> {"sector": str, "earnings": datetime.date | None}  (read by the scan)
+
+def load_context(raw):
+    """Load the in-scan cache from the dict carried in the last signals.json
+    (raw: {ticker: {"sector": str, "earnings": ISO-str|None, "asof": ISO-str}}). Earnings is parsed
+    back to a date. Tolerates missing/garbage input (cold start → empty cache → context degrades to
+    '—'/None, never an error)."""
+    _CTX.clear()
+    for t, v in (raw or {}).items():
+        if not isinstance(v, dict):
+            continue
+        ed = v.get("earnings")
+        if isinstance(ed, str) and ed:
+            try:
+                ed = datetime.date.fromisoformat(ed[:10])
+            except Exception:
+                ed = None
+        elif not hasattr(ed, "year"):
+            ed = None
+        _CTX[str(t).upper()] = {"sector": v.get("sector") or "—", "earnings": ed}
+
+
+def _sector(ticker):
+    """Sector from the context cache (no network). '—' until the ticker has been cached."""
+    return (_CTX.get(str(ticker).upper()) or {}).get("sector") or "—"
+
+
+def _earnings_date(ticker):
+    """Next earnings date (a date) from the context cache, or None (no network)."""
+    return (_CTX.get(str(ticker).upper()) or {}).get("earnings")
+
 
 def _yf_bounded(fn, fallback):
+    """Run a Yahoo call with a hard per-call timeout + a short-circuit breaker. Used ONLY by the
+    post-publish context top-up — never on the trade path."""
     if _YF_FAILS["n"] >= _YF_BREAK:
         return fallback
     ex = _cf.ThreadPoolExecutor(max_workers=1)
@@ -468,17 +509,16 @@ def _yf_bounded(fn, fallback):
         ex.shutdown(wait=False)   # abandon any slow straggler; the headless runner os._exit()s at the end
 
 
-def _sector(ticker):
+def _yahoo_sector(ticker):
     def _go():
         import yfinance as yf
         return (yf.Ticker(ticker).info or {}).get("sector") or "—"
     return _yf_bounded(_go, "—")
 
 
-def _earnings_date(ticker):
-    """Next earnings date (a date) or None. Best-effort via Yahoo's earnings calendar (yfinance),
-    bounded by _yf_bounded; None on any failure/timeout or when Yahoo has no confirmed date (fail-open
-    — we don't block or warn on data we don't have)."""
+def _yahoo_earnings(ticker):
+    """Next earnings date (a date) or None, via Yahoo's calendar. None on any failure/timeout or when
+    Yahoo has no confirmed date (fail-open — we don't block or warn on data we don't have)."""
     def _go():
         import yfinance as yf
         cal = yf.Ticker(ticker).calendar
@@ -495,6 +535,44 @@ def _earnings_date(ticker):
             dt = dt.date()
         return dt
     return _yf_bounded(_go, None)
+
+
+def refresh_context(tickers, raw, budget_s=75, max_age_h=20):
+    """Best-effort top-up of the context cache from Yahoo, for the NEXT cycle. Runs AFTER the Tradier
+    core has been published, so it can never block a trade. Only (re)fetches tickers that are missing
+    or older than max_age_h, and stops when the wall-clock budget runs out — so a slow Yahoo just
+    means some tickers refresh on a later cycle. Returns the updated raw dict to publish. Never raises."""
+    import time as _time
+    out = dict(raw or {})
+    now = datetime.datetime.now(datetime.timezone.utc)
+    nowiso = now.isoformat(timespec="seconds")
+    deadline = _time.time() + max(0, budget_s)
+
+    def _stale(entry):
+        if not isinstance(entry, dict):
+            return True
+        asof = entry.get("asof")
+        if not isinstance(asof, str):
+            return True
+        try:
+            return (now - datetime.datetime.fromisoformat(asof)).total_seconds() >= max_age_h * 3600
+        except Exception:
+            return True
+
+    for t in [str(x).upper() for x in (tickers or [])]:
+        if _time.time() >= deadline:
+            break
+        if not _stale(out.get(t)):
+            continue
+        try:
+            sec = _yahoo_sector(t)
+            ed = _yahoo_earnings(t)
+            out[t] = {"sector": sec or "—",
+                      "earnings": ed.isoformat() if hasattr(ed, "isoformat") else None,
+                      "asof": nowiso}
+        except Exception:
+            continue
+    return out
 
 
 def _nearest_delta(options, opt_type, target=0.30):
