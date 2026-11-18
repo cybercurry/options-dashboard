@@ -115,6 +115,7 @@ jobs:
 
       - name: Run engine → JSON (retry on hang/failure, 60s cooloff)
         if: steps.gate.outputs.go == 'true'
+        id: engine
         run: |
           set +e
           run_engine() {
@@ -130,20 +131,39 @@ jobs:
           }
           # Fallback for a hung/failed run: retry once after a 60s cooloff, each attempt capped at 330s
           # so one stuck upstream fetch can't burn the whole budget and leave the site stale at the open
-          # (2026-11-17 incident). First success publishes; two failures leave the last good data branch
-          # untouched (the guard/publish steps are skipped because this step exits non-zero).
+          # (2026-11-17 incident). First success publishes (published=true → guard/publish run).
+          #
+          # Exit-code contract from build_json.py's deadline watchdog:
+          #   0  → published a fresh (or core-only) scan this cycle
+          #   75 → EX_TEMPFAIL: upstream too slow, DELIBERATELY kept last-good (designed degradation)
+          #   other → a genuine crash/hang
+          # rc=75 is NOT a failure: the site keeps serving honestly-timestamped last-good data, so it
+          # must not email "all jobs failed" — it only annotates. Any other non-zero fails the job loudly.
+          published=false
           for attempt in 1 2; do
             echo "::group::engine attempt ${attempt}/2 (mode=${{ steps.gate.outputs.mode }})"
             run_engine; rc=$?
             echo "::endgroup::"
-            if [ $rc -eq 0 ]; then echo "engine OK on attempt ${attempt}"; exit 0; fi
-            echo "::warning::engine attempt ${attempt} failed (rc=${rc})"
+            if [ $rc -eq 0 ]; then echo "engine OK on attempt ${attempt}"; published=true; break; fi
+            if [ $rc -eq 75 ]; then
+              echo "::warning::engine attempt ${attempt}: upstream too slow to finish the core scan in time — kept last-good data (degraded cycle, not a failure)"
+            else
+              echo "::warning::engine attempt ${attempt} failed (rc=${rc})"
+            fi
             if [ $attempt -lt 2 ]; then echo "60s cooloff, then retry…"; sleep 60; fi
           done
-          echo "::error::engine failed after 2 attempts"; exit 1
+          echo "published=${published}" >> "$GITHUB_OUTPUT"
+          if [ "$published" = "true" ]; then exit 0; fi
+          # Both attempts non-publishing. The expected degraded fail-safe (last attempt rc=75) keeps the
+          # job green; any other code is a real error.
+          if [ $rc -eq 75 ]; then
+            echo "::warning::Kept last-good data after 2 degraded attempts (upstream slow). Site still serves the last good scan; not failing the job."
+            exit 0
+          fi
+          echo "::error::engine failed after 2 attempts (rc=${rc})"; exit 1
 
       - name: Guard — never publish a degenerate full scan
-        if: steps.gate.outputs.go == 'true'
+        if: steps.gate.outputs.go == 'true' && steps.engine.outputs.published == 'true'
         id: guard
         env:
           MODE: ${{ steps.gate.outputs.mode }}
@@ -178,7 +198,7 @@ jobs:
           PY
 
       - name: Publish data to the `data` branch (served to the site; keeps main small)
-        if: steps.gate.outputs.go == 'true' && steps.guard.outputs.publish == 'true'
+        if: steps.gate.outputs.go == 'true' && steps.engine.outputs.published == 'true' && steps.guard.outputs.publish == 'true'
         run: |
           git config user.name  "optionintel-bot"
           git config user.email "optionintel-bot@users.noreply.github.com"

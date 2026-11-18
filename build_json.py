@@ -60,8 +60,13 @@ def _deadline_watchdog(deadline_s):
         except Exception as e:
             print("DEADLINE publish failed:", e); sys.stdout.flush(); os._exit(1)
         sys.stdout.flush(); os._exit(0)
+    # Core scan didn't finish in time (an upstream — usually Tradier — is degraded/slow). This is the
+    # DESIGNED graceful-degradation outcome, not a crash: we deliberately keep the last-good data
+    # branch untouched. Exit 75 (EX_TEMPFAIL) is the sentinel the refresh workflow reads to treat this
+    # as a non-failing "kept last-good" cycle (yellow warning, no "all jobs failed" email), while a
+    # real crash (any other non-zero code) still fails the job loudly.
     print("DEADLINE reached before the core scan was ready — not publishing (last good data kept)")
-    sys.stdout.flush(); os._exit(1)
+    sys.stdout.flush(); os._exit(75)
 
 # Registered users' private watchlists live in Supabase (per-user, row-level-security). The
 # public site is anonymous, but the cron folds the *deduped union* of every user's tickers into
