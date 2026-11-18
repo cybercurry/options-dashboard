@@ -1007,23 +1007,30 @@ def scan(universe):
     _IND_CACHE.clear(); _CHAIN_CACHE.clear(); _OVERVIEW.clear()   # fresh per scan
     all_names = list(dict.fromkeys(wheel + growth))
 
+    import time as _t
+    _p = _t.time()
     all_sigs = []
     for t in all_names:                 # CSP/CC for every name — CSPs also enter growth names
         all_sigs.extend(scan_ticker(t))
+    print("  [scan] signals pass: {} names in {:.1f}s".format(len(all_names), _t.time() - _p), flush=True)
     _shortlist(all_sigs)
     all_sigs.sort(key=lambda s: (s["strategy"] != "CSP", -(s["premium_pct"] or 0)))
 
+    _p = _t.time()
     leaps = []
     for t in list(dict.fromkeys(growth + wheel)):     # growth first, deduped
         lp = scan_leap_ticker(t)
         if lp:
             leaps.append(lp)
+    print("  [scan] leap pass: {} names in {:.1f}s".format(len(all_names), _t.time() - _p), flush=True)
     leaps.sort(key=lambda s: (not s.get("qualifies"),
                               s.get("carry_pct") if s.get("carry_pct") is not None else 999))
 
     # Watchlist-Overview rows for EVERY name (the app analyses all of them, not just the wheel).
+    _p = _t.time()
     for t in all_names:
         overview_row(t)
+    print("  [scan] overview pass: {} names in {:.1f}s".format(len(all_names), _t.time() - _p), flush=True)
     leap_tl = {lp["ticker"]: lp.get("timing_label") for lp in leaps}
     # Per-leg verdicts computed once (on the leg signals) → copied onto the overview rows, so the
     # watchlist shows the SAME traffic light as the TA/Signals tabs. One engine, one light.

@@ -805,6 +805,10 @@ def light_refresh():
 
 
 def main():
+    import time as _time
+    _t0 = _time.time()
+    def _lap(msg):                   # phase timing → CI log, so we can see exactly where the budget goes
+        print("[t+{:6.1f}s] {}".format(_time.time() - _t0, msg), flush=True)
     ENGINE_DEADLINE_S = 300          # hard ceiling for the whole engine (healthy full scan ~210s; this
                                      # gives the Tradier core room to finish on a degraded day, and sits
                                      # under the workflow's 330s per-attempt timeout)
@@ -826,7 +830,11 @@ def main():
     # always finishes fast and publishes, no matter what Yahoo is doing. (Topped up after publish, below.)
     ctx_seed = _seed_context(_load_published())
     signals.load_context(ctx_seed)
+    _lap("universe={} names (default {} + {} user); context seed={} → starting Tradier scan".format(
+        len(uni.get("wheel", [])) + len(uni.get("growth", [])), len(default_set), len(extra), len(ctx_seed)))
     data = signals.scan(uni)                       # {"signals": [...], "leaps": [...], "params": {...}}  (Tradier)
+    _lap("Tradier scan DONE: {} signals, {} overview rows, {} leaps".format(
+        len(data.get("signals", [])), len(data.get("overview", [])), len(data.get("leaps", []))))
     data["generated_at"] = datetime.datetime.now(datetime.timezone.utc).isoformat(timespec="seconds")
     # universe payload keeps the DEFAULT list distinct from the user-added extras, so the
     # front-end renders the default watchlist by default and can filter to a signed-in user's own
@@ -852,18 +860,25 @@ def main():
     # Fresh Tradier signals + overview are ready → register NOW so the watchdog can ship them even if the
     # yfinance-heavy tiles/enrichment below stall (refresh_tiles was the 2026-11-17 open's real blocker).
     _PENDING["data"] = data
+    _lap("core REGISTERED (publishable) — best-effort enrichment follows")
     _names = [o.get("ticker") for o in data.get("overview", []) if o.get("ticker")]
     _prices = {o.get("ticker"): o.get("price") for o in data.get("overview", [])}
     enrich_overview(data)                           # best-effort: earnings_date & IV Rank onto overview rows
+    _lap("enrich_overview done")
     refresh_tiles(data)                             # best-effort: fresh market/pulse/sectors/market_stats tiles
+    _lap("refresh_tiles done (Yahoo/FRED/CoinGecko)")
     data["fundamentals"] = fetch_fundamentals_all(_names, _prices)   # best-effort (Yahoo; batch-bounded)
+    _lap("fundamentals done ({} tickers)".format(len(data.get("fundamentals", {}))))
     data["chains"] = fetch_chains(_names, _prices)                   # best-effort (Tradier option chains)
+    _lap("chains done ({} tickers)".format(len(data.get("chains", {}))))
     # Top up the context cache from Yahoo for NEXT cycle — LOWEST priority, after everything else, so a
     # slow Yahoo only ever costs some tickers a later refresh. Budget-bounded; refetches only stale/missing.
     data["context"] = signals.refresh_context(_names, ctx_seed, budget_s=60, max_age_h=20)
+    _lap("context top-up done ({} cached)".format(len(data.get("context", {}))))
     _DONE.set()                                     # finished in time — stand the watchdog down
     OUT.mkdir(parents=True, exist_ok=True)
     (OUT / "signals.json").write_text(json.dumps(data, indent=2, default=str))
+    _lap("WROTE signals.json — full cycle complete")
     print("wrote {} — {} signals, {} leaps (universe: {})".format(
         OUT / "signals.json", len(data.get("signals", [])), len(data.get("leaps", [])), data["universe"]))
 
