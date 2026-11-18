@@ -19,6 +19,8 @@ Setup (done once, no token ever touches the repo):
 """
 
 import os
+import time
+import threading
 import requests
 
 try:                       # streamlit is present in the app, but keep this importable
@@ -32,6 +34,14 @@ _BASES = {
     "sandbox":    "https://sandbox.tradier.com",
 }
 _TIMEOUT = 12
+
+# Rate-limit safety. The engine scan now fetches tickers CONCURRENTLY (bounded pool), so _get must be
+# safe under parallel callers: a shared requests.Session is fine (urllib3's pool is thread-safe), but
+# we must never let a burst trip Tradier's per-minute cap and silently drop a ticker's signals. Tradier
+# returns X-Ratelimit-Available / X-Ratelimit-Expiry on every market-data response; we track the last
+# values and, when we're near the cap, pause until the window resets. A 429 is retried with backoff.
+_RL_LOCK = threading.Lock()
+_RL = {"available": None, "expiry": 0.0}   # last-seen remaining calls, and when the window resets (epoch s)
 
 
 # ── credentials / config ────────────────────────────────────────────────────────
@@ -91,21 +101,56 @@ else:
         return _SESS[token]
 
 
-def _get(path, params=None):
-    """Core GET through the door. Returns parsed JSON. Raises on missing token,
-    HTTP error, or non-JSON body so callers can surface a precise reason."""
+def _get(path, params=None, _tries=4):
+    """Core GET through the door. Returns parsed JSON. Raises on missing token, HTTP error, or non-JSON
+    body so callers can surface a precise reason. Thread-safe and rate-limit aware: when Tradier's
+    headers say we're near the per-minute cap it pauses until the window resets, and a 429 is retried
+    with backoff — so the concurrent scan can never silently drop a ticker by overrunning the limit."""
     token = _token()
     if not token:
         raise RuntimeError("No TRADIER_TOKEN configured (add it to Streamlit secrets).")
-    r = _session(token).get(_base() + path, params=params or {}, timeout=_TIMEOUT)
-    if r.status_code == 401:
-        raise RuntimeError("Tradier rejected the token (401). Check TRADIER_TOKEN / that it's "
-                           "a production token for a funded account.")
-    r.raise_for_status()
-    try:
-        return r.json()
-    except ValueError:
-        raise RuntimeError(f"Tradier returned non-JSON (HTTP {r.status_code}).")
+    sess, url = _session(token), _base() + path
+    last_exc = None
+    for attempt in range(_tries):
+        # Proactive throttle: if the last response left ≤1 call in the window, wait for it to reset.
+        with _RL_LOCK:
+            avail, expiry = _RL["available"], _RL["expiry"]
+        if avail is not None and avail <= 1 and expiry > time.time():
+            time.sleep(min(3.0, max(0.0, expiry - time.time()) + 0.05))
+        try:
+            r = sess.get(url, params=params or {}, timeout=_TIMEOUT)
+        except requests.RequestException as e:          # transient network blip → brief backoff + retry
+            last_exc = e
+            time.sleep(min(3.0, 0.5 * (attempt + 1)))
+            continue
+        # Record Tradier's rate-limit headers for the next caller (best-effort).
+        try:
+            with _RL_LOCK:
+                if "X-Ratelimit-Available" in r.headers:
+                    _RL["available"] = int(r.headers["X-Ratelimit-Available"])
+                if "X-Ratelimit-Expiry" in r.headers:   # epoch MILLIS per Tradier
+                    _RL["expiry"] = int(r.headers["X-Ratelimit-Expiry"]) / 1000.0
+        except Exception:
+            pass
+        if r.status_code == 429:                        # over the cap → honor Retry-After / back off
+            ra = r.headers.get("Retry-After")
+            try:
+                wait = float(ra) if ra else 1.0 * (attempt + 1)
+            except ValueError:
+                wait = 1.0 * (attempt + 1)
+            time.sleep(min(5.0, max(0.5, wait)))
+            continue
+        if r.status_code == 401:
+            raise RuntimeError("Tradier rejected the token (401). Check TRADIER_TOKEN / that it's "
+                               "a production token for a funded account.")
+        r.raise_for_status()
+        try:
+            return r.json()
+        except ValueError:
+            raise RuntimeError(f"Tradier returned non-JSON (HTTP {r.status_code}).")
+    if last_exc:
+        raise last_exc
+    raise RuntimeError("Tradier rate-limited: still 429 after retries.")
 
 
 # ── market data endpoints (all REST → all work with the market closed) ──────────

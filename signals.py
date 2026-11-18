@@ -1007,29 +1007,53 @@ def scan(universe):
     _IND_CACHE.clear(); _CHAIN_CACHE.clear(); _OVERVIEW.clear()   # fresh per scan
     all_names = list(dict.fromkeys(wheel + growth))
 
-    import time as _t
+    # The per-ticker work is independent and I/O-bound (each ticker is its own Tradier round-trips),
+    # so the three passes run CONCURRENTLY over a bounded pool instead of one ticker at a time. This is
+    # the headroom that keeps the core scan well under the 300s deadline even when Tradier latency rises
+    # at the open (serial was ~1.4s/ticker ⇒ 122s for 89 names, with no slack; the 2026-11-17/18 freeze).
+    # Safety: tradier._get is rate-limit aware (won't drop a ticker under load); the per-ticker caches are
+    # keyed per ticker/expiry so concurrent writes don't collide (worst case a duplicate fetch); and each
+    # worker is wrapped so one ticker's error can never abort the scan. Order is restored by the sorts /
+    # the ticker-keyed _OVERVIEW read below, so results are identical to the serial version.
+    import time as _t, os as _os
+    try:
+        _WORKERS = max(1, min(16, int(_os.environ.get("TRADIER_SCAN_WORKERS", "6"))))
+    except Exception:
+        _WORKERS = 6
+
+    def _safe(fn, default):
+        def _w(tk):
+            try:
+                return fn(tk)
+            except Exception:
+                return default
+        return _w
+
     _p = _t.time()
     all_sigs = []
-    for t in all_names:                 # CSP/CC for every name — CSPs also enter growth names
-        all_sigs.extend(scan_ticker(t))
-    print("  [scan] signals pass: {} names in {:.1f}s".format(len(all_names), _t.time() - _p), flush=True)
+    with _cf.ThreadPoolExecutor(max_workers=_WORKERS) as _ex:   # CSP/CC for every name
+        for sigs in _ex.map(_safe(scan_ticker, []), all_names):
+            all_sigs.extend(sigs or [])
+    print("  [scan] signals pass: {} names in {:.1f}s ({} workers)".format(
+        len(all_names), _t.time() - _p, _WORKERS), flush=True)
     _shortlist(all_sigs)
     all_sigs.sort(key=lambda s: (s["strategy"] != "CSP", -(s["premium_pct"] or 0)))
 
     _p = _t.time()
+    _leap_names = list(dict.fromkeys(growth + wheel))          # growth first, deduped
     leaps = []
-    for t in list(dict.fromkeys(growth + wheel)):     # growth first, deduped
-        lp = scan_leap_ticker(t)
-        if lp:
-            leaps.append(lp)
-    print("  [scan] leap pass: {} names in {:.1f}s".format(len(all_names), _t.time() - _p), flush=True)
+    with _cf.ThreadPoolExecutor(max_workers=_WORKERS) as _ex:
+        for lp in _ex.map(_safe(scan_leap_ticker, None), _leap_names):
+            if lp:
+                leaps.append(lp)
+    print("  [scan] leap pass: {} names in {:.1f}s".format(len(_leap_names), _t.time() - _p), flush=True)
     leaps.sort(key=lambda s: (not s.get("qualifies"),
                               s.get("carry_pct") if s.get("carry_pct") is not None else 999))
 
     # Watchlist-Overview rows for EVERY name (the app analyses all of them, not just the wheel).
     _p = _t.time()
-    for t in all_names:
-        overview_row(t)
+    with _cf.ThreadPoolExecutor(max_workers=_WORKERS) as _ex:
+        list(_ex.map(_safe(overview_row, None), all_names))
     print("  [scan] overview pass: {} names in {:.1f}s".format(len(all_names), _t.time() - _p), flush=True)
     leap_tl = {lp["ticker"]: lp.get("timing_label") for lp in leaps}
     # Per-leg verdicts computed once (on the leg signals) → copied onto the overview rows, so the
