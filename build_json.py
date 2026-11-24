@@ -804,6 +804,85 @@ def light_refresh():
         len(data.get("signals", [])), len(data.get("overview", [])), data.get("generated_at")))
 
 
+# ─── Expected-Move hit-rate history ────────────────────────────────────────────────────────────
+# The Option-Chain EM strip shows how often the stock has historically stayed within a move the size
+# the Expected Move currently implies. The EM itself is computed live in the front-end (1 SD = spot ×
+# ATM IV × √(DTE/365)); the only thing that needs history is the stock's OWN realized-move
+# distribution, which comes straight from Tradier daily closes — no third party. We store, per ticker,
+# the percentiles of |realized move| over a few calendar-day horizons; the front-end looks up where the
+# live EM% falls on that curve to get the hit rate. Computed once/day, AFTER the core publishes,
+# bounded — so it never blocks the trade scan (same pattern as the sector/earnings context cache).
+_EM_Q = [1, 5, 10, 25, 50, 75, 90, 95, 99]     # percentile grid of |realized move| (%)
+_EM_BUCKETS = [7, 30, 60]                        # calendar-day horizons; the strip maps a DTE to the nearest
+_EM_YEARS = 2                                     # history window
+
+def _pctiles(vals, qs):
+    """Linear-interpolated percentiles of `vals` at the percent levels `qs` (0–100). Pure-python."""
+    xs = sorted(v for v in vals if v is not None)
+    n = len(xs)
+    if n == 0:
+        return None
+    out = []
+    for q in qs:
+        if n == 1:
+            out.append(round(xs[0], 3)); continue
+        pos = (q / 100.0) * (n - 1)
+        lo = int(pos); hi = min(lo + 1, n - 1); frac = pos - lo
+        out.append(round(xs[lo] + (xs[hi] - xs[lo]) * frac, 3))
+    return out
+
+def fetch_em_hist(tickers, existing, budget_s=60, max_age_h=20):
+    """Per-ticker |realized move| percentiles over a few calendar-day horizons, from ~2yr of Tradier
+    daily closes. Feeds the EM strip's historical hit rate. Carries forward; only missing/stale tickers
+    are refetched, bounded by a wall-clock budget, so a slow day just means some tickers refresh next
+    cycle. Never raises — returns the whole em_hist block to publish."""
+    import time as _time
+    import tradier
+    prev = existing if isinstance(existing, dict) else {}
+    out_t = dict(prev.get("t") or {})
+    now = datetime.datetime.now(datetime.timezone.utc)
+    nowiso = now.isoformat(timespec="seconds")
+    deadline = _time.time() + max(0, budget_s)
+    start = (now.date() - datetime.timedelta(days=int(_EM_YEARS * 365) + 25)).isoformat()
+    end = now.date().isoformat()
+    wins = [max(1, round(cal * 252.0 / 365.0)) for cal in _EM_BUCKETS]   # calendar → trading-day windows
+
+    def _stale(entry):
+        if not isinstance(entry, dict):
+            return True
+        a = entry.get("a")
+        if not isinstance(a, str):
+            return True
+        try:
+            return (now - datetime.datetime.fromisoformat(a)).total_seconds() >= max_age_h * 3600
+        except Exception:
+            return True
+
+    for t in [str(x).upper() for x in (tickers or [])]:
+        if _time.time() >= deadline:
+            break
+        if not _stale(out_t.get(t)):
+            continue
+        try:
+            hist = tradier.get_history(t, interval="daily", start=start, end=end)
+            closes = [float(d.get("close")) for d in (hist or [])
+                      if d.get("close") not in (None, "")]
+            if len(closes) < 40:
+                continue
+            m = []
+            for w in wins:
+                if len(closes) <= w:
+                    m.append([])
+                    continue
+                moves = [abs(closes[i] / closes[i - w] - 1.0) * 100.0
+                         for i in range(w, len(closes)) if closes[i - w]]
+                m.append(_pctiles(moves, _EM_Q) or [])
+            out_t[t] = {"a": nowiso, "m": m}
+        except Exception:
+            continue
+    return {"q": _EM_Q, "buckets": _EM_BUCKETS, "years": _EM_YEARS, "t": out_t}
+
+
 def main():
     import time as _time
     _t0 = _time.time()
@@ -828,7 +907,9 @@ def main():
     # Context (sector + earnings) is SEPARATE from the trade scan: carry it forward from the last
     # publish and inject it so the scan reads it from memory — zero Yahoo calls, so the Tradier scan
     # always finishes fast and publishes, no matter what Yahoo is doing. (Topped up after publish, below.)
-    ctx_seed = _seed_context(_load_published())
+    _published = _load_published()
+    ctx_seed = _seed_context(_published)
+    em_prev = (_published.get("em_hist") if isinstance(_published, dict) else None) or {}
     signals.load_context(ctx_seed)
     _lap("universe={} names (default {} + {} user); context seed={} → starting Tradier scan".format(
         len(uni.get("wheel", [])) + len(uni.get("growth", [])), len(default_set), len(extra), len(ctx_seed)))
@@ -857,6 +938,7 @@ def main():
     data.setdefault("fundamentals", {})
     data.setdefault("chains", {})
     data["context"] = ctx_seed                      # carry the context cache forward (replaced post-publish below)
+    data["em_hist"] = em_prev                        # carry EM realized-move history forward (refreshed post-publish)
     # Fresh Tradier signals + overview are ready → register NOW so the watchdog can ship them even if the
     # yfinance-heavy tiles/enrichment below stall (refresh_tiles was the 2026-11-17 open's real blocker).
     _PENDING["data"] = data
@@ -875,6 +957,8 @@ def main():
     # slow Yahoo only ever costs some tickers a later refresh. Budget-bounded; refetches only stale/missing.
     data["context"] = signals.refresh_context(_names, ctx_seed, budget_s=60, max_age_h=20)
     _lap("context top-up done ({} cached)".format(len(data.get("context", {}))))
+    data["em_hist"] = fetch_em_hist(_names, em_prev, budget_s=60, max_age_h=20)   # EM hit-rate history (once/day)
+    _lap("em_hist done ({} tickers)".format(len((data.get("em_hist", {}) or {}).get("t", {}))))
     _DONE.set()                                     # finished in time — stand the watchdog down
     OUT.mkdir(parents=True, exist_ok=True)
     (OUT / "signals.json").write_text(json.dumps(data, indent=2, default=str))

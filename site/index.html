@@ -343,6 +343,16 @@ td.star-c,th.star-c{width:1%; text-align:center; padding-left:12px; padding-righ
 .chainpx b{font-size:25px; color:var(--text)} .chainpx .dim{font-family:"IBM Plex Sans"; font-size:12px; font-weight:400}
 /* VIX-band → target-delta guide at the top of the Options Chain tab (compact, horizontal) */
 #chain-voltarget{margin:2px 0 12px}
+/* Expected-Move strip (Option Chain tab) + the ±1σ edge markers in the ladders */
+.emstrip{display:flex;flex-wrap:wrap;gap:8px 22px;align-items:center;margin:2px 0 14px;padding:10px 14px;border:1px solid var(--line);border-radius:12px;background:var(--surface-2)}
+.emstrip .emitem{display:flex;gap:7px;align-items:baseline;font-size:13px;color:var(--faint)}
+.emstrip .emitem b{font-size:17px;color:var(--text);font-family:"Archivo",sans-serif;font-weight:700}
+.emstrip .eml{text-transform:uppercase;letter-spacing:.05em;font-size:10.5px;color:var(--muted);opacity:.85}
+.emstrip .emp{color:var(--faint)}
+.emstrip .emhint{font-size:11px;color:var(--faint);opacity:.85}
+.emstrip .earn b{color:var(--warn)}
+#v-chain tbody tr.emedge td{border-top:2px dashed var(--accent)}
+#v-chain tbody tr.emedge td.l::after{content:" · EM 1σ";font-size:10px;color:var(--accent);font-weight:700;letter-spacing:.02em}
 .vtcard{border:1px solid var(--line); border-radius:12px; background:var(--surface); padding:7px 14px; display:flex; flex-wrap:wrap; gap:6px 20px; align-items:center; box-shadow:var(--shadow)}
 .vtcard .vtnow{font-size:13.5px; font-weight:600; color:var(--muted)} .vtcard .vtnow b{color:var(--text)}
 .vtcard.vt-calm{border-left:3px solid var(--good)} .vtcard.vt-elev{border-left:3px solid var(--warn)} .vtcard.vt-high{border-left:3px solid var(--bad)}
@@ -1553,13 +1563,63 @@ function renderWatchTable(){
   wireTips(host);
 }
 
+/* ---------- expected move (1 standard deviation) ---------- */
+// EM = spot × ATM IV × √(DTE/365). All inputs come straight from the Tradier chain already in hand
+// (nearest-strike IV, spot, dte) — no new data. Recomputed per selected expiration.
+function _atmIV(rows, spot){
+  if(!rows||!rows.length||!spot) return null;
+  let best=Infinity, iv=null;
+  rows.forEach(r=>{ if(r.iv!=null){ const e=Math.abs(r.k-spot); if(e<best){best=e; iv=r.iv;} } });
+  return iv;   // percent, e.g. 90.2
+}
+function _expectedMove(ex, spot){
+  if(!ex||!spot||!(ex.dte>0)) return null;
+  const civ=_atmIV(ex.calls,spot), piv=_atmIV(ex.puts,spot);
+  const ivs=[civ,piv].filter(v=>v!=null);
+  if(!ivs.length) return null;
+  const atmIV=ivs.reduce((a,b)=>a+b,0)/ivs.length;         // % (avg of ATM call & put IV)
+  const sig=atmIV/100, f=Math.sqrt(ex.dte/365);
+  return {dollar:spot*sig*f, pct:sig*f*100, atmIV, lo:spot-spot*sig*f, hi:spot+spot*sig*f};
+}
+// Historical hit rate: where the live EM% falls on the stock's OWN |realized move| distribution
+// (em_hist, built from ~2yr of Tradier closes). Picks the horizon bucket nearest the selected DTE.
+function _hitRate(tk, dte, emPct){
+  const H=DATA.em_hist; if(!H||!H.t||!H.t[tk]||!H.buckets||!H.q) return null;
+  const m=(H.t[tk].m)||[]; if(!m.length) return null;
+  let bi=0, bd=Infinity; H.buckets.forEach((b,i)=>{const e=Math.abs(b-dte); if(e<bd){bd=e;bi=i;}});
+  const arr=m[bi], q=H.q; if(!arr||!arr.length) return null;
+  let hit;
+  if(emPct<=arr[0]) hit=q[0];
+  else if(emPct>=arr[arr.length-1]) hit=q[q.length-1];
+  else { hit=q[q.length-1];
+    for(let j=1;j<arr.length;j++){ if(emPct<=arr[j]){ const t=(emPct-arr[j-1])/((arr[j]-arr[j-1])||1); hit=q[j-1]+t*(q[j]-q[j-1]); break; } } }
+  return {pct:hit, horizon:H.buckets[bi], years:H.years};
+}
+function _emStrip(tk, ex, spot, em){
+  if(!em) return '';
+  const ov=(DATA.overview||[]).find(o=>String(o.ticker||'').toUpperCase()===String(tk).toUpperCase())||{};
+  const ivr=ov.ivr, ivrHint=(ivr==null?'':(ivr>=67?'rich':ivr<=33?'cheap':'mid'));
+  const edate=ov.earnings_date, todayISO=new Date().toISOString().slice(0,10);
+  const earn = edate && edate<=ex.exp && edate>=todayISO;
+  const hr=_hitRate(tk, ex.dte, em.pct);
+  const emTip="Expected move (±1 standard deviation) = price × ATM IV × √(DTE/365). The stock is expected to finish within this band by expiry about 68% of the time.";
+  const ivrTip="IV Rank (0–100): where the stock's current ATM IV sits in its ~"+(DATA.iv_rank_weeks||'')+"-week range. High = options and this EM are historically rich; low = cheap.";
+  const hrTip=hr?("Of this stock's own past ~"+hr.horizon+"-day moves over ~"+hr.years+"yr of Tradier history, how often it stayed within a move this size. Implied-vs-realized edge — a high number means the EM has usually contained the move."):"Needs the stock's realized-move history (builds within a day).";
+  let items=`<span class="emitem" title="${emTip}"><span class="eml">Expected move</span><b>±$${em.dollar.toFixed(2)}</b><span class="emp">±${em.pct.toFixed(1)}%</span></span>`;
+  if(ivr!=null) items+=`<span class="emitem" title="${ivrTip}"><span class="eml">IV Rank</span><b>${ivr}</b><span class="emhint">${ivrHint}</span></span>`;
+  if(earn) items+=`<span class="emitem earn" title="Next earnings (${fmtDMY(edate)}) falls before this expiry — the EM is inflated by the event."><span class="eml">Earnings</span><b>⚠ in window</b></span>`;
+  items+=`<span class="emitem" title="${hrTip}"><span class="eml">Stayed within EM</span><b>${hr?Math.round(hr.pct)+'%':'—'}</b>${hr?`<span class="emhint">~${hr.horizon}d · ${hr.years}yr</span>`:''}</span>`;
+  return `<div class="emstrip">${items}</div>`;
+}
+
 /* ---------- options chain ---------- */
-function _ladder(rows, title, type, spot){
+function _ladder(rows, title, type, spot, edge){
   if(!rows||!rows.length) return `<div><div class="subhead">${title}</div><div class="dim" style="font-size:13px">no strikes in range</div></div>`;
   const _B=vixBand(), _TGT=(type==='call')?_B.callD:_B.putD;   // VIX-band target Δ (calls ~5Δ below puts)
   let ti=-1, best=9; rows.forEach((r,i)=>{ if(r.d!=null){const e=Math.abs(Math.abs(r.d)-_TGT); if(e<best){best=e;ti=i;}} });
   let ai=-1, ab=Infinity; if(spot) rows.forEach((r,i)=>{const e=Math.abs(r.k-spot); if(e<ab){ab=e;ai=i;}});
-  const body=rows.map((r,i)=>`<tr class="${i===ti?'tgt ':''}${i===ai?'atm':''}">
+  let ei=-1, eb=Infinity; if(edge!=null) rows.forEach((r,i)=>{const e=Math.abs(r.k-edge); if(e<eb){eb=e;ei=i;}});   // ±1σ EM edge strike
+  const body=rows.map((r,i)=>`<tr class="${i===ti?'tgt ':''}${i===ai?'atm ':''}${i===ei?'emedge':''}">
     <td class="l mono">${i===ai?'▸ ':(i===ti?'🎯 ':'')}$${r.k}</td>
     <td class="mono">${r.d==null?'—':r.d.toFixed(2)}</td>
     <td class="mono">${r.b==null?'—':`<span class="bidcell" data-t="${type}" data-k="${r.k}" data-b="${r.b}">$${r.b.toFixed(2)}</span>`}</td>
@@ -1587,7 +1647,9 @@ function renderChainExp(tk, exp){
   const host=document.getElementById('chain-body');
   if(!ex){ host.innerHTML='<div class="empty">No chain for this expiry.</div>'; return; }
   const pxline=`<div class="chainpx">${tk} <b>$${spot!=null?(+spot).toFixed(2):'—'}</b> <span class="dim">· ${fmtDMY(exp)} · ${ex.dte}d · tap a Bid to size the trade</span></div>`;
-  host.innerHTML=`${pxline}<div class="ch2">${_ladder(ex.calls,'Calls','call',spot)}${_ladder(ex.puts,'Puts','put',spot)}</div>`;
+  const em=_expectedMove(ex, spot);                      // ±1σ EM for THIS expiration
+  const strip=_emStrip(tk, ex, spot, em);
+  host.innerHTML=`${pxline}${strip}<div class="ch2">${_ladder(ex.calls,'Calls','call',spot, em&&em.hi)}${_ladder(ex.puts,'Puts','put',spot, em&&em.lo)}</div>`;
   wireTips(host);
 }
 function renderChainTk(tk){
