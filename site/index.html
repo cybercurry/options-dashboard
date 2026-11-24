@@ -708,6 +708,11 @@ th.thelp:hover{color:var(--text)} th.thelp:hover .thi{border-color:var(--accent)
     </div>
 
     <div class="rules-sec">
+      <h2>Expected Move — the Options Chain tab</h2>
+      <p class="rnote"><b>Expected Move (EM)</b> is the ±1 standard-deviation range the options market is pricing for the stock by a chosen expiry. <b>EM = price × ATM&nbsp;IV × √(DTE ÷ 365)</b>, using the at-the-money implied volatility from the Tradier chain — so the stock is expected to finish <b>within ±EM about 68%</b> of the time. The dashed <b>EM&nbsp;1σ</b> lines in the ladders mark the edge strikes (≈16–20Δ). The strip also shows <b>IV&nbsp;Rank</b> (is that volatility rich or cheap vs the stock's own ~15-week history), an <b>earnings</b> flag when the next report lands before the expiry (the event inflates the EM), and a <b>historical hit rate</b> — how often this stock's own realized move over a comparable window (~2&nbsp;yr of Tradier closes) stayed within a move this size. Reference only — it doesn't gate any suggestion.</p>
+    </div>
+
+    <div class="rules-sec">
       <h2>Data inputs — open by design</h2>
       <div class="src">
         <span><b>Tradier</b> — option chains, vendor greeks (Δ/IV), daily price history</span>
