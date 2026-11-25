@@ -36,18 +36,40 @@ async function secGet(url, ttl) {
 }
 
 function rows(facts, concepts) {
+  // Return the matching concept with the MOST-RECENT data. Companies often leave a legacy XBRL tag
+  // populated with only stale values alongside the concept they file under today (e.g. ISRG's real
+  // capex is PaymentsToAcquireProductiveAssets, while PaymentsToAcquirePropertyPlantAndEquipment holds
+  // only 2011 figures; likewise NVDA/XOM revenue → Revenues, TSLA debt → LongTermDebt/DebtCurrent).
+  // Returning the first non-empty concept hands back the stale tag and blanks the metric. So: keep the
+  // concept order as priority, but SKIP a concept whose newest period ends >500 days before the freshest
+  // concept's (a clearly abandoned tag). Among concepts still current, the earliest-listed wins, so
+  // normal selections (revenue/debt/shares) are unchanged.
   const gaap = (facts.facts && facts.facts["us-gaap"]) || {};
   const dei = (facts.facts && facts.facts.dei) || {};
-  for (const c of concepts) {
+  const cand = [];                                  // [priorityIndex, maxEnd, rows]
+  concepts.forEach((c, i) => {
     const node = gaap[c] || dei[c];
-    if (!node) continue;
+    if (!node) return;
     const units = node.units || {};
     let rws = null;
     for (const uk of ["USD", "shares", "USD/shares"]) { if (units[uk]) { rws = units[uk]; break; } }
     if (rws === null) { const vals = Object.values(units); rws = vals.length ? vals[0] : []; }
-    if (rws && rws.length) return rws;
-  }
-  return [];
+    if (!rws || !rws.length) return;
+    let maxEnd = "";
+    for (const r of rws) { const e = String(r.end || ""); if (e > maxEnd) maxEnd = e; }
+    cand.push([i, maxEnd, rws]);
+  });
+  if (!cand.length) return [];
+  const freshest = cand.reduce((a, t) => (t[1] > a ? t[1] : a), "");
+  const fe = Date.parse(freshest);
+  const stale = (me) => {
+    const d = Date.parse(me);
+    return (fe && d) ? ((fe - d) / 86400000 > 500) : (me !== freshest);
+  };
+  let usable = cand.filter((t) => !stale(t[1]));
+  if (!usable.length) usable = cand;
+  usable.sort((a, b) => a[0] - b[0]);               // highest priority among the current
+  return usable[0][2];
 }
 
 function annualLastTwo(facts, concepts) {

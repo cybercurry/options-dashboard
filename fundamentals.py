@@ -107,10 +107,18 @@ def company_facts(cik):
 
 # ── concept extraction ───────────────────────────────────────────────────────────
 def _rows(facts, concepts):
-    """Return the raw fact rows for the first matching concept (us-gaap or dei)."""
+    """Return the raw fact rows for the matching concept with the MOST-RECENT data (us-gaap or dei).
+
+    Companies often keep a legacy XBRL tag populated with only stale values alongside the concept
+    they actually file under today — e.g. ISRG's real capex lives in `PaymentsToAcquireProductiveAssets`
+    (current), while `PaymentsToAcquirePropertyPlantAndEquipment` holds only 2011 figures. Returning the
+    first non-empty concept would hand back the stale tag and blank the metric (capex→no FCF). So we pick
+    the concept whose rows reach the latest period end; the concept order still breaks ties, preserving
+    the intended priority (e.g. RevenueFromContract… over Revenues) whenever both are equally current."""
     gaap = facts.get("facts", {}).get("us-gaap", {})
     dei  = facts.get("facts", {}).get("dei", {})
-    for c in concepts:
+    cand = []                                       # (priority_index, max_end, rows) per non-empty concept
+    for i, c in enumerate(concepts):
         node = gaap.get(c) or dei.get(c)
         if not node:
             continue
@@ -121,9 +129,29 @@ def _rows(facts, concepts):
                 rows = units[uk]; break
         if rows is None:
             rows = next(iter(units.values()), [])
-        if rows:
-            return rows
-    return []
+        if not rows:
+            continue
+        max_end = max((str(r.get("end") or "") for r in rows), default="")
+        cand.append((i, max_end, rows))
+    if not cand:
+        return []
+    # Priority order normally wins. The ONLY override: skip a concept whose data is clearly abandoned —
+    # its most-recent period ends >500 days before the freshest concept's (a legacy tag left stale after
+    # a company migrated to another, e.g. ISRG's 2011-only PaymentsToAcquirePropertyPlantAndEquipment vs
+    # its current PaymentsToAcquireProductiveAssets). Among concepts that are still current, the earliest-
+    # listed (highest priority) is kept, so normal selections (revenue/debt/shares tags) are unchanged.
+    freshest = max(me for _, me, _ in cand)
+
+    def _stale(me):
+        try:
+            d1 = _pdate(me); d2 = _pdate(freshest)
+            return bool(d1 and d2 and (d2 - d1).days > 500)
+        except Exception:
+            return me != freshest
+
+    usable = [t for t in cand if not _stale(t[1])] or cand
+    usable.sort(key=lambda t: t[0])                 # highest priority (earliest-listed) among the current
+    return usable[0][2]
 
 
 def _annual_last_two(facts, concepts):
