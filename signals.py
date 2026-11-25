@@ -44,9 +44,11 @@ P = {
     "mr_bb_lookback": 3,         # BB %B peak/trough within the last 3 sessions
     "mr_rsi_lookback": 5,        # RSI >70 / <30 rollover within the last 5 sessions
     "mr_candle_lookback": 3,     # candle-reversal search window (Jay: "3 days trading")
-    # LEAP (growth + PMCC basis) — long-dated deep-ITM call, Δ75-80 (criteria doc §2/§10.5)
+    # LEAP (growth + PMCC basis) — long-dated deep-ITM call, MIN Δ 0.80 (stock-replacement floor;
+    # target just above the floor so we take the SHALLOWEST call that still clears 0.80 — best
+    # leverage/cost — and the 0.90 cap keeps coverage when strikes are sparse).
     "leap_dte_lo": 180, "leap_dte_hi": 900, "leap_dte_opt": 542,
-    "leap_delta_opt": 0.78, "leap_delta_lo": 0.70, "leap_delta_hi": 0.85,
+    "leap_delta_opt": 0.82, "leap_delta_lo": 0.80, "leap_delta_hi": 0.90,
     "leap_backstop_ext_share": 0.55,  # hard backstop: extrinsic ≤55% of premium (reject rented-time buys)
     # Below the backstop, extrinsic (≤40→4·≤45→3·≤50→2·≤55→1) and carry (≤8→3·≤12→2·≤16→1) are SCORE points,
     # not gates (Jay 27 Aug). Trend gate = price>200MA AND 50>200 only — below the 50-MA is fine
