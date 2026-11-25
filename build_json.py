@@ -74,7 +74,10 @@ def _deadline_watchdog(deadline_s):
 # tab to whichever universe (default vs. the signed-in user's own list) is active. This never
 # exposes who owns which ticker (the union is unattributed) and never touches the default list.
 SUPABASE_URL = os.environ.get("SUPABASE_URL", "https://asxwbjrripzbkcxbkect.supabase.co")
-USER_TICKER_CAP = 60   # safety ceiling on extra scan load beyond the default universe (raised 40->60; the union of users' blue-list tickers was hitting 40 and dropping extras like ORCL)
+USER_TICKER_CAP = 120  # safety ceiling on extra scan load beyond the default universe (40->60->120; the
+                       # union of users' list tickers kept saturating the cap and silently dropping the
+                       # most-recently-added names — e.g. ORCL at 40, then ISRG/ONON at exactly 60. The
+                       # scan is parallelized (bounded, rate-limit-safe pool), so this headroom is cheap.
 
 
 def load_universe():
