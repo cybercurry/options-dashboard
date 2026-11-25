@@ -554,7 +554,7 @@ th.thelp:hover{color:var(--text)} th.thelp:hover .thi{border-color:var(--accent)
     <div id="ready-wrap"></div>
 
     <div class="subhead">LEAP ideas — a buy, not premium <span class="n" id="n-leap"></span></div>
-    <p class="note">Deep-ITM (Δ ≥ 80) long-dated calls in an <b>uptrend</b> (price &gt; 200-MA · 50 &gt; 200) with a workable contract (time value ≤ 55%), graded by a transparent <b>0–16 entry score</b> — buying a pullback inside the trend is fine.</p>
+    <p class="note">Deep-ITM (Δ ≥ 78, target ~85) long-dated calls in an <b>uptrend</b> (price &gt; 200-MA · 50 &gt; 200) with low rented time (time value ≤ 40% of premium), graded by a transparent <b>0–16 entry score</b> — buying a pullback inside the trend is fine.</p>
     <div id="leap-wrap"></div>
   </section>
 
@@ -678,12 +678,12 @@ th.thelp:hover{color:var(--text)} th.thelp:hover .thi{border-color:var(--accent)
       <h2>4 · LEAP — a buy, not premium income</h2>
       <p>A LEAP is <b>accumulation in a confirmed uptrend</b> — often on a pullback. It <b>qualifies</b> on just two hard checks (an uptrend and a workable contract); everything else is a <b>graded 0–11 score</b>, never a hard reject. A LEAP is <b>never shown red</b>.</p>
       <table class="rtable"><thead><tr><th>Element</th><th>Rule</th></tr></thead><tbody>
-        <tr><td>Delta</td><td class="mono">≥ 0.80 · min 80 (deep ITM = intrinsic-led)</td></tr>
+        <tr><td>Delta</td><td class="mono">≥ 0.78 · target ~0.85 (deep ITM = intrinsic-led, low time value)</td></tr>
         <tr><td>DTE</td><td class="mono">180–900 · target ~542 (Jan-2027+)</td></tr>
         <tr><td><b>Gate 1</b> — Uptrend</td><td class="mono">price &gt; 200-MA <b>and</b> 50-MA &gt; 200-MA. Below the 50-MA is fine — a pullback inside the uptrend (§2).</td></tr>
-        <tr><td><b>Gate 2</b> — Contract backstop</td><td class="mono">time value (premium − intrinsic) ≤ 55% of premium — reject a mostly-rented-time call</td></tr>
+        <tr><td><b>Gate 2</b> — Contract backstop</td><td class="mono">time value (premium − intrinsic) ≤ 40% of premium — reject a mostly-rented-time call</td></tr>
       </tbody></table>
-      <p class="rnote"><b>Score (0–16), all transparent:</b> IV vs realized (&lt;1.0 → 3 · &lt;1.25 → 2) · RSI §2 zone (45–55 → 3 · 33–45 → 2 · 55–65 → 1) · time value (≤40% → 4 · ≤45% → 3 · ≤50% → 2 · ≤55% → 1) · carry = (time value ÷ spot)×365/DTE (≤8% → 3 · ≤12% → 2 · ≤16% → 1) · uptrend confirmed → 1 · <b>dip-reversal</b>: below the 20-day median (%B &lt; 0.5) <b>and</b> RSI rising over 2 sessions → 2 (a falling/flat RSI scores 0 — no rewarding a knife; independent of the 200/50-MA gate). Carry and time value <b>cost points but no longer gate</b> — only the 55% backstop can reject a contract.</p>
+      <p class="rnote"><b>Score (0–16), all transparent:</b> IV vs realized (&lt;1.0 → 3 · &lt;1.25 → 2) · RSI §2 zone (45–55 → 3 · 33–45 → 2 · 55–65 → 1) · time value (≤25% → 4 · ≤30% → 3 · ≤35% → 2 · ≤40% → 1) · carry = (time value ÷ spot)×365/DTE (≤8% → 3 · ≤12% → 2 · ≤16% → 1) · uptrend confirmed → 1 · <b>dip-reversal</b>: below the 20-day median (%B &lt; 0.5) <b>and</b> RSI rising over 2 sessions → 2 (a falling/flat RSI scores 0 — no rewarding a knife; independent of the 200/50-MA gate). Carry and time value <b>cost points but no longer gate</b> — only the 40% time-value backstop can reject a contract.</p>
       <p class="rnote"><b>What "carry" means:</b> a LEAP costs extra for its <b>time value</b> (premium above intrinsic), which decays over the option's life. <b>Carry</b> annualizes that decay — <b>(time value ÷ share price) × 365/DTE</b> — i.e. how much the stock must rise <b>per year</b> just to offset the time you're renting instead of owning shares outright. <b>Lower = cheaper to hold</b>; think of it as the LEAP's financing cost vs. buying the stock.</p>
     </div>
 
@@ -1257,9 +1257,9 @@ function renderLeaps(){
   const TH=(cls,lbl,tip)=>`<th class="${cls} thelp" data-tip="${tip.replace(/"/g,'&quot;')}">${lbl}<i class="thi">i</i></th>`;
   document.getElementById('leap-wrap').innerHTML=`<div class="tablewrap"><table><thead><tr>
     ${TH('l','Ticker','The underlying. Click any row to open it in the TA tab.')}
-    ${TH('l','Suggested trade','The deep-ITM long call the engine picked (Δ ≥ 0.80) — a stock substitute, not premium income.')}
+    ${TH('l','Suggested trade','The deep-ITM long call the engine picked (Δ ≥ 0.78, target ~0.85) — a stock substitute, not premium income.')}
     ${TH('l','Entry','Graded entry light + score /16: 🟢 STRONG (≥11) · 🟡 ANALYZE (7–10) · 🟠 MARGINAL (3–6). Only names in an uptrend with a workable contract are listed. Score compares candidates at a glance.')}
-    ${TH('','Δ','Delta ≥ 0.80 (min 80) — deep in-the-money, so the call moves almost like the stock (intrinsic-led).')}
+    ${TH('','Δ','Delta ≥ 0.78 (deep ITM) — deep in-the-money, so the call moves almost like the stock (intrinsic-led).')}
     ${TH('','Time value','Premium − intrinsic, as a % of premium (the dollars you pay for time). Backstop rejects &gt;55%; scores ≤40%→4 · ≤45%→3 · ≤50%→2 · ≤55%→1.')}
     ${TH('','Carry','Time-value cost per year, as a % of the share price. Scores ≤8%→3 · ≤12%→2 · ≤16%→1 (no longer a gate).')}
     ${TH('','DTE','Days to expiry — target ~542 (Jan-2027+), band 180–900.')}

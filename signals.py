@@ -44,13 +44,12 @@ P = {
     "mr_bb_lookback": 3,         # BB %B peak/trough within the last 3 sessions
     "mr_rsi_lookback": 5,        # RSI >70 / <30 rollover within the last 5 sessions
     "mr_candle_lookback": 3,     # candle-reversal search window (Jay: "3 days trading")
-    # LEAP (growth + PMCC basis) — long-dated deep-ITM call, MIN Δ 0.80 (stock-replacement floor;
-    # target just above the floor so we take the SHALLOWEST call that still clears 0.80 — best
-    # leverage/cost — and the 0.90 cap keeps coverage when strikes are sparse).
+    # LEAP (growth + PMCC basis) — long-dated DEEP-ITM call. Floor Δ 0.78, but TARGET deeper (0.85):
+    # lower delta = more time value, and the whole point is to minimise rented-time burn. Deep ITM.
     "leap_dte_lo": 180, "leap_dte_hi": 900, "leap_dte_opt": 542,
-    "leap_delta_opt": 0.82, "leap_delta_lo": 0.80, "leap_delta_hi": 0.90,
-    "leap_backstop_ext_share": 0.55,  # hard backstop: extrinsic ≤55% of premium (reject rented-time buys)
-    # Below the backstop, extrinsic (≤40→4·≤45→3·≤50→2·≤55→1) and carry (≤8→3·≤12→2·≤16→1) are SCORE points,
+    "leap_delta_opt": 0.85, "leap_delta_lo": 0.78, "leap_delta_hi": 0.92,
+    "leap_backstop_ext_share": 0.40,  # hard backstop: extrinsic ≤40% of premium (deep-ITM; reject rented time)
+    # Below the backstop, extrinsic (≤25→4·≤30→3·≤35→2·≤40→1) and carry (≤8→3·≤12→2·≤16→1) are SCORE points,
     # not gates (Jay 27 Aug). Trend gate = price>200MA AND 50>200 only — below the 50-MA is fine
     # (a pullback inside the uptrend, criteria §2). Score is graded 0-11; a LEAP never reads red.
 }
@@ -865,10 +864,10 @@ def scan_leap_ticker(ticker):
         ma50 = ind.get("ma50"); ma200 = ind.get("ma200")
         aligned = bool(ma50 is not None and ma200 is not None and ma50 >= ma200)
         trend_ok = bool(above_200 and aligned)
-        # ── Contract backstop (hard, reject-only) — extrinsic ≤55% of premium. A LEAP whose
-        # premium is mostly rented time isn't a stock substitute. Carry is no longer a gate — it
-        # only costs score points below. 55% is the compromise between the old strict 40% and
-        # the Streamlit-era 60%.
+        # ── Contract backstop (hard, reject-only) — extrinsic ≤40% of premium. A LEAP whose
+        # premium is mostly rented time isn't a stock substitute; deep-ITM keeps time value low.
+        # Tightened 55%→40% (Jay, Nov): the point of a LEAP is to lose as little to time decay as
+        # possible. Carry is no longer a gate — it only costs score points below.
         ext_ok = bool(ext_share is not None and ext_share <= P["leap_backstop_ext_share"])
         qualifies = bool(trend_ok and ext_ok)
         rsi_now = ind.get("rsi"); rsi_5ago = ind.get("rsi_5ago")
@@ -891,8 +890,8 @@ def scan_leap_ticker(ticker):
             tscore += (3 if 45 <= rsi_now <= 55 else 2 if 33 <= rsi_now < 45
                        else 1 if 55 < rsi_now <= 65 else 0)
         if ext_share is not None:                                    # contract quality (time value) — 0–4
-            tscore += (4 if ext_share <= 0.40 else 3 if ext_share <= 0.45
-                       else 2 if ext_share <= 0.50 else 1 if ext_share <= 0.55 else 0)
+            tscore += (4 if ext_share <= 0.25 else 3 if ext_share <= 0.30
+                       else 2 if ext_share <= 0.35 else 1 if ext_share <= 0.40 else 0)
         if carry is not None:                                        # cost of the rented time — 0–3
             tscore += (3 if carry <= 0.08 else 2 if carry <= 0.12 else 1 if carry <= 0.16 else 0)
         if trend_ok:                                                 # long-term trend confirmed
