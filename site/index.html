@@ -351,10 +351,9 @@ td.star-c,th.star-c{width:1%; text-align:center; padding-left:12px; padding-righ
 .emstrip .emp{color:var(--faint)}
 .emstrip .emhint{font-size:11px;color:var(--faint);opacity:.85}
 .emstrip .earn b{color:var(--warn)}
-#v-chain tbody tr.emedge td{border-top:2px dashed var(--accent)}
-#v-chain tbody tr.emedge td.l::after{content:" · EM 1σ";font-size:10px;color:var(--accent);font-weight:700;letter-spacing:.02em}
 .vtcard{border:1px solid var(--line); border-radius:12px; background:var(--surface); padding:7px 14px; display:flex; flex-wrap:wrap; gap:6px 20px; align-items:center; box-shadow:var(--shadow)}
 .vtcard .vtnow{font-size:13.5px; font-weight:600; color:var(--muted)} .vtcard .vtnow b{color:var(--text)}
+.vtcard .vtnote{flex-basis:100%; font-size:11.5px; line-height:1.45; color:var(--muted); font-style:italic; margin-top:2px} .vtcard .vtnote b{color:var(--text); font-style:normal}
 .vtcard.vt-calm{border-left:3px solid var(--good)} .vtcard.vt-elev{border-left:3px solid var(--warn)} .vtcard.vt-high{border-left:3px solid var(--bad)}
 .vttable{border-collapse:collapse; font-size:12.5px; font-family:"IBM Plex Mono",monospace}
 .vttable th,.vttable td{padding:2px 12px; text-align:center; border:1px solid var(--line-soft)}
@@ -618,7 +617,7 @@ th.thelp:hover{color:var(--text)} th.thelp:hover .thi{border-color:var(--accent)
       <h2>1 · Structural gates — every CSP &amp; CC must pass all</h2>
       <table class="rtable"><thead><tr><th>Rule</th><th>Threshold</th><th>Why</th></tr></thead><tbody>
         <tr><td>DTE (days to expiry)</td><td class="mono">21–45 · target 30</td><td>the monthly cycle</td></tr>
-        <tr><td>Delta</td><td class="mono">CSP ~0.30 · CC ~0.25 (further OTM) · window 0.20–0.45</td><td>CC sells lower-Δ for upside room</td></tr>
+        <tr><td>Delta</td><td class="mono">CSP ~0.30 · CC ~0.20 (further OTM) · window 0.20–0.45</td><td>CC sells lower-Δ for upside room</td></tr>
         <tr><td>Premium</td><td class="mono">≥ 1.5% of basis (CSP: strike, CC: spot)</td><td>worth selling; ≥2.0% = 🔥 strong</td></tr>
         <tr><td>Open interest</td><td class="mono">≥ 100</td><td>liquidity</td></tr>
         <tr><td>Bid/ask spread</td><td class="mono">≤ 15% of mid</td><td>tradeable</td></tr>
@@ -711,7 +710,7 @@ th.thelp:hover{color:var(--text)} th.thelp:hover .thi{border-color:var(--accent)
 
     <div class="rules-sec">
       <h2>Expected Move — the Options Chain tab</h2>
-      <p class="rnote"><b>Expected Move (EM)</b> is the ±1 standard-deviation range the options market is pricing for the stock by a chosen expiry. <b>EM = price × ATM&nbsp;IV × √(DTE ÷ 365)</b>, using the at-the-money implied volatility from the Tradier chain — so the stock is expected to finish <b>within ±EM about 68%</b> of the time. The dashed <b>EM&nbsp;1σ</b> lines in the ladders mark the edge strikes (≈16–20Δ). The strip also shows <b>IV&nbsp;Rank</b> (is that volatility rich or cheap vs the stock's own ~15-week history), an <b>earnings</b> flag when the next report lands before the expiry (the event inflates the EM), and a <b>historical hit rate</b> — how often this stock's own realized move over a comparable window (~2&nbsp;yr of Tradier closes) stayed within a move this size. Reference only — it doesn't gate any suggestion.</p>
+      <p class="rnote"><b>Expected Move (EM)</b> is the ±1 standard-deviation range the options market is pricing for the stock by a chosen expiry. <b>EM = price × ATM&nbsp;IV × √(DTE ÷ 365)</b>, using the at-the-money implied volatility from the Tradier chain — so the stock is expected to finish <b>within ±EM about 68%</b> of the time. The strip also shows <b>IV&nbsp;Rank</b> (is that volatility rich or cheap vs the stock's own ~15-week history), an <b>earnings</b> flag when the next report lands before the expiry (the event inflates the EM), and a <b>historical hit rate</b> — how often this stock's own realized move over a comparable window (~2&nbsp;yr of Tradier closes) stayed within a move this size. Reference only — it doesn't gate any suggestion.</p>
     </div>
 
     <div class="rules-sec">
@@ -1620,13 +1619,12 @@ function _emStrip(tk, ex, spot, em){
 }
 
 /* ---------- options chain ---------- */
-function _ladder(rows, title, type, spot, edge){
+function _ladder(rows, title, type, spot){
   if(!rows||!rows.length) return `<div><div class="subhead">${title}</div><div class="dim" style="font-size:13px">no strikes in range</div></div>`;
   const _B=vixBand(), _TGT=(type==='call')?_B.callD:_B.putD;   // VIX-band target Δ (calls ~5Δ below puts)
   let ti=-1, best=9; rows.forEach((r,i)=>{ if(r.d!=null){const e=Math.abs(Math.abs(r.d)-_TGT); if(e<best){best=e;ti=i;}} });
   let ai=-1, ab=Infinity; if(spot) rows.forEach((r,i)=>{const e=Math.abs(r.k-spot); if(e<ab){ab=e;ai=i;}});
-  let ei=-1, eb=Infinity; if(edge!=null) rows.forEach((r,i)=>{const e=Math.abs(r.k-edge); if(e<eb){eb=e;ei=i;}});   // ±1σ EM edge strike
-  const body=rows.map((r,i)=>`<tr class="${i===ti?'tgt ':''}${i===ai?'atm ':''}${i===ei?'emedge':''}">
+  const body=rows.map((r,i)=>`<tr class="${i===ti?'tgt ':''}${i===ai?'atm ':''}">
     <td class="l mono">${i===ai?'▸ ':(i===ti?'🎯 ':'')}$${r.k}</td>
     <td class="mono">${r.d==null?'—':r.d.toFixed(2)}</td>
     <td class="mono">${r.b==null?'—':`<span class="bidcell" data-t="${type}" data-k="${r.k}" data-b="${r.b}">$${r.b.toFixed(2)}</span>`}</td>
@@ -1656,7 +1654,7 @@ function renderChainExp(tk, exp){
   const pxline=`<div class="chainpx">${tk} <b>$${spot!=null?(+spot).toFixed(2):'—'}</b> <span class="dim">· ${fmtDMY(exp)} · ${ex.dte}d · tap a Bid to size the trade</span></div>`;
   const em=_expectedMove(ex, spot);                      // ±1σ EM for THIS expiration
   const strip=_emStrip(tk, ex, spot, em);
-  host.innerHTML=`${pxline}${strip}<div class="ch2">${_ladder(ex.calls,'Calls','call',spot, em&&em.hi)}${_ladder(ex.puts,'Puts','put',spot, em&&em.lo)}</div>`;
+  host.innerHTML=`${pxline}${strip}<div class="ch2">${_ladder(ex.calls,'Calls','call',spot)}${_ladder(ex.puts,'Puts','put',spot)}</div>`;
   wireTips(host);
 }
 function renderChainTk(tk){
@@ -1694,10 +1692,11 @@ function renderVolTarget(){
   const head=bands.map(r=>`<th class="${r[1]?'on':''}">${r[0]}</th>`).join('');
   const prow=bands.map((r,i)=>`<td class="${r[1]?'on':''}">${put[i]}Δ</td>`).join('');
   const crow=bands.map((r,i)=>`<td class="${r[1]?'on':''}">${call[i]}Δ</td>`).join('');
-  host.innerHTML=`<div class="vtcard ${b.cls}" title="Higher VIX → sell further out (lower delta); calls sit ~5Δ below puts for the market's average upward drift. The 🎯 in each ladder auto-marks this strike — a starting point; your discretion and the live quotes set the final one.">
+  host.innerHTML=`<div class="vtcard ${b.cls}" title="Info only — a general guide, not what the engine does. VIX is a market-wide gauge; each stock has its own IV, so read this as a suggestion and let the name's own vol and live quotes set the final strike. The engine itself always targets CSP ~0.30 / CC ~0.20.">
     <div class="vtnow">VIX <b>${b.vix==null?'—':b.vix.toFixed(1)}</b> → <b>${b.label}</b> → put <b>~${pd}Δ</b> · call <b>~${cd}Δ</b></div>
     <table class="vttable"><thead><tr><th class="vtlbl">VIX</th>${head}</tr></thead>
       <tbody><tr><th class="vtlbl">Put Δ</th>${prow}</tr><tr><th class="vtlbl">Call Δ</th>${crow}</tr></tbody></table>
+    <div class="vtnote">Info only — a general recommendation. VIX is market-wide; each stock has its own vol, so treat this as a suggestion. The engine always targets <b>CSP ~0.30 · CC ~0.20</b>.</div>
   </div>`;
 }
 function renderChain(){
@@ -1822,7 +1821,7 @@ function renderDeep(tk){
   // Every ticker gets all three legs — a CSP is also a paid way to enter a growth name,
   // so the user decides per ticker what to do. Greyed 'none' tile when a leg has no contract.
   const tiles=[ o.csp?legTile(o.csp):emptyTile('CSP','No ~30Δ put cleared the premium / OI / spread / earnings gates.'),
-                o.cc ?legTile(o.cc) :emptyTile('CC','No ~25Δ call cleared the gates.'),
+                o.cc ?legTile(o.cc) :emptyTile('CC','No ~20Δ call cleared the gates.'),
                 o.leap?leapTile(o.leap):emptyTile('LEAP','No call in the 180–900 DTE · Δ78–92 window.') ];
   host.innerHTML=`<div class="head" style="margin:6px 0 0"><h1 style="font-size:22px">${tk} <span class="dim" style="font-size:14px;font-weight:400">${o.sector||''} · ${role} · earnings ${earnCell(o.earnings_date)}</span></h1></div>
     <p class="hint">Hover a tile for the full metrics &amp; gate breakdown.</p>

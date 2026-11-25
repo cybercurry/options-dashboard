@@ -31,7 +31,7 @@ P = {
     # CSP / CC (the wheel)
     "dte_lo": 21, "dte_hi": 45, "dte_opt": 30,
     "delta_opt": 0.30, "delta_lo": 0.20, "delta_hi": 0.45,   # CSP target ~0.30; window matches Screener
-    "cc_delta_opt": 0.25,        # CC sells ~5Δ FURTHER OTM than the CSP — lower delta, more room in an uptrend
+    "cc_delta_opt": 0.20,        # CC sells ~10Δ FURTHER OTM than the CSP (0.30) — lower delta, room in an uptrend
     "min_premium": 0.015,        # 1.5% per-trade floor — premium ÷ basis (CSP: strike, CC: spot)
     "strong_premium": 0.020,     # 2.0%+ = flagged strong (kept above the 1.5% floor)
     "min_oi": 100,
