@@ -48,8 +48,8 @@ P = {
     # lower delta = more time value, and the whole point is to minimise rented-time burn. Deep ITM.
     "leap_dte_lo": 180, "leap_dte_hi": 900, "leap_dte_opt": 542,
     "leap_delta_opt": 0.85, "leap_delta_lo": 0.78, "leap_delta_hi": 0.92,
-    "leap_backstop_ext_share": 0.40,  # hard backstop: extrinsic ≤40% of premium (deep-ITM; reject rented time)
-    # Below the backstop, extrinsic (≤25→4·≤30→3·≤35→2·≤40→1) and carry (≤8→3·≤12→2·≤16→1) are SCORE points,
+    "leap_backstop_ext_share": 0.45,  # HARD GATE: reject time value > 45% of premium (TARGET ≤40%; deep-ITM)
+    # Below the gate, extrinsic (≤25→4·≤33→3·≤40→2·≤45→1) and carry (≤8→3·≤12→2·≤16→1) are SCORE points,
     # not gates (Jay 27 Aug). Trend gate = price>200MA AND 50>200 only — below the 50-MA is fine
     # (a pullback inside the uptrend, criteria §2). Score is graded 0-11; a LEAP never reads red.
 }
@@ -864,10 +864,9 @@ def scan_leap_ticker(ticker):
         ma50 = ind.get("ma50"); ma200 = ind.get("ma200")
         aligned = bool(ma50 is not None and ma200 is not None and ma50 >= ma200)
         trend_ok = bool(above_200 and aligned)
-        # ── Contract backstop (hard, reject-only) — extrinsic ≤40% of premium. A LEAP whose
-        # premium is mostly rented time isn't a stock substitute; deep-ITM keeps time value low.
-        # Tightened 55%→40% (Jay, Nov): the point of a LEAP is to lose as little to time decay as
-        # possible. Carry is no longer a gate — it only costs score points below.
+        # ── Contract backstop (hard, reject-only) — reject if time value > 45% of premium. TARGET is
+        # ≤40% (full score): a LEAP should be mostly intrinsic, not rented time; deep-ITM keeps it
+        # there. 55%→45% hard gate, ≤40% target (Jay, Nov). Carry only costs score points, not a gate.
         ext_ok = bool(ext_share is not None and ext_share <= P["leap_backstop_ext_share"])
         qualifies = bool(trend_ok and ext_ok)
         rsi_now = ind.get("rsi"); rsi_5ago = ind.get("rsi_5ago")
@@ -890,8 +889,8 @@ def scan_leap_ticker(ticker):
             tscore += (3 if 45 <= rsi_now <= 55 else 2 if 33 <= rsi_now < 45
                        else 1 if 55 < rsi_now <= 65 else 0)
         if ext_share is not None:                                    # contract quality (time value) — 0–4
-            tscore += (4 if ext_share <= 0.25 else 3 if ext_share <= 0.30
-                       else 2 if ext_share <= 0.35 else 1 if ext_share <= 0.40 else 0)
+            tscore += (4 if ext_share <= 0.25 else 3 if ext_share <= 0.33
+                       else 2 if ext_share <= 0.40 else 1 if ext_share <= 0.45 else 0)
         if carry is not None:                                        # cost of the rented time — 0–3
             tscore += (3 if carry <= 0.08 else 2 if carry <= 0.12 else 1 if carry <= 0.16 else 0)
         if trend_ok:                                                 # long-term trend confirmed
