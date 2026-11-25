@@ -1781,7 +1781,7 @@ function leapTile(l){
   // node that can amber but never red. MA breakdown is informational → foot, not a gate.
   const gnodes=[
     {l:'Uptrend (50>200 & >200MA)', s:l.trend_ok?'ok':'no'},
-    {l:'Time value ≤45% (target ≤40%)', s:(l.ext_ok!==false)?'ok':'no'},
+    {l:'Time value ≤45%', s:(l.ext_ok!==false)?'ok':'no'},
     {l:'Entry score'+(ts!=null?' '+ts+'/'+(l.score_max||16):''), s: ts==null?'warn':(ts>=11?'ok':'warn')} ];
   const ma=`${l.above_50ma?'✓':'✗'}>50MA · ${l.above_200ma?'✓':'✗'}>200MA · ${l.ma_aligned?'✓':'✗'}50>200`;
   const foot=`<span class="pre">Exp ${l.expiry}</span> · <span class="pre">DTE ${l.dte}</span> · cost $${l.cost} · time value $${num(l.extrinsic,0)} · carry ${num(l.carry_pct,1,'%/yr')} · ${ma}`;
