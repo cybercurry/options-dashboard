@@ -98,7 +98,13 @@ def _user_tickers():
     """Deduped union of every registered user's private watchlist tickers, read with the Supabase
     service_role key (env SUPABASE_SERVICE_KEY) which bypasses row-level security. Unattributed —
     we never learn or store who owns what, only the set of symbols to make sure they get scanned.
-    Returns [] on any missing-key / network / parse error so the build never breaks."""
+    Returns [] on any missing-key / network / parse error so the build never breaks.
+
+    Ordered NEWEST-ADDED FIRST (created_at desc). The caller truncates this union at USER_TICKER_CAP,
+    so the order decides which tickers get dropped when the pool exceeds the cap. Newest-first means a
+    name someone JUST added always makes the cut (the common 'I added X and it shows no data' case),
+    and only the oldest, longest-untouched picks fall off the tail. The timestamp is used only to rank
+    symbols for scanning — it is never stored or attributed to a user."""
     # .strip(): a key pasted into a GitHub secret often carries a trailing newline, which requests
     # rejects as an invalid header character — that would silently break the read (and, before this,
     # returned an empty list that looked like "no users").
@@ -107,12 +113,12 @@ def _user_tickers():
         return []
     try:
         r = requests.get(SUPABASE_URL + "/rest/v1/watchlist",
-                         params={"select": "ticker"},
+                         params={"select": "ticker,created_at", "order": "created_at.desc"},
                          headers={"apikey": key, "Authorization": "Bearer " + key},
                          timeout=15)
         r.raise_for_status()
         seen, out = set(), []
-        for row in (r.json() or []):
+        for row in (r.json() or []):                 # already newest-first; dedup keeps first (newest) hit
             t = str(row.get("ticker") or "").strip().upper()
             if t and t not in seen:
                 seen.add(t)
