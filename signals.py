@@ -49,6 +49,7 @@ P = {
     "leap_dte_lo": 180, "leap_dte_hi": 900, "leap_dte_opt": 542,
     "leap_delta_opt": 0.85, "leap_delta_lo": 0.78, "leap_delta_hi": 0.92,
     "leap_backstop_ext_share": 0.45,  # HARD GATE: reject time value > 45% of premium (TARGET ≤40%; deep-ITM)
+    "leap_max_spread_pct": 0.08,      # HARD GATE: reject a LEAP whose bid/ask spread > 8% of mid (illiquid)
     # Below the gate, extrinsic (≤25→4·≤33→3·≤40→2·≤45→1) and carry (≤8→3·≤12→2·≤16→1) are SCORE points,
     # not gates (Jay 27 Aug). Trend gate = price>200MA AND 50>200 only — below the 50-MA is fine
     # (a pullback inside the uptrend, criteria §2). Score is graded 0-11; a LEAP never reads red.
@@ -837,13 +838,20 @@ def scan_leap_ticker(ticker):
             dl = _f((o.get("greeks") or {}).get("delta"))
             if dl is None or not (P["leap_delta_lo"] <= dl <= P["leap_delta_hi"]):
                 continue
+            ob = _f(o.get("bid")); oa = _f(o.get("ask")); om = _mid(o.get("bid"), o.get("ask"))
+            if om is None or om <= 0 or ob is None or oa is None:
+                continue
+            if (oa - ob) / om > P["leap_max_spread_pct"]:     # HARD liquidity gate — skip a wide bid/ask
+                continue
             gap = abs(dl - P["leap_delta_opt"])
             if gap < best:
                 call, best = o, gap
         if not call:
             return None
         strike = _f(call.get("strike"))
+        bid = _f(call.get("bid")); ask = _f(call.get("ask"))
         mid = _mid(call.get("bid"), call.get("ask"))
+        spread_pct = round((ask - bid) / mid * 100, 1) if (bid is not None and ask is not None and mid) else None
         dl = _f((call.get("greeks") or {}).get("delta"))
         iv = _f((call.get("greeks") or {}).get("mid_iv"))
         if strike is None or mid is None:
@@ -904,7 +912,7 @@ def scan_leap_ticker(ticker):
             "ticker": ticker, "strategy": "LEAP", "spot": round(spot, 2),
             "expiry": expiry, "dte": dte, "strike": strike,
             "delta": round(dl, 3) if dl is not None else None,
-            "mid": round(mid, 2), "cost": round(mid * 100, 0),
+            "mid": round(mid, 2), "cost": round(mid * 100, 0), "spread_pct": spread_pct,
             "intrinsic": round(intrinsic, 2), "extrinsic": round(extrinsic, 2),
             "extrinsic_pct": round(ext_share * 100, 1) if ext_share is not None else None,
             "carry_pct": round(carry * 100, 2) if carry is not None else None,

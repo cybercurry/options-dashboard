@@ -676,15 +676,17 @@ th.thelp:hover{color:var(--text)} th.thelp:hover .thi{border-color:var(--accent)
 
     <div class="rules-sec">
       <h2>4 · LEAP — a buy, not premium income</h2>
-      <p>A LEAP is <b>accumulation in a confirmed uptrend</b> — often on a pullback. It <b>qualifies</b> on just two hard checks (an uptrend and a workable contract); everything else is a <b>graded 0–11 score</b>, never a hard reject. A LEAP is <b>never shown red</b>.</p>
+      <p>A LEAP is <b>accumulation in a confirmed uptrend</b> — often on a pullback. It <b>qualifies</b> on three hard checks (an uptrend, a workable contract, and a liquid market); everything else is a <b>graded 0–11 score</b>, never a hard reject. A LEAP is <b>never shown red</b>.</p>
       <table class="rtable"><thead><tr><th>Element</th><th>Rule</th></tr></thead><tbody>
         <tr><td>Delta</td><td class="mono">≥ 0.78 · target ~0.85 (deep ITM = intrinsic-led, low time value)</td></tr>
         <tr><td>DTE</td><td class="mono">180–900 · target ~542 (Jan-2027+)</td></tr>
         <tr><td><b>Gate 1</b> — Uptrend</td><td class="mono">price &gt; 200-MA <b>and</b> 50-MA &gt; 200-MA. Below the 50-MA is fine — a pullback inside the uptrend (§2).</td></tr>
         <tr><td><b>Gate 2</b> — Contract backstop</td><td class="mono">time value (premium − intrinsic) &lt; 45% of premium (target ≤ 40%) — reject a mostly-rented-time call</td></tr>
+        <tr><td><b>Gate 3</b> — Liquidity</td><td class="mono">bid/ask spread ≤ 8% of mid — reject an illiquid LEAP you can't enter or exit at a fair price</td></tr>
       </tbody></table>
       <p class="rnote"><b>Score (0–16), all transparent:</b> IV vs realized (&lt;1.0 → 3 · &lt;1.25 → 2) · RSI §2 zone (45–55 → 3 · 33–45 → 2 · 55–65 → 1) · time value (≤25% → 4 · ≤33% → 3 · ≤40% → 2 · ≤45% → 1) · carry = (time value ÷ spot)×365/DTE (≤8% → 3 · ≤12% → 2 · ≤16% → 1) · uptrend confirmed → 1 · <b>dip-reversal</b>: below the 20-day median (%B &lt; 0.5) <b>and</b> RSI rising over 2 sessions → 2 (a falling/flat RSI scores 0 — no rewarding a knife; independent of the 200/50-MA gate). Carry and time value <b>cost points but no longer gate</b> — only the 45% time-value gate can reject a contract.</p>
       <p class="rnote"><b>What "carry" means:</b> a LEAP costs extra for its <b>time value</b> (premium above intrinsic), which decays over the option's life. <b>Carry</b> annualizes that decay — <b>(time value ÷ share price) × 365/DTE</b> — i.e. how much the stock must rise <b>per year</b> just to offset the time you're renting instead of owning shares outright. <b>Lower = cheaper to hold</b>; think of it as the LEAP's financing cost vs. buying the stock.</p>
+      <p class="rnote"><b>Position sizing — your discipline, not enforced here:</b> cap total LEAP cost at <b>≤ 10% of portfolio NLV</b> (a LEAP sits at the edge of the risk curve, so keep the basket small — e.g. a $500K book → ≤ $50K in LEAPs). This app is anonymous and never sees your account, so it can't size for you; hold the cap in your own records.</p>
     </div>
 
     <div class="rules-sec">
