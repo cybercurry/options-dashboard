@@ -30,9 +30,10 @@ import tradier
 P = {
     # CSP / CC (the wheel)
     "dte_lo": 21, "dte_hi": 45, "dte_opt": 30,
-    "delta_opt": 0.30, "delta_lo": 0.20, "delta_hi": 0.45,   # matches Screener CSP window
-    "min_premium": 0.012,        # 1.2% per-trade floor — premium ÷ SPOT (Jay's definition)
-    "strong_premium": 0.015,     # 1.5%+ = flagged strong
+    "delta_opt": 0.30, "delta_lo": 0.20, "delta_hi": 0.45,   # CSP target ~0.30; window matches Screener
+    "cc_delta_opt": 0.25,        # CC sells ~5Δ FURTHER OTM than the CSP — lower delta, more room in an uptrend
+    "min_premium": 0.015,        # 1.5% per-trade floor — premium ÷ basis (CSP: strike, CC: spot)
+    "strong_premium": 0.020,     # 2.0%+ = flagged strong (kept above the 1.5% floor)
     "min_oi": 100,
     "max_spread_pct": 0.15,      # (ask-bid)/mid
     "earnings_blackout": True,   # no new position within `earnings_blackout_days` of earnings
@@ -609,7 +610,9 @@ def _build(ticker, strat, o, spot, expiry, dte, sector, iv_atm, earn_soon, earn_
     spr = _spread_pct(o.get("bid"), o.get("ask"))
     if strike is None or mid is None or not strike or not spot:
         return None
-    prem_pct = mid / spot          # Jay's definition: premium ÷ stock price (both CSP and CC)
+    # Return basis per strategy: a CSP is cash-secured by the STRIKE, a CC is covered by shares at
+    # SPOT. So CSP = premium ÷ strike, CC = premium ÷ spot (corrected — was ÷spot for both).
+    prem_pct = (mid / strike) if strat == "CSP" else (mid / spot)
     pop = (1 - abs(delta)) if delta is not None else None    # ≈ prob of expiring OTM
     # Structural gates are no longer a drop-filter: we still build the nearest ~30Δ contract even
     # when one fails, so the TA tile can grey the face yet disclose the full pass/fail scorecard
@@ -764,7 +767,7 @@ def scan_ticker(ticker):
                 s["verdict"], s["verdict_why"] = _leg_verdict(s)
                 out.append(s)
         # CC — needs price ABOVE the median
-        call = _nearest_delta(chain, "call", P["delta_opt"])
+        call = _nearest_delta(chain, "call", P["cc_delta_opt"])
         if call:
             s = _build(ticker, "CC", call, spot, expiry, dte, sector, iv_atm, earn_soon, earn_window)
             if s:

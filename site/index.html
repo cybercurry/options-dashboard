@@ -618,8 +618,8 @@ th.thelp:hover{color:var(--text)} th.thelp:hover .thi{border-color:var(--accent)
       <h2>1 · Structural gates — every CSP &amp; CC must pass all</h2>
       <table class="rtable"><thead><tr><th>Rule</th><th>Threshold</th><th>Why</th></tr></thead><tbody>
         <tr><td>DTE (days to expiry)</td><td class="mono">21–45 · target 30</td><td>the monthly cycle</td></tr>
-        <tr><td>Delta</td><td class="mono">0.20–0.45 · target 0.30</td><td>~30Δ sweet spot</td></tr>
-        <tr><td>Premium</td><td class="mono">≥ 1.2% of spot</td><td>worth selling; ≥1.5% = 🔥 strong</td></tr>
+        <tr><td>Delta</td><td class="mono">CSP ~0.30 · CC ~0.25 (further OTM) · window 0.20–0.45</td><td>CC sells lower-Δ for upside room</td></tr>
+        <tr><td>Premium</td><td class="mono">≥ 1.5% of basis (CSP: strike, CC: spot)</td><td>worth selling; ≥2.0% = 🔥 strong</td></tr>
         <tr><td>Open interest</td><td class="mono">≥ 100</td><td>liquidity</td></tr>
         <tr><td>Bid/ask spread</td><td class="mono">≤ 15% of mid</td><td>tradeable</td></tr>
         <tr><td>Earnings</td><td class="mono">none within 7 days</td><td>no gap risk into the print</td></tr>
@@ -1237,7 +1237,7 @@ function renderReady(){
     ${TH('l','Setup','Overall traffic light (scorecard rollup): 🟢 STRONG · 🟡 ANALYZE (valid, partial setup — your call) · 🔴 WEAK/BLOCKED.')}
     ${TH('','DTE','Days to expiry — target 30, band 21–45.')}
     ${TH('','Δ','Delta — approx. probability of finishing in-the-money / share-equivalent exposure. ~0.30 is the target.')}
-    ${TH('','Prem %','Premium as a % of the share price — what you collect. Gate ≥1.2%; ≥1.5% = 🔥 strong.')}
+    ${TH('','Prem %','Premium as a % of capital at risk — CSP vs strike, CC vs spot. Gate ≥1.5%; ≥2.0% = 🔥 strong.')}
     ${TH('','POP','Probability of profit ≈ 1 − |delta| — the odds the option expires worthless and you keep the premium.')}
     ${TH('','IV','Implied volatility of the contract — the movement the market is pricing in. Higher = fatter premium.')}
     ${TH('l','Notes','Flags: 🔥 = strong premium (≥1.5%) · ⚠ = earnings land before expiry.')}
@@ -1822,9 +1822,9 @@ function renderDeep(tk){
   // Every ticker gets all three legs — a CSP is also a paid way to enter a growth name,
   // so the user decides per ticker what to do. Greyed 'none' tile when a leg has no contract.
   const tiles=[ o.csp?legTile(o.csp):emptyTile('CSP','No ~30Δ put cleared the premium / OI / spread / earnings gates.'),
-                o.cc ?legTile(o.cc) :emptyTile('CC','No ~30Δ call cleared the gates.'),
-                o.leap?leapTile(o.leap):emptyTile('LEAP','No call in the 180–900 DTE · Δ70–85 window.') ];
-  host.innerHTML=`<div class="head" style="margin:6px 0 0"><h1 style="font-size:22px">${tk} <span class="dim" style="font-size:14px;font-weight:400">${o.sector||''} · ${role}</span></h1></div>
+                o.cc ?legTile(o.cc) :emptyTile('CC','No ~25Δ call cleared the gates.'),
+                o.leap?leapTile(o.leap):emptyTile('LEAP','No call in the 180–900 DTE · Δ78–92 window.') ];
+  host.innerHTML=`<div class="head" style="margin:6px 0 0"><h1 style="font-size:22px">${tk} <span class="dim" style="font-size:14px;font-weight:400">${o.sector||''} · ${role} · earnings ${earnCell(o.earnings_date)}</span></h1></div>
     <p class="hint">Hover a tile for the full metrics &amp; gate breakdown.</p>
     <div class="cards">${tiles.join('')}</div>`;
   document.getElementById('sym2').textContent=tk; mountChart('tvchart2',tk);
