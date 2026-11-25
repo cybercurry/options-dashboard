@@ -577,7 +577,7 @@ th.thelp:hover{color:var(--text)} th.thelp:hover .thi{border-color:var(--accent)
 
   <!-- ══════════ OPTIONS CHAIN ══════════ -->
   <section id="v-chain" class="view" hidden>
-    <div class="head"><h1>Options Chain</h1><div class="meta">Pick a ticker, then an expiry (DTE) — the full calls &amp; puts ladder with Δ, bid/ask, IV and OI. 🎯 marks the VIX-band sell target (calls ~5Δ below puts); the table below shows the rule.</div><span class="js-snap snap"></span></div>
+    <div class="head"><h1>Options Chain</h1><div class="meta">Pick a ticker, then an expiry (DTE) — the full calls &amp; puts ladder with Δ, bid/ask, IV and OI. 🎯 marks the VIX-band sell target (calls ~5Δ below puts); the table below is an info-only guide — the engine itself always targets CSP ~0.30 · CC ~0.20.</div><span class="js-snap snap"></span></div>
     <div id="chain-voltarget"></div>
     <div id="chain-chips" class="chips"></div>
     <div id="chain-exps" class="etiles"></div>
@@ -617,7 +617,7 @@ th.thelp:hover{color:var(--text)} th.thelp:hover .thi{border-color:var(--accent)
       <h2>1 · Structural gates — every CSP &amp; CC must pass all</h2>
       <table class="rtable"><thead><tr><th>Rule</th><th>Threshold</th><th>Why</th></tr></thead><tbody>
         <tr><td>DTE (days to expiry)</td><td class="mono">21–45 · target 30</td><td>the monthly cycle</td></tr>
-        <tr><td>Delta</td><td class="mono">CSP ~0.30 · CC ~0.20 (further OTM) · window 0.20–0.45</td><td>CC sells lower-Δ for upside room</td></tr>
+        <tr><td>Delta</td><td class="mono">CSP ~0.30 · CC ~0.20 (further OTM) · window 0.20–0.45</td><td>fixed engine targets — CC sells lower-Δ for upside room. The VIX-band table on the Options&nbsp;Chain tab is an <b>info-only</b> guide, not applied here (VIX is market-wide; each name has its own vol).</td></tr>
         <tr><td>Premium</td><td class="mono">≥ 1.5% of basis (CSP: strike, CC: spot)</td><td>worth selling; ≥2.0% = 🔥 strong</td></tr>
         <tr><td>Open interest</td><td class="mono">≥ 100</td><td>liquidity</td></tr>
         <tr><td>Bid/ask spread</td><td class="mono">≤ 15% of mid</td><td>tradeable</td></tr>
@@ -1232,10 +1232,10 @@ function renderReady(){
   document.getElementById('ready-wrap').innerHTML=`<div class="tablewrap"><table><thead><tr>
     ${TH('l','Ticker','The underlying. Click any row to open it in the TA tab.')}
     ${TH('l','Strategy','CSP = cash-secured put (sell a put into weakness) · CC = covered call (sell a call into strength).')}
-    ${TH('l','Suggested trade','The exact contract the engine picked — the ≈30Δ strike at ~30 DTE.')}
+    ${TH('l','Suggested trade','The exact contract the engine picked — ≈30Δ for a CSP, ≈20Δ for a CC (further OTM), at ~30 DTE.')}
     ${TH('l','Setup','Overall traffic light (scorecard rollup): 🟢 STRONG · 🟡 ANALYZE (valid, partial setup — your call) · 🔴 WEAK/BLOCKED.')}
     ${TH('','DTE','Days to expiry — target 30, band 21–45.')}
-    ${TH('','Δ','Delta — approx. probability of finishing in-the-money / share-equivalent exposure. ~0.30 is the target.')}
+    ${TH('','Δ','Delta — approx. probability of finishing in-the-money / share-equivalent exposure. Engine target: CSP ~0.30 · CC ~0.20 (further OTM).')}
     ${TH('','Prem %','Premium as a % of capital at risk — CSP vs strike, CC vs spot. Gate ≥1.5%; ≥2.0% = 🔥 strong.')}
     ${TH('','POP','Probability of profit ≈ 1 − |delta| — the odds the option expires worthless and you keep the premium.')}
     ${TH('','IV','Implied volatility of the contract — the movement the market is pricing in. Higher = fatter premium.')}
