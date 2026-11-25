@@ -1261,7 +1261,7 @@ function renderLeaps(){
     ${TH('l','Suggested trade','The deep-ITM long call the engine picked (Δ ≥ 0.78, target ~0.85) — a stock substitute, not premium income.')}
     ${TH('l','Entry','Graded entry light + score /16: 🟢 STRONG (≥11) · 🟡 ANALYZE (7–10) · 🟠 MARGINAL (3–6). Only names in an uptrend with a workable contract are listed. Score compares candidates at a glance.')}
     ${TH('','Δ','Delta ≥ 0.78 (deep ITM) — deep in-the-money, so the call moves almost like the stock (intrinsic-led).')}
-    ${TH('','Time value','Premium − intrinsic, as a % of premium (the dollars you pay for time). Backstop rejects &gt;55%; scores ≤40%→4 · ≤45%→3 · ≤50%→2 · ≤55%→1.')}
+    ${TH('','Time value','Premium − intrinsic, as a % of premium (the dollars you pay for time). Backstop rejects &gt;45% (target ≤40%); scores ≤25%→4 · ≤33%→3 · ≤40%→2 · ≤45%→1.')}
     ${TH('','Carry','Time-value cost per year, as a % of the share price. Scores ≤8%→3 · ≤12%→2 · ≤16%→1 (no longer a gate).')}
     ${TH('','DTE','Days to expiry — target ~542 (Jan-2027+), band 180–900.')}
     ${TH('','IV','Implied volatility — for a LEAP this is the timing input (cheap IV = better entry), not the cost gate.')}
@@ -1781,7 +1781,7 @@ function leapTile(l){
   // node that can amber but never red. MA breakdown is informational → foot, not a gate.
   const gnodes=[
     {l:'Uptrend (50>200 & >200MA)', s:l.trend_ok?'ok':'no'},
-    {l:'Time value ≤55%', s:(l.ext_ok!==false)?'ok':'no'},
+    {l:'Time value ≤45% (target ≤40%)', s:(l.ext_ok!==false)?'ok':'no'},
     {l:'Entry score'+(ts!=null?' '+ts+'/'+(l.score_max||16):''), s: ts==null?'warn':(ts>=11?'ok':'warn')} ];
   const ma=`${l.above_50ma?'✓':'✗'}>50MA · ${l.above_200ma?'✓':'✗'}>200MA · ${l.ma_aligned?'✓':'✗'}50>200`;
   const foot=`<span class="pre">Exp ${l.expiry}</span> · <span class="pre">DTE ${l.dte}</span> · cost $${l.cost} · time value $${num(l.extrinsic,0)} · carry ${num(l.carry_pct,1,'%/yr')} · ${ma}`;
